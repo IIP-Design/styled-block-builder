@@ -1,0 +1,13 @@
+# Editor
+.vscode
+.DS_Store
+
+# Environment
+.env
+
+# Dependencies
+node_modules/
+npm-debug.log*
+
+#Development Build
+dist/style-templates-admin.js
