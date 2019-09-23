@@ -4,9 +4,9 @@
 * Plugin Name: Style Templates
 * Plugin URI: https://github.com/IIP-Design/style-templates
 * Description: Customizable animated blocks for WordPress sites
-* Version: 0.0.1
+* Version: v0.0.1
 * Author: Marek Rewers, U.S. Department of State, Global Public Affairs <designdevops@america.gov>
-* Text Domain: style-templates
+* Text Domain: gcx-templates
 * License: GNU General Public License v2.0
 * License URI: https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html
 */
