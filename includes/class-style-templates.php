@@ -62,8 +62,11 @@ class Style_Templates {
     // The class responsible for defining all actions that occur in the admin area.
     require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-style-templates-admin.php';
 
+    require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/block-registration/class-animated.php';
+
     // The class responsible for defining all actions that occur in the public-facing side of the site.
     require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-style-templates-public.php';
+  
     $this->loader = new Style_Templates\Loader();
   }
 
@@ -72,8 +75,13 @@ class Style_Templates {
     $plugin_admin = new Style_Templates\Admin( $this->get_plugin_name(), $this->get_version() );
 
     // Admin hooks
+    // $this->loader->add_action( 'INSERT_WP_HOOK', $plugin_admin, 'INSERT_CALLBACK' );
 
-    $this->loader->add_action( 'INSERT_WP_HOOK', $plugin_admin, 'INSERT_CALLBACK' );
+    // Animated blocks
+    $plugin_animated = new Style_Templates\Animated( $this->get_plugin_name(), $this->get_version() );
+
+    $this->loader->add_action( 'init', $plugin_animated, 'register_animated_blocks' );
+    $this->loader->add_filter( 'block_categories', $plugin_animated, 'register_animated_block_category', 10, 2 );
   }
 
   // Register all of the hooks related to the public-facing functionality
