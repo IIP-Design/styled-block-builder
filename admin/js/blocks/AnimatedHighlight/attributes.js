@@ -1,6 +1,11 @@
-export const attributes = {
+export const atts = {
+  img: {
+    type: 'string'
+  },
   text: {
-    type: 'string',
-    default: ''
+    default: '',
+    selector: 'p',
+    source: 'html',
+    type: 'string'
   }
 };

@@ -5,6 +5,7 @@
   "license": "GPL-2.0",
   "scripts": {
     "build:blocks": "webpack --config ./config/webpack.config.js --mode production",
+    "build:dev": "webpack --config ./config/webpack.config.js --mode development",
     "build": "npm run build:blocks"
   },
   "devDependencies": {

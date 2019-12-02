@@ -1,1 +1,18 @@
-p{color:red}
+.gcx-ahl-container {
+  align-items: center;
+  background-color: #f3f4f5;
+  display: flex;
+  justify-content: flex-start;
+  min-height: 300px; }
+  .gcx-ahl-container > .block-editor-rich-text {
+    position: absolute;
+    margin-left: 30px; }
+
+.gcx-ahl-figure {
+  margin: 0 auto; }
+
+.gcx-ahl-icon {
+  color: #cfcfcf;
+  height: 50px;
+  width: 50px; }
+

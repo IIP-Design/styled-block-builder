@@ -1,6 +1,4 @@
 const MiniCssExtractPlugin = require( 'mini-css-extract-plugin' );
-const OptimizeCSSAssetsPlugin = require( 'optimize-css-assets-webpack-plugin' );
-const UglifyJsPlugin = require( 'uglifyjs-webpack-plugin' );
 
 const paths = require( './paths' );
 
@@ -16,11 +14,6 @@ module.exports = {
     rules: [
       {
         test: /\.(js|jsx)$/,
-        use: ['babel-loader'],
-        exclude: /node_modules/
-      },
-      {
-        test: /.js$/,
         use: ['babel-loader'],
         exclude: /node_modules/
       },
@@ -47,14 +40,6 @@ module.exports = {
       }
     ]
   },
-  optimization: {
-    minimizer: [
-      new UglifyJsPlugin( {
-        sourceMap: true
-      } ),
-      new OptimizeCSSAssetsPlugin( {} )
-    ]
-  },
   output: {
     path: paths.appDist,
     publicPath: '/',
@@ -67,7 +52,7 @@ module.exports = {
   ],
   resolve: {
     extensions: [
-'*', '.js', '.jsx'
-]
+      '*', '.js', '.jsx'
+    ]
   }
 };
