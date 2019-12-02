@@ -6,7 +6,7 @@
 * Description: Customizable animated blocks for WordPress sites
 * Version: v0.0.1
 * Author: Marek Rewers, U.S. Department of State, Global Public Affairs <designdevops@america.gov>
-* Text Domain: gcx-templates
+* Text Domain: gpalab-templates
 * License: GNU General Public License v2.0
 * License URI: https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html
 */
