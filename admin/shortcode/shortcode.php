@@ -6,7 +6,7 @@ class Shortcode {
 
   // Register the scripts for each block type
   public function register_template_scripts() {
-    wp_register_script( 'quote-box', STYLE_TEMPLATES_URL . 'dist/quote-box.js', array(), null, true );
+    wp_register_script( 'gpalab-quote-box', STYLE_TEMPLATES_URL . 'dist/gpalab-quote-box.js', array(), null, true );
   }
   
   public function template_shortcode( $args ) {
@@ -21,14 +21,14 @@ class Shortcode {
 
     // Check the requested block type and enqueue the relevant script
     if ( $type == 'quote-box' ) {
-      wp_enqueue_script( 'quote-box' );
+      wp_enqueue_script( 'gpalab-quote-box' );
     }
 
     wp_localize_script(
       $type,
       str_replace('-', '', $type) . $id,
       array(
-        'block-id' => $id
+        'blockId' => $id
       )
     );
 
