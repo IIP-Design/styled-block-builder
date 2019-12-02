@@ -63,6 +63,7 @@ class Style_Templates {
     require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-style-templates-admin.php';
 
     require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/block-registration/class-animated.php';
+    require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/shortcode/shortcode.php';
 
     // The class responsible for defining all actions that occur in the public-facing side of the site.
     require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-style-templates-public.php';
@@ -82,6 +83,12 @@ class Style_Templates {
 
     $this->loader->add_action( 'init', $plugin_animated, 'register_animated_blocks' );
     $this->loader->add_filter( 'block_categories', $plugin_animated, 'register_animated_block_category', 10, 2 );
+
+    // Shortcode
+    $plugin_shortcode = new Style_Templates\Shortcode( $this->get_plugin_name(), $this->get_version() );
+
+    $this->loader->add_action( 'init', $plugin_shortcode, 'register_template_scripts' );
+    $this->loader->add_action( 'init', $plugin_shortcode, 'add_templates_shortcode' );
   }
 
   // Register all of the hooks related to the public-facing functionality
