@@ -8,6 +8,7 @@ const pluginDirectory = fs.realpathSync( process.cwd() );
 const resolvePlugin = relativePath => path.resolve( pluginDirectory, relativePath );
 
 module.exports = {
+  pluginAdmin: resolvePlugin( 'admin' ),
   pluginAssets: resolvePlugin( 'static/assets' ),
   pluginDist: resolvePlugin( 'dist' ),
   pluginHTML: resolvePlugin( 'static/index.html' ),
