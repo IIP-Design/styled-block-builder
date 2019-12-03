@@ -4,7 +4,8 @@
   "private": true,
   "license": "GPL-2.0",
   "scripts": {
-    "build": "webpack --config config/webpack.config.js --mode development"
+    "build": "webpack --config config/webpack.config.js --mode production",
+    "dev": "webpack --watch --config config/webpack.config.js --mode development"
   },
   "devDependencies": {
     "@babel/core": "^7.7.4",
