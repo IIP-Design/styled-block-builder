@@ -77,7 +77,7 @@ class Style_Templates {
     // Admin hooks
     $plugin_admin = new Style_Templates\Admin( $this->get_plugin_name(), $this->get_version() );
 
-    $this->loader->add_action( 'init', $plugin_admin, 'register_template_admin_styles' );
+    $this->loader->add_action( 'init', $plugin_admin, 'register_admin_scripts_styles' );
 
     // Animated blocks
     // $plugin_animated = new Style_Templates\Animated( $this->get_plugin_name(), $this->get_version() );

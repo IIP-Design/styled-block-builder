@@ -7,7 +7,7 @@ class Metabox {
   public function add_templates_metabox() {
     add_meta_box(
       'gpalab_templates_meta',
-      __( 'Add Style Template', 'gpalab-templates' ),
+      __( 'Style Templates', 'gpalab-templates' ),
       array( $this, 'render_templates_metabox' ),
       'post',
       'side',
@@ -16,17 +16,10 @@ class Metabox {
   }
 
   public function render_templates_metabox() {
-    wp_enqueue_style( 'gpalab-template-admin' );
+    wp_enqueue_script( 'gpalab-template-admin-js' );
+    wp_enqueue_style( 'gpalab-template-admin-css' );
 
-    $html .= '<div id="gpalab-add-style-template">';
-    $html .=   '<label for="gpalab-templates-dropdown">';
-    $html .=     '<strong>Add a Style Template:</strong>';
-    $html .=     '<select class="gpalab-admin-dropdown id="gpalab-templates-dropdown">';
-    $html .=       '<option value="">- Select Template Type -</option>';
-    $html .=       '<option value="quote-box">Quote Box</option>';
-    $html .=     '</select>';
-    $html .=   '</label>';
-    $html .= '</div>';
+    $html = '<div id="gpalab-add-style-template"></div>';
 
     echo $html;
   }

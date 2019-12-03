@@ -36,7 +36,8 @@ module.exports = {
     'react/react-in-jsx-scope': 0,
     'react/require-default-props': 0,
     'space-in-parens': ['warn', 'always'],
-    'import/no-webpack-loader-syntax': 0
+    'import/no-webpack-loader-syntax': 0,
+    'react/jsx-fragments': ['warn', 'element']
   },
   env: {
     browser: true,
