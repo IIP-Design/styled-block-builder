@@ -8,6 +8,11 @@ const MetaBox = () => {
   const [selected, setSelected] = useState( '' );
   const [showModal, setShowModal] = useState( false );
 
+  const toggleModal = () => {
+    setShowModal( false );
+    setSelected( '' );
+  };
+
   return (
     <Fragment>
       <label htmlFor="gpalab-templates-dropdown">
@@ -30,7 +35,7 @@ const MetaBox = () => {
       >
         Configure Template
       </button>
-      <Modal form={ selected } show={ showModal } />
+      <Modal form={ selected } show={ showModal } toggle={ toggleModal } />
     </Fragment>
   );
 };

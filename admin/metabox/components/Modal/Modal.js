@@ -2,25 +2,46 @@ import React from 'react';
 import propTypes from 'prop-types';
 import { createPortal } from 'react-dom';
 
+import QuoteBoxForm from '../Forms/QuoteBoxForm';
+
 import './Modal.scss';
 
 const modalRoot = document.getElementById( 'gpalab-add-template-modal' );
 
-const ModelContent = ( { show } ) => {
+const ModelContent = ( { form, show, toggle } ) => {
   if ( !show ) return null;
+
+  let selectedForm = null;
+
+  if ( form && form === 'quote-box' ) {
+    selectedForm = <QuoteBoxForm />;
+  }
 
   return (
     <div className="gpalab-modal">
       <div className="gpalab-modal-background" />
-      <div className="gpalab-modal-foreground">This is the modal</div>
+      <div className="gpalab-modal-foreground">
+        { selectedForm }
+        <div className="gpalab-modal-buttons">
+          <button className="button-secondary" onClick={ toggle } type="button">
+            Cancel
+          </button>
+          <button className="button-primary" type="button">
+            Save
+          </button>
+        </div>
+      </div>
     </div>
   );
 };
 
 ModelContent.propTypes = {
-  show: propTypes.bool
+  form: propTypes.string,
+  show: propTypes.bool,
+  toggle: propTypes.func
 };
 
-const Modal = ( { show } ) => createPortal( <ModelContent show={ show } />, modalRoot );
+const Modal = ( { form, show, toggle } ) =>
+  createPortal( <ModelContent form={ form } show={ show } toggle={ toggle } />, modalRoot );
 
 export default Modal;
