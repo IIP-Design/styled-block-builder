@@ -35,4 +35,5 @@ function run_style_templates() {
   $plugin = new Style_Templates();
   $plugin->run();
 }
+
 run_style_templates();

@@ -25,7 +25,7 @@ class Shortcode {
     }
 
     wp_localize_script(
-      $type,
+      'gpalab-' . $type,
       str_replace('-', '', $type) . $id,
       array(
         'blockId' => $id

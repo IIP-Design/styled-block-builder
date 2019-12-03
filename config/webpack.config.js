@@ -4,7 +4,7 @@ const paths = require( './paths' );
 
 module.exports = {
   entry: {
-    // 'gut-animated': `${paths.gutenbergBlocks}/animated`,
+    // 'gut-highlight': `${paths.gutenbergBlocks}/highlight`,
     'quote-box': `${paths.blocksFrontend}/quote-box`,
     'template-admin': `${paths.pluginAdmin}/js/admin`
   },

@@ -14,5 +14,5 @@ module.exports = {
   pluginHTML: resolvePlugin( 'static/index.html' ),
   pluginPackage: resolvePlugin( 'package.json' ),
   blocksFrontend: resolvePlugin( 'public/blocks' ),
-  gutenbergBlocks: resolvePlugin( 'admin/js/blocks' )
+  gutenbergBlocks: resolvePlugin( 'admin/gut-blocks' )
 };

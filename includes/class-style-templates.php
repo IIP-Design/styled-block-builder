@@ -57,17 +57,17 @@ class Style_Templates {
 
   private function load_dependencies() {
     // The class responsible for orchestrating the actions and filters of the core plugin.
-    require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-style-templates-loader.php';
+    require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-loader.php';
 
     // The class responsible for defining all actions that occur in the admin area.
-    require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-style-templates-admin.php';
-    require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/post-types/custom-metabox.php';
-    require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/shortcode/shortcode.php';
+    require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-admin.php';
+    require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/metabox/class-metabox.php';
+    require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/shortcode/class-shortcode.php';
 
-    // require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/block-registration/class-animated.php';
+    // require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/gut-blocks/highlight/class-gut-highlight.php';
 
     // The class responsible for defining all actions that occur in the public-facing side of the site.
-    require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-style-templates-public.php';
+    require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-public.php';
   
     $this->loader = new Style_Templates\Loader();
   }
