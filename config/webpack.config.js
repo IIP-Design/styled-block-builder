@@ -4,6 +4,7 @@ const paths = require( './paths' );
 
 module.exports = {
   entry: {
+    // 'gut-animated': `${paths.gutenbergBlocks}/animated`,
     'quote-box': `${paths.blocksFrontend}/quote-box`,
     'template-admin': `${paths.pluginAdmin}/js/admin`
   },
@@ -32,6 +33,6 @@ module.exports = {
     } )
   ],
   resolve: {
-    extensions: ['.js', '.jsx']
+    extensions: ['*', '.js', '.jsx']
   }
 };
