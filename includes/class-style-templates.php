@@ -93,7 +93,7 @@ class Style_Templates {
     // Shortcode
     $plugin_shortcode = new Style_Templates\Shortcode( $this->get_plugin_name(), $this->get_version() );
 
-    $this->loader->add_action( 'init', $plugin_shortcode, 'register_template_scripts' );
+    $this->loader->add_action( 'init', $plugin_shortcode, 'register_template_scripts_styles' );
     $this->loader->add_action( 'init', $plugin_shortcode, 'add_templates_shortcode' );
   }
 

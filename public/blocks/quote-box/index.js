@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import QuoteBox from './QuoteBox';
+import QuoteBox from './QuoteBox/QuoteBox';
 
 const divs = [...document.querySelectorAll( 'div[data-type="gpalab-quote-box"]' )];
 
