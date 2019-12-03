@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from 'react-dom';
 
-import MetaBox from './metabox';
+import Metabox from './components/Metabox/Metabox';
 
-render( <MetaBox />, document.getElementById( 'gpalab-add-style-template' ) );
+render( <Metabox />, document.getElementById( 'gpalab-add-template-metabox' ) );

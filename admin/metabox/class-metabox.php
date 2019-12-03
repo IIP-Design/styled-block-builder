@@ -19,7 +19,8 @@ class Metabox {
     wp_enqueue_script( 'gpalab-template-admin-js' );
     wp_enqueue_style( 'gpalab-template-admin-css' );
 
-    $html = '<div id="gpalab-add-style-template"></div>';
+    $html .= '<div id="gpalab-add-template-metabox"></div>';
+    $html .= '<div id="gpalab-add-template-modal"></div>';
 
     echo $html;
   }
