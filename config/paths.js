@@ -15,5 +15,5 @@ module.exports = {
   pluginPackage: resolvePlugin( 'package.json' ),
   blocksFrontend: resolvePlugin( 'public/blocks' ),
   gutenbergBlocks: resolvePlugin( 'admin/gut-blocks' ),
-  metabox: resolvePlugin( 'admin/metabox' )
+  metaboxUI: resolvePlugin( 'admin/metabox/ui' )
 };

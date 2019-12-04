@@ -24,4 +24,10 @@ class Metabox {
 
     echo $html;
   }
+
+  static function update_template( $args ) {
+    $create_new_template = new Style_Templates\Create_Post();
+
+    $create_new_template->create_template( $args );
+  }
 }
