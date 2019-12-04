@@ -4,6 +4,7 @@ namespace Style_Templates;
 
 class Metabox {
 
+  // Add custom metabox to the sidebar of the WordPress admin area
   public function add_templates_metabox() {
     add_meta_box(
       'gpalab_templates_meta',
@@ -15,6 +16,8 @@ class Metabox {
     );
   }
 
+  // Enqueue the scripts & styles which control the metabox, add divs required by JS to the DOM
+  // Note: these scripts & styles are registered & localized in Style_Templates/Admin
   public function render_templates_metabox() {
     wp_enqueue_script( 'gpalab-template-admin-js' );
     wp_enqueue_style( 'gpalab-template-admin-css' );
@@ -25,9 +28,17 @@ class Metabox {
     echo $html;
   }
 
-  static function update_template( $args ) {
-    $create_new_template = new Style_Templates\Create_Post();
+  // Create/update template post
+  function handle_template_update() {
+    // Check for a valid nonce coming from the AJAX request (nonce set in Style_Templates/Admin)
+    check_ajax_referer( 'gpalab-template-nonce', 'security' );
+    
+    // Pull in and instantiate Update_Template class
+    include_once STYLE_TEMPLATES_DIR . 'admin/metabox/ajax/class-update-template.php';
+    
+    $update_template = new Update_Template();
 
-    $create_new_template->create_template( $args );
+    // Run function to pass data to post
+    $update_template->insert_template_data();
   }
 }

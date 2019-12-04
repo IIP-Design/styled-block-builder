@@ -41,9 +41,9 @@ class Style_Templates {
   }
 
   /**
-   * Load the required dependencies for this plugin.
+   * Loads the classes needed to run this plugin.
    *
-   * Include the following files that make up the plugin:
+   * Includes the following files that make up the plugin:
    *
    * - Style_Templates\Loader. Orchestrates the hooks of the plugin.
    * - Style_Templates\Admin. Defines all hooks for the admin area.
@@ -74,25 +74,24 @@ class Style_Templates {
 
   // Register all of the hooks related to the admin area functionality of the plugin.
   private function define_admin_hooks() {
-    // Admin hooks
+    // Instantiate all admin classes
     $plugin_admin = new Style_Templates\Admin( $this->get_plugin_name(), $this->get_version() );
-
+    $plugin_metabox = new Style_Templates\Metabox( $this->get_plugin_name(), $this->get_version() );
+    $plugin_shortcode = new Style_Templates\Shortcode( $this->get_plugin_name(), $this->get_version() );
+    
+    // Admin hooks
     $this->loader->add_action( 'init', $plugin_admin, 'register_admin_scripts_styles' );
+    $this->loader->add_action( 'admin_notices', $plugin_admin, 'localize_admin_script_globals' );
 
     // Animated blocks
     // $plugin_animated = new Style_Templates\Animated( $this->get_plugin_name(), $this->get_version() );
-
     // $this->loader->add_action( 'init', $plugin_animated, 'register_animated_blocks' );
     // $this->loader->add_filter( 'block_categories', $plugin_animated, 'register_animated_block_category', 10, 2 );
 
     // Custom Metabox
-    $plugin_metabox = new Style_Templates\Metabox( $this->get_plugin_name(), $this->get_version() );
-
     $this->loader->add_action( 'add_meta_boxes', $plugin_metabox, 'add_templates_metabox' );
-    
+    $this->loader->add_action( 'wp_ajax_gpalab_update_template', $plugin_metabox, 'handle_template_update' );
     // Shortcode
-    $plugin_shortcode = new Style_Templates\Shortcode( $this->get_plugin_name(), $this->get_version() );
-
     $this->loader->add_action( 'init', $plugin_shortcode, 'register_template_scripts_styles' );
     $this->loader->add_action( 'init', $plugin_shortcode, 'add_templates_shortcode' );
   }

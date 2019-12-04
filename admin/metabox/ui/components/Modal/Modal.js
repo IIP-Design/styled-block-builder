@@ -3,6 +3,7 @@ import propTypes from 'prop-types';
 import { createPortal } from 'react-dom';
 
 import QuoteBoxForm from '../Forms/QuoteBoxForm';
+import { savePost } from '../../utils/save-post';
 
 import './Modal.scss';
 
@@ -26,7 +27,7 @@ const ModelContent = ( { form, show, toggle } ) => {
           <button className="button-secondary" onClick={ toggle } type="button">
             Cancel
           </button>
-          <button className="button-primary" type="button">
+          <button className="button-primary" onClick={ savePost } type="button">
             Save
           </button>
         </div>
