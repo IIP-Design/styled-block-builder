@@ -26,12 +26,12 @@ class Shortcode {
       wp_enqueue_script( 'gpalab-quote-box-js' );
       wp_enqueue_style( 'gpalab-quote-box-css' );
     }
-
+    
     wp_localize_script(
-      'gpalab-' . $type,
+      'gpalab-' . $type . '-js',
       str_replace('-', '', $type) . $id,
       array(
-        'blockId' => $id
+        'blockId' => $id,
       )
     );
 
