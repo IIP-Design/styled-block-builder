@@ -25,6 +25,7 @@ const MetaBox = () => {
         >
           <option value="">- Select Template Type -</option>
           <option value="quote-box">Quote Box</option>
+          <option value="text">Text Block</option>
         </select>
       </label>
       <button
