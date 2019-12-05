@@ -6,9 +6,9 @@ class Shortcode {
 
   // Register the scripts for each block type
   public function register_template_scripts_styles() {
-    wp_register_script( 'gpalab-template-frontend-js', STYLE_TEMPLATES_URL . 'dist/gpalab-template-frontend.js', array(), null, true );
+    wp_register_script( 'gpalab-template-frontend-js', STYLE_TEMPLATES_DIST . 'gpalab-template-frontend.js', array(), null, true );
 
-    wp_register_style( 'gpalab-template-frontend-css', STYLE_TEMPLATES_URL . 'dist/gpalab-template-frontend.css', array(), null );
+    wp_register_style( 'gpalab-template-frontend-css', STYLE_TEMPLATES_DIST . 'gpalab-template-frontend.css', array(), null );
   }
   
   public function template_shortcode( $args ) {

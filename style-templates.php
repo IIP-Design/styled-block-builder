@@ -18,6 +18,7 @@ if ( ! defined( 'WPINC' ) ) {
 
 // Define constants
 define( 'STYLE_TEMPLATES_DIR', plugin_dir_path( dirname( __FILE__ ) ) . 'style-templates/' );
+define( 'STYLE_TEMPLATES_DIST', plugin_dir_url( dirname( __FILE__ ) ) . 'style-templates/dist/' );
 define( 'STYLE_TEMPLATES_URL', plugin_dir_url( dirname( __FILE__ ) ) . 'style-templates/' );
 
 // Imports Style_Templates class

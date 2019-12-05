@@ -62,6 +62,7 @@ class Style_Templates {
     // The class responsible for defining all actions that occur in the admin area.
     require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-admin.php';
     require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/metabox/class-metabox.php';
+    require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/metabox/ajax/class-update-template.php';
     require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/shortcode/class-shortcode.php';
 
     // require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/gut-blocks/highlight/class-gut-highlight.php';
@@ -76,6 +77,7 @@ class Style_Templates {
   private function define_admin_hooks() {
     // Instantiate all admin classes
     $plugin_admin = new Style_Templates\Admin( $this->get_plugin_name(), $this->get_version() );
+    $plugin_ajax = new Style_Templates\Update_Template( $this->get_plugin_name(), $this->get_version() );
     $plugin_metabox = new Style_Templates\Metabox( $this->get_plugin_name(), $this->get_version() );
     $plugin_shortcode = new Style_Templates\Shortcode( $this->get_plugin_name(), $this->get_version() );
     
@@ -88,9 +90,10 @@ class Style_Templates {
     // $this->loader->add_action( 'init', $plugin_animated, 'register_animated_blocks' );
     // $this->loader->add_filter( 'block_categories', $plugin_animated, 'register_animated_block_category', 10, 2 );
 
+    // Ajax
+    $this->loader->add_action( 'wp_ajax_gpalab_update_template', $plugin_ajax, 'handle_template_update' );
     // Custom Metabox
     $this->loader->add_action( 'add_meta_boxes', $plugin_metabox, 'add_templates_metabox' );
-    $this->loader->add_action( 'wp_ajax_gpalab_update_template', $plugin_metabox, 'handle_template_update' );
     // Shortcode
     $this->loader->add_action( 'init', $plugin_shortcode, 'register_template_scripts_styles' );
     $this->loader->add_action( 'init', $plugin_shortcode, 'add_templates_shortcode' );

@@ -7,9 +7,9 @@ class Admin {
   // Register the scripts and styles for the admin interface
   public function register_admin_scripts_styles() {
 
-    wp_register_script( 'gpalab-template-admin-js', STYLE_TEMPLATES_URL . 'dist/gpalab-template-admin.js', array(), null, true );
+    wp_register_script( 'gpalab-template-admin-js', STYLE_TEMPLATES_DIST . 'gpalab-template-admin.js', array(), null, true );
     
-    wp_register_style( 'gpalab-template-admin-css', STYLE_TEMPLATES_URL . 'dist/gpalab-template-admin.css', array(), null );
+    wp_register_style( 'gpalab-template-admin-css', STYLE_TEMPLATES_DIST . 'gpalab-template-admin.css', array(), null );
   }
 
   // Pass required PHP values as variables to admin JS
