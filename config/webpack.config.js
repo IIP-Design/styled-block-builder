@@ -18,6 +18,24 @@ module.exports = {
         }
       },
       {
+        include: /\.module\.(sa|sc|c)ss$/,
+        test: /\.(sa|sc|c)ss$/,
+        use: [
+          MiniCssExtractPlugin.loader,
+          {
+            loader: 'css-loader',
+            options: {
+              modules: {
+                localIdentName: 'gpalab-[local]-[hash:base64:5]',
+                mode: 'local'
+              }
+            }
+          },
+          'sass-loader'
+        ]
+      },
+      {
+        exclude: /\.module\.(sa|sc|c)ss$/,
         test: /\.(sa|sc|c)ss$/,
         use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader']
       }
