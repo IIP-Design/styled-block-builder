@@ -1,0 +1,87 @@
+@import '../../../style/colors.scss';
+
+.bg {
+  align-items: center;
+  background-color: $blueBlackPearl;
+  background-position: center center;
+  background-size: cover;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  min-height: 750px;
+  padding: 2.75rem 0 3rem;
+  position: relative;
+  width: 100vw;
+}
+
+.content {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.title {
+  color: $black;
+  text-align: center;
+}
+
+.subtitle {
+  color: $black;
+  margin-top: 1rem;
+  text-align: center;
+}
+
+.text {
+  color: $black;
+  margin: 2rem 0 1rem;
+  max-width: 1191px;
+  text-align: center;
+  width: 75vw;
+}
+
+.quote {
+  align-items: center;
+  background-color: $greyLight;
+  background-repeat: repeat;
+  box-shadow: 1px 1px 5px $greyLightest;
+  display: flex;
+  justify-content: center;
+  max-width: 1191px;
+  margin: 1rem 0 2rem;
+  width: 80vw;
+
+  &-text {
+    color: $blueBright;
+    font-style: italic;
+    padding: 3rem;
+    text-align: center;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .bg {
+    padding: 2rem 0 1rem;
+  }
+
+  .text {
+    width: 90vw;
+  }
+
+  .subtitle {
+    width: 90vw;
+  }
+
+  .quote {
+    height: auto;
+    margin-bottom: 1rem;
+    width: 90vw;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .quote-text {
+    margin: 1rem;
+    padding: 1rem;
+  }
+}
