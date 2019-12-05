@@ -1,11 +1,11 @@
 import { getFormData } from './helpers';
 
-export const savePost = async () => {
+export const savePost = async data => {
   // Get values provided to the client by the server
   const fromPHP = window.gpalabTemplateAdmin ? window.gpalabTemplateAdmin : {};
 
   // Create a FormData object to send user inputs to server
-  const formData = getFormData( {} );
+  const formData = getFormData( data );
   formData.append( 'action', 'gpalab_update_template' );
   formData.append( 'security', fromPHP.templateNonce );
 

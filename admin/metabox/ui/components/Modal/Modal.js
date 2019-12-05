@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import propTypes from 'prop-types';
 import { createPortal } from 'react-dom';
 
@@ -12,10 +12,12 @@ const modalRoot = document.getElementById( 'gpalab-add-template-modal' );
 const ModelContent = ( { form, show, toggle } ) => {
   if ( !show ) return null;
 
+  const [data, setData] = useState( {} );
+
   let selectedForm = null;
 
   if ( form && form === 'quote-box' ) {
-    selectedForm = <QuoteBoxForm />;
+    selectedForm = <QuoteBoxForm callback={ setData } />;
   }
 
   return (
@@ -27,7 +29,11 @@ const ModelContent = ( { form, show, toggle } ) => {
           <button className="button-secondary" onClick={ toggle } type="button">
             Cancel
           </button>
-          <button className="button-primary" onClick={ savePost } type="button">
+          <button
+            className="button-primary"
+            onClick={ () => savePost( { meta: data, type: form } ) }
+            type="button"
+          >
             Save
           </button>
         </div>
