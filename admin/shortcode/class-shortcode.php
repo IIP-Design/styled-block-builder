@@ -6,13 +6,9 @@ class Shortcode {
 
   // Register the scripts for each block type
   public function register_template_scripts_styles() {
-    wp_register_script( 'gpalab-quote-box-js', STYLE_TEMPLATES_URL . 'dist/gpalab-quote-box.js', array(), null, true );
+    wp_register_script( 'gpalab-template-frontend-js', STYLE_TEMPLATES_URL . 'dist/gpalab-template-frontend.js', array(), null, true );
 
-    wp_register_style( 'gpalab-quote-box-css', STYLE_TEMPLATES_URL . 'dist/gpalab-quote-box.css', array(), null );
-
-    wp_register_script( 'gpalab-text-js', STYLE_TEMPLATES_URL . 'dist/gpalab-text.js', array(), null, true );
-
-    wp_register_style( 'gpalab-text-css', STYLE_TEMPLATES_URL . 'dist/gpalab-text.css', array(), null );
+    wp_register_style( 'gpalab-template-frontend-css', STYLE_TEMPLATES_URL . 'dist/gpalab-template-frontend.css', array(), null );
   }
   
   public function template_shortcode( $args ) {
@@ -25,20 +21,13 @@ class Shortcode {
     $id = $attr['id'];
     $type = $attr['type'];
 
-    // Check the requested block type and enqueue the relevant script
-    if ( $type == 'quote-box' ) {
-      wp_enqueue_script( 'gpalab-quote-box-js' );
-      wp_enqueue_style( 'gpalab-quote-box-css' );
-    }
-
-    if ( $type == 'text' ) {
-      wp_enqueue_script( 'gpalab-text-js' );
-      wp_enqueue_style( 'gpalab-text-css' );
-    }
+    // Enqueue the relevant scripts & styles
+    wp_enqueue_script( 'gpalab-template-frontend-js' );
+    wp_enqueue_style( 'gpalab-template-frontend-css' );
 
     // Localize the enqueued script
     wp_localize_script(
-      'gpalab-' . $type . "-js",
+      'gpalab-template-frontend-js',
       str_replace('-', '', $type) . $id,
       array(
         'blockId' => $id,

@@ -5,9 +5,8 @@ const paths = require( './paths' );
 module.exports = {
   entry: {
     // 'gut-highlight': `${paths.gutenbergBlocks}/highlight`,
-    'quote-box': `${paths.blocksFrontend}/quote-box`,
-    'text': `${paths.blocksFrontend}/text/index.js`,
-    'template-admin': `${paths.metaboxUI}/index.js`
+    'template-frontend': `${paths.blocksFrontend}/blocks`,
+    'template-admin': paths.metaboxUI
   },
   module: {
     rules: [
