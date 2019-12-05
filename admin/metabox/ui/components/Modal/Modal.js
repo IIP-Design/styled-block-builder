@@ -5,7 +5,7 @@ import { createPortal } from 'react-dom';
 import QuoteBoxForm from '../Forms/QuoteBoxForm';
 import { savePost } from '../../utils/save-post';
 
-import './Modal.scss';
+import './Modal.module.scss';
 
 const modalRoot = document.getElementById( 'gpalab-add-template-modal' );
 
@@ -19,11 +19,11 @@ const ModelContent = ( { form, show, toggle } ) => {
   }
 
   return (
-    <div className="gpalab-modal">
-      <div className="gpalab-modal-background" />
-      <div className="gpalab-modal-foreground">
+    <div styleName="modal">
+      <div styleName="modal-background" />
+      <div styleName="modal-foreground">
         { selectedForm }
-        <div className="gpalab-modal-buttons">
+        <div styleName="modal-buttons">
           <button className="button-secondary" onClick={ toggle } type="button">
             Cancel
           </button>

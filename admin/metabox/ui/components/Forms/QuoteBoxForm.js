@@ -1,5 +1,7 @@
 import React from 'react';
 
+import './Forms.scss';
+
 const QuoteBoxForm = () => (
   <form className="gpalab-modal-form">
     <h3 className="gpalab-modal-form-title">Configure Your Quote Box:</h3>

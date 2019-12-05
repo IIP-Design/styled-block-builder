@@ -1,8 +1,8 @@
-import React, { Fragment, useState } from 'react';
+import React, { useState } from 'react';
 
 import Modal from '../Modal/Modal';
 
-import './Metabox.scss';
+import './Metabox.module.scss';
 
 const MetaBox = () => {
   const [selected, setSelected] = useState( '' );
@@ -14,11 +14,11 @@ const MetaBox = () => {
   };
 
   return (
-    <Fragment>
+    <div styleName="dropdown-container">
       <label htmlFor="gpalab-templates-dropdown">
         Add Template:
         <select
-          className="gpalab-admin-dropdown"
+          styleName="dropdown"
           id="gpalab-templates-dropdown"
           onChange={ e => setSelected( e.target.value ) }
           value={ selected }
@@ -36,7 +36,7 @@ const MetaBox = () => {
         Configure Template
       </button>
       <Modal form={ selected } show={ showModal } toggle={ toggleModal } />
-    </Fragment>
+    </div>
   );
 };
 export default MetaBox;
