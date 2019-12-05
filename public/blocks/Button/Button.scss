@@ -1,0 +1,58 @@
+@import '../../style/colors.scss';
+
+.read-more {
+  border: 2px solid $white;
+  color: $white;
+  font-weight: 700;
+  background: none;
+  margin: 1rem 0 2rem;
+  padding: 0.5rem 1rem;
+  letter-spacing: 1.5px;
+  transition: 0.5s;
+
+  &:hover {
+    cursor: pointer;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+  }
+
+  &.minimal {
+    border: none;
+    background: none;
+    color: $blueDark;
+    padding-left: 0;
+  }
+
+  &.red {
+    color: $blueDark;
+    border-color: $red;
+
+    &:hover {
+      border: 2px solid rgba(208, 19, 25, 0.1);
+    }
+  }
+
+  &.blue {
+    color: $blueBlackPearl;
+    border-color: $blueBlackPearl;
+
+    &:hover {
+      border: 2px solid rgba($color: $blueBlackPearl, $alpha: 0.1);
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    margin: 1rem 0 1rem;
+  }
+}
+
+.arrow {
+  &-white {
+    color: $white;
+    font-size: 0.8rem;
+  }
+
+  &-red {
+    color: $red;
+    font-size: 0.8rem;
+  }
+}

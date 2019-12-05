@@ -3,6 +3,7 @@ import propTypes from 'prop-types';
 import { createPortal } from 'react-dom';
 
 import QuoteBoxForm from '../Forms/QuoteBoxForm';
+import TextForm from '../Forms/TextForm';
 import { savePost } from '../../utils/save-post';
 
 import './Modal.module.scss';
@@ -18,6 +19,10 @@ const ModelContent = ( { form, show, toggle } ) => {
 
   if ( form && form === 'quote-box' ) {
     selectedForm = <QuoteBoxForm callback={ setData } />;
+  }
+
+  if ( form && form === 'text' ) {
+    selectedForm = <TextForm />;
   }
 
   return (

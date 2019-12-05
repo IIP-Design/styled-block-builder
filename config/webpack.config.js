@@ -6,7 +6,8 @@ module.exports = {
   entry: {
     // 'gut-highlight': `${paths.gutenbergBlocks}/highlight`,
     'quote-box': `${paths.blocksFrontend}/quote-box`,
-    'template-admin': `${paths.metaboxUI}/index.js`
+    'text': `${paths.blocksFrontend}/text/index.js`,
+    'template-admin': `${paths.metabox}/index.js`
   },
   module: {
     rules: [

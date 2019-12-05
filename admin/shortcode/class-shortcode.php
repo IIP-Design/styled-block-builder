@@ -9,6 +9,10 @@ class Shortcode {
     wp_register_script( 'gpalab-quote-box-js', STYLE_TEMPLATES_URL . 'dist/gpalab-quote-box.js', array(), null, true );
 
     wp_register_style( 'gpalab-quote-box-css', STYLE_TEMPLATES_URL . 'dist/gpalab-quote-box.css', array(), null );
+
+    wp_register_script( 'gpalab-text-js', STYLE_TEMPLATES_URL . 'dist/gpalab-text.js', array(), null, true );
+
+    wp_register_style( 'gpalab-text-css', STYLE_TEMPLATES_URL . 'dist/gpalab-text.css', array(), null );
   }
   
   public function template_shortcode( $args ) {
@@ -26,9 +30,15 @@ class Shortcode {
       wp_enqueue_script( 'gpalab-quote-box-js' );
       wp_enqueue_style( 'gpalab-quote-box-css' );
     }
-    
+
+    if ( $type == 'text' ) {
+      wp_enqueue_script( 'gpalab-text-js' );
+      wp_enqueue_style( 'gpalab-text-css' );
+    }
+
+    // Localize the enqueued script
     wp_localize_script(
-      'gpalab-' . $type . '-js',
+      'gpalab-' . $type . "-js",
       str_replace('-', '', $type) . $id,
       array(
         'blockId' => $id,
