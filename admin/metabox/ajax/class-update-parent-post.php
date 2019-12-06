@@ -21,4 +21,22 @@ class Update_Parent_Post {
       update_post_meta( $parent_id, '_gpalab_associated_templates', $associated );
     }
   }
+
+  public function remove_from_parent_post_meta( $parent_id, $template_id ) {
+    // Get the list of style templates associated with the parent post
+    $associated = get_post_meta( $parent_id, '_gpalab_associated_templates', true );
+
+    if ( empty( $associated) ) {
+      return;
+    }
+
+    if ( in_array( $template_id, $associated ) ) {
+      $remove = array( $template_id );
+
+      // array_values needed to reindex the array after removing item
+      $removed = array_values( array_diff( $associated, $remove ) );
+
+      update_post_meta( $parent_id, '_gpalab_associated_templates', $removed );
+    }
+  }
 }
