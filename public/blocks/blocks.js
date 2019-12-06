@@ -1,6 +1,6 @@
 // Blocks
-import './quote-box';
-import './text';
-import './stats';
 import './hero';
 import './hero-animated';
+import './quote-box';
+import './stats';
+import './text';
