@@ -1,0 +1,116 @@
+@import '../../../style/colors.scss';
+
+.box-bg {
+  background-attachment: fixed;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  padding: 0 0 5rem;
+  position: relative;
+  width: 100%;
+}
+
+.container {
+  position: relative;
+}
+
+.title {
+  color: $white;
+  padding-top: 2.75rem;
+  text-align: center;
+}
+
+.array {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  align-content: center;
+  padding: 3.5rem 0;
+  margin: 0 auto;
+  max-width: calc(1280px - 6rem);
+}
+
+.item {
+  border: 5px solid $white;
+  padding: 2rem;
+  margin: 0.5rem;
+
+  &-percent {
+    font-size: 80px;
+    font-weight: 800;
+    color: $white;
+    text-decoration: none;
+    text-align: center;
+    margin-top: 26px;
+    padding-bottom: 2rem;
+  }
+
+  &-info {
+    font-size: 1rem;
+    color: $white;
+    text-decoration: none;
+    text-align: center;
+    width: 200px;
+    margin-bottom: 0;
+  }
+}
+
+.opacity-overlay {
+  background-color: $blueBlackPearl;
+  height: 100%;
+  opacity: 0.6;
+  position: absolute;
+  width: 100%;
+}
+
+
+@media screen and (max-width: 768px) {
+
+  .array {
+    flex-direction: column;
+    padding: 2rem 0;
+  }
+
+  .box-bg {
+    padding-bottom: 1rem;
+  }
+
+  .title {
+    padding-top: 2rem;
+  }
+}
+
+.resources-link {
+  margin: 10px;
+  height: 100px;
+  width: 200px;
+}
+
+
+@media screen and (max-width: 500px) {
+
+  .array {
+    padding-bottom: 50px;
+    padding-top: 50px;
+  }
+
+  .item {
+    padding: 0.5rem;
+    height: calc(160px + 1rem);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    &-info {
+      width: 150px;
+    }
+
+    &-percent {
+      font-size: 2rem;
+    }
+  }
+
+  &-array {
+    padding: 20px 0px 20px 0px;
+  }
+}
