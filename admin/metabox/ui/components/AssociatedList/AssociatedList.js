@@ -1,6 +1,8 @@
 import React, { Fragment } from 'react';
 import propTypes from 'prop-types';
 
+import { updatePost } from '../../utils/update-post';
+
 import './AssociatedList.module.scss';
 
 const AssociatedList = ( { list, edit } ) => {
@@ -14,7 +16,11 @@ const AssociatedList = ( { list, edit } ) => {
             <button onClick={ () => edit( item.id, item.type ) } styleName="button" type="button">
               <span className="dashicons dashicons-edit" />
             </button>
-            <button styleName="button" type="button">
+            <button
+              onClick={ () => updatePost( { id: item.id }, 'delete' ) }
+              styleName="button"
+              type="button"
+            >
               <span className="dashicons dashicons-no" />
             </button>
           </div>

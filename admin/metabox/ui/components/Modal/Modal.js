@@ -4,7 +4,7 @@ import { createPortal } from 'react-dom';
 
 import QuoteBoxForm from '../Forms/QuoteBoxForm';
 import TextForm from '../Forms/TextForm';
-import { savePost } from '../../utils/save-post';
+import { updatePost } from '../../utils/update-post';
 
 import './Modal.module.scss';
 
@@ -25,17 +25,15 @@ const ModelContent = ( { form, id, show, toggle } ) => {
   const meta = current?.meta ? current.meta : {};
 
   let selectedForm = null;
-  if ( form ) {
-    switch ( form ) {
-      case 'quote-box':
-        selectedForm = <QuoteBoxForm callback={ setData } meta={ meta } />;
-        break;
-      case 'text':
-        selectedForm = <TextForm callback={ setData } meta={ meta } />;
-        break;
-      default:
-        return;
-    }
+  switch ( form ) {
+    case 'quote-box':
+      selectedForm = <QuoteBoxForm callback={ setData } meta={ meta } />;
+      break;
+    case 'text':
+      selectedForm = <TextForm callback={ setData } meta={ meta } />;
+      break;
+    default:
+      return;
   }
 
   return (
@@ -49,7 +47,7 @@ const ModelContent = ( { form, id, show, toggle } ) => {
           </button>
           <button
             className="button-primary"
-            onClick={ () => savePost( { id, meta: data, type: form } ) }
+            onClick={ () => updatePost( { id, meta: data, type: form }, 'save' ) }
             type="button"
           >
             Save

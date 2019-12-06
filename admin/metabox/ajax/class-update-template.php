@@ -4,7 +4,7 @@ namespace Style_Templates;
 
 class Update_Template {
 
-  // Create/update template post
+  // Create/update a template post
   public function handle_template_update() {
     // Check for a valid nonce coming from the AJAX request (nonce set in Style_Templates/Admin)
     $is_nonce_set = isset( $_POST[ 'security' ] );
@@ -34,13 +34,41 @@ class Update_Template {
 
     $parent_id = sanitize_text_field( $_POST['parent'] );
     
-    // Add template id to parent post meta
+    // Add the template id to its parent's post metadata
     include_once STYLE_TEMPLATES_DIR . 'admin/metabox/ajax/class-update-parent-post.php';
     $update_parent = new Update_Parent_Post();
     $update_parent->set_parent_post_meta( $parent_id, $post_id );
 
     // Return post ID as the AJAX response
-    wp_send_json($post_id);
+    wp_send_json('Added a ' . $form_type . ' template with the ID: ' . $post_id );
+
+    wp_die();
+  }
+
+  // Delete a template post
+  public function handle_template_deletion() {
+    // Check for a valid nonce coming from the AJAX request (nonce set in Style_Templates/Admin)
+    $is_nonce_set = isset( $_POST[ 'security' ] );
+    $is_verified_nonce = wp_verify_nonce( $_POST[ 'security' ], 'gpalab-template-nonce' );
+    $is_referer_valid = check_ajax_referer( 'gpalab-template-nonce', 'security' );
+    
+    if ( !$is_nonce_set || !$is_verified_nonce || !$is_referer_valid ) {
+      return;
+    }
+
+    // Get required information about the template
+    $post_id = sanitize_text_field( $_POST['id'] );
+    $parent_id = sanitize_text_field( $_POST['parent'] );
+    
+    // Remove the template id from it's parent's post metadata
+    include_once STYLE_TEMPLATES_DIR . 'admin/metabox/ajax/class-update-parent-post.php';
+    $update_parent = new Update_Parent_Post();
+    $update_parent->remove_from_parent_post_meta( $parent_id, $post_id );
+
+    wp_delete_post( $post_id );
+
+    // Return post ID as the AJAX response
+    wp_send_json('Deleted the template with the ID: ' . $post_id );
 
     wp_die();
   }

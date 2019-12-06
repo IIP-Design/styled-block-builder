@@ -92,6 +92,7 @@ class Style_Templates {
 
     // Ajax
     $this->loader->add_action( 'wp_ajax_gpalab_update_template', $plugin_ajax, 'handle_template_update' );
+    $this->loader->add_action( 'wp_ajax_gpalab_delete_template', $plugin_ajax, 'handle_template_deletion' );
     // Custom Metabox
     $this->loader->add_action( 'add_meta_boxes', $plugin_metabox, 'add_templates_metabox' );
     // Shortcode
