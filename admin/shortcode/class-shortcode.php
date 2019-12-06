@@ -32,9 +32,9 @@ class Shortcode {
     // Localize the enqueued script
     wp_localize_script(
       'gpalab-template-frontend-js',
-      str_replace('-', '', $type) . $id,
+      'gpalab' . str_replace('-', '', ucwords( $type, '-') ) . $id,
       array(
-        'blockId' => $id,
+        'meta' => get_post_meta( $id, '_gpalab_template_meta', true ),
       )
     );
 
