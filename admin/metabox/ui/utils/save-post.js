@@ -7,6 +7,7 @@ export const savePost = async data => {
   // Create a FormData object to send user inputs to server
   const formData = getFormData( data );
   formData.append( 'action', 'gpalab_update_template' );
+  formData.append( 'parent', fromPHP.parentPost );
   formData.append( 'security', fromPHP.templateNonce );
 
   // AJAX call

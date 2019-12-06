@@ -26,17 +26,29 @@ class Update_Template {
     $data = array();
     $data['post_meta'] = $meta;
     $data['post_title'] = $meta['title'];
-    $data['post_type'] = 'quote-box';
+    $data['post_type'] = $form_type;
 
     // Run function to pass data to post
-    $this->insert_template_data( $data );
+    $post_id = $this->insert_template_data( $data );
+
+    $parent_id = sanitize_text_field( $_POST['parent'] );
+    
+    // Add template id to parent post meta
+    include_once STYLE_TEMPLATES_DIR . 'admin/metabox/ajax/class-update-parent-post.php';
+    $update_parent = new Update_Parent_Post();
+    $update_parent->set_parent_post_meta( $parent_id, $post_id );
+
+    // Return post ID as the AJAX response
+    wp_send_json($post_id);
+
+    wp_die();
   }
 
   // Pull in and instantiate the proper sanitizer class for the form type submitted
   function load_sanitizer( $form_type ) {
 
     if ( $form_type == 'quote-box') {
-      include_once STYLE_TEMPLATES_DIR . 'admin/metabox/forms/class-sanitize-quotebox-meta.php';
+      include_once STYLE_TEMPLATES_DIR . 'admin/metabox/ajax/forms/class-sanitize-quotebox-meta.php';
       $sanitize = new Sanitize_Quotebox_Meta();
       
       return $sanitize;
@@ -62,6 +74,8 @@ class Update_Template {
 
     // wp_insert_post creates a new post if the ID passed in is empty or 0
     // Otherwise, it updates the existing post with the provided post ID
-    wp_insert_post( $post_data, true );
+    $post_id = wp_insert_post( $post_data, true );
+
+    return $post_id;
   }
 }

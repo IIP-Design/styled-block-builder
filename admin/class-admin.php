@@ -17,6 +17,7 @@ class Admin {
 
     wp_localize_script( 'gpalab-template-admin-js', 'gpalabTemplateAdmin', array(
       'ajaxUrl'       => admin_url( 'admin-ajax.php' ),
+      'parentPost'    => get_the_ID(),
       'templateNonce' => wp_create_nonce('gpalab-template-nonce')
     ) );
   }
