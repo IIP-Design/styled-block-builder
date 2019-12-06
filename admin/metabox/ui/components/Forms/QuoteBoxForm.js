@@ -3,12 +3,12 @@ import propTypes from 'prop-types';
 
 import './Forms.scss';
 
-const QuoteBoxForm = ( { callback } ) => {
-  const [desc, setDesc] = useState( '' );
-  const [quote, setQuote] = useState( '' );
-  const [speaker, setSpeaker] = useState( '' );
-  const [subtitle, setSubtitle] = useState( '' );
-  const [title, setTitle] = useState( '' );
+const QuoteBoxForm = ( { callback, meta } ) => {
+  const [desc, setDesc] = useState( meta.desc || '' );
+  const [quote, setQuote] = useState( meta.quote || '' );
+  const [speaker, setSpeaker] = useState( meta.speaker || '' );
+  const [subtitle, setSubtitle] = useState( meta.subtitle || '' );
+  const [title, setTitle] = useState( meta.title || '' );
 
   const handleChange = e => {
     const { name, value } = e.target;
@@ -104,7 +104,8 @@ const QuoteBoxForm = ( { callback } ) => {
 };
 
 QuoteBoxForm.propTypes = {
-  callback: propTypes.func
+  callback: propTypes.func,
+  meta: propTypes.object
 };
 
 export default QuoteBoxForm;

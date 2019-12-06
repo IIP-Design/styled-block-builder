@@ -14,10 +14,28 @@ class Admin {
 
   // Pass required PHP values as variables to admin JS
   public function localize_admin_script_globals() {
+    $current_post = get_the_ID();
+
+    $associated = get_post_meta( $current_post, '_gpalab_associated_templates', true );
+
+    $assoc_data = array();
+
+    if ( !empty( $associated) ) {
+      foreach ( $associated as $id ) {
+        $assoc = array();
+        $assoc['id'] = $id;
+        $assoc['meta'] = get_post_meta( $id, '_gpalab_template_meta', true );
+        $assoc['title'] = get_the_title( $id );
+        $assoc['type'] = get_post_type( $id );
+
+        $assoc_data[] = $assoc;
+      }
+    }
 
     wp_localize_script( 'gpalab-template-admin-js', 'gpalabTemplateAdmin', array(
       'ajaxUrl'       => admin_url( 'admin-ajax.php' ),
-      'parentPost'    => get_the_ID(),
+      'associated'    => $assoc_data,
+      'parentPost'    => $current_post,
       'templateNonce' => wp_create_nonce('gpalab-template-nonce')
     ) );
   }

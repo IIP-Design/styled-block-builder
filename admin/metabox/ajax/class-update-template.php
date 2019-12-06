@@ -24,6 +24,7 @@ class Update_Template {
 
     // Istantiate and populate the post data array
     $data = array();
+    $data['id'] = sanitize_text_field( $_POST['id'] );
     $data['post_meta'] = $meta;
     $data['post_title'] = $meta['title'];
     $data['post_type'] = $form_type;
@@ -60,6 +61,7 @@ class Update_Template {
     $user_id = get_current_user_id();
     
     $post_data = array(
+      'ID'                    => $data['id'],
       'post_author'           => $user_id,
       'post_content'          => '',
       'post_content_filtered' => '',
@@ -69,7 +71,7 @@ class Update_Template {
       'post_type'             => $data['post_type'],
       'comment_status'        => 'closed',
       'post_parent'           => 0,
-      'meta_input'            => $data['post_meta']
+      'meta_input'            => array( '_gpalab_template_meta' => $data['post_meta'])
     );
 
     // wp_insert_post creates a new post if the ID passed in is empty or 0

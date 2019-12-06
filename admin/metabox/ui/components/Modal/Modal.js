@@ -10,19 +10,32 @@ import './Modal.module.scss';
 
 const modalRoot = document.getElementById( 'gpalab-add-template-modal' );
 
-const ModelContent = ( { form, show, toggle } ) => {
+const ModelContent = ( { form, id, show, toggle } ) => {
   if ( !show ) return null;
 
   const [data, setData] = useState( {} );
 
+  // Get array of associated templates
+  const template = window?.gpalabTemplateAdmin?.associated
+    ? window.gpalabTemplateAdmin.associated
+    : [];
+
+  // Pick out the one selected for editing and get it's metadata
+  const current = template.filter( item => item.id === id )[0];
+  const meta = current?.meta ? current.meta : {};
+
   let selectedForm = null;
-
-  if ( form && form === 'quote-box' ) {
-    selectedForm = <QuoteBoxForm callback={ setData } />;
-  }
-
-  if ( form && form === 'text' ) {
-    selectedForm = <TextForm />;
+  if ( form ) {
+    switch ( form ) {
+      case 'quote-box':
+        selectedForm = <QuoteBoxForm callback={ setData } meta={ meta } />;
+        break;
+      case 'text':
+        selectedForm = <TextForm callback={ setData } meta={ meta } />;
+        break;
+      default:
+        return;
+    }
   }
 
   return (
@@ -36,7 +49,7 @@ const ModelContent = ( { form, show, toggle } ) => {
           </button>
           <button
             className="button-primary"
-            onClick={ () => savePost( { meta: data, type: form } ) }
+            onClick={ () => savePost( { id, meta: data, type: form } ) }
             type="button"
           >
             Save
@@ -49,11 +62,12 @@ const ModelContent = ( { form, show, toggle } ) => {
 
 ModelContent.propTypes = {
   form: propTypes.string,
+  id: propTypes.number,
   show: propTypes.bool,
   toggle: propTypes.func
 };
 
-const Modal = ( { form, show, toggle } ) =>
-  createPortal( <ModelContent form={ form } show={ show } toggle={ toggle } />, modalRoot );
+/* eslint-disable-next-line react/jsx-props-no-spreading */
+const Modal = props => createPortal( <ModelContent { ...props } />, modalRoot );
 
 export default Modal;
