@@ -7,7 +7,13 @@ class Update_Template {
   // Create/update template post
   public function handle_template_update() {
     // Check for a valid nonce coming from the AJAX request (nonce set in Style_Templates/Admin)
-    check_ajax_referer( 'gpalab-template-nonce', 'security' );
+    $is_nonce_set = isset( $_POST[ 'security' ] );
+    $is_verified_nonce = wp_verify_nonce( $_POST[ 'security' ], 'gpalab-template-nonce' );
+    $is_referer_valid = check_ajax_referer( 'gpalab-template-nonce', 'security' );
+    
+    if ( !$is_nonce_set || !$is_verified_nonce || !$is_referer_valid ) {
+      return;
+    }
 
     // Check what sort of form has been submitted
     $form_type = sanitize_text_field( $_POST['type'] );

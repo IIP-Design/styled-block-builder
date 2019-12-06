@@ -10,8 +10,12 @@ class Shortcode {
 
     wp_register_style( 'gpalab-template-frontend-css', STYLE_TEMPLATES_DIST . 'gpalab-template-frontend.css', array(), null );
   }
+
+  public function add_templates_shortcode() {
+    add_shortcode( 'gpalab_template', array( $this, 'template_shortcode' ) );
+  }
   
-  public function template_shortcode( $args ) {
+  function template_shortcode( $args ) {
     // Map the provided shortcode attributes
     $attr = shortcode_atts( array(
       'type' => '',
@@ -21,7 +25,7 @@ class Shortcode {
     $id = $attr['id'];
     $type = $attr['type'];
 
-    // Enqueue the relevant scripts & styles
+    // Enqueue the relevant scripts & styles when shortcode present
     wp_enqueue_script( 'gpalab-template-frontend-js' );
     wp_enqueue_style( 'gpalab-template-frontend-css' );
 
@@ -38,9 +42,5 @@ class Shortcode {
     $html = '<div data-id="' . $id . '" data-type="gpalab-' . $type . '">' . $type . '</div>';
 
     return $html;
-  }
-
-  public function add_templates_shortcode() {
-    add_shortcode( 'gpalab_template', array( $this, 'template_shortcode' ) );
   }
 }

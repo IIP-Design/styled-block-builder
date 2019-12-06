@@ -77,9 +77,9 @@ class Style_Templates {
   private function define_admin_hooks() {
     // Instantiate all admin classes
     $plugin_admin = new Style_Templates\Admin( $this->get_plugin_name(), $this->get_version() );
-    $plugin_ajax = new Style_Templates\Update_Template( $this->get_plugin_name(), $this->get_version() );
     $plugin_metabox = new Style_Templates\Metabox( $this->get_plugin_name(), $this->get_version() );
     $plugin_shortcode = new Style_Templates\Shortcode( $this->get_plugin_name(), $this->get_version() );
+    $plugin_ajax = new Style_Templates\Update_Template( $this->get_plugin_name(), $this->get_version() );
     
     // Admin hooks
     $this->loader->add_action( 'init', $plugin_admin, 'register_admin_scripts_styles' );
