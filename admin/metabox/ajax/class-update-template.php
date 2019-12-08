@@ -15,8 +15,9 @@ class Update_Template {
       return;
     }
 
-    // Check what sort of form has been submitted
+    // Check what sort of form has been submitted and whether it is a new post
     $form_type = sanitize_text_field( $_POST['type'] );
+    $passed_id = sanitize_text_field( $_POST['id'] );
     
     // Use the appropriate sanitizer to sanitize the inputs
     $sanitizer = $this->load_sanitizer( $form_type );
@@ -24,7 +25,7 @@ class Update_Template {
 
     // Istantiate and populate the post data array
     $data = array();
-    $data['id'] = sanitize_text_field( $_POST['id'] );
+    $data['id'] = $passed_id;
     $data['post_meta'] = $meta;
     $data['post_title'] = $meta['title'];
     $data['post_type'] = $form_type;
@@ -40,7 +41,8 @@ class Update_Template {
     $update_parent->set_parent_post_meta( $parent_id, $post_id );
 
     // Return post ID as the AJAX response
-    wp_send_json('Added a ' . $form_type . ' template with the ID: ' . $post_id );
+    $is_new = $passed_id == 0 ? 'Added a ' : 'Updated the ';
+    wp_send_json($is_new . $form_type . ' template with the ID: ' . $post_id );
 
     wp_die();
   }

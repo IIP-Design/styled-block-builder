@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import propTypes from 'prop-types';
 
 import './Forms.scss';
@@ -10,16 +10,21 @@ const QuoteBoxForm = ( { callback, meta } ) => {
   const [subtitle, setSubtitle] = useState( meta.subtitle || '' );
   const [title, setTitle] = useState( meta.title || '' );
 
+  const formData = {
+    desc,
+    quote,
+    speaker,
+    subtitle,
+    title
+  };
+
+  // Initialize the state on first render, otherwise will submit empty values if saved without making changes
+  useEffect( () => {
+    callback( formData );
+  }, [] );
+
   const handleChange = e => {
     const { name, value } = e.target;
-
-    const formData = {
-      desc,
-      quote,
-      speaker,
-      subtitle,
-      title
-    };
 
     switch ( name ) {
       case 'desc':

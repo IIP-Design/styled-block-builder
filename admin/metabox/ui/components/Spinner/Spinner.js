@@ -1,12 +1,17 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 
 import './Spinner.module.scss';
 
 const Spinner = () => (
-  <div styleName="container">
+  <Fragment>
     <div styleName="background" />
-    <div styleName="spinner" />
-  </div>
+    <div styleName="container">
+      <div styleName="spinner-background">
+        <strong>Saving...</strong>
+        <div styleName="spinner" />
+      </div>
+    </div>
+  </Fragment>
 );
 
 export default Spinner;

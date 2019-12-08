@@ -1,6 +1,6 @@
 import { getFormData } from './helpers';
 
-export const updatePost = async ( data, action ) => {
+export const updatePost = async ( data, action, onComplete ) => {
   // Get values provided to the client by the server
   const fromPHP = window.gpalabTemplateAdmin ? window.gpalabTemplateAdmin : {};
 
@@ -29,6 +29,9 @@ export const updatePost = async ( data, action ) => {
     } );
     const result = await response.json();
     console.log( 'Success:', JSON.stringify( result ) );
+    if ( onComplete ) {
+      onComplete();
+    }
   } catch ( error ) {
     console.error( 'Error:', error );
   }

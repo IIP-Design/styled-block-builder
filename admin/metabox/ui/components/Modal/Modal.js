@@ -3,6 +3,7 @@ import propTypes from 'prop-types';
 import { createPortal } from 'react-dom';
 
 import QuoteBoxForm from '../Forms/QuoteBoxForm';
+import Spinner from '../Spinner/Spinner';
 import TextForm from '../Forms/TextForm';
 import { updatePost } from '../../utils/update-post';
 
@@ -14,6 +15,7 @@ const ModelContent = ( { form, id, show, toggle } ) => {
   if ( !show ) return null;
 
   const [data, setData] = useState( {} );
+  const [saving, setSaving] = useState( false );
 
   // Get array of associated templates
   const template = window?.gpalabTemplateAdmin?.associated
@@ -36,20 +38,23 @@ const ModelContent = ( { form, id, show, toggle } ) => {
       return;
   }
 
+  const submitForm = () => {
+    const onComplete = () => setSaving( false );
+    setSaving( true );
+    updatePost( { id, meta: data, type: form }, 'save', onComplete );
+  };
+
   return (
     <div styleName="modal">
       <div styleName="modal-background" />
       <div styleName="modal-foreground">
+        { saving && <Spinner /> }
         { selectedForm }
         <div styleName="modal-buttons">
           <button className="button-secondary" onClick={ toggle } type="button">
             Cancel
           </button>
-          <button
-            className="button-primary"
-            onClick={ () => updatePost( { id, meta: data, type: form }, 'save' ) }
-            type="button"
-          >
+          <button className="button-primary" onClick={ submitForm } type="button">
             Save
           </button>
         </div>

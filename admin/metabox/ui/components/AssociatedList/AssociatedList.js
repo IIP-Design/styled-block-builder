@@ -13,10 +13,16 @@ const AssociatedList = ( { list, edit } ) => {
         { list.map( item => (
           <div data-id={ item.id } key={ item.id } styleName="list-item">
             { item.title }
-            <button onClick={ () => edit( item.id, item.type ) } styleName="button" type="button">
+            <button
+              aria-label="edit"
+              onClick={ () => edit( item.id, item.type ) }
+              styleName="button"
+              type="button"
+            >
               <span className="dashicons dashicons-edit" />
             </button>
             <button
+              aria-label="delete"
               onClick={ () => updatePost( { id: item.id }, 'delete' ) }
               styleName="button"
               type="button"
