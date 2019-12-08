@@ -14,7 +14,7 @@ const AssociatedList = ( { list, edit } ) => {
           <div data-id={ item.id } key={ item.id } styleName="list-item">
             { item.title }
             <button
-              aria-label="edit"
+              aria-label="edit template"
               onClick={ () => edit( item.id, item.type ) }
               styleName="button"
               type="button"
@@ -22,12 +22,12 @@ const AssociatedList = ( { list, edit } ) => {
               <span className="dashicons dashicons-edit" />
             </button>
             <button
-              aria-label="delete"
+              aria-label="delete template"
               onClick={ () => updatePost( { id: item.id }, 'delete' ) }
               styleName="button"
               type="button"
             >
-              <span className="dashicons dashicons-no" />
+              <span className="dashicons dashicons-trash" />
             </button>
           </div>
         ) ) }

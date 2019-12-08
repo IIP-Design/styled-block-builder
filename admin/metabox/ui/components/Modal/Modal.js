@@ -44,13 +44,29 @@ const ModelContent = ( { form, id, show, toggle } ) => {
     updatePost( { id, meta: data, type: form }, 'save', onComplete );
   };
 
+  const shortcode = `[gpalab_template id='${id}' type='${form}']`;
+
   return (
     <div styleName="modal">
       <div styleName="modal-background" />
       <div styleName="modal-foreground">
+        <button aria-label="close modal" onClick={ toggle } styleName="close-icon" type="button">
+          <span className="dashicons dashicons-no" />
+        </button>
         { saving && <Spinner /> }
         { selectedForm }
-        <div styleName="modal-buttons">
+        <div styleName="modal-controls">
+          <label htmlFor="copy-shortcode">
+            { id !== 0 && (
+              <input
+                styleName="shortcode-input"
+                id="copy-shortcode"
+                readOnly
+                type="text"
+                value={ shortcode }
+              />
+            ) }
+          </label>
           <button className="button-secondary" onClick={ toggle } type="button">
             Cancel
           </button>

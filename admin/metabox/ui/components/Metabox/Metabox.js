@@ -16,6 +16,7 @@ const MetaBox = () => {
 
   const toggleModal = () => {
     setShowModal( false );
+    setFormId( 0 );
     setFormType( '' );
   };
 

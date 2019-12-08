@@ -1,3 +1,17 @@
+.close-icon {
+  align-self: flex-end;
+  background-color: transparent;
+  border: none;
+  color: #e5e5e5;
+  margin: -1rem -1rem;
+  padding: 0;
+  z-index: 1;
+
+  &:hover {
+    color: #444444;
+  }
+}
+
 .modal {
   align-items: center;
   display: flex;
@@ -19,20 +33,27 @@
     width: 100%;
   }
 
-  &-buttons {
-    display: flex;
-    justify-content: flex-end;
-
-    > button:not(:first-of-type) {
-      margin-left: 1rem;
-    }
+  &-controls {
+    align-items: center;
+    border-top: 1px solid #e5e5e5;
+    display: grid;
+    grid-template-columns: 1fr 65px 65px;
+    grid-column-gap: 0.5rem;
+    margin-top: 1rem;
+    padding-top: 1rem;
   }
 
   &-foreground {
     background: #fff;
     border: 1px solid #e5e5e5;
     box-shadow: 0 1px 1px rgba($color: #000000, $alpha: 0.04);
+    display: flex;
+    flex-direction: column;
     padding: 2rem;
     position: relative;
   }
+}
+
+.shortcode-input {
+  width: 100%;
 }
