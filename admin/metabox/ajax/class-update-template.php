@@ -84,6 +84,14 @@ class Update_Template {
       
       return $sanitize;
     }
+
+    if ( $form_type == 'stats') {
+      include_once STYLE_TEMPLATES_DIR . 'admin/metabox/ajax/forms/class-sanitize-stats-meta.php';
+      $sanitize = new Sanitize_Stats_Meta();
+      
+      return $sanitize;
+    }
+
   }
   
   // Accept post data and use it to create/update post

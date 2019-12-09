@@ -4,58 +4,68 @@ import { TimelineMax, Power2 } from 'gsap';
 import ScrollMagic from 'scrollmagic';
 
 import './Stats.module.scss';
-import mockData from './mockdata';
 
 const Stats = ( { id } ) => {
-  // const { title } = window[`quotebox${id}`];
-  const {
-    title,
-    background,
-    statOneText,
-    statOneNumber,
-    statTwoText,
-    statTwoNumber,
-    statThreeText,
-    statThreeNumber
-  } = mockData;
+  const { meta } = window[`gpalabStats${id}`];
 
-  return (
-    <div styleName="box-bg" style={ { backgroundImage: `url(${background})` } }>
-      <div styleName="opacity-overlay" id="stats-section" />
-      <div styleName="container">
-        <h2 styleName="title">{ title }</h2>
-        <div styleName="array">
-          <div styleName="item">
-            <div styleName="item-percent">
-              <span id="stat-1" data-stat={ statOneNumber }>
-                0
-              </span>
-              %
-            </div>
-            <p styleName="item-info">{ statOneText }</p>
-          </div>
-          <div styleName="item">
-            <div styleName="item-percent">
-              <span id="stat-2" data-stat={ statTwoNumber }>
-                0
-              </span>
-              %
-            </div>
-            <p styleName="item-info">{ statTwoText }</p>
-          </div>
-          <div styleName="item">
-            <div styleName="item-percent">
-              <span id="stat-3" data-stat={ statThreeNumber }>
-                0
-              </span>
-              %
-            </div>
-            <p styleName="item-info">{ statThreeText }</p>
+  if ( meta ) {
+    const {
+      background,
+      statOneNumber,
+      statOneText,
+      statTwoNumber,
+      statTwoText,
+      statThreeNumber,
+      statThreeText,
+      title
+    } = meta;
+
+    return (
+      <div styleName="box-bg" style={ { backgroundImage: `url(${background})` } }>
+        <div styleName="opacity-overlay" id="stats-section" />
+        <div styleName="container">
+          { title && <h2 styleName="title">{ title }</h2> }
+          <div styleName="array">
+            { statOneNumber && statOneText && (
+              <div styleName="item">
+                <div styleName="item-percent">
+                  <span id="stat-1" data-stat={ statOneNumber }>
+                    0
+                  </span>
+                  %
+                </div>
+                <p styleName="item-info">{ statOneText }</p>
+              </div>
+            ) }
+            { statTwoNumber && statTwoText && (
+              <div styleName="item">
+                <div styleName="item-percent">
+                  <span id="stat-2" data-stat={ statTwoNumber }>
+                    0
+                  </span>
+                  %
+                </div>
+                <p styleName="item-info">{ statTwoText }</p>
+              </div>
+            ) }
+            { statThreeNumber && statThreeText && (
+              <div styleName="item">
+                <div styleName="item-percent">
+                  <span id="stat-3" data-stat={ statThreeNumber }>
+                    0
+                  </span>
+                  %
+                </div>
+                <p styleName="item-info">{ statThreeText }</p>
+              </div>
+            ) }
           </div>
         </div>
       </div>
-    </div>
-  );
+    );
+  }
+
+  return null;
 };
 
 const statOne = document.getElementById( 'stat-1' );
