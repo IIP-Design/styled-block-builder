@@ -3,6 +3,8 @@ import propTypes from 'prop-types';
 
 import { getFromCDP, parseFeedItemData } from '../../utils/cdp';
 
+import './CDPFeed.module.scss';
+
 const CDPFeedItem = ( { id, source } ) => {
   const [data, setData] = useState( null );
 
@@ -18,10 +20,10 @@ const CDPFeedItem = ( { id, source } ) => {
 
   if ( data ) {
     return (
-      <div className="cdp-feed-item" key={ id } style={ { backgroundImage: `url('${data.image}')` } }>
-        <a className="cdp-feed-item-link" href={ data.link }>
+      <div styleName="feed-item" key={ id } style={ { backgroundImage: `url('${data.image}')` } }>
+        <a styleName="feed-item-link" href={ data.link }>
           <div>
-            <p className="cdp-feed-item-title">{ data.title }</p>
+            <p styleName="feed-item-title">{ data.title }</p>
           </div>
         </a>
       </div>

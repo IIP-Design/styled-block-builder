@@ -3,7 +3,7 @@ import propTypes from 'prop-types';
 
 import CDPFeedItem from './CDPFeedItem';
 
-import './CDPFeed.scss';
+import './CDPFeed.module.scss';
 
 const CDPFeed = ( { id, items } ) => {
   let feedType = '';
@@ -16,12 +16,10 @@ const CDPFeed = ( { id, items } ) => {
   }
 
   return (
-    <div className="cdp-feed-container">
-      <div className={ `cdp-feed ${feedType}` } id={ `cdp-feed-${id}` }>
-        { items.map( item => (
-          <CDPFeedItem id={ item.id } key={ item.id } source={ item.source } />
-        ) ) }
-      </div>
+    <div styleName={ `cdp-feed ${feedType}` } id={ `cdp-feed-${id}` }>
+      { items.map( item => (
+        <CDPFeedItem id={ item.id } key={ item.id } source={ item.source } />
+      ) ) }
     </div>
   );
 };
