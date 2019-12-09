@@ -3,7 +3,7 @@ import propTypes from 'prop-types';
 
 import './Hero.module.scss';
 import mockData from './mockdata';
-import Button from '../../_shared/Button/Button';
+import Button from '../../_shared/components/Button/Button';
 
 const Hero = ( { id } ) => {
   // const { title } = window[`quotebox${id}`];

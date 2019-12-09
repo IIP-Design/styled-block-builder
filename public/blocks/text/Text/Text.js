@@ -1,6 +1,6 @@
 import React from 'react';
 import propTypes from 'prop-types';
-import Button from '../../_shared/Button/Button';
+import Button from '../../_shared/components/Button/Button';
 
 import './Text.module.scss';
 import mockData from './mockdata';
