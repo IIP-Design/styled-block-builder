@@ -14,7 +14,7 @@ class Sanitize_Text_Meta {
     }
 
     if( !empty( $unsanitary['color'] ) ) {
-      $sanitized['color'] = sanitize_textarea_field( $unsanitary['color'] );
+      $sanitized['color'] = sanitize_text_field( $unsanitary['color'] );
     }
 
     if( !empty( $unsanitary['desc'] ) ) {
@@ -22,19 +22,19 @@ class Sanitize_Text_Meta {
     }
 
     if( !empty( $unsanitary['link'] ) ) {
-      $sanitized['link'] = sanitize_textarea_field( $unsanitary['link'] );
+      $sanitized['link'] = sanitize_text_field( $unsanitary['link'] );
     }
 
     if( !empty( $unsanitary['style'] ) ) {
-      $sanitized['style'] = sanitize_textarea_field( $unsanitary['style'] );
+      $sanitized['style'] = sanitize_text_field( $unsanitary['style'] );
     }
 
     if( !empty( $unsanitary['subtitle'] ) ) {
-      $sanitized['subtitle'] = sanitize_textarea_field( $unsanitary['subtitle'] );
+      $sanitized['subtitle'] = sanitize_text_field( $unsanitary['subtitle'] );
     }
 
     if( !empty( $unsanitary['title'] ) ) {
-      $sanitized['title'] = sanitize_textarea_field( $unsanitary['title'] );
+      $sanitized['title'] = sanitize_text_field( $unsanitary['title'] );
     }
 
     return $sanitized;
