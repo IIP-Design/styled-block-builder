@@ -1,12 +1,14 @@
 import React from 'react';
 import propTypes from 'prop-types';
 
+import AnimatedLines from '../../_shared/components/AnimatedLines/AnimatedLines';
+
 import './HeroAnimated.module.scss';
 import mockData from './mockdata';
 
 const HeroAnimated = ( { id } ) => {
   // const { title } = window[`quotebox${id}`];
-  const { title, subtitle, background, text1, text2, text3, text4, text5 } = mockData;
+  const { title, subtitle, background, lines } = mockData;
 
   return (
     <div styleName="container" id="iran-section">
@@ -20,11 +22,7 @@ const HeroAnimated = ( { id } ) => {
           <span styleName="title-highlight">{ subtitle }</span>
         </h3>
         <div styleName="content">
-          <div styleName="line">{ text1 }</div>
-          <div styleName="line">{ text2 }</div>
-          <div styleName="line">{ text3 }</div>
-          <div styleName="line">{ text4 }</div>
-          <div styleName="line">{ text5 }</div>
+          <AnimatedLines lines={ lines } />
         </div>
       </div>
       <div styleName="scroll-more">
