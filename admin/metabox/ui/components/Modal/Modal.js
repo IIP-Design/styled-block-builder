@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import propTypes from 'prop-types';
 import { createPortal } from 'react-dom';
 
-import Spinner from '../Spinner/Spinner';
 import QuoteBoxForm from '../Forms/QuoteBoxForm';
+import Spinner from '../Spinner/Spinner';
 import StatsForm from '../Forms/StatsForm';
 import TextForm from '../Forms/TextForm';
 import { updatePost } from '../../utils/update-post';
