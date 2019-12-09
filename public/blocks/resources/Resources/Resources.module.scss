@@ -1,0 +1,154 @@
+@import '../../../style/colors.scss';
+
+.background {
+  align-items: center;
+  background-color: $white;
+  background-repeat: repeat;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 2rem;
+  position: relative;
+}
+
+.container {
+  background-color: $white;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.03);
+  margin: 2.5rem 0;
+  max-width: 1280px;
+  width: 90%;
+}
+
+.feed-container {
+  display: flex;
+  margin: 0 1rem;
+  max-width: 100%;
+
+  @media screen and (max-width: 768px) {
+    margin: 0;
+  }
+}
+
+.nav {
+  background-color: $white;
+  border-bottom: 1px solid $greyLight;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+
+  &-button {
+    background-color: $white;
+    color: $black;
+    font-size: 1rem;
+    font-weight: 600;
+    height: 100px;
+    width: 300px;
+    padding: 1rem;
+    text-decoration: none;
+    text-align: center;
+    border-bottom: 2px solid $gold;
+    border-top: none;
+    border-right: none;
+    border-left: none;
+
+    &:focus {
+      outline: none;
+    }
+
+    &:hover {
+      cursor: pointer;
+      color: $gold;
+    }
+
+    &.inactive {
+      border-bottom: none;
+      color: $greyMedium;
+
+      &:hover {
+        color: $gold;
+      }
+    }
+  }
+}
+
+.section {
+  &-content {
+    display: grid;
+    grid-template-areas:
+      'content'
+      'hr'
+      'feed';
+    margin: 2rem 1rem 1rem;
+
+    > :global(.cdp-feed-container) {
+      grid-area: feed;
+    }
+  }
+
+  &-hr {
+    border-top: 1px solid $greyLight;
+    grid-area: hr;
+    margin-top: 3rem;
+    width: calc(100% - 2rem);
+  }
+}
+
+.subtitle {
+  margin-top: 1rem;
+  text-align: center;
+}
+
+.title {
+  padding: 2.75rem 0 0;
+  text-align: center;
+}
+
+@media screen and (max-width: 768px) {
+  .container {
+    margin: 2rem 0 1rem;
+  }
+
+  .nav {
+    flex-direction: row;
+    flex-wrap: nowrap;
+
+    &-button {
+      font-size: 1rem;
+    }
+  }
+
+  .subtitle {
+    margin: 1rem 1rem 0;
+  }
+
+  .title {
+    padding-top: 2rem;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .nav {
+    display: none;
+  }
+
+  .title {
+    text-align: center;
+  }
+
+  .section {
+    &-content {
+      grid-template-areas:
+        'content'
+        'feed'
+        'hr';
+      margin: 1rem;
+    }
+
+    &-hr {
+      margin: 1rem;
+    }
+  }
+
+  .subtitle {
+    margin: 1rem;
+  }
+}
