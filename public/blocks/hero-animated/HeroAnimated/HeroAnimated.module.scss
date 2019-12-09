@@ -64,34 +64,6 @@
   margin: 0 0 3rem 3rem;
 }
 
-.scroll-more {
-  color: $greyMediumLight;
-  font-size: 0.8rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  position: absolute;
-  left: 50%;
-  right: 50%;
-  margin: 0 -50%;
-  top: 650px;
-
-  &-arrow {
-    color: $greyMediumLight;
-    animation: bounce ease-in-out 3s infinite;
-    -webkit-animation: bounce ease-in-out 3s infinite;
-    -moz-animation: bounce ease-in-out 3s infinite;
-    font-size: 3rem;
-    margin-top: -35px;
-
-    @keyframes bounce {
-      50% {
-        transform: translateY(+15px);
-      }
-    }
-  }
-}
-
 @media screen and (min-width: 1951px) {
   .background {
     background-position-x: right;
@@ -119,15 +91,6 @@
 }
 
 @media screen and (max-width: 768px) {
-  .scroll-more {
-    top: 900px;
-    @keyframes bounce {
-      50% {
-        transform: translateY(+8px);
-      }
-    }
-  }
-
   .background {
     height: 100%;
   }
@@ -163,10 +126,6 @@
 }
 
 @media screen and (max-width: 500px) {
-  .scroll-more {
-    top: 650px;
-  }
-
   .content {
     margin: 40vh 1rem 1rem;
   }
@@ -186,10 +145,6 @@
 }
 
 @media screen and (max-width: 375px) {
-  .scroll-more {
-    top: 575px;
-  }
-
   .background {
     transform: translateY(0.5rem);
   }
@@ -200,10 +155,6 @@
 }
 
 @media screen and (max-width: 325px) {
-  .scroll-more {
-    top: 505px;
-  }
-
   .background {
     transform: translateY(0.7rem);
   }

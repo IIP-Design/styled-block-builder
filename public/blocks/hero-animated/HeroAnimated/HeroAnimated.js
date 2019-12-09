@@ -25,10 +25,6 @@ const HeroAnimated = ( { id } ) => {
           <AnimatedLines lines={ lines } />
         </div>
       </div>
-      <div styleName="scroll-more">
-        <p>Scroll Down</p>
-        <div styleName="scroll-more-arrow">⌄</div>
-      </div>
     </div>
   );
 };
