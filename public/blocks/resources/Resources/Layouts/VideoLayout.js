@@ -13,7 +13,7 @@ const VideoLayout = ( { data } ) => (
       <span className="dashicons dashicons-star-filled" />
       <span className="dashicons dashicons-star-filled" />
     </div>
-    <p styleName="content-title">{ data.title }</p>
+    <h5 styleName="content-title">{ data.title }</h5>
     <div styleName="content-text">{ data.text }</div>
   </div>
 );

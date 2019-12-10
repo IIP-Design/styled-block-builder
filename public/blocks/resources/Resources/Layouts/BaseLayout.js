@@ -5,7 +5,7 @@ import './Layouts.module.scss';
 
 const BaseLayout = ( { data } ) => (
   <div styleName="content no-columns">
-    <p styleName="content-title">{ data.title }</p>
+    <h5 styleName="content-title">{ data.title }</h5>
     <div styleName="content-text">{ data.text }</div>
   </div>
 );
