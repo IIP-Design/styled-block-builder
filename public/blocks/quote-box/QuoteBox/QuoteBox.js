@@ -1,6 +1,8 @@
 import React from 'react';
 import propTypes from 'prop-types';
 
+import Normalizer from '../../_shared/components/Normalizer/Normalizer';
+
 import './QuoteBox.module.scss';
 
 const QuoteBox = ( { id } ) => {
@@ -10,21 +12,23 @@ const QuoteBox = ( { id } ) => {
     const { desc, quote, speaker, subtitle, title } = meta;
 
     return (
-      <div styleName="content">
-        { title && <h2 styleName="title">{ title }</h2> }
-        { subtitle && <h3 styleName="subtitle">{ subtitle }</h3> }
-        { desc && <div styleName="text">{ desc }</div> }
-        { quote && (
-          <div styleName="quote">
-            <p styleName="quote-text">
-              { quote }
-              <br />
-              <br />
-              { speaker && `– ${speaker}` }
-            </p>
-          </div>
-        ) }
-      </div>
+      <Normalizer>
+        <div styleName="content">
+          { title && <h2 styleName="title">{ title }</h2> }
+          { subtitle && <h3 styleName="subtitle">{ subtitle }</h3> }
+          { desc && <div styleName="text">{ desc }</div> }
+          { quote && (
+            <div styleName="quote">
+              <p styleName="quote-text">
+                { quote }
+                <br />
+                <br />
+                { speaker && `– ${speaker}` }
+              </p>
+            </div>
+          ) }
+        </div>
+      </Normalizer>
     );
   }
 
