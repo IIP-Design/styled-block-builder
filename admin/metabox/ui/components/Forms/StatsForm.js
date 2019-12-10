@@ -4,25 +4,20 @@ import propTypes from 'prop-types';
 import './Forms.scss';
 
 const StatsForm = ( { callback, meta } ) => {
-  const [background, setBackground] = useState( meta.background || '' );
-  const [statOneNumber, setStatOneNumber] = useState( meta.statOneNumber || '' );
-  const [statOneText, setStatOneText] = useState( meta.statOneText || '' );
-  const [statTwoNumber, setStatTwoNumber] = useState( meta.statTwoNumber || '' );
-  const [statTwoText, setStatTwoText] = useState( meta.statTwoText || '' );
-  const [statThreeNumber, setStatThreeNumber] = useState( meta.statThreeNumber || '' );
-  const [statThreeText, setStatThreeText] = useState( meta.statThreeText || '' );
-  const [title, setTitle] = useState( meta.title || '' );
-
-  const formData = {
-    background,
-    statOneNumber,
-    statOneText,
-    statTwoNumber,
-    statTwoText,
-    statThreeNumber,
-    statThreeText,
-    title
+  const schema = {
+    background: meta.background || '',
+    statOneNumber: meta.statOneNumber || '',
+    statOneText: meta.statOneText || '',
+    statTwoNumber: meta.statTwoNumber || '',
+    statTwoText: meta.statTwoText || '',
+    statThreeNumber: meta.statThreeNumber || '',
+    statThreeText: meta.statThreeText || '',
+    title: meta.title || ''
   };
+
+  const [inputs, setInputs] = useState( schema );
+
+  const formData = { ...inputs };
 
   // Initialize the state on first render, otherwise will submit empty values if saved without making changes
   useEffect( () => {
@@ -31,42 +26,8 @@ const StatsForm = ( { callback, meta } ) => {
 
   const handleChange = e => {
     const { name, value } = e.target;
-
-    switch ( name ) {
-      case 'background':
-        setBackground( value );
-        callback( { ...formData, background: value } );
-        break;
-      case 'statOneNumber':
-        setStatOneNumber( value );
-        callback( { ...formData, statOneNumber: value } );
-        break;
-      case 'statOneText':
-        setStatOneText( value );
-        callback( { ...formData, statOneText: value } );
-        break;
-      case 'statTwoNumber':
-        setStatTwoNumber( value );
-        callback( { ...formData, statTwoNumber: value } );
-        break;
-      case 'statTwoText':
-        setStatTwoText( value );
-        callback( { ...formData, statTwoText: value } );
-        break;
-      case 'statThreeNumber':
-        setStatThreeNumber( value );
-        callback( { ...formData, statThreeNumber: value } );
-        break;
-      case 'statThreeText':
-        setStatThreeText( value );
-        callback( { ...formData, statThreeText: value } );
-        break;
-      case 'title':
-        setTitle( value );
-        callback( { ...formData, title: value } );
-        break;
-      default:
-    }
+    setInputs( { ...inputs, [name]: value } );
+    callback( { ...formData, [name]: value } );
   };
 
   return (
@@ -79,7 +40,7 @@ const StatsForm = ( { callback, meta } ) => {
           name="background"
           onChange={ e => handleChange( e ) }
           type="text"
-          value={ background }
+          value={ meta.background }
         />
       </label>
       <label htmlFor="stats-title">
@@ -89,7 +50,7 @@ const StatsForm = ( { callback, meta } ) => {
           name="title"
           onChange={ e => handleChange( e ) }
           type="text"
-          value={ title }
+          value={ meta.title }
         />
       </label>
       <label htmlFor="stats-statOneNumber">
@@ -99,7 +60,7 @@ const StatsForm = ( { callback, meta } ) => {
           name="statOneNumber"
           onChange={ e => handleChange( e ) }
           type="text"
-          value={ statOneNumber }
+          value={ meta.statOneNumber }
         />
       </label>
       <label htmlFor="stats-statOneText">
@@ -109,7 +70,7 @@ const StatsForm = ( { callback, meta } ) => {
           name="statOneText"
           onChange={ e => handleChange( e ) }
           type="text"
-          value={ statOneText }
+          value={ meta.statOneText }
         />
       </label>
       <label htmlFor="stats-statTwoNumber">
@@ -119,7 +80,7 @@ const StatsForm = ( { callback, meta } ) => {
           name="statTwoNumber"
           onChange={ e => handleChange( e ) }
           type="text"
-          value={ statTwoNumber }
+          value={ meta.statTwoNumber }
         />
       </label>
       <label htmlFor="stats-statTwoText">
@@ -129,7 +90,7 @@ const StatsForm = ( { callback, meta } ) => {
           name="statTwoText"
           onChange={ e => handleChange( e ) }
           type="text"
-          value={ statTwoText }
+          value={ meta.statTwoText }
         />
       </label>
       <label htmlFor="stats-statThreeNumber">
@@ -139,7 +100,7 @@ const StatsForm = ( { callback, meta } ) => {
           name="statThreeNumber"
           onChange={ e => handleChange( e ) }
           type="text"
-          value={ statThreeNumber }
+          value={ meta.statThreeNumber }
         />
       </label>
       <label htmlFor="stats-statThreeText">
@@ -149,7 +110,7 @@ const StatsForm = ( { callback, meta } ) => {
           name="statThreeText"
           onChange={ e => handleChange( e ) }
           type="text"
-          value={ statThreeText }
+          value={ meta.statThreeText }
         />
       </label>
     </form>
