@@ -3,6 +3,7 @@ import propTypes from 'prop-types';
 import { createPortal } from 'react-dom';
 
 import QuoteBoxForm from '../Forms/QuoteBoxForm';
+import ResourcesForm from '../Forms/ResourcesForm';
 import Spinner from '../Spinner/Spinner';
 import StatsForm from '../Forms/StatsForm';
 import TextForm from '../Forms/TextForm';
@@ -31,6 +32,9 @@ const ModelContent = ( { form, id, show, toggle } ) => {
   switch ( form ) {
     case 'quote-box':
       selectedForm = <QuoteBoxForm callback={ setData } meta={ meta } />;
+      break;
+    case 'resources':
+      selectedForm = <ResourcesForm callback={ setData } meta={ meta } />;
       break;
     case 'stats':
       selectedForm = <StatsForm callback={ setData } meta={ meta } />;
