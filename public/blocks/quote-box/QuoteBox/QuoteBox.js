@@ -7,13 +7,13 @@ const QuoteBox = ( { id } ) => {
   const { meta } = window[`gpalabQuoteBox${id}`];
 
   if ( meta ) {
-    const { description, quote, speaker, subtitle, title } = meta;
+    const { desc, quote, speaker, subtitle, title } = meta;
 
     return (
       <div styleName="content">
         { title && <h2 styleName="title">{ title }</h2> }
         { subtitle && <h3 styleName="subtitle">{ subtitle }</h3> }
-        { description && <div styleName="text">{ description }</div> }
+        { desc && <div styleName="text">{ desc }</div> }
         { quote && (
           <div styleName="quote">
             <p styleName="quote-text">

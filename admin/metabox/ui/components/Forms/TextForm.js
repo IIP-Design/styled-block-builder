@@ -4,23 +4,19 @@ import propTypes from 'prop-types';
 import './Forms.scss';
 
 const TextForm = ( { callback, meta } ) => {
-  const [button, setButton] = useState( meta.button || '' );
-  const [color, setColor] = useState( meta.color || '' );
-  const [desc, setDesc] = useState( meta.desc || '' );
-  const [link, setLink] = useState( meta.link || '' );
-  const [style, setStyle] = useState( meta.style || '' );
-  const [subtitle, setSubtitle] = useState( meta.subtitle || '' );
-  const [title, setTitle] = useState( meta.title || '' );
-
-  const formData = {
-    button,
-    color,
-    desc,
-    link,
-    style,
-    subtitle,
-    title
+  const schema = {
+    button: meta.button || '',
+    color: meta.color || '',
+    desc: meta.desc || '',
+    link: meta.link || '',
+    style: meta.style || '',
+    subtitle: meta.subtitle || '',
+    title: meta.title || ''
   };
+
+  const [inputs, setInputs] = useState( schema );
+
+  const formData = { ...inputs };
 
   // Initialize the state on first render, otherwise will submit empty values if saved without making changes
   useEffect( () => {
@@ -30,37 +26,8 @@ const TextForm = ( { callback, meta } ) => {
   const handleChange = e => {
     const { name, value } = e.target;
 
-    switch ( name ) {
-      case 'button':
-        setButton( value );
-        callback( { ...formData, button: value } );
-        break;
-      case 'color':
-        setColor( value );
-        callback( { ...formData, color: value } );
-        break;
-      case 'desc':
-        setDesc( value );
-        callback( { ...formData, desc: value } );
-        break;
-      case 'link':
-        setLink( value );
-        callback( { ...formData, link: value } );
-        break;
-      case 'style':
-        setStyle( value );
-        callback( { ...formData, style: value } );
-        break;
-      case 'subtitle':
-        setSubtitle( value );
-        callback( { ...formData, subtitle: value } );
-        break;
-      case 'title':
-        setTitle( value );
-        callback( { ...formData, title: value } );
-        break;
-      default:
-    }
+    setInputs( { ...inputs, [name]: value } );
+    callback( { ...formData, [name]: value } );
   };
 
   return (
@@ -73,7 +40,7 @@ const TextForm = ( { callback, meta } ) => {
           name="title"
           onChange={ e => handleChange( e ) }
           type="text"
-          value={ title }
+          value={ inputs.title }
         />
       </label>
       <label htmlFor="text-subtitle">
@@ -83,7 +50,7 @@ const TextForm = ( { callback, meta } ) => {
           name="subtitle"
           onChange={ e => handleChange( e ) }
           type="text"
-          value={ subtitle }
+          value={ inputs.subtitle }
         />
       </label>
       <label htmlFor="text-desc">
@@ -93,7 +60,7 @@ const TextForm = ( { callback, meta } ) => {
           name="desc"
           onChange={ e => handleChange( e ) }
           rows="6"
-          value={ desc }
+          value={ inputs.desc }
         />
       </label>
       <label htmlFor="text-button">
@@ -103,7 +70,7 @@ const TextForm = ( { callback, meta } ) => {
           name="button"
           onChange={ e => handleChange( e ) }
           type="text"
-          value={ button }
+          value={ inputs.button }
         />
       </label>
       <label htmlFor="text-button-link">
@@ -113,7 +80,7 @@ const TextForm = ( { callback, meta } ) => {
           name="link"
           onChange={ e => handleChange( e ) }
           type="text"
-          value={ link }
+          value={ inputs.link }
         />
       </label>
 
@@ -124,7 +91,7 @@ const TextForm = ( { callback, meta } ) => {
           name="style"
           onChange={ e => handleChange( e ) }
           type="select"
-          value={ style }
+          value={ inputs.style }
         >
           <option value="minimal">Minimal</option>
           <option value="red">Red</option>
@@ -138,7 +105,7 @@ const TextForm = ( { callback, meta } ) => {
           name="color"
           onChange={ e => handleChange( e ) }
           type="select"
-          value={ color }
+          value={ inputs.color }
         >
           <option value="white">White</option>
           <option value="red">Red</option>

@@ -4,19 +4,17 @@ import propTypes from 'prop-types';
 import './Forms.scss';
 
 const QuoteBoxForm = ( { callback, meta } ) => {
-  const [desc, setDesc] = useState( meta.desc || '' );
-  const [quote, setQuote] = useState( meta.quote || '' );
-  const [speaker, setSpeaker] = useState( meta.speaker || '' );
-  const [subtitle, setSubtitle] = useState( meta.subtitle || '' );
-  const [title, setTitle] = useState( meta.title || '' );
-
-  const formData = {
-    desc,
-    quote,
-    speaker,
-    subtitle,
-    title
+  const schema = {
+    desc: meta.desc || '',
+    quote: meta.quote || '',
+    speaker: meta.speaker || '',
+    subtitle: meta.subtitle || '',
+    title: meta.title || ''
   };
+
+  const [inputs, setInputs] = useState( schema );
+
+  const formData = { ...inputs };
 
   // Initialize the state on first render, otherwise will submit empty values if saved without making changes
   useEffect( () => {
@@ -26,29 +24,8 @@ const QuoteBoxForm = ( { callback, meta } ) => {
   const handleChange = e => {
     const { name, value } = e.target;
 
-    switch ( name ) {
-      case 'desc':
-        setDesc( value );
-        callback( { ...formData, desc: value } );
-        break;
-      case 'quote':
-        setQuote( value );
-        callback( { ...formData, quote: value } );
-        break;
-      case 'speaker':
-        setSpeaker( value );
-        callback( { ...formData, speaker: value } );
-        break;
-      case 'subtitle':
-        setSubtitle( value );
-        callback( { ...formData, subtitle: value } );
-        break;
-      case 'title':
-        setTitle( value );
-        callback( { ...formData, title: value } );
-        break;
-      default:
-    }
+    setInputs( { ...inputs, [name]: value } );
+    callback( { ...formData, [name]: value } );
   };
 
   return (
@@ -61,7 +38,7 @@ const QuoteBoxForm = ( { callback, meta } ) => {
           name="title"
           onChange={ e => handleChange( e ) }
           type="text"
-          value={ title }
+          value={ inputs.title }
         />
       </label>
       <label htmlFor="quote-box-subtitle">
@@ -71,7 +48,7 @@ const QuoteBoxForm = ( { callback, meta } ) => {
           name="subtitle"
           onChange={ e => handleChange( e ) }
           type="text"
-          value={ subtitle }
+          value={ inputs.subtitle }
         />
       </label>
       <label htmlFor="quote-box-desc">
@@ -81,7 +58,7 @@ const QuoteBoxForm = ( { callback, meta } ) => {
           name="desc"
           onChange={ e => handleChange( e ) }
           rows="6"
-          value={ desc }
+          value={ inputs.desc }
         />
       </label>
       <label htmlFor="quote-box-quote">
@@ -91,7 +68,7 @@ const QuoteBoxForm = ( { callback, meta } ) => {
           name="quote"
           onChange={ e => handleChange( e ) }
           rows="6"
-          value={ quote }
+          value={ inputs.quote }
         />
       </label>
       <label htmlFor="quote-box-speaker">
@@ -101,7 +78,7 @@ const QuoteBoxForm = ( { callback, meta } ) => {
           name="speaker"
           onChange={ e => handleChange( e ) }
           type="text"
-          value={ speaker }
+          value={ inputs.speaker }
         />
       </label>
     </form>
