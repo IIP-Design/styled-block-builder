@@ -63,6 +63,7 @@ class Style_Templates {
     require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-admin.php';
     require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/metabox/class-metabox.php';
     require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/metabox/ajax/class-update-template.php';
+    require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/settings/class-settings.php';
     require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/shortcode/class-shortcode.php';
 
     // require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/gut-blocks/highlight/class-gut-highlight.php';
@@ -78,6 +79,7 @@ class Style_Templates {
     // Instantiate all admin classes
     $plugin_admin = new Style_Templates\Admin( $this->get_plugin_name(), $this->get_version() );
     $plugin_metabox = new Style_Templates\Metabox( $this->get_plugin_name(), $this->get_version() );
+    $plugin_settings = new Style_Templates\Settings( $this->get_plugin_name(), $this->get_version() );
     $plugin_shortcode = new Style_Templates\Shortcode( $this->get_plugin_name(), $this->get_version() );
     $plugin_ajax = new Style_Templates\Update_Template( $this->get_plugin_name(), $this->get_version() );
     
@@ -95,6 +97,9 @@ class Style_Templates {
     $this->loader->add_action( 'wp_ajax_gpalab_delete_template', $plugin_ajax, 'handle_template_deletion' );
     // Custom Metabox
     $this->loader->add_action( 'add_meta_boxes', $plugin_metabox, 'add_templates_metabox' );
+    // Settings
+    $this->loader->add_action( 'admin_menu', $plugin_settings, 'add_templates_settings_page' );
+    $this->loader->add_action( 'admin_init', $plugin_settings, 'populate_template_settings' );
     // Shortcode
     $this->loader->add_action( 'init', $plugin_shortcode, 'register_template_scripts_styles' );
     $this->loader->add_action( 'init', $plugin_shortcode, 'add_templates_shortcode' );
