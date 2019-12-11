@@ -6,10 +6,16 @@ class Admin {
 
   // Register the scripts and styles for the admin interface
   public function register_admin_scripts_styles() {
-
-    wp_register_script( 'gpalab-template-admin-js', STYLE_TEMPLATES_DIST . 'gpalab-template-admin.js', array(), null, true );
     
-    wp_register_style( 'gpalab-template-admin-css', STYLE_TEMPLATES_DIST . 'gpalab-template-admin.css', array(), null );
+    // Check whether in dev mode and if so load dev builds 
+    $dev_mode = get_option( 'gpalab-style-template-dev-mode' );
+    
+    $scripts = $dev_mode == 1 ? 'dev-template-admin.js' : 'gpalab-template-admin.js';
+    $styles = $dev_mode == 1 ? 'dev-template-admin.css' : 'gpalab-template-admin.css';
+
+    wp_register_script( 'gpalab-template-admin-js', STYLE_TEMPLATES_DIST . $scripts, array(), null, true );
+    
+    wp_register_style( 'gpalab-template-admin-css', STYLE_TEMPLATES_DIST . $styles, array(), null );
   }
 
   // Pass required PHP values as variables to admin JS

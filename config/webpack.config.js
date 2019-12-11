@@ -48,12 +48,12 @@ module.exports = ( _, argv ) => {
       ]
     },
     output: {
-      filename: 'gpalab-[name].js',
+      filename: argv.mode === 'development' ? 'dev-[name].js' : 'gpalab-[name].js',
       path: paths.pluginDist
     },
     plugins: [
       new MiniCssExtractPlugin( {
-        filename: 'gpalab-[name].css'
+        filename: argv.mode === 'development' ? 'dev-[name].css' : 'gpalab-[name].css'
       } )
     ],
     resolve: {
