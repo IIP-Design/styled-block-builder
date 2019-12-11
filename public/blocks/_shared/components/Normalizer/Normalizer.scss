@@ -1,4 +1,12 @@
 .gpalab-normalizer {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+
+  &.full-width {
+    margin: 0 -50vw;
+  }
+
   * {
     box-sizing: border-box;
     margin: 0;
