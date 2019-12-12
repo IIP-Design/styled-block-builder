@@ -1,8 +1,7 @@
-import React, { Fragment, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import propTypes from 'prop-types';
 
 import TabbedForm from './TabbedForm';
-import { keyGen } from '../../utils/generate-key';
 
 const ResourcesForm = ( { callback, meta } ) => {
   // Set an initial object to load in the form,
@@ -13,9 +12,6 @@ const ResourcesForm = ( { callback, meta } ) => {
     resources: meta.resources || []
   };
 
-  const [sectionText, setSectionText] = useState( meta.sectionText || '' );
-  const [sectionTitle, setSectionTitle] = useState( meta.sectionTitle || '' );
-  const [sectionVideo, setSectionVideo] = useState( meta.sectionVideo || '' );
   const [inputs, setInputs] = useState( meta.inputs || schema );
 
   // Intermediate variable because state mutations are asynchronous
@@ -40,7 +36,11 @@ const ResourcesForm = ( { callback, meta } ) => {
     callback( { ...formData, [name]: value } );
   };
 
-  const tabFields = ['sectionText', 'sectionTitle', 'sectionVideo'];
+  const tabFields = [
+    { label: 'Add section text:', name: 'text', type: 'textarea' },
+    { label: 'Add section title:', name: 'title', type: 'text' },
+    { label: 'Add video url:', name: 'video', type: 'text' }
+  ];
 
   return (
     <form className="gpalab-modal-form">
@@ -69,45 +69,9 @@ const ResourcesForm = ( { callback, meta } ) => {
         fields={ tabFields }
         group="resources"
         inputs={ inputs }
-        label="Add Resource Section"
+        label="Add Resource"
         stateFunc={ tabStateFunc }
-      >
-        { inputs.resources.map( ( resource, index ) => (
-          <Fragment key={ keyGen( index ) }>
-            <label htmlFor="section-title">
-              Add section title:
-              <input
-                id="section-title"
-                name="sectionTitle"
-                onChange={ e => handleChange( e ) }
-                rows="6"
-                type="text"
-                value={ sectionTitle }
-              />
-            </label>
-            <label htmlFor="section-text">
-              Add section text:
-              <textarea
-                id="section-text"
-                name="sectionText"
-                onChange={ e => handleChange( e ) }
-                value={ sectionText }
-              />
-            </label>
-            <label htmlFor="section-video">
-              Add video url:
-              <input
-                id="section-video"
-                name="sectionVideo"
-                onChange={ e => handleChange( e ) }
-                rows="6"
-                type="text"
-                value={ sectionVideo }
-              />
-            </label>
-          </Fragment>
-        ) ) }
-      </TabbedForm>
+      />
     </form>
   );
 };
