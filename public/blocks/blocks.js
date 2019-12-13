@@ -6,5 +6,7 @@ import './hero';
 import './hero-animated';
 import './quote-box';
 import './resources';
+import './slides';
 import './stats';
 import './text';
+import './timeline';
