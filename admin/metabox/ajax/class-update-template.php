@@ -119,7 +119,7 @@ class Update_Template {
       'post_title'            => $data['post_title'],
       'post_excerpt'          => '',
       'post_status'           => 'publish',
-      'post_type'             => $data['post_type'],
+      'post_type'             => 'gpalab-' . $data['post_type'],
       'comment_status'        => 'closed',
       'post_parent'           => 0,
       'meta_input'            => array( '_gpalab_template_meta' => $data['post_meta'])

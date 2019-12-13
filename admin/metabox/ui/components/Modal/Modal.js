@@ -29,7 +29,8 @@ const ModelContent = ( { form, id, show, toggle } ) => {
   const meta = current?.meta ? current.meta : {};
 
   let selectedForm = null;
-  switch ( form ) {
+  const formStr = form.replace( 'gpalab-', '' );
+  switch ( formStr ) {
     case 'quote-box':
       selectedForm = <QuoteBoxForm callback={ setData } meta={ meta } />;
       break;
