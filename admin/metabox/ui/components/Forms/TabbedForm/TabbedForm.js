@@ -1,6 +1,7 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import propTypes from 'prop-types';
-import { v4 as uuid } from 'uuid';
+
+import { handleAdd, handleInput, handleRemove } from 'metabox/utils/modify-group';
 
 import './TabbedForm.module.scss';
 
@@ -21,36 +22,13 @@ const TabbedForm = ( { fields, group, inputs, label, maxTabs, stateFunc } ) => {
   const updateState = ( val, index ) => {
     stateFunc( group, val );
     setForms( val );
-    setSelectedTab( index );
+
+    if ( index ) {
+      setSelectedTab( index );
+    }
   };
 
-  const handleAdd = () => {
-    const fieldNames = fields.map( field => field.name );
-
-    // Create an object to store values for new resource
-    const obj = {};
-    obj.id = uuid();
-    fieldNames.forEach( name => {
-      obj[name] = '';
-      return obj;
-    } );
-
-    // Replicate resources array and populate it with previously created object
-    const clone = [...inputs[group]];
-    clone.push( obj );
-
-    // Handle all the state updates
-    updateState( clone, obj.id );
-  };
-
-  const handleRemove = () => {
-    const selected = forms.filter( form => form.id === selectedTab );
-    const index = forms.indexOf( selected[0] );
-
-    // Replicate resources array and add new resource object
-    const clone = [...inputs[group]];
-    clone.splice( index, 1 );
-
+  const uponRemoval = ( clone, index ) => {
     // Bring adjacent tab in focus when removing tab
     let tab;
     switch ( clone.length ) {
@@ -67,24 +45,6 @@ const TabbedForm = ( { fields, group, inputs, label, maxTabs, stateFunc } ) => {
 
     // Handles all the state updates
     updateState( clone, tab );
-  };
-
-  const handleInput = e => {
-    const { parent } = e.target.dataset;
-    const { name, value } = e.target;
-
-    // Make an updated replica of the form objects
-    const newState = [...forms];
-    newState.map( form => {
-      if ( form.id === parent ) {
-        form[name] = value;
-      }
-
-      return form;
-    } );
-
-    setForms( newState );
-    stateFunc( group, newState );
   };
 
   const responsiveTitle = ( index, title ) => {
@@ -145,7 +105,7 @@ const TabbedForm = ( { fields, group, inputs, label, maxTabs, stateFunc } ) => {
                                 id={ `section-${field.name}-${form.id}` }
                                 data-parent={ form.id }
                                 name={ field.name }
-                                onChange={ e => handleInput( e ) }
+                                onChange={ e => handleInput( e, forms, updateState ) }
                                 type="text"
                                 value={ selected[0][field.name] }
                               />
@@ -163,7 +123,7 @@ const TabbedForm = ( { fields, group, inputs, label, maxTabs, stateFunc } ) => {
                                 id={ `section-${field.name}-${form.id}` }
                                 data-parent={ form.id }
                                 name={ `${field.name}` }
-                                onChange={ e => handleInput( e ) }
+                                onChange={ e => handleInput( e, forms, updateState ) }
                                 rows="6"
                                 value={ selected[0][field.name] }
                               />
@@ -183,14 +143,18 @@ const TabbedForm = ( { fields, group, inputs, label, maxTabs, stateFunc } ) => {
           styleName="tab-buttons"
         >
           { forms && forms.length > 0 && (
-            <button className="button-secondary" onClick={ () => handleRemove() } type="button">
+            <button
+              className="button-secondary"
+              onClick={ () => handleRemove( forms, selectedTab, uponRemoval ) }
+              type="button"
+            >
               { `Remove ${label}` || 'Remove Section' }
             </button>
           ) }
           <button
             className="button-secondary"
             disabled={ forms && forms.length === maxTabs }
-            onClick={ () => handleAdd() }
+            onClick={ () => handleAdd( fields, inputs, group, updateState ) }
             styleName="tab-button"
             type="button"
           >
