@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import propTypes from 'prop-types';
 import { createPortal } from 'react-dom';
 
+import ArticleFeedForm from 'metabox/components/Forms/ArticleFeedForm';
 import QuoteBoxForm from 'metabox/components/Forms/QuoteBoxForm';
 import ResourcesForm from 'metabox/components/Forms/ResourcesForm';
 import Spinner from 'metabox/components/Spinner/Spinner';
@@ -31,6 +32,9 @@ const ModelContent = ( { form, id, show, toggle } ) => {
   let selectedForm = null;
   const formStr = form.replace( 'gpalab-', '' );
   switch ( formStr ) {
+    case 'article-feed':
+      selectedForm = <ArticleFeedForm callback={ setData } meta={ meta } />;
+      break;
     case 'quote-box':
       selectedForm = <QuoteBoxForm callback={ setData } meta={ meta } />;
       break;

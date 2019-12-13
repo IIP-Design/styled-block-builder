@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import propTypes from 'prop-types';
 
 import './Toggles.module.scss';
 
-const ConditionalRendering = ( { callback, checked, children, label, name } ) => (
-  <div>
+const CheckboxConditional = ( { callback, checked, children, label, name } ) => (
+  <Fragment>
     <label htmlFor="conditional-rendering" styleName="toggle-label">
       { label }
       <input
@@ -17,10 +17,10 @@ const ConditionalRendering = ( { callback, checked, children, label, name } ) =>
       />
     </label>
     { checked && children }
-  </div>
+  </Fragment>
 );
 
-ConditionalRendering.propTypes = {
+CheckboxConditional.propTypes = {
   callback: propTypes.func,
   checked: propTypes.bool,
   children: propTypes.node,
@@ -28,4 +28,4 @@ ConditionalRendering.propTypes = {
   name: propTypes.string
 };
 
-export default ConditionalRendering;
+export default CheckboxConditional;

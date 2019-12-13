@@ -17,3 +17,36 @@
     margin: 0.5rem 0;
   }
 }
+
+.article-feed {
+  &-button {
+    align-self: flex-end;
+
+    &-remove {
+      align-self: flex-end;
+    }
+  }
+
+  &-buttons {
+    display: flex;
+    margin: 0.5rem 0;
+  }
+
+  &-info {
+    display: flex;
+    flex-direction: column;
+    margin: 0.75rem 0;
+    padding-bottom: 0.75rem;
+
+    &:not(:last-of-type) {
+      border-bottom: $wordpressBorder;
+    }
+  }
+
+  &-label {
+    display: grid;
+    grid-gap: 1rem;
+    grid-template-columns: 1fr 1fr;
+    margin: 0.3rem 0;
+  }
+}
