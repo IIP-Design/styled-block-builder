@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import propTypes from 'prop-types';
 
-import TabbedForm from './TabbedForm';
+import TabbedForm from './TabbedForm/TabbedForm';
 
 const ResourcesForm = ( { callback, meta } ) => {
   // Set an initial object to load in the form,

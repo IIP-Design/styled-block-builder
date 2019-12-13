@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import propTypes from 'prop-types';
 
-import TabbedForm from './TabbedForm';
+import TabbedForm from './TabbedForm/TabbedForm';
 
 import './Forms.scss';
 
