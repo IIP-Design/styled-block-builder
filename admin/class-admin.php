@@ -31,7 +31,7 @@ class Admin {
         $assoc = array();
         $assoc['id'] = $id;
         $assoc['meta'] = get_post_meta( $id, '_gpalab_template_meta', true );
-        $assoc['title'] = get_the_title( $id );
+        $assoc['title'] = wp_specialchars_decode( get_the_title( $id ) );
         $assoc['type'] = get_post_type( $id );
 
         $assoc_data[] = $assoc;
