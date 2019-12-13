@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import propTypes from 'prop-types';
 
-import FullWidthToggle from './FullWidthToggle/FullWidthToggle';
+import FullWidthToggle from './Toggles/FullWidthToggle';
 import TabbedForm from './TabbedForm/TabbedForm';
 
 const ResourcesForm = ( { callback, meta } ) => {

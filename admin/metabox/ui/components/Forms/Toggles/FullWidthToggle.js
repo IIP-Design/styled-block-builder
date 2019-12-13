@@ -1,7 +1,7 @@
 import React from 'react';
 import propTypes from 'prop-types';
 
-import './FullWidthToggle.module.scss';
+import './Toggles.module.scss';
 
 const FullWidthToggle = ( { callback, checked } ) => (
   <div>
