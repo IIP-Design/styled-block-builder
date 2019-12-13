@@ -14,7 +14,7 @@ class Sanitize_Quotebox_Meta {
     }
 
     if( !empty( $unsanitary['subtitle'] ) ) {
-      $sanitized['subtitle'] = sanitize_textarea_field( $unsanitary['subtitle'] );
+      $sanitized['subtitle'] = sanitize_text_field( $unsanitary['subtitle'] );
     }
 
     if( !empty( $unsanitary['desc'] ) ) {
@@ -26,7 +26,7 @@ class Sanitize_Quotebox_Meta {
     }
 
     if( !empty( $unsanitary['speaker'] ) ) {
-      $sanitized['speaker'] = sanitize_textarea_field( $unsanitary['speaker'] );
+      $sanitized['speaker'] = sanitize_text_field( $unsanitary['speaker'] );
     }
 
     return $sanitized;

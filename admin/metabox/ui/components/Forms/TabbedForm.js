@@ -9,7 +9,13 @@ const TabbedForm = ( { fields, group, inputs, label, stateFunc } ) => {
   const [forms, setForms] = useState( [] );
 
   useEffect( () => {
-    setForms( ...inputs[group] );
+    const currentState = [...inputs[group]];
+    setForms( currentState );
+
+    // If forms already present, open first one
+    if ( currentState.length > 0 ) {
+      setSelectedTab( currentState[0].id );
+    }
   }, [] );
 
   const updateState = ( val, index ) => {
@@ -83,15 +89,6 @@ const TabbedForm = ( { fields, group, inputs, label, stateFunc } ) => {
 
   return (
     <div>
-      <button
-        className="button-secondary"
-        disabled={ forms && forms.length === 3 }
-        onClick={ () => handleAdd() }
-        styleName="tab-button"
-        type="button"
-      >
-        { label || 'Add Section' }
-      </button>
       <div className="tabbed-form">
         { forms && forms.length > 0 && (
           <Fragment>
@@ -164,11 +161,27 @@ const TabbedForm = ( { fields, group, inputs, label, stateFunc } ) => {
                 );
               } ) }
             </div>
-            <button className="button-secondary" onClick={ () => handleRemove() } type="button">
-              Remove This Item
-            </button>
           </Fragment>
         ) }
+        <div
+          style={ { justifyContent: forms && forms.length > 0 ? 'space-between' : 'flex-end' } }
+          styleName="tab-buttons"
+        >
+          { forms && forms.length > 0 && (
+            <button className="button-secondary" onClick={ () => handleRemove() } type="button">
+              { `Remove ${label}` || 'Remove Section' }
+            </button>
+          ) }
+          <button
+            className="button-secondary"
+            disabled={ forms && forms.length === 3 }
+            onClick={ () => handleAdd() }
+            styleName="tab-button"
+            type="button"
+          >
+            { `Add ${label}` || 'Add Section' }
+          </button>
+        </div>
       </div>
     </div>
   );

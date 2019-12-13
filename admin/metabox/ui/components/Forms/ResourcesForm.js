@@ -12,7 +12,7 @@ const ResourcesForm = ( { callback, meta } ) => {
     resources: meta.resources || []
   };
 
-  const [inputs, setInputs] = useState( meta.inputs || schema );
+  const [inputs, setInputs] = useState( schema );
 
   // Intermediate variable because state mutations are asynchronous
   // and can't be depended upon to update immediately
@@ -69,7 +69,7 @@ const ResourcesForm = ( { callback, meta } ) => {
         fields={ tabFields }
         group="resources"
         inputs={ inputs }
-        label="Add Resource"
+        label="Resource"
         stateFunc={ tabStateFunc }
       />
     </form>
