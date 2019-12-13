@@ -6,88 +6,92 @@ import VideoLayout from './Layouts/VideoLayout';
 import CDPFeed from '../../_shared/components/CDPFeed/CDPFeed';
 import Normalizer from '../../_shared/components/Normalizer/Normalizer';
 
-import mockData from './mockdata';
 import './Resources.module.scss';
 
-const Resources = ( { data } ) => {
+const Resources = ( { id } ) => {
+  const { meta } = window[`gpalabResources${id}`];
+
   const [selected, setSelected] = useState( null );
 
   useEffect( () => {
-    const first = mockData?.resources ? mockData.resources[0] : null;
+    const first = meta?.resources ? meta.resources[0] : null;
     setSelected( first.id );
   }, [] );
 
   const isMobile = window.innerWidth <= 500;
 
-  return (
-    <Normalizer>
-      <div
-        styleName="background"
-        id="resource-section"
-        style={ {
-          backgroundImage: "url('https://policystatic.state.gov/uploads/2019/11/wavy-bg.jpg')"
-        } }
-      >
-        <h2 styleName="title">{ mockData.title }</h2>
+  if ( meta ) {
+    return (
+      <Normalizer>
+        <div
+          styleName="background"
+          id="resource-section"
+          style={ {
+            backgroundImage: "url('https://policystatic.state.gov/uploads/2019/11/wavy-bg.jpg')"
+          } }
+        >
+          <h2 styleName="title">{ meta.title }</h2>
 
-        <h4 styleName="subtitle">{ mockData.subtitle }</h4>
+          <h4 styleName="subtitle">{ meta.subtitle }</h4>
 
-        <div styleName="container">
-          <div styleName="nav">
-            { mockData.resources.map( resource => {
-              const styles = resource.id === selected ? 'nav-button' : 'nav-button inactive';
-              return (
-                <button
-                  styleName={ styles }
-                  id={ resource.id }
-                  key={ resource.id }
-                  onClick={ () => setSelected( resource.id ) }
-                  type="button"
-                >
-                  { resource.title }
-                </button>
-              );
+          <div styleName="container">
+            <div styleName="nav">
+              { meta.resources.map( resource => {
+                const styles = resource.id === selected ? 'nav-button' : 'nav-button inactive';
+                return (
+                  <button
+                    styleName={ styles }
+                    id={ resource.id }
+                    key={ resource.id }
+                    onClick={ () => setSelected( resource.id ) }
+                    type="button"
+                  >
+                    { resource.title }
+                  </button>
+                );
+              } ) }
+            </div>
+
+            { meta.resources.map( resource => {
+              const type = resource.video ? 'video' : 'base';
+              let layout = null;
+              if ( type === 'base' ) {
+                layout = <BaseLayout data={ resource } />;
+              }
+
+              if ( type === 'video' ) {
+                layout = <VideoLayout data={ resource } />;
+              }
+
+              if ( resource.id === selected || isMobile ) {
+                return (
+                  <div id={ resource.id } key={ resource.id }>
+                    <div styleName="section-content" id={ resource.id }>
+                      { layout }
+                      { resource.cdp && (
+                        <Fragment>
+                          <hr styleName="section-hr" />
+                          <div styleName="feed-container">
+                            <CDPFeed id={ resource.id } items={ resource.cdp } />
+                          </div>
+                        </Fragment>
+                      ) }
+                    </div>
+                  </div>
+                );
+              }
+
+              return null;
             } ) }
           </div>
-
-          { mockData.resources.map( resource => {
-            let layout = null;
-            if ( resource.type === 'base' ) {
-              layout = <BaseLayout data={ resource } />;
-            }
-
-            if ( resource.type === 'video' ) {
-              layout = <VideoLayout data={ resource } />;
-            }
-
-            if ( resource.id === selected || isMobile ) {
-              return (
-                <div id={ resource.id } key={ resource.id }>
-                  <div styleName="section-content" id={ resource.id }>
-                    { layout }
-                    { resource.cdp && (
-                      <Fragment>
-                        <hr styleName="section-hr" />
-                        <div styleName="feed-container">
-                          <CDPFeed id={ resource.id } items={ resource.cdp } />
-                        </div>
-                      </Fragment>
-                    ) }
-                  </div>
-                </div>
-              );
-            }
-
-            return null;
-          } ) }
         </div>
-      </div>
-    </Normalizer>
-  );
+      </Normalizer>
+    );
+  }
 };
 
 Resources.propTypes = {
-  data: propTypes.object
+  id: propTypes.string
 };
 
 export default Resources;
