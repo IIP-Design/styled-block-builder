@@ -1,9 +1,10 @@
 import React from 'react';
 import propTypes from 'prop-types';
 
-import './Hero.module.scss';
+import Button from 'blocks/_shared/components/Button/Button';
 import mockData from './mockdata';
-import Button from '../../_shared/components/Button/Button';
+
+import './Hero.module.scss';
 
 const Hero = ( { id } ) => {
   // const { title } = window[`quotebox${id}`];

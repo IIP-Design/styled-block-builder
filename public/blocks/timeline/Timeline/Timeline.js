@@ -2,7 +2,7 @@ import React from 'react';
 import propTypes from 'prop-types';
 import { TimelineMax } from 'react-gsap';
 
-import Normalizer from '../../_shared/components/Normalizer/Normalizer';
+import Normalizer from 'blocks/_shared/components/Normalizer/Normalizer';
 
 import './Timeline.module.scss';
 import mockData from './mockdata';

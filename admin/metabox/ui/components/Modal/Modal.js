@@ -2,12 +2,12 @@ import React, { useState } from 'react';
 import propTypes from 'prop-types';
 import { createPortal } from 'react-dom';
 
-import QuoteBoxForm from '../Forms/QuoteBoxForm';
-import ResourcesForm from '../Forms/ResourcesForm';
-import Spinner from '../Spinner/Spinner';
-import StatsForm from '../Forms/StatsForm';
-import TextForm from '../Forms/TextForm';
-import { updatePost } from '../../utils/update-post';
+import QuoteBoxForm from 'metabox/components/Forms/QuoteBoxForm';
+import ResourcesForm from 'metabox/components/Forms/ResourcesForm';
+import Spinner from 'metabox/components/Spinner/Spinner';
+import StatsForm from 'metabox/components/Forms/StatsForm';
+import TextForm from 'metabox/components/Forms/TextForm';
+import { updatePost } from 'metabox/utils/update-post';
 
 import './Modal.module.scss';
 

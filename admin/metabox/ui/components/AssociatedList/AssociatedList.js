@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import propTypes from 'prop-types';
 
-import { updatePost } from '../../utils/update-post';
+import { updatePost } from 'metabox/utils/update-post';
 
 import './AssociatedList.module.scss';
 

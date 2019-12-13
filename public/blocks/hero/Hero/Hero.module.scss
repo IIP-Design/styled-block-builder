@@ -1,4 +1,4 @@
-@import '../../../style/colors.scss';
+@import 'styles/colors.scss';
 
 .content-background {
   align-items: center;
@@ -43,7 +43,7 @@
       display: flex;
       flex-direction: column;
 
-      >p {
+      > p {
         font-family: 'EB Garamond', Times, serif;
         font-size: 1.3rem;
         margin: 1rem 0;
@@ -57,17 +57,13 @@
   }
 }
 
-
 @media screen and (max-width: 800px) {
   .header-text {
     grid-template-columns: 1fr;
   }
-
-
 }
 
 @media screen and (max-width: 768px) {
-
   .header {
     &-title {
       margin: 1.5rem 1.5rem 0;
@@ -82,12 +78,9 @@
       margin: 1rem 1.5rem 2rem;
     }
   }
-
 }
 
-
 @media screen and (max-width: 500px) {
-
   .header {
     &-title {
       text-align: center;

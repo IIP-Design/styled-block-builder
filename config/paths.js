@@ -13,6 +13,7 @@ module.exports = {
   pluginDist: resolvePlugin( 'dist' ),
   pluginHTML: resolvePlugin( 'static/index.html' ),
   pluginPackage: resolvePlugin( 'package.json' ),
+  pluginRoot: resolvePlugin( './' ),
   blocksFrontend: resolvePlugin( 'public/blocks' ),
   gutenbergBlocks: resolvePlugin( 'admin/gut-blocks' ),
   metaboxUI: resolvePlugin( 'admin/metabox/ui' )

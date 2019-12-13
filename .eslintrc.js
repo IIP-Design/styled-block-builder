@@ -59,5 +59,16 @@ module.exports = {
         'import/no-unresolved': 'off'
       }
     }
-  ]
+  ],
+  settings: {
+    'import/resolver': {
+      'babel-module': {
+        alias: {
+          blocks: './public/blocks',
+          metabox: './admin/metabox/ui',
+          styles: './styles'
+        }
+      }
+    }
+  }
 };

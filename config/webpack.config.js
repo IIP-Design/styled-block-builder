@@ -31,6 +31,7 @@ module.exports = ( _, argv ) => {
             {
               loader: 'css-loader',
               options: {
+                importLoaders: 1,
                 modules: {
                   localIdentName: cssModuleNames,
                   mode: 'local'

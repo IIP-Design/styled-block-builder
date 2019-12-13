@@ -1,7 +1,7 @@
 import React from 'react';
 import propTypes from 'prop-types';
 
-import VideoEmbed from '../../../_shared/components/VideoEmbed/VideoEmbed';
+import VideoEmbed from 'blocks/_shared/components/VideoEmbed/VideoEmbed';
 
 import './Layouts.module.scss';
 

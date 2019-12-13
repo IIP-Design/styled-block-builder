@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
-import AssociatedList from '../AssociatedList/AssociatedList';
-import Modal from '../Modal/Modal';
+import AssociatedList from 'metabox/components/AssociatedList/AssociatedList';
+import Modal from 'metabox/components/Modal/Modal';
 
 import './Metabox.module.scss';
 

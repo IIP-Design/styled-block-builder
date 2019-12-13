@@ -1,4 +1,4 @@
-@import '../../../style/colors.scss';
+@import 'styles/colors.scss';
 
 .box-bg {
   background-attachment: fixed;
@@ -63,9 +63,7 @@
   width: 100%;
 }
 
-
 @media screen and (max-width: 768px) {
-
   .array {
     flex-direction: column;
     padding: 2rem 0;
@@ -86,9 +84,7 @@
   width: 200px;
 }
 
-
 @media screen and (max-width: 500px) {
-
   .array {
     padding-bottom: 50px;
     padding-top: 50px;

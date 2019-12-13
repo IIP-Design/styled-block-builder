@@ -1,10 +1,10 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import propTypes from 'prop-types';
 
+import CDPFeed from 'blocks/_shared/components/CDPFeed/CDPFeed';
+import Normalizer from 'blocks/_shared/components/Normalizer/Normalizer';
 import BaseLayout from './Layouts/BaseLayout';
 import VideoLayout from './Layouts/VideoLayout';
-import CDPFeed from '../../_shared/components/CDPFeed/CDPFeed';
-import Normalizer from '../../_shared/components/Normalizer/Normalizer';
 
 import './Resources.module.scss';
 

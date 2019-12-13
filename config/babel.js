@@ -1,3 +1,5 @@
+const paths = require( './paths' );
+
 const setBabelConfig = cssModuleNames => ( {
   presets: ['@babel/preset-react'],
   plugins: [
@@ -12,6 +14,18 @@ const setBabelConfig = cssModuleNames => ( {
           }
         },
         generateScopedName: cssModuleNames
+      }
+    ],
+    [
+      'babel-plugin-module-resolver',
+      {
+        alias: {
+          blocks: './public/blocks',
+          metabox: './admin/metabox/ui',
+          styles: './styles'
+        },
+        extensions: ['.js', '.jsx', '.css', '.scss'],
+        root: [paths.pluginRoot]
       }
     ]
   ]

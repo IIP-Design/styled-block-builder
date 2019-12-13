@@ -3,7 +3,7 @@ import propTypes from 'prop-types';
 import { Controller, Scene } from 'react-scrollmagic';
 import { Tween, Timeline } from 'react-gsap';
 
-import Normalizer from '../../_shared/components/Normalizer/Normalizer';
+import Normalizer from 'blocks/_shared/components/Normalizer/Normalizer';
 
 import './Slides.module.scss';
 import mockData from './mockdata';

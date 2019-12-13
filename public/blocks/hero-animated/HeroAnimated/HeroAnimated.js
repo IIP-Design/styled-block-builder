@@ -1,8 +1,8 @@
 import React from 'react';
 import propTypes from 'prop-types';
 
-import AnimatedLines from '../../_shared/components/AnimatedLines/AnimatedLines';
-import Normalizer from '../../_shared/components/Normalizer/Normalizer';
+import AnimatedLines from 'blocks/_shared/components/AnimatedLines/AnimatedLines';
+import Normalizer from 'blocks/_shared/components/Normalizer/Normalizer';
 
 import './HeroAnimated.module.scss';
 import mockData from './mockdata';
