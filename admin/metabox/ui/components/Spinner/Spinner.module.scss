@@ -1,5 +1,7 @@
+@import '../../../../../public/style/colors.scss';
+
 .background {
-  background-color: #ebebeb;
+  background-color: $wordpressLighterGrey;
   height: 100%;
   margin: -2rem;
   opacity: 0.5;
@@ -20,8 +22,8 @@
 
 .spinner {
   animation: spin 1.2s linear infinite;
-  border: 6px solid rgba(0, 0, 0, 0.1);
-  border-left-color: #002d74;
+  border: 6px solid rgba($color: $blackStandard, $alpha: 0.1);
+  border-left-color: $blueBright;
   border-radius: 50%;
   display: inline-block;
   height: 30px;
@@ -30,10 +32,10 @@
 
   &-background {
     align-items: center;
-    background-color: #f1f1f1;
+    background-color: $greyLightest;
     border-radius: 5px;
-    border: 1px solid #e5e5e5;
-    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.04);
+    border: $wordpressBorder;
+    box-shadow: 0 1px 1px rgba($color: $blackStandard, $alpha: 0.04);
     display: flex;
     flex-direction: column;
     justify-content: center;

@@ -1,7 +1,9 @@
+@import '../../../../../public/style/colors.scss';
+
 .button {
   background-color: transparent;
   border: none;
-  color: #444444;
+  color: $wordpressBlack;
   cursor: pointer;
   padding: 0;
 }
@@ -21,7 +23,7 @@
     grid-template-columns: 1fr 30px 30px;
 
     &:not(:last-of-type) {
-      border-bottom: 1px solid #e5e5e5;
+      border-bottom: $wordpressBorder;
     }
   }
 }
