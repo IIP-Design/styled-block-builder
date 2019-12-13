@@ -12,7 +12,7 @@
 
   &:hover {
     cursor: pointer;
-    border: 2px solid rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba($color: $white, $alpha: 0.1);
   }
 
   &.minimal {
@@ -27,7 +27,7 @@
     border-color: $red;
 
     &:hover {
-      border: 2px solid rgba(208, 19, 25, 0.1);
+      border: 2px solid rgba($color: $red, $aplha: 0.1);
     }
   }
 

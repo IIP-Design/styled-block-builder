@@ -12,7 +12,8 @@
 
 .container {
   background-color: $white;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.03);
+  box-shadow: 0 4px 8px 0 rgba($color: $blackStandard, $alpha: 0.1),
+    0 6px 20px 0 rgba($color: $blackStandard, $alpha: 0.03);
   margin: 2.5rem auto;
   max-width: 1280px;
   width: 90%;

@@ -1,10 +1,12 @@
+@import '../../../../../public/style/colors.scss';
+
 .gpalab-modal-form {
   display: flex;
   flex-direction: column;
   width: 30vw;
 
   &-title {
-    border-bottom: 1px solid #e5e5e5;
+    border-bottom: $wordpressBorder;
     margin: 0 -2rem 1rem;
     padding: 0 2rem 0.5rem;
   }
