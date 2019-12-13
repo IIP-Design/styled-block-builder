@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import propTypes from 'prop-types';
 
+import FullWidthToggle from './FullWidthToggle/FullWidthToggle';
+
 import './Forms.scss';
 
 const QuoteBoxForm = ( { callback, meta } ) => {
   const schema = {
     desc: meta.desc || '',
+    fullWidth: meta.fullWidth || false,
     quote: meta.quote || '',
     speaker: meta.speaker || '',
     subtitle: meta.subtitle || '',
@@ -26,6 +29,13 @@ const QuoteBoxForm = ( { callback, meta } ) => {
 
     setInputs( { ...inputs, [name]: value } );
     callback( { ...formData, [name]: value } );
+  };
+
+  const handleToggle = () => {
+    const checked = !inputs.fullWidth;
+
+    setInputs( { ...inputs, fullWidth: checked } );
+    callback( { ...formData, fullWidth: checked } );
   };
 
   return (
@@ -81,6 +91,7 @@ const QuoteBoxForm = ( { callback, meta } ) => {
           value={ inputs.speaker }
         />
       </label>
+      <FullWidthToggle callback={ handleToggle } checked={ inputs.fullWidth } />
     </form>
   );
 };

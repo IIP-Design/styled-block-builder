@@ -9,10 +9,10 @@ const QuoteBox = ( { id } ) => {
   const { meta } = window[`gpalabQuoteBox${id}`];
 
   if ( meta ) {
-    const { desc, quote, speaker, subtitle, title } = meta;
+    const { desc, fullWidth, quote, speaker, subtitle, title } = meta;
 
     return (
-      <Normalizer>
+      <Normalizer fullWidth={ fullWidth }>
         <div styleName="content">
           { title && <h2 styleName="title">{ title }</h2> }
           { subtitle && <h3 styleName="subtitle">{ subtitle }</h3> }
