@@ -4,7 +4,7 @@ import { v4 as uuid } from 'uuid';
 
 import './TabbedForm.module.scss';
 
-const TabbedForm = ( { fields, group, inputs, label, stateFunc } ) => {
+const TabbedForm = ( { fields, group, inputs, label, maxTabs, stateFunc } ) => {
   const [selectedTab, setSelectedTab] = useState( null );
   const [forms, setForms] = useState( [] );
 
@@ -87,6 +87,21 @@ const TabbedForm = ( { fields, group, inputs, label, stateFunc } ) => {
     stateFunc( group, newState );
   };
 
+  const responsiveTitle = ( index, title ) => {
+    if ( !title || forms.length > 7 ) {
+      return index + 1;
+    }
+
+    // Reduce total allowed characters for more tabs to account for more instances of ellipses
+    const base = forms.length < 5 ? 30 : 21;
+
+    // Total characters across all tabs, divided by num of tabs,
+    // -1 to account for 0 based indexing, rounded to whole number
+    const end = Math.round( base / forms.length - 1 );
+
+    return `${title.substring( 0, end )}...`;
+  };
+
   return (
     <div>
       <div className="tabbed-form">
@@ -103,7 +118,7 @@ const TabbedForm = ( { fields, group, inputs, label, stateFunc } ) => {
                     styleName={ selectedTab === form.id ? 'tab selected-tab' : 'tab' }
                     type="button"
                   >
-                    { selected[0].title ? `${selected[0].title.substring( 0, 8 )}...` : `${index + 1}` }
+                    { responsiveTitle( index, selected[0].title ) }
                   </button>
                 );
               } ) }
@@ -174,7 +189,7 @@ const TabbedForm = ( { fields, group, inputs, label, stateFunc } ) => {
           ) }
           <button
             className="button-secondary"
-            disabled={ forms && forms.length === 3 }
+            disabled={ forms && forms.length === maxTabs }
             onClick={ () => handleAdd() }
             styleName="tab-button"
             type="button"
@@ -192,7 +207,12 @@ TabbedForm.propTypes = {
   group: propTypes.string,
   inputs: propTypes.object,
   label: propTypes.string,
+  maxTabs: propTypes.number,
   stateFunc: propTypes.func
+};
+
+TabbedForm.defaultProps = {
+  maxTabs: 3
 };
 
 export default TabbedForm;
