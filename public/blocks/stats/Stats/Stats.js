@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import propTypes from 'prop-types';
 import { TimelineMax, Power2 } from 'gsap';
 import ScrollMagic from 'scrollmagic';
+import { v4 as uuid } from 'uuid';
 
 import './Stats.module.scss';
 
@@ -9,16 +10,7 @@ const Stats = ( { id } ) => {
   const { meta } = window[`gpalabStats${id}`];
 
   if ( meta ) {
-    const {
-      background,
-      statOneNumber,
-      statOneText,
-      statTwoNumber,
-      statTwoText,
-      statThreeNumber,
-      statThreeText,
-      title
-    } = meta;
+    const { background, stats, title } = meta;
 
     useEffect( () => {
       // const runStats = () => {
@@ -90,39 +82,18 @@ const Stats = ( { id } ) => {
         <div className="stats-container" styleName="container">
           { title && <h2 styleName="title">{ title }</h2> }
           <div styleName="array">
-            { statOneNumber && statOneText && (
-              <div styleName="item">
-                <div styleName="item-percent">
-                  <span id="stat-1" data-stat={ statOneNumber }>
-                    0
-                  </span>
-                  %
+            { stats &&
+              stats.map( ( stat, index ) => (
+                <div key={ uuid() } styleName="item">
+                  <div styleName="item-percent">
+                    <span id={ `stat-${index + 1}` } data-stat={ stat.number }>
+                      0
+                    </span>
+                    %
+                  </div>
+                  <p styleName="item-info">{ stat.title }</p>
                 </div>
-                <p styleName="item-info">{ statOneText }</p>
-              </div>
-            ) }
-            { statTwoNumber && statTwoText && (
-              <div styleName="item">
-                <div styleName="item-percent">
-                  <span id="stat-2" data-stat={ statTwoNumber }>
-                    0
-                  </span>
-                  %
-                </div>
-                <p styleName="item-info">{ statTwoText }</p>
-              </div>
-            ) }
-            { statThreeNumber && statThreeText && (
-              <div styleName="item">
-                <div styleName="item-percent">
-                  <span id="stat-3" data-stat={ statThreeNumber }>
-                    0
-                  </span>
-                  %
-                </div>
-                <p styleName="item-info">{ statThreeText }</p>
-              </div>
-            ) }
+              ) ) }
           </div>
         </div>
       </div>

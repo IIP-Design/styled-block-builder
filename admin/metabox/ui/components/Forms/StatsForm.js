@@ -1,17 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import propTypes from 'prop-types';
 
+import TabbedForm from './TabbedForm';
+
 import './Forms.scss';
 
 const StatsForm = ( { callback, meta } ) => {
   const schema = {
     background: meta.background || '',
-    statOneNumber: meta.statOneNumber || '',
-    statOneText: meta.statOneText || '',
-    statTwoNumber: meta.statTwoNumber || '',
-    statTwoText: meta.statTwoText || '',
-    statThreeNumber: meta.statThreeNumber || '',
-    statThreeText: meta.statThreeText || '',
+    stats: meta.stats || [],
     title: meta.title || ''
   };
 
@@ -24,11 +21,22 @@ const StatsForm = ( { callback, meta } ) => {
     callback( formData );
   }, [] );
 
+  const tabStateFunc = ( group, clone ) => {
+    setInputs( { ...inputs, [group]: clone } );
+    callback( { ...formData, [group]: clone } );
+  };
+
   const handleChange = e => {
     const { name, value } = e.target;
+
     setInputs( { ...inputs, [name]: value } );
     callback( { ...formData, [name]: value } );
   };
+
+  const tabFields = [
+    { label: 'Add stat title:', name: 'title', type: 'text' },
+    { label: 'Add stat value:', name: 'number', type: 'text' }
+  ];
 
   return (
     <form className="gpalab-modal-form">
@@ -53,66 +61,13 @@ const StatsForm = ( { callback, meta } ) => {
           value={ meta.title }
         />
       </label>
-      <label htmlFor="stats-statOneNumber">
-        Add Stat One Number:
-        <input
-          id="stats-statOneNumber"
-          name="statOneNumber"
-          onChange={ e => handleChange( e ) }
-          type="text"
-          value={ meta.statOneNumber }
-        />
-      </label>
-      <label htmlFor="stats-statOneText">
-        Add Stat One Text:
-        <input
-          id="stats-statOneText"
-          name="statOneText"
-          onChange={ e => handleChange( e ) }
-          type="text"
-          value={ meta.statOneText }
-        />
-      </label>
-      <label htmlFor="stats-statTwoNumber">
-        Add Stat Two Number:
-        <input
-          id="stats-statTwoNumber"
-          name="statTwoNumber"
-          onChange={ e => handleChange( e ) }
-          type="text"
-          value={ meta.statTwoNumber }
-        />
-      </label>
-      <label htmlFor="stats-statTwoText">
-        Add Stat Two Text:
-        <input
-          id="stats-statTwoText"
-          name="statTwoText"
-          onChange={ e => handleChange( e ) }
-          type="text"
-          value={ meta.statTwoText }
-        />
-      </label>
-      <label htmlFor="stats-statThreeNumber">
-        Add Stat Three Number:
-        <input
-          id="stats-statThreeNumber"
-          name="statThreeNumber"
-          onChange={ e => handleChange( e ) }
-          type="text"
-          value={ meta.statThreeNumber }
-        />
-      </label>
-      <label htmlFor="stats-statThreeText">
-        Add Stat Three Text:
-        <input
-          id="stats-statThreeText"
-          name="statThreeText"
-          onChange={ e => handleChange( e ) }
-          type="text"
-          value={ meta.statThreeText }
-        />
-      </label>
+      <TabbedForm
+        fields={ tabFields }
+        group="stats"
+        inputs={ inputs }
+        label="Stat"
+        stateFunc={ tabStateFunc }
+      />
     </form>
   );
 };

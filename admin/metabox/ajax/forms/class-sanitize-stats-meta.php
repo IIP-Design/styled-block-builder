@@ -13,28 +13,22 @@ class Sanitize_Stats_Meta {
       $sanitized['background'] = sanitize_text_field( $unsanitary['background'] );
     }
 
-    if( !empty( $unsanitary['statOneNumber'] ) ) {
-      $sanitized['statOneNumber'] = sanitize_text_field( $unsanitary['statOneNumber'] );
-    }
+    if( !empty( $unsanitary['stats'] ) ) {
+      $sanitized_stats = array();
 
-    if( !empty( $unsanitary['statOneText'] ) ) {
-      $sanitized['statOneText'] = sanitize_text_field( $unsanitary['statOneText'] );
-    }
+      foreach ( $unsanitary['stats'] as $stat ) {
+        $sanitized_stat = array();
 
-    if( !empty( $unsanitary['statTwoNumber'] ) ) {
-      $sanitized['statTwoNumber'] = sanitize_text_field( $unsanitary['statTwoNumber'] );
-    }
+        $sanitized_stat['id'] = sanitize_text_field( $stat['id'] );
+        $sanitized_stat['number'] = sanitize_text_field( $stat['number'] );
+        $sanitized_stat['title'] = sanitize_text_field( $stat['title'] );
 
-    if( !empty( $unsanitary['statTwoText'] ) ) {
-      $sanitized['statTwoText'] = sanitize_text_field( $unsanitary['statTwoText'] );
-    }
+        array_push( $sanitized_stats, $sanitized_stat );
+      }
 
-    if( !empty( $unsanitary['statThreeNumber'] ) ) {
-      $sanitized['statThreeNumber'] = sanitize_text_field( $unsanitary['statThreeNumber'] );
-    }
+      unset($stat);
 
-    if( !empty( $unsanitary['statThreeText'] ) ) {
-      $sanitized['statThreeText'] = sanitize_text_field( $unsanitary['statThreeText'] );
+      $sanitized['stats'] =  $sanitized_stats;
     }
 
     if( !empty( $unsanitary['title'] ) ) {
