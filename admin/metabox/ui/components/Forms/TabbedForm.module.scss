@@ -1,12 +1,14 @@
+@import '../../../../../public/style/colors.scss';
+
 .tabs {
-  border-bottom: 1px solid #e5e5e5;
+  border-bottom: $wordpressBorder;
   display: flex;
   margin: 0.5rem 0 0.3rem;
 }
 
 .tab {
-  background-color: #ebebeb;
-  border: 1px solid #e5e5e5;
+  background-color: $wordpressLighterGrey;
+  border: $wordpressBorder;
   border-bottom: none;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
@@ -18,8 +20,8 @@
   }
 
   &.selected-tab {
-    background-color: #ffffff;
-    border-bottom: 1px solid #ffffff;
+    background-color: $white;
+    border-bottom: 1px solid $white;
     margin-bottom: -1px;
     opacity: 1;
   }
