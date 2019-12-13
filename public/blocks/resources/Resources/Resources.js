@@ -22,7 +22,7 @@ const Resources = ( { id } ) => {
 
   if ( meta ) {
     return (
-      <Normalizer>
+      <Normalizer fullWidth={ meta.fullWidth }>
         <div
           styleName="background"
           id="resource-section"
@@ -88,6 +88,8 @@ const Resources = ( { id } ) => {
       </Normalizer>
     );
   }
+
+  return null;
 };
 
 Resources.propTypes = {

@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import propTypes from 'prop-types';
 
+import FullWidthToggle from './FullWidthToggle/FullWidthToggle';
 import TabbedForm from './TabbedForm/TabbedForm';
 
 const ResourcesForm = ( { callback, meta } ) => {
   // Set an initial object to load in the form,
   // populated with either values passed from parent or empty values
   const schema = {
-    title: meta.title || '',
+    fullWidth: meta.fullWidth || false,
+    resources: meta.resources || [],
     subtitle: meta.subtitle || '',
-    resources: meta.resources || []
+    title: meta.title || ''
   };
 
   const [inputs, setInputs] = useState( schema );
@@ -34,6 +36,13 @@ const ResourcesForm = ( { callback, meta } ) => {
 
     setInputs( { ...inputs, [name]: value } );
     callback( { ...formData, [name]: value } );
+  };
+
+  const handleToggle = () => {
+    const checked = !inputs.fullWidth;
+
+    setInputs( { ...inputs, fullWidth: checked } );
+    callback( { ...formData, fullWidth: checked } );
   };
 
   const tabFields = [
@@ -72,6 +81,7 @@ const ResourcesForm = ( { callback, meta } ) => {
         label="Resource"
         stateFunc={ tabStateFunc }
       />
+      <FullWidthToggle callback={ handleToggle } checked={ inputs.fullWidth } />
     </form>
   );
 };
