@@ -10,7 +10,8 @@
   border-bottom: none;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
-  padding: 0.5rem 1rem 0.2rem;
+  opacity: 0.6;
+  padding: 0.5rem 1rem 0.3rem;
 
   &:not(:first-of-type) {
     margin-left: 0.2rem;
@@ -20,6 +21,11 @@
     background-color: #ffffff;
     border-bottom: 1px solid #ffffff;
     margin-bottom: -1px;
+    opacity: 1;
+  }
+
+  &-button {
+    margin: 0.5rem 0;
   }
 
   &-item {
