@@ -12,7 +12,7 @@ const AssociatedList = ( { list, edit } ) => {
       <div styleName="list">
         { list.map( item => (
           <div data-id={ item.id } key={ item.id } styleName="list-item">
-            { item.title }
+            { item.title || item.id }
             <button
               aria-label="edit template"
               onClick={ () => edit( item.id, item.type ) }
