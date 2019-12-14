@@ -78,6 +78,13 @@ class Update_Template {
   // Pull in and instantiate the proper sanitizer class for the form type submitted
   function load_sanitizer( $form_type ) {
 
+    if ( $form_type == 'article-feed') {
+      include_once STYLE_TEMPLATES_DIR . 'admin/metabox/ajax/forms/class-sanitize-article-feed-meta.php';
+      $sanitize = new Sanitize_Article_Feed_Meta();
+      
+      return $sanitize;
+    }
+
     if ( $form_type == 'quote-box') {
       include_once STYLE_TEMPLATES_DIR . 'admin/metabox/ajax/forms/class-sanitize-quotebox-meta.php';
       $sanitize = new Sanitize_Quotebox_Meta();

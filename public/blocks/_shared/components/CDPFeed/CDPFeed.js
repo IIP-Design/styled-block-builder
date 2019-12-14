@@ -15,10 +15,23 @@ const CDPFeed = ( { id, items } ) => {
     feedType = 'three';
   }
 
+  const getSource = alias => {
+    switch ( alias ) {
+      case 'share':
+        return 'share.america.gov';
+      case 'yali':
+        return 'yali.america.gov';
+      case 'ylai':
+        return 'ylai.america.gov';
+      default:
+        return null;
+    }
+  };
+
   return (
     <div styleName={ `cdp-feed ${feedType}` } id={ `cdp-feed-${id}` }>
       { items.map( item => (
-        <CDPFeedItem id={ item.id } key={ item.id } source={ item.source } />
+        <CDPFeedItem id={ item.postId } key={ item.postId } source={ getSource( item.source ) } />
       ) ) }
     </div>
   );
