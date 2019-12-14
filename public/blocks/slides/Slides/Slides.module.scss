@@ -2,7 +2,7 @@
 
 .pinContainer {
   height: 100vh;
-  width: 100vw;
+  width: 100%;
   overflow: hidden;
 }
 
@@ -11,7 +11,7 @@
   height: 100%;
   overflow: hidden;
   position: relative;
-  width: 100vw;
+  width: 100%;
 }
 
 .slide {
@@ -23,7 +23,7 @@
   height: 100vh;
   justify-content: center;
   position: absolute;
-  width: 100vw;
+  width: 100%;
 
   &-content {
     align-items: center;
@@ -37,11 +37,11 @@
     &:before {
       background: linear-gradient(
         to top,
-        rgba($color: black, $alpha: 0.3),
-        rgba($color: black, $alpha: 0.7) 40%,
-        rgba($color: black, $alpha: 0.8) 50%,
-        rgba($color: black, $alpha: 0.7) 60%,
-        rgba($color: black, $alpha: 0.3) 100%
+        rgba($color: $blackStandard, $alpha: 0.3),
+        rgba($color: $blackStandard, $alpha: 0.7) 40%,
+        rgba($color: $blackStandard, $alpha: 0.8) 50%,
+        rgba($color: $blackStandard, $alpha: 0.7) 60%,
+        rgba($color: $blackStandard, $alpha: 0.3) 100%
       );
       content: '';
       display: block;
@@ -116,10 +116,10 @@
       &:before {
         background: linear-gradient(
           to top,
-          black,
-          rgba($color: black, $alpha: 0.7) 30%,
-          rgba($color: black, $alpha: 0) 60%,
-          black 100%
+          $blackStandard,
+          rgba($color: $blackStandard, $alpha: 0.7) 30%,
+          rgba($color: $blackStandard, $alpha: 0) 60%,
+          $blackStandard 100%
         );
       }
     }

@@ -2,7 +2,6 @@ import React from 'react';
 import propTypes from 'prop-types';
 import { Controller, Scene } from 'react-scrollmagic';
 import { Tween, Timeline } from 'react-gsap';
-import { v4 as uuid } from 'uuid';
 
 import Normalizer from 'blocks/_shared/components/Normalizer/Normalizer';
 import './Slides.module.scss';
@@ -18,7 +17,7 @@ const Slides = ( { id } ) => {
     const remaining = slides.slice( 1 );
 
     return (
-      <Normalizer>
+      <Normalizer fullWidth>
         <div styleName="slide-container">
           <h2 styleName="slide-title">{ title }</h2>
           <Controller>
@@ -26,8 +25,7 @@ const Slides = ( { id } ) => {
               <Timeline wrapper={ <div styleName="pinContainer" /> }>
                 <section
                   styleName="slide"
-                  id={ `slide-${first.index}` }
-                  key={ uuid() }
+                  id={ `slide-${first.id}` }
                   style={ { backgroundImage: `url(${first.background})` } }
                 >
                   <div styleName="slide-content">
@@ -36,11 +34,10 @@ const Slides = ( { id } ) => {
                   </div>
                 </section>
                 { remaining.map( slide => (
-                  <Tween from={ { x: '+100%' } } to={ { x: '0%' } }>
+                  <Tween from={ { x: '+100%' } } to={ { x: '0%' } } key={ slide.id }>
                     <section
                       styleName="slide"
-                      id={ `slide-${slide.index}` }
-                      key={ uuid() }
+                      id={ `slide-${slide.id}` }
                       style={ { backgroundImage: `url(${slide.background})` } }
                     >
                       <div styleName="slide-content">
@@ -54,9 +51,9 @@ const Slides = ( { id } ) => {
                   { slides.map( slide => (
                     <div
                       styleName="slide-dot"
-                      data-number={ slide.index }
-                      id={ `slide-dot-${slide.index}` }
-                      key={ uuid() }
+                      data-number={ slide.id }
+                      id={ `slide-dot-${slide.id}` }
+                      key={ `dot-${slide.id}` }
                     />
                   ) ) }
                 </div>
