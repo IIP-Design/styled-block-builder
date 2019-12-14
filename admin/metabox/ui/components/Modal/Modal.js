@@ -61,7 +61,7 @@ const ModelContent = ( { form, id, show, toggle } ) => {
     updatePost( { id, meta: data, type: form }, 'save', onComplete );
   };
 
-  const shortcode = `[gpalab_template id='${id}' type='${form}']`;
+  const shortcode = `[gpalab_template id='${id}' type='${formStr}']`;
 
   return (
     <div styleName="modal">
