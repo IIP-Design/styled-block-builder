@@ -40,6 +40,7 @@ const MetaBox = () => {
           <option value="article-feed">Article Feed</option>
           <option value="quote-box">Quote Box</option>
           <option value="resources">Resources Block</option>
+          <option value="slides">Slides Block</option>
           <option value="stats">Stats Block</option>
           <option value="text">Text Block</option>
         </select>

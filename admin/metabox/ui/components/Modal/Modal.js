@@ -6,6 +6,7 @@ import ArticleFeedForm from 'metabox/components/Forms/ArticleFeedForm';
 import QuoteBoxForm from 'metabox/components/Forms/QuoteBoxForm';
 import ResourcesForm from 'metabox/components/Forms/ResourcesForm';
 import Spinner from 'metabox/components/Spinner/Spinner';
+import SlidesForm from 'metabox/components/Forms/SlidesForm';
 import StatsForm from 'metabox/components/Forms/StatsForm';
 import TextForm from 'metabox/components/Forms/TextForm';
 import { updatePost } from 'metabox/utils/update-post';
@@ -40,6 +41,9 @@ const ModelContent = ( { form, id, show, toggle } ) => {
       break;
     case 'resources':
       selectedForm = <ResourcesForm callback={ setData } meta={ meta } />;
+      break;
+    case 'slides':
+      selectedForm = <SlidesForm callback={ setData } meta={ meta } />;
       break;
     case 'stats':
       selectedForm = <StatsForm callback={ setData } meta={ meta } />;
