@@ -1,6 +1,7 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import propTypes from 'prop-types';
 
+import { getTabTitleField, responsiveTitle } from 'metabox/utils/tab-titles';
 import { handleAdd, handleInput, handleRemove } from 'metabox/utils/modify-group';
 
 import './TabbedForm.module.scss';
@@ -47,21 +48,6 @@ const TabbedForm = ( { fields, group, inputs, label, maxTabs, stateFunc } ) => {
     updateState( clone, tab );
   };
 
-  const responsiveTitle = ( index, title ) => {
-    if ( !title || forms.length > 7 ) {
-      return index + 1;
-    }
-
-    // Reduce total allowed characters for more tabs to account for more instances of ellipses
-    const base = forms.length < 5 ? 30 : 21;
-
-    // Total characters across all tabs, divided by num of tabs,
-    // -1 to account for 0 based indexing, rounded to whole number
-    const end = Math.round( base / forms.length - 1 );
-
-    return `${title.substring( 0, end )}...`;
-  };
-
   return (
     <div>
       <div className="tabbed-form">
@@ -78,7 +64,7 @@ const TabbedForm = ( { fields, group, inputs, label, maxTabs, stateFunc } ) => {
                     styleName={ selectedTab === form.id ? 'tab selected-tab' : 'tab' }
                     type="button"
                   >
-                    { responsiveTitle( index, selected[0].title ) }
+                    { responsiveTitle( index, selected[0][getTabTitleField( fields )] ) }
                   </button>
                 );
               } ) }

@@ -34,7 +34,7 @@ const StatsForm = ( { callback, meta } ) => {
   };
 
   const tabFields = [
-    { label: 'Add stat title:', name: 'title', type: 'text' },
+    { label: 'Add stat title:', name: 'title', tabTitle: true, type: 'text' },
     { label: 'Add stat value:', name: 'number', type: 'text' }
   ];
 

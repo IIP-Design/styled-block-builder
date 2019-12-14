@@ -46,7 +46,7 @@ const ResourcesForm = ( { callback, meta } ) => {
   };
 
   const tabFields = [
-    { label: 'Add section title:', name: 'title', type: 'text' },
+    { label: 'Add section title:', name: 'title', tabTitle: true, type: 'text' },
     { label: 'Add section text:', name: 'text', type: 'textarea' },
     { label: 'Add video url:', name: 'video', type: 'text' }
   ];

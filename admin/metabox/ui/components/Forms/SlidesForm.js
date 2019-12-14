@@ -38,7 +38,7 @@ const SlidesForm = ( { callback, meta } ) => {
   };
 
   const tabFields = [
-    { label: 'Add slide subtitle:', name: 'subtitle', type: 'text' },
+    { label: 'Add slide subtitle:', name: 'subtitle', tabTitle: true, type: 'text' },
     { label: 'Add slide background:', name: 'background', type: 'text' },
     { label: 'Add slide text:', name: 'text', type: 'textarea' }
   ];
