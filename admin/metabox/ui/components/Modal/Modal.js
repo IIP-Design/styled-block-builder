@@ -3,6 +3,7 @@ import propTypes from 'prop-types';
 import { createPortal } from 'react-dom';
 
 import ArticleFeedForm from 'metabox/components/Forms/ArticleFeedForm';
+import ErrorMessage from 'metabox/components/ErrorMessage/ErrorMessage';
 import QuoteBoxForm from 'metabox/components/Forms/QuoteBoxForm';
 import ResourcesForm from 'metabox/components/Forms/ResourcesForm';
 import Spinner from 'metabox/components/Spinner/Spinner';
@@ -20,6 +21,8 @@ const ModelContent = ( { form, id, show, toggle } ) => {
 
   const [data, setData] = useState( {} );
   const [saving, setSaving] = useState( false );
+  const [error, setError] = useState( false );
+  const [errorData, setErrorData] = useState( null );
 
   // Get array of associated templates
   const template = window?.gpalabTemplateAdmin?.associated
@@ -57,8 +60,14 @@ const ModelContent = ( { form, id, show, toggle } ) => {
 
   const submitForm = () => {
     const onComplete = () => setSaving( false );
+    const onError = err => {
+      setSaving( false );
+      setError( true );
+      setErrorData( err );
+    };
+
     setSaving( true );
-    updatePost( { id, meta: data, type: form }, 'save', onComplete );
+    updatePost( { id, meta: data, type: formStr }, 'save', onComplete, onError );
   };
 
   const shortcode = `[gpalab_template id='${id}' type='${formStr}']`;
@@ -71,6 +80,7 @@ const ModelContent = ( { form, id, show, toggle } ) => {
           <span className="dashicons dashicons-no" />
         </button>
         { saving && <Spinner /> }
+        { error && <ErrorMessage err={ errorData } /> }
         { selectedForm }
         <div styleName="modal-controls">
           <label htmlFor="copy-shortcode">

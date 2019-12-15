@@ -6,22 +6,32 @@ class Update_Template {
 
   // Create/update a template post
   public function handle_template_update() {
-    // Check for a valid nonce coming from the AJAX request (nonce set in Style_Templates/Admin)
-    $is_nonce_set = isset( $_POST[ 'security' ] );
-    $is_verified_nonce = wp_verify_nonce( $_POST[ 'security' ], 'gpalab-template-nonce' );
-    $is_referer_valid = check_ajax_referer( 'gpalab-template-nonce', 'security' );
-    
-    if ( !$is_nonce_set || !$is_verified_nonce || !$is_referer_valid ) {
-      return;
-    }
+    // Load in possible HTTP responses
+    include_once STYLE_TEMPLATES_DIR . 'admin/metabox/ajax/class-responses.php';
+    $send_response = new Responses();
 
-    // Check what sort of form has been submitted and whether it is a new post
+    // Load in sanitizer
+    include_once STYLE_TEMPLATES_DIR . 'admin/metabox/ajax/class-sanitizer.php';
+    $sanitizer = new Sanitizer();
+
+    // Load in validator
+    include_once STYLE_TEMPLATES_DIR . 'admin/metabox/ajax/class-validator.php';
+    $validator = new Validator();
+
+    // Validate the values sent in the AJAX call
+    $validator->validate_nonce( $_POST[ 'security' ] );
+    $validator->validate_post_id( $_POST['id'] );
+    $validator->validate_form_type( $_POST['type'] );
+    $validator->validate_parent_id( $_POST['parent'] );
+
+    // Sanitize submited values
     $form_type = sanitize_text_field( $_POST['type'] );
     $passed_id = sanitize_text_field( $_POST['id'] );
+    $parent_id = sanitize_text_field( $_POST['parent'] );
     
     // Use the appropriate sanitizer to sanitize the inputs
-    $sanitizer = $this->load_sanitizer( $form_type );
-    $meta = $sanitizer->sanitize_inputs( $_POST['meta'] );
+    $sanitize = $sanitizer->load_sanitizer( $form_type );
+    $meta = $sanitize->sanitize_inputs( $_POST['meta'] );
 
     // Istantiate and populate the post data array
     $data = array();
@@ -32,93 +42,47 @@ class Update_Template {
 
     // Run function to pass data to post
     $post_id = $this->insert_template_data( $data );
-
-    $parent_id = sanitize_text_field( $_POST['parent'] );
     
     // Add the template id to its parent's post metadata
     include_once STYLE_TEMPLATES_DIR . 'admin/metabox/ajax/class-update-parent-post.php';
     $update_parent = new Update_Parent_Post();
+
     $update_parent->set_parent_post_meta( $parent_id, $post_id );
 
     // Return post ID as the AJAX response
-    $is_new = $passed_id == 0 ? 'Added a ' : 'Updated the ';
-    wp_send_json($is_new . $form_type . ' template with the ID: ' . $post_id );
-
-    wp_die();
+    $action_type = $passed_id == 0 ? 'added_post' : 'updated_post';
+    $send_response->send_custom_success( $action_type, $post_id );
   }
 
   // Delete a template post
   public function handle_template_deletion() {
-    // Check for a valid nonce coming from the AJAX request (nonce set in Style_Templates/Admin)
-    $is_nonce_set = isset( $_POST[ 'security' ] );
-    $is_verified_nonce = wp_verify_nonce( $_POST[ 'security' ], 'gpalab-template-nonce' );
-    $is_referer_valid = check_ajax_referer( 'gpalab-template-nonce', 'security' );
-    
-    if ( !$is_nonce_set || !$is_verified_nonce || !$is_referer_valid ) {
-      return;
-    }
+    // Load in possible HTTP responses
+    include_once STYLE_TEMPLATES_DIR . 'admin/metabox/ajax/class-responses.php';
+    $send_response = new Responses();
 
-    // Get required information about the template
+    // Load in validator and validate inputs
+    include_once STYLE_TEMPLATES_DIR . 'admin/metabox/ajax/class-validator.php';
+    $validator = new Validator();
+
+    // Validate the values sent in the AJAX call
+    $validator->validate_nonce( $_POST[ 'security' ] );
+    $validator->validate_post_id( $_POST['id'] );
+    $validator->validate_parent_id( $_POST['parent'] );
+
+    // Sanitize submited values
     $post_id = sanitize_text_field( $_POST['id'] );
     $parent_id = sanitize_text_field( $_POST['parent'] );
     
     // Remove the template id from it's parent's post metadata
     include_once STYLE_TEMPLATES_DIR . 'admin/metabox/ajax/class-update-parent-post.php';
     $update_parent = new Update_Parent_Post();
+
     $update_parent->remove_from_parent_post_meta( $parent_id, $post_id );
 
     wp_delete_post( $post_id );
 
     // Return post ID as the AJAX response
-    wp_send_json('Deleted the template with the ID: ' . $post_id );
-
-    wp_die();
-  }
-
-  // Pull in and instantiate the proper sanitizer class for the form type submitted
-  function load_sanitizer( $form_type ) {
-
-    if ( $form_type == 'article-feed') {
-      include_once STYLE_TEMPLATES_DIR . 'admin/metabox/ajax/forms/class-sanitize-article-feed-meta.php';
-      $sanitize = new Sanitize_Article_Feed_Meta();
-      
-      return $sanitize;
-    }
-
-    if ( $form_type == 'quote-box') {
-      include_once STYLE_TEMPLATES_DIR . 'admin/metabox/ajax/forms/class-sanitize-quotebox-meta.php';
-      $sanitize = new Sanitize_Quotebox_Meta();
-      
-      return $sanitize;
-    }
-
-    if ( $form_type == 'resources') {
-      include_once STYLE_TEMPLATES_DIR . 'admin/metabox/ajax/forms/class-sanitize-resources-meta.php';
-      $sanitize = new Sanitize_Resources_Meta();
-      
-      return $sanitize;
-    }
-
-    if ( $form_type == 'slides') {
-      include_once STYLE_TEMPLATES_DIR . 'admin/metabox/ajax/forms/class-sanitize-slides-meta.php';
-      $sanitize = new Sanitize_Slides_Meta();
-      
-      return $sanitize;
-    }
-
-    if ( $form_type == 'stats') {
-      include_once STYLE_TEMPLATES_DIR . 'admin/metabox/ajax/forms/class-sanitize-stats-meta.php';
-      $sanitize = new Sanitize_Stats_Meta();
-      
-      return $sanitize;
-    }
-
-    if ( $form_type == 'text') {
-      include_once STYLE_TEMPLATES_DIR . 'admin/metabox/ajax/forms/class-sanitize-text-meta.php';
-      $sanitize = new Sanitize_Text_Meta();
-      
-      return $sanitize;
-    }
+    $send_response->send_custom_success( 'deleted_post', $post_id );
   }
   
   // Accept post data and use it to create/update post

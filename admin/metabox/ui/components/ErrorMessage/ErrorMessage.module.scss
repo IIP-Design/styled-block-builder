@@ -32,9 +32,15 @@
     flex-direction: column;
     justify-content: center;
     padding: 1rem 4rem;
+    z-index: 1;
   }
+}
+
+.heading {
+  text-align: center;
 }
 
 .message {
   margin: 0;
+  text-align: center;
 }

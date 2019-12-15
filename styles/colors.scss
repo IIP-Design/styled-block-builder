@@ -14,8 +14,16 @@ $greySlate: #323a45;
 $red: #d01319;
 $white: #ffffff;
 
+$errorBackground: #f8dfe2;
+$errorColor: #6f3331;
+
 $wordpressBlack: #444444;
 $wordpressLightGrey: #e5e5e5;
 $wordpressLighterGrey: #ebebeb;
 
 $wordpressBorder: 1px solid $wordpressLightGrey;
+$wordpressBoxShadow: 0 1px 1px
+  rgba(
+    $color: $blackStandard,
+    $alpha: 0.04
+  );
