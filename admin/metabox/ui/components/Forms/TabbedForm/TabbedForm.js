@@ -64,7 +64,7 @@ const TabbedForm = ( { fields, group, inputs, label, maxTabs, stateFunc } ) => {
                     styleName={ selectedTab === form.id ? 'tab selected-tab' : 'tab' }
                     type="button"
                   >
-                    { responsiveTitle( index, selected[0][getTabTitleField( fields )] ) }
+                    { responsiveTitle( index, forms.length, selected[0][getTabTitleField( fields )] ) }
                   </button>
                 );
               } ) }
