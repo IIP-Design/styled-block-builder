@@ -5,8 +5,10 @@ import { handleAdd, handleInput, handleRemove } from 'metabox/utils/modify-group
 
 import './ArticleById.module.scss';
 
-const ArticleById = ( { fields, inputs, updateState } ) => {
+const ArticleById = ( { inputs, updateState } ) => {
   const { articles } = inputs;
+
+  const fields = [{ name: 'postId' }, { name: 'source' }];
 
   if ( articles ) {
     return (
@@ -68,7 +70,6 @@ const ArticleById = ( { fields, inputs, updateState } ) => {
 };
 
 ArticleById.propTypes = {
-  fields: propTypes.array,
   inputs: propTypes.object,
   updateState: propTypes.func
 };

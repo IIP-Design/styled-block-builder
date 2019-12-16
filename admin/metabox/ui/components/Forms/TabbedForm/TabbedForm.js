@@ -3,6 +3,8 @@ import propTypes from 'prop-types';
 
 import { getTabTitleField, responsiveTitle } from 'metabox/utils/tab-titles';
 import { handleAdd, handleInput, handleRemove } from 'metabox/utils/modify-group';
+import ArticleById from '../FeedTypes/ArticleById';
+import CheckboxConditional from '../Toggles/CheckboxConditional';
 
 import './TabbedForm.module.scss';
 
@@ -29,6 +31,20 @@ const TabbedForm = ( { fields, group, inputs, label, maxTabs, stateFunc } ) => {
     }
   };
 
+  const updateArticles = val => {
+    const newState = [...forms];
+
+    newState.map( item => {
+      if ( item.id === val[0].parent ) {
+        item.articles = val;
+      }
+
+      return item;
+    } );
+
+    updateState( newState );
+  };
+
   const uponRemoval = ( clone, index ) => {
     // Bring adjacent tab in focus when removing tab
     let tab;
@@ -48,9 +64,28 @@ const TabbedForm = ( { fields, group, inputs, label, maxTabs, stateFunc } ) => {
     updateState( clone, tab );
   };
 
+  const handleToggle = e => {
+    const parent = e.target.name;
+
+    // Make an updated replica of the form objects
+    const newState = [...forms];
+    newState.map( item => {
+      if ( item.id === parent ) {
+        const checked = item.hasFeed;
+        item.hasFeed = !checked;
+
+        item.articles = item.articles ? item.articles : [];
+      }
+
+      return item;
+    } );
+
+    updateState( newState );
+  };
+
   return (
     <div>
-      <div className="tabbed-form">
+      <div styleName="tabbed-form">
         { forms && forms.length > 0 && (
           <Fragment>
             <div styleName="tabs">
@@ -98,6 +133,7 @@ const TabbedForm = ( { fields, group, inputs, label, maxTabs, stateFunc } ) => {
                             </label>
                           );
                         }
+
                         if ( field.type === 'textarea' ) {
                           return (
                             <label
@@ -108,7 +144,7 @@ const TabbedForm = ( { fields, group, inputs, label, maxTabs, stateFunc } ) => {
                               <textarea
                                 id={ `section-${field.name}-${form.id}` }
                                 data-parent={ form.id }
-                                name={ `${field.name}` }
+                                name={ field.name }
                                 onChange={ e => handleInput( e, forms, updateState ) }
                                 rows="6"
                                 value={ selected[0][field.name] }
@@ -116,6 +152,22 @@ const TabbedForm = ( { fields, group, inputs, label, maxTabs, stateFunc } ) => {
                             </label>
                           );
                         }
+
+                        if ( field.type === 'article-feed' ) {
+                          return (
+                            <CheckboxConditional
+                              callback={ handleToggle }
+                              checked={ form.hasFeed }
+                              data-parent={ form.id }
+                              key={ `${field.name}-${form.id}` }
+                              label={ field.label || '' }
+                              name={ form.id }
+                            >
+                              <ArticleById inputs={ form } updateState={ updateArticles } />
+                            </CheckboxConditional>
+                          );
+                        }
+
                         return null;
                       } ) }
                   </div>

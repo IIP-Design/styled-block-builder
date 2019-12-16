@@ -1,8 +1,6 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import propTypes from 'prop-types';
 
-import ArticleById from './FeedTypes/ArticleById';
-import CheckboxConditional from './Toggles/CheckboxConditional';
 import FullWidthToggle from './Toggles/FullWidthToggle';
 import TabbedForm from './TabbedForm/TabbedForm';
 
@@ -10,9 +8,7 @@ const ResourcesForm = ( { callback, meta } ) => {
   // Set an initial object to load in the form,
   // populated with either values passed from parent or empty values
   const schema = {
-    articles: meta.articles || [],
     fullWidth: meta.fullWidth || false,
-    hasFeed: meta.hasFeed || false,
     resources: meta.resources || [],
     subtitle: meta.subtitle || '',
     title: meta.title || ''
@@ -35,10 +31,6 @@ const ResourcesForm = ( { callback, meta } ) => {
     callback( { ...formData, [group]: val } );
   };
 
-  const updateArticles = clone => {
-    updateInputs( 'articles', clone );
-  };
-
   const handleChange = e => {
     const { name, value } = e.target;
 
@@ -55,10 +47,9 @@ const ResourcesForm = ( { callback, meta } ) => {
   const tabFields = [
     { label: 'Add section title:', name: 'title', tabTitle: true, type: 'text' },
     { label: 'Add section text:', name: 'text', type: 'textarea' },
-    { label: 'Add video url:', name: 'video', type: 'text' }
+    { label: 'Add video url:', name: 'video', type: 'text' },
+    { label: 'Add an Article Feed?', name: 'hasFeed', type: 'article-feed' }
   ];
-
-  const fields = [{ name: 'postId' }, { name: 'source' }];
 
   return (
     <Fragment>
@@ -89,14 +80,6 @@ const ResourcesForm = ( { callback, meta } ) => {
         label="Resource"
         stateFunc={ updateInputs }
       />
-      <CheckboxConditional
-        callback={ handleToggle }
-        checked={ inputs.hasFeed }
-        label="Add an Article Feed?"
-        name="hasFeed"
-      >
-        <ArticleById fields={ fields } inputs={ inputs } updateState={ updateArticles } />
-      </CheckboxConditional>
       <FullWidthToggle callback={ handleToggle } checked={ inputs.fullWidth } />
     </Fragment>
   );

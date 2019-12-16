@@ -72,11 +72,11 @@ const Resources = ( { id } ) => {
                     <div id={ resource.id } key={ resource.id }>
                       <div styleName="section-content" id={ resource.id }>
                         { layout }
-                        { resource.cdp && (
+                        { resource.articles && (
                           <Fragment>
                             <hr styleName="section-hr" />
                             <div styleName="feed-container">
-                              <CDPFeed id={ resource.id } items={ resource.cdp } />
+                              <CDPFeed id={ resource.id } items={ resource.articles } />
                             </div>
                           </Fragment>
                         ) }
