@@ -10,14 +10,28 @@ class Responses {
 
     // Status codes
     $bad_request = __( '400: Bad Request', 'gpalab-templates' );
+    $unauthorized = __( '401: Unauthorized', 'gpalab-templates' );
     $forbidden = __( '403: Forbidden', 'gpalab-templates' );
     
+    if ( $type == 'insufficient_permissions') {
+      $data['message'] = __( 'Authorization failed - user does not have sufficient permissions', 'gpalab-templates' );
+      $data['status'] = $forbidden;
+      $status = 403;
+    }
+
     if ( $type == 'invalid_parent_id' ) {
       $data['message'] = __( 'The post associated with this template does not exist', 'gpalab-templates' );
       $data['status'] = $bad_request;
       $status = 400;
     }
     
+    if ( $type == 'invalid_nonce') {
+      $data['header'] = 'WWW-Authenticate: Bearer';
+      $data['message'] = __( 'Authorization failed - invalid nonce provided', 'gpalab-templates' );
+      $data['status'] = $unauthorized;
+      $status = 401;
+    }
+
     if ( $type == 'invalid_post_id' ) {
       $data['message'] = __( 'Invalid post id provided', 'gpalab-templates' );
       $data['status'] = $bad_request;
@@ -46,12 +60,6 @@ class Responses {
       $data['message'] = __( 'Required field "post id" not provided', 'gpalab-templates' );
       $data['status'] = $bad_request;
       $status = 400;
-    }
-
-    if ( $type == 'unauthorized') {
-      $data['message'] = __( 'Authorization failed', 'gpalab-templates' );
-      $data['status'] = $forbidden;
-      $status = 403;
     }
 
     wp_send_json_error( $data, $status );

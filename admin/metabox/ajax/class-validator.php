@@ -77,15 +77,19 @@ class Validator {
     // $is_referer_valid = 
     
     if ( !isset( $nonce ) ) {
-      $send_response->send_custom_error( 'unauthorized' );
+      $send_response->send_custom_error( 'invalid_nonce' );
     }
 
     if ( wp_verify_nonce( $nonce, 'gpalab-template-nonce' ) == false ) {
-      $send_response->send_custom_error( 'unauthorized' );
+      $send_response->send_custom_error( 'invalid_nonce' );
     }
 
     if ( check_ajax_referer( 'gpalab-template-nonce', 'security', false ) == false ) {
-      $send_response->send_custom_error( 'unauthorized' );
+      $send_response->send_custom_error( 'invalid_nonce' );
+    }
+
+    if ( !current_user_can( 'edit_pages' ) ) {
+      $send_response->send_custom_error( 'insufficient_permissions' );
     }
   }
 }
