@@ -34,24 +34,31 @@ const ModelContent = ( { form, id, show, toggle } ) => {
   const meta = current?.meta ? current.meta : {};
 
   let selectedForm = null;
+  let formTitle = null;
   const formStr = form.replace( 'gpalab-', '' );
   switch ( formStr ) {
     case 'article-feed':
+      formTitle = 'Configure Your Article Feed:';
       selectedForm = <ArticleFeedForm callback={ setData } meta={ meta } />;
       break;
     case 'quote-box':
+      formTitle = 'Configure Your Quote Box:';
       selectedForm = <QuoteBoxForm callback={ setData } meta={ meta } />;
       break;
     case 'resources':
+      formTitle = 'Configure Your Resources Block:';
       selectedForm = <ResourcesForm callback={ setData } meta={ meta } />;
       break;
     case 'slides':
+      formTitle = 'Configure Your Slides Block:';
       selectedForm = <SlidesForm callback={ setData } meta={ meta } />;
       break;
     case 'stats':
+      formTitle = 'Configure Your Stats Block:';
       selectedForm = <StatsForm callback={ setData } meta={ meta } />;
       break;
     case 'text':
+      formTitle = 'Configure Your Text Block:';
       selectedForm = <TextForm callback={ setData } meta={ meta } />;
       break;
     default:
@@ -81,7 +88,12 @@ const ModelContent = ( { form, id, show, toggle } ) => {
         </button>
         { saving && <Spinner /> }
         { error && <ErrorMessage err={ errorData } /> }
-        { selectedForm }
+        { selectedForm && (
+          <form styleName="modal-form">
+            <h3 styleName="modal-form-title">{ formTitle }</h3>
+            { selectedForm }
+          </form>
+        ) }
         <div styleName="modal-controls">
           <label htmlFor="copy-shortcode">
             { id !== 0 && (

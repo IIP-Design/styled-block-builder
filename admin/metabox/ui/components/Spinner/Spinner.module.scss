@@ -35,7 +35,7 @@
     background-color: $greyLightest;
     border-radius: 5px;
     border: $wordpressBorder;
-    box-shadow: 0 1px 1px rgba($color: $blackStandard, $alpha: 0.04);
+    box-shadow: $wordpressBoxShadow;
     display: flex;
     flex-direction: column;
     justify-content: center;

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import propTypes from 'prop-types';
 
 import TabbedForm from './TabbedForm/TabbedForm';
@@ -44,8 +44,7 @@ const SlidesForm = ( { callback, meta } ) => {
   ];
 
   return (
-    <form className="gpalab-modal-form">
-      <h3 className="gpalab-modal-form-title">Configure Your Slides Block:</h3>
+    <Fragment>
       <label htmlFor="slides-title">
         Add title:
         <input
@@ -63,7 +62,7 @@ const SlidesForm = ( { callback, meta } ) => {
         label="Slides"
         stateFunc={ tabStateFunc }
       />
-    </form>
+    </Fragment>
   );
 };
 

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import propTypes from 'prop-types';
 
 import './Forms.scss';
@@ -31,8 +31,7 @@ const TextForm = ( { callback, meta } ) => {
   };
 
   return (
-    <form className="gpalab-modal-form">
-      <h3 className="gpalab-modal-form-title">Configure Your Text Block:</h3>
+    <Fragment>
       <label htmlFor="text-title">
         Add title:
         <input
@@ -111,7 +110,7 @@ const TextForm = ( { callback, meta } ) => {
           <option value="red">Red</option>
         </select>
       </label>
-    </form>
+    </Fragment>
   );
 };
 

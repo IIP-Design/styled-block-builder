@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import propTypes from 'prop-types';
 
 import FullWidthToggle from './Toggles/FullWidthToggle';
@@ -39,8 +39,7 @@ const QuoteBoxForm = ( { callback, meta } ) => {
   };
 
   return (
-    <form className="gpalab-modal-form">
-      <h3 className="gpalab-modal-form-title">Configure Your Quote Box:</h3>
+    <Fragment>
       <label htmlFor="quote-box-title">
         Add title:
         <input
@@ -92,7 +91,7 @@ const QuoteBoxForm = ( { callback, meta } ) => {
         />
       </label>
       <FullWidthToggle callback={ handleToggle } checked={ inputs.fullWidth } />
-    </form>
+    </Fragment>
   );
 };
 

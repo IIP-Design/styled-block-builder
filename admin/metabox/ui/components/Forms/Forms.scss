@@ -1,23 +1,5 @@
 @import 'styles/colors.scss';
 
-.gpalab-modal-form {
-  display: flex;
-  flex-direction: column;
-  width: 30vw;
-
-  &-title {
-    border-bottom: $wordpressBorder;
-    margin: 0 -2rem 1rem;
-    padding: 0 2rem 0.5rem;
-  }
-
-  > label {
-    display: flex;
-    flex-direction: column;
-    margin: 0.5rem 0;
-  }
-}
-
 .article-feed {
   &-button {
     align-self: flex-end;

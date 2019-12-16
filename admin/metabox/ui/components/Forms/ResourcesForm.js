@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import propTypes from 'prop-types';
 
+import ArticleById from './FeedTypes/ArticleById';
 import FullWidthToggle from './Toggles/FullWidthToggle';
 import TabbedForm from './TabbedForm/TabbedForm';
 
@@ -51,9 +52,18 @@ const ResourcesForm = ( { callback, meta } ) => {
     { label: 'Add video url:', name: 'video', type: 'text' }
   ];
 
+  const fields = [{ name: 'postId' }, { name: 'source' }];
+
+  const mock = {
+    articles: [
+      { postId: '592410', source: 'share' },
+      { postId: '759726', source: 'share' },
+      { postId: '769637', source: 'share' }
+    ]
+  };
+
   return (
-    <form className="gpalab-modal-form">
-      <h3 className="gpalab-modal-form-title">Configure Your Resources Block:</h3>
+    <Fragment>
       <label htmlFor="resources-title">
         Add title:
         <input
@@ -81,8 +91,9 @@ const ResourcesForm = ( { callback, meta } ) => {
         label="Resource"
         stateFunc={ tabStateFunc }
       />
+      <ArticleById fields={ fields } inputs={ mock } updateState={ tabStateFunc } />
       <FullWidthToggle callback={ handleToggle } checked={ inputs.fullWidth } />
-    </form>
+    </Fragment>
   );
 };
 

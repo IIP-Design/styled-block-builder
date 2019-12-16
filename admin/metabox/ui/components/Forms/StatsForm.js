@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import propTypes from 'prop-types';
 
 import TabbedForm from './TabbedForm/TabbedForm';
@@ -39,8 +39,7 @@ const StatsForm = ( { callback, meta } ) => {
   ];
 
   return (
-    <form className="gpalab-modal-form">
-      <h3 className="gpalab-modal-form-title">Configure Your Stats Block:</h3>
+    <Fragment>
       <label htmlFor="stats-background">
         Add Background Image URL:
         <input
@@ -68,7 +67,7 @@ const StatsForm = ( { callback, meta } ) => {
         label="Stat"
         stateFunc={ tabStateFunc }
       />
-    </form>
+    </Fragment>
   );
 };
 
