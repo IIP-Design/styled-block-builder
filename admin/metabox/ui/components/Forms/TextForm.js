@@ -1,8 +1,6 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import propTypes from 'prop-types';
 
-import './Forms.scss';
-
 const TextForm = ( { callback, meta } ) => {
   const schema = {
     button: meta.button || '',

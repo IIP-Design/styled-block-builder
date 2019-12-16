@@ -1,8 +1,9 @@
 @import 'styles/colors.scss';
 
-.article-feed {
+.feed {
   &-button {
-    align-self: flex-end;
+    align-self: center;
+    width: 75%;
 
     &-remove {
       align-self: flex-end;

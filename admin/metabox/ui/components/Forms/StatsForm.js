@@ -3,8 +3,6 @@ import propTypes from 'prop-types';
 
 import TabbedForm from './TabbedForm/TabbedForm';
 
-import './Forms.scss';
-
 const StatsForm = ( { callback, meta } ) => {
   const schema = {
     background: meta.background || '',

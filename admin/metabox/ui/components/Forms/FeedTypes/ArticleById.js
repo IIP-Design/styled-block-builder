@@ -3,7 +3,7 @@ import propTypes from 'prop-types';
 
 import { handleAdd, handleInput, handleRemove } from 'metabox/utils/modify-group';
 
-import '../Forms.scss';
+import './ArticleById.module.scss';
 
 const ArticleById = ( { fields, inputs, updateState } ) => {
   const { articles } = inputs;
@@ -13,8 +13,8 @@ const ArticleById = ( { fields, inputs, updateState } ) => {
       <Fragment>
         <h4>Add Articles by Post ID:</h4>
         { articles.map( article => (
-          <div className="article-feed-info" key={ article.id }>
-            <label className="article-feed-label" htmlFor={ `article-id-${article.id}` }>
+          <div styleName="feed-info" key={ article.id }>
+            <label styleName="feed-label" htmlFor={ `article-id-${article.id}` }>
               Enter article id
               <input
                 data-parent={ article.id }
@@ -25,7 +25,7 @@ const ArticleById = ( { fields, inputs, updateState } ) => {
                 value={ article.postId }
               />
             </label>
-            <label className="article-feed-label" htmlFor={ `article-source-${article.id}` }>
+            <label styleName="feed-label" htmlFor={ `article-source-${article.id}` }>
               Select article source
               <select
                 data-parent={ article.id }
@@ -41,9 +41,10 @@ const ArticleById = ( { fields, inputs, updateState } ) => {
               </select>
             </label>
             <button
-              className="button-secondary article-feed-button-remove"
+              className="button-secondary"
               data-parent={ article.id }
               onClick={ e => handleRemove( articles, e.target.dataset.parent, updateState ) }
+              styleName="feed-button-remove"
               type="button"
             >
               Remove Article
@@ -51,9 +52,10 @@ const ArticleById = ( { fields, inputs, updateState } ) => {
           </div>
         ) ) }
         <button
-          className="button-secondary article-feed-button"
+          className="button-secondary"
           disabled={ articles && articles.length === 3 }
           onClick={ () => handleAdd( fields, inputs, 'articles', updateState ) }
+          styleName="feed-button"
           type="button"
         >
           Add Article
