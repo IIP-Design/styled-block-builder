@@ -10,10 +10,10 @@ const Text = ( { id } ) => {
   const { meta } = window[`gpalabText${id}`];
 
   if ( meta ) {
-    const { button, color, desc, link, style, subtitle, title } = meta;
+    const { button, color, desc, fullWidth, link, style, subtitle, title } = meta;
 
     return (
-      <Normalizer>
+      <Normalizer fullWidth={ fullWidth }>
         <div styleName="container">
           { title && <h2 styleName="title">{ title }</h2> }
           { subtitle && <h3 styleName="subtitle">{ subtitle }</h3> }

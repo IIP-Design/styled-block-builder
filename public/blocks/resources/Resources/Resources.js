@@ -21,8 +21,10 @@ const Resources = ( { id } ) => {
   const isMobile = window.innerWidth <= 500;
 
   if ( meta ) {
+    const { fullWidth, resources, subtitle, title } = meta;
+
     return (
-      <Normalizer fullWidth={ meta.fullWidth }>
+      <Normalizer fullWidth={ fullWidth }>
         <div
           styleName="background"
           id="resource-section"
@@ -30,59 +32,61 @@ const Resources = ( { id } ) => {
             backgroundImage: "url('https://policystatic.state.gov/uploads/2019/11/wavy-bg.jpg')"
           } }
         >
-          <h2 styleName="title">{ meta.title }</h2>
+          { title && <h2 styleName="title">{ title }</h2> }
 
-          <h4 styleName="subtitle">{ meta.subtitle }</h4>
+          { subtitle && <h4 styleName="subtitle">{ subtitle }</h4> }
 
           <div styleName="container">
             <div styleName="nav">
-              { meta.resources.map( resource => {
-                const styles = resource.id === selected ? 'nav-button' : 'nav-button inactive';
-                return (
-                  <button
-                    styleName={ styles }
-                    id={ resource.id }
-                    key={ resource.id }
-                    onClick={ () => setSelected( resource.id ) }
-                    type="button"
-                  >
-                    { resource.title }
-                  </button>
-                );
-              } ) }
+              { resources &&
+                resources.map( resource => {
+                  const styles = resource.id === selected ? 'nav-button' : 'nav-button inactive';
+                  return (
+                    <button
+                      styleName={ styles }
+                      id={ resource.id }
+                      key={ resource.id }
+                      onClick={ () => setSelected( resource.id ) }
+                      type="button"
+                    >
+                      { resource.title }
+                    </button>
+                  );
+                } ) }
             </div>
 
-            { meta.resources.map( resource => {
-              const type = resource.video ? 'video' : 'base';
-              let layout = null;
-              if ( type === 'base' ) {
-                layout = <BaseLayout data={ resource } />;
-              }
+            { resources &&
+              resources.map( resource => {
+                const type = resource.video ? 'video' : 'base';
+                let layout = null;
+                if ( type === 'base' ) {
+                  layout = <BaseLayout data={ resource } />;
+                }
 
-              if ( type === 'video' ) {
-                layout = <VideoLayout data={ resource } />;
-              }
+                if ( type === 'video' ) {
+                  layout = <VideoLayout data={ resource } />;
+                }
 
-              if ( resource.id === selected || isMobile ) {
-                return (
-                  <div id={ resource.id } key={ resource.id }>
-                    <div styleName="section-content" id={ resource.id }>
-                      { layout }
-                      { resource.cdp && (
-                        <Fragment>
-                          <hr styleName="section-hr" />
-                          <div styleName="feed-container">
-                            <CDPFeed id={ resource.id } items={ resource.cdp } />
-                          </div>
-                        </Fragment>
-                      ) }
+                if ( resource.id === selected || isMobile ) {
+                  return (
+                    <div id={ resource.id } key={ resource.id }>
+                      <div styleName="section-content" id={ resource.id }>
+                        { layout }
+                        { resource.cdp && (
+                          <Fragment>
+                            <hr styleName="section-hr" />
+                            <div styleName="feed-container">
+                              <CDPFeed id={ resource.id } items={ resource.cdp } />
+                            </div>
+                          </Fragment>
+                        ) }
+                      </div>
                     </div>
-                  </div>
-                );
-              }
+                  );
+                }
 
-              return null;
-            } ) }
+                return null;
+              } ) }
           </div>
         </div>
       </Normalizer>

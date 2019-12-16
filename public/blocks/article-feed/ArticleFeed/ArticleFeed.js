@@ -8,9 +8,11 @@ const ArticleFeed = ( { id } ) => {
   const { meta } = window[`gpalabArticleFeed${id}`];
 
   if ( meta ) {
+    const { articles, fullWidth } = meta;
+
     return (
-      <Normalizer>
-        <CDPFeed id={ id } items={ meta.articles } />
+      <Normalizer fullWidth={ fullWidth }>
+        <CDPFeed id={ id } items={ articles } />
       </Normalizer>
     );
   }

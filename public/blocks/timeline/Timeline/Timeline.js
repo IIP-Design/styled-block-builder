@@ -9,10 +9,10 @@ import mockData from './mockdata';
 
 const Timeline = ( { id } ) => {
   // const { title } = window[`quotebox${id}`];
-  const { title, events } = mockData;
+  const { fullWidth, title, events } = mockData;
 
   return (
-    <Normalizer>
+    <Normalizer fullWidth={ fullWidth }>
       <div styleName="bg" id="section">
         <div
           styleName="overlay"
