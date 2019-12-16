@@ -3,11 +3,21 @@
 .content-background {
   align-items: center;
   background-color: $blueDarkest;
-  background-position: right bottom;
   background-repeat: no-repeat;
-  background-size: contain;
+  background-size: cover;
   position: relative;
   width: 100%;
+}
+
+.overlay {
+  background: linear-gradient(
+    to top,
+    rgba($color: $blackStandard, $alpha: 0.3),
+    rgba($color: $blackStandard, $alpha: 0.7) 40%,
+    rgba($color: $blackStandard, $alpha: 0.8) 50%,
+    rgba($color: $blackStandard, $alpha: 0.7) 60%,
+    rgba($color: $blackStandard, $alpha: 0.3) 100%
+  );
 }
 
 .header {
