@@ -10,7 +10,7 @@ class Metabox {
       'gpalab_templates_meta',
       __( 'Style Templates', 'gpalab-templates' ),
       array( $this, 'render_templates_metabox' ),
-      'post',
+      array( 'page', 'post' ),
       'side',
       'high'
     );
