@@ -2,6 +2,7 @@ import React, { Fragment, useEffect, useState } from 'react';
 import propTypes from 'prop-types';
 
 import ArticleById from './FeedTypes/ArticleById';
+import CheckboxConditional from './Toggles/CheckboxConditional';
 import FullWidthToggle from './Toggles/FullWidthToggle';
 import TabbedForm from './TabbedForm/TabbedForm';
 
@@ -9,7 +10,9 @@ const ResourcesForm = ( { callback, meta } ) => {
   // Set an initial object to load in the form,
   // populated with either values passed from parent or empty values
   const schema = {
+    articles: meta.articles || [],
     fullWidth: meta.fullWidth || false,
+    hasFeed: meta.hasFeed || false,
     resources: meta.resources || [],
     subtitle: meta.subtitle || '',
     title: meta.title || ''
@@ -27,23 +30,26 @@ const ResourcesForm = ( { callback, meta } ) => {
     callback( inputs );
   }, [] );
 
-  const tabStateFunc = ( group, clone ) => {
-    setInputs( { ...inputs, [group]: clone } );
-    callback( { ...formData, [group]: clone } );
+  const updateInputs = ( group, val ) => {
+    setInputs( { ...inputs, [group]: val } );
+    callback( { ...formData, [group]: val } );
+  };
+
+  const updateArticles = clone => {
+    updateInputs( 'articles', clone );
   };
 
   const handleChange = e => {
     const { name, value } = e.target;
 
-    setInputs( { ...inputs, [name]: value } );
-    callback( { ...formData, [name]: value } );
+    updateInputs( name, value );
   };
 
-  const handleToggle = () => {
-    const checked = !inputs.fullWidth;
+  const handleToggle = e => {
+    const { name } = e.target;
+    const checked = !inputs[name];
 
-    setInputs( { ...inputs, fullWidth: checked } );
-    callback( { ...formData, fullWidth: checked } );
+    updateInputs( [name], checked );
   };
 
   const tabFields = [
@@ -53,14 +59,6 @@ const ResourcesForm = ( { callback, meta } ) => {
   ];
 
   const fields = [{ name: 'postId' }, { name: 'source' }];
-
-  const mock = {
-    articles: [
-      { postId: '592410', source: 'share' },
-      { postId: '759726', source: 'share' },
-      { postId: '769637', source: 'share' }
-    ]
-  };
 
   return (
     <Fragment>
@@ -89,9 +87,16 @@ const ResourcesForm = ( { callback, meta } ) => {
         group="resources"
         inputs={ inputs }
         label="Resource"
-        stateFunc={ tabStateFunc }
+        stateFunc={ updateInputs }
       />
-      <ArticleById fields={ fields } inputs={ mock } updateState={ tabStateFunc } />
+      <CheckboxConditional
+        callback={ handleToggle }
+        checked={ inputs.hasFeed }
+        label="Add an Article Feed?"
+        name="hasFeed"
+      >
+        <ArticleById fields={ fields } inputs={ inputs } updateState={ updateArticles } />
+      </CheckboxConditional>
       <FullWidthToggle callback={ handleToggle } checked={ inputs.fullWidth } />
     </Fragment>
   );

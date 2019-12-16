@@ -1,23 +1,23 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import propTypes from 'prop-types';
 
 import './Toggles.module.scss';
 
 const CheckboxConditional = ( { callback, checked, children, label, name } ) => (
-  <Fragment>
+  <div styleName="form-break">
     <label htmlFor="conditional-rendering" styleName="toggle-label">
-      { label }
+      { label && label }
       <input
         checked={ checked }
         id="conditional-rendering"
-        onChange={ () => callback() }
         name={ name }
+        onChange={ e => callback( e ) }
         styleName="toggle-checkbox"
         type="checkbox"
       />
     </label>
     { checked && children }
-  </Fragment>
+  </div>
 );
 
 CheckboxConditional.propTypes = {
