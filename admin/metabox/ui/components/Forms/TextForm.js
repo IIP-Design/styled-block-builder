@@ -2,6 +2,7 @@ import React, { Fragment, useEffect, useState } from 'react';
 import propTypes from 'prop-types';
 
 import './Forms.scss';
+import ArticleById from './FeedTypes/ArticleById';
 
 const TextForm = ( { callback, meta } ) => {
   const schema = {
@@ -23,11 +24,26 @@ const TextForm = ( { callback, meta } ) => {
     callback( formData );
   }, [] );
 
+  const tabStateFunc = ( group, clone ) => {
+    setInputs( { ...inputs, [group]: clone } );
+    callback( { ...formData, [group]: clone } );
+  };
+
   const handleChange = e => {
     const { name, value } = e.target;
 
     setInputs( { ...inputs, [name]: value } );
     callback( { ...formData, [name]: value } );
+  };
+
+  const fields = [{ name: 'postId' }, { name: 'source' }];
+
+  const mock = {
+    articles: [
+      { postId: '592410', source: 'share' },
+      { postId: '759726', source: 'share' },
+      { postId: '769637', source: 'share' }
+    ]
   };
 
   return (
@@ -110,6 +126,7 @@ const TextForm = ( { callback, meta } ) => {
           <option value="red">Red</option>
         </select>
       </label>
+      <ArticleById fields={ fields } inputs={ mock } updateState={ tabStateFunc } />
     </Fragment>
   );
 };
