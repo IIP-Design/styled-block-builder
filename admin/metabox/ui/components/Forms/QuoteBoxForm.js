@@ -3,8 +3,6 @@ import propTypes from 'prop-types';
 
 import FullWidthToggle from './Toggles/FullWidthToggle';
 
-import './Forms.scss';
-
 const QuoteBoxForm = ( { callback, meta } ) => {
   const schema = {
     desc: meta.desc || '',

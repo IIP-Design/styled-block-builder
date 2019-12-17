@@ -7,9 +7,13 @@ export const handleAdd = ( fields, inputs, group, updateState ) => {
   const obj = {};
   obj.id = uuid();
   fieldNames.forEach( name => {
-    obj[name] = '';
+    obj[name] = name === 'hasFeed' ? false : '';
     return obj;
   } );
+
+  if ( inputs.id ) {
+    obj.parent = inputs.id;
+  }
 
   // Replicate resources array and populate it with previously created object
   const clone = [...inputs[group]];

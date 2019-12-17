@@ -32,8 +32,6 @@ const ArticleFeedForm = ( { callback, meta } ) => {
   //   callback( { ...formData, type: checked } );
   // };
 
-  const fields = [{ name: 'postId' }, { name: 'source' }];
-
   return (
     <Fragment>
       { /* <RadioConditional
@@ -41,7 +39,7 @@ const ArticleFeedForm = ( { callback, meta } ) => {
         checked={ inputs.type }
         label="Add a feed of articles?"
       > */ }
-      <ArticleById fields={ fields } inputs={ inputs } updateState={ updateState } />
+      <ArticleById inputs={ inputs } updateState={ updateState } />
       { /* </RadioConditional> */ }
     </Fragment>
   );

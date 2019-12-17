@@ -10,7 +10,8 @@ const FullWidthToggle = ( { callback, checked } ) => (
       <input
         checked={ checked }
         id="full-width-toggle"
-        onChange={ () => callback() }
+        name="fullWidth"
+        onChange={ e => callback( e ) }
         styleName="toggle-checkbox"
         type="checkbox"
       />

@@ -24,7 +24,7 @@ class Sanitize_Article_Feed_Meta {
 
       unset($article);
 
-      $sanitized['articles'] =  $sanitized_articles;
+      $sanitized['articles'] = $sanitized_articles;
     }
 
     if( !empty( $unsanitary['type'] ) ) {

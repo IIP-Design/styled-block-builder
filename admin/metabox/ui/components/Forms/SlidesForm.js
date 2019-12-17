@@ -3,8 +3,6 @@ import propTypes from 'prop-types';
 
 import TabbedForm from './TabbedForm/TabbedForm';
 
-import './Forms.scss';
-
 const SlidesForm = ( { callback, meta } ) => {
   // Set an initial object to load in the form,
   // populated with either values passed from parent or empty values

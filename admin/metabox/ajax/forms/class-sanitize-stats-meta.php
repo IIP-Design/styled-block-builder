@@ -28,7 +28,7 @@ class Sanitize_Stats_Meta {
 
       unset($stat);
 
-      $sanitized['stats'] =  $sanitized_stats;
+      $sanitized['stats'] = $sanitized_stats;
     }
 
     if( !empty( $unsanitary['title'] ) ) {
