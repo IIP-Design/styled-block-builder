@@ -4,6 +4,8 @@ import { createPortal } from 'react-dom';
 
 import ArticleFeedForm from 'metabox/components/Forms/ArticleFeedForm';
 import ErrorMessage from 'metabox/components/ErrorMessage/ErrorMessage';
+import HeroForm from 'metabox/components/Forms/HeroForm';
+import HeroAnimatedForm from 'metabox/components/Forms/HeroAnimatedForm';
 import QuoteBoxForm from 'metabox/components/Forms/QuoteBoxForm';
 import ResourcesForm from 'metabox/components/Forms/ResourcesForm';
 import Spinner from 'metabox/components/Spinner/Spinner';
@@ -40,6 +42,14 @@ const ModelContent = ( { form, id, show, toggle } ) => {
     case 'article-feed':
       formTitle = 'Configure Your Article Feed:';
       selectedForm = <ArticleFeedForm callback={ setData } meta={ meta } />;
+      break;
+    case 'hero':
+      formTitle = 'Configure Your Hero:';
+      selectedForm = <HeroForm callback={ setData } meta={ meta } />;
+      break;
+    case 'hero-animated':
+      formTitle = 'Configure Your Animated Hero:';
+      selectedForm = <HeroAnimatedForm callback={ setData } meta={ meta } />;
       break;
     case 'quote-box':
       formTitle = 'Configure Your Quote Box:';

@@ -5,31 +5,35 @@ import AnimatedLines from 'blocks/_shared/components/AnimatedLines/AnimatedLines
 import Normalizer from 'blocks/_shared/components/Normalizer/Normalizer';
 
 import './HeroAnimated.module.scss';
-import mockData from './mockdata';
 
 const HeroAnimated = ( { id } ) => {
-  // const { title } = window[`quotebox${id}`];
-  const { title, subtitle, background, lines } = mockData;
+  const { meta } = window[`gpalabHeroAnimated${id}`];
 
-  return (
-    <Normalizer>
-      <div styleName="container" id="iran-section">
-        <div styleName="background" style={ { backgroundImage: `url(${background})` } }>
-          <div styleName="gradient-overlay" />
-        </div>
+  if ( meta ) {
+    const { title, subtitle, background, lines } = meta;
 
-        <div styleName="content-container">
-          <h1 styleName="title">{ title }</h1>
-          <h3 styleName="subtitle">
-            <span styleName="title-highlight">{ subtitle }</span>
-          </h3>
-          <div styleName="content">
-            <AnimatedLines lines={ lines } />
+    return (
+      <Normalizer>
+        <div styleName="container" id="iran-section">
+          <div styleName="background" style={ { backgroundImage: `url(${background})` } }>
+            <div styleName="gradient-overlay" />
+          </div>
+
+          <div styleName="content-container">
+            <h1 styleName="title">{ title }</h1>
+            <h3 styleName="subtitle">
+              <span styleName="title-highlight">{ subtitle }</span>
+            </h3>
+            <div styleName="content">
+              <AnimatedLines lines={ lines } />
+            </div>
           </div>
         </div>
-      </div>
-    </Normalizer>
-  );
+      </Normalizer>
+    );
+  }
+
+  return null;
 };
 
 HeroAnimated.propTypes = {

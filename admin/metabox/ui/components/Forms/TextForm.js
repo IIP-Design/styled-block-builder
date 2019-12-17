@@ -1,11 +1,16 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import propTypes from 'prop-types';
 
+import CheckboxConditional from 'metabox/components/Forms/Toggles/CheckboxConditional';
+import ArticleById from './FeedTypes/ArticleById';
+
 const TextForm = ( { callback, meta } ) => {
   const schema = {
+    articles: meta.articles || [],
     button: meta.button || '',
     color: meta.color || '',
     desc: meta.desc || '',
+    hasFeed: meta.hasFeed || false,
     link: meta.link || '',
     style: meta.style || '',
     subtitle: meta.subtitle || '',
@@ -21,11 +26,26 @@ const TextForm = ( { callback, meta } ) => {
     callback( formData );
   }, [] );
 
+  const updateInputs = ( group, val ) => {
+    setInputs( { ...inputs, [group]: val } );
+    callback( { ...formData, [group]: val } );
+  };
+
   const handleChange = e => {
     const { name, value } = e.target;
 
-    setInputs( { ...inputs, [name]: value } );
-    callback( { ...formData, [name]: value } );
+    updateInputs( name, value );
+  };
+
+  const handleToggle = e => {
+    const { name } = e.target;
+    const checked = !inputs[name];
+
+    updateInputs( name, checked );
+  };
+
+  const updateArticles = val => {
+    updateInputs( 'articles', val );
   };
 
   return (
@@ -108,6 +128,14 @@ const TextForm = ( { callback, meta } ) => {
           <option value="red">Red</option>
         </select>
       </label>
+      <CheckboxConditional
+        callback={ handleToggle }
+        checked={ inputs.hasFeed }
+        label="Add an Article Feed?"
+        name="hasFeed"
+      >
+        <ArticleById inputs={ inputs } updateState={ updateArticles } />
+      </CheckboxConditional>
     </Fragment>
   );
 };
