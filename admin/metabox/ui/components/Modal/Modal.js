@@ -87,7 +87,7 @@ const ModelContent = ( { form, id, show, toggle } ) => {
           <span className="dashicons dashicons-no" />
         </button>
         { saving && <Spinner /> }
-        { error && <ErrorMessage err={ errorData } /> }
+        { error && <ErrorMessage closeFunc={ () => setError( false ) } err={ errorData } /> }
         { selectedForm && (
           <form styleName="modal-form">
             <h3 styleName="modal-form-title">{ formTitle }</h3>

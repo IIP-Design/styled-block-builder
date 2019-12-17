@@ -3,10 +3,18 @@
 .background {
   background-color: $wordpressLighterGrey;
   height: 100%;
-  margin: -2rem;
+  margin: 2rem -2rem -2rem;
   opacity: 0.5;
   position: absolute;
   width: 100%;
+}
+
+.close-icon {
+  align-self: flex-end;
+  background-color: transparent;
+  border: none;
+  color: $errorColor;
+  margin-right: -3rem;
 }
 
 .container {

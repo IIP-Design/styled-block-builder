@@ -3,7 +3,7 @@ import propTypes from 'prop-types';
 
 import './ErrorMessage.module.scss';
 
-const ErrorMessage = ( { err } ) => {
+const ErrorMessage = ( { closeFunc, err } ) => {
   const status = err?.status ? err.status : null;
   const message = err?.message ? err.message : null;
 
@@ -12,6 +12,9 @@ const ErrorMessage = ( { err } ) => {
       <div styleName="background" />
       <div styleName="container">
         <div styleName="error-background">
+          <button aria-label="close error" onClick={ closeFunc } styleName="close-icon" type="button">
+            <span className="dashicons dashicons-no" />
+          </button>
           <strong styleName="heading">Unable to save changes</strong>
           <strong styleName="heading">We encountered the following error...</strong>
           <br />
@@ -25,6 +28,7 @@ const ErrorMessage = ( { err } ) => {
 };
 
 ErrorMessage.propTypes = {
+  closeFunc: propTypes.func,
   err: propTypes.object
 };
 
