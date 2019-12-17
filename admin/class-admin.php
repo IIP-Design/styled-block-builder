@@ -22,7 +22,7 @@ class Admin {
   public function localize_admin_script_globals() {
     $current_post = get_the_ID();
 
-    $associated = get_post_meta( $current_post, '_gpalab_associated_templates', true );
+    $associated = get_post_meta( $current_post, 'gpalab_associated_templates', true );
 
     $assoc_data = array();
 

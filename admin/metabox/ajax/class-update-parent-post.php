@@ -6,7 +6,7 @@ class Update_Parent_Post {
 
   public function set_parent_post_meta( $parent_id, $template_id ) {
     // Get the list of style templates associated with the parent post
-    $associated = get_post_meta( $parent_id, '_gpalab_associated_templates', true );
+    $associated = get_post_meta( $parent_id, 'gpalab_associated_templates', true );
 
     // Initialize empy array if no associated templates exist
     if ( empty( $associated) ) {
@@ -18,13 +18,13 @@ class Update_Parent_Post {
       return;
     } else {
       $associated[] = $template_id;
-      update_post_meta( $parent_id, '_gpalab_associated_templates', $associated );
+      update_post_meta( $parent_id, 'gpalab_associated_templates', $associated );
     }
   }
 
   public function remove_from_parent_post_meta( $parent_id, $template_id ) {
     // Get the list of style templates associated with the parent post
-    $associated = get_post_meta( $parent_id, '_gpalab_associated_templates', true );
+    $associated = get_post_meta( $parent_id, 'gpalab_associated_templates', true );
 
     if ( empty( $associated) ) {
       return;
@@ -36,7 +36,7 @@ class Update_Parent_Post {
       // array_values needed to reindex the array after removing item
       $removed = array_values( array_diff( $associated, $remove ) );
 
-      update_post_meta( $parent_id, '_gpalab_associated_templates', $removed );
+      update_post_meta( $parent_id, 'gpalab_associated_templates', $removed );
     }
   }
 }
