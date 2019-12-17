@@ -59,7 +59,8 @@ const SlidesForm = ( { callback, meta } ) => {
         fields={ tabFields }
         group="slides"
         inputs={ inputs }
-        label="Slides"
+        label="Slide"
+        maxTabs={ 10 }
         stateFunc={ tabStateFunc }
       />
     </Fragment>
