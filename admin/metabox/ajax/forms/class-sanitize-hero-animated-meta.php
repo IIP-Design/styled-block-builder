@@ -13,8 +13,10 @@ class Sanitize_HeroAnimated_Meta {
       $sanitized_lines = array();
 
       foreach ( $unsanitary['lines'] as $line ) {
-        $sanitized_line = sanitize_text_field( $line['line'] );
+        $sanitized_line = array();
         
+        $sanitized_line['id'] = sanitize_text_field( $line['id'] );
+        $sanitized_line['text'] = sanitize_text_field( $line['text'] );
 
         array_push( $sanitized_lines, $sanitized_line );
       }
