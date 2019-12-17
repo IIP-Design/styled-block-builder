@@ -86,7 +86,7 @@ const HeroForm = ( { callback, meta } ) => {
       <CheckboxConditional
         label="Add Button (Optional)"
         checked={ hasButton }
-        callback={ inputs }
+        callback={ handleToggle }
         name="add-button"
       >
         <label htmlFor="hero-buttonLink">
