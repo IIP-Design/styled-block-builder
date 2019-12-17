@@ -17,10 +17,10 @@ class Sanitize_Hero_Meta {
       $sanitized['background'] = sanitize_text_field( $unsanitary['background'] );
     }
     
-    if( !empty( $unsanitary['buttonText'] ) ) {
-      $sanitized['buttonText'] = sanitize_text_field( $unsanitary['buttonText'] );
+    if( !empty( $unsanitary['buttonArrow'] ) ) {
+      $sanitized['buttonArrow'] = sanitize_text_field( $unsanitary['buttonArrow'] );
     }
-  
+    
     if( !empty( $unsanitary['buttonLink'] ) ) {
       $sanitized['buttonLink'] = sanitize_text_field( $unsanitary['buttonLink'] );
     }
@@ -29,8 +29,12 @@ class Sanitize_Hero_Meta {
       $sanitized['buttonStyle'] = sanitize_text_field( $unsanitary['buttonStyle'] );
     }
     
-    if( !empty( $unsanitary['buttonArrow'] ) ) {
-      $sanitized['buttonArrow'] = sanitize_text_field( $unsanitary['buttonArrow'] );
+    if( !empty( $unsanitary['buttonText'] ) ) {
+      $sanitized['buttonText'] = sanitize_text_field( $unsanitary['buttonText'] );
+    }
+
+    if( !empty( $unsanitary['hasButton'] ) ) {
+      $sanitized['hasButton'] = rest_sanitize_boolean( $unsanitary['hasButton'] );
     }
     
     if( !empty( $unsanitary['subtitle'] ) ) {

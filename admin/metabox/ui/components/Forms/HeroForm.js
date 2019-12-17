@@ -1,7 +1,6 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import propTypes from 'prop-types';
 
-import './Forms.scss';
 import CheckboxConditional from './Toggles/CheckboxConditional';
 
 const HeroForm = ( { callback, meta } ) => {
@@ -12,13 +11,12 @@ const HeroForm = ( { callback, meta } ) => {
     buttonStyle: meta.buttonStyle || '',
     buttonText: meta.buttonText || '',
     description: meta.description || '',
+    hasButton: meta.hasButton || false,
     subtitle: meta.subtitle || '',
     title: meta.title || ''
   };
 
   const [inputs, setInputs] = useState( schema );
-
-  const [hasButton, setHasButton] = useState( false );
 
   const formData = { ...inputs };
 
@@ -27,17 +25,20 @@ const HeroForm = ( { callback, meta } ) => {
     callback( formData );
   }, [] );
 
-  const handleChange = e => {
-    const { name, value } = e.target;
-
+  const updateState = ( name, value ) => {
     setInputs( { ...inputs, [name]: value } );
     callback( { ...formData, [name]: value } );
   };
 
-  const handleToggle = () => {
-    const isChecked = !hasButton;
+  const handleChange = e => {
+    const { name, value } = e.target;
+    updateState( name, value );
+  };
 
-    setHasButton( isChecked );
+  const handleToggle = () => {
+    const isChecked = !inputs.hasButton;
+
+    updateState( 'hasButton', isChecked );
   };
 
   return (
@@ -85,7 +86,7 @@ const HeroForm = ( { callback, meta } ) => {
       </label>
       <CheckboxConditional
         label="Add Button (Optional)"
-        checked={ hasButton }
+        checked={ inputs.hasButton }
         callback={ handleToggle }
         name="add-button"
       >
@@ -123,14 +124,14 @@ const HeroForm = ( { callback, meta } ) => {
             <option value="blue">Blue</option>
           </select>
         </label>
-        <label htmlFor="hero-buttonColor">
+        <label htmlFor="hero-buttonArrow">
           Select Button Arrow Color:
           <select
-            id="hero-buttonColor"
-            name="buttonColor"
+            id="hero-buttonArrow"
+            name="buttonArrow"
             onChange={ e => handleChange( e ) }
             type="select"
-            value={ inputs.buttonColor }
+            value={ inputs.buttonArrow }
           >
             <option value="white">White</option>
             <option value="red">Red</option>
