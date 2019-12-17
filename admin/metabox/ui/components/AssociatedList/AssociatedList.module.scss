@@ -6,6 +6,10 @@
   color: $wordpressBlack;
   cursor: pointer;
   padding: 0;
+
+  &.disabled {
+    cursor: default;
+  }
 }
 
 .header {
@@ -24,6 +28,11 @@
 
     &:not(:last-of-type) {
       border-bottom: $wordpressBorder;
+    }
+
+    &.disabled {
+      background-color: $wordpressBackgroundGrey;
+      opacity: 0.6;
     }
   }
 }

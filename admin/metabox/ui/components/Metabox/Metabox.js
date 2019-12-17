@@ -71,7 +71,9 @@ const MetaBox = () => {
       >
         Configure Template
       </button>
-      { associated.length > 0 && <AssociatedList list={ associated } edit={ editExisting } /> }
+      { associated.length > 0 && (
+        <AssociatedList list={ associated } edit={ editExisting } updateMetabox={ updateAssociated } />
+      ) }
       <Modal
         id={ formId }
         form={ formType }
