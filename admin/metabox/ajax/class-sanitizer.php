@@ -30,6 +30,13 @@ class Sanitizer {
       return $sanitize;
     }
 
+    elseif ( $form_type == 'parallax' ) {
+      include_once STYLE_TEMPLATES_DIR . 'admin/metabox/ajax/forms/class-sanitize-parallax-meta.php';
+      $sanitize = new Sanitize_Parallax_Meta();
+      
+      return $sanitize;
+    }
+
     elseif ( $form_type == 'quote-box' ) {
       include_once STYLE_TEMPLATES_DIR . 'admin/metabox/ajax/forms/class-sanitize-quotebox-meta.php';
       $sanitize = new Sanitize_Quotebox_Meta();

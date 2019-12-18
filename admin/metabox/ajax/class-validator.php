@@ -18,6 +18,7 @@ class Validator {
       'article-feed',
       'hero',
       'hero-animated',
+      'parallax',
       'quote-box',
       'resources',
       'slides',

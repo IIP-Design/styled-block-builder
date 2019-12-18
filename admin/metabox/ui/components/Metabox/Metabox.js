@@ -39,6 +39,7 @@ const MetaBox = () => {
           <option value="">- Select Template Type -</option>
           <option value="article-feed">Article Feed</option>
           <option value="hero">Hero Block</option>
+          <option value="parallax">Parallax Block</option>
           <option value="quote-box">Quote Box</option>
           <option value="resources">Resources Block</option>
           <option value="slides">Slides Block</option>
