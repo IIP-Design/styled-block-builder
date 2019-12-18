@@ -5,7 +5,6 @@ import { createPortal } from 'react-dom';
 import ArticleFeedForm from 'metabox/components/Forms/ArticleFeedForm';
 import ErrorMessage from 'metabox/components/ErrorMessage/ErrorMessage';
 import HeroForm from 'metabox/components/Forms/HeroForm';
-import HeroAnimatedForm from 'metabox/components/Forms/HeroAnimatedForm';
 import QuoteBoxForm from 'metabox/components/Forms/QuoteBoxForm';
 import ResourcesForm from 'metabox/components/Forms/ResourcesForm';
 import Spinner from 'metabox/components/Spinner/Spinner';
