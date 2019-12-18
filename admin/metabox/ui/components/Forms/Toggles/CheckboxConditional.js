@@ -5,11 +5,11 @@ import './Toggles.module.scss';
 
 const CheckboxConditional = ( { callback, checked, children, label, name } ) => (
   <div styleName="form-break">
-    <label htmlFor="conditional-rendering" styleName="toggle-label">
+    <label htmlFor={ `conditional-rendering-${name}` } styleName="toggle-label">
       { label && label }
       <input
         checked={ checked }
-        id="conditional-rendering"
+        id={ `conditional-rendering-${name}` }
         name={ name }
         onChange={ e => callback( e ) }
         styleName="toggle-checkbox"

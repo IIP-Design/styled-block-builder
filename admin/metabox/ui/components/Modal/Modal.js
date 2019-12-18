@@ -44,12 +44,8 @@ const ModelContent = ( { form, id, show, toggle } ) => {
       selectedForm = <ArticleFeedForm callback={ setData } meta={ meta } />;
       break;
     case 'hero':
-      formTitle = 'Configure Your Hero:';
+      formTitle = 'Configure Your Hero Block:';
       selectedForm = <HeroForm callback={ setData } meta={ meta } />;
-      break;
-    case 'hero-animated':
-      formTitle = 'Configure Your Animated Hero:';
-      selectedForm = <HeroAnimatedForm callback={ setData } meta={ meta } />;
       break;
     case 'quote-box':
       formTitle = 'Configure Your Quote Box:';

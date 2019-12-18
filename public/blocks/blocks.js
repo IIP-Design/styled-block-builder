@@ -4,7 +4,6 @@ import './_shared/components/Normalizer/Normalizer.scss';
 // Blocks
 import './article-feed';
 import './hero';
-import './hero-animated';
 import './quote-box';
 import './resources';
 import './slides';

@@ -2,6 +2,8 @@ import React, { Fragment, useEffect, useState } from 'react';
 import propTypes from 'prop-types';
 
 import CheckboxConditional from './Toggles/CheckboxConditional';
+import RadioConditional from './Toggles/RadioConditional';
+import TabbedForm from './TabbedForm/TabbedForm';
 
 const HeroForm = ( { callback, meta } ) => {
   const schema = {
@@ -12,8 +14,10 @@ const HeroForm = ( { callback, meta } ) => {
     buttonText: meta.buttonText || '',
     description: meta.description || '',
     hasButton: meta.hasButton || false,
+    lines: meta.lines || [],
     subtitle: meta.subtitle || '',
-    title: meta.title || ''
+    title: meta.title || '',
+    type: meta.type || ''
   };
 
   const [inputs, setInputs] = useState( schema );
@@ -40,6 +44,13 @@ const HeroForm = ( { callback, meta } ) => {
 
     updateState( 'hasButton', isChecked );
   };
+
+  const options = [
+    { label: 'Text', name: 'type', value: 'text' },
+    { label: 'Animated lines', name: 'type', value: 'lines' }
+  ];
+
+  const tabFields = [{ label: 'Add Animated line:', name: 'text', tabTitle: true, type: 'text' }];
 
   return (
     <Fragment>
@@ -73,17 +84,35 @@ const HeroForm = ( { callback, meta } ) => {
           value={ inputs.subtitle }
         />
       </label>
-      <label htmlFor="hero-description">
-        Add main content area text:
-        <textarea
-          id="hero-description"
-          name="description"
-          onChange={ e => handleChange( e ) }
-          type="text"
-          rows="6"
-          value={ inputs.description }
+      <RadioConditional
+        callback={ handleChange }
+        checked={ inputs.type }
+        label="What type of block would you like?"
+        options={ options }
+      />
+      { inputs.type === 'text' && (
+        <label htmlFor="hero-description">
+          Add main content area text:
+          <textarea
+            id="hero-description"
+            name="description"
+            onChange={ e => handleChange( e ) }
+            type="text"
+            rows="6"
+            value={ inputs.description }
+          />
+        </label>
+      ) }
+      { inputs.type === 'lines' && (
+        <TabbedForm
+          fields={ tabFields }
+          group="lines"
+          inputs={ inputs }
+          label="Line"
+          maxTabs={ 10 }
+          stateFunc={ updateState }
         />
-      </label>
+      ) }
       <CheckboxConditional
         label="Add Button (Optional)"
         checked={ inputs.hasButton }
