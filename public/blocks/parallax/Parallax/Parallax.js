@@ -28,7 +28,7 @@ const Parallax = ( { id } ) => {
     return (
       <Normalizer fullWidth={ fullWidth }>
         <Controller>
-          <Scene indicators duration="200%" triggerHook="onEnter">
+          <Scene duration="200%" triggerHook="onEnter">
             <Timeline wrapper={ <div styleName="parallax" /> }>
               <Tween
                 position="0"
