@@ -40,6 +40,7 @@ class Admin {
 
     wp_localize_script( 'gpalab-template-admin-js', 'gpalabTemplateAdmin', array(
       'ajaxUrl'       => admin_url( 'admin-ajax.php' ),
+      'assets'        => STYLE_TEMPLATES_URL . 'assets/',
       'associated'    => $assoc_data,
       'parentPost'    => $current_post,
       'templateNonce' => wp_create_nonce('gpalab-template-nonce')

@@ -1,0 +1,40 @@
+@import 'styles/colors.scss';
+
+.button {
+  border: $wordpressBorder;
+  cursor: pointer;
+  height: 1.5rem;
+  width: 1.5rem;
+
+  &.selected {
+    transform: scale(1.3);
+  }
+}
+
+.container {
+  margin: 1rem 0;
+}
+
+.heading {
+  margin: 0;
+}
+
+.indicator {
+  &.hidden {
+    color: transparent;
+  }
+
+  &.selected {
+    color: $greyMedium;
+  }
+}
+
+.option {
+  display: flex;
+  flex-direction: column;
+  margin-right: 0.5rem;
+}
+
+.options-container {
+  display: flex;
+}

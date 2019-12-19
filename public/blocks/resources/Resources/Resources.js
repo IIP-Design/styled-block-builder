@@ -9,6 +9,7 @@ import VideoLayout from './Layouts/VideoLayout';
 import './Resources.module.scss';
 
 const Resources = ( { id } ) => {
+  const { assets } = window.gpalabTemplateFront;
   const { meta } = window[`gpalabResources${id}`];
 
   const [selected, setSelected] = useState( null );
@@ -26,11 +27,10 @@ const Resources = ( { id } ) => {
     return (
       <Normalizer fullWidth={ fullWidth }>
         <div
-          styleName="background"
-          id="resource-section"
           style={ {
-            backgroundImage: "url('https://policystatic.state.gov/uploads/2019/11/wavy-bg.jpg')"
+            backgroundImage: `url('${assets}wavy-bg.jpg')`
           } }
+          styleName="background"
         >
           { title && <h2 styleName="title">{ title }</h2> }
 
