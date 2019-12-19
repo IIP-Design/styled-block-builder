@@ -101,7 +101,6 @@ class Style_Templates {
     $this->loader->add_action( 'admin_menu', $plugin_settings, 'add_templates_settings_page' );
     $this->loader->add_action( 'admin_init', $plugin_settings, 'populate_template_settings' );
     // Shortcode
-    $this->loader->add_action( 'init', $plugin_shortcode, 'register_template_scripts_styles' );
     $this->loader->add_action( 'init', $plugin_shortcode, 'add_templates_shortcode' );
   }
 
@@ -110,7 +109,7 @@ class Style_Templates {
     $plugin_frontend = new Style_Templates\Frontend( $this->get_plugin_name(), $this->get_version() );
 
     // Frontend hooks
-    $this->loader->add_action( 'INSERT_WP_HOOK', $plugin_frontend, 'INSERT_CALLBACK' );
+    $this->loader->add_action( 'init', $plugin_frontend, 'register_template_scripts_styles' );
   }
 
   /**
