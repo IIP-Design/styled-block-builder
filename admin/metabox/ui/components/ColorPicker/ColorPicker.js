@@ -26,7 +26,7 @@ const ColorPicker = ( { callback, colors, label, selected } ) => {
                 <button
                   aria-label={ `Choose ${color.name}` }
                   data-group={ colors.group }
-                  id={ `color-picker-${color.name}` }
+                  id={ `color-${colors.group}-${color.name}` }
                   name={ color.name }
                   onClick={ e => callback( e ) }
                   style={ style }

@@ -31,7 +31,7 @@ const RadioConditional = ( { callback, checked, label, options } ) => (
 
 RadioConditional.propTypes = {
   callback: propTypes.func,
-  checked: propTypes.bool,
+  checked: propTypes.string,
   label: propTypes.string,
   options: propTypes.array
 };

@@ -2,13 +2,9 @@
 
 .bg {
   align-items: center;
-  background-color: $blueBlackPearl;
-  background-position: center center;
-  background-size: cover;
   display: flex;
   flex-direction: row;
   justify-content: center;
-  min-height: 750px;
   padding: 2.75rem 0 3rem;
   position: relative;
   width: 100%;
@@ -22,18 +18,15 @@
 }
 
 .title {
-  color: $black;
   text-align: center;
 }
 
 .subtitle {
-  color: $black;
   margin-top: 1rem;
   text-align: center;
 }
 
 .text {
-  color: $black;
   margin: 2rem 0 1rem;
   max-width: 1191px;
   text-align: center;
@@ -43,7 +36,6 @@
 .quote {
   align-items: center;
   background-color: $greyLight;
-  background-repeat: repeat;
   box-shadow: 1px 1px 5px $greyLightest;
   display: flex;
   justify-content: center;
@@ -54,6 +46,7 @@
   &-text {
     color: $blueBright;
     font-style: italic;
+    margin: 0 !important;
     padding: 3rem;
     text-align: center;
   }
