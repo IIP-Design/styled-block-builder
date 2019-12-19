@@ -15,8 +15,19 @@ export const updatePost = async ( data, action, onComplete, onError ) => {
     default:
   }
 
+  const files = data?.meta?.files ? data.meta.files : [];
+
+  const clone = { ...data };
+  if ( data?.meta?.files ) {
+    delete clone.meta.files;
+  }
+
+  console.log( clone, files );
   // Create a FormData object to send user inputs to server
-  const formData = getFormData( data );
+  const formData = getFormData( clone );
+  if ( files.length > 0 ) {
+    files.forEach( file => formData.append( file.name, file.file ) );
+  }
   formData.append( 'action', actionHandle );
   formData.append( 'parent', fromPHP.parentPost );
   formData.append( 'security', fromPHP.templateNonce );

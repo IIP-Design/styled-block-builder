@@ -76,4 +76,25 @@ class Sanitizer {
       $send_response->send_custom_error( 'invalid_form_type' );
     }
   }
+
+  public function sanitize_files( $unsanitary ) {
+    $sanitized_files = array();
+
+    if( !empty( $unsanitary ) ) {
+
+      foreach ( $unsanitary as $file ) {
+        $sanitized_file = array();
+        
+        $sanitized_file['name'] = sanitize_text_field( $file['name'] );
+        // URL comes from wp_handle_upload function and doesn't need to be sanitized
+        $sanitized_file['url'] = $file['url'];
+
+        array_push( $sanitized_files, $sanitized_file );
+      }
+
+      unset($file);
+    }
+
+    return $sanitized_files;
+  }
 }

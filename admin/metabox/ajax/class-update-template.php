@@ -18,6 +18,10 @@ class Update_Template {
     include_once STYLE_TEMPLATES_DIR . 'admin/metabox/ajax/class-validator.php';
     $validator = new Validator();
 
+    // Load in uploader
+    include_once STYLE_TEMPLATES_DIR . 'admin/metabox/ajax/class-upload-file.php';
+    $uploader = new Uploader();
+
     // Validate the values sent in the AJAX call
     $validator->validate_nonce( $_POST[ 'security' ] );
     $validator->validate_post_id( $_POST['id'] );
@@ -33,6 +37,14 @@ class Update_Template {
     $sanitize = $sanitizer->load_sanitizer( $form_type );
     $meta = $sanitize->sanitize_inputs( $_POST['meta'] );
 
+    // Handle file uploads
+    $files;
+    if ( isset( $_FILES ) ) {
+      $files = $uploader->initiate_upload( $_FILES, $form_type );
+    }
+
+    $meta['files'] = $sanitizer->sanitize_files( $files );
+
     // Istantiate and populate the post data array
     $data = array();
     $data['id'] = $passed_id;
@@ -42,6 +54,11 @@ class Update_Template {
 
     // Run function to pass data to post
     $post_id = $this->insert_template_data( $data );
+
+    // Update post data object with post id
+    if ( $passed_id == 0 ) {
+      $data['id'] = $post_id;
+    }
     
     // Add the template id to its parent's post metadata
     include_once STYLE_TEMPLATES_DIR . 'admin/metabox/ajax/class-update-parent-post.php';
@@ -51,7 +68,7 @@ class Update_Template {
 
     // Return post ID as the AJAX response
     $action_type = $passed_id == 0 ? 'added_post' : 'updated_post';
-    $send_response->send_custom_success( $action_type, $post_id );
+    $send_response->send_custom_success( $action_type, $data );
   }
 
   // Delete a template post

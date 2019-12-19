@@ -51,7 +51,7 @@ class Sanitize_Hero_Meta {
 
       unset($line);
 
-      $sanitized['lines'] =  $sanitized_lines;
+      $sanitized['lines'] = $sanitized_lines;
     }
     
     if( !empty( $unsanitary['subtitle'] ) ) {

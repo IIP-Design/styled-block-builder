@@ -66,7 +66,7 @@ class Responses {
   }
 
   // Successes
-  public function send_custom_success( $type, $post_id ) {
+  public function send_custom_success( $type, $post_data ) {
     $data = array();
     $status = null;
 
@@ -80,20 +80,23 @@ class Responses {
     $created = __( '201: Created', 'gpalab-templates' );
     
     if ( $type == 'added_post' ) {
-      $data['message'] = $added . $post_id;
+      $data['message'] = $added . $post_data['id'];
       $data['status'] = $created;
+      $data['data'] = $post_data;
       $status = 201;
     }
 
     if ( $type == 'deleted_post' ) {
-      $data['message'] = $deleted . $post_id;
+      $data['message'] = $deleted . $post_data;
       $data['status'] = $okay;
+      $data['data'] = $post_data;
       $status = 200;
     }
 
     if ( $type == 'updated_post' ) {
-      $data['message'] = $updated . $post_id;
+      $data['message'] = $updated . $post_data['id'];
       $data['status'] = $okay;
+      $data['data'] = $post_data;
       $status = 200;
     }
 
