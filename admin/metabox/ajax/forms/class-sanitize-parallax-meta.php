@@ -36,7 +36,6 @@ class Sanitize_Parallax_Meta {
     if( !empty( $unsanitary['hasButton'] ) ) {
       $sanitized['hasButton'] = rest_sanitize_boolean( $unsanitary['hasButton'] );
     }
-
     
     if( !empty( $unsanitary['subtitle'] ) ) {
       $sanitized['subtitle'] = sanitize_text_field( $unsanitary['subtitle'] );

@@ -17,7 +17,6 @@ class Validator {
     $accepted_forms = array(
       'article-feed',
       'hero',
-      'hero-animated',
       'parallax',
       'quote-box',
       'resources',
