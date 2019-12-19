@@ -9,11 +9,12 @@ import FullWidthToggle from './Toggles/FullWidthToggle';
 const ArticleFeedForm = ( { callback, meta } ) => {
   const schema = {
     articles: meta.articles || [],
-    subtitle: meta.subtitle || '',
-    title: meta.title || '',
-    type: meta.type || 'byId',
     blockBackground: meta.blockBackground || '#ffffff',
-    textColor: meta.textColor || '#333333'
+    fullWidth: meta.fullWidth || false,
+    title: meta.title || '',
+    subtitle: meta.subtitle || '',
+    textColor: meta.textColor || '#333333',
+    type: meta.type || 'byId'
   };
 
   const [inputs, setInputs] = useState( schema );
@@ -49,7 +50,6 @@ const ArticleFeedForm = ( { callback, meta } ) => {
   };
 
   const handleColor = e => {
-    console.log( e.target );
     const { group } = e.target.dataset;
     const { value } = e.target;
 
