@@ -15,5 +15,13 @@ class Frontend {
     wp_register_script( 'gpalab-template-frontend-js', STYLE_TEMPLATES_DIST . $scripts, array(), null, true );
 
     wp_register_style( 'gpalab-template-frontend-css', STYLE_TEMPLATES_DIST . $styles, array(), null );
+
+    wp_localize_script(
+      'gpalab-template-frontend-js',
+      'gpalabTemplateFront',
+      array(
+        'assets' => STYLE_TEMPLATES_URL . 'assets/',
+      )
+    );
   }
 }

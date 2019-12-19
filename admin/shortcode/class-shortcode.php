@@ -22,7 +22,7 @@ class Shortcode {
     wp_enqueue_script( 'gpalab-template-frontend-js' );
     wp_enqueue_style( 'gpalab-template-frontend-css' );
 
-    // Localize the enqueued script
+    // Localize the enqueued script with shortcode data
     wp_localize_script(
       'gpalab-template-frontend-js',
       'gpalab' . str_replace('-', '', ucwords( $type, '-') ) . $id,
