@@ -2,6 +2,7 @@ import React, { Fragment, useEffect, useState } from 'react';
 import propTypes from 'prop-types';
 
 import ColorPicker from 'metabox/components/ColorPicker/ColorPicker';
+import FileUploader from 'metabox/components/FileUploader/FileUploader';
 import { defaultBackgrounds, defaultText } from 'metabox/utils/color-picker-palettes';
 import FullWidthToggle from './Toggles/FullWidthToggle';
 import RadioConditional from './Toggles/RadioConditional';
@@ -9,9 +10,9 @@ import RadioConditional from './Toggles/RadioConditional';
 const QuoteBoxForm = ( { callback, meta } ) => {
   const schema = {
     backgroundType: meta.backgroundType || 'color',
-    backgroundImage: meta.backgroundImage || '',
     blockBackground: meta.blockBackground || '#ffffff',
     desc: meta.desc || '',
+    files: meta.files || [],
     fullWidth: meta.fullWidth || false,
     quote: meta.quote || '',
     quoteBackground: meta.quoteBackground || '#ffffff',
@@ -55,6 +56,16 @@ const QuoteBoxForm = ( { callback, meta } ) => {
     updateState( group, value );
   };
 
+  const handleFile = e => {
+    const { name } = e.target;
+    const file = e.target.files[0];
+
+    const files = inputs.files.filter( f => f.name !== name );
+    files.push( { name, file } );
+
+    updateState( 'files', files );
+  };
+
   const blockBgOptions = {
     group: 'blockBackground',
     options: defaultBackgrounds
@@ -92,16 +103,20 @@ const QuoteBoxForm = ( { callback, meta } ) => {
         />
       ) }
       { inputs.backgroundType === 'image' && (
-        <label htmlFor="quote-box-image">
-          Add background image URL:
-          <input
-            id="quote-box-image"
-            name="backgroundImage"
-            onChange={ e => handleChange( e ) }
-            type="text"
-            value={ inputs.backgroundImage }
-          />
-        </label>
+        <FileUploader
+          callback={ handleFile }
+          label="Add background image URL:"
+          name="backgroundImage"
+        />
+        // <label htmlFor="quote-box-image">
+        //   <input
+        //     id="quote-box-image"
+        //     name="backgroundImage"
+        //     onChange={ e => handleChange( e ) }
+        //     type="text"
+        //     value={ inputs.backgroundImage }
+        //   />
+        // </label>
       ) }
       <ColorPicker
         callback={ handleColor }

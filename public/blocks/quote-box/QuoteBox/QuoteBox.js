@@ -15,6 +15,7 @@ const QuoteBox = ( { id } ) => {
       backgroundType,
       blockBackground,
       desc,
+      files,
       fullWidth,
       quote,
       quoteBackground,
@@ -24,9 +25,15 @@ const QuoteBox = ( { id } ) => {
       title
     } = meta;
 
+    const getBackgroundImage = fileList => {
+      const bgImage = fileList.filter( file => file.name === 'backgroundImage' );
+
+      return bgImage[0].url;
+    };
+
     const bg =
       backgroundType === 'image'
-        ? backgroundImage( blockBackground, assets )
+        ? backgroundImage( getBackgroundImage( files ) )
         : backgroundStyle( blockBackground, assets );
 
     const quoteBg = backgroundStyle( quoteBackground, assets );

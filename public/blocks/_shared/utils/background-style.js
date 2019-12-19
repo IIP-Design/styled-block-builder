@@ -18,9 +18,9 @@ export const backgroundStyle = ( value, url ) => {
   return { backgroundColor: value };
 };
 
-export const backgroundImage = ( value, url ) => {
+export const backgroundImage = url => {
   return {
-    backgroundImage: `url('${url}${value}')`,
+    backgroundImage: `url('${url}')`,
     backgroundPostion: 'center center',
     backgroundRepeat: 'no-repeat',
     backgroundSize: 'cover'
