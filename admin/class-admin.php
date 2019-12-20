@@ -21,6 +21,8 @@ class Admin {
   // Pass required PHP values as variables to admin JS
   public function localize_admin_script_globals() {
     $current_post = get_the_ID();
+    $post_type = get_post_type( $current_post );
+    $endpoint = get_site_url() . '/wp-json/wp/v2/' . $post_type . 's/' . $current_post;
 
     $associated = get_post_meta( $current_post, 'gpalab_associated_templates', true );
 
@@ -41,6 +43,7 @@ class Admin {
     wp_localize_script( 'gpalab-template-admin-js', 'gpalabTemplateAdmin', array(
       'ajaxUrl'       => admin_url( 'admin-ajax.php' ),
       'assets'        => STYLE_TEMPLATES_URL . 'assets/',
+      'apiEndpoint'   => $endpoint,
       'associated'    => $assoc_data,
       'parentPost'    => $current_post,
       'templateNonce' => wp_create_nonce('gpalab-template-nonce')

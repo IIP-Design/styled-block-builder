@@ -18,7 +18,7 @@ import './Modal.module.scss';
 
 const modalRoot = document.getElementById( 'gpalab-add-template-modal' );
 
-const ModelContent = ( { form, id, show, toggle } ) => {
+const ModelContent = ( { form, id, show, toggle, updateMetabox } ) => {
   if ( !show ) return null;
 
   const [data, setData] = useState( {} );
@@ -75,7 +75,7 @@ const ModelContent = ( { form, id, show, toggle } ) => {
       return;
   }
 
-  const submitForm = () => {
+  const submitForm = async () => {
     const onComplete = () => setSaving( false );
     const onError = err => {
       setSaving( false );
@@ -84,7 +84,8 @@ const ModelContent = ( { form, id, show, toggle } ) => {
     };
 
     setSaving( true );
-    updatePost( { id, meta: data, type: formStr }, 'save', onComplete, onError );
+    await updatePost( { id, meta: data, type: formStr }, 'save', onComplete, onError );
+    updateMetabox();
   };
 
   const shortcode = `[gpalab_template id='${id}' type='${formStr}']`;
@@ -132,7 +133,8 @@ ModelContent.propTypes = {
   form: propTypes.string,
   id: propTypes.number,
   show: propTypes.bool,
-  toggle: propTypes.func
+  toggle: propTypes.func,
+  updateMetabox: propTypes.func
 };
 
 /* eslint-disable-next-line react/jsx-props-no-spreading */

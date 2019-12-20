@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import AssociatedList from 'metabox/components/AssociatedList/AssociatedList';
 import Modal from 'metabox/components/Modal/Modal';
+import { getAssociated } from 'metabox/utils/api';
 
 import './Metabox.module.scss';
 
@@ -9,10 +10,15 @@ const MetaBox = () => {
   const [formId, setFormId] = useState( 0 );
   const [formType, setFormType] = useState( '' );
   const [showModal, setShowModal] = useState( false );
+  const [associated, setAssociated] = useState( [] );
 
-  const associated = window?.gpalabTemplateAdmin?.associated
-    ? window.gpalabTemplateAdmin.associated
-    : [];
+  useEffect( () => {
+    const list = window?.gpalabTemplateAdmin?.associated
+      ? window.gpalabTemplateAdmin.associated
+      : [];
+
+    setAssociated( list );
+  }, [] );
 
   const toggleModal = () => {
     setShowModal( false );
@@ -24,6 +30,16 @@ const MetaBox = () => {
     setFormId( id );
     setFormType( type );
     setShowModal( true );
+  };
+
+  const updateAssociated = async () => {
+    const endpoint = window?.gpalabTemplateAdmin?.apiEndpoint
+      ? window.gpalabTemplateAdmin.apiEndpoint
+      : null;
+
+    const response = await getAssociated( endpoint );
+
+    setAssociated( response.gpalab_associated_templates );
   };
 
   return (
@@ -56,7 +72,13 @@ const MetaBox = () => {
         Configure Template
       </button>
       { associated.length > 0 && <AssociatedList list={ associated } edit={ editExisting } /> }
-      <Modal id={ formId } form={ formType } show={ showModal } toggle={ toggleModal } />
+      <Modal
+        id={ formId }
+        form={ formType }
+        show={ showModal }
+        toggle={ toggleModal }
+        updateMetabox={ updateAssociated }
+      />
     </div>
   );
 };
