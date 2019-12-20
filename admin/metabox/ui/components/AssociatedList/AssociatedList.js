@@ -14,10 +14,10 @@ const AssociatedList = ( { list, edit, updateMetabox } ) => {
     setUpdating( newUpdating );
 
     await updatePost( { id }, 'delete' );
-    await updateMetabox();
 
     const resetUpdating = newUpdating.filter( item => item !== id );
     setUpdating( resetUpdating );
+    updateMetabox( id, 'delete' );
   };
 
   return (

@@ -22,7 +22,6 @@ export const updatePost = async ( data, action, onComplete, onError ) => {
     delete clone.meta.files;
   }
 
-  console.log( clone, files );
   // Create a FormData object to send user inputs to server
   const formData = getFormData( clone );
   if ( files.length > 0 ) {
@@ -45,7 +44,8 @@ export const updatePost = async ( data, action, onComplete, onError ) => {
     }
 
     if ( result.success !== false && onComplete ) {
-      onComplete();
+      const res = result?.data?.data ? result.data.data : null;
+      onComplete( res, action );
     }
   } catch ( error ) {
     if ( onError ) {

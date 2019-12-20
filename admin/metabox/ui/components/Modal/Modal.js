@@ -19,7 +19,7 @@ import './Modal.module.scss';
 const modalRoot = document.getElementById( 'gpalab-add-template-modal' );
 
 const ModelContent = ( { form, id, show, toggle, updateMetabox } ) => {
-  if ( !show ) return null;
+  if ( !show || !form ) return null;
 
   const [data, setData] = useState( {} );
   const [saving, setSaving] = useState( false );
@@ -38,6 +38,7 @@ const ModelContent = ( { form, id, show, toggle, updateMetabox } ) => {
   let selectedForm = null;
   let formTitle = null;
   const formStr = form.replace( 'gpalab-', '' );
+
   switch ( formStr ) {
     case 'article-feed':
       formTitle = 'Configure Your Article Feed:';
@@ -76,7 +77,11 @@ const ModelContent = ( { form, id, show, toggle, updateMetabox } ) => {
   }
 
   const submitForm = async () => {
-    const onComplete = () => setSaving( false );
+    const onComplete = ( res, action ) => {
+      updateMetabox( res, action );
+      setSaving( false );
+    };
+
     const onError = err => {
       setSaving( false );
       setError( true );
@@ -85,7 +90,6 @@ const ModelContent = ( { form, id, show, toggle, updateMetabox } ) => {
 
     setSaving( true );
     await updatePost( { id, meta: data, type: formStr }, 'save', onComplete, onError );
-    updateMetabox();
   };
 
   const shortcode = `[gpalab_template id='${id}' type='${formStr}']`;

@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 
 import AssociatedList from 'metabox/components/AssociatedList/AssociatedList';
 import Modal from 'metabox/components/Modal/Modal';
-import { getAssociated } from 'metabox/utils/api';
 
 import './Metabox.module.scss';
 
@@ -32,14 +31,29 @@ const MetaBox = () => {
     setShowModal( true );
   };
 
-  const updateAssociated = async () => {
-    const endpoint = window?.gpalabTemplateAdmin?.apiEndpoint
-      ? window.gpalabTemplateAdmin.apiEndpoint
-      : null;
+  const updateAssociated = ( res, action ) => {
+    const clone = [...associated];
 
-    const response = await getAssociated( endpoint );
+    if ( action === 'save' ) {
+      const filtered = clone.filter( items => items.id !== res.id );
 
-    setAssociated( response.gpalab_associated_templates );
+      const newItem = {
+        id: res.id,
+        meta: res.post_meta,
+        title: res.post_title,
+        type: `gpalab-${res.post_type}`
+      };
+
+      filtered.push( newItem );
+
+      setAssociated( filtered );
+    }
+
+    if ( action === 'delete' ) {
+      const filtered = clone.filter( items => items.id !== res );
+
+      setAssociated( filtered );
+    }
   };
 
   return (

@@ -45,5 +45,5 @@ class API {
  
     // Return the list of associated posts
     return $gpalab_style_templates;
-}
+  }
 }
