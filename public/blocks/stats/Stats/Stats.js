@@ -104,7 +104,7 @@ const Stats = ( { id } ) => {
             <div styleName="array">
               { stats &&
                 stats.map( ( stat, index ) => (
-                  <div key={ uuid() } styleName="item">
+                  <div key={ uuid() } style={ { borderColor: textColor } } styleName="item">
                     <div style={ { color: textColor } } styleName="item-percent">
                       <span id={ `stat-${index + 1}` } data-stat={ stat.number }>
                         0
