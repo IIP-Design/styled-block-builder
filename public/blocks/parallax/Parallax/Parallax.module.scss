@@ -1,15 +1,16 @@
 @import 'styles/colors.scss';
 
-.content-background {
-  align-items: center;
+.box-bg {
+  background-attachment: fixed;
   background-position: center;
-  background-repeat: no-repeat;
   background-size: cover;
-  position: absolute;
+  background-repeat: no-repeat;
+  padding: 0 0 5rem;
+  position: relative;
   width: 100%;
 }
 
-.parallax {
+.fixed {
   min-height: 600px;
   position: relative;
   overflow: hidden;
