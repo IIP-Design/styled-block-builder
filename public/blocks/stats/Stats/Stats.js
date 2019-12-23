@@ -5,14 +5,27 @@ import ScrollMagic from 'scrollmagic';
 import { v4 as uuid } from 'uuid';
 
 import Normalizer from 'blocks/_shared/components/Normalizer/Normalizer';
+import { backgroundImage, backgroundStyle } from 'blocks/_shared/utils/background-style';
 
 import './Stats.module.scss';
 
 const Stats = ( { id } ) => {
+  const { assets } = window.gpalabTemplateFront;
   const { meta } = window[`gpalabStats${id}`];
 
   if ( meta ) {
-    const { background, fullWidth, stats, title } = meta;
+    const { backgroundType, blockBackground, files, fullWidth, stats, textColor, title } = meta;
+
+    const getBackgroundImage = fileList => {
+      const bgImage = fileList.filter( file => file.name === 'backgroundImage' );
+
+      return bgImage[0].url;
+    };
+
+    const bg =
+      backgroundType === 'image'
+        ? backgroundImage( getBackgroundImage( files ) )
+        : backgroundStyle( blockBackground, assets );
 
     useEffect( () => {
       // const runStats = () => {
@@ -80,21 +93,27 @@ const Stats = ( { id } ) => {
 
     return (
       <Normalizer fullWidth={ fullWidth }>
-        <div styleName="box-bg" style={ { backgroundImage: `url(${background})` } }>
+        <div styleName="box-bg" style={ bg }>
           <div styleName="opacity-overlay" id="stats-section" />
           <div className="stats-container" styleName="container">
-            { title && <h2 styleName="title">{ title }</h2> }
+            { title && (
+              <h2 style={ { color: textColor } } styleName="title">
+                { title }
+              </h2>
+            ) }
             <div styleName="array">
               { stats &&
                 stats.map( ( stat, index ) => (
                   <div key={ uuid() } styleName="item">
-                    <div styleName="item-percent">
+                    <div style={ { color: textColor } } styleName="item-percent">
                       <span id={ `stat-${index + 1}` } data-stat={ stat.number }>
                         0
                       </span>
                       %
                     </div>
-                    <p styleName="item-info">{ stat.title }</p>
+                    <p style={ { color: textColor } } styleName="item-info">
+                      { stat.title }
+                    </p>
                   </div>
                 ) ) }
             </div>
