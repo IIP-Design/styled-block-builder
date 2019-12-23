@@ -4,6 +4,7 @@ import { TimelineMax, Power2 } from 'gsap';
 import ScrollMagic from 'scrollmagic';
 import { v4 as uuid } from 'uuid';
 
+import Gradient from 'blocks/_shared/components/Gradient/Gradient';
 import Normalizer from 'blocks/_shared/components/Normalizer/Normalizer';
 import { backgroundImage, backgroundStyle } from 'blocks/_shared/utils/background-style';
 
@@ -94,30 +95,32 @@ const Stats = ( { id } ) => {
     return (
       <Normalizer fullWidth={ fullWidth }>
         <div styleName="box-bg" style={ bg }>
-          <div styleName="opacity-overlay" id="stats-section" />
-          <div className="stats-container" styleName="container">
-            { title && (
-              <h2 style={ { color: textColor } } styleName="title">
-                { title }
-              </h2>
-            ) }
-            <div styleName="array">
-              { stats &&
-                stats.map( ( stat, index ) => (
-                  <div key={ uuid() } style={ { borderColor: textColor } } styleName="item">
-                    <div style={ { color: textColor } } styleName="item-percent">
-                      <span id={ `stat-${index + 1}` } data-stat={ stat.number }>
-                        0
-                      </span>
-                      %
+          <Gradient>
+            <div id="stats-section" />
+            <div className="stats-container" styleName="container">
+              { title && (
+                <h2 style={ { color: textColor } } styleName="title">
+                  { title }
+                </h2>
+              ) }
+              <div styleName="array">
+                { stats &&
+                  stats.map( ( stat, index ) => (
+                    <div key={ uuid() } style={ { borderColor: textColor } } styleName="item">
+                      <div style={ { color: textColor } } styleName="item-percent">
+                        <span id={ `stat-${index + 1}` } data-stat={ stat.number }>
+                          0
+                        </span>
+                        %
+                      </div>
+                      <p style={ { color: textColor } } styleName="item-info">
+                        { stat.title }
+                      </p>
                     </div>
-                    <p style={ { color: textColor } } styleName="item-info">
-                      { stat.title }
-                    </p>
-                  </div>
-                ) ) }
+                  ) ) }
+              </div>
             </div>
-          </div>
+          </Gradient>
         </div>
       </Normalizer>
     );
