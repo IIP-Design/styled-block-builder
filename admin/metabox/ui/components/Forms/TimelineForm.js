@@ -68,7 +68,7 @@ const TimelineForm = ( { callback, meta } ) => {
         group="events"
         inputs={ inputs }
         label="Event"
-        maxTabs={ 4 }
+        maxTabs={ 5 }
         stateFunc={ tabStateFunc }
       />
       <FullWidthToggle callback={ handleToggle } checked={ inputs.fullWidth } />

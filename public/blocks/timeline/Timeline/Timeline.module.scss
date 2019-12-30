@@ -3,11 +3,8 @@
 .bg {
   background-color: $greyLightest;
   padding: 0 0 3rem;
+  position: relative;
   width: 100%;
-
-  > div:not(:first-of-type) {
-    background-position: center 150%;
-  }
 }
 
 .card {
@@ -17,14 +14,14 @@
   margin: 0 auto;
 }
 
+.cards {
+  display: grid;
+  grid-template-areas: 'cards';
+}
+
 .container {
   background-color: $white;
-  box-shadow: 4px 4px 12px 0 rgba($color: black, $alpha: 0.2);
-  display: grid;
-  grid-template-areas:
-    'line line line line'
-    'bottom1 top1 bottom2 top2';
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  box-shadow: 4px 4px 12px 0 rgba($color: $blackStandard, $alpha: 0.2);
   margin: 5rem auto 0;
   max-width: 1280px;
   position: relative;
@@ -64,14 +61,14 @@
 }
 
 .overlay {
+  background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  height: 120%;
-  opacity: 0;
+  height: 100%;
+  opacity: 0.5;
   padding: 2.75rem 0 5rem;
   position: absolute;
   transition: all 1s ease;
-  visibility: hidden;
   width: 100%;
 }
 
@@ -105,64 +102,23 @@
   text-align: center;
 }
 
-// Place grid items in correct grid spot
-.top1 {
-  grid-area: top1;
-}
-
-.top2 {
-  grid-area: top2;
-}
-
-.bottom1 {
-  grid-area: bottom1;
-}
-
-.bottom2 {
-  grid-area: bottom2;
-}
-
-#tl-persia {
-  grid-area: persia;
-}
-
-#tl-iran {
-  grid-area: iran;
-  justify-content: flex-end;
-}
-
-#tl-ir1 {
-  grid-area: ir1;
-}
-
-#tl-ir2 {
-  grid-area: ir2;
-  justify-content: flex-end;
-
-  @media screen and (max-width: 500px) {
-    margin-left: 1rem;
-  }
-}
-
 @media screen and (max-width: 768px) {
   .bg {
     padding-bottom: 0;
   }
 
   .card {
+    align-items: flex-start;
     justify-content: center;
+    margin: 0.5rem 0 0.5rem 0.5rem;
   }
 
   .container {
     background-color: transparent;
     box-shadow: none;
-    grid-template-areas:
-      'bottom1 line persia'
-      'iran line top1'
-      'bottom2 line ir1'
-      'ir2 line top2';
-    grid-template-columns: 1fr 0.25fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr 1fr;
+    display: grid;
+    grid-template-areas: 'line cards';
+    grid-template-columns: 0.25fr 1fr;
     margin: 0 auto;
     padding: 5rem 0;
   }
@@ -190,6 +146,10 @@
     width: 1px;
   }
 
+  .overlay {
+    opacity: 0.3;
+  }
+
   .slide-title {
     display: none;
 
@@ -199,37 +159,21 @@
       display: flex;
       font-size: 1.8rem;
       font-weight: bold;
+      justify-content: center;
+      margin: 1rem 1rem 0;
+      position: relative;
       text-transform: uppercase;
     }
   }
 
   .text {
     color: $black;
+    margin: 0 !important;
   }
 
   .title {
     margin: 0 1rem 0;
     padding-top: 2rem;
-  }
-}
-
-.bottom1,
-.bottom2 {
-  align-items: flex-end;
-  margin: 2rem 0;
-
-  > .timeline-text {
-    text-align: right;
-  }
-}
-
-.top1,
-.top2 {
-  align-items: flex-start;
-  margin: 2rem 0;
-
-  > .timeline-text {
-    text-align: left;
   }
 }
 
@@ -241,30 +185,12 @@
   .slide-title-mobile {
     font-size: 1.5rem;
   }
-
-  .overlay {
-    height: 170%;
-  }
-}
-
-@media screen and (max-width: 360px) {
-  .overlay {
-    height: 200%;
-  }
 }
 
 .extra-opacity {
-  background-color: black;
-  height: 120%;
+  background-color: $blackStandard;
+  height: 100%;
   margin-top: -2.75rem;
   opacity: 0.2;
-  width: 100vw;
-
-  @media screen and (max-width: 500px) {
-    height: 170%;
-  }
-
-  @media screen and (max-width: 360px) {
-    height: 200%;
-  }
+  width: 100%;
 }
