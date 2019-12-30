@@ -6,7 +6,8 @@
   &.full-width {
     margin: 0 -50vw;
 
-    @media screen and (max-width: 768px) {
+    // Point at which negative margins might push content off the page
+    @media screen and (max-width: 1280px) {
       margin: 0;
     }
   }
