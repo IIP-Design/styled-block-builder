@@ -29,7 +29,6 @@
   margin-top: 1rem;
 }
 
-
 @media screen and (max-width: 768px) {
   .content {
     align-items: center;
@@ -37,7 +36,11 @@
 }
 
 @media screen and (max-width: 500px) {
+  .bg {
+    padding: 1rem 0;
+  }
+
   .subtitle {
-    width: 90vw;
+    width: 90%;
   }
 }

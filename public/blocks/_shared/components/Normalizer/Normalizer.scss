@@ -5,6 +5,10 @@
 
   &.full-width {
     margin: 0 -50vw;
+
+    @media screen and (max-width: 768px) {
+      margin: 0;
+    }
   }
 
   * {

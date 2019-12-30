@@ -68,12 +68,8 @@
       justify-content: center;
     }
 
-    &-text {
-      max-width: 90%;
-
-      > p:first-of-type {
-        margin-top: 0;
-      }
+    &-text > p:first-of-type {
+      margin-top: 0;
     }
   }
 
