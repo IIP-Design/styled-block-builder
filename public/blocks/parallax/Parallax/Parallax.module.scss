@@ -1,20 +1,21 @@
 @import 'styles/colors.scss';
 
-.content-background {
-  align-items: center;
+.box-bg {
+  background-attachment: fixed;
   background-position: center;
-  background-repeat: no-repeat;
   background-size: cover;
-  position: absolute;
+  background-repeat: no-repeat;
+  position: relative;
   width: 100%;
 }
 
-.parallax {
-  min-height: 600px;
+.fixed {
+  min-height: 500px;
   position: relative;
   overflow: hidden;
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 
 .container {
@@ -33,7 +34,7 @@
 .subtitle {
   color: $white;
   text-align: center;
-  margin-top: 1rem;
+  margin: 1rem;
 }
 
 .content {
@@ -42,6 +43,7 @@
   align-items: center;
   margin: 2rem 0;
   position: absolute;
+  max-width: 75vw;
 }
 
 .text {
