@@ -9,11 +9,11 @@ class Sanitize_Resources_Meta {
     $unsanitary = json_decode( stripslashes( $data ), true );
     $sanitized = array();
     
-    if( !empty( $unsanitary['fullWidth'] ) ) {
+    if ( !empty( $unsanitary['fullWidth'] ) ) {
       $sanitized['fullWidth'] = rest_sanitize_boolean( $unsanitary['fullWidth'] );
     }
     
-    if( !empty( $unsanitary['resources'] ) ) {
+    if ( !empty( $unsanitary['resources'] ) ) {
       $sanitized_resources = array();
 
       foreach ( $unsanitary['resources'] as $resource ) {
@@ -25,7 +25,7 @@ class Sanitize_Resources_Meta {
         $sanitized_resource['title'] = sanitize_text_field( $resource['title'] );
         $sanitized_resource['video'] = sanitize_text_field( $resource['video'] );
 
-        if( !empty( $resource['articles'] ) ) {
+        if ( !empty( $resource['articles'] ) ) {
           $sanitized_articles = array();
     
           foreach ( $resource['articles'] as $article ) {
@@ -52,11 +52,11 @@ class Sanitize_Resources_Meta {
       $sanitized['resources'] = $sanitized_resources;
     }
 
-    if( !empty( $unsanitary['subtitle'] ) ) {
+    if ( !empty( $unsanitary['subtitle'] ) ) {
       $sanitized['subtitle'] = sanitize_text_field( $unsanitary['subtitle'] );
     }
 
-    if( !empty( $unsanitary['title'] ) ) {
+    if ( !empty( $unsanitary['title'] ) ) {
       $sanitized['title'] = sanitize_text_field( $unsanitary['title'] );
     }
 

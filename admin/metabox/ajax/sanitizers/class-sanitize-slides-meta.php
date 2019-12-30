@@ -9,11 +9,11 @@ class Sanitize_Slides_Meta {
     $unsanitary = json_decode( stripslashes( $data ), true );
     $sanitized = array();
 
-    if( !empty( $unsanitary['title'] ) ) {
+    if ( !empty( $unsanitary['title'] ) ) {
       $sanitized['title'] = sanitize_text_field( $unsanitary['title'] );
     }
 
-    if( !empty( $unsanitary['slides'] ) ) {
+    if ( !empty( $unsanitary['slides'] ) ) {
       $sanitized_slides = array();
 
       foreach ( $unsanitary['slides'] as $slide ) {

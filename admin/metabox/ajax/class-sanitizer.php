@@ -10,70 +10,70 @@ class Sanitizer {
     $send_response = new Responses();
 
     if ( $form_type == 'article-feed' ) {
-      include_once STYLE_TEMPLATES_DIR . 'admin/metabox/ajax/forms/class-sanitize-article-feed-meta.php';
+      include_once STYLE_TEMPLATES_DIR . 'admin/metabox/ajax/sanitizers/class-sanitize-article-feed-meta.php';
       $sanitize = new Sanitize_Article_Feed_Meta();
       
       return $sanitize;
     }
 
     elseif ( $form_type == 'hero' ) {
-      include_once STYLE_TEMPLATES_DIR . 'admin/metabox/ajax/forms/class-sanitize-hero-meta.php';
+      include_once STYLE_TEMPLATES_DIR . 'admin/metabox/ajax/sanitizers/class-sanitize-hero-meta.php';
       $sanitize = new Sanitize_Hero_Meta();
       
       return $sanitize;
     }
 
     elseif ( $form_type == 'hero-animated' ) {
-      include_once STYLE_TEMPLATES_DIR . 'admin/metabox/ajax/forms/class-sanitize-hero-animated-meta.php';
+      include_once STYLE_TEMPLATES_DIR . 'admin/metabox/ajax/sanitizers/class-sanitize-hero-animated-meta.php';
       $sanitize = new Sanitize_HeroAnimated_Meta();
       
       return $sanitize;
     }
 
     elseif ( $form_type == 'parallax' ) {
-      include_once STYLE_TEMPLATES_DIR . 'admin/metabox/ajax/forms/class-sanitize-parallax-meta.php';
+      include_once STYLE_TEMPLATES_DIR . 'admin/metabox/ajax/sanitizers/class-sanitize-parallax-meta.php';
       $sanitize = new Sanitize_Parallax_Meta();
       
       return $sanitize;
     }
 
     elseif ( $form_type == 'quote-box' ) {
-      include_once STYLE_TEMPLATES_DIR . 'admin/metabox/ajax/forms/class-sanitize-quotebox-meta.php';
+      include_once STYLE_TEMPLATES_DIR . 'admin/metabox/ajax/sanitizers/class-sanitize-quotebox-meta.php';
       $sanitize = new Sanitize_Quotebox_Meta();
       
       return $sanitize;
     }
 
     elseif ( $form_type == 'resources' ) {
-      include_once STYLE_TEMPLATES_DIR . 'admin/metabox/ajax/forms/class-sanitize-resources-meta.php';
+      include_once STYLE_TEMPLATES_DIR . 'admin/metabox/ajax/sanitizers/class-sanitize-resources-meta.php';
       $sanitize = new Sanitize_Resources_Meta();
       
       return $sanitize;
     }
 
     elseif ( $form_type == 'slides' ) {
-      include_once STYLE_TEMPLATES_DIR . 'admin/metabox/ajax/forms/class-sanitize-slides-meta.php';
+      include_once STYLE_TEMPLATES_DIR . 'admin/metabox/ajax/sanitizers/class-sanitize-slides-meta.php';
       $sanitize = new Sanitize_Slides_Meta();
       
       return $sanitize;
     }
 
     elseif ( $form_type == 'stats' ) {
-      include_once STYLE_TEMPLATES_DIR . 'admin/metabox/ajax/forms/class-sanitize-stats-meta.php';
+      include_once STYLE_TEMPLATES_DIR . 'admin/metabox/ajax/sanitizers/class-sanitize-stats-meta.php';
       $sanitize = new Sanitize_Stats_Meta();
       
       return $sanitize;
     }
 
     if ( $form_type == 'text' ) {
-      include_once STYLE_TEMPLATES_DIR . 'admin/metabox/ajax/forms/class-sanitize-text-meta.php';
+      include_once STYLE_TEMPLATES_DIR . 'admin/metabox/ajax/sanitizers/class-sanitize-text-meta.php';
       $sanitize = new Sanitize_Text_Meta();
       
       return $sanitize;
     }
 
     if ( $form_type == 'timeline' ) {
-      include_once STYLE_TEMPLATES_DIR . 'admin/metabox/ajax/forms/class-sanitize-timeline-meta.php';
+      include_once STYLE_TEMPLATES_DIR . 'admin/metabox/ajax/sanitizers/class-sanitize-timeline-meta.php';
       $sanitize = new Sanitize_Timeline_Meta();
       
       return $sanitize;

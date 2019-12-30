@@ -9,11 +9,11 @@ class Sanitize_Timeline_Meta {
     $unsanitary = json_decode( stripslashes( $data ), true );
     $sanitized = array();
 
-    if( !empty( $unsanitary['title'] ) ) {
+    if ( !empty( $unsanitary['title'] ) ) {
       $sanitized['title'] = sanitize_text_field( $unsanitary['title'] );
     }
 
-    if( !empty( $unsanitary['events'] ) ) {
+    if ( !empty( $unsanitary['events'] ) ) {
       $sanitized_events = array();
 
       foreach ( $unsanitary['events'] as $event ) {
@@ -33,7 +33,7 @@ class Sanitize_Timeline_Meta {
       $sanitized['events'] = $sanitized_events;
     }
 
-    if( !empty( $unsanitary['fullWidth'] ) ) {
+    if ( !empty( $unsanitary['fullWidth'] ) ) {
       $sanitized['fullWidth'] = rest_sanitize_boolean( $unsanitary['fullWidth'] );
     }
 

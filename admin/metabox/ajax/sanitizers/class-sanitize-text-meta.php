@@ -9,7 +9,7 @@ class Sanitize_Text_Meta {
     $unsanitary = json_decode( stripslashes( $data ), true );
     $sanitized = array();
 
-    if( !empty( $unsanitary['articles'] ) ) {
+    if ( !empty( $unsanitary['articles'] ) ) {
       $sanitized_articles = array();
 
       foreach ( $unsanitary['articles'] as $article ) {
@@ -27,63 +27,63 @@ class Sanitize_Text_Meta {
       $sanitized['articles'] = $sanitized_articles;
     }
 
-    if( !empty( $unsanitary['blockBackground'] ) ) {
+    if ( !empty( $unsanitary['blockBackground'] ) ) {
       $sanitized['blockBackground'] = sanitize_text_field( $unsanitary['blockBackground'] );
     }
     
-    if( !empty( $unsanitary['button'] ) ) {
+    if ( !empty( $unsanitary['button'] ) ) {
       $sanitized['button'] = sanitize_text_field( $unsanitary['button'] );
     }
 
-    if( !empty( $unsanitary['color'] ) ) {
+    if ( !empty( $unsanitary['color'] ) ) {
       $sanitized['color'] = sanitize_text_field( $unsanitary['color'] );
     }
 
-    if( !empty( $unsanitary['desc'] ) ) {
+    if ( !empty( $unsanitary['desc'] ) ) {
       $sanitized['desc'] = sanitize_textarea_field( $unsanitary['desc'] );
     }
 
-    if( !empty( $unsanitary['fullWidth'] ) ) {
+    if ( !empty( $unsanitary['fullWidth'] ) ) {
       $sanitized['fullWidth'] = rest_sanitize_boolean( $unsanitary['fullWidth'] );
     }
 
-    if( !empty( $unsanitary['hasButton'] ) ) {
+    if ( !empty( $unsanitary['hasButton'] ) ) {
       $sanitized['hasButton'] = rest_sanitize_boolean( $unsanitary['hasButton'] );
     }
 
-    if( !empty( $unsanitary['hasFeed'] ) ) {
+    if ( !empty( $unsanitary['hasFeed'] ) ) {
       $sanitized['hasFeed'] = rest_sanitize_boolean( $unsanitary['hasFeed'] );
     }
 
-    if( !empty( $unsanitary['hasVideo'] ) ) {
+    if ( !empty( $unsanitary['hasVideo'] ) ) {
       $sanitized['hasVideo'] = rest_sanitize_boolean( $unsanitary['hasVideo'] );
     }
 
-    if( !empty( $unsanitary['link'] ) ) {
+    if ( !empty( $unsanitary['link'] ) ) {
       $sanitized['link'] = sanitize_text_field( $unsanitary['link'] );
     }
 
-    if( !empty( $unsanitary['style'] ) ) {
+    if ( !empty( $unsanitary['style'] ) ) {
       $sanitized['style'] = sanitize_text_field( $unsanitary['style'] );
     }
 
-    if( !empty( $unsanitary['subtitle'] ) ) {
+    if ( !empty( $unsanitary['subtitle'] ) ) {
       $sanitized['subtitle'] = sanitize_text_field( $unsanitary['subtitle'] );
     }
 
-    if( !empty( $unsanitary['textColor'] ) ) {
+    if ( !empty( $unsanitary['textColor'] ) ) {
       $sanitized['textColor'] = sanitize_text_field( $unsanitary['textColor'] );
     }
 
-    if( !empty( $unsanitary['title'] ) ) {
+    if ( !empty( $unsanitary['title'] ) ) {
       $sanitized['title'] = sanitize_text_field( $unsanitary['title'] );
     }
 
-    if( !empty( $unsanitary['videoTitle'] ) ) {
+    if ( !empty( $unsanitary['videoTitle'] ) ) {
       $sanitized['videoTitle'] = sanitize_text_field( $unsanitary['videoTitle'] );
     }
 
-    if( !empty( $unsanitary['videoURL'] ) ) {
+    if ( !empty( $unsanitary['videoURL'] ) ) {
       $sanitized['videoURL'] = sanitize_text_field( $unsanitary['videoURL'] );
     }
 
