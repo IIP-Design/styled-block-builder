@@ -72,6 +72,13 @@ class Sanitizer {
       return $sanitize;
     }
 
+    if ( $form_type == 'timeline' ) {
+      include_once STYLE_TEMPLATES_DIR . 'admin/metabox/ajax/forms/class-sanitize-timeline-meta.php';
+      $sanitize = new Sanitize_Timeline_Meta();
+      
+      return $sanitize;
+    }
+
     else {
       $send_response->send_custom_error( 'invalid_form_type' );
     }

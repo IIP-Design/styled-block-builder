@@ -22,7 +22,8 @@ class Validator {
       'resources',
       'slides',
       'stats',
-      'text'
+      'text',
+      'timeline'
     );
 
     if ( !in_array( $type, $accepted_forms ) ) {

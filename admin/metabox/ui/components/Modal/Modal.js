@@ -12,6 +12,7 @@ import Spinner from 'metabox/components/Spinner/Spinner';
 import SlidesForm from 'metabox/components/Forms/SlidesForm';
 import StatsForm from 'metabox/components/Forms/StatsForm';
 import TextForm from 'metabox/components/Forms/TextForm';
+import TimelineForm from 'metabox/components/Forms/TimelineForm';
 import { updatePost } from 'metabox/utils/update-post';
 
 import './Modal.module.scss';
@@ -71,6 +72,10 @@ const ModelContent = ( { form, id, show, toggle, updateMetabox } ) => {
     case 'text':
       formTitle = 'Configure Your Text Block:';
       selectedForm = <TextForm callback={ setData } meta={ meta } />;
+      break;
+    case 'timeline':
+      formTitle = 'Configure Your Timeline Block:';
+      selectedForm = <TimelineForm callback={ setData } meta={ meta } />;
       break;
     default:
       return;

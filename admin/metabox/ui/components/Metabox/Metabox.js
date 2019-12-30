@@ -75,6 +75,7 @@ const MetaBox = () => {
           <option value="slides">Slides Block</option>
           <option value="stats">Stats Block</option>
           <option value="text">Text Block</option>
+          <option value="timeline">Timeline Block</option>
         </select>
       </label>
       <button
