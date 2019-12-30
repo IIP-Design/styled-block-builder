@@ -55,14 +55,6 @@
   }
 }
 
-.opacity-overlay {
-  background-color: $blueBlackPearl;
-  height: 100%;
-  opacity: 0.6;
-  position: absolute;
-  width: 100%;
-}
-
 @media screen and (max-width: 768px) {
   .array {
     flex-direction: column;
