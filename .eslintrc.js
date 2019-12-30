@@ -31,11 +31,11 @@ module.exports = {
     'no-unused-expressions': ['error', { allowShortCircuit: true, allowTernary: true }],
     'no-plusplus': ['warn', { allowForLoopAfterthoughts: true }],
     'react/forbid-prop-types': 0,
-    'react/jsx-curly-spacing': [2, { when: 'always', children: true }],
+    // 'react/jsx-curly-spacing': [2, { when: 'always', children: true }],
     'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx'] }],
     'react/react-in-jsx-scope': 0,
     'react/require-default-props': 0,
-    'space-in-parens': ['warn', 'always'],
+    // 'space-in-parens': ['warn', 'always'],
     'import/no-webpack-loader-syntax': 0,
     'react/jsx-fragments': ['warn', 'element']
   },
