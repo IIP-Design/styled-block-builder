@@ -3,13 +3,13 @@ import propTypes from 'prop-types';
 
 import './Button.scss';
 
-const Button = ( { link, text, style, arrow } ) => {
+const Button = ({ buttonLink, buttonText, buttonStyle, buttonArrow }) => {
   return (
     <div>
-      <a href={ link }>
-        <button className={ `read-more ${style}` } type="button">
-          { text }
-          <span className={ `arrow-${arrow}` }>⟶</span>
+      <a href={buttonLink}>
+        <button className={`read-more ${buttonStyle}`} type="button">
+          {buttonText}
+          <span className={`arrow-${buttonArrow}`}>⟶</span>
         </button>
       </a>
     </div>
@@ -17,10 +17,10 @@ const Button = ( { link, text, style, arrow } ) => {
 };
 
 Button.propTypes = {
-  link: propTypes.string,
-  text: propTypes.string,
-  style: propTypes.string,
-  arrow: propTypes.string
+  buttonLink: propTypes.string,
+  buttonText: propTypes.string,
+  buttonStyle: propTypes.string,
+  buttonArrow: propTypes.string
 };
 
 export default Button;
