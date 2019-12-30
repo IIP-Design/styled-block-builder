@@ -2,19 +2,29 @@ import React, { Fragment, useEffect, useState } from 'react';
 import propTypes from 'prop-types';
 
 import CheckboxConditional from 'metabox/components/Forms/Toggles/CheckboxConditional';
+import ColorPicker from 'metabox/components/ColorPicker/ColorPicker';
+import { defaultBackgrounds, defaultText } from 'metabox/utils/color-picker-palettes';
 import ArticleById from './FeedTypes/ArticleById';
+import FullWidthToggle from './Toggles/FullWidthToggle';
 
 const TextForm = ( { callback, meta } ) => {
   const schema = {
     articles: meta.articles || [],
+    blockBackground: meta.blockBackground || '#ffffff',
     button: meta.button || '',
     color: meta.color || '',
     desc: meta.desc || '',
+    fullWidth: meta.fullWidth || false,
+    hasButton: meta.hasButton || false,
     hasFeed: meta.hasFeed || false,
+    hasVideo: meta.hasVideo || false,
     link: meta.link || '',
     style: meta.style || '',
     subtitle: meta.subtitle || '',
-    title: meta.title || ''
+    textColor: meta.textColor || '#333333',
+    title: meta.title || '',
+    videoTitle: meta.videoTitle || '',
+    videoURL: meta.videoURL || ''
   };
 
   const [inputs, setInputs] = useState( schema );
@@ -48,8 +58,37 @@ const TextForm = ( { callback, meta } ) => {
     updateInputs( 'articles', val );
   };
 
+  const handleColor = e => {
+    const { group } = e.target.dataset;
+    const { value } = e.target;
+
+    updateInputs( group, value );
+  };
+
+  const blockBgOptions = {
+    group: 'blockBackground',
+    options: defaultBackgrounds
+  };
+
+  const textOptions = {
+    group: 'textColor',
+    options: defaultText
+  };
+
   return (
     <Fragment>
+      <ColorPicker
+        callback={ handleColor }
+        colors={ textOptions }
+        label="Set block text color:"
+        selected={ inputs.textColor }
+      />
+      <ColorPicker
+        callback={ handleColor }
+        colors={ blockBgOptions }
+        label="Set block background color:"
+        selected={ inputs.blockBackground }
+      />
       <label htmlFor="text-title">
         Add title:
         <input
@@ -80,54 +119,89 @@ const TextForm = ( { callback, meta } ) => {
           value={ inputs.desc }
         />
       </label>
-      <label htmlFor="text-button">
-        Add button text:
-        <input
-          id="text-button"
-          name="button"
-          onChange={ e => handleChange( e ) }
-          type="text"
-          value={ inputs.button }
-        />
-      </label>
-      <label htmlFor="text-button-link">
-        Add button link:
-        <input
-          id="text-button-link"
-          name="link"
-          onChange={ e => handleChange( e ) }
-          type="text"
-          value={ inputs.link }
-        />
-      </label>
-
-      <label htmlFor="text-button-style">
-        Select Button Style:
-        <select
-          id="text-button-style"
-          name="style"
-          onChange={ e => handleChange( e ) }
-          type="select"
-          value={ inputs.style }
-        >
-          <option value="minimal">Minimal</option>
-          <option value="red">Red</option>
-          <option value="blue">Blue</option>
-        </select>
-      </label>
-      <label htmlFor="text-arrow-color">
-        Select Button Arrow Color:
-        <select
-          id="text-arrow-color"
-          name="color"
-          onChange={ e => handleChange( e ) }
-          type="select"
-          value={ inputs.color }
-        >
-          <option value="white">White</option>
-          <option value="red">Red</option>
-        </select>
-      </label>
+      <FullWidthToggle callback={ handleToggle } checked={ inputs.fullWidth } />
+      <CheckboxConditional
+        callback={ handleToggle }
+        checked={ inputs.hasButton }
+        label="Add a Button?"
+        name="hasButton"
+      >
+        <label htmlFor="text-button">
+          Add button text:
+          <input
+            id="text-button"
+            name="button"
+            onChange={ e => handleChange( e ) }
+            type="text"
+            value={ inputs.button }
+          />
+        </label>
+        <label htmlFor="text-button-link">
+          Add button link:
+          <input
+            id="text-button-link"
+            name="link"
+            onChange={ e => handleChange( e ) }
+            type="text"
+            value={ inputs.link }
+          />
+        </label>
+        <label htmlFor="text-button-style">
+          Select Button Style:
+          <select
+            id="text-button-style"
+            name="style"
+            onChange={ e => handleChange( e ) }
+            type="select"
+            value={ inputs.style }
+          >
+            <option value="minimal">Minimal</option>
+            <option value="red">Red</option>
+            <option value="blue">Blue</option>
+          </select>
+        </label>
+        <label htmlFor="text-arrow-color">
+          Select Button Arrow Color:
+          <select
+            id="text-arrow-color"
+            name="color"
+            onChange={ e => handleChange( e ) }
+            type="select"
+            value={ inputs.color }
+          >
+            <option value="white">White</option>
+            <option value="red">Red</option>
+          </select>
+        </label>
+      </CheckboxConditional>
+      <CheckboxConditional
+        callback={ handleToggle }
+        checked={ inputs.hasVideo }
+        label="Add a Video?"
+        name="hasVideo"
+      >
+        <label htmlFor="video-title">
+          Add Video Title:
+          <input
+            id="video-title"
+            name="videoTitle"
+            onChange={ e => handleChange( e ) }
+            type="text"
+            value={ inputs.videoTitle }
+          />
+        </label>
+        <label htmlFor="video-url">
+          Add Video URL (for YouTube use the embed link format
+          https://www.youtube.com/embed/VIDEOID):
+          <input
+            id="video-url"
+            name="videoURL"
+            onChange={ e => handleChange( e ) }
+            type="text"
+            value={ inputs.videoURL }
+          />
+        </label>
+      </CheckboxConditional>
       <CheckboxConditional
         callback={ handleToggle }
         checked={ inputs.hasFeed }
