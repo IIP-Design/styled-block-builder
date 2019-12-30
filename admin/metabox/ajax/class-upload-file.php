@@ -20,6 +20,17 @@ class Uploader {
       }
     }
 
+    if ( $type == 'stats') {
+      if ( isset( $files['backgroundImage'] ) ) {
+        $file = array(
+          'name' => 'backgroundImage',
+          'file' => $files['backgroundImage']
+        );
+
+        array_push( $for_upload, $file );
+      }
+    }
+
     $response = $this->handle_upload( $for_upload );
 
     return $response;
