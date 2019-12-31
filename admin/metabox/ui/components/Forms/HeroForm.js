@@ -1,11 +1,12 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import propTypes from 'prop-types';
 
+import ButtonForm from './ButtonForm/ButtonForm';
 import CheckboxConditional from './Toggles/CheckboxConditional';
 import RadioConditional from './Toggles/RadioConditional';
 import TabbedForm from './TabbedForm/TabbedForm';
 
-const HeroForm = ( { callback, meta } ) => {
+const HeroForm = ({ callback, meta }) => {
   const schema = {
     background: meta.background || '',
     buttonArrow: meta.buttonArrow || '',
@@ -20,29 +21,29 @@ const HeroForm = ( { callback, meta } ) => {
     type: meta.type || ''
   };
 
-  const [inputs, setInputs] = useState( schema );
+  const [inputs, setInputs] = useState(schema);
 
   const formData = { ...inputs };
 
   // Initialize the state on first render, otherwise will submit empty values if saved without making changes
-  useEffect( () => {
-    callback( formData );
-  }, [] );
+  useEffect(() => {
+    callback(formData);
+  }, []);
 
-  const updateState = ( name, value ) => {
-    setInputs( { ...inputs, [name]: value } );
-    callback( { ...formData, [name]: value } );
+  const updateState = (name, value) => {
+    setInputs({ ...inputs, [name]: value });
+    callback({ ...formData, [name]: value });
   };
 
   const handleChange = e => {
     const { name, value } = e.target;
-    updateState( name, value );
+    updateState(name, value);
   };
 
   const handleToggle = () => {
     const isChecked = !inputs.hasButton;
 
-    updateState( 'hasButton', isChecked );
+    updateState('hasButton', isChecked);
   };
 
   const options = [
@@ -59,9 +60,9 @@ const HeroForm = ( { callback, meta } ) => {
         <input
           id="hero-background"
           name="background"
-          onChange={ e => handleChange( e ) }
+          onChange={e => handleChange(e)}
           type="text"
-          value={ inputs.background }
+          value={inputs.background}
         />
       </label>
       <label htmlFor="hero-title">
@@ -69,9 +70,9 @@ const HeroForm = ( { callback, meta } ) => {
         <input
           id="hero-title"
           name="title"
-          onChange={ e => handleChange( e ) }
+          onChange={e => handleChange(e)}
           type="text"
-          value={ inputs.title }
+          value={inputs.title}
         />
       </label>
       <label htmlFor="hero-subtitle">
@@ -79,93 +80,47 @@ const HeroForm = ( { callback, meta } ) => {
         <input
           id="hero-subtitle"
           name="subtitle"
-          onChange={ e => handleChange( e ) }
+          onChange={e => handleChange(e)}
           type="text"
-          value={ inputs.subtitle }
+          value={inputs.subtitle}
         />
       </label>
       <RadioConditional
-        callback={ handleChange }
-        checked={ inputs.type }
+        callback={handleChange}
+        checked={inputs.type}
         label="What type of block would you like?"
-        options={ options }
+        options={options}
       />
-      { inputs.type === 'text' && (
+      {inputs.type === 'text' && (
         <label htmlFor="hero-description">
           Add main content area text:
           <textarea
             id="hero-description"
             name="description"
-            onChange={ e => handleChange( e ) }
+            onChange={e => handleChange(e)}
             type="text"
             rows="6"
-            value={ inputs.description }
+            value={inputs.description}
           />
         </label>
-      ) }
-      { inputs.type === 'lines' && (
+      )}
+      {inputs.type === 'lines' && (
         <TabbedForm
-          fields={ tabFields }
+          fields={tabFields}
           group="lines"
-          inputs={ inputs }
+          inputs={inputs}
           label="Line"
-          maxTabs={ 10 }
-          stateFunc={ updateState }
+          maxTabs={10}
+          stateFunc={updateState}
         />
-      ) }
+      )}
       <CheckboxConditional
         label="Add Button (Optional)"
-        checked={ inputs.hasButton }
-        callback={ handleToggle }
+        checked={inputs.hasButton}
+        callback={handleToggle}
         name="add-button"
       >
-        <label htmlFor="hero-buttonLink">
-          Add button link:
-          <input
-            id="hero-buttonLink"
-            name="buttonLink"
-            onChange={ e => handleChange( e ) }
-            type="text"
-            value={ inputs.buttonLink }
-          />
-        </label>
-        <label htmlFor="hero-buttonText">
-          Add button text:
-          <input
-            id="hero-buttonText"
-            name="buttonText"
-            onChange={ e => handleChange( e ) }
-            type="text"
-            value={ inputs.buttonText }
-          />
-        </label>
-        <label htmlFor="hero-buttonStyle">
-          Select Button Style:
-          <select
-            id="hero-buttonStyle"
-            name="buttonStyle"
-            onChange={ e => handleChange( e ) }
-            type="select"
-            value={ inputs.buttonStyle }
-          >
-            <option value="minimal">Minimal</option>
-            <option value="red">Red</option>
-            <option value="blue">Blue</option>
-          </select>
-        </label>
-        <label htmlFor="hero-buttonArrow">
-          Select Button Arrow Color:
-          <select
-            id="hero-buttonArrow"
-            name="buttonArrow"
-            onChange={ e => handleChange( e ) }
-            type="select"
-            value={ inputs.buttonArrow }
-          >
-            <option value="white">White</option>
-            <option value="red">Red</option>
-          </select>
-        </label>
+        <ButtonForm callback={handleChange} inputs={inputs} />
       </CheckboxConditional>
     </Fragment>
   );
