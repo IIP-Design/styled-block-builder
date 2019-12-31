@@ -31,10 +31,9 @@ class Style_Templates {
    *
    * @since    0.0.1
    */
-
   public function __construct() {
     $this->plugin_name = 'style-templates';
-    $this->version = '0.0.1';
+    $this->version     = '0.0.1';
     $this->load_dependencies();
     $this->define_admin_hooks();
     $this->define_public_hooks();
@@ -54,7 +53,6 @@ class Style_Templates {
    * @since    0.0.1
    * @access   private
    */
-
   private function load_dependencies() {
     // The class responsible for orchestrating the actions and filters of the core plugin.
     require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-loader.php';
@@ -71,49 +69,49 @@ class Style_Templates {
 
     // The class responsible for defining all actions that occur in the public-facing side of the site.
     require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-public.php';
-  
+
     $this->loader = new Style_Templates\Loader();
   }
 
-  // Register all of the hooks related to the admin area functionality of the plugin.
+  /** Register all of the hooks related to the admin area functionality of the plugin. */
   private function define_admin_hooks() {
-    // Instantiate all admin classes
-    $plugin_admin = new Style_Templates\Admin( $this->get_plugin_name(), $this->get_version() );
-    $plugin_ajax = new Style_Templates\Update_Template( $this->get_plugin_name(), $this->get_version() );
-    $plugin_api = new Style_Templates\API( $this->get_plugin_name(), $this->get_version() );
-    $plugin_metabox = new Style_Templates\Metabox( $this->get_plugin_name(), $this->get_version() );
-    $plugin_settings = new Style_Templates\Settings( $this->get_plugin_name(), $this->get_version() );
+    // Instantiate all admin classes.
+    $plugin_admin     = new Style_Templates\Admin( $this->get_plugin_name(), $this->get_version() );
+    $plugin_ajax      = new Style_Templates\Update_Template( $this->get_plugin_name(), $this->get_version() );
+    $plugin_api       = new Style_Templates\API( $this->get_plugin_name(), $this->get_version() );
+    $plugin_metabox   = new Style_Templates\Metabox( $this->get_plugin_name(), $this->get_version() );
+    $plugin_settings  = new Style_Templates\Settings( $this->get_plugin_name(), $this->get_version() );
     $plugin_shortcode = new Style_Templates\Shortcode( $this->get_plugin_name(), $this->get_version() );
-    
-    // Admin hooks
+
+    // Admin hooks.
     $this->loader->add_action( 'init', $plugin_admin, 'register_admin_scripts_styles' );
     $this->loader->add_action( 'admin_notices', $plugin_admin, 'localize_admin_script_globals' );
-    
-    // WP API hooks
-    $this->loader->add_action( 'rest_api_init', $plugin_api, 'register_associated_templates_meta' ); 
 
-    // Animated blocks
+    // WP API hooks.
+    $this->loader->add_action( 'rest_api_init', $plugin_api, 'register_associated_templates_meta' );
+
+    // Animated blocks.
     // $plugin_animated = new Style_Templates\Animated( $this->get_plugin_name(), $this->get_version() );
     // $this->loader->add_action( 'init', $plugin_animated, 'register_animated_blocks' );
     // $this->loader->add_filter( 'block_categories', $plugin_animated, 'register_animated_block_category', 10, 2 );
 
-    // Ajax
+    // Ajax.
     $this->loader->add_action( 'wp_ajax_gpalab_update_template', $plugin_ajax, 'handle_template_update' );
     $this->loader->add_action( 'wp_ajax_gpalab_delete_template', $plugin_ajax, 'handle_template_deletion' );
-    // Custom Metabox
+    // Custom Metabox.
     $this->loader->add_action( 'add_meta_boxes', $plugin_metabox, 'add_templates_metabox' );
-    // Settings
+    // Settings.
     $this->loader->add_action( 'admin_menu', $plugin_settings, 'add_templates_settings_page' );
     $this->loader->add_action( 'admin_init', $plugin_settings, 'populate_template_settings' );
-    // Shortcode
+    // Shortcode.
     $this->loader->add_action( 'init', $plugin_shortcode, 'add_templates_shortcode' );
   }
 
-  // Register all of the hooks related to the public-facing functionality
+  /** Register all of the hooks related to the public-facing functionality. */
   private function define_public_hooks() {
     $plugin_frontend = new Style_Templates\Frontend( $this->get_plugin_name(), $this->get_version() );
 
-    // Frontend hooks
+    // Frontend hooks.
     $this->loader->add_action( 'init', $plugin_frontend, 'register_template_scripts_styles' );
   }
 
@@ -122,7 +120,6 @@ class Style_Templates {
    *
    * @since    0.0.1
    */
-
   public function run() {
     $this->loader->run();
   }
@@ -133,12 +130,11 @@ class Style_Templates {
    * @since     0.0.1
    * @return    Style_Templates_Loader    Orchestrates the hooks of the plugin.
    */
-
   public function get_loader() {
     return $this->loader;
   }
 
-  // Retrieve the name & version number of the plugin.
+  /** Retrieve the name & version number of the plugin. */
   public function get_plugin_name() {
     return $this->plugin_name;
   }

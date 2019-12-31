@@ -7,8 +7,11 @@
 
 # Dependencies
 node_modules/
-npm-debug.log*
+vendor/
 
 # Development Builds
 dist/dev-*.js
 dist/dev-*.css
+
+# Error Logs
+npm-debug.log*

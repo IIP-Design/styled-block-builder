@@ -1,7 +1,7 @@
 {
   "name": "iip-design/style-templates",
   "type": "wordpress-plugin",
-  "description" : "Customizable animated blocks for WordPress sites",
+  "description": "Customizable animated blocks for WordPress sites",
   "authors": [
     {
       "name": "Marek Rewers, U.S. Department of State, Global Public Affairs <designdevops@america.gov>"
@@ -10,5 +10,11 @@
   "minimum-stability": "stable",
   "require": {
     "composer/installers": "~1.0"
+  },
+  "require-dev": {
+    "dealerdirect/phpcodesniffer-composer-installer": "^0.5.0",
+    "phpcompatibility/phpcompatibility-wp": "^2.1",
+    "squizlabs/php_codesniffer": "^3.5",
+    "wp-coding-standards/wpcs": "^2.2"
   }
 }

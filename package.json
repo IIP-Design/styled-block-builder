@@ -4,8 +4,9 @@
   "private": true,
   "license": "GPL-2.0",
   "scripts": {
+    "dev": "webpack --watch --config config/webpack.config.js --mode development",
     "build": "webpack --config config/webpack.config.js --mode production",
-    "dev": "webpack --watch --config config/webpack.config.js --mode development"
+    "test:PHP": "./vendor/bin/phpcs"
   },
   "devDependencies": {
     "@babel/core": "^7.7.4",
