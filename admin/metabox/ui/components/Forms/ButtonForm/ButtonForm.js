@@ -5,7 +5,7 @@ import './ButtonForm.module.scss';
 
 const ButtonForm = ({ callback, inputs }) => (
   <div styleName="form">
-    <label htmlFor="button">
+    <label htmlFor="button-text">
       Add button text:
       <input
         id="button-text"
@@ -15,7 +15,7 @@ const ButtonForm = ({ callback, inputs }) => (
         value={inputs.buttonText}
       />
     </label>
-    <label htmlFor="text-button-link">
+    <label htmlFor="button-link">
       Add button link:
       <input
         id="button-link"
@@ -26,8 +26,8 @@ const ButtonForm = ({ callback, inputs }) => (
       />
     </label>
 
-    <label htmlFor="text-button-style">
-      Select Button Style:
+    <label htmlFor="button-style">
+      Select button style:
       <select
         id="button-style"
         name="buttonStyle"
@@ -40,8 +40,8 @@ const ButtonForm = ({ callback, inputs }) => (
         <option value="blue">Blue</option>
       </select>
     </label>
-    <label htmlFor="text-arrow-color">
-      Select Button Arrow Color:
+    <label htmlFor="arrow-color">
+      Select button arrow color:
       <select
         id="arrow-color"
         name="buttonArrow"
