@@ -7,10 +7,10 @@ import Normalizer from 'blocks/_shared/components/Normalizer/Normalizer';
 
 import './Hero.module.scss';
 
-const Hero = ( { id } ) => {
+const Hero = ({ id }) => {
   const { meta } = window[`gpalabHero${id}`];
 
-  if ( meta ) {
+  if (meta) {
     const {
       background,
       buttonArrow,
@@ -27,25 +27,25 @@ const Hero = ( { id } ) => {
 
     return (
       <Normalizer fullWidth>
-        <div styleName="content-background" style={ { backgroundImage: `url(${background})` } }>
+        <div styleName="content-background" style={{ backgroundImage: `url(${background})` }}>
           <div styleName="overlay">
             <div styleName="header">
-              { title && <h1 styleName="header-title">{ title }</h1> }
-              { subtitle && <h3 styleName="header-subtitle">{ subtitle }</h3> }
+              {title && <h1 styleName="header-title">{title}</h1>}
+              {subtitle && <h3 styleName="header-subtitle">{subtitle}</h3>}
               <div styleName="header-text">
                 <div styleName="header-text-column">
                   <div>
-                    { type === 'text' && <p styleName="header-text-large">{ description }</p> }
-                    { type === 'lines' && <AnimatedLines lines={ lines } /> }
+                    {type === 'text' && <p styleName="header-text-large">{description}</p>}
+                    {type === 'lines' && <AnimatedLines lines={lines} />}
                   </div>
-                  { hasButton && (
+                  {hasButton && (
                     <Button
-                      link={ buttonLink }
-                      text={ buttonText }
-                      style={ buttonStyle }
-                      arrow={ buttonArrow }
+                      arrow={buttonArrow}
+                      link={buttonLink}
+                      text={buttonText}
+                      style={buttonStyle}
                     />
-                  ) }
+                  )}
                 </div>
               </div>
             </div>
