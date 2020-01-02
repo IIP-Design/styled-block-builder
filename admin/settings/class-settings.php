@@ -15,11 +15,11 @@ class Settings {
   }
 
   function create_admin_page() {
-    // Set class property
+    // Set class property.
     $this->options = get_option( 'gpalab-style-template-dev-mode' );
     ?>
     <div class="wrap">
-      <h1> <?php __( 'GPA/LAB Style Templates', 'gpalab-templates' ) ?></h1>
+      <h1> <?php __( 'GPA/LAB Style Templates', 'gpalab-templates' ); ?></h1>
       <form method="post" action="options.php">
       <?php
         settings_fields( 'gpalab-templates' );
@@ -36,23 +36,23 @@ class Settings {
       'gpalab-templates',
       'gpalab-style-template-dev-mode'
     );
-    
+
     add_settings_section(
       'gpalab-templates',
-      __('Set Plugin to Dev Mode?', 'gpalab-templates'),
+      __( 'Set Plugin to Dev Mode?', 'gpalab-templates' ),
       function() {
-        echo __( 'This is not recommended. It will enqueue development builds of the plugin\'s scripts and styles and should only be used while actively developing the plugin.', 'gpalab-templates');
+        esc_html_e( 'This is not recommended. It will enqueue development builds of the plugin\'s scripts and styles and should only be used while actively developing the plugin.', 'gpalab-templates' );
       },
       'gpalab-templates'
     );
 
     add_settings_field(
       'gpalab-dev-mode',
-      __('Toggle Dev Mode', 'gpalab-templates' ),
+      __( 'Toggle Dev Mode', 'gpalab-templates' ),
       array( $this, 'dev_mode_toggle' ),
       'gpalab-templates',
       'gpalab-templates'
-    ); 
+    );
   }
 
   function dev_mode_toggle() {
@@ -60,7 +60,7 @@ class Settings {
 
     ?>
       <label for="gpalab-dev-mode-disabled">
-        <?php echo __( 'Disabled', 'gpalab-templates' ); ?>
+        <?php esc_html_e( 'Disabled', 'gpalab-templates' ); ?>
         <input
           id="gpalab-dev-mode-disabled"
           name="gpalab-style-template-dev-mode"
@@ -68,13 +68,13 @@ class Settings {
           type="radio"
           value="0"
           <?php
-            $disabled = get_option( 'gpalab-style-template-dev-mode' ) == 0 ? 'checked' : '';
-            echo $disabled
+            $disabled = get_option( 'gpalab-style-template-dev-mode' ) === '0' ? 'checked' : '';
+            echo esc_html( $disabled );
           ?>
         />
       </label>
       <label for="gpalab-dev-mode-enabled">
-        <?php echo __( 'Enabled', 'gpalab-templates' ); ?>
+        <?php esc_html_e( 'Enabled', 'gpalab-templates' ); ?>
         <input
           id="gpalab-dev-mode-enabled"
           name="gpalab-style-template-dev-mode"
@@ -82,8 +82,8 @@ class Settings {
           type="radio"
           value="1"
           <?php
-            $enabled = get_option( 'gpalab-style-template-dev-mode' ) == 1 ? 'checked' : '';
-            echo $enabled
+            $enabled = get_option( 'gpalab-style-template-dev-mode' ) === '1' ? 'checked' : '';
+            echo esc_html( $enabled );
           ?>
         />
       </label>

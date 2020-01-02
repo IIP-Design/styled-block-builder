@@ -8,6 +8,8 @@
  * Text Domain: gpalab-templates
  * License: GNU General Public License v2.0
  * License URI: https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html
+ *
+ * @package    Style_Templates
  */
 
 // If this file is called directly, abort.
@@ -20,14 +22,18 @@ define( 'STYLE_TEMPLATES_DIR', plugin_dir_path( dirname( __FILE__ ) ) . 'style-t
 define( 'STYLE_TEMPLATES_DIST', plugin_dir_url( dirname( __FILE__ ) ) . 'style-templates/dist/' );
 define( 'STYLE_TEMPLATES_URL', plugin_dir_url( dirname( __FILE__ ) ) . 'style-templates/' );
 
-/** Run functions needed at startup when plugin is installed. */
+/**
+ * Run functions needed at startup when plugin is installed.
+ */
 function gpalab_style_templates_activate() {
   require_once plugin_dir_path( __FILE__ ) . 'includes/class-activator.php';
   Style_Templates\Activator::activate();
 }
 register_activation_hook( __FILE__, 'gpalab_style_templates_activate' );
 
-/** Clean up site when the plugin is deactivated. */
+/**
+ * Clean up site when the plugin is deactivated.
+ */
 function gpalab_style_templates_deactivate() {
   require_once plugin_dir_path( __FILE__ ) . 'includes/class-deactivator.php';
   Style_Templates\Deactivator::deactivate();

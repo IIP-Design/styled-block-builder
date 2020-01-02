@@ -16,6 +16,9 @@
 <arg name="extensions" value="php" />
 <arg value="s"/>
 
+<!-- Uncomment the below line if you only want a summary report. -->
+<!-- <arg name="report" value="summary" /> -->
+
 <rule ref="PHPCompatibilityWP" />
 
 <!-- Include the three WordPress coding standards rulesets. -->

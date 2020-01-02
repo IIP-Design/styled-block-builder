@@ -5,26 +5,26 @@ namespace Style_Templates;
 class Uploader {
 
   public function initiate_upload( $files, $type ) {
-    // Initialize an array of files for upload
+    // Initialize an array of files for upload.
     $for_upload = array();
 
-    // Check for the correct files based on block type
-    if ( $type == 'quote-box') {
+    // Check for the correct files based on block type.
+    if ( 'quote-box' === $type ) {
       if ( isset( $files['backgroundImage'] ) ) {
         $file = array(
           'name' => 'backgroundImage',
-          'file' => $files['backgroundImage']
+          'file' => $files['backgroundImage'],
         );
 
         array_push( $for_upload, $file );
       }
     }
 
-    if ( $type == 'stats') {
+    if ( 'stats' === $type ) {
       if ( isset( $files['backgroundImage'] ) ) {
         $file = array(
           'name' => 'backgroundImage',
-          'file' => $files['backgroundImage']
+          'file' => $files['backgroundImage'],
         );
 
         array_push( $for_upload, $file );
@@ -37,29 +37,29 @@ class Uploader {
   }
 
   function handle_upload( $files ) {
-    // Make sure the WP upload function is available
+    // Make sure the WP upload function is available.
     if ( ! function_exists( 'wp_handle_upload' ) ) {
-      require_once( ABSPATH . 'wp-admin/includes/file.php' );
+      require_once ABSPATH . 'wp-admin/includes/file.php';
     }
 
-    // Initialize an array for the response values
+    // Initialize an array for the response values.
     $response = array();
 
     foreach ( $files as $file ) {
-      // Ensure that file is coming from a valid AJAX request
+      // Ensure that file is coming from a valid AJAX request.
       $overrides = array( 'action' => 'gpalab_update_template' );
 
-      // Upload file
+      // Upload file.
       $new_file = wp_handle_upload( $file['file'], $overrides );
 
-      if ( $new_file && !isset( $new_file['error'] ) ) {
+      if ( $new_file && ! isset( $new_file['error'] ) ) {
         $file_data = array(
           'name' => $file['name'],
-          'url'  => $new_file['url']
+          'url'  => $new_file['url'],
         );
 
         array_push( $response, $file_data );
-      } else {   
+      } else {
         echo $new_file['error'];
       }
     }
@@ -67,5 +67,5 @@ class Uploader {
     unset( $file );
 
     return $response;
-  } 
+  }
 }

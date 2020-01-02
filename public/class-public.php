@@ -9,8 +9,8 @@ class Frontend {
 
     /** Check whether in dev mode and if so load dev builds. */
     $dev_mode = get_option( 'gpalab-style-template-dev-mode' );
-    $scripts  = $dev_mode === 1 ? 'dev-template-frontend.js' : 'gpalab-template-frontend.js';
-    $styles   = $dev_mode === 1 ? 'dev-template-frontend.css' : 'gpalab-template-frontend.css';
+    $scripts  = '1' === $dev_mode ? 'dev-template-frontend.js' : 'gpalab-template-frontend.js';
+    $styles   = '1' === $dev_mode ? 'dev-template-frontend.css' : 'gpalab-template-frontend.css';
 
     wp_register_script( 'gpalab-template-frontend-js', STYLE_TEMPLATES_DIST . $scripts, array(), null, true );
 
