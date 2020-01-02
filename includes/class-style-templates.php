@@ -18,7 +18,7 @@ class Style_Templates {
    *
    * @since 0.0.1
    * @access protected
-   * @var Style_Templates_Loader    $loader    Maintains and registers all hooks for the plugin.
+   * @var Style_Templates_Loader $loader    Maintains and registers all hooks for the plugin.
    */
   protected $loader;
 
@@ -77,13 +77,12 @@ class Style_Templates {
 
     // The class responsible for defining all actions that occur in the admin area.
     require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-admin.php';
+
     require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/api/class-api.php';
     require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/metabox/class-metabox.php';
     require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/metabox/ajax/class-update-template.php';
     require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/settings/class-settings.php';
     require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/shortcode/class-shortcode.php';
-
-    // require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/gut-blocks/highlight/class-gut-highlight.php';
 
     // The class responsible for defining all actions that occur in the public-facing side of the site.
     require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-frontend.php';
@@ -108,20 +107,18 @@ class Style_Templates {
     // WP API hooks.
     $this->loader->add_action( 'rest_api_init', $plugin_api, 'register_associated_templates_meta' );
 
-    // Animated blocks.
-    // $plugin_animated = new Style_Templates\Animated( $this->get_plugin_name(), $this->get_version() );
-    // $this->loader->add_action( 'init', $plugin_animated, 'register_animated_blocks' );
-    // $this->loader->add_filter( 'block_categories', $plugin_animated, 'register_animated_block_category', 10, 2 );
-
-    // Ajax.
+    // Ajax hooks.
     $this->loader->add_action( 'wp_ajax_gpalab_update_template', $plugin_ajax, 'handle_template_update' );
     $this->loader->add_action( 'wp_ajax_gpalab_delete_template', $plugin_ajax, 'handle_template_deletion' );
-    // Custom Metabox.
+
+    // Custom metabox hooks.
     $this->loader->add_action( 'add_meta_boxes', $plugin_metabox, 'add_templates_metabox' );
-    // Settings.
+
+    // Settings page hooks.
     $this->loader->add_action( 'admin_menu', $plugin_settings, 'add_templates_settings_page' );
     $this->loader->add_action( 'admin_init', $plugin_settings, 'populate_template_settings' );
-    // Shortcode.
+
+    // Shortcode hooks.
     $this->loader->add_action( 'init', $plugin_shortcode, 'add_templates_shortcode' );
   }
 
@@ -146,7 +143,7 @@ class Style_Templates {
    * The reference to the class that orchestrates the hooks with the plugin.
    *
    * @since  0.0.1
-   * @return    Style_Templates_Loader    Orchestrates the hooks of the plugin.
+   * @return Style_Templates_Loader    Orchestrates the hooks of the plugin.
    */
   public function get_loader() {
     return $this->loader;
