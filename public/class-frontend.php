@@ -1,10 +1,24 @@
 <?php
+/**
+ * Registers the Frontend class.
+ *
+ * @package Style_Templates\Frontend
+ * @since 0.0.1
+ */
 
 namespace Style_Templates;
 
+/**
+ * Add style templates frontend scripts and styles.
+ *
+ * @package Style_Templates\Admin
+ * @since 0.0.1
+ */
 class Frontend {
 
-  /** Register the scripts for each block type. */
+  /**
+   * Register the scripts for each block type.
+   */
   public function register_template_scripts_styles() {
 
     /** Check whether in dev mode and if so load dev builds. */
