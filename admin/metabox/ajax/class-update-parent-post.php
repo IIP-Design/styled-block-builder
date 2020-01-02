@@ -53,12 +53,16 @@ class Update_Parent_Post {
     // Get the list of style templates associated with the parent post.
     $associated = get_post_meta( $parent_id, 'gpalab_associated_templates', true );
 
+    // If no array of associated templates, there is nothing to remove.
     if ( empty( $associated ) ) {
       return;
     }
 
-    if ( in_array( $template_id, $associated, true ) ) {
-      $remove = array( $template_id );
+    // Cast id value to an integer since post ids are ints, but the template_id values are stored as strings.
+    $id_as_int = (int) $template_id;
+
+    if ( in_array( $id_as_int, $associated, true ) ) {
+      $remove = array( $id_as_int );
 
       // array_values needed to reindex the array after removing item.
       $removed = array_values( array_diff( $associated, $remove ) );
