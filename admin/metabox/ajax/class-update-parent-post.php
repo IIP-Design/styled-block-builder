@@ -1,9 +1,30 @@
 <?php
+/**
+ * Registers the Update_Template class.
+ *
+ * @package Style_Templates\Update_Parent_Post
+ * @since 0.0.1
+ */
 
 namespace Style_Templates;
 
+/**
+ * Maintains list of associated templates.
+ *
+ * Upon an AJAX request to add/delete a style template, this class updates the list
+ * of templates associated with the parent post.
+ *
+ * @package Style_Templates\Update_Parent_Post
+ * @since 0.0.1
+ */
 class Update_Parent_Post {
 
+  /**
+   * Add a post id to the list of associated templates.
+   *
+   * @param string $parent_id       Post id of the parent post.
+   * @param string $template_id     Post id of the template post.
+   */
   public function set_parent_post_meta( $parent_id, $template_id ) {
     // Get the list of style templates associated with the parent post.
     $associated = get_post_meta( $parent_id, 'gpalab_associated_templates', true );
@@ -22,6 +43,12 @@ class Update_Parent_Post {
     }
   }
 
+  /**
+   * Remove a post id to the list of associated templates.
+   *
+   * @param string $parent_id       Post id of the parent post.
+   * @param string $template_id     Post id of the template post.
+   */
   public function remove_from_parent_post_meta( $parent_id, $template_id ) {
     // Get the list of style templates associated with the parent post.
     $associated = get_post_meta( $parent_id, 'gpalab_associated_templates', true );

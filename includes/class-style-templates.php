@@ -1,25 +1,43 @@
 <?php
+/**
+ * Registers the Style_Templates class.
+ *
+ * @package Style_Templates
+ * @since 0.0.1
+ */
 
+ /**
+  * Register all hooks to be run by the plugin.
+  *
+  * @package Style_Templates
+  */
 class Style_Templates {
 
   /**
    * The loader that's responsible for maintaining and registering all hooks that power the plugin.
    *
-   * @since    0.0.1
-   * @access   protected
-   * @var      Style_Templates_Loader    $loader    Maintains and registers all hooks for the plugin.
+   * @since 0.0.1
+   * @access protected
+   * @var Style_Templates_Loader    $loader    Maintains and registers all hooks for the plugin.
    */
-
   protected $loader;
 
   /**
-   * The unique identifier and version of this plugin.
+   * The unique identifier of this plugin.
    *
-   * @since    0.0.1
-   * @access   protected
+   * @since 0.0.1
+   * @access protected
+   * @var string $plugin_name
    */
-
   protected $plugin_name;
+
+  /**
+   * The version number of this plugin.
+   *
+   * @since 0.0.1
+   * @access protected
+   * @var string $version
+   */
   protected $version;
 
   /**
@@ -29,7 +47,7 @@ class Style_Templates {
    * Load the dependencies and set the hooks for the admin area and
    * the public-facing side of the site.
    *
-   * @since    0.0.1
+   * @since 0.0.1
    */
   public function __construct() {
     $this->plugin_name = 'style-templates';
@@ -50,8 +68,8 @@ class Style_Templates {
    *
    * Create an instance of the loader which will be used to register the hooks with WordPress.
    *
-   * @since    0.0.1
-   * @access   private
+   * @since 0.0.1
+   * @access private
    */
   private function load_dependencies() {
     // The class responsible for orchestrating the actions and filters of the core plugin.
@@ -68,7 +86,7 @@ class Style_Templates {
     // require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/gut-blocks/highlight/class-gut-highlight.php';
 
     // The class responsible for defining all actions that occur in the public-facing side of the site.
-    require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-public.php';
+    require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-frontend.php';
 
     $this->loader = new Style_Templates\Loader();
   }
@@ -118,7 +136,7 @@ class Style_Templates {
   /**
    * Run the loader to execute all of the hooks with WordPress.
    *
-   * @since    0.0.1
+   * @since 0.0.1
    */
   public function run() {
     $this->loader->run();
@@ -127,18 +145,23 @@ class Style_Templates {
   /**
    * The reference to the class that orchestrates the hooks with the plugin.
    *
-   * @since     0.0.1
+   * @since  0.0.1
    * @return    Style_Templates_Loader    Orchestrates the hooks of the plugin.
    */
   public function get_loader() {
     return $this->loader;
   }
 
-  /** Retrieve the name & version number of the plugin. */
+  /**
+   * Retrieve the name of the plugin.
+   */
   public function get_plugin_name() {
     return $this->plugin_name;
   }
 
+  /**
+   * Retrieve the version number of the plugin.
+   */
   public function get_version() {
     return $this->version;
   }

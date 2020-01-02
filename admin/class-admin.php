@@ -1,7 +1,19 @@
 <?php
+/**
+ * Registers the Admin class.
+ *
+ * @package Style_Templates\Admin
+ * @since 0.0.1
+ */
 
 namespace Style_Templates;
 
+/**
+ * Add style templates admin scripts and styles.
+ *
+ * @package Style_Templates\Admin
+ * @since 0.0.1
+ */
 class Admin {
 
   /**

@@ -1,4 +1,10 @@
 <?php
+/**
+ * Registers the Animated class.
+ *
+ * @package Style_Templates\Animated
+ * @since 0.0.1
+ */
 
 namespace Style_Templates;
 

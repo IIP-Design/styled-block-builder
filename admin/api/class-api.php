@@ -1,7 +1,22 @@
 <?php
+/**
+ * Registers the API class.
+ *
+ * @package Style_Templates\API
+ * @since 0.0.1
+ */
 
 namespace Style_Templates;
 
+/**
+ * Creates custom API endpoint.
+ *
+ * Adds a 'gpalab_associated_templates' node to the WordPress posts API,
+ * which displays the data for style templates assoicated with the post.
+ *
+ * @package Style_Templates\API
+ * @since 0.0.1
+ */
 class API {
 
   /**
@@ -21,7 +36,12 @@ class API {
     );
   }
 
-  function get_template_data_for_api( $object ) {
+  /**
+   * Register an API endpoint for 'gpalab_styles_templates' data for each post
+   *
+   * @param array $object     Post data onject.
+   */
+  public function get_template_data_for_api( $object ) {
     // Get the id of the given post.
     $post_id = $object['id'];
 

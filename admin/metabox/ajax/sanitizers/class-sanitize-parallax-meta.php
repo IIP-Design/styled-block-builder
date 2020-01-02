@@ -1,9 +1,29 @@
 <?php
+/**
+ * Registers the Sanitize_Parallax_Meta class.
+ *
+ * @package Style_Templates\Sanitizer
+ * @since 0.0.1
+ */
 
 namespace Style_Templates;
 
+/**
+ * Sanitizes the values sent over in the AJAX request.
+ *
+ * Checks for and sanitizes the fields expected by the parallax form.
+ *
+ * @package Style_Templates\Sanitizer
+ * @since 0.0.1
+ */
 class Sanitize_Parallax_Meta {
 
+  /**
+   * Checks for and sanitizes the expected fields.
+   *
+   * @param array $data     Unsanitized values sent over in the AJAX request.
+   * @return array          Array of sanitized values
+   */
   public function sanitize_inputs( $data ) {
 
     $unsanitary = json_decode( stripslashes( $data ), true );

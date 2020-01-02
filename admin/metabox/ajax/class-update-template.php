@@ -1,7 +1,22 @@
 <?php
+/**
+ * Registers the Update_Template class.
+ *
+ * @package Style_Templates\Update_Template
+ * @since 0.0.1
+ */
 
 namespace Style_Templates;
 
+/**
+ * Handles template form submissions.
+ *
+ * Accepts AJAX request from the style templates metabox, validates and sanitize form inputs,
+ * and executes the appropriate action (be it post creation, deletion, or update).
+ *
+ * @package Style_Templates\Update_Template
+ * @since 0.0.1
+ */
 class Update_Template {
 
   /**
@@ -21,7 +36,7 @@ class Update_Template {
     $validator = new Validator();
 
     // Load in uploader.
-    include_once STYLE_TEMPLATES_DIR . 'admin/metabox/ajax/class-upload-file.php';
+    include_once STYLE_TEMPLATES_DIR . 'admin/metabox/ajax/class-uploader.php';
     $uploader = new Uploader();
 
     // The following rules are handled by the valitation and sanitization functions and hence can be safely ignored.
@@ -66,7 +81,7 @@ class Update_Template {
     $post_id = $this->insert_template_data( $data );
 
     // Update post data object with post id.
-    if ( 0 == $passed_id ) {
+    if ( '0' === $passed_id ) {
       $data['id'] = $post_id;
     }
 
@@ -77,7 +92,7 @@ class Update_Template {
     $update_parent->set_parent_post_meta( $parent_id, $post_id );
 
     // Return post ID as the AJAX response.
-    $action_type = 0 == $passed_id ? 'added_post' : 'updated_post';
+    $action_type = '0' === $passed_id ? 'added_post' : 'updated_post';
     $send_response->send_custom_success( $action_type, $data );
   }
 
@@ -125,9 +140,9 @@ class Update_Template {
   /**
    * Accept post data and use it to create/update post.
    *
-   * @param   array $data     Post data to be inserted upon post creation/updating.
+   * @param array $data     Post data to be inserted upon post creation/updating.
    */
-  function insert_template_data( $data ) {
+  private function insert_template_data( $data ) {
     $user_id = get_current_user_id();
 
     $post_data = array(

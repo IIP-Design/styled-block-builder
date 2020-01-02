@@ -1,14 +1,37 @@
 <?php
+/**
+ * Registers the Shortcode class.
+ *
+ * @package Style_Templates\Shortcode
+ * @since 0.0.1
+ */
 
 namespace Style_Templates;
 
+/**
+ * Add style templates shortcode.
+ *
+ * The Shortcode class adds a custom shortcode and registers the corresponding scripts and styles.
+ *
+ * @package Style_Templates\Shortcode
+ * @since 0.0.1
+ */
 class Shortcode {
 
+  /**
+   * Adds a custom shortcode for the style templates.
+   */
   public function add_templates_shortcode() {
     add_shortcode( 'gpalab_template', array( $this, 'template_shortcode' ) );
   }
 
-  function template_shortcode( $args ) {
+  /**
+   * Pass required PHP values as variables to admin JS.
+   *
+   * @param array $args     The arguments passed into the shortcode.
+   * @return string         Output shortcode.
+   */
+  public function template_shortcode( $args ) {
     // Map the provided shortcode attributes.
     $attr = shortcode_atts(
       array(

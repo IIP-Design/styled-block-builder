@@ -1,12 +1,26 @@
 <?php
+/**
+ * Registers the Responses class.
+ *
+ * @package Style_Templates\Responses
+ * @since 0.0.1
+ */
 
 namespace Style_Templates;
 
+/**
+ * HTTP error and success responses.
+ *
+ * Sends out the appropriate success or error message.
+ *
+ * @package Style_Templates\Responses
+ * @since 0.0.1
+ */
 class Responses {
   /**
-   * Errors.
+   * Accepts the error name and then sends a corresponding error message.
    *
-   * @param   string $type     Name of error message to be sent.
+   * @param string $type     Name of error message to be sent.
    */
   public function send_custom_error( $type ) {
     $data   = array();
@@ -70,10 +84,11 @@ class Responses {
   }
 
   /**
-   * Successes
+   * Accepts the success type and then sends a corresponding success message,
+   * along with relevant post data.
    *
-   * @param   string       $type          Name of success message to be sent.
-   * @param   string|array $post_data     Post data to be included in the HTTP response.
+   * @param string       $type          Name of success message to be sent.
+   * @param string|array $post_data     Post data to be included in the HTTP response.
    */
   public function send_custom_success( $type, $post_data ) {
     $data   = array();

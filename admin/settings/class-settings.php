@@ -1,20 +1,42 @@
 <?php
+/**
+ * Registers the Settings class.
+ *
+ * @package Style_Templates\Settings
+ * @since 0.0.1
+ */
 
 namespace Style_Templates;
 
+/**
+ * Add plugin settings.
+ *
+ * The Settings class adds a settings page allowing site admins to configure the plugin.
+ *
+ * @package Style_Templates\Settings
+ * @since 0.0.1
+ */
 class Settings {
 
+  /**
+   * Create a settings page for the plugin.
+   */
   public function add_templates_settings_page() {
     add_options_page(
       __( 'GPA/LAB Style Templates', 'gpalab-templates' ),
       __( 'Style Templates', 'gpalab-templates' ),
       'activate_plugins',
       'gpalab-templates',
-      array( $this, 'create_admin_page' )
+      function() {
+        return $this->create_admin_page();
+      }
     );
   }
 
-  function create_admin_page() {
+  /**
+   * Define the contents of the settings page.
+   */
+  private function create_admin_page() {
     // Set class property.
     $this->options = get_option( 'gpalab-style-template-dev-mode' );
     ?>
@@ -31,6 +53,9 @@ class Settings {
     <?php
   }
 
+  /**
+   * Register the plugin settings and add to the settings page.
+   */
   public function populate_template_settings() {
     register_setting(
       'gpalab-templates',
@@ -49,13 +74,18 @@ class Settings {
     add_settings_field(
       'gpalab-dev-mode',
       __( 'Toggle Dev Mode', 'gpalab-templates' ),
-      array( $this, 'dev_mode_toggle' ),
+      function() {
+        return $this->dev_mode_toggle();
+      },
       'gpalab-templates',
       'gpalab-templates'
     );
   }
 
-  function dev_mode_toggle() {
+  /**
+   * Provide option to toggle development mode for the plugin.
+   */
+  private function dev_mode_toggle() {
     $option = get_option( 'gpalab-style-template-dev-mode' );
 
     ?>
