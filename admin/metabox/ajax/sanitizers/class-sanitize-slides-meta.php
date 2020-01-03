@@ -39,7 +39,7 @@ class Sanitize_Slides_Meta {
       foreach ( $unsanitary['slides'] as $slide ) {
         $sanitized_slide = array();
 
-        $sanitized_slide['background'] = sanitize_text_field( $slide['background'] );
+        $sanitized_slide['backgroundImage'] = sanitize_text_field( $slide['backgroundImage'] );
         $sanitized_slide['id']         = sanitize_text_field( $slide['id'] );
         $sanitized_slide['subtitle']   = sanitize_text_field( $slide['subtitle'] );
         $sanitized_slide['text']       = sanitize_textarea_field( $slide['text'] );
