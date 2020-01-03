@@ -31,7 +31,40 @@ class Uploader {
     $for_upload = array();
 
     // Check for the correct files based on block type.
+    if ( $type == 'hero') {
+      if ( isset( $files['backgroundImage'] ) ) {
+        $file = array(
+          'name' => 'backgroundImage',
+          'file' => $files['backgroundImage']
+        );
+
+        array_push( $for_upload, $file );
+      }
+    }
+
+    if ( $type == 'parallax') {
+      if ( isset( $files['backgroundImage'] ) ) {
+        $file = array(
+          'name' => 'backgroundImage',
+          'file' => $files['backgroundImage']
+        );
+
+        array_push( $for_upload, $file );
+      }
+    }
+    
     if ( 'quote-box' === $type ) {
+      if ( isset( $files['backgroundImage'] ) ) {
+        $file = array(
+          'name' => 'backgroundImage',
+          'file' => $files['backgroundImage'],
+        );
+
+        array_push( $for_upload, $file );
+      }
+    }
+
+    if ( 'slides' === $type ) {
       if ( isset( $files['backgroundImage'] ) ) {
         $file = array(
           'name' => 'backgroundImage',

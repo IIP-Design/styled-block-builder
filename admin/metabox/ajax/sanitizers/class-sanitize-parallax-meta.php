@@ -29,8 +29,8 @@ class Sanitize_Parallax_Meta {
     $unsanitary = json_decode( stripslashes( $data ), true );
     $sanitized  = array();
 
-    if ( ! empty( $unsanitary['background'] ) ) {
-      $sanitized['background'] = sanitize_text_field( $unsanitary['background'] );
+    if ( !empty( $unsanitary['backgroundImage'] ) ) {
+      $sanitized['backgroundImage'] = sanitize_text_field( $unsanitary['backgroundImage'] );
     }
 
     if ( ! empty( $unsanitary['buttonArrow'] ) ) {

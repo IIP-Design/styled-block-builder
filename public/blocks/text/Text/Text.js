@@ -9,20 +9,21 @@ import VideoEmbed from 'blocks/_shared/components/VideoEmbed/VideoEmbed';
 import { backgroundStyle } from 'blocks/_shared/utils/background-style';
 import './Text.module.scss';
 
-const Text = ( { id } ) => {
+const Text = ({ id }) => {
   const { assets } = window.gpalabTemplateFront;
   const { meta } = window[`gpalabText${id}`];
 
-  if ( meta ) {
+  if (meta) {
     const {
       articles,
       blockBackground,
-      button,
-      color,
+      buttonArrow,
+      buttonLink,
+      buttonStyle,
+      buttonText,
       desc,
       fullWidth,
-      link,
-      style,
+      hasButton,
       subtitle,
       textColor,
       title,
@@ -30,34 +31,41 @@ const Text = ( { id } ) => {
       videoURL
     } = meta;
 
-    const bg = backgroundStyle( blockBackground, assets );
+    const bg = backgroundStyle(blockBackground, assets);
 
     return (
-      <Normalizer fullWidth={ fullWidth }>
+      <Normalizer fullWidth={fullWidth}>
         <Fragment>
-          <div style={ bg } styleName="bg">
+          <div style={bg} styleName="bg">
             <div styleName="container">
-              { title && (
-                <h2 style={ { color: textColor } } styleName="title">
-                  { title }
+              {title && (
+                <h2 style={{ color: textColor }} styleName="title">
+                  {title}
                 </h2>
-              ) }
-              { subtitle && (
-                <h3 style={ { color: textColor } } styleName="subtitle">
-                  { subtitle }
+              )}
+              {subtitle && (
+                <h3 style={{ color: textColor }} styleName="subtitle">
+                  {subtitle}
                 </h3>
-              ) }
+              )}
               <div styleName="content">
-                { desc && (
-                  <div style={ { color: textColor } } styleName="description">
-                    { desc }
+                {desc && (
+                  <div style={{ color: textColor }} styleName="description">
+                    {desc}
                   </div>
-                ) }
+                )}
               </div>
-              { button && link && <Button link={ link } text={ button } style={ style } arrow={ color } /> }
+              {hasButton && (
+                <Button
+                  arrow={buttonArrow}
+                  link={buttonLink}
+                  text={buttonText}
+                  style={buttonStyle}
+                />
+              )}
             </div>
-            { videoURL && <VideoEmbed title={ videoTitle } url={ videoURL } /> }
-            { articles && <CDPFeed id={ id } items={ articles } /> }
+            {videoURL && <VideoEmbed title={videoTitle} url={videoURL} />}
+            {articles && <CDPFeed id={id} items={articles} />}
           </div>
         </Fragment>
       </Normalizer>
