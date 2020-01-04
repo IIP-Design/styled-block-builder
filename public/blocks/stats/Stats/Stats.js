@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, Fragment } from 'react';
 import propTypes from 'prop-types';
 import { TimelineMax, Power2 } from 'gsap';
 import ScrollMagic from 'scrollmagic';
@@ -96,30 +96,32 @@ const Stats = ({ id }) => {
       <Normalizer fullWidth={fullWidth}>
         <div styleName="box-bg" style={bg}>
           <Gradient>
-            <div id="stats-section" />
-            <div className="stats-container" styleName="container">
-              {title && (
-                <h2 style={{ color: textColor }} styleName="title">
-                  {title}
-                </h2>
-              )}
-              <div styleName="array">
-                {stats &&
-                  stats.map((stat, index) => (
-                    <div key={uuid()} style={{ borderColor: textColor }} styleName="item">
-                      <div style={{ color: textColor }} styleName="item-percent">
-                        <span id={`stat-${index + 1}`} data-stat={stat.number}>
-                          0
-                        </span>
-                        %
+            <Fragment>
+              <div id="stats-section" />
+              <div className="stats-container" styleName="container">
+                {title && (
+                  <h2 style={{ color: textColor }} styleName="title">
+                    {title}
+                  </h2>
+                )}
+                <div styleName="array">
+                  {stats &&
+                    stats.map((stat, index) => (
+                      <div key={uuid()} style={{ borderColor: textColor }} styleName="item">
+                        <div style={{ color: textColor }} styleName="item-percent">
+                          <span id={`stat-${index + 1}`} data-stat={stat.number}>
+                            0
+                          </span>
+                          %
+                        </div>
+                        <p style={{ color: textColor }} styleName="item-info">
+                          {stat.title}
+                        </p>
                       </div>
-                      <p style={{ color: textColor }} styleName="item-info">
-                        {stat.title}
-                      </p>
-                    </div>
-                  ))}
+                    ))}
+                </div>
               </div>
-            </div>
+            </Fragment>
           </Gradient>
         </div>
       </Normalizer>
