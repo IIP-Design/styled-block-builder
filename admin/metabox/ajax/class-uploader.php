@@ -31,64 +31,66 @@ class Uploader {
     $for_upload = array();
 
     // Check for the correct files based on block type.
-    if ( $type == 'hero') {
-      if ( isset( $files['backgroundImage'] ) ) {
-        $file = array(
-          'name' => 'backgroundImage',
-          'file' => $files['backgroundImage']
-        );
+    if ( 'hero' === $type ) {
+      $background = $this->background_image( $files );
 
-        array_push( $for_upload, $file );
-      }
+      if ( ! empty( $background ) ) {
+        array_push( $for_upload, $background );
+      };
     }
 
-    if ( $type == 'parallax') {
-      if ( isset( $files['backgroundImage'] ) ) {
-        $file = array(
-          'name' => 'backgroundImage',
-          'file' => $files['backgroundImage']
-        );
+    if ( 'parallax' === $type ) {
+      $background = $this->background_image( $files );
 
-        array_push( $for_upload, $file );
-      }
+      if ( ! empty( $background ) ) {
+        array_push( $for_upload, $background );
+      };
     }
-    
+
     if ( 'quote-box' === $type ) {
-      if ( isset( $files['backgroundImage'] ) ) {
-        $file = array(
-          'name' => 'backgroundImage',
-          'file' => $files['backgroundImage'],
-        );
+      $background = $this->background_image( $files );
 
-        array_push( $for_upload, $file );
-      }
+      if ( ! empty( $background ) ) {
+        array_push( $for_upload, $background );
+      };
     }
 
     if ( 'slides' === $type ) {
-      if ( isset( $files['backgroundImage'] ) ) {
-        $file = array(
-          'name' => 'backgroundImage',
-          'file' => $files['backgroundImage'],
-        );
+      $background = $this->background_image( $files );
 
-        array_push( $for_upload, $file );
-      }
+      if ( ! empty( $background ) ) {
+        array_push( $for_upload, $background );
+      };
     }
 
     if ( 'stats' === $type ) {
-      if ( isset( $files['backgroundImage'] ) ) {
-        $file = array(
-          'name' => 'backgroundImage',
-          'file' => $files['backgroundImage'],
-        );
+      $background = $this->background_image( $files );
 
-        array_push( $for_upload, $file );
-      }
+      if ( ! empty( $background ) ) {
+        array_push( $for_upload, $background );
+      };
     }
 
     $response = $this->handle_upload( $for_upload );
 
     return $response;
+  }
+
+  /**
+   * Uploads the file to the WordPress media library.
+   *
+   * @param array $files          File objects submitted by the AJAX request.
+   * @return array $for_upload    File data array.
+   */
+  private function background_image( $files ) {
+    if ( isset( $files['backgroundImage'] ) ) {
+      $file = array(
+        'name' => 'backgroundImage',
+        'file' => $files['backgroundImage'],
+      );
+
+      return $file;
+    }
   }
 
   /**
@@ -120,7 +122,7 @@ class Uploader {
 
         array_push( $response, $file_data );
       } else {
-        echo $new_file['error'];
+        echo esc_html( $new_file['error'] );
       }
     }
 
