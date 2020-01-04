@@ -2,7 +2,7 @@ import React, { Fragment, useEffect, useState } from 'react';
 import propTypes from 'prop-types';
 
 import { getTabTitleField, responsiveTitle } from 'metabox/utils/tab-titles';
-import { handleAdd, handleInput, handleRemove } from 'metabox/utils/modify-group';
+import { handleAdd, handleFile, handleInput, handleRemove } from 'metabox/utils/modify-group';
 import FileUploader from 'metabox/components/FileUploader/FileUploader';
 import ArticleById from '../FeedTypes/ArticleById';
 import CheckboxConditional from '../Toggles/CheckboxConditional';
@@ -24,6 +24,7 @@ const TabbedForm = ({ fields, group, inputs, label, maxTabs, stateFunc }) => {
   }, []);
 
   const updateState = (val, index) => {
+    console.log(val);
     stateFunc(group, val);
     setForms(val);
 
@@ -44,16 +45,6 @@ const TabbedForm = ({ fields, group, inputs, label, maxTabs, stateFunc }) => {
     });
 
     updateState(newState);
-  };
-
-  const handleFile = e => {
-    const { name } = e.target;
-    const file = e.target.files[0];
-
-    const files = inputs.files.filter(f => f.name !== name);
-    files.push({ name, file });
-
-    updateState('files', files);
   };
 
   const uponRemoval = (clone, index) => {
@@ -126,12 +117,13 @@ const TabbedForm = ({ fields, group, inputs, label, maxTabs, stateFunc }) => {
                   >
                     {fields &&
                       fields.map(field => {
-                        if (field.type === 'image') {
+                        if (field.type === 'file') {
                           return (
                             <FileUploader
-                              callback={handleFile}
-                              label="Add background image:"
-                              name="backgroundImage"
+                              callback={e => handleFile(e, form.id, forms, updateState)}
+                              key={`${field.name}-${form.id}`}
+                              label={field.label || ''}
+                              name={field.name}
                             />
                           );
                         }

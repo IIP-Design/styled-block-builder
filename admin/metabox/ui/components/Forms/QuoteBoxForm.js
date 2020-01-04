@@ -7,7 +7,7 @@ import { defaultBackgrounds, defaultText } from 'metabox/utils/color-picker-pale
 import FullWidthToggle from './Toggles/FullWidthToggle';
 import RadioConditional from './Toggles/RadioConditional';
 
-const QuoteBoxForm = ( { callback, meta } ) => {
+const QuoteBoxForm = ({ callback, meta }) => {
   const schema = {
     backgroundType: meta.backgroundType || 'color',
     blockBackground: meta.blockBackground || '#ffffff',
@@ -22,48 +22,48 @@ const QuoteBoxForm = ( { callback, meta } ) => {
     title: meta.title || ''
   };
 
-  const [inputs, setInputs] = useState( schema );
+  const [inputs, setInputs] = useState(schema);
 
   const formData = { ...inputs };
 
   // Initialize the state on first render, otherwise will submit empty values if saved without making changes
-  useEffect( () => {
-    callback( formData );
-  }, [] );
+  useEffect(() => {
+    callback(formData);
+  }, []);
 
-  const updateState = ( name, value ) => {
-    setInputs( { ...inputs, [name]: value } );
-    callback( { ...formData, [name]: value } );
+  const updateState = (name, value) => {
+    setInputs({ ...inputs, [name]: value });
+    callback({ ...formData, [name]: value });
   };
 
   const handleChange = e => {
     const { name, value } = e.target;
 
-    updateState( name, value );
+    updateState(name, value);
   };
 
   const handleToggle = e => {
     const { name } = e.target;
     const checked = !inputs.fullWidth;
 
-    updateState( name, checked );
+    updateState(name, checked);
   };
 
   const handleColor = e => {
     const { group } = e.target.dataset;
     const { value } = e.target;
 
-    updateState( group, value );
+    updateState(group, value);
   };
 
   const handleFile = e => {
     const { name } = e.target;
     const file = e.target.files[0];
 
-    const files = inputs.files.filter( f => f.name !== name );
-    files.push( { name, file } );
+    const files = inputs.files.filter(f => f.name !== name);
+    files.push({ name, file });
 
-    updateState( 'files', files );
+    updateState('files', files);
   };
 
   const blockBgOptions = {
@@ -89,49 +89,40 @@ const QuoteBoxForm = ( { callback, meta } ) => {
   return (
     <Fragment>
       <RadioConditional
-        callback={ handleChange }
-        checked={ inputs.backgroundType }
+        callback={handleChange}
+        checked={inputs.backgroundType}
         label="What type of background would you like to apply to this block?"
-        options={ blockBgType }
+        options={blockBgType}
       />
-      { inputs.backgroundType === 'color' && (
+      {inputs.backgroundType === 'color' && (
         <ColorPicker
-          callback={ handleColor }
-          colors={ blockBgOptions }
+          callback={handleColor}
+          colors={blockBgOptions}
           label="Set block background color:"
-          selected={ inputs.blockBackground }
+          selected={inputs.blockBackground}
         />
-      ) }
-      { inputs.backgroundType === 'image' && (
+      )}
+      {inputs.backgroundType === 'image' && (
         <FileUploader
-          callback={ handleFile }
+          callback={handleFile}
           label="Add background image URL:"
           name="backgroundImage"
         />
-        // <label htmlFor="quote-box-image">
-        //   <input
-        //     id="quote-box-image"
-        //     name="backgroundImage"
-        //     onChange={ e => handleChange( e ) }
-        //     type="text"
-        //     value={ inputs.backgroundImage }
-        //   />
-        // </label>
-      ) }
+      )}
       <ColorPicker
-        callback={ handleColor }
-        colors={ textOptions }
+        callback={handleColor}
+        colors={textOptions}
         label="Set block text color:"
-        selected={ inputs.textColor }
+        selected={inputs.textColor}
       />
       <label htmlFor="quote-box-title">
         Add title:
         <input
           id="quote-box-title"
           name="title"
-          onChange={ e => handleChange( e ) }
+          onChange={e => handleChange(e)}
           type="text"
-          value={ inputs.title }
+          value={inputs.title}
         />
       </label>
       <label htmlFor="quote-box-subtitle">
@@ -139,9 +130,9 @@ const QuoteBoxForm = ( { callback, meta } ) => {
         <input
           id="quote-box-subtitle"
           name="subtitle"
-          onChange={ e => handleChange( e ) }
+          onChange={e => handleChange(e)}
           type="text"
-          value={ inputs.subtitle }
+          value={inputs.subtitle}
         />
       </label>
       <label htmlFor="quote-box-desc">
@@ -149,25 +140,25 @@ const QuoteBoxForm = ( { callback, meta } ) => {
         <textarea
           id="quote-box-desc"
           name="desc"
-          onChange={ e => handleChange( e ) }
+          onChange={e => handleChange(e)}
           rows="6"
-          value={ inputs.desc }
+          value={inputs.desc}
         />
       </label>
       <ColorPicker
-        callback={ handleColor }
-        colors={ quoteBgOptions }
+        callback={handleColor}
+        colors={quoteBgOptions}
         label="Set quote background color:"
-        selected={ inputs.quoteBackground }
+        selected={inputs.quoteBackground}
       />
       <label htmlFor="quote-box-quote">
         Add quote:
         <textarea
           id="quote-box-quote"
           name="quote"
-          onChange={ e => handleChange( e ) }
+          onChange={e => handleChange(e)}
           rows="6"
-          value={ inputs.quote }
+          value={inputs.quote}
         />
       </label>
       <label htmlFor="quote-box-speaker">
@@ -175,12 +166,12 @@ const QuoteBoxForm = ( { callback, meta } ) => {
         <input
           id="quote-box-speaker"
           name="speaker"
-          onChange={ e => handleChange( e ) }
+          onChange={e => handleChange(e)}
           type="text"
-          value={ inputs.speaker }
+          value={inputs.speaker}
         />
       </label>
-      <FullWidthToggle callback={ handleToggle } checked={ inputs.fullWidth } />
+      <FullWidthToggle callback={handleToggle} checked={inputs.fullWidth} />
     </Fragment>
   );
 };
