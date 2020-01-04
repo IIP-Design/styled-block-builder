@@ -51,27 +51,27 @@ class Sanitize_Text_Meta {
       $sanitized['blockBackground'] = sanitize_text_field( $unsanitary['blockBackground'] );
     }
 
+    if ( ! empty( $unsanitary['buttonArrow'] ) ) {
+      $sanitized['buttonArrow'] = sanitize_text_field( $unsanitary['buttonArrow'] );
+    }
+
+    if ( ! empty( $unsanitary['buttonLink'] ) ) {
+      $sanitized['buttonLink'] = sanitize_text_field( $unsanitary['buttonLink'] );
+    }
+
+    if ( ! empty( $unsanitary['buttonStyle'] ) ) {
+      $sanitized['buttonStyle'] = sanitize_text_field( $unsanitary['buttonStyle'] );
+    }
+
+    if ( ! empty( $unsanitary['buttonText'] ) ) {
+      $sanitized['buttonText'] = sanitize_text_field( $unsanitary['buttonText'] );
+    }
+
     if ( ! empty( $unsanitary['desc'] ) ) {
       $sanitized['desc'] = sanitize_textarea_field( $unsanitary['desc'] );
     }
 
-    if ( !empty( $unsanitary['buttonArrow'] ) ) {
-      $sanitized['buttonArrow'] = sanitize_text_field( $unsanitary['buttonArrow'] );
-    }
-    
-    if ( !empty( $unsanitary['buttonLink'] ) ) {
-      $sanitized['buttonLink'] = sanitize_text_field( $unsanitary['buttonLink'] );
-    }
-    
-    if ( !empty( $unsanitary['buttonStyle'] ) ) {
-      $sanitized['buttonStyle'] = sanitize_text_field( $unsanitary['buttonStyle'] );
-    }
-    
-    if ( !empty( $unsanitary['buttonText'] ) ) {
-      $sanitized['buttonText'] = sanitize_text_field( $unsanitary['buttonText'] );
-    }
-
-    if ( !empty( $unsanitary['fullWidth'] ) ) {
+    if ( ! empty( $unsanitary['fullWidth'] ) ) {
       $sanitized['fullWidth'] = rest_sanitize_boolean( $unsanitary['fullWidth'] );
     }
 
@@ -87,7 +87,7 @@ class Sanitize_Text_Meta {
       $sanitized['hasVideo'] = rest_sanitize_boolean( $unsanitary['hasVideo'] );
     }
 
-    if ( !empty( $unsanitary['subtitle'] ) ) {
+    if ( ! empty( $unsanitary['subtitle'] ) ) {
       $sanitized['subtitle'] = sanitize_text_field( $unsanitary['subtitle'] );
     }
 

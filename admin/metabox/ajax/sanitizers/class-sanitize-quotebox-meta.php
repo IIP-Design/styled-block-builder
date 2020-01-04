@@ -33,10 +33,6 @@ class Sanitize_Quotebox_Meta {
       $sanitized['backgroundType'] = sanitize_text_field( $unsanitary['backgroundType'] );
     }
 
-    if ( ! empty( $unsanitary['backgroundImage'] ) ) {
-      $sanitized['backgroundImage'] = sanitize_text_field( $unsanitary['backgroundImage'] );
-    }
-
     if ( ! empty( $unsanitary['blockBackground'] ) ) {
       $sanitized['blockBackground'] = sanitize_text_field( $unsanitary['blockBackground'] );
     }

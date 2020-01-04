@@ -29,10 +29,6 @@ class Sanitize_Hero_Meta {
     $unsanitary = json_decode( stripslashes( $data ), true );
     $sanitized  = array();
 
-    if ( !empty( $unsanitary['backgroundImage'] ) ) {
-      $sanitized['backgroundImage'] = sanitize_text_field( $unsanitary['backgroundImage'] );
-    }
-
     if ( ! empty( $unsanitary['buttonArrow'] ) ) {
       $sanitized['buttonArrow'] = sanitize_text_field( $unsanitary['buttonArrow'] );
     }
