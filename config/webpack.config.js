@@ -1,15 +1,14 @@
-const MiniCssExtractPlugin = require( 'mini-css-extract-plugin' );
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
-const babel = require( './babel' );
-const paths = require( './paths' );
+const babel = require('./babel');
+const paths = require('./paths');
 
-module.exports = ( _, argv ) => {
+module.exports = (_, argv) => {
   const cssModuleNames =
     argv.mode === 'development' ? '[name]-[local]' : 'gpalab-[local]-[hash:base64:5]';
 
   return {
     entry: {
-      // 'gut-highlight': `${paths.gutenbergBlocks}/highlight`,
       'template-frontend': `${paths.blocksFrontend}/blocks`,
       'template-admin': paths.metaboxUI
     },
@@ -20,7 +19,7 @@ module.exports = ( _, argv ) => {
           exclude: /node_modules/,
           use: {
             loader: 'babel-loader',
-            options: babel.setBabelConfig( cssModuleNames )
+            options: babel.setBabelConfig(cssModuleNames)
           }
         },
         {
@@ -53,9 +52,9 @@ module.exports = ( _, argv ) => {
       path: paths.pluginDist
     },
     plugins: [
-      new MiniCssExtractPlugin( {
+      new MiniCssExtractPlugin({
         filename: argv.mode === 'development' ? 'dev-[name].css' : 'gpalab-[name].css'
-      } )
+      })
     ],
     resolve: {
       extensions: ['*', '.js', '.jsx']
