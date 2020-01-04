@@ -28,6 +28,10 @@ const Parallax = ({ id }) => {
     } = meta;
 
     const getBackgroundImage = fileList => {
+      if (!fileList) {
+        return '';
+      }
+
       const bgImage = fileList.filter(file => file.name === 'backgroundImage');
 
       return bgImage[0].url;
@@ -46,10 +50,10 @@ const Parallax = ({ id }) => {
                 {text && <div styleName="text">{text}</div>}
                 {hasButton && (
                   <Button
+                    arrow={buttonArrow}
                     link={buttonLink}
                     text={buttonText}
                     style={buttonStyle}
-                    arrow={buttonArrow}
                   />
                 )}
               </div>

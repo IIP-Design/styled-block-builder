@@ -28,6 +28,10 @@ const Hero = ({ id }) => {
     } = meta;
 
     const getBackgroundImage = fileList => {
+      if (!fileList) {
+        return '';
+      }
+
       const bgImage = fileList.filter(file => file.name === 'backgroundImage');
 
       return bgImage[0].url;
