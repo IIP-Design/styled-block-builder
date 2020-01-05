@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import propTypes from 'prop-types';
 import { createPortal } from 'react-dom';
 
@@ -13,88 +13,90 @@ import SlidesForm from 'metabox/components/Forms/SlidesForm';
 import StatsForm from 'metabox/components/Forms/StatsForm';
 import TextForm from 'metabox/components/Forms/TextForm';
 import TimelineForm from 'metabox/components/Forms/TimelineForm';
+import { MetaboxContext } from 'metabox/components/Metabox/MetaboxContext';
 import { updatePost } from 'metabox/utils/update-post';
 
 import './Modal.module.scss';
 
-const modalRoot = document.getElementById( 'gpalab-add-template-modal' );
+const modalRoot = document.getElementById('gpalab-add-template-modal');
 
-const ModelContent = ( { form, id, show, toggle, updateMetabox } ) => {
-  if ( !show || !form ) return null;
+const ModelContent = ({ form, id, show, toggle }) => {
+  if (!show || !form) return null;
 
-  const [data, setData] = useState( {} );
-  const [saving, setSaving] = useState( false );
-  const [error, setError] = useState( false );
-  const [errorData, setErrorData] = useState( null );
+  const [data, setData] = useState({});
+  const [saving, setSaving] = useState(false);
+  const [error, setError] = useState(false);
+  const [errorData, setErrorData] = useState(null);
+
+  const { dispatch, state } = useContext(MetaboxContext);
 
   // Get array of associated templates
-  const template = window?.gpalabTemplateAdmin?.associated
-    ? window.gpalabTemplateAdmin.associated
-    : [];
+  const templates = state?.templates ? state.templates : [];
 
   // Pick out the one selected for editing and get it's metadata
-  const current = template.filter( item => item.id === id )[0];
+  // console.log(templates);
+  const current = templates.filter(item => item.id === id)[0];
   const meta = current?.meta ? current.meta : {};
 
   let selectedForm = null;
   let formTitle = null;
-  const formStr = form.replace( 'gpalab-', '' );
+  const formStr = form.replace('gpalab-', '');
 
-  switch ( formStr ) {
+  switch (formStr) {
     case 'article-feed':
       formTitle = 'Configure Your Article Feed:';
-      selectedForm = <ArticleFeedForm callback={ setData } meta={ meta } />;
+      selectedForm = <ArticleFeedForm callback={setData} meta={meta} />;
       break;
     case 'hero':
       formTitle = 'Configure Your Hero Block:';
-      selectedForm = <HeroForm callback={ setData } meta={ meta } />;
+      selectedForm = <HeroForm callback={setData} meta={meta} />;
       break;
     case 'parallax':
       formTitle = 'Configure Your Parallax Block:';
-      selectedForm = <ParallaxForm callback={ setData } meta={ meta } />;
+      selectedForm = <ParallaxForm callback={setData} meta={meta} />;
       break;
     case 'quote-box':
       formTitle = 'Configure Your Quote Box:';
-      selectedForm = <QuoteBoxForm callback={ setData } meta={ meta } />;
+      selectedForm = <QuoteBoxForm callback={setData} meta={meta} />;
       break;
     case 'resources':
       formTitle = 'Configure Your Resources Block:';
-      selectedForm = <ResourcesForm callback={ setData } meta={ meta } />;
+      selectedForm = <ResourcesForm callback={setData} meta={meta} />;
       break;
     case 'slides':
       formTitle = 'Configure Your Slides Block:';
-      selectedForm = <SlidesForm callback={ setData } meta={ meta } />;
+      selectedForm = <SlidesForm callback={setData} meta={meta} />;
       break;
     case 'stats':
       formTitle = 'Configure Your Stats Block:';
-      selectedForm = <StatsForm callback={ setData } meta={ meta } />;
+      selectedForm = <StatsForm callback={setData} meta={meta} />;
       break;
     case 'text':
       formTitle = 'Configure Your Text Block:';
-      selectedForm = <TextForm callback={ setData } meta={ meta } />;
+      selectedForm = <TextForm callback={setData} meta={meta} />;
       break;
     case 'timeline':
       formTitle = 'Configure Your Timeline Block:';
-      selectedForm = <TimelineForm callback={ setData } meta={ meta } />;
+      selectedForm = <TimelineForm callback={setData} meta={meta} />;
       break;
     default:
       return;
   }
 
   const submitForm = async () => {
-    const onComplete = ( res, action ) => {
-      updateMetabox( res, action );
-      setSaving( false );
+    const onComplete = (res, action) => {
+      dispatch({ type: 'save', payload: res });
+      setSaving(false);
     };
 
     const onError = err => {
-      setSaving( false );
-      setError( true );
-      setErrorData( err );
+      setSaving(false);
+      setError(true);
+      setErrorData(err);
     };
 
-    setSaving( true );
-    await updatePost( { id, meta: data, type: formStr }, 'save', onComplete, onError );
+    setSaving(true);
+    await updatePost({ id, meta: data, type: formStr }, 'save', onComplete, onError);
   };
 
   const shortcode = `[gpalab_template id='${id}' type='${formStr}']`;
@@ -103,33 +105,33 @@ const ModelContent = ( { form, id, show, toggle, updateMetabox } ) => {
     <div styleName="modal">
       <div styleName="modal-background" />
       <div styleName="modal-foreground">
-        <button aria-label="close modal" onClick={ toggle } styleName="close-icon" type="button">
+        <button aria-label="close modal" onClick={toggle} styleName="close-icon" type="button">
           <span className="dashicons dashicons-no" />
         </button>
-        { saving && <Spinner /> }
-        { error && <ErrorMessage closeFunc={ () => setError( false ) } err={ errorData } /> }
-        { selectedForm && (
+        {saving && <Spinner />}
+        {error && <ErrorMessage closeFunc={() => setError(false)} err={errorData} />}
+        {selectedForm && (
           <form styleName="modal-form">
-            <h3 styleName="modal-form-title">{ formTitle }</h3>
-            { selectedForm }
+            <h3 styleName="modal-form-title">{formTitle}</h3>
+            {selectedForm}
           </form>
-        ) }
+        )}
         <div styleName="modal-controls">
           <label htmlFor="copy-shortcode">
-            { id !== 0 && (
+            {id !== 0 && (
               <input
                 styleName="shortcode-input"
                 id="copy-shortcode"
                 readOnly
                 type="text"
-                value={ shortcode }
+                value={shortcode}
               />
-            ) }
+            )}
           </label>
-          <button className="button-secondary" onClick={ toggle } type="button">
+          <button className="button-secondary" onClick={toggle} type="button">
             Cancel
           </button>
-          <button className="button-primary" onClick={ submitForm } type="button">
+          <button className="button-primary" onClick={submitForm} type="button">
             Save
           </button>
         </div>
@@ -142,11 +144,10 @@ ModelContent.propTypes = {
   form: propTypes.string,
   id: propTypes.number,
   show: propTypes.bool,
-  toggle: propTypes.func,
-  updateMetabox: propTypes.func
+  toggle: propTypes.func
 };
 
 /* eslint-disable-next-line react/jsx-props-no-spreading */
-const Modal = props => createPortal( <ModelContent { ...props } />, modalRoot );
+const Modal = props => createPortal(<ModelContent {...props} />, modalRoot);
 
 export default Modal;

@@ -1,12 +1,12 @@
 import React, { Fragment, useContext, useState } from 'react';
 import propTypes from 'prop-types';
 
-import { MetaboxContext } from 'metabox/components/Metabox/Metabox';
+import { MetaboxContext } from 'metabox/components/Metabox/MetaboxContext';
 import { updatePost } from 'metabox/utils/update-post';
 
 import './AssociatedList.module.scss';
 
-const AssociatedList = ({ list, edit, updateMetabox }) => {
+const AssociatedList = ({ edit }) => {
   const [updating, setUpdating] = useState([]);
 
   const { dispatch, state } = useContext(MetaboxContext);
@@ -21,7 +21,7 @@ const AssociatedList = ({ list, edit, updateMetabox }) => {
 
     const resetUpdating = newUpdating.filter(item => item !== id);
     setUpdating(resetUpdating);
-    updateMetabox(id, 'delete');
+    dispatch({ type: 'delete', payload: id });
   };
 
   return (
@@ -47,7 +47,7 @@ const AssociatedList = ({ list, edit, updateMetabox }) => {
             <button
               aria-label="delete template"
               disabled={item.id === updating}
-              onClick={() => dispatch({ type: 'delete-item', payload: item.id })}
+              onClick={() => deleteItem(item.id)}
               styleName={updating.includes(item.id) ? 'button disabled' : 'button'}
               type="button"
             >
@@ -61,9 +61,7 @@ const AssociatedList = ({ list, edit, updateMetabox }) => {
 };
 
 AssociatedList.propTypes = {
-  edit: propTypes.func,
-  list: propTypes.array,
-  updateMetabox: propTypes.func
+  edit: propTypes.func
 };
 
 export default AssociatedList;

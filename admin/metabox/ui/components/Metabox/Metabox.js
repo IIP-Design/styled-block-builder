@@ -2,40 +2,21 @@ import React, { useEffect, useReducer, useState } from 'react';
 
 import AssociatedList from 'metabox/components/AssociatedList/AssociatedList';
 import Modal from 'metabox/components/Modal/Modal';
+import { MetaboxContext, metaboxReducer } from './MetaboxContext';
 
 import './Metabox.module.scss';
-
-const MetaboxContext = React.createContext();
-const { Provider } = MetaboxContext;
-
-const initialState = {
-  templates: []
-};
-
-function metaboxReducer(state, action) {
-  switch (action.type) {
-    case 'init':
-      return { templates: action.payload };
-    case 'delete-item':
-      console.log(`delete ${action.payload}`);
-      break;
-    default:
-      throw new Error();
-  }
-}
 
 const MetaBox = () => {
   const [formId, setFormId] = useState(0);
   const [formType, setFormType] = useState('');
   const [showModal, setShowModal] = useState(false);
-  const [associated, setAssociated] = useState([]);
 
+  const initialState = { templates: [] };
   const [state, dispatch] = useReducer(metaboxReducer, initialState);
 
   const store = {
     dispatch,
-    state,
-    getState: () => state
+    state
   };
 
   useEffect(() => {
@@ -58,34 +39,9 @@ const MetaBox = () => {
     setShowModal(true);
   };
 
-  const updateAssociated = (res, action) => {
-    const clone = [...associated];
-
-    if (action === 'save') {
-      const filtered = clone.filter(items => items.id !== res.id);
-
-      const newItem = {
-        id: res.id,
-        meta: res.post_meta,
-        title: res.post_title,
-        type: `gpalab-${res.post_type}`
-      };
-
-      filtered.push(newItem);
-
-      setAssociated(filtered);
-    }
-
-    if (action === 'delete') {
-      const filtered = clone.filter(items => items.id !== res);
-
-      setAssociated(filtered);
-    }
-  };
-
   return (
     <div styleName="dropdown-container">
-      <Provider value={store}>
+      <MetaboxContext.Provider value={store}>
         <label htmlFor="gpalab-templates-dropdown">
           <strong>Add Template:</strong>
           <select
@@ -114,17 +70,9 @@ const MetaBox = () => {
         >
           Configure Template
         </button>
-        {state.templates.length > 0 && (
-          <AssociatedList list={associated} edit={editExisting} updateMetabox={updateAssociated} />
-        )}
-        <Modal
-          id={formId}
-          form={formType}
-          show={showModal}
-          toggle={toggleModal}
-          updateMetabox={updateAssociated}
-        />
-      </Provider>
+        {state?.templates && state.templates.length > 0 && <AssociatedList edit={editExisting} />}
+        <Modal id={formId} form={formType} show={showModal} toggle={toggleModal} />
+      </MetaboxContext.Provider>
     </div>
   );
 };
