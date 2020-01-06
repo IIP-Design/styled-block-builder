@@ -79,6 +79,24 @@ export const metaboxReducer = (state, action) => {
         ...state,
         templates: saveInState(state, action.payload)
       };
+    case 'modal-hide':
+      return {
+        ...state,
+        formData: {
+          formId: 0,
+          formType: ''
+        },
+        showModal: false
+      };
+    case 'modal-show':
+      return {
+        ...state,
+        formData: {
+          formId: action.payload.formId,
+          formType: action.payload.formType
+        },
+        showModal: true
+      };
     case 'updating-add':
       return {
         ...state,

@@ -9,9 +9,13 @@ import './Metabox.module.scss';
 const MetaBox = () => {
   const [formId, setFormId] = useState(0);
   const [formType, setFormType] = useState('');
-  const [showModal, setShowModal] = useState(false);
 
   const initialState = {
+    formData: {
+      formId: 0,
+      formType: ''
+    },
+    showModal: false,
     templates: [],
     updating: []
   };
@@ -30,18 +34,6 @@ const MetaBox = () => {
 
     dispatch({ type: 'init', payload: list });
   }, []);
-
-  const toggleModal = () => {
-    setShowModal(false);
-    setFormId(0);
-    setFormType('');
-  };
-
-  const editExisting = (id, type) => {
-    setFormId(id);
-    setFormType(type);
-    setShowModal(true);
-  };
 
   return (
     <div styleName="dropdown-container">
@@ -69,13 +61,13 @@ const MetaBox = () => {
         <button
           className="button-secondary"
           disabled={formType === ''}
-          onClick={() => setShowModal(true)}
+          onClick={() => dispatch({ type: 'modal-show' })}
           type="button"
         >
           Configure Template
         </button>
-        {state?.templates && state.templates.length > 0 && <AssociatedList edit={editExisting} />}
-        <Modal id={formId} form={formType} show={showModal} toggle={toggleModal} />
+        {state?.templates && state.templates.length > 0 && <AssociatedList />}
+        <Modal id={formId} form={formType} />
       </MetaboxContext.Provider>
     </div>
   );

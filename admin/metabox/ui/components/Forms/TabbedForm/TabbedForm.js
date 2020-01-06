@@ -24,7 +24,6 @@ const TabbedForm = ({ fields, group, inputs, label, maxTabs, stateFunc }) => {
   }, []);
 
   const updateState = (val, index) => {
-    console.log(val);
     stateFunc(group, val);
     setForms(val);
 

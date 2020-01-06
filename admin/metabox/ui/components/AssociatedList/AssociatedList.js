@@ -35,7 +35,15 @@ const AssociatedList = ({ edit }) => {
             <button
               aria-label="edit template"
               disabled={isUpdating(item.id)}
-              onClick={() => edit(item.id, item.type)}
+              onClick={() =>
+                dispatch({
+                  type: 'modal-show',
+                  payload: {
+                    formId: item.id,
+                    formType: item.type
+                  }
+                })
+              }
               styleName="button"
               type="button"
             >
