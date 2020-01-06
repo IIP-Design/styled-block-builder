@@ -1,6 +1,7 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import propTypes from 'prop-types';
 
+import FileUploader from 'metabox/components/FileUploader/FileUploader';
 import ButtonForm from './ButtonForm/ButtonForm';
 import CheckboxConditional from './Toggles/CheckboxConditional';
 import RadioConditional from './Toggles/RadioConditional';
@@ -14,6 +15,7 @@ const HeroForm = ({ callback, meta }) => {
     buttonStyle: meta.buttonStyle || '',
     buttonText: meta.buttonText || '',
     description: meta.description || '',
+    files: meta.files || [],
     hasButton: meta.hasButton || false,
     lines: meta.lines || [],
     subtitle: meta.subtitle || '',
@@ -40,6 +42,16 @@ const HeroForm = ({ callback, meta }) => {
     updateState(name, value);
   };
 
+  const handleFile = e => {
+    const { name } = e.target;
+    const file = e.target.files[0];
+
+    const files = inputs.files.filter(f => f.name !== name);
+    files.push({ name, file });
+
+    updateState('files', files);
+  };
+
   const handleToggle = () => {
     const isChecked = !inputs.hasButton;
 
@@ -55,16 +67,7 @@ const HeroForm = ({ callback, meta }) => {
 
   return (
     <Fragment>
-      <label htmlFor="hero-background">
-        Add URL for Background Image:
-        <input
-          id="hero-background"
-          name="background"
-          onChange={e => handleChange(e)}
-          type="text"
-          value={inputs.background}
-        />
-      </label>
+      <FileUploader callback={handleFile} label="Add background image:" name="backgroundImage" />
       <label htmlFor="hero-title">
         Add Title:
         <input

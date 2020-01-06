@@ -3,7 +3,9 @@ import propTypes from 'prop-types';
 
 import AnimatedLines from 'blocks/_shared/components/AnimatedLines/AnimatedLines';
 import Button from 'blocks/_shared/components/Button/Button';
+import Gradient from 'blocks/_shared/components/Gradient/Gradient';
 import Normalizer from 'blocks/_shared/components/Normalizer/Normalizer';
+import { backgroundImage } from 'blocks/_shared/utils/background-style';
 
 import './Hero.module.scss';
 
@@ -12,12 +14,12 @@ const Hero = ({ id }) => {
 
   if (meta) {
     const {
-      background,
       buttonArrow,
       buttonLink,
       buttonStyle,
       buttonText,
       description,
+      files,
       hasButton,
       lines,
       subtitle,
@@ -25,10 +27,22 @@ const Hero = ({ id }) => {
       type
     } = meta;
 
+    const getBackgroundImage = fileList => {
+      if (!fileList) {
+        return '';
+      }
+
+      const bgImage = fileList.filter(file => file.name === 'backgroundImage');
+
+      return bgImage[0].url;
+    };
+
+    const bg = backgroundImage(getBackgroundImage(files));
+
     return (
       <Normalizer fullWidth>
-        <div styleName="content-background" style={{ backgroundImage: `url(${background})` }}>
-          <div styleName="overlay">
+        <div styleName="content-background" style={bg}>
+          <Gradient>
             <div styleName="header">
               {title && <h1 styleName="header-title">{title}</h1>}
               {subtitle && <h3 styleName="header-subtitle">{subtitle}</h3>}
@@ -49,7 +63,7 @@ const Hero = ({ id }) => {
                 </div>
               </div>
             </div>
-          </div>
+          </Gradient>
         </div>
       </Normalizer>
     );
