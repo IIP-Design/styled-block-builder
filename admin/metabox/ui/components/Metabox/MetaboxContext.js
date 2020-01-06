@@ -35,12 +35,40 @@ const saveInState = (state, template) => {
   return [];
 };
 
+const addToUpdating = (state, id) => {
+  if (state?.updating) {
+    const clone = [...state.updating];
+    if (!clone.includes(id)) {
+      clone.push(id);
+    }
+
+    return clone;
+  }
+
+  return [];
+};
+
+const removeFromUpdating = (state, id) => {
+  if (state?.updating) {
+    const clone = [...state.updating];
+
+    const resetUpdating = clone.filter(item => item !== id);
+
+    return resetUpdating;
+  }
+
+  return [];
+};
+
 export const MetaboxContext = React.createContext();
 
 export const metaboxReducer = (state, action) => {
   switch (action.type) {
     case 'init':
-      return { templates: action.payload };
+      return {
+        ...state,
+        templates: action.payload
+      };
     case 'delete':
       return {
         ...state,
@@ -50,6 +78,16 @@ export const metaboxReducer = (state, action) => {
       return {
         ...state,
         templates: saveInState(state, action.payload)
+      };
+    case 'updating-add':
+      return {
+        ...state,
+        updating: addToUpdating(state, action.payload)
+      };
+    case 'updating-remove':
+      return {
+        ...state,
+        updating: removeFromUpdating(state, action.payload)
       };
     default:
       throw new Error();

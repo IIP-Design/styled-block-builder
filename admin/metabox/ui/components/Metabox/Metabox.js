@@ -11,7 +11,11 @@ const MetaBox = () => {
   const [formType, setFormType] = useState('');
   const [showModal, setShowModal] = useState(false);
 
-  const initialState = { templates: [] };
+  const initialState = {
+    templates: [],
+    updating: []
+  };
+
   const [state, dispatch] = useReducer(metaboxReducer, initialState);
 
   const store = {

@@ -1,4 +1,4 @@
-import React, { Fragment, useContext, useState } from 'react';
+import React, { Fragment, useContext } from 'react';
 import propTypes from 'prop-types';
 
 import { MetaboxContext } from 'metabox/components/Metabox/MetaboxContext';
@@ -7,22 +7,19 @@ import { updatePost } from 'metabox/utils/update-post';
 import './AssociatedList.module.scss';
 
 const AssociatedList = ({ edit }) => {
-  const [updating, setUpdating] = useState([]);
-
   const { dispatch, state } = useContext(MetaboxContext);
-  const { templates } = state;
+  const { templates, updating } = state;
 
   const deleteItem = async id => {
-    const newUpdating = [...updating];
-    newUpdating.push(id);
-    setUpdating(newUpdating);
+    dispatch({ type: 'updating-add', payload: id });
 
     await updatePost({ id }, 'delete');
 
-    const resetUpdating = newUpdating.filter(item => item !== id);
-    setUpdating(resetUpdating);
+    dispatch({ type: 'updating-remove', payload: id });
     dispatch({ type: 'delete', payload: id });
   };
+
+  const isUpdating = id => updating && updating.includes(id);
 
   return (
     <Fragment>
@@ -32,12 +29,12 @@ const AssociatedList = ({ edit }) => {
           <div
             data-id={item.id}
             key={item.id}
-            styleName={updating.includes(item.id) ? 'list-item disabled' : 'list-item'}
+            styleName={isUpdating(item.id) ? 'list-item disabled' : 'list-item'}
           >
             {item.title || item.id}
             <button
               aria-label="edit template"
-              disabled={item.id === updating}
+              disabled={isUpdating(item.id)}
               onClick={() => edit(item.id, item.type)}
               styleName="button"
               type="button"
@@ -46,9 +43,9 @@ const AssociatedList = ({ edit }) => {
             </button>
             <button
               aria-label="delete template"
-              disabled={item.id === updating}
+              disabled={isUpdating(item.id)}
               onClick={() => deleteItem(item.id)}
-              styleName={updating.includes(item.id) ? 'button disabled' : 'button'}
+              styleName={isUpdating(item.id) ? 'button disabled' : 'button'}
               type="button"
             >
               <span className="dashicons dashicons-trash" />
