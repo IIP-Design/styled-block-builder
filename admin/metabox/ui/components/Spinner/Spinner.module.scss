@@ -1,23 +1,17 @@
 @import 'styles/colors.scss';
 
-.background {
-  background-color: $wordpressLighterGrey;
-  height: 100%;
-  margin: -2rem;
-  opacity: 0.5;
-  position: absolute;
-  width: 100%;
-}
-
 .container {
   align-items: center;
+  bottom: 0;
   display: flex;
   flex-direction: column;
-  height: 100%;
   justify-content: center;
+  left: 50%;
   margin: -2rem;
-  position: absolute;
-  width: 100%;
+  position: fixed;
+  right: 50%;
+  top: 0;
+  z-index: 1;
 }
 
 .spinner {

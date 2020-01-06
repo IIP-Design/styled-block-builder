@@ -117,6 +117,39 @@ const ModalContent = () => {
           >
             <span className="dashicons dashicons-no" />
           </button>
+          {saving && <Spinner />}
+          {error && <ErrorMessage closeFunc={() => setError(false)} err={errorData} />}
+          {selectedForm && (
+            <form styleName="modal-form">
+              <h3 styleName="modal-form-title">{formTitle}</h3>
+              <div styleName={saving ? 'modal-form-background saving' : 'modal-form-background'}>
+                {selectedForm}
+              </div>
+              <div styleName="modal-controls">
+                <label htmlFor="copy-shortcode">
+                  {formData.formId !== 0 && (
+                    <input
+                      styleName="shortcode-input"
+                      id="copy-shortcode"
+                      readOnly
+                      type="text"
+                      value={shortcode}
+                    />
+                  )}
+                </label>
+                <button
+                  className="button-secondary"
+                  onClick={() => dispatch({ type: 'modal-hide' })}
+                  type="button"
+                >
+                  Cancel
+                </button>
+                <button className="button-primary" onClick={submitForm} type="button">
+                  Save
+                </button>
+              </div>
+            </form>
+          )}
         </div>
       </div>
     );
