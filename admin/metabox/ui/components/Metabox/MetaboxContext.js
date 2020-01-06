@@ -1,4 +1,5 @@
 import React from 'react';
+import { v4 as uuid } from 'uuid';
 
 const deleteFromState = (state, id) => {
   if (state?.templates) {
@@ -35,6 +36,44 @@ const saveInState = (state, template) => {
   return [];
 };
 
+const addGroupItem = (fields, formValues, group) => {
+  const fieldNames = fields.map(field => field.name);
+
+  const groupArr = formValues[group] ? [...formValues[group]] : [];
+  // Create an object to store values for new resource
+  const obj = {};
+  obj.id = uuid();
+  fieldNames.forEach(name => {
+    obj[name] = '';
+  });
+
+  groupArr.push(obj);
+
+  return groupArr;
+};
+
+const removeGroupItem = (formValues, group, id) => {
+  const groupArr = formValues[group] ? [...formValues[group]] : [];
+
+  const filtered = groupArr.filter(item => item.id !== id);
+
+  return filtered;
+};
+
+export const handleNestedInput = (group, name, parent, value) => {
+  // Make an updated replica of the form objects
+  const newState = [...group];
+  newState.map(item => {
+    if (item.id === parent) {
+      item[name] = value;
+    }
+
+    return item;
+  });
+
+  return newState;
+};
+
 const addToUpdating = (state, id) => {
   if (state?.updating) {
     const clone = [...state.updating];
@@ -63,28 +102,80 @@ const removeFromUpdating = (state, id) => {
 export const MetaboxContext = React.createContext();
 
 export const metaboxReducer = (state, action) => {
+  const { payload } = action;
+
   switch (action.type) {
     case 'init':
       return {
         ...state,
-        templates: action.payload
+        templates: payload
       };
     case 'delete':
       return {
         ...state,
-        templates: deleteFromState(state, action.payload)
+        templates: deleteFromState(state, payload)
       };
     case 'save':
       return {
         ...state,
-        templates: saveInState(state, action.payload)
+        templates: saveInState(state, payload)
+      };
+    case 'form-update':
+      return {
+        ...state,
+        formData: {
+          ...state.formData,
+          formValues: {
+            ...state.formData.formValues,
+            [payload.name]: payload.value
+          }
+        }
+      };
+    case 'group-add':
+      return {
+        ...state,
+        formData: {
+          ...state.formData,
+          formValues: {
+            ...state.formData.formValues,
+            [payload.group]: addGroupItem(payload.fields, state.formData.formValues, payload.group)
+          }
+        }
+      };
+    case 'group-input':
+      return {
+        ...state,
+        formData: {
+          ...state.formData,
+          formValues: {
+            ...state.formData.formValues,
+            [payload.group]: handleNestedInput(
+              state.formData.formValues[payload.group],
+              payload.name,
+              payload.parent,
+              payload.value
+            )
+          }
+        }
+      };
+    case 'group-remove':
+      return {
+        ...state,
+        formData: {
+          ...state.formData,
+          formValues: {
+            ...state.formData.formValues,
+            [payload.group]: removeGroupItem(state.formData.formValues, payload.group, payload.id)
+          }
+        }
       };
     case 'modal-hide':
       return {
         ...state,
         formData: {
           formId: 0,
-          formType: ''
+          formType: '',
+          formValues: null
         },
         showModal: false
       };
@@ -92,20 +183,21 @@ export const metaboxReducer = (state, action) => {
       return {
         ...state,
         formData: {
-          formId: action.payload.formId,
-          formType: action.payload.formType
+          formId: payload.formId,
+          formType: payload.formType,
+          formValues: payload.formValues
         },
         showModal: true
       };
     case 'updating-add':
       return {
         ...state,
-        updating: addToUpdating(state, action.payload)
+        updating: addToUpdating(state, payload)
       };
     case 'updating-remove':
       return {
         ...state,
-        updating: removeFromUpdating(state, action.payload)
+        updating: removeFromUpdating(state, payload)
       };
     default:
       throw new Error();

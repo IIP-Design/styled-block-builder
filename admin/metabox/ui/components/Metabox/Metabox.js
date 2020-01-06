@@ -7,13 +7,13 @@ import { MetaboxContext, metaboxReducer } from './MetaboxContext';
 import './Metabox.module.scss';
 
 const MetaBox = () => {
-  const [formId, setFormId] = useState(0);
   const [formType, setFormType] = useState('');
 
   const initialState = {
     formData: {
       formId: 0,
-      formType: ''
+      formType: '',
+      formValues: null
     },
     showModal: false,
     templates: [],
@@ -41,10 +41,11 @@ const MetaBox = () => {
         <label htmlFor="gpalab-templates-dropdown">
           <strong>Add Template:</strong>
           <select
-            styleName="dropdown"
             id="gpalab-templates-dropdown"
-            onChange={e => setFormType(e.target.value)}
+            styleName="dropdown"
             value={formType}
+            onBlur={e => setFormType(e.target.value)}
+            onChange={e => setFormType(e.target.value)}
           >
             <option value="">- Select Template Type -</option>
             <option value="article-feed">Article Feed</option>
@@ -61,13 +62,18 @@ const MetaBox = () => {
         <button
           className="button-secondary"
           disabled={formType === ''}
-          onClick={() => dispatch({ type: 'modal-show' })}
           type="button"
+          onClick={() =>
+            dispatch({
+              type: 'modal-show',
+              payload: { formId: 0, formType, formValues: null }
+            })
+          }
         >
           Configure Template
         </button>
         {state?.templates && state.templates.length > 0 && <AssociatedList />}
-        <Modal id={formId} form={formType} />
+        <Modal />
       </MetaboxContext.Provider>
     </div>
   );

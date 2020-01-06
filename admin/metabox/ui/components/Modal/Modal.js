@@ -44,7 +44,7 @@ const ModalContent = () => {
     switch (formStr) {
       case 'article-feed':
         formTitle = 'Configure Your Article Feed:';
-        selectedForm = <ArticleFeedForm callback={setData} meta={meta} />;
+        selectedForm = <ArticleFeedForm />;
         break;
       case 'hero':
         formTitle = 'Configure Your Hero Block:';
@@ -72,7 +72,7 @@ const ModalContent = () => {
         break;
       case 'text':
         formTitle = 'Configure Your Text Block:';
-        selectedForm = <TextForm callback={setData} meta={meta} />;
+        selectedForm = <TextForm />;
         break;
       case 'timeline':
         formTitle = 'Configure Your Timeline Block:';
@@ -96,7 +96,7 @@ const ModalContent = () => {
 
       setSaving(true);
       await updatePost(
-        { id: formData.formId, meta: data, type: formStr },
+        { id: formData.formId, meta: formData.formValues, type: formStr },
         'save',
         onComplete,
         onError
@@ -162,7 +162,6 @@ const ModalContent = () => {
   return null;
 };
 
-/* eslint-disable-next-line react/jsx-props-no-spreading */
-const Modal = props => createPortal(<ModalContent {...props} />, modalRoot);
+const Modal = () => createPortal(<ModalContent />, modalRoot);
 
 export default Modal;

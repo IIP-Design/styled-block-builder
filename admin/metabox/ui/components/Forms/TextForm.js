@@ -1,71 +1,48 @@
-import React, { Fragment, useEffect, useState } from 'react';
-import propTypes from 'prop-types';
+import React, { Fragment, useContext, useEffect } from 'react';
 
 import CheckboxConditional from 'metabox/components/Forms/Toggles/CheckboxConditional';
 import ColorPicker from 'metabox/components/ColorPicker/ColorPicker';
 import { defaultBackgrounds, defaultText } from 'metabox/utils/color-picker-palettes';
+import { MetaboxContext } from 'metabox/components/Metabox/MetaboxContext';
 import ArticleById from './FeedTypes/ArticleById';
 import ButtonForm from './ButtonForm/ButtonForm';
 import FullWidthToggle from './Toggles/FullWidthToggle';
 
-const TextForm = ({ callback, meta }) => {
-  const schema = {
-    articles: meta.articles || [],
-    blockBackground: meta.blockBackground || '#ffffff',
-    buttonArrow: meta.buttonArrow || '',
-    buttonLink: meta.buttonLink || '',
-    buttonStyle: meta.buttonStyle || '',
-    buttonText: meta.buttonText || '',
-    desc: meta.desc || '',
-    fullWidth: meta.fullWidth || false,
-    hasButton: meta.hasButton || false,
-    hasFeed: meta.hasFeed || false,
-    hasVideo: meta.hasVideo || false,
-    subtitle: meta.subtitle || '',
-    textColor: meta.textColor || '#333333',
-    title: meta.title || '',
-    videoTitle: meta.videoTitle || '',
-    videoURL: meta.videoURL || ''
-  };
+const TextForm = () => {
+  const { dispatch, state } = useContext(MetaboxContext);
 
-  const [inputs, setInputs] = useState(schema);
+  const formValues = state?.formData?.formValues ? state.formData.formValues : {};
 
-  const formData = { ...inputs };
-
-  // Initialize the state on first render, otherwise will submit empty values if saved without making changes
+  // Initialize color pickers with default values if no color already selected.
   useEffect(() => {
-    callback(formData);
-  }, []);
+    if (!state?.formData?.formValues?.textColor) {
+      dispatch({ type: 'form-update', payload: { name: 'textColor', value: '#333333' } });
+    }
 
-  const updateInputs = (group, val) => {
-    setInputs({ ...inputs, [group]: val });
-    callback({ ...formData, [group]: val });
-  };
+    if (!state?.formData?.formValues?.blockBackground) {
+      dispatch({ type: 'form-update', payload: { name: 'blockBackground', value: '#ffffff' } });
+    }
+  }, []);
 
   const handleChange = e => {
     const { name, value } = e.target;
 
-    updateInputs(name, value);
-  };
-
-  const handleToggle = e => {
-    const { name } = e.target;
-    const checked = !inputs[name];
-
-    updateInputs(name, checked);
-  };
-
-  const updateArticles = val => {
-    updateInputs('articles', val);
+    dispatch({ type: 'form-update', payload: { name, value } });
   };
 
   const handleColor = e => {
     const { group } = e.target.dataset;
     const { value } = e.target;
 
-    updateInputs(group, value);
+    dispatch({ type: 'form-update', payload: { name: group, value } });
   };
 
+  const handleToggle = e => {
+    const { name } = e.target;
+    const isChecked = formValues[name] || false;
+
+    dispatch({ type: 'form-update', payload: { name, value: !isChecked } });
+  };
   const blockBgOptions = {
     group: 'blockBackground',
     options: defaultBackgrounds
@@ -82,22 +59,22 @@ const TextForm = ({ callback, meta }) => {
         callback={handleColor}
         colors={textOptions}
         label="Set block text color:"
-        selected={inputs.textColor}
+        selected={formValues.textColor}
       />
       <ColorPicker
         callback={handleColor}
         colors={blockBgOptions}
         label="Set block background color:"
-        selected={inputs.blockBackground}
+        selected={formValues.blockBackground}
       />
       <label htmlFor="text-title">
         Add title:
         <input
           id="text-title"
           name="title"
-          onChange={e => handleChange(e)}
           type="text"
-          value={inputs.title}
+          value={formValues.title || ''}
+          onChange={e => handleChange(e)}
         />
       </label>
       <label htmlFor="text-subtitle">
@@ -105,9 +82,9 @@ const TextForm = ({ callback, meta }) => {
         <input
           id="text-subtitle"
           name="subtitle"
-          onChange={e => handleChange(e)}
           type="text"
-          value={inputs.subtitle}
+          value={formValues.subtitle || ''}
+          onChange={e => handleChange(e)}
         />
       </label>
       <label htmlFor="text-desc">
@@ -115,23 +92,23 @@ const TextForm = ({ callback, meta }) => {
         <textarea
           id="text-desc"
           name="desc"
-          onChange={e => handleChange(e)}
           rows="6"
-          value={inputs.desc}
+          value={formValues.desc || ''}
+          onChange={e => handleChange(e)}
         />
       </label>
-      <FullWidthToggle callback={handleToggle} checked={inputs.fullWidth} />
+      <FullWidthToggle callback={handleToggle} checked={formValues.fullWidth} />
       <CheckboxConditional
-        label="Add Button (Optional)"
-        checked={inputs.hasButton}
         callback={handleToggle}
+        checked={formValues.hasButton}
+        label="Add Button (Optional)"
         name="hasButton"
       >
-        <ButtonForm callback={handleChange} inputs={inputs} />
+        <ButtonForm />
       </CheckboxConditional>
       <CheckboxConditional
         callback={handleToggle}
-        checked={inputs.hasVideo}
+        checked={formValues.hasVideo}
         label="Add a Video?"
         name="hasVideo"
       >
@@ -140,9 +117,9 @@ const TextForm = ({ callback, meta }) => {
           <input
             id="video-title"
             name="videoTitle"
-            onChange={e => handleChange(e)}
             type="text"
-            value={inputs.videoTitle}
+            value={formValues.videoTitle || ''}
+            onChange={e => handleChange(e)}
           />
         </label>
         <label htmlFor="video-url">
@@ -151,27 +128,22 @@ const TextForm = ({ callback, meta }) => {
           <input
             id="video-url"
             name="videoURL"
-            onChange={e => handleChange(e)}
             type="text"
-            value={inputs.videoURL}
+            value={formValues.videoURL || ''}
+            onChange={e => handleChange(e)}
           />
         </label>
       </CheckboxConditional>
       <CheckboxConditional
         callback={handleToggle}
-        checked={inputs.hasFeed}
+        checked={formValues.hasFeed}
         label="Add an Article Feed?"
         name="hasFeed"
       >
-        <ArticleById inputs={inputs} updateState={updateArticles} />
+        <ArticleById />
       </CheckboxConditional>
     </Fragment>
   );
-};
-
-TextForm.propTypes = {
-  callback: propTypes.func,
-  meta: propTypes.object
 };
 
 export default TextForm;

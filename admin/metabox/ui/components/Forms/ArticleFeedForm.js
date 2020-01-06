@@ -1,59 +1,45 @@
-import React, { Fragment, useEffect, useState } from 'react';
-import propTypes from 'prop-types';
+import React, { Fragment, useContext, useEffect } from 'react';
 
 import ColorPicker from 'metabox/components/ColorPicker/ColorPicker';
 import { defaultBackgrounds, defaultText } from 'metabox/utils/color-picker-palettes';
+import { MetaboxContext } from 'metabox/components/Metabox/MetaboxContext';
 import ArticleById from './FeedTypes/ArticleById';
 import FullWidthToggle from './Toggles/FullWidthToggle';
 
-const ArticleFeedForm = ( { callback, meta } ) => {
-  const schema = {
-    articles: meta.articles || [],
-    blockBackground: meta.blockBackground || '#ffffff',
-    fullWidth: meta.fullWidth || false,
-    title: meta.title || '',
-    subtitle: meta.subtitle || '',
-    textColor: meta.textColor || '#333333',
-    type: meta.type || 'byId'
-  };
+const ArticleFeedForm = () => {
+  const { dispatch, state } = useContext(MetaboxContext);
 
-  const [inputs, setInputs] = useState( schema );
+  const formValues = state?.formData?.formValues ? state.formData.formValues : {};
 
-  const formData = { ...inputs };
+  // Initialize color pickers with default values if no color already selected.
+  useEffect(() => {
+    if (!state?.formData?.formValues?.textColor) {
+      dispatch({ type: 'form-update', payload: { name: 'textColor', value: '#333333' } });
+    }
 
-  // Initialize the state on first render, otherwise will submit empty values if saved without making changes
-  useEffect( () => {
-    callback( formData );
-  }, [] );
-
-  const updateState = clone => {
-    setInputs( { ...inputs, articles: clone } );
-    callback( { ...formData, articles: clone } );
-  };
-
-  const updateInputs = ( group, val ) => {
-    setInputs( { ...inputs, [group]: val } );
-    callback( { ...formData, [group]: val } );
-  };
+    if (!state?.formData?.formValues?.blockBackground) {
+      dispatch({ type: 'form-update', payload: { name: 'blockBackground', value: '#ffffff' } });
+    }
+  }, []);
 
   const handleChange = e => {
     const { name, value } = e.target;
 
-    updateInputs( name, value );
+    dispatch({ type: 'form-update', payload: { name, value } });
   };
 
   const handleToggle = e => {
     const { name } = e.target;
-    const checked = !inputs.fullWidth;
+    const isChecked = formValues[name] || false;
 
-    updateInputs( name, checked );
+    dispatch({ type: 'form-update', payload: { name, value: !isChecked } });
   };
 
   const handleColor = e => {
     const { group } = e.target.dataset;
     const { value } = e.target;
 
-    updateInputs( group, value );
+    dispatch({ type: 'form-update', payload: { name: group, value } });
   };
 
   const blockBgOptions = {
@@ -69,19 +55,19 @@ const ArticleFeedForm = ( { callback, meta } ) => {
   return (
     <Fragment>
       <ColorPicker
-        callback={ handleColor }
-        colors={ textOptions }
+        callback={handleColor}
+        colors={textOptions}
         label="Set block text color:"
-        selected={ inputs.textColor }
+        selected={formValues.textColor}
       />
       <label htmlFor="article-feed-title">
         Add title (Optional):
         <input
           id="article-feed-title"
           name="title"
-          onChange={ e => handleChange( e ) }
           type="text"
-          value={ inputs.title }
+          value={formValues.title || ''}
+          onChange={e => handleChange(e)}
         />
       </label>
       <label htmlFor="article-feed-subtitle">
@@ -89,26 +75,21 @@ const ArticleFeedForm = ( { callback, meta } ) => {
         <input
           id="article-feed-subtitle"
           name="subtitle"
-          onChange={ e => handleChange( e ) }
           type="text"
-          value={ inputs.subtitle }
+          value={formValues.subtitle || ''}
+          onChange={e => handleChange(e)}
         />
       </label>
       <ColorPicker
-        callback={ handleColor }
-        colors={ blockBgOptions }
+        callback={handleColor}
+        colors={blockBgOptions}
         label="Set block background color:"
-        selected={ inputs.blockBackground }
+        selected={formValues.blockBackground}
       />
-      <ArticleById inputs={ inputs } updateState={ updateState } />
-      <FullWidthToggle callback={ handleToggle } checked={ inputs.fullWidth } />
+      <ArticleById />
+      <FullWidthToggle callback={handleToggle} checked={formValues.fullWidth} />
     </Fragment>
   );
-};
-
-ArticleFeedForm.propTypes = {
-  callback: propTypes.func,
-  meta: propTypes.object
 };
 
 export default ArticleFeedForm;

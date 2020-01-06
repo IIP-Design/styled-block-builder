@@ -3,17 +3,17 @@ import propTypes from 'prop-types';
 
 import './Toggles.module.scss';
 
-const FullWidthToggle = ( { callback, checked } ) => (
+const FullWidthToggle = ({ callback, checked }) => (
   <div>
     <label htmlFor="full-width-toggle" styleName="toggle-label">
       Make this block full-page width?
       <input
-        checked={ checked }
+        checked={checked}
         id="full-width-toggle"
         name="fullWidth"
-        onChange={ e => callback( e ) }
         styleName="toggle-checkbox"
         type="checkbox"
+        onChange={e => callback(e)}
       />
     </label>
   </div>
@@ -22,6 +22,10 @@ const FullWidthToggle = ( { callback, checked } ) => (
 FullWidthToggle.propTypes = {
   callback: propTypes.func,
   checked: propTypes.bool
+};
+
+FullWidthToggle.defaultProps = {
+  checked: false
 };
 
 export default FullWidthToggle;

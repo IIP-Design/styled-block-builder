@@ -1,12 +1,11 @@
 import React, { Fragment, useContext } from 'react';
-import propTypes from 'prop-types';
 
 import { MetaboxContext } from 'metabox/components/Metabox/MetaboxContext';
 import { updatePost } from 'metabox/utils/update-post';
 
 import './AssociatedList.module.scss';
 
-const AssociatedList = ({ edit }) => {
+const AssociatedList = () => {
   const { dispatch, state } = useContext(MetaboxContext);
   const { templates, updating } = state;
 
@@ -27,34 +26,35 @@ const AssociatedList = ({ edit }) => {
       <div styleName="list">
         {templates.map(item => (
           <div
-            data-id={item.id}
             key={item.id}
+            data-id={item.id}
             styleName={isUpdating(item.id) ? 'list-item disabled' : 'list-item'}
           >
             {item.title || item.id}
             <button
               aria-label="edit template"
               disabled={isUpdating(item.id)}
+              styleName="button"
+              type="button"
               onClick={() =>
                 dispatch({
                   type: 'modal-show',
                   payload: {
                     formId: item.id,
-                    formType: item.type
+                    formType: item.type,
+                    formValues: item.meta
                   }
                 })
               }
-              styleName="button"
-              type="button"
             >
               <span className="dashicons dashicons-edit" />
             </button>
             <button
               aria-label="delete template"
               disabled={isUpdating(item.id)}
-              onClick={() => deleteItem(item.id)}
               styleName={isUpdating(item.id) ? 'button disabled' : 'button'}
               type="button"
+              onClick={() => deleteItem(item.id)}
             >
               <span className="dashicons dashicons-trash" />
             </button>
@@ -63,10 +63,6 @@ const AssociatedList = ({ edit }) => {
       </div>
     </Fragment>
   );
-};
-
-AssociatedList.propTypes = {
-  edit: propTypes.func
 };
 
 export default AssociatedList;
