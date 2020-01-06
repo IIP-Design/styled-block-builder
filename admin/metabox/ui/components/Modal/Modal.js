@@ -83,7 +83,7 @@ const ModalContent = () => {
     }
 
     const submitForm = async () => {
-      const onComplete = (res, action) => {
+      const onComplete = res => {
         dispatch({ type: 'save', payload: res });
         setSaving(false);
       };
@@ -111,9 +111,9 @@ const ModalContent = () => {
         <div styleName="modal-foreground">
           <button
             aria-label="close modal"
-            onClick={() => dispatch({ type: 'modal-hide' })}
             styleName="close-icon"
             type="button"
+            onClick={() => dispatch({ type: 'modal-hide' })}
           >
             <span className="dashicons dashicons-no" />
           </button>
@@ -122,16 +122,20 @@ const ModalContent = () => {
           {selectedForm && (
             <form styleName="modal-form">
               <h3 styleName="modal-form-title">{formTitle}</h3>
-              <div styleName={saving ? 'modal-form-background saving' : 'modal-form-background'}>
+              <div
+                styleName={
+                  error || saving ? 'modal-form-background obscured' : 'modal-form-background'
+                }
+              >
                 {selectedForm}
               </div>
               <div styleName="modal-controls">
                 <label htmlFor="copy-shortcode">
                   {formData.formId !== 0 && (
                     <input
-                      styleName="shortcode-input"
                       id="copy-shortcode"
                       readOnly
+                      styleName="shortcode-input"
                       type="text"
                       value={shortcode}
                     />
@@ -139,12 +143,12 @@ const ModalContent = () => {
                 </label>
                 <button
                   className="button-secondary"
-                  onClick={() => dispatch({ type: 'modal-hide' })}
                   type="button"
+                  onClick={() => dispatch({ type: 'modal-hide' })}
                 >
                   Cancel
                 </button>
-                <button className="button-primary" onClick={submitForm} type="button">
+                <button className="button-primary" type="button" onClick={submitForm}>
                   Save
                 </button>
               </div>

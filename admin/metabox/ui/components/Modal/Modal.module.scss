@@ -42,6 +42,7 @@
     background-color: $white;
     border-top: $wordpressBorder;
     bottom: 0;
+    box-shadow: 0 -2px 3px 1px rgba($color: $blackStandard, $alpha: 0.04);
     display: grid;
     grid-template-columns: 1fr 65px 65px;
     grid-column-gap: 0.5rem;
@@ -71,7 +72,7 @@
       margin: -1rem -2rem;
       padding: 1rem 2rem;
 
-      &.saving {
+      &.obscured {
         background-color: $greyLightest;
         opacity: 0.6;
       }
@@ -86,6 +87,7 @@
     &-title {
       background-color: $white;
       border-bottom: $wordpressBorder;
+      box-shadow: 0 2px 3px 1px rgba($color: $blackStandard, $alpha: 0.04);
       margin: -2rem -2rem 1rem;
       padding: 2rem 2rem 0.5rem;
       position: sticky;
