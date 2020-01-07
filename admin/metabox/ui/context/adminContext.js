@@ -1,6 +1,7 @@
 import React from 'react';
 import { v4 as uuid } from 'uuid';
 
+// Removes template from array in context
 const deleteFromState = (state, id) => {
   if (state?.templates) {
     const clone = [...state.templates];
@@ -13,13 +14,23 @@ const deleteFromState = (state, id) => {
   return [];
 };
 
+// Add new/edits existing template to/in context array
 const saveInState = (state, template) => {
   if (state?.templates) {
+    let indexValue = state.templates.length;
+
     const clone = [...state.templates];
 
     // ID comes over as a string so must be converted into a number
     const intID = Number(template.id);
-    const filtered = clone.filter(items => items.id !== intID);
+
+    const filtered = clone.filter((item, index) => {
+      if (item.id === intID) {
+        indexValue = index;
+      }
+
+      return item.id !== intID;
+    });
 
     const newItem = {
       id: intID,
@@ -28,7 +39,7 @@ const saveInState = (state, template) => {
       type: `gpalab-${template.post_type}`
     };
 
-    filtered.push(newItem);
+    filtered.splice(indexValue, 0, newItem);
 
     return filtered;
   }
@@ -42,6 +53,25 @@ const addFile = (file, name, fileList) => {
   files.push({ file, name });
 
   return files;
+};
+
+const addNestedFile = (data, file, name, parentId) => {
+  // Isolated the group member getting updated.
+  const selected = data.filter(item => item.id === parentId)[0];
+
+  // Store the remainder of the group.
+  const temp = data.filter(item => item.id !== parentId);
+
+  // Update the nested group.
+  const groupArr = addFile(file, name, selected.files);
+
+  // Update selected group member.
+  selected.files = groupArr;
+
+  // Push updated item back into group
+  temp.push(selected);
+
+  return temp;
 };
 
 const addGroupItem = (fields, formValues, group) => {
@@ -194,9 +224,9 @@ const removeFromUpdating = (state, id) => {
   return [];
 };
 
-export const MetaboxContext = React.createContext();
+export const AdminContext = React.createContext();
 
-export const metaboxReducer = (state, action) => {
+export const adminReducer = (state, action) => {
   const { payload } = action;
 
   switch (action.type) {
@@ -223,6 +253,22 @@ export const metaboxReducer = (state, action) => {
           formValues: {
             ...state.formData.formValues,
             files: addFile(payload.file, payload.name, state.formData.formValues.files)
+          }
+        }
+      };
+    case 'file-add-nested':
+      return {
+        ...state,
+        formData: {
+          ...state.formData,
+          formValues: {
+            ...state.formData.formValues,
+            [payload.parentGroup]: addNestedFile(
+              state.formData.formValues[payload.parentGroup],
+              payload.file,
+              payload.name,
+              payload.parentId
+            )
           }
         }
       };

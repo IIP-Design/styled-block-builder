@@ -5,23 +5,16 @@ import CheckboxConditional from 'metabox/components/Forms/Toggles/CheckboxCondit
 import FileUploader from 'metabox/components/FileUploader/FileUploader';
 import RadioConditional from 'metabox/components/Forms/Toggles/RadioConditional';
 import TabbedForm from 'metabox/components/Forms/TabbedForm/TabbedForm';
-import { MetaboxContext } from 'metabox/components/Metabox/MetaboxContext';
+import { AdminContext } from 'metabox/context/adminContext';
 
 const HeroForm = () => {
-  const { dispatch, state } = useContext(MetaboxContext);
+  const { dispatch, state } = useContext(AdminContext);
   const formValues = state?.formData?.formValues ? state.formData.formValues : {};
 
   const handleChange = e => {
     const { name, value } = e.target;
 
     dispatch({ type: 'form-update', payload: { name, value } });
-  };
-
-  const handleFile = e => {
-    const { name } = e.target;
-    const file = e.target.files[0];
-
-    dispatch({ type: 'file-add', file, name });
   };
 
   const handleToggle = e => {
@@ -40,7 +33,7 @@ const HeroForm = () => {
 
   return (
     <Fragment>
-      <FileUploader callback={handleFile} label="Add background image:" name="backgroundImage" />
+      <FileUploader label="Add background image:" name="backgroundImage" />
       <label htmlFor="hero-title">
         Add Title:
         <input

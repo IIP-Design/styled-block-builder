@@ -2,10 +2,10 @@ import React, { Fragment, useContext } from 'react';
 
 import TabbedForm from 'metabox/components/Forms/TabbedForm/TabbedForm';
 import FullWidthToggle from 'metabox/components/Forms/Toggles/FullWidthToggle';
-import { MetaboxContext } from 'metabox/components/Metabox/MetaboxContext';
+import { AdminContext } from 'metabox/context/adminContext';
 
 const TimelineForm = () => {
-  const { dispatch, state } = useContext(MetaboxContext);
+  const { dispatch, state } = useContext(AdminContext);
   const formValues = state?.formData?.formValues ? state.formData.formValues : {};
 
   const handleChange = e => {

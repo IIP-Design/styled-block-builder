@@ -2,7 +2,7 @@ import React, { useEffect, useReducer, useState } from 'react';
 
 import AssociatedList from 'metabox/components/AssociatedList/AssociatedList';
 import Modal from 'metabox/components/Modal/Modal';
-import { MetaboxContext, metaboxReducer } from './MetaboxContext';
+import { AdminContext, adminReducer } from 'metabox/context/adminContext';
 
 import './Metabox.module.scss';
 
@@ -20,7 +20,7 @@ const MetaBox = () => {
     updating: []
   };
 
-  const [state, dispatch] = useReducer(metaboxReducer, initialState);
+  const [state, dispatch] = useReducer(adminReducer, initialState);
 
   const store = {
     dispatch,
@@ -37,7 +37,7 @@ const MetaBox = () => {
 
   return (
     <div styleName="dropdown-container">
-      <MetaboxContext.Provider value={store}>
+      <AdminContext.Provider value={store}>
         <label htmlFor="gpalab-templates-dropdown">
           <strong>Add Template:</strong>
           <select
@@ -74,9 +74,9 @@ const MetaBox = () => {
         </button>
         {state?.templates && state.templates.length > 0 && <AssociatedList />}
         <Modal />
-      </MetaboxContext.Provider>
+      </AdminContext.Provider>
     </div>
   );
 };
 
-export { MetaboxContext, MetaBox as default };
+export default MetaBox;

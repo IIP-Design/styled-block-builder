@@ -2,10 +2,10 @@ import React, { Fragment, useContext } from 'react';
 
 import FullWidthToggle from 'metabox/components/Forms/Toggles/FullWidthToggle';
 import TabbedForm from 'metabox/components/Forms/TabbedForm/TabbedForm';
-import { MetaboxContext } from 'metabox/components/Metabox/MetaboxContext';
+import { AdminContext } from 'metabox/context/AdminContext';
 
 const ResourcesForm = () => {
-  const { dispatch, state } = useContext(MetaboxContext);
+  const { dispatch, state } = useContext(AdminContext);
   const formValues = state?.formData?.formValues ? state.formData.formValues : {};
 
   const handleChange = e => {

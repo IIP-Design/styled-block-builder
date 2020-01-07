@@ -5,11 +5,11 @@ import ButtonForm from 'metabox/components/Forms/ButtonForm/ButtonForm';
 import CheckboxConditional from 'metabox/components/Forms/Toggles/CheckboxConditional';
 import ColorPicker from 'metabox/components/ColorPicker/ColorPicker';
 import FullWidthToggle from 'metabox/components/Forms/Toggles/FullWidthToggle';
+import { AdminContext } from 'metabox/context/adminContext';
 import { defaultBackgrounds, defaultText } from 'metabox/utils/color-picker-palettes';
-import { MetaboxContext } from 'metabox/components/Metabox/MetaboxContext';
 
 const TextForm = () => {
-  const { dispatch, state } = useContext(MetaboxContext);
+  const { dispatch, state } = useContext(AdminContext);
 
   const formValues = state?.formData?.formValues ? state.formData.formValues : {};
 

@@ -2,12 +2,12 @@ import React, { Fragment, useContext, useEffect } from 'react';
 
 import ColorPicker from 'metabox/components/ColorPicker/ColorPicker';
 import { defaultBackgrounds, defaultText } from 'metabox/utils/color-picker-palettes';
-import { MetaboxContext } from 'metabox/components/Metabox/MetaboxContext';
+import { AdminContext } from 'metabox/context/adminContext';
 import ArticleById from './FeedTypes/ArticleById';
 import FullWidthToggle from './Toggles/FullWidthToggle';
 
 const ArticleFeedForm = () => {
-  const { dispatch, state } = useContext(MetaboxContext);
+  const { dispatch, state } = useContext(AdminContext);
 
   const formValues = state?.formData?.formValues ? state.formData.formValues : {};
 

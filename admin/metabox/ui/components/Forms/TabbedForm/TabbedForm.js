@@ -4,16 +4,15 @@ import propTypes from 'prop-types';
 import ArticleById from 'metabox/components/Forms/FeedTypes/ArticleById';
 import CheckboxConditional from 'metabox/components/Forms/Toggles/CheckboxConditional';
 import FileUploader from 'metabox/components/FileUploader/FileUploader';
+import { AdminContext } from 'metabox/context/adminContext';
 import { getTabTitleField, responsiveTitle } from 'metabox/utils/tab-titles';
-import { handleFile } from 'metabox/utils/modify-group';
-import { MetaboxContext } from 'metabox/components/Metabox/MetaboxContext';
 
 import './TabbedForm.module.scss';
 
 const TabbedForm = ({ fields, group, label, maxTabs }) => {
   const [selectedTab, setSelectedTab] = useState(null);
 
-  const { dispatch, state } = useContext(MetaboxContext);
+  const { dispatch, state } = useContext(AdminContext);
   const formValues = state?.formData?.formValues ? state.formData.formValues : {};
 
   useEffect(() => {
@@ -69,6 +68,7 @@ const TabbedForm = ({ fields, group, label, maxTabs }) => {
     dispatch({ type: 'group-remove', payload: { group, id: selectedTab } });
   };
 
+  // Manage turning on/off of optional sections
   const handleToggle = (name, itemId) => {
     const isChecked = formValues[name] || false;
 
@@ -114,9 +114,10 @@ const TabbedForm = ({ fields, group, label, maxTabs }) => {
                             return (
                               <FileUploader
                                 key={`${field.name}-${form.id}`}
-                                callback={e => handleFile(e, form.id, forms, updateState)}
                                 label={field.label || ''}
                                 name={field.name}
+                                parentGroup={group}
+                                parentId={form.id}
                               />
                             );
                           }

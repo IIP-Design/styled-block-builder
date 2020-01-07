@@ -1,11 +1,11 @@
 import React, { useContext, useEffect } from 'react';
 
-import { MetaboxContext } from 'metabox/components/Metabox/MetaboxContext';
+import { AdminContext } from 'metabox/context/adminContext';
 
 import './ButtonForm.module.scss';
 
 const ButtonForm = () => {
-  const { dispatch, state } = useContext(MetaboxContext);
+  const { dispatch, state } = useContext(AdminContext);
   const formValues = state?.formData?.formValues ? state.formData.formValues : {};
 
   // Initialize button style options with default values if none are already selected.

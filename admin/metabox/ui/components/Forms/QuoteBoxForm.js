@@ -3,12 +3,12 @@ import React, { Fragment, useContext, useEffect } from 'react';
 import ColorPicker from 'metabox/components/ColorPicker/ColorPicker';
 import FileUploader from 'metabox/components/FileUploader/FileUploader';
 import { defaultBackgrounds, defaultText } from 'metabox/utils/color-picker-palettes';
-import { MetaboxContext } from 'metabox/components/Metabox/MetaboxContext';
+import { AdminContext } from 'metabox/context/adminContext';
 import FullWidthToggle from './Toggles/FullWidthToggle';
 import RadioConditional from './Toggles/RadioConditional';
 
 const QuoteBoxForm = () => {
-  const { dispatch, state } = useContext(MetaboxContext);
+  const { dispatch, state } = useContext(AdminContext);
   const formValues = state?.formData?.formValues ? state.formData.formValues : {};
 
   // Initialize style options with default values if none are already selected.
@@ -41,13 +41,6 @@ const QuoteBoxForm = () => {
     const { value } = e.target;
 
     dispatch({ type: 'form-update', payload: { name: group, value } });
-  };
-
-  const handleFile = e => {
-    const { name } = e.target;
-    const file = e.target.files[0];
-
-    dispatch({ type: 'file-add', file, name });
   };
 
   const handleToggle = e => {
@@ -94,11 +87,7 @@ const QuoteBoxForm = () => {
         />
       )}
       {formValues.backgroundType === 'image' && (
-        <FileUploader
-          callback={handleFile}
-          label="Add background image URL:"
-          name="backgroundImage"
-        />
+        <FileUploader label="Add background image URL:" name="backgroundImage" />
       )}
       <ColorPicker
         callback={handleColor}

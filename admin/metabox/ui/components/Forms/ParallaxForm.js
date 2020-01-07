@@ -2,12 +2,12 @@ import React, { Fragment, useContext } from 'react';
 
 import CheckboxConditional from 'metabox/components/Forms/Toggles/CheckboxConditional';
 import FileUploader from 'metabox/components/FileUploader/FileUploader';
-import { MetaboxContext } from 'metabox/components/Metabox/MetaboxContext';
+import { AdminContext } from 'metabox/context/adminContext';
 import ButtonForm from './ButtonForm/ButtonForm';
 import FullWidthToggle from './Toggles/FullWidthToggle';
 
 const ParallaxForm = () => {
-  const { dispatch, state } = useContext(MetaboxContext);
+  const { dispatch, state } = useContext(AdminContext);
   const formValues = state?.formData?.formValues ? state.formData.formValues : {};
 
   const handleChange = e => {
@@ -23,16 +23,9 @@ const ParallaxForm = () => {
     dispatch({ type: 'form-update', payload: { name, value: !isChecked } });
   };
 
-  const handleFile = e => {
-    const { name } = e.target;
-    const file = e.target.files[0];
-
-    dispatch({ type: 'file-add', file, name });
-  };
-
   return (
     <Fragment>
-      <FileUploader callback={handleFile} label="Add background image:" name="backgroundImage" />
+      <FileUploader label="Add background image:" name="backgroundImage" />
       <label htmlFor="parallax-title">
         Add title (Optional):
         <input

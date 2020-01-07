@@ -1,12 +1,12 @@
 import React, { Fragment, useContext } from 'react';
 
-import { MetaboxContext } from 'metabox/components/Metabox/MetaboxContext';
+import { AdminContext } from 'metabox/context/adminContext';
 import { updatePost } from 'metabox/utils/update-post';
 
 import './AssociatedList.module.scss';
 
 const AssociatedList = () => {
-  const { dispatch, state } = useContext(MetaboxContext);
+  const { dispatch, state } = useContext(AdminContext);
   const { templates, updating } = state;
 
   const deleteItem = async id => {

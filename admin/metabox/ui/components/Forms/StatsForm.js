@@ -6,10 +6,10 @@ import FullWidthToggle from 'metabox/components/Forms/Toggles/FullWidthToggle';
 import RadioConditional from 'metabox/components/Forms/Toggles/RadioConditional';
 import TabbedForm from 'metabox/components/Forms/TabbedForm/TabbedForm';
 import { defaultBackgrounds, defaultText } from 'metabox/utils/color-picker-palettes';
-import { MetaboxContext } from 'metabox/components/Metabox/MetaboxContext';
+import { AdminContext } from 'metabox/context/adminContext';
 
 const StatsForm = () => {
-  const { dispatch, state } = useContext(MetaboxContext);
+  const { dispatch, state } = useContext(AdminContext);
   const formValues = state?.formData?.formValues ? state.formData.formValues : {};
 
   // Initialize style options with default values if none are already selected.
@@ -38,13 +38,6 @@ const StatsForm = () => {
     const { value } = e.target;
 
     dispatch({ type: 'form-update', payload: { name: group, value } });
-  };
-
-  const handleFile = e => {
-    const { name } = e.target;
-    const file = e.target.files[0];
-
-    dispatch({ type: 'file-add', file, name });
   };
 
   const handleToggle = e => {
@@ -92,11 +85,7 @@ const StatsForm = () => {
           />
         )}
         {formValues.backgroundType === 'image' && (
-          <FileUploader
-            callback={handleFile}
-            label="Add background image:"
-            name="backgroundImage"
-          />
+          <FileUploader label="Add background image:" name="backgroundImage" />
         )}
         <ColorPicker
           callback={handleColor}

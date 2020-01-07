@@ -1,10 +1,10 @@
 import React, { Fragment, useContext } from 'react';
 
 import TabbedForm from 'metabox/components/Forms/TabbedForm/TabbedForm';
-import { MetaboxContext } from 'metabox/components/Metabox/MetaboxContext';
+import { AdminContext } from 'metabox/context/adminContext';
 
 const SlidesForm = () => {
-  const { dispatch, state } = useContext(MetaboxContext);
+  const { dispatch, state } = useContext(AdminContext);
   const formValues = state?.formData?.formValues ? state.formData.formValues : {};
 
   const handleChange = e => {

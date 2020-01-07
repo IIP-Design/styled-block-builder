@@ -1,12 +1,12 @@
 import React, { Fragment, useContext } from 'react';
 import propTypes from 'prop-types';
 
-import { MetaboxContext } from 'metabox/components/Metabox/MetaboxContext';
+import { AdminContext } from 'metabox/context/adminContext';
 
 import './ArticleById.module.scss';
 
 const ArticleById = ({ parentGroup, parentId }) => {
-  const { dispatch, state } = useContext(MetaboxContext);
+  const { dispatch, state } = useContext(AdminContext);
   const formValues = state?.formData?.formValues ? state.formData.formValues : {};
 
   const handleAdd = () => {

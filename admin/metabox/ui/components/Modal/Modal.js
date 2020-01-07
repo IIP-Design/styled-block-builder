@@ -12,7 +12,7 @@ import SlidesForm from 'metabox/components/Forms/SlidesForm';
 import StatsForm from 'metabox/components/Forms/StatsForm';
 import TextForm from 'metabox/components/Forms/TextForm';
 import TimelineForm from 'metabox/components/Forms/TimelineForm';
-import { MetaboxContext } from 'metabox/components/Metabox/MetaboxContext';
+import { AdminContext } from 'metabox/context/adminContext';
 import { updatePost } from 'metabox/utils/update-post';
 
 import './Modal.module.scss';
@@ -25,7 +25,7 @@ const ModalContent = () => {
   const [errorData, setErrorData] = useState(null);
 
   // Get array of associated templates
-  const { dispatch, state } = useContext(MetaboxContext);
+  const { dispatch, state } = useContext(AdminContext);
 
   if (state && state.showModal && state.showModal === true) {
     const formData = state?.formData ? state.formData : { formId: 0, formType: '' };
