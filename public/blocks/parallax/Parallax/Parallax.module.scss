@@ -42,8 +42,8 @@
   flex-direction: column;
   align-items: center;
   margin: 2rem 0;
-  position: absolute;
-  max-width: 75vw;
+  position: relative;
+  max-width: 1280px;
 }
 
 .text {
@@ -55,11 +55,11 @@
 @media screen and (max-width: 768px) {
   .content {
     margin: 2rem 0 1rem;
+    width: 90vw;
   }
 
   .text {
     text-align: center;
-    width: 90vw;
   }
 
   .container {
@@ -68,7 +68,7 @@
 }
 
 @media screen and (max-width: 500px) {
-  .subtitle {
-    width: 90vw;
+  .content {
+    width: 80vw;
   }
 }
