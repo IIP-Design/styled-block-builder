@@ -43,6 +43,7 @@ const TextForm = () => {
 
     dispatch({ type: 'form-update', payload: { name, value: !isChecked } });
   };
+
   const blockBgOptions = {
     group: 'blockBackground',
     options: defaultBackgrounds

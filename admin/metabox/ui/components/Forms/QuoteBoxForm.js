@@ -1,69 +1,60 @@
-import React, { Fragment, useEffect, useState } from 'react';
-import propTypes from 'prop-types';
+import React, { Fragment, useContext, useEffect } from 'react';
 
 import ColorPicker from 'metabox/components/ColorPicker/ColorPicker';
 import FileUploader from 'metabox/components/FileUploader/FileUploader';
 import { defaultBackgrounds, defaultText } from 'metabox/utils/color-picker-palettes';
+import { MetaboxContext } from 'metabox/components/Metabox/MetaboxContext';
 import FullWidthToggle from './Toggles/FullWidthToggle';
 import RadioConditional from './Toggles/RadioConditional';
 
-const QuoteBoxForm = ({ callback, meta }) => {
-  const schema = {
-    backgroundType: meta.backgroundType || 'color',
-    blockBackground: meta.blockBackground || '#ffffff',
-    desc: meta.desc || '',
-    files: meta.files || [],
-    fullWidth: meta.fullWidth || false,
-    quote: meta.quote || '',
-    quoteBackground: meta.quoteBackground || '#ffffff',
-    speaker: meta.speaker || '',
-    subtitle: meta.subtitle || '',
-    textColor: meta.textColor || '#333333',
-    title: meta.title || ''
-  };
+const QuoteBoxForm = () => {
+  const { dispatch, state } = useContext(MetaboxContext);
+  const formValues = state?.formData?.formValues ? state.formData.formValues : {};
 
-  const [inputs, setInputs] = useState(schema);
-
-  const formData = { ...inputs };
-
-  // Initialize the state on first render, otherwise will submit empty values if saved without making changes
+  // Initialize style options with default values if none are already selected.
   useEffect(() => {
-    callback(formData);
-  }, []);
+    if (!state?.formData?.formValues?.textColor) {
+      dispatch({ type: 'form-update', payload: { name: 'textColor', value: '#333333' } });
+    }
 
-  const updateState = (name, value) => {
-    setInputs({ ...inputs, [name]: value });
-    callback({ ...formData, [name]: value });
-  };
+    if (!state?.formData?.formValues?.backgroundType) {
+      dispatch({ type: 'form-update', payload: { name: 'backgroundType', value: 'color' } });
+    }
+
+    if (!state?.formData?.formValues?.blockBackground) {
+      dispatch({ type: 'form-update', payload: { name: 'blockBackground', value: '#ffffff' } });
+    }
+
+    if (!state?.formData?.formValues?.quoteBackground) {
+      dispatch({ type: 'form-update', payload: { name: 'quoteBackground', value: '#ffffff' } });
+    }
+  }, []);
 
   const handleChange = e => {
     const { name, value } = e.target;
 
-    updateState(name, value);
-  };
-
-  const handleToggle = e => {
-    const { name } = e.target;
-    const checked = !inputs.fullWidth;
-
-    updateState(name, checked);
+    dispatch({ type: 'form-update', payload: { name, value } });
   };
 
   const handleColor = e => {
     const { group } = e.target.dataset;
     const { value } = e.target;
 
-    updateState(group, value);
+    dispatch({ type: 'form-update', payload: { name: group, value } });
   };
 
   const handleFile = e => {
     const { name } = e.target;
     const file = e.target.files[0];
 
-    const files = inputs.files.filter(f => f.name !== name);
-    files.push({ name, file });
+    dispatch({ type: 'file-add', file, name });
+  };
 
-    updateState('files', files);
+  const handleToggle = e => {
+    const { name } = e.target;
+    const isChecked = formValues[name] || false;
+
+    dispatch({ type: 'form-update', payload: { name, value: !isChecked } });
   };
 
   const blockBgOptions = {
@@ -90,19 +81,19 @@ const QuoteBoxForm = ({ callback, meta }) => {
     <Fragment>
       <RadioConditional
         callback={handleChange}
-        checked={inputs.backgroundType}
+        checked={formValues.backgroundType}
         label="What type of background would you like to apply to this block?"
         options={blockBgType}
       />
-      {inputs.backgroundType === 'color' && (
+      {formValues.backgroundType === 'color' && (
         <ColorPicker
           callback={handleColor}
           colors={blockBgOptions}
           label="Set block background color:"
-          selected={inputs.blockBackground}
+          selected={formValues.blockBackground}
         />
       )}
-      {inputs.backgroundType === 'image' && (
+      {formValues.backgroundType === 'image' && (
         <FileUploader
           callback={handleFile}
           label="Add background image URL:"
@@ -113,16 +104,16 @@ const QuoteBoxForm = ({ callback, meta }) => {
         callback={handleColor}
         colors={textOptions}
         label="Set block text color:"
-        selected={inputs.textColor}
+        selected={formValues.textColor}
       />
       <label htmlFor="quote-box-title">
         Add title:
         <input
           id="quote-box-title"
           name="title"
-          onChange={e => handleChange(e)}
           type="text"
-          value={inputs.title}
+          value={formValues.title || ''}
+          onChange={e => handleChange(e)}
         />
       </label>
       <label htmlFor="quote-box-subtitle">
@@ -130,9 +121,9 @@ const QuoteBoxForm = ({ callback, meta }) => {
         <input
           id="quote-box-subtitle"
           name="subtitle"
-          onChange={e => handleChange(e)}
           type="text"
-          value={inputs.subtitle}
+          value={formValues.subtitle || ''}
+          onChange={e => handleChange(e)}
         />
       </label>
       <label htmlFor="quote-box-desc">
@@ -140,25 +131,25 @@ const QuoteBoxForm = ({ callback, meta }) => {
         <textarea
           id="quote-box-desc"
           name="desc"
-          onChange={e => handleChange(e)}
           rows="6"
-          value={inputs.desc}
+          value={formValues.desc || ''}
+          onChange={e => handleChange(e)}
         />
       </label>
       <ColorPicker
         callback={handleColor}
         colors={quoteBgOptions}
         label="Set quote background color:"
-        selected={inputs.quoteBackground}
+        selected={formValues.quoteBackground}
       />
       <label htmlFor="quote-box-quote">
         Add quote:
         <textarea
           id="quote-box-quote"
           name="quote"
-          onChange={e => handleChange(e)}
           rows="6"
-          value={inputs.quote}
+          value={formValues.quote || ''}
+          onChange={e => handleChange(e)}
         />
       </label>
       <label htmlFor="quote-box-speaker">
@@ -166,19 +157,14 @@ const QuoteBoxForm = ({ callback, meta }) => {
         <input
           id="quote-box-speaker"
           name="speaker"
-          onChange={e => handleChange(e)}
           type="text"
-          value={inputs.speaker}
+          value={formValues.speaker || ''}
+          onChange={e => handleChange(e)}
         />
       </label>
-      <FullWidthToggle callback={handleToggle} checked={inputs.fullWidth} />
+      <FullWidthToggle callback={handleToggle} checked={formValues.fullWidth} />
     </Fragment>
   );
-};
-
-QuoteBoxForm.propTypes = {
-  callback: propTypes.func,
-  meta: propTypes.object
 };
 
 export default QuoteBoxForm;

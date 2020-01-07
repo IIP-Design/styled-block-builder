@@ -1,65 +1,33 @@
-import React, { Fragment, useEffect, useState } from 'react';
-import propTypes from 'prop-types';
+import React, { Fragment, useContext } from 'react';
 
 import CheckboxConditional from 'metabox/components/Forms/Toggles/CheckboxConditional';
 import FileUploader from 'metabox/components/FileUploader/FileUploader';
+import { MetaboxContext } from 'metabox/components/Metabox/MetaboxContext';
 import ButtonForm from './ButtonForm/ButtonForm';
 import FullWidthToggle from './Toggles/FullWidthToggle';
 
-const ParallaxForm = ({ callback, meta }) => {
-  const schema = {
-    buttonArrow: meta.buttonArrow || '',
-    buttonLink: meta.buttonLink || '',
-    buttonStyle: meta.buttonStyle || '',
-    buttonText: meta.buttonText || '',
-    files: meta.files || [],
-    fullWidth: meta.fullWidth || false,
-    hasButton: meta.hasButton || false,
-    subtitle: meta.subtitle || '',
-    text: meta.text || '',
-    title: meta.title || ''
-  };
-
-  const [inputs, setInputs] = useState(schema);
-
-  const formData = { ...inputs };
-
-  // Initialize the state on first render, otherwise will submit empty values if saved without making changes
-  useEffect(() => {
-    callback(formData);
-  }, []);
-
-  const updateState = (name, value) => {
-    setInputs({ ...inputs, [name]: value });
-    callback({ ...formData, [name]: value });
-  };
+const ParallaxForm = () => {
+  const { dispatch, state } = useContext(MetaboxContext);
+  const formValues = state?.formData?.formValues ? state.formData.formValues : {};
 
   const handleChange = e => {
     const { name, value } = e.target;
-    updateState(name, value);
+
+    dispatch({ type: 'form-update', payload: { name, value } });
   };
 
-  const handleToggle = () => {
-    const isChecked = !inputs.hasButton;
-
-    updateState('hasButton', isChecked);
-  };
-
-  const handleWidth = e => {
+  const handleToggle = e => {
     const { name } = e.target;
-    const checked = !inputs[name];
+    const isChecked = formValues[name] || false;
 
-    updateState([name], checked);
+    dispatch({ type: 'form-update', payload: { name, value: !isChecked } });
   };
 
   const handleFile = e => {
     const { name } = e.target;
     const file = e.target.files[0];
 
-    const files = inputs.files.filter(f => f.name !== name);
-    files.push({ name, file });
-
-    updateState('files', files);
+    dispatch({ type: 'file-add', file, name });
   };
 
   return (
@@ -70,9 +38,9 @@ const ParallaxForm = ({ callback, meta }) => {
         <input
           id="parallax-title"
           name="title"
-          onChange={e => handleChange(e)}
           type="text"
-          value={inputs.title}
+          value={formValues.title || ''}
+          onChange={e => handleChange(e)}
         />
       </label>
       <label htmlFor="parallax-subtitle">
@@ -80,9 +48,9 @@ const ParallaxForm = ({ callback, meta }) => {
         <input
           id="parallax-subtitle"
           name="subtitle"
-          onChange={e => handleChange(e)}
           type="text"
-          value={inputs.subtitle}
+          value={formValues.subtitle || ''}
+          onChange={e => handleChange(e)}
         />
       </label>
       <label htmlFor="parallax-text">
@@ -90,27 +58,22 @@ const ParallaxForm = ({ callback, meta }) => {
         <textarea
           id="parallax-text"
           name="text"
-          onChange={e => handleChange(e)}
           rows="6"
-          value={inputs.desc}
+          value={formValues.desc || ''}
+          onChange={e => handleChange(e)}
         />
       </label>
       <CheckboxConditional
-        label="Add Button (Optional)"
-        checked={inputs.hasButton}
         callback={handleToggle}
-        name="add-button"
+        checked={formValues.hasButton}
+        label="Add Button (Optional)"
+        name="hasButton"
       >
-        <ButtonForm callback={handleChange} inputs={inputs} />
+        <ButtonForm />
       </CheckboxConditional>
-      <FullWidthToggle callback={handleWidth} checked={inputs.fullWidth} />
+      <FullWidthToggle callback={handleToggle} checked={formValues.fullWidth} />
     </Fragment>
   );
-};
-
-ParallaxForm.propTypes = {
-  callback: propTypes.func,
-  meta: propTypes.object
 };
 
 export default ParallaxForm;

@@ -36,6 +36,14 @@ const saveInState = (state, template) => {
   return [];
 };
 
+const addFile = (file, name, fileList) => {
+  const files = fileList || [];
+
+  files.push({ file, name });
+
+  return files;
+};
+
 const addGroupItem = (fields, formValues, group) => {
   const fieldNames = fields.map(field => field.name);
 
@@ -120,6 +128,17 @@ export const metaboxReducer = (state, action) => {
         ...state,
         templates: saveInState(state, payload)
       };
+    case 'file-add':
+      return {
+        ...state,
+        formData: {
+          ...state.formData,
+          formValues: {
+            ...state.formData.formValues,
+            files: addFile(payload.file, payload.name, state.formData.formValues.files)
+          }
+        }
+      };
     case 'form-update':
       return {
         ...state,
@@ -175,7 +194,7 @@ export const metaboxReducer = (state, action) => {
         formData: {
           formId: 0,
           formType: '',
-          formValues: null
+          formValues: {}
         },
         showModal: false
       };

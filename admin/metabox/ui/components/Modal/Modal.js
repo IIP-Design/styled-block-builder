@@ -52,11 +52,11 @@ const ModalContent = () => {
         break;
       case 'parallax':
         formTitle = 'Configure Your Parallax Block:';
-        selectedForm = <ParallaxForm callback={setData} meta={meta} />;
+        selectedForm = <ParallaxForm />;
         break;
       case 'quote-box':
         formTitle = 'Configure Your Quote Box:';
-        selectedForm = <QuoteBoxForm callback={setData} meta={meta} />;
+        selectedForm = <QuoteBoxForm />;
         break;
       case 'resources':
         formTitle = 'Configure Your Resources Block:';

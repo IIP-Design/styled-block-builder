@@ -13,7 +13,7 @@ const MetaBox = () => {
     formData: {
       formId: 0,
       formType: '',
-      formValues: null
+      formValues: {}
     },
     showModal: false,
     templates: [],
@@ -66,7 +66,7 @@ const MetaBox = () => {
           onClick={() =>
             dispatch({
               type: 'modal-show',
-              payload: { formId: 0, formType, formValues: null }
+              payload: { formId: 0, formType, formValues: {} }
             })
           }
         >
