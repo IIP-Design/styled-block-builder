@@ -1,18 +1,10 @@
 import React, { useContext, useState } from 'react';
 import { createPortal } from 'react-dom';
 
-import ArticleFeedForm from 'metabox/components/Forms/ArticleFeedForm';
 import ErrorMessage from 'metabox/components/ErrorMessage/ErrorMessage';
-import HeroForm from 'metabox/components/Forms/HeroForm';
-import ParallaxForm from 'metabox/components/Forms/ParallaxForm';
-import QuoteBoxForm from 'metabox/components/Forms/QuoteBoxForm';
-import ResourcesForm from 'metabox/components/Forms/ResourcesForm';
 import Spinner from 'metabox/components/Spinner/Spinner';
-import SlidesForm from 'metabox/components/Forms/SlidesForm';
-import StatsForm from 'metabox/components/Forms/StatsForm';
-import TextForm from 'metabox/components/Forms/TextForm';
-import TimelineForm from 'metabox/components/Forms/TimelineForm';
 import { AdminContext } from 'metabox/context/adminContext';
+import { selectForm, selectTitle } from 'metabox/utils/select-form';
 import { updatePost } from 'metabox/utils/update-post';
 
 import './Modal.module.scss';
@@ -30,50 +22,7 @@ const ModalContent = () => {
   if (state && state.showModal && state.showModal === true) {
     const formData = state?.formData ? state.formData : { formId: 0, formType: '' };
 
-    let selectedForm = null;
-    let formTitle = null;
     const formStr = formData.formType.replace('gpalab-', '');
-
-    switch (formStr) {
-      case 'article-feed':
-        formTitle = 'Configure Your Article Feed:';
-        selectedForm = <ArticleFeedForm />;
-        break;
-      case 'hero':
-        formTitle = 'Configure Your Hero Block:';
-        selectedForm = <HeroForm />;
-        break;
-      case 'parallax':
-        formTitle = 'Configure Your Parallax Block:';
-        selectedForm = <ParallaxForm />;
-        break;
-      case 'quote-box':
-        formTitle = 'Configure Your Quote Box:';
-        selectedForm = <QuoteBoxForm />;
-        break;
-      case 'resources':
-        formTitle = 'Configure Your Resources Block:';
-        selectedForm = <ResourcesForm />;
-        break;
-      case 'slides':
-        formTitle = 'Configure Your Slides Block:';
-        selectedForm = <SlidesForm />;
-        break;
-      case 'stats':
-        formTitle = 'Configure Your Stats Block:';
-        selectedForm = <StatsForm />;
-        break;
-      case 'text':
-        formTitle = 'Configure Your Text Block:';
-        selectedForm = <TextForm />;
-        break;
-      case 'timeline':
-        formTitle = 'Configure Your Timeline Block:';
-        selectedForm = <TimelineForm />;
-        break;
-      default:
-        return null;
-    }
 
     const submitForm = async () => {
       const onComplete = res => {
@@ -112,15 +61,15 @@ const ModalContent = () => {
           </button>
           {saving && <Spinner />}
           {error && <ErrorMessage closeFunc={() => setError(false)} err={errorData} />}
-          {selectedForm && (
+          {formStr && (
             <form styleName="modal-form">
-              <h3 styleName="modal-form-title">{formTitle}</h3>
+              <h3 styleName="modal-form-title">{selectTitle(formStr)}</h3>
               <div
                 styleName={
                   error || saving ? 'modal-form-background obscured' : 'modal-form-background'
                 }
               >
-                {selectedForm}
+                {selectForm(formStr)}
               </div>
               <div styleName="modal-controls">
                 <label htmlFor="copy-shortcode">
