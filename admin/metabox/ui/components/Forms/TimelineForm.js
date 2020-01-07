@@ -1,47 +1,24 @@
-import React, { Fragment, useEffect, useState } from 'react';
-import propTypes from 'prop-types';
+import React, { Fragment, useContext } from 'react';
 
-import TabbedForm from './TabbedForm/TabbedForm';
-import FullWidthToggle from './Toggles/FullWidthToggle';
+import TabbedForm from 'metabox/components/Forms/TabbedForm/TabbedForm';
+import FullWidthToggle from 'metabox/components/Forms/Toggles/FullWidthToggle';
+import { MetaboxContext } from 'metabox/components/Metabox/MetaboxContext';
 
-const TimelineForm = ( { callback, meta } ) => {
-  // Set an initial object to load in the form,
-  // populated with either values passed from parent or empty values
-  const schema = {
-    title: meta.title || '',
-    events: meta.events || [],
-    fullWidth: meta.fullWidth || false
-  };
-
-  const [inputs, setInputs] = useState( schema );
-
-  // Intermediate variable because state mutations are asynchronous
-  // and can't be depended upon to update immediately
-  const formData = { ...inputs };
-
-  // Initialize the state on first render, otherwise
-  // it will submit empty values if saved without making changes
-  useEffect( () => {
-    callback( formData );
-  }, [] );
-
-  const tabStateFunc = ( group, clone ) => {
-    setInputs( { ...inputs, [group]: clone } );
-    callback( { ...formData, [group]: clone } );
-  };
+const TimelineForm = () => {
+  const { dispatch, state } = useContext(MetaboxContext);
+  const formValues = state?.formData?.formValues ? state.formData.formValues : {};
 
   const handleChange = e => {
     const { name, value } = e.target;
 
-    setInputs( { ...inputs, [name]: value } );
-    callback( { ...formData, [name]: value } );
+    dispatch({ type: 'form-update', payload: { name, value } });
   };
 
-  const handleToggle = () => {
-    const checked = !inputs.fullWidth;
+  const handleToggle = e => {
+    const { name } = e.target;
+    const isChecked = formValues[name] || false;
 
-    setInputs( { ...inputs, fullWidth: checked } );
-    callback( { ...formData, fullWidth: checked } );
+    dispatch({ type: 'form-update', payload: { name, value: !isChecked } });
   };
 
   const tabFields = [
@@ -58,26 +35,15 @@ const TimelineForm = ( { callback, meta } ) => {
         <input
           id="events-title"
           name="title"
-          onChange={ e => handleChange( e ) }
           type="text"
-          value={ inputs.title }
+          value={formValues.title || ''}
+          onChange={e => handleChange(e)}
         />
       </label>
-      <TabbedForm
-        fields={ tabFields }
-        group="events"
-        inputs={ inputs }
-        label="Event"
-        maxTabs={ 5 }
-        stateFunc={ tabStateFunc }
-      />
-      <FullWidthToggle callback={ handleToggle } checked={ inputs.fullWidth } />
+      <TabbedForm fields={tabFields} group="events" label="Event" maxTabs={5} />
+      <FullWidthToggle callback={handleToggle} checked={formValues.fullWidth} />
     </Fragment>
   );
 };
 
-TimelineForm.propTypes = {
-  callback: propTypes.func,
-  meta: propTypes.object
-};
 export default TimelineForm;

@@ -20,7 +20,6 @@ import './Modal.module.scss';
 const modalRoot = document.getElementById('gpalab-add-template-modal');
 
 const ModalContent = () => {
-  const [data, setData] = useState({});
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState(false);
   const [errorData, setErrorData] = useState(null);
@@ -29,13 +28,7 @@ const ModalContent = () => {
   const { dispatch, state } = useContext(MetaboxContext);
 
   if (state && state.showModal && state.showModal === true) {
-    const templates = state?.templates ? state.templates : [];
     const formData = state?.formData ? state.formData : { formId: 0, formType: '' };
-
-    // Pick out the one selected for editing and get it's metadata
-    // console.log(templates);
-    const current = templates.filter(item => item.id === formData.formId)[0];
-    const meta = current?.meta ? current.meta : {};
 
     let selectedForm = null;
     let formTitle = null;
@@ -48,7 +41,7 @@ const ModalContent = () => {
         break;
       case 'hero':
         formTitle = 'Configure Your Hero Block:';
-        selectedForm = <HeroForm callback={setData} meta={meta} />;
+        selectedForm = <HeroForm />;
         break;
       case 'parallax':
         formTitle = 'Configure Your Parallax Block:';
@@ -60,15 +53,15 @@ const ModalContent = () => {
         break;
       case 'resources':
         formTitle = 'Configure Your Resources Block:';
-        selectedForm = <ResourcesForm callback={setData} meta={meta} />;
+        selectedForm = <ResourcesForm />;
         break;
       case 'slides':
         formTitle = 'Configure Your Slides Block:';
-        selectedForm = <SlidesForm callback={setData} meta={meta} />;
+        selectedForm = <SlidesForm />;
         break;
       case 'stats':
         formTitle = 'Configure Your Stats Block:';
-        selectedForm = <StatsForm callback={setData} meta={meta} />;
+        selectedForm = <StatsForm />;
         break;
       case 'text':
         formTitle = 'Configure Your Text Block:';
@@ -76,7 +69,7 @@ const ModalContent = () => {
         break;
       case 'timeline':
         formTitle = 'Configure Your Timeline Block:';
-        selectedForm = <TimelineForm callback={setData} meta={meta} />;
+        selectedForm = <TimelineForm />;
         break;
       default:
         return null;

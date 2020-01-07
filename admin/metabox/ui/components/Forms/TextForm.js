@@ -1,12 +1,12 @@
 import React, { Fragment, useContext, useEffect } from 'react';
 
+import ArticleById from 'metabox/components/Forms/FeedTypes/ArticleById';
+import ButtonForm from 'metabox/components/Forms/ButtonForm/ButtonForm';
 import CheckboxConditional from 'metabox/components/Forms/Toggles/CheckboxConditional';
 import ColorPicker from 'metabox/components/ColorPicker/ColorPicker';
+import FullWidthToggle from 'metabox/components/Forms/Toggles/FullWidthToggle';
 import { defaultBackgrounds, defaultText } from 'metabox/utils/color-picker-palettes';
 import { MetaboxContext } from 'metabox/components/Metabox/MetaboxContext';
-import ArticleById from './FeedTypes/ArticleById';
-import ButtonForm from './ButtonForm/ButtonForm';
-import FullWidthToggle from './Toggles/FullWidthToggle';
 
 const TextForm = () => {
   const { dispatch, state } = useContext(MetaboxContext);

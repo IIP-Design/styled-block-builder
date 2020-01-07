@@ -1,72 +1,57 @@
-import React, { Fragment, useEffect, useState } from 'react';
-import propTypes from 'prop-types';
+import React, { Fragment, useContext, useEffect } from 'react';
 
 import ColorPicker from 'metabox/components/ColorPicker/ColorPicker';
 import FileUploader from 'metabox/components/FileUploader/FileUploader';
+import FullWidthToggle from 'metabox/components/Forms/Toggles/FullWidthToggle';
+import RadioConditional from 'metabox/components/Forms/Toggles/RadioConditional';
+import TabbedForm from 'metabox/components/Forms/TabbedForm/TabbedForm';
 import { defaultBackgrounds, defaultText } from 'metabox/utils/color-picker-palettes';
-import TabbedForm from './TabbedForm/TabbedForm';
-import FullWidthToggle from './Toggles/FullWidthToggle';
-import RadioConditional from './Toggles/RadioConditional';
+import { MetaboxContext } from 'metabox/components/Metabox/MetaboxContext';
 
-const StatsForm = ({ callback, meta }) => {
-  const schema = {
-    background: meta.background || '',
-    backgroundType: meta.backgroundType || 'color',
-    blockBackground: meta.blockBackground || '#ffffff',
-    files: meta.files || [],
-    fullWidth: meta.fullWidth || false,
-    stats: meta.stats || [],
-    textColor: meta.textColor || '#333333',
-    title: meta.title || ''
-  };
+const StatsForm = () => {
+  const { dispatch, state } = useContext(MetaboxContext);
+  const formValues = state?.formData?.formValues ? state.formData.formValues : {};
 
-  const [inputs, setInputs] = useState(schema);
-
-  const formData = { ...inputs };
-
-  // Initialize the state on first render, otherwise will submit empty values if saved without making changes
+  // Initialize style options with default values if none are already selected.
   useEffect(() => {
-    callback(formData);
+    if (!state?.formData?.formValues?.textColor) {
+      dispatch({ type: 'form-update', payload: { name: 'textColor', value: '#333333' } });
+    }
+
+    if (!state?.formData?.formValues?.backgroundType) {
+      dispatch({ type: 'form-update', payload: { name: 'backgroundType', value: 'color' } });
+    }
+
+    if (!state?.formData?.formValues?.blockBackground) {
+      dispatch({ type: 'form-update', payload: { name: 'blockBackground', value: '#ffffff' } });
+    }
   }, []);
-
-  const updateState = (group, val) => {
-    setInputs({ ...inputs, [group]: val });
-    callback({ ...formData, [group]: val });
-  };
-
-  const tabStateFunc = (group, clone) => {
-    setInputs({ ...inputs, [group]: clone });
-    callback({ ...formData, [group]: clone });
-  };
 
   const handleChange = e => {
     const { name, value } = e.target;
 
-    updateState(name, value);
-  };
-
-  const handleToggle = e => {
-    const { name } = e.target;
-    const checked = !inputs[name];
-
-    updateState(name, checked);
+    dispatch({ type: 'form-update', payload: { name, value } });
   };
 
   const handleColor = e => {
     const { group } = e.target.dataset;
     const { value } = e.target;
 
-    updateState(group, value);
+    dispatch({ type: 'form-update', payload: { name: group, value } });
   };
 
   const handleFile = e => {
     const { name } = e.target;
     const file = e.target.files[0];
 
-    const files = inputs.files.filter(f => f.name !== name);
-    files.push({ name, file });
+    dispatch({ type: 'file-add', file, name });
+  };
 
-    updateState('files', files);
+  const handleToggle = e => {
+    const { name } = e.target;
+    const isChecked = formValues[name] || false;
+
+    dispatch({ type: 'form-update', payload: { name, value: !isChecked } });
   };
 
   const blockBgOptions = {
@@ -89,56 +74,53 @@ const StatsForm = ({ callback, meta }) => {
     { label: 'Add stat value:', name: 'number', type: 'text' }
   ];
 
-  return (
-    <Fragment>
-      <RadioConditional
-        callback={handleChange}
-        checked={inputs.backgroundType}
-        label="What type of background would you like to apply to this block?"
-        options={blockBgType}
-      />
-      {inputs.backgroundType === 'color' && (
+  if (formValues) {
+    return (
+      <Fragment>
+        <RadioConditional
+          callback={handleChange}
+          checked={formValues.backgroundType}
+          label="What type of background would you like to apply to this block?"
+          options={blockBgType}
+        />
+        {formValues.backgroundType === 'color' && (
+          <ColorPicker
+            callback={handleColor}
+            colors={blockBgOptions}
+            label="Set block background color:"
+            selected={formValues.blockBackground}
+          />
+        )}
+        {formValues.backgroundType === 'image' && (
+          <FileUploader
+            callback={handleFile}
+            label="Add background image:"
+            name="backgroundImage"
+          />
+        )}
         <ColorPicker
           callback={handleColor}
-          colors={blockBgOptions}
-          label="Set block background color:"
-          selected={inputs.blockBackground}
+          colors={textOptions}
+          label="Set block text color:"
+          selected={formValues.textColor}
         />
-      )}
-      {inputs.backgroundType === 'image' && (
-        <FileUploader callback={handleFile} label="Add background image:" name="backgroundImage" />
-      )}
-      <ColorPicker
-        callback={handleColor}
-        colors={textOptions}
-        label="Set block text color:"
-        selected={inputs.textColor}
-      />
-      <label htmlFor="stats-title">
-        Add Stats block title:
-        <input
-          id="stats-title"
-          name="title"
-          onChange={e => handleChange(e)}
-          type="text"
-          value={meta.title}
-        />
-      </label>
-      <FullWidthToggle callback={handleToggle} checked={inputs.fullWidth} />
-      <TabbedForm
-        fields={tabFields}
-        group="stats"
-        inputs={inputs}
-        label="Stat"
-        stateFunc={tabStateFunc}
-      />
-    </Fragment>
-  );
-};
+        <label htmlFor="stats-title">
+          Add Stats block title:
+          <input
+            id="stats-title"
+            name="title"
+            type="text"
+            value={formValues.title || ''}
+            onChange={e => handleChange(e)}
+          />
+        </label>
+        <FullWidthToggle callback={handleToggle} checked={formValues.fullWidth} />
+        <TabbedForm fields={tabFields} group="stats" label="Stat" />
+      </Fragment>
+    );
+  }
 
-StatsForm.propTypes = {
-  callback: propTypes.func,
-  meta: propTypes.object
+  return null;
 };
 
 export default StatsForm;

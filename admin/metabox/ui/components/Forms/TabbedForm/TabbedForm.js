@@ -1,27 +1,21 @@
-import React, { Fragment, useEffect, useState } from 'react';
+import React, { Fragment, useContext, useState } from 'react';
 import propTypes from 'prop-types';
 
-import { getTabTitleField, responsiveTitle } from 'metabox/utils/tab-titles';
-import { handleAdd, handleFile, handleInput, handleRemove } from 'metabox/utils/modify-group';
+import ArticleById from 'metabox/components/Forms/FeedTypes/ArticleById';
+import CheckboxConditional from 'metabox/components/Forms/Toggles/CheckboxConditional';
 import FileUploader from 'metabox/components/FileUploader/FileUploader';
-import ArticleById from '../FeedTypes/ArticleById';
-import CheckboxConditional from '../Toggles/CheckboxConditional';
+import { getTabTitleField, responsiveTitle } from 'metabox/utils/tab-titles';
+import { handleFile } from 'metabox/utils/modify-group';
+import { MetaboxContext } from 'metabox/components/Metabox/MetaboxContext';
 
 import './TabbedForm.module.scss';
 
-const TabbedForm = ({ fields, group, inputs, label, maxTabs, stateFunc }) => {
+const TabbedForm = ({ fields, group, label, maxTabs, stateFunc }) => {
   const [selectedTab, setSelectedTab] = useState(null);
-  const [forms, setForms] = useState([]);
+  // const [forms, setForms] = useState([]);
 
-  useEffect(() => {
-    const currentState = [...inputs[group]];
-    setForms(currentState);
-
-    // If forms already present, open first one
-    if (currentState.length > 0) {
-      setSelectedTab(currentState[0].id);
-    }
-  }, []);
+  const { dispatch, state } = useContext(MetaboxContext);
+  const formValues = state?.formData?.formValues ? state.formData.formValues : {};
 
   const updateState = (val, index) => {
     stateFunc(group, val);
@@ -46,7 +40,20 @@ const TabbedForm = ({ fields, group, inputs, label, maxTabs, stateFunc }) => {
     updateState(newState);
   };
 
-  const uponRemoval = (clone, index) => {
+  const handleChange = (e, parent) => {
+    const { name, value } = e.target;
+
+    dispatch({ type: 'group-input', payload: { group, name, parent, value } });
+  };
+
+  const handleRemoval = forms => {
+    const selected = forms.filter(item => item.id === selectedTab);
+    const index = forms.indexOf(selected[0]);
+
+    // Replicate resources array and add new resource object
+    const clone = [...forms];
+    clone.splice(index, 1);
+
     // Bring adjacent tab in focus when removing tab
     let tab;
     switch (clone.length) {
@@ -61,165 +68,160 @@ const TabbedForm = ({ fields, group, inputs, label, maxTabs, stateFunc }) => {
         }
     }
 
-    // Handles all the state updates
-    updateState(clone, tab);
+    if (tab) {
+      setSelectedTab(tab);
+    }
+
+    dispatch({ type: 'group-remove', payload: { group, id: selectedTab } });
   };
 
-  const handleToggle = e => {
-    const parent = e.target.name;
+  const handleToggle = (name, parent) => {
+    const isChecked = formValues[name] || false;
 
-    // Make an updated replica of the form objects
-    const newState = [...forms];
-    newState.map(item => {
-      if (item.id === parent) {
-        const checked = item.hasFeed;
-        item.hasFeed = !checked;
-
-        item.articles = item.articles ? item.articles : [];
-      }
-
-      return item;
-    });
-
-    updateState(newState);
+    dispatch({ type: 'group-input', payload: { group, name, parent, value: !isChecked } });
   };
 
-  return (
-    <div>
-      <div styleName="tabbed-form">
-        {forms && forms.length > 0 && (
-          <Fragment>
-            <div styleName="tabs">
-              {forms.map((form, index) => {
-                const selected = forms.filter(base => base.id === form.id);
-                return (
-                  <button
-                    id={`tab-${index}`}
-                    key={`tab-${form.id}`}
-                    onClick={() => setSelectedTab(form.id)}
-                    styleName={selectedTab === form.id ? 'tab selected-tab' : 'tab'}
-                    type="button"
-                  >
-                    {responsiveTitle(index, forms.length, selected[0][getTabTitleField(fields)])}
-                  </button>
-                );
-              })}
-            </div>
-            <div className="tab-container">
-              {forms.map(form => {
-                const selected = forms.filter(base => base.id === form.id);
-                return (
-                  <div
-                    id={`tab-item-${form.id}`}
-                    key={`tab-item-${form.id}`}
-                    styleName={selectedTab === form.id ? 'tab-item selected-item' : 'tab-item'}
-                  >
-                    {fields &&
-                      fields.map(field => {
-                        if (field.type === 'file') {
-                          return (
-                            <FileUploader
-                              callback={e => handleFile(e, form.id, forms, updateState)}
-                              key={`${field.name}-${form.id}`}
-                              label={field.label || ''}
-                              name={field.name}
-                            />
-                          );
-                        }
+  if (formValues) {
+    const forms = formValues[group] || [];
 
-                        if (field.type === 'text') {
-                          return (
-                            <label
-                              htmlFor={`section-${field.name}-${form.id}`}
-                              key={`${field.name}-${form.id}`}
-                            >
-                              {field.label || ''}
-                              <input
-                                id={`section-${field.name}-${form.id}`}
-                                data-parent={form.id}
-                                name={field.name}
-                                onChange={e => handleInput(e, forms, updateState)}
-                                type="text"
-                                value={selected[0][field.name]}
-                              />
-                            </label>
-                          );
-                        }
-
-                        if (field.type === 'textarea') {
-                          return (
-                            <label
-                              htmlFor={`section-${field.name}-${form.id}`}
-                              key={`${field.name}-${form.id}`}
-                            >
-                              {field.label || ''}
-                              <textarea
-                                id={`section-${field.name}-${form.id}`}
-                                data-parent={form.id}
-                                name={field.name}
-                                onChange={e => handleInput(e, forms, updateState)}
-                                rows="6"
-                                value={selected[0][field.name]}
-                              />
-                            </label>
-                          );
-                        }
-
-                        if (field.type === 'article-feed') {
-                          return (
-                            <CheckboxConditional
-                              callback={handleToggle}
-                              checked={form.hasFeed}
-                              data-parent={form.id}
-                              key={`${field.name}-${form.id}`}
-                              label={field.label || ''}
-                              name={form.id}
-                            >
-                              <ArticleById inputs={form} updateState={updateArticles} />
-                            </CheckboxConditional>
-                          );
-                        }
-
-                        return null;
-                      })}
-                  </div>
-                );
-              })}
-            </div>
-          </Fragment>
-        )}
-        <div
-          style={{ justifyContent: forms && forms.length > 0 ? 'space-between' : 'flex-end' }}
-          styleName="tab-buttons"
-        >
+    return (
+      <div>
+        <div styleName="tabbed-form">
           {forms && forms.length > 0 && (
+            <Fragment>
+              <div styleName="tabs">
+                {forms.map((form, index) => {
+                  const selected = forms.filter(base => base.id === form.id);
+                  return (
+                    <button
+                      key={`tab-${form.id}`}
+                      id={`tab-${index}`}
+                      styleName={selectedTab === form.id ? 'tab selected-tab' : 'tab'}
+                      type="button"
+                      onClick={() => setSelectedTab(form.id)}
+                    >
+                      {responsiveTitle(index, forms.length, selected[0][getTabTitleField(fields)])}
+                    </button>
+                  );
+                })}
+              </div>
+              <div className="tab-container">
+                {forms.map(form => {
+                  const selected = forms.filter(base => base.id === form.id);
+                  return (
+                    <div
+                      key={`tab-item-${form.id}`}
+                      id={`tab-item-${form.id}`}
+                      styleName={selectedTab === form.id ? 'tab-item selected-item' : 'tab-item'}
+                    >
+                      {fields &&
+                        fields.map(field => {
+                          if (field.type === 'file') {
+                            return (
+                              <FileUploader
+                                key={`${field.name}-${form.id}`}
+                                callback={e => handleFile(e, form.id, forms, updateState)}
+                                label={field.label || ''}
+                                name={field.name}
+                              />
+                            );
+                          }
+
+                          if (field.type === 'text') {
+                            return (
+                              <label
+                                key={`${field.name}-${form.id}`}
+                                htmlFor={`section-${field.name}-${form.id}`}
+                              >
+                                {field.label || ''}
+                                <input
+                                  data-parent={form.id}
+                                  id={`section-${field.name}-${form.id}`}
+                                  name={field.name}
+                                  type="text"
+                                  value={selected[0][field.name]}
+                                  onChange={e => handleChange(e, form.id)}
+                                />
+                              </label>
+                            );
+                          }
+
+                          if (field.type === 'textarea') {
+                            return (
+                              <label
+                                key={`${field.name}-${form.id}`}
+                                htmlFor={`section-${field.name}-${form.id}`}
+                              >
+                                {field.label || ''}
+                                <textarea
+                                  data-parent={form.id}
+                                  id={`section-${field.name}-${form.id}`}
+                                  name={field.name}
+                                  rows="6"
+                                  value={selected[0][field.name]}
+                                  onChange={e => handleChange(e, form.id)}
+                                />
+                              </label>
+                            );
+                          }
+
+                          if (field.type === 'article-feed') {
+                            return (
+                              <CheckboxConditional
+                                key={`${field.name}-${form.id}`}
+                                callback={() => handleToggle('hasFeed', form.id)}
+                                checked={form.hasFeed}
+                                data-parent={form.id}
+                                label={field.label || ''}
+                                name={form.id}
+                              >
+                                <ArticleById nestingGroup={group} />
+                              </CheckboxConditional>
+                            );
+                          }
+
+                          return null;
+                        })}
+                    </div>
+                  );
+                })}
+              </div>
+            </Fragment>
+          )}
+          <div
+            style={{ justifyContent: forms && forms.length > 0 ? 'space-between' : 'flex-end' }}
+            styleName="tab-buttons"
+          >
+            {forms && forms.length > 0 && (
+              <button
+                className="button-secondary"
+                type="button"
+                onClick={() => handleRemoval(forms)}
+              >
+                {`Remove ${label}` || 'Remove Section'}
+              </button>
+            )}
             <button
               className="button-secondary"
-              onClick={() => handleRemove(forms, selectedTab, uponRemoval)}
+              disabled={forms && forms.length === maxTabs}
+              styleName="tab-button"
               type="button"
+              onClick={() => dispatch({ type: 'group-add', payload: { fields, group } })}
             >
-              {`Remove ${label}` || 'Remove Section'}
+              {`Add ${label}` || 'Add Section'}
             </button>
-          )}
-          <button
-            className="button-secondary"
-            disabled={forms && forms.length === maxTabs}
-            onClick={() => handleAdd(fields, inputs, group, updateState)}
-            styleName="tab-button"
-            type="button"
-          >
-            {`Add ${label}` || 'Add Section'}
-          </button>
+          </div>
         </div>
       </div>
-    </div>
-  );
+    );
+  }
+
+  return null;
 };
 
 TabbedForm.propTypes = {
   fields: propTypes.array,
   group: propTypes.string,
-  inputs: propTypes.object,
   label: propTypes.string,
   maxTabs: propTypes.number,
   stateFunc: propTypes.func

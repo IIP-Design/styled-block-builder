@@ -1,61 +1,34 @@
-import React, { Fragment, useEffect, useState } from 'react';
-import propTypes from 'prop-types';
+import React, { Fragment, useContext } from 'react';
 
+import ButtonForm from 'metabox/components/Forms/ButtonForm/ButtonForm';
+import CheckboxConditional from 'metabox/components/Forms/Toggles/CheckboxConditional';
 import FileUploader from 'metabox/components/FileUploader/FileUploader';
-import ButtonForm from './ButtonForm/ButtonForm';
-import CheckboxConditional from './Toggles/CheckboxConditional';
-import RadioConditional from './Toggles/RadioConditional';
-import TabbedForm from './TabbedForm/TabbedForm';
+import RadioConditional from 'metabox/components/Forms/Toggles/RadioConditional';
+import TabbedForm from 'metabox/components/Forms/TabbedForm/TabbedForm';
+import { MetaboxContext } from 'metabox/components/Metabox/MetaboxContext';
 
-const HeroForm = ({ callback, meta }) => {
-  const schema = {
-    background: meta.background || '',
-    buttonArrow: meta.buttonArrow || '',
-    buttonLink: meta.buttonLink || '',
-    buttonStyle: meta.buttonStyle || '',
-    buttonText: meta.buttonText || '',
-    description: meta.description || '',
-    files: meta.files || [],
-    hasButton: meta.hasButton || false,
-    lines: meta.lines || [],
-    subtitle: meta.subtitle || '',
-    title: meta.title || '',
-    type: meta.type || ''
-  };
-
-  const [inputs, setInputs] = useState(schema);
-
-  const formData = { ...inputs };
-
-  // Initialize the state on first render, otherwise will submit empty values if saved without making changes
-  useEffect(() => {
-    callback(formData);
-  }, []);
-
-  const updateState = (name, value) => {
-    setInputs({ ...inputs, [name]: value });
-    callback({ ...formData, [name]: value });
-  };
+const HeroForm = () => {
+  const { dispatch, state } = useContext(MetaboxContext);
+  const formValues = state?.formData?.formValues ? state.formData.formValues : {};
 
   const handleChange = e => {
     const { name, value } = e.target;
-    updateState(name, value);
+
+    dispatch({ type: 'form-update', payload: { name, value } });
   };
 
   const handleFile = e => {
     const { name } = e.target;
     const file = e.target.files[0];
 
-    const files = inputs.files.filter(f => f.name !== name);
-    files.push({ name, file });
-
-    updateState('files', files);
+    dispatch({ type: 'file-add', file, name });
   };
 
-  const handleToggle = () => {
-    const isChecked = !inputs.hasButton;
+  const handleToggle = e => {
+    const { name } = e.target;
+    const isChecked = formValues[name] || false;
 
-    updateState('hasButton', isChecked);
+    dispatch({ type: 'form-update', payload: { name, value: !isChecked } });
   };
 
   const options = [
@@ -73,9 +46,9 @@ const HeroForm = ({ callback, meta }) => {
         <input
           id="hero-title"
           name="title"
-          onChange={e => handleChange(e)}
           type="text"
-          value={inputs.title}
+          value={formValues.title || ''}
+          onChange={e => handleChange(e)}
         />
       </label>
       <label htmlFor="hero-subtitle">
@@ -83,55 +56,43 @@ const HeroForm = ({ callback, meta }) => {
         <input
           id="hero-subtitle"
           name="subtitle"
-          onChange={e => handleChange(e)}
           type="text"
-          value={inputs.subtitle}
+          value={formValues.subtitle || ''}
+          onChange={e => handleChange(e)}
         />
       </label>
       <RadioConditional
         callback={handleChange}
-        checked={inputs.type}
+        checked={formValues.type}
         label="What type of block would you like?"
         options={options}
       />
-      {inputs.type === 'text' && (
+      {formValues.type === 'text' && (
         <label htmlFor="hero-description">
           Add main content area text:
           <textarea
             id="hero-description"
             name="description"
-            onChange={e => handleChange(e)}
-            type="text"
             rows="6"
-            value={inputs.description}
+            type="text"
+            value={formValues.description || ''}
+            onChange={e => handleChange(e)}
           />
         </label>
       )}
-      {inputs.type === 'lines' && (
-        <TabbedForm
-          fields={tabFields}
-          group="lines"
-          inputs={inputs}
-          label="Line"
-          maxTabs={10}
-          stateFunc={updateState}
-        />
+      {formValues.type === 'lines' && (
+        <TabbedForm fields={tabFields} group="lines" label="Line" maxTabs={10} />
       )}
       <CheckboxConditional
-        label="Add Button (Optional)"
-        checked={inputs.hasButton}
         callback={handleToggle}
-        name="add-button"
+        checked={formValues.hasButton}
+        label="Add Button (Optional)"
+        name="hasButton"
       >
-        <ButtonForm callback={handleChange} inputs={inputs} />
+        <ButtonForm />
       </CheckboxConditional>
     </Fragment>
   );
-};
-
-HeroForm.propTypes = {
-  callback: propTypes.func,
-  meta: propTypes.object
 };
 
 export default HeroForm;
