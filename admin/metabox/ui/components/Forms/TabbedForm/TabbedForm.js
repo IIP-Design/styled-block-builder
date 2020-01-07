@@ -12,38 +12,22 @@ import './TabbedForm.module.scss';
 
 const TabbedForm = ({ fields, group, label, maxTabs, stateFunc }) => {
   const [selectedTab, setSelectedTab] = useState(null);
-  // const [forms, setForms] = useState([]);
 
   const { dispatch, state } = useContext(MetaboxContext);
   const formValues = state?.formData?.formValues ? state.formData.formValues : {};
 
   const updateState = (val, index) => {
     stateFunc(group, val);
-    setForms(val);
 
     if (index) {
       setSelectedTab(index);
     }
   };
 
-  const updateArticles = val => {
-    const newState = [...forms];
-
-    newState.map(item => {
-      if (item.id === val[0].parent) {
-        item.articles = val;
-      }
-
-      return item;
-    });
-
-    updateState(newState);
-  };
-
-  const handleChange = (e, parent) => {
+  const handleChange = (e, itemId) => {
     const { name, value } = e.target;
 
-    dispatch({ type: 'group-input', payload: { group, name, parent, value } });
+    dispatch({ type: 'group-input', payload: { group, itemId, name, value } });
   };
 
   const handleRemoval = forms => {
@@ -75,10 +59,10 @@ const TabbedForm = ({ fields, group, label, maxTabs, stateFunc }) => {
     dispatch({ type: 'group-remove', payload: { group, id: selectedTab } });
   };
 
-  const handleToggle = (name, parent) => {
+  const handleToggle = (name, itemId) => {
     const isChecked = formValues[name] || false;
 
-    dispatch({ type: 'group-input', payload: { group, name, parent, value: !isChecked } });
+    dispatch({ type: 'group-input', payload: { group, itemId, name, value: !isChecked } });
   };
 
   if (formValues) {
@@ -170,12 +154,12 @@ const TabbedForm = ({ fields, group, label, maxTabs, stateFunc }) => {
                               <CheckboxConditional
                                 key={`${field.name}-${form.id}`}
                                 callback={() => handleToggle('hasFeed', form.id)}
-                                checked={form.hasFeed}
+                                checked={form.hasFeed || false}
                                 data-parent={form.id}
                                 label={field.label || ''}
                                 name={form.id}
                               >
-                                <ArticleById nestingGroup={group} />
+                                <ArticleById parentGroup={group} parentId={form.id} />
                               </CheckboxConditional>
                             );
                           }

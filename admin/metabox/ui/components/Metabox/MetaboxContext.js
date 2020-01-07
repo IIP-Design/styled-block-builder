@@ -45,19 +45,42 @@ const addFile = (file, name, fileList) => {
 };
 
 const addGroupItem = (fields, formValues, group) => {
+  // Get list of field names required.
   const fieldNames = fields.map(field => field.name);
 
+  // Check if selected group member has relevant sub-group, if not create.
   const groupArr = formValues[group] ? [...formValues[group]] : [];
-  // Create an object to store values for new resource
+
+  // Create an object to store values for new resource.
   const obj = {};
   obj.id = uuid();
   fieldNames.forEach(name => {
     obj[name] = '';
   });
 
+  // Add new object to sub-group.
   groupArr.push(obj);
 
   return groupArr;
+};
+
+const addNestedGroupItem = (parentGroup, fields, group, parentId) => {
+  // Isolated the group member getting updated.
+  const selected = parentGroup.filter(item => item.id === parentId)[0];
+
+  // Store the remainder of the group.
+  const temp = parentGroup.filter(item => item.id !== parentId);
+
+  // Update the nested group.
+  const groupArr = addGroupItem(fields, selected, group);
+
+  // Update selected group member.
+  selected[group] = groupArr;
+
+  // Push updated item back into group
+  temp.push(selected);
+
+  return temp;
 };
 
 const removeGroupItem = (formValues, group, id) => {
@@ -68,18 +91,82 @@ const removeGroupItem = (formValues, group, id) => {
   return filtered;
 };
 
-export const handleNestedInput = (group, name, parent, value) => {
-  // Make an updated replica of the form objects
-  const newState = [...group];
-  newState.map(item => {
-    if (item.id === parent) {
-      item[name] = value;
+const removeNestedGroupInput = (data, itemId, group, parentId) => {
+  let indexValue = 0;
+
+  // Isolate the group-member getting updated.
+  const selectedGroup = data.filter((item, index) => {
+    if (item.id === parentId) {
+      indexValue = index;
     }
 
-    return item;
-  });
+    return item.id === parentId;
+  })[0];
 
-  return newState;
+  // Store the remainder of the group.
+  const groupTemp = data.filter(item => item.id !== parentId);
+
+  // Check if selected group member has relevant sub-group, if not create.
+  const groupArr = removeGroupItem(selectedGroup, group, itemId);
+
+  selectedGroup[group] = groupArr;
+
+  // Updated full group with altered sub-group.
+  groupTemp.splice(indexValue, 0, selectedGroup);
+
+  return groupTemp;
+};
+
+const handleNestedInput = (data, itemId, name, value) => {
+  let itemIndexValue = 0;
+
+  // Pull off selected sub-group item.
+  const selectedItem = data.filter((item, index) => {
+    if (item.id === itemId) {
+      itemIndexValue = index;
+    }
+
+    return item.id === itemId;
+  })[0];
+
+  const itemsTemp = data.filter(item => item.id !== itemId);
+
+  // Update selected sub-group item.
+  selectedItem[name] = value;
+
+  // Add updated sub-group item back to sub-group.
+  itemsTemp.splice(itemIndexValue, 0, selectedItem);
+
+  return itemsTemp;
+};
+
+const handleDoubleNestedInput = (data, itemId, group, name, parentId, value) => {
+  let groupIndexValue = 0;
+
+  // Isolate the group-member getting updated.
+  const selectedGroup = data.filter((item, index) => {
+    if (item.id === parentId) {
+      groupIndexValue = index;
+    }
+
+    return item.id === parentId;
+  })[0];
+
+  // Store the remainder of the group.
+  const groupTemp = data.filter(item => item.id !== parentId);
+
+  // Check if selected group member has relevant sub-group, if not create.
+  const groupArr = selectedGroup[group] ? [...selectedGroup[group]] : [];
+
+  const itemsTemp = handleNestedInput(groupArr, itemId, name, value);
+
+  // Updated full group with altered sub-group.
+  selectedGroup[group] = itemsTemp;
+
+  // groupTemp.push(selectedGroup);
+  groupTemp.splice(groupIndexValue, 0, selectedGroup);
+
+  return groupTemp;
 };
 
 const addToUpdating = (state, id) => {
@@ -161,6 +248,22 @@ export const metaboxReducer = (state, action) => {
           }
         }
       };
+    case 'group-add-nested':
+      return {
+        ...state,
+        formData: {
+          ...state.formData,
+          formValues: {
+            ...state.formData.formValues,
+            [payload.parentGroup]: addNestedGroupItem(
+              state.formData.formValues[payload.parentGroup],
+              payload.fields,
+              payload.group,
+              payload.parentId
+            )
+          }
+        }
+      };
     case 'group-input':
       return {
         ...state,
@@ -170,8 +273,26 @@ export const metaboxReducer = (state, action) => {
             ...state.formData.formValues,
             [payload.group]: handleNestedInput(
               state.formData.formValues[payload.group],
+              payload.itemId,
               payload.name,
-              payload.parent,
+              payload.value
+            )
+          }
+        }
+      };
+    case 'group-input-nested':
+      return {
+        ...state,
+        formData: {
+          ...state.formData,
+          formValues: {
+            ...state.formData.formValues,
+            [payload.parentGroup]: handleDoubleNestedInput(
+              state.formData.formValues[payload.parentGroup],
+              payload.itemId,
+              payload.group,
+              payload.name,
+              payload.parentId,
               payload.value
             )
           }
@@ -185,6 +306,22 @@ export const metaboxReducer = (state, action) => {
           formValues: {
             ...state.formData.formValues,
             [payload.group]: removeGroupItem(state.formData.formValues, payload.group, payload.id)
+          }
+        }
+      };
+    case 'group-remove-nested':
+      return {
+        ...state,
+        formData: {
+          ...state.formData,
+          formValues: {
+            ...state.formData.formValues,
+            [payload.parentGroup]: removeNestedGroupInput(
+              state.formData.formValues[payload.parentGroup],
+              payload.itemId,
+              payload.group,
+              payload.parentId
+            )
           }
         }
       };

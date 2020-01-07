@@ -1,38 +1,16 @@
-import React, { Fragment, useEffect, useState } from 'react';
-import propTypes from 'prop-types';
+import React, { Fragment, useContext } from 'react';
 
-import TabbedForm from './TabbedForm/TabbedForm';
+import TabbedForm from 'metabox/components/Forms/TabbedForm/TabbedForm';
+import { MetaboxContext } from 'metabox/components/Metabox/MetaboxContext';
 
-const SlidesForm = ({ callback, meta }) => {
-  // Set an initial object to load in the form,
-  // populated with either values passed from parent or empty values
-  const schema = {
-    title: meta.title || '',
-    slides: meta.slides || []
-  };
-
-  const [inputs, setInputs] = useState(schema);
-
-  // Intermediate variable because state mutations are asynchronous
-  // and can't be depended upon to update immediately
-  const formData = { ...inputs };
-
-  // Initialize the state on first render, otherwise
-  // it will submit empty values if saved without making changes
-  useEffect(() => {
-    callback(formData);
-  }, []);
-
-  const tabStateFunc = (group, clone) => {
-    setInputs({ ...inputs, [group]: clone });
-    callback({ ...formData, [group]: clone });
-  };
+const SlidesForm = () => {
+  const { dispatch, state } = useContext(MetaboxContext);
+  const formValues = state?.formData?.formValues ? state.formData.formValues : {};
 
   const handleChange = e => {
     const { name, value } = e.target;
 
-    setInputs({ ...inputs, [name]: value });
-    callback({ ...formData, [name]: value });
+    dispatch({ type: 'form-update', payload: { name, value } });
   };
 
   const tabFields = [
@@ -41,32 +19,25 @@ const SlidesForm = ({ callback, meta }) => {
     { label: 'Add slide text:', name: 'text', type: 'textarea' }
   ];
 
-  return (
-    <Fragment>
-      <label htmlFor="slides-title">
-        Add title:
-        <input
-          id="slides-title"
-          name="title"
-          onChange={e => handleChange(e)}
-          type="text"
-          value={inputs.title}
-        />
-      </label>
-      <TabbedForm
-        fields={tabFields}
-        group="slides"
-        inputs={inputs}
-        label="Slide"
-        maxTabs={10}
-        stateFunc={tabStateFunc}
-      />
-    </Fragment>
-  );
+  if (formValues) {
+    return (
+      <Fragment>
+        <label htmlFor="slides-title">
+          Add title:
+          <input
+            id="slides-title"
+            name="title"
+            type="text"
+            value={formValues.title || ''}
+            onChange={e => handleChange(e)}
+          />
+        </label>
+        <TabbedForm fields={tabFields} group="slides" label="Slide" maxTabs={10} />
+      </Fragment>
+    );
+  }
+
+  return null;
 };
 
-SlidesForm.propTypes = {
-  callback: propTypes.func,
-  meta: propTypes.object
-};
 export default SlidesForm;

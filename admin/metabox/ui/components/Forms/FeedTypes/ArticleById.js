@@ -1,30 +1,66 @@
 import React, { Fragment, useContext } from 'react';
+import propTypes from 'prop-types';
 
 import { MetaboxContext } from 'metabox/components/Metabox/MetaboxContext';
 
 import './ArticleById.module.scss';
 
-const ArticleById = () => {
+const ArticleById = ({ parentGroup, parentId }) => {
   const { dispatch, state } = useContext(MetaboxContext);
   const formValues = state?.formData?.formValues ? state.formData.formValues : {};
 
-  const fields = [{ name: 'postId' }, { name: 'source' }];
+  const handleAdd = () => {
+    const fields = [{ name: 'postId' }, { name: 'source' }];
+
+    if (parentGroup) {
+      dispatch({
+        type: 'group-add-nested',
+        payload: { fields, group: 'articles', parentGroup, parentId }
+      });
+    } else {
+      dispatch({ type: 'group-add', payload: { fields, group: 'articles' } });
+    }
+  };
 
   const handleChange = e => {
-    const { parent } = e.target.dataset;
+    const { itemid } = e.target.dataset;
     const { name, value } = e.target;
 
-    dispatch({ type: 'group-input', payload: { group: 'articles', name, parent, value } });
+    if (parentGroup) {
+      dispatch({
+        type: 'group-input-nested',
+        payload: { itemId: itemid, group: 'articles', name, parentGroup, parentId, value }
+      });
+    } else {
+      dispatch({
+        type: 'group-input',
+        payload: { itemId: itemid, group: 'articles', name, value }
+      });
+    }
   };
 
   const handleRemove = e => {
-    const { parent } = e.target.dataset;
+    const { itemid } = e.target.dataset;
 
-    dispatch({ type: 'group-remove', payload: { group: 'articles', id: parent } });
+    if (parentGroup) {
+      dispatch({
+        type: 'group-remove-nested',
+        payload: { itemId: itemid, group: 'articles', parentGroup, parentId }
+      });
+    } else {
+      dispatch({ type: 'group-remove', payload: { group: 'articles', id: itemid } });
+    }
   };
 
   if (formValues) {
-    const articles = formValues.articles || [];
+    let articles;
+    if (!parentGroup) {
+      articles = formValues.articles || [];
+    } else {
+      const group = formValues[parentGroup] || [];
+      const current = group.filter(item => item.id === parentId)[0];
+      articles = current.articles || [];
+    }
 
     return (
       <Fragment>
@@ -34,7 +70,7 @@ const ArticleById = () => {
             <label htmlFor={`article-id-${article.id}`} styleName="feed-label">
               Enter article id
               <input
-                data-parent={article.id}
+                data-itemid={article.id}
                 id={`article-id-${article.id}`}
                 name="postId"
                 type="text"
@@ -45,7 +81,7 @@ const ArticleById = () => {
             <label htmlFor={`article-source-${article.id}`} styleName="feed-label">
               Select article source
               <select
-                data-parent={article.id}
+                data-itemid={article.id}
                 id={`article-source-${article.id}`}
                 name="source"
                 value={article.source}
@@ -55,12 +91,12 @@ const ArticleById = () => {
                 <option value="">- Select Source -</option>
                 <option value="share">Share America</option>
                 <option value="yali">YALI</option>
-                <option value="yali">YLAI</option>
+                <option value="ylai">YLAI</option>
               </select>
             </label>
             <button
               className="button-secondary"
-              data-parent={article.id}
+              data-itemid={article.id}
               styleName="feed-button-remove"
               type="button"
               onClick={e => handleRemove(e)}
@@ -74,7 +110,7 @@ const ArticleById = () => {
           disabled={articles && articles.length === 3}
           styleName="feed-button"
           type="button"
-          onClick={() => dispatch({ type: 'group-add', payload: { fields, group: 'articles' } })}
+          onClick={() => handleAdd()}
         >
           Add Article
         </button>
@@ -83,6 +119,16 @@ const ArticleById = () => {
   }
 
   return null;
+};
+
+ArticleById.propTypes = {
+  parentGroup: propTypes.string,
+  parentId: propTypes.string
+};
+
+ArticleById.defaultProps = {
+  parentGroup: null,
+  parentId: null
 };
 
 export default ArticleById;
