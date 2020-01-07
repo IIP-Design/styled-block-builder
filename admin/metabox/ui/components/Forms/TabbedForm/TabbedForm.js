@@ -1,4 +1,4 @@
-import React, { Fragment, useContext, useState } from 'react';
+import React, { Fragment, useContext, useEffect, useState } from 'react';
 import propTypes from 'prop-types';
 
 import ArticleById from 'metabox/components/Forms/FeedTypes/ArticleById';
@@ -10,31 +10,41 @@ import { MetaboxContext } from 'metabox/components/Metabox/MetaboxContext';
 
 import './TabbedForm.module.scss';
 
-const TabbedForm = ({ fields, group, label, maxTabs, stateFunc }) => {
+const TabbedForm = ({ fields, group, label, maxTabs }) => {
   const [selectedTab, setSelectedTab] = useState(null);
 
   const { dispatch, state } = useContext(MetaboxContext);
   const formValues = state?.formData?.formValues ? state.formData.formValues : {};
 
-  const updateState = (val, index) => {
-    stateFunc(group, val);
-
-    if (index) {
-      setSelectedTab(index);
+  useEffect(() => {
+    // If group items already present, open first one
+    if (formValues?.[group] && formValues[group].length > 0) {
+      setSelectedTab(formValues[group][0].id);
     }
+  }, []);
+
+  // Adds a new tab.
+  const handleAdd = () => {
+    dispatch({ type: 'group-add', payload: { fields, group } });
+    /**
+     * TODO: Bring new tab into focus upon creation. This is difficult to do since the reducer
+     * async without a callback and there is no way to tell when the state has been updated
+     */
   };
 
+  // Updates form field values.
   const handleChange = (e, itemId) => {
     const { name, value } = e.target;
 
     dispatch({ type: 'group-input', payload: { group, itemId, name, value } });
   };
 
+  // Removes the selected tab.
   const handleRemoval = forms => {
     const selected = forms.filter(item => item.id === selectedTab);
     const index = forms.indexOf(selected[0]);
 
-    // Replicate resources array and add new resource object
+    // Replicate resources array and add new resource object.
     const clone = [...forms];
     clone.splice(index, 1);
 
@@ -190,7 +200,7 @@ const TabbedForm = ({ fields, group, label, maxTabs, stateFunc }) => {
               disabled={forms && forms.length === maxTabs}
               styleName="tab-button"
               type="button"
-              onClick={() => dispatch({ type: 'group-add', payload: { fields, group } })}
+              onClick={() => handleAdd()}
             >
               {`Add ${label}` || 'Add Section'}
             </button>
@@ -207,8 +217,7 @@ TabbedForm.propTypes = {
   fields: propTypes.array,
   group: propTypes.string,
   label: propTypes.string,
-  maxTabs: propTypes.number,
-  stateFunc: propTypes.func
+  maxTabs: propTypes.number
 };
 
 TabbedForm.defaultProps = {
