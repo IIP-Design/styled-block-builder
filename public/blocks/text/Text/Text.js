@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import propTypes from 'prop-types';
 
 import CDPFeed from 'blocks/_shared/components/CDPFeed/CDPFeed';
@@ -35,39 +35,32 @@ const Text = ({ id }) => {
 
     return (
       <Normalizer fullWidth={fullWidth}>
-        <Fragment>
-          <div style={bg} styleName="bg">
-            <div styleName="container">
-              {title && (
-                <h2 style={{ color: textColor }} styleName="title">
-                  {title}
-                </h2>
-              )}
-              {subtitle && (
-                <h3 style={{ color: textColor }} styleName="subtitle">
-                  {subtitle}
-                </h3>
-              )}
-              <div styleName="content">
-                {desc && (
-                  <div style={{ color: textColor }} styleName="description">
-                    {desc}
-                  </div>
-                )}
-              </div>
-              {hasButton && (
-                <Button
-                  arrow={buttonArrow}
-                  link={buttonLink}
-                  text={buttonText}
-                  style={buttonStyle}
-                />
+        <div style={bg} styleName="bg">
+          <div styleName="container">
+            {title && (
+              <h2 style={{ color: textColor }} styleName="title">
+                {title}
+              </h2>
+            )}
+            {subtitle && (
+              <h3 style={{ color: textColor }} styleName="subtitle">
+                {subtitle}
+              </h3>
+            )}
+            <div styleName="content">
+              {desc && (
+                <div style={{ color: textColor }} styleName="description">
+                  {desc}
+                </div>
               )}
             </div>
-            {videoURL && <VideoEmbed title={videoTitle} url={videoURL} />}
-            {articles && <CDPFeed id={id} items={articles} />}
+            {hasButton && (
+              <Button arrow={buttonArrow} link={buttonLink} style={buttonStyle} text={buttonText} />
+            )}
           </div>
-        </Fragment>
+          {videoURL && <VideoEmbed title={videoTitle} url={videoURL} />}
+          {articles && <CDPFeed id={id} items={articles} />}
+        </div>
       </Normalizer>
     );
   }
