@@ -2,7 +2,7 @@ import React, { Fragment, useContext } from 'react';
 
 import FullWidthToggle from 'metabox/components/Forms/Toggles/FullWidthToggle';
 import TabbedForm from 'metabox/components/Forms/TabbedForm/TabbedForm';
-import { AdminContext } from 'metabox/context/AdminContext';
+import { AdminContext } from 'metabox/context/adminContext';
 
 const ResourcesForm = () => {
   const { dispatch, state } = useContext(AdminContext);

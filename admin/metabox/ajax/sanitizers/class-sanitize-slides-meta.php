@@ -40,9 +40,9 @@ class Sanitize_Slides_Meta {
         $sanitized_slide = array();
 
         $sanitized_slide['backgroundImage'] = sanitize_text_field( $slide['backgroundImage'] );
-        $sanitized_slide['id']         = sanitize_text_field( $slide['id'] );
-        $sanitized_slide['subtitle']   = sanitize_text_field( $slide['subtitle'] );
-        $sanitized_slide['text']       = sanitize_textarea_field( $slide['text'] );
+        $sanitized_slide['id']              = sanitize_text_field( $slide['id'] );
+        $sanitized_slide['subtitle']        = sanitize_text_field( $slide['subtitle'] );
+        $sanitized_slide['text']            = sanitize_textarea_field( $slide['text'] );
 
         array_push( $sanitized_slides, $sanitized_slide );
       }
