@@ -116,8 +116,9 @@ class Uploader {
 
       if ( $new_file && ! isset( $new_file['error'] ) ) {
         $file_data = array(
-          'name' => $file['name'],
-          'url'  => $new_file['url'],
+          'filename' => $file['file']['name'],
+          'name'     => $file['name'],
+          'url'      => $new_file['url'],
         );
 
         array_push( $response, $file_data );

@@ -117,9 +117,9 @@ class Sanitizer {
       foreach ( $unsanitary as $file ) {
         $sanitized_file = array();
 
-        $sanitized_file['name'] = sanitize_text_field( $file['name'] );
-        // URL comes from wp_handle_upload function and doesn't need to be sanitized.
-        $sanitized_file['url'] = $file['url'];
+        $sanitized_file['filename'] = sanitize_text_field( $file['filename'] );
+        $sanitized_file['name']     = sanitize_text_field( $file['name'] );
+        $sanitized_file['url']      = $file['url']; // URL comes from wp_handle_upload function and doesn't need to be sanitized.
 
         array_push( $sanitized_files, $sanitized_file );
       }
