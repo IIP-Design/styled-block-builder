@@ -1,3 +1,14 @@
+@import 'styles/colors.scss';
+
+.existing-file {
+  align-items: flex-start;
+  border: $wordpressBorder;
+  display: flex;
+  flex-direction: column;
+  margin: 0.5rem 0;
+  padding: 0.5rem;
+}
+
 .label {
   display: flex;
   flex-direction: column;

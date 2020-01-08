@@ -47,6 +47,16 @@ const StatsForm = () => {
     dispatch({ type: 'form-update', payload: { name, value: !isChecked } });
   };
 
+  const checkForFile = identifier => {
+    if (formValues?.files) {
+      const selectedFile = formValues.files.filter(file => file.name === identifier)[0];
+
+      return selectedFile;
+    }
+
+    return null;
+  };
+
   const blockBgOptions = {
     group: 'blockBackground',
     options: defaultBackgrounds
@@ -85,7 +95,11 @@ const StatsForm = () => {
           />
         )}
         {formValues.backgroundType === 'image' && (
-          <FileUploader label="Add background image:" name="backgroundImage" />
+          <FileUploader
+            current={checkForFile('backgroundImage')}
+            label="Add background image:"
+            name="backgroundImage"
+          />
         )}
         <ColorPicker
           callback={handleColor}
