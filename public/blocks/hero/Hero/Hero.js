@@ -41,7 +41,7 @@ const Hero = ({ id }) => {
 
     return (
       <Normalizer fullWidth>
-        <div styleName="content-background" style={bg}>
+        <div style={bg} styleName="content-background">
           <Gradient>
             <div styleName="header">
               {title && <h1 styleName="header-title">{title}</h1>}
@@ -56,8 +56,8 @@ const Hero = ({ id }) => {
                     <Button
                       arrow={buttonArrow}
                       link={buttonLink}
-                      text={buttonText}
                       style={buttonStyle}
+                      text={buttonText}
                     />
                   )}
                 </div>
