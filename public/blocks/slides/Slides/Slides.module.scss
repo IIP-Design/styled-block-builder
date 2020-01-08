@@ -35,14 +35,12 @@
     overflow: hidden;
 
     &:before {
-      background: linear-gradient(
-        to top,
-        rgba($color: $blackStandard, $alpha: 0.3),
-        rgba($color: $blackStandard, $alpha: 0.7) 40%,
-        rgba($color: $blackStandard, $alpha: 0.8) 50%,
-        rgba($color: $blackStandard, $alpha: 0.7) 60%,
-        rgba($color: $blackStandard, $alpha: 0.3) 100%
-      );
+      background: linear-gradient(to top,
+          rgba($color: $blackStandard, $alpha: 0.3),
+          rgba($color: $blackStandard, $alpha: 0.7) 40%,
+          rgba($color: $blackStandard, $alpha: 0.8) 50%,
+          rgba($color: $blackStandard, $alpha: 0.7) 60%,
+          rgba($color: $blackStandard, $alpha: 0.3) 100%);
       content: '';
       display: block;
       height: 100%;
@@ -73,6 +71,7 @@
       width: 100%;
     }
   }
+
   &-subtitle {
     color: $white;
     background: $red;
@@ -80,6 +79,7 @@
     position: relative;
     text-align: center;
   }
+
   &-text {
     color: $white;
     font-size: 1.5rem;
@@ -87,7 +87,7 @@
     padding-bottom: 4rem;
     position: relative;
 
-    > p {
+    >p {
       font-weight: 600;
       line-height: 1.3;
       margin: 1rem;
@@ -114,18 +114,20 @@
       max-width: 100%;
 
       &:before {
-        background: linear-gradient(
-          to top,
-          $blackStandard,
-          rgba($color: $blackStandard, $alpha: 0.7) 30%,
-          rgba($color: $blackStandard, $alpha: 0) 60%,
-          $blackStandard 100%
-        );
+        background: linear-gradient(to top,
+            $blackStandard,
+            rgba($color: $blackStandard, $alpha: 0.7) 30%,
+            rgba($color: $blackStandard, $alpha: 0) 60%,
+            $blackStandard 100%);
       }
     }
 
     &-title {
       margin-top: 2rem;
+    }
+
+    &-text {
+      padding: 4rem 2rem;
     }
   }
 }
@@ -142,11 +144,13 @@
       margin: 1rem 0.5rem 4rem;
       padding: 0;
     }
+
     &-subtitle {
       font-size: 1.4rem;
       width: 75%;
       padding: 0.5rem 1rem;
     }
+
     &-title {
       margin: 2rem -45% 0;
     }
@@ -158,7 +162,7 @@
     &-text {
       font-size: 1rem;
 
-      > p {
+      >p {
         line-height: 1.3;
       }
     }
@@ -166,6 +170,7 @@
     &-title {
       font-size: 2.1rem;
     }
+
     &-subtitle {
       font-size: 1.2rem;
     }
