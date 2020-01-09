@@ -20,11 +20,15 @@ const AnimatedLines = ({ lines }) => {
     });
   }, []);
 
-  return lines.map(line => (
-    <div key={line.text} className="hero-line" styleName="line">
-      {line.text}
-    </div>
-  ));
+  if (lines) {
+    return lines.map(line => (
+      <div key={line.text} className="hero-line" styleName="line">
+        {line.text}
+      </div>
+    ));
+  }
+
+  return null;
 };
 
 AnimatedLines.propTypes = {
