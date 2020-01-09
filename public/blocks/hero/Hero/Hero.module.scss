@@ -29,7 +29,7 @@
     color: $white;
     font-style: normal;
     letter-spacing: -0.75px;
-    margin: 2rem 0 0;
+    margin: 4rem 0 0;
     text-align: center;
   }
 
@@ -53,6 +53,7 @@
       display: grid;
       grid-template-columns: 1fr;
       grid-template-rows: 1fr 1fr;
+      grid-row-gap: 2rem;
 
       > p {
         font-family: 'EB Garamond', Times, serif;

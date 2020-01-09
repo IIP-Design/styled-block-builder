@@ -16,6 +16,7 @@
   flex-direction: column;
   justify-content: flex-start;
   padding: 0;
+  max-width: 1280px;
 }
 
 .title {
@@ -46,11 +47,12 @@
 @media screen and (max-width: 768px) {
   .content {
     margin: 2rem 0 1rem;
+    width: 90vw;
   }
 
   .text {
     text-align: center;
-    width: 90vw;
+
   }
 
   .container {
@@ -59,6 +61,10 @@
 }
 
 @media screen and (max-width: 500px) {
+  .content {
+    width: 80vw;
+  }
+
   .subtitle {
     width: 90vw;
   }

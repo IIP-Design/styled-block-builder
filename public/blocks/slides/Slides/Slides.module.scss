@@ -73,6 +73,7 @@
       width: 100%;
     }
   }
+
   &-subtitle {
     color: $white;
     background: $red;
@@ -80,6 +81,7 @@
     position: relative;
     text-align: center;
   }
+
   &-text {
     color: $white;
     font-size: 1.5rem;
@@ -127,6 +129,10 @@
     &-title {
       margin-top: 2rem;
     }
+
+    &-text {
+      padding: 4rem 2rem;
+    }
   }
 }
 
@@ -142,11 +148,13 @@
       margin: 1rem 0.5rem 4rem;
       padding: 0;
     }
+
     &-subtitle {
       font-size: 1.4rem;
       width: 75%;
       padding: 0.5rem 1rem;
     }
+
     &-title {
       margin: 2rem -45% 0;
     }
@@ -166,6 +174,7 @@
     &-title {
       font-size: 2.1rem;
     }
+
     &-subtitle {
       font-size: 1.2rem;
     }
