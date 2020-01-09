@@ -27,8 +27,13 @@ const FileUploader = ({ current, label, name, parentGroup, parentId }) => {
       {label}
       {current && (
         <div styleName="existing-file">
-          {`Current image: ${current.filename}`}
-          <button type="button">Remove File</button>
+          <p>
+            <strong>Current image: </strong>
+            {current.filename}
+          </p>
+          <button styleName="button" type="button">
+            Remove This File
+          </button>
         </div>
       )}
       {!current && <input name={name} type="file" onChange={e => handleFile(e)} />}

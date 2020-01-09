@@ -1,12 +1,23 @@
 @import 'styles/colors.scss';
 
+.button {
+  margin-top: 0.5rem;
+}
+
 .existing-file {
   align-items: flex-start;
+  background-color: $wordpressBackgroundGrey;
   border: $wordpressBorder;
+  border-radius: 3px;
+  box-shadow: $wordpressBoxShadowInset;
   display: flex;
   flex-direction: column;
   margin: 0.5rem 0;
   padding: 0.5rem;
+
+  > p {
+    margin: 0;
+  }
 }
 
 .label {

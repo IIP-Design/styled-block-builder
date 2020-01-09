@@ -28,3 +28,8 @@ $wordpressBoxShadow: 0 1px 1px
     $color: $blackStandard,
     $alpha: 0.04
   );
+$wordpressBoxShadowInset: inset 0 1px 2px
+  rgba(
+    $color: $blackStandard,
+    $alpha: 0.07
+  );
