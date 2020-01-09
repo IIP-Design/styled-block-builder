@@ -29,6 +29,10 @@ class Sanitize_Slides_Meta {
     $unsanitary = json_decode( stripslashes( $data ), true );
     $sanitized  = array();
 
+    if ( ! empty( $unsanitary['subTitleColor'] ) ) {
+      $sanitized['subTitleColor'] = sanitize_text_field( $unsanitary['subTitleColor'] );
+    }
+
     if ( ! empty( $unsanitary['title'] ) ) {
       $sanitized['title'] = sanitize_text_field( $unsanitary['title'] );
     }
