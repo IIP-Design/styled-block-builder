@@ -4,6 +4,7 @@
   "private": true,
   "license": "GPL-2.0",
   "scripts": {
+    "analyze": "npm run build && webpack-bundle-analyzer dist/bundleStats.json dist",
     "dev": "webpack --watch --config config/webpack.config.js --mode development",
     "build": "webpack --config config/webpack.config.js --mode production",
     "test:PHP": "./vendor/bin/phpcs"
@@ -35,6 +36,7 @@
     "prettier": "^1.19.1",
     "sass-loader": "^8.0.0",
     "webpack": "^4.41.2",
+    "webpack-bundle-analyzer": "^3.6.0",
     "webpack-cli": "^3.3.10"
   },
   "dependencies": {

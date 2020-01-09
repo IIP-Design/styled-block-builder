@@ -2,6 +2,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const babel = require('./babel');
 const paths = require('./paths');
+const plugins = require('./plugins');
 
 module.exports = (_, argv) => {
   const cssModuleNames =
@@ -51,11 +52,7 @@ module.exports = (_, argv) => {
       filename: argv.mode === 'development' ? 'dev-[name].js' : 'gpalab-[name].js',
       path: paths.pluginDist
     },
-    plugins: [
-      new MiniCssExtractPlugin({
-        filename: argv.mode === 'development' ? 'dev-[name].css' : 'gpalab-[name].css'
-      })
-    ],
+    plugins: plugins.loadPlugins(argv.mode),
     resolve: {
       extensions: ['*', '.js', '.jsx']
     }
