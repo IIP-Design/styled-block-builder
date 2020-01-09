@@ -3,23 +3,11 @@ import React, { Fragment, useContext } from 'react';
 import TabbedForm from 'metabox/components/Forms/TabbedForm/TabbedForm';
 import FullWidthToggle from 'metabox/components/Forms/Toggles/FullWidthToggle';
 import { AdminContext } from 'metabox/context/adminContext';
+import { handleChange } from 'metabox/utils/dispatch-helpers';
 
 const TimelineForm = () => {
   const { dispatch, state } = useContext(AdminContext);
   const formValues = state?.formData?.formValues ? state.formData.formValues : {};
-
-  const handleChange = e => {
-    const { name, value } = e.target;
-
-    dispatch({ type: 'form-update', payload: { name, value } });
-  };
-
-  const handleToggle = e => {
-    const { name } = e.target;
-    const isChecked = formValues[name] || false;
-
-    dispatch({ type: 'form-update', payload: { name, value: !isChecked } });
-  };
 
   const tabFields = [
     { label: 'Add Event Title:', name: 'subtitle', tabTitle: true, type: 'text' },
@@ -37,11 +25,11 @@ const TimelineForm = () => {
           name="title"
           type="text"
           value={formValues.title || ''}
-          onChange={e => handleChange(e)}
+          onChange={e => handleChange(e, dispatch)}
         />
       </label>
       <TabbedForm fields={tabFields} group="events" label="Event" maxTabs={5} />
-      <FullWidthToggle callback={handleToggle} checked={formValues.fullWidth} />
+      <FullWidthToggle checked={formValues.fullWidth} />
     </Fragment>
   );
 };

@@ -6,23 +6,11 @@ import FileUploader from 'metabox/components/FileUploader/FileUploader';
 import RadioConditional from 'metabox/components/Forms/Toggles/RadioConditional';
 import TabbedForm from 'metabox/components/Forms/TabbedForm/TabbedForm';
 import { AdminContext } from 'metabox/context/adminContext';
+import { handleChange } from 'metabox/utils/dispatch-helpers';
 
 const HeroForm = () => {
   const { dispatch, state } = useContext(AdminContext);
   const formValues = state?.formData?.formValues ? state.formData.formValues : {};
-
-  const handleChange = e => {
-    const { name, value } = e.target;
-
-    dispatch({ type: 'form-update', payload: { name, value } });
-  };
-
-  const handleToggle = e => {
-    const { name } = e.target;
-    const isChecked = formValues[name] || false;
-
-    dispatch({ type: 'form-update', payload: { name, value: !isChecked } });
-  };
 
   const options = [
     { label: 'Text', name: 'type', value: 'text' },
@@ -41,7 +29,7 @@ const HeroForm = () => {
           name="title"
           type="text"
           value={formValues.title || ''}
-          onChange={e => handleChange(e)}
+          onChange={e => handleChange(e, dispatch)}
         />
       </label>
       <label htmlFor="hero-subtitle">
@@ -51,11 +39,10 @@ const HeroForm = () => {
           name="subtitle"
           type="text"
           value={formValues.subtitle || ''}
-          onChange={e => handleChange(e)}
+          onChange={e => handleChange(e, dispatch)}
         />
       </label>
       <RadioConditional
-        callback={handleChange}
         checked={formValues.type}
         label="What type of block would you like?"
         options={options}
@@ -69,7 +56,7 @@ const HeroForm = () => {
             rows="6"
             type="text"
             value={formValues.description || ''}
-            onChange={e => handleChange(e)}
+            onChange={e => handleChange(e, dispatch)}
           />
         </label>
       )}
@@ -77,7 +64,6 @@ const HeroForm = () => {
         <TabbedForm fields={tabFields} group="lines" label="Line" maxTabs={10} />
       )}
       <CheckboxConditional
-        callback={handleToggle}
         checked={formValues.hasButton}
         label="Add Button (Optional)"
         name="hasButton"

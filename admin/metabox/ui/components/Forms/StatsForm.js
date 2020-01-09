@@ -5,8 +5,9 @@ import FileUploader from 'metabox/components/FileUploader/FileUploader';
 import FullWidthToggle from 'metabox/components/Forms/Toggles/FullWidthToggle';
 import RadioConditional from 'metabox/components/Forms/Toggles/RadioConditional';
 import TabbedForm from 'metabox/components/Forms/TabbedForm/TabbedForm';
-import { defaultBackgrounds, defaultText } from 'metabox/utils/color-picker-palettes';
 import { AdminContext } from 'metabox/context/adminContext';
+import { handleChange } from 'metabox/utils/dispatch-helpers';
+import { defaultBackgrounds, defaultText } from 'metabox/utils/color-picker-palettes';
 
 const StatsForm = () => {
   const { dispatch, state } = useContext(AdminContext);
@@ -26,26 +27,6 @@ const StatsForm = () => {
       dispatch({ type: 'form-update', payload: { name: 'blockBackground', value: '#ffffff' } });
     }
   }, []);
-
-  const handleChange = e => {
-    const { name, value } = e.target;
-
-    dispatch({ type: 'form-update', payload: { name, value } });
-  };
-
-  const handleColor = e => {
-    const { group } = e.target.dataset;
-    const { value } = e.target;
-
-    dispatch({ type: 'form-update', payload: { name: group, value } });
-  };
-
-  const handleToggle = e => {
-    const { name } = e.target;
-    const isChecked = formValues[name] || false;
-
-    dispatch({ type: 'form-update', payload: { name, value: !isChecked } });
-  };
 
   const checkForFile = identifier => {
     if (formValues?.files) {
@@ -81,14 +62,12 @@ const StatsForm = () => {
     return (
       <Fragment>
         <RadioConditional
-          callback={handleChange}
           checked={formValues.backgroundType}
           label="What type of background would you like to apply to this block?"
           options={blockBgType}
         />
         {formValues.backgroundType === 'color' && (
           <ColorPicker
-            callback={handleColor}
             colors={blockBgOptions}
             label="Set block background color:"
             selected={formValues.blockBackground}
@@ -102,7 +81,6 @@ const StatsForm = () => {
           />
         )}
         <ColorPicker
-          callback={handleColor}
           colors={textOptions}
           label="Set block text color:"
           selected={formValues.textColor}
@@ -114,10 +92,10 @@ const StatsForm = () => {
             name="title"
             type="text"
             value={formValues.title || ''}
-            onChange={e => handleChange(e)}
+            onChange={e => handleChange(e, dispatch)}
           />
         </label>
-        <FullWidthToggle callback={handleToggle} checked={formValues.fullWidth} />
+        <FullWidthToggle checked={formValues.fullWidth} />
         <TabbedForm fields={tabFields} group="stats" label="Stat" />
       </Fragment>
     );

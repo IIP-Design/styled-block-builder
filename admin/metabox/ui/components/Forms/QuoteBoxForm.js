@@ -2,10 +2,11 @@ import React, { Fragment, useContext, useEffect } from 'react';
 
 import ColorPicker from 'metabox/components/ColorPicker/ColorPicker';
 import FileUploader from 'metabox/components/FileUploader/FileUploader';
-import { defaultBackgrounds, defaultText } from 'metabox/utils/color-picker-palettes';
+import FullWidthToggle from 'metabox/components/Forms/Toggles/FullWidthToggle';
+import RadioConditional from 'metabox/components/Forms/Toggles/RadioConditional';
 import { AdminContext } from 'metabox/context/adminContext';
-import FullWidthToggle from './Toggles/FullWidthToggle';
-import RadioConditional from './Toggles/RadioConditional';
+import { defaultBackgrounds, defaultText } from 'metabox/utils/color-picker-palettes';
+import { handleChange } from 'metabox/utils/dispatch-helpers';
 
 const QuoteBoxForm = () => {
   const { dispatch, state } = useContext(AdminContext);
@@ -30,26 +31,6 @@ const QuoteBoxForm = () => {
     }
   }, []);
 
-  const handleChange = e => {
-    const { name, value } = e.target;
-
-    dispatch({ type: 'form-update', payload: { name, value } });
-  };
-
-  const handleColor = e => {
-    const { group } = e.target.dataset;
-    const { value } = e.target;
-
-    dispatch({ type: 'form-update', payload: { name: group, value } });
-  };
-
-  const handleToggle = e => {
-    const { name } = e.target;
-    const isChecked = formValues[name] || false;
-
-    dispatch({ type: 'form-update', payload: { name, value: !isChecked } });
-  };
-
   const blockBgOptions = {
     group: 'blockBackground',
     options: defaultBackgrounds
@@ -73,14 +54,12 @@ const QuoteBoxForm = () => {
   return (
     <Fragment>
       <RadioConditional
-        callback={handleChange}
         checked={formValues.backgroundType}
         label="What type of background would you like to apply to this block?"
         options={blockBgType}
       />
       {formValues.backgroundType === 'color' && (
         <ColorPicker
-          callback={handleColor}
           colors={blockBgOptions}
           label="Set block background color:"
           selected={formValues.blockBackground}
@@ -90,7 +69,6 @@ const QuoteBoxForm = () => {
         <FileUploader label="Add background image URL:" name="backgroundImage" />
       )}
       <ColorPicker
-        callback={handleColor}
         colors={textOptions}
         label="Set block text color:"
         selected={formValues.textColor}
@@ -102,7 +80,7 @@ const QuoteBoxForm = () => {
           name="title"
           type="text"
           value={formValues.title || ''}
-          onChange={e => handleChange(e)}
+          onChange={e => handleChange(e, dispatch)}
         />
       </label>
       <label htmlFor="quote-box-subtitle">
@@ -112,7 +90,7 @@ const QuoteBoxForm = () => {
           name="subtitle"
           type="text"
           value={formValues.subtitle || ''}
-          onChange={e => handleChange(e)}
+          onChange={e => handleChange(e, dispatch)}
         />
       </label>
       <label htmlFor="quote-box-desc">
@@ -122,11 +100,10 @@ const QuoteBoxForm = () => {
           name="desc"
           rows="6"
           value={formValues.desc || ''}
-          onChange={e => handleChange(e)}
+          onChange={e => handleChange(e, dispatch)}
         />
       </label>
       <ColorPicker
-        callback={handleColor}
         colors={quoteBgOptions}
         label="Set quote background color:"
         selected={formValues.quoteBackground}
@@ -138,7 +115,7 @@ const QuoteBoxForm = () => {
           name="quote"
           rows="6"
           value={formValues.quote || ''}
-          onChange={e => handleChange(e)}
+          onChange={e => handleChange(e, dispatch)}
         />
       </label>
       <label htmlFor="quote-box-speaker">
@@ -148,10 +125,10 @@ const QuoteBoxForm = () => {
           name="speaker"
           type="text"
           value={formValues.speaker || ''}
-          onChange={e => handleChange(e)}
+          onChange={e => handleChange(e, dispatch)}
         />
       </label>
-      <FullWidthToggle callback={handleToggle} checked={formValues.fullWidth} />
+      <FullWidthToggle checked={formValues.fullWidth} />
     </Fragment>
   );
 };

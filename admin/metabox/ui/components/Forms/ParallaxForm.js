@@ -1,27 +1,15 @@
 import React, { Fragment, useContext } from 'react';
 
+import ButtonForm from 'metabox/components/Forms/ButtonForm/ButtonForm';
 import CheckboxConditional from 'metabox/components/Forms/Toggles/CheckboxConditional';
 import FileUploader from 'metabox/components/FileUploader/FileUploader';
+import FullWidthToggle from 'metabox/components/Forms/Toggles/FullWidthToggle';
 import { AdminContext } from 'metabox/context/adminContext';
-import ButtonForm from './ButtonForm/ButtonForm';
-import FullWidthToggle from './Toggles/FullWidthToggle';
+import { handleChange } from 'metabox/utils/dispatch-helpers';
 
 const ParallaxForm = () => {
   const { dispatch, state } = useContext(AdminContext);
   const formValues = state?.formData?.formValues ? state.formData.formValues : {};
-
-  const handleChange = e => {
-    const { name, value } = e.target;
-
-    dispatch({ type: 'form-update', payload: { name, value } });
-  };
-
-  const handleToggle = e => {
-    const { name } = e.target;
-    const isChecked = formValues[name] || false;
-
-    dispatch({ type: 'form-update', payload: { name, value: !isChecked } });
-  };
 
   return (
     <Fragment>
@@ -33,7 +21,7 @@ const ParallaxForm = () => {
           name="title"
           type="text"
           value={formValues.title || ''}
-          onChange={e => handleChange(e)}
+          onChange={e => handleChange(e, dispatch)}
         />
       </label>
       <label htmlFor="parallax-subtitle">
@@ -43,7 +31,7 @@ const ParallaxForm = () => {
           name="subtitle"
           type="text"
           value={formValues.subtitle || ''}
-          onChange={e => handleChange(e)}
+          onChange={e => handleChange(e, dispatch)}
         />
       </label>
       <label htmlFor="parallax-text">
@@ -53,18 +41,17 @@ const ParallaxForm = () => {
           name="text"
           rows="6"
           value={formValues.desc || ''}
-          onChange={e => handleChange(e)}
+          onChange={e => handleChange(e, dispatch)}
         />
       </label>
       <CheckboxConditional
-        callback={handleToggle}
         checked={formValues.hasButton}
         label="Add Button (Optional)"
         name="hasButton"
       >
         <ButtonForm />
       </CheckboxConditional>
-      <FullWidthToggle callback={handleToggle} checked={formValues.fullWidth} />
+      <FullWidthToggle checked={formValues.fullWidth} />
     </Fragment>
   );
 };

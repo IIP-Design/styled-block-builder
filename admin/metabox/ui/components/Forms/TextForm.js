@@ -7,10 +7,10 @@ import ColorPicker from 'metabox/components/ColorPicker/ColorPicker';
 import FullWidthToggle from 'metabox/components/Forms/Toggles/FullWidthToggle';
 import { AdminContext } from 'metabox/context/adminContext';
 import { defaultBackgrounds, defaultText } from 'metabox/utils/color-picker-palettes';
+import { handleChange } from 'metabox/utils/dispatch-helpers';
 
 const TextForm = () => {
   const { dispatch, state } = useContext(AdminContext);
-
   const formValues = state?.formData?.formValues ? state.formData.formValues : {};
 
   // Initialize color pickers with default values if no color already selected.
@@ -23,26 +23,6 @@ const TextForm = () => {
       dispatch({ type: 'form-update', payload: { name: 'blockBackground', value: '#ffffff' } });
     }
   }, []);
-
-  const handleChange = e => {
-    const { name, value } = e.target;
-
-    dispatch({ type: 'form-update', payload: { name, value } });
-  };
-
-  const handleColor = e => {
-    const { group } = e.target.dataset;
-    const { value } = e.target;
-
-    dispatch({ type: 'form-update', payload: { name: group, value } });
-  };
-
-  const handleToggle = e => {
-    const { name } = e.target;
-    const isChecked = formValues[name] || false;
-
-    dispatch({ type: 'form-update', payload: { name, value: !isChecked } });
-  };
 
   const blockBgOptions = {
     group: 'blockBackground',
@@ -57,13 +37,11 @@ const TextForm = () => {
   return (
     <Fragment>
       <ColorPicker
-        callback={handleColor}
         colors={textOptions}
         label="Set block text color:"
         selected={formValues.textColor}
       />
       <ColorPicker
-        callback={handleColor}
         colors={blockBgOptions}
         label="Set block background color:"
         selected={formValues.blockBackground}
@@ -75,7 +53,7 @@ const TextForm = () => {
           name="title"
           type="text"
           value={formValues.title || ''}
-          onChange={e => handleChange(e)}
+          onChange={e => handleChange(e, dispatch)}
         />
       </label>
       <label htmlFor="text-subtitle">
@@ -85,7 +63,7 @@ const TextForm = () => {
           name="subtitle"
           type="text"
           value={formValues.subtitle || ''}
-          onChange={e => handleChange(e)}
+          onChange={e => handleChange(e, dispatch)}
         />
       </label>
       <label htmlFor="text-desc">
@@ -95,24 +73,18 @@ const TextForm = () => {
           name="desc"
           rows="6"
           value={formValues.desc || ''}
-          onChange={e => handleChange(e)}
+          onChange={e => handleChange(e, dispatch)}
         />
       </label>
-      <FullWidthToggle callback={handleToggle} checked={formValues.fullWidth} />
+      <FullWidthToggle checked={formValues.fullWidth} />
       <CheckboxConditional
-        callback={handleToggle}
         checked={formValues.hasButton}
         label="Add Button (Optional)"
         name="hasButton"
       >
         <ButtonForm />
       </CheckboxConditional>
-      <CheckboxConditional
-        callback={handleToggle}
-        checked={formValues.hasVideo}
-        label="Add a Video?"
-        name="hasVideo"
-      >
+      <CheckboxConditional checked={formValues.hasVideo} label="Add a Video?" name="hasVideo">
         <label htmlFor="video-title">
           Add Video Title:
           <input
@@ -120,7 +92,7 @@ const TextForm = () => {
             name="videoTitle"
             type="text"
             value={formValues.videoTitle || ''}
-            onChange={e => handleChange(e)}
+            onChange={e => handleChange(e, dispatch)}
           />
         </label>
         <label htmlFor="video-url">
@@ -131,16 +103,11 @@ const TextForm = () => {
             name="videoURL"
             type="text"
             value={formValues.videoURL || ''}
-            onChange={e => handleChange(e)}
+            onChange={e => handleChange(e, dispatch)}
           />
         </label>
       </CheckboxConditional>
-      <CheckboxConditional
-        callback={handleToggle}
-        checked={formValues.hasFeed}
-        label="Add an Article Feed?"
-        name="hasFeed"
-      >
+      <CheckboxConditional checked={formValues.hasFeed} label="Add an Article Feed?" name="hasFeed">
         <ArticleById />
       </CheckboxConditional>
     </Fragment>
