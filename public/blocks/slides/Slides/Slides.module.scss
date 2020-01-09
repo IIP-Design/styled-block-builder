@@ -35,12 +35,14 @@
     overflow: hidden;
 
     &:before {
-      background: linear-gradient(to top,
-          rgba($color: $blackStandard, $alpha: 0.3),
-          rgba($color: $blackStandard, $alpha: 0.7) 40%,
-          rgba($color: $blackStandard, $alpha: 0.8) 50%,
-          rgba($color: $blackStandard, $alpha: 0.7) 60%,
-          rgba($color: $blackStandard, $alpha: 0.3) 100%);
+      background: linear-gradient(
+        to top,
+        rgba($color: $blackStandard, $alpha: 0.3),
+        rgba($color: $blackStandard, $alpha: 0.7) 40%,
+        rgba($color: $blackStandard, $alpha: 0.8) 50%,
+        rgba($color: $blackStandard, $alpha: 0.7) 60%,
+        rgba($color: $blackStandard, $alpha: 0.3) 100%
+      );
       content: '';
       display: block;
       height: 100%;
@@ -87,7 +89,7 @@
     padding-bottom: 4rem;
     position: relative;
 
-    >p {
+    > p {
       font-weight: 600;
       line-height: 1.3;
       margin: 1rem;
@@ -114,11 +116,13 @@
       max-width: 100%;
 
       &:before {
-        background: linear-gradient(to top,
-            $blackStandard,
-            rgba($color: $blackStandard, $alpha: 0.7) 30%,
-            rgba($color: $blackStandard, $alpha: 0) 60%,
-            $blackStandard 100%);
+        background: linear-gradient(
+          to top,
+          $blackStandard,
+          rgba($color: $blackStandard, $alpha: 0.7) 30%,
+          rgba($color: $blackStandard, $alpha: 0) 60%,
+          $blackStandard 100%
+        );
       }
     }
 
@@ -162,7 +166,7 @@
     &-text {
       font-size: 1rem;
 
-      >p {
+      > p {
         line-height: 1.3;
       }
     }
