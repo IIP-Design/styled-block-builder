@@ -1,12 +1,10 @@
 import React from 'react';
 import propTypes from 'prop-types';
-import { Controller, Scene } from 'react-scrollmagic';
-import { Tween, Timeline } from 'react-gsap';
 
-import Normalizer from 'blocks/_shared/components/Normalizer/Normalizer';
 import Button from 'blocks/_shared/components/Button/Button';
 import Gradient from 'blocks/_shared/components/Gradient/Gradient';
-import { backgroundImage } from 'blocks/_shared/utils/background-style';
+import Normalizer from 'blocks/_shared/components/Normalizer/Normalizer';
+import { setBackgroundImage } from 'blocks/_shared/utils/background-style';
 
 import './Parallax.module.scss';
 
@@ -27,21 +25,9 @@ const Parallax = ({ id }) => {
       title
     } = meta;
 
-    const getBackgroundImage = fileList => {
-      if (!fileList) {
-        return '';
-      }
-
-      const bgImage = fileList.filter(file => file.name === 'backgroundImage');
-
-      return bgImage[0].url;
-    };
-
-    const bg = backgroundImage(getBackgroundImage(files));
-
     return (
       <Normalizer fullWidth={fullWidth}>
-        <div styleName="box-bg" style={bg}>
+        <div style={setBackgroundImage(files)} styleName="box-bg">
           <Gradient>
             <div styleName="fixed">
               <div styleName="content">
@@ -52,8 +38,8 @@ const Parallax = ({ id }) => {
                   <Button
                     arrow={buttonArrow}
                     link={buttonLink}
-                    text={buttonText}
                     style={buttonStyle}
+                    text={buttonText}
                   />
                 )}
               </div>

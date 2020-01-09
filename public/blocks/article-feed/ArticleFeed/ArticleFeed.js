@@ -7,30 +7,27 @@ import { backgroundStyle } from 'blocks/_shared/utils/background-style';
 
 import './ArticleFeed.module.scss';
 
-const ArticleFeed = ( { id } ) => {
-  const { assets } = window.gpalabTemplateFront;
+const ArticleFeed = ({ id }) => {
   const { meta } = window[`gpalabArticleFeed${id}`];
 
-  if ( meta ) {
+  if (meta) {
     const { blockBackground, fullWidth, subtitle, textColor, title, articles } = meta;
 
-    const bg = backgroundStyle( blockBackground, assets );
-
     return (
-      <Normalizer fullWidth={ fullWidth }>
-        <div style={ bg } styleName="bg">
+      <Normalizer fullWidth={fullWidth}>
+        <div style={backgroundStyle(blockBackground)} styleName="bg">
           <div styleName="content">
-            { title && (
-              <h2 style={ { color: textColor } } styleName="title">
-                { title }
+            {title && (
+              <h2 style={{ color: textColor }} styleName="title">
+                {title}
               </h2>
-            ) }
-            { subtitle && (
-              <h3 style={ { color: textColor } } styleName="subtitle">
-                { subtitle }
+            )}
+            {subtitle && (
+              <h3 style={{ color: textColor }} styleName="subtitle">
+                {subtitle}
               </h3>
-            ) }
-            <CDPFeed id={ id } items={ articles } />
+            )}
+            <CDPFeed id={id} items={articles} />
           </div>
         </div>
       </Normalizer>

@@ -94,7 +94,7 @@ const Stats = ({ id }) => {
 
     return (
       <Normalizer fullWidth={fullWidth}>
-        <div styleName="box-bg" style={bg}>
+        <div style={bg} styleName="box-bg">
           <Gradient>
             <Fragment>
               <div id="stats-section" />
@@ -109,7 +109,7 @@ const Stats = ({ id }) => {
                     stats.map((stat, index) => (
                       <div key={uuid()} style={{ borderColor: textColor }} styleName="item">
                         <div style={{ color: textColor }} styleName="item-percent">
-                          <span id={`stat-${index + 1}`} data-stat={stat.number}>
+                          <span data-stat={stat.number} id={`stat-${index + 1}`}>
                             0
                           </span>
                           %

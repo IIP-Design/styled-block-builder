@@ -2,12 +2,15 @@ import React from 'react';
 import propTypes from 'prop-types';
 
 import Normalizer from 'blocks/_shared/components/Normalizer/Normalizer';
-import { backgroundImage, backgroundStyle, setText } from 'blocks/_shared/utils/background-style';
+import {
+  backgroundStyle,
+  setBackgroundImage,
+  setText
+} from 'blocks/_shared/utils/background-style';
 
 import './QuoteBox.module.scss';
 
 const QuoteBox = ({ id }) => {
-  const { assets } = window.gpalabTemplateFront;
   const { meta } = window[`gpalabQuoteBox${id}`];
 
   if (meta) {
@@ -25,22 +28,8 @@ const QuoteBox = ({ id }) => {
       title
     } = meta;
 
-    const getBackgroundImage = fileList => {
-      if (!fileList) {
-        return '';
-      }
-
-      const bgImage = fileList.filter(file => file.name === 'backgroundImage');
-
-      return bgImage[0].url;
-    };
-
     const bg =
-      backgroundType === 'image'
-        ? backgroundImage(getBackgroundImage(files))
-        : backgroundStyle(blockBackground, assets);
-
-    const quoteBg = backgroundStyle(quoteBackground, assets);
+      backgroundType === 'image' ? setBackgroundImage(files) : backgroundStyle(blockBackground);
 
     return (
       <Normalizer fullWidth={fullWidth}>
@@ -62,7 +51,7 @@ const QuoteBox = ({ id }) => {
               </div>
             )}
             {quote && (
-              <div style={quoteBg} styleName="quote">
+              <div style={backgroundStyle(quoteBackground)} styleName="quote">
                 <p style={{ color: setText(quoteBackground) }} styleName="quote-text">
                   {quote}
                   <br />

@@ -1,16 +1,15 @@
 import React from 'react';
 import propTypes from 'prop-types';
 
-import CDPFeed from 'blocks/_shared/components/CDPFeed/CDPFeed';
 import Button from 'blocks/_shared/components/Button/Button';
+import CDPFeed from 'blocks/_shared/components/CDPFeed/CDPFeed';
 import Normalizer from 'blocks/_shared/components/Normalizer/Normalizer';
 import VideoEmbed from 'blocks/_shared/components/VideoEmbed/VideoEmbed';
-
 import { backgroundStyle } from 'blocks/_shared/utils/background-style';
+
 import './Text.module.scss';
 
 const Text = ({ id }) => {
-  const { assets } = window.gpalabTemplateFront;
   const { meta } = window[`gpalabText${id}`];
 
   if (meta) {
@@ -31,11 +30,9 @@ const Text = ({ id }) => {
       videoURL
     } = meta;
 
-    const bg = backgroundStyle(blockBackground, assets);
-
     return (
       <Normalizer fullWidth={fullWidth}>
-        <div style={bg} styleName="bg">
+        <div style={backgroundStyle(blockBackground)} styleName="bg">
           <div styleName="container">
             {title && (
               <h2 style={{ color: textColor }} styleName="title">

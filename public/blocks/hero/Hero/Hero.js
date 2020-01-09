@@ -5,7 +5,7 @@ import AnimatedLines from 'blocks/_shared/components/AnimatedLines/AnimatedLines
 import Button from 'blocks/_shared/components/Button/Button';
 import Gradient from 'blocks/_shared/components/Gradient/Gradient';
 import Normalizer from 'blocks/_shared/components/Normalizer/Normalizer';
-import { backgroundImage } from 'blocks/_shared/utils/background-style';
+import { setBackgroundImage } from 'blocks/_shared/utils/background-style';
 
 import './Hero.module.scss';
 
@@ -27,21 +27,9 @@ const Hero = ({ id }) => {
       type
     } = meta;
 
-    const getBackgroundImage = fileList => {
-      if (!fileList) {
-        return '';
-      }
-
-      const bgImage = fileList.filter(file => file.name === 'backgroundImage');
-
-      return bgImage[0].url;
-    };
-
-    const bg = backgroundImage(getBackgroundImage(files));
-
     return (
       <Normalizer fullWidth>
-        <div style={bg} styleName="content-background">
+        <div style={setBackgroundImage(files)} styleName="content-background">
           <Gradient>
             <div styleName="header">
               {title && <h1 styleName="header-title">{title}</h1>}
