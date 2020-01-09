@@ -1,13 +1,13 @@
 import React, { Fragment, useContext, useEffect } from 'react';
 
+import ColorPicker from 'metabox/components/ColorPicker/ColorPicker';
 import TabbedForm from 'metabox/components/Forms/TabbedForm/TabbedForm';
 import { AdminContext } from 'metabox/context/adminContext';
 import { defaultSubHeaders } from 'metabox/utils/color-picker-palettes';
-import ColorPicker from 'metabox/components/ColorPicker/ColorPicker';
+import { handleChange } from 'metabox/utils/dispatch-helpers';
 
 const SlidesForm = () => {
   const { dispatch, state } = useContext(AdminContext);
-
   const formValues = state?.formData?.formValues ? state.formData.formValues : {};
 
   // Initialize color pickers with default values if no color already selected.
@@ -16,19 +16,6 @@ const SlidesForm = () => {
       dispatch({ type: 'form-update', payload: { name: 'subTitleColor', value: '#d01319' } });
     }
   }, []);
-
-  const handleChange = e => {
-    const { name, value } = e.target;
-
-    dispatch({ type: 'form-update', payload: { name, value } });
-  };
-
-  const handleColor = e => {
-    const { group } = e.target.dataset;
-    const { value } = e.target;
-
-    dispatch({ type: 'form-update', payload: { name: group, value } });
-  };
 
   const colorSubHeader = {
     group: 'subTitleColor',
@@ -51,11 +38,10 @@ const SlidesForm = () => {
             name="title"
             type="text"
             value={formValues.title || ''}
-            onChange={e => handleChange(e)}
+            onChange={e => handleChange(e, dispatch)}
           />
         </label>
         <ColorPicker
-          callback={handleColor}
           colors={colorSubHeader}
           label="Set slide subheadings background color:"
           selected={formValues.subTitleColor}
