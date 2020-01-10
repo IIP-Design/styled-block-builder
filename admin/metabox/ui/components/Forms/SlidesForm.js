@@ -4,7 +4,7 @@ import ColorPicker from 'metabox/components/ColorPicker/ColorPicker';
 import TabbedForm from 'metabox/components/Forms/TabbedForm/TabbedForm';
 import { AdminContext } from 'metabox/context/adminContext';
 import { defaultSubHeaders } from 'metabox/utils/color-picker-palettes';
-import { handleChange } from 'metabox/utils/dispatch-helpers';
+import { handleChange } from 'metabox/utils/event-handlers';
 
 const SlidesForm = () => {
   const { dispatch, state } = useContext(AdminContext);

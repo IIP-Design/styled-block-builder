@@ -6,7 +6,7 @@ import FullWidthToggle from 'metabox/components/Forms/Toggles/FullWidthToggle';
 import RadioConditional from 'metabox/components/Forms/Toggles/RadioConditional';
 import TabbedForm from 'metabox/components/Forms/TabbedForm/TabbedForm';
 import { AdminContext } from 'metabox/context/adminContext';
-import { handleChange } from 'metabox/utils/dispatch-helpers';
+import { handleChange } from 'metabox/utils/event-handlers';
 import { defaultBackgrounds, defaultText } from 'metabox/utils/color-picker-palettes';
 
 const StatsForm = () => {
@@ -27,16 +27,6 @@ const StatsForm = () => {
       dispatch({ type: 'form-update', payload: { name: 'blockBackground', value: '#ffffff' } });
     }
   }, []);
-
-  const checkForFile = identifier => {
-    if (formValues?.files) {
-      const selectedFile = formValues.files.filter(file => file.name === identifier)[0];
-
-      return selectedFile;
-    }
-
-    return null;
-  };
 
   const blockBgOptions = {
     group: 'blockBackground',
@@ -74,11 +64,7 @@ const StatsForm = () => {
           />
         )}
         {formValues.backgroundType === 'image' && (
-          <FileUploader
-            current={checkForFile('backgroundImage')}
-            label="Add background image:"
-            name="backgroundImage"
-          />
+          <FileUploader label="Add background image:" name="backgroundImage" />
         )}
         <ColorPicker
           colors={textOptions}

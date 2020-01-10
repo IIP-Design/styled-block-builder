@@ -5,7 +5,7 @@ import CheckboxConditional from 'metabox/components/Forms/Toggles/CheckboxCondit
 import FileUploader from 'metabox/components/FileUploader/FileUploader';
 import FullWidthToggle from 'metabox/components/Forms/Toggles/FullWidthToggle';
 import { AdminContext } from 'metabox/context/adminContext';
-import { handleChange } from 'metabox/utils/dispatch-helpers';
+import { handleChange } from 'metabox/utils/event-handlers';
 
 const ParallaxForm = () => {
   const { dispatch, state } = useContext(AdminContext);

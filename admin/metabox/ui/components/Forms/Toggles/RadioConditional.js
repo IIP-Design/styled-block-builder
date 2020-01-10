@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import propTypes from 'prop-types';
 
 import { AdminContext } from 'metabox/context/adminContext';
-import { handleChange } from 'metabox/utils/dispatch-helpers';
+import { handleChange } from 'metabox/utils/event-handlers';
 
 import './Toggles.module.scss';
 

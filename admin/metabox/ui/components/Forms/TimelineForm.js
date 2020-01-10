@@ -3,7 +3,7 @@ import React, { Fragment, useContext } from 'react';
 import TabbedForm from 'metabox/components/Forms/TabbedForm/TabbedForm';
 import FullWidthToggle from 'metabox/components/Forms/Toggles/FullWidthToggle';
 import { AdminContext } from 'metabox/context/adminContext';
-import { handleChange } from 'metabox/utils/dispatch-helpers';
+import { handleChange } from 'metabox/utils/event-handlers';
 
 const TimelineForm = () => {
   const { dispatch, state } = useContext(AdminContext);

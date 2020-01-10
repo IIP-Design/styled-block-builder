@@ -6,7 +6,7 @@ import FileUploader from 'metabox/components/FileUploader/FileUploader';
 import RadioConditional from 'metabox/components/Forms/Toggles/RadioConditional';
 import TabbedForm from 'metabox/components/Forms/TabbedForm/TabbedForm';
 import { AdminContext } from 'metabox/context/adminContext';
-import { handleChange } from 'metabox/utils/dispatch-helpers';
+import { handleChange } from 'metabox/utils/event-handlers';
 
 const HeroForm = () => {
   const { dispatch, state } = useContext(AdminContext);

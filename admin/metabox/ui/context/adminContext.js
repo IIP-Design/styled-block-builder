@@ -1,228 +1,21 @@
 import React from 'react';
-import { v4 as uuid } from 'uuid';
 
-// Removes template from array in context
-const deleteFromState = (state, id) => {
-  if (state?.templates) {
-    const clone = [...state.templates];
-
-    const filtered = clone.filter(items => items.id !== id);
-
-    return filtered;
-  }
-
-  return [];
-};
-
-// Add new/edits existing template to/in context array
-const saveInState = (state, template) => {
-  if (state?.templates) {
-    let indexValue = state.templates.length;
-
-    const clone = [...state.templates];
-
-    // ID comes over as a string so must be converted into a number
-    const intID = Number(template.id);
-
-    const filtered = clone.filter((item, index) => {
-      if (item.id === intID) {
-        indexValue = index;
-      }
-
-      return item.id !== intID;
-    });
-
-    const newItem = {
-      id: intID,
-      meta: template.post_meta,
-      title: template.post_title,
-      type: `gpalab-${template.post_type}`
-    };
-
-    filtered.splice(indexValue, 0, newItem);
-
-    return filtered;
-  }
-
-  return [];
-};
-
-const addFile = (file, name, fileList) => {
-  const files = fileList || [];
-
-  files.push({ file, name });
-
-  return files;
-};
-
-const addNestedFile = (data, file, name, parentId) => {
-  // Isolated the group member getting updated.
-  const selected = data.filter(item => item.id === parentId)[0];
-
-  // Store the remainder of the group.
-  const temp = data.filter(item => item.id !== parentId);
-
-  // Update the nested group.
-  const groupArr = addFile(file, name, selected.files);
-
-  // Update selected group member.
-  selected.files = groupArr;
-
-  // Push updated item back into group
-  temp.push(selected);
-
-  return temp;
-};
-
-const addGroupItem = (fields, formValues, group) => {
-  // Get list of field names required.
-  const fieldNames = fields.map(field => field.name);
-
-  // Check if selected group member has relevant sub-group, if not create.
-  const groupArr = formValues[group] ? [...formValues[group]] : [];
-
-  // Create an object to store values for new resource.
-  const obj = {};
-  obj.id = uuid();
-  fieldNames.forEach(name => {
-    obj[name] = '';
-  });
-
-  // Add new object to sub-group.
-  groupArr.push(obj);
-
-  return groupArr;
-};
-
-const addNestedGroupItem = (parentGroup, fields, group, parentId) => {
-  // Isolated the group member getting updated.
-  const selected = parentGroup.filter(item => item.id === parentId)[0];
-
-  // Store the remainder of the group.
-  const temp = parentGroup.filter(item => item.id !== parentId);
-
-  // Update the nested group.
-  const groupArr = addGroupItem(fields, selected, group);
-
-  // Update selected group member.
-  selected[group] = groupArr;
-
-  // Push updated item back into group
-  temp.push(selected);
-
-  return temp;
-};
-
-const removeGroupItem = (formValues, group, id) => {
-  const groupArr = formValues[group] ? [...formValues[group]] : [];
-
-  const filtered = groupArr.filter(item => item.id !== id);
-
-  return filtered;
-};
-
-const removeNestedGroupInput = (data, itemId, group, parentId) => {
-  let indexValue = 0;
-
-  // Isolate the group-member getting updated.
-  const selectedGroup = data.filter((item, index) => {
-    if (item.id === parentId) {
-      indexValue = index;
-    }
-
-    return item.id === parentId;
-  })[0];
-
-  // Store the remainder of the group.
-  const groupTemp = data.filter(item => item.id !== parentId);
-
-  // Check if selected group member has relevant sub-group, if not create.
-  const groupArr = removeGroupItem(selectedGroup, group, itemId);
-
-  selectedGroup[group] = groupArr;
-
-  // Updated full group with altered sub-group.
-  groupTemp.splice(indexValue, 0, selectedGroup);
-
-  return groupTemp;
-};
-
-const handleNestedInput = (data, itemId, name, value) => {
-  let itemIndexValue = 0;
-
-  // Pull off selected sub-group item.
-  const selectedItem = data.filter((item, index) => {
-    if (item.id === itemId) {
-      itemIndexValue = index;
-    }
-
-    return item.id === itemId;
-  })[0];
-
-  const itemsTemp = data.filter(item => item.id !== itemId);
-
-  // Update selected sub-group item.
-  selectedItem[name] = value;
-
-  // Add updated sub-group item back to sub-group.
-  itemsTemp.splice(itemIndexValue, 0, selectedItem);
-
-  return itemsTemp;
-};
-
-const handleDoubleNestedInput = (data, itemId, group, name, parentId, value) => {
-  let groupIndexValue = 0;
-
-  // Isolate the group-member getting updated.
-  const selectedGroup = data.filter((item, index) => {
-    if (item.id === parentId) {
-      groupIndexValue = index;
-    }
-
-    return item.id === parentId;
-  })[0];
-
-  // Store the remainder of the group.
-  const groupTemp = data.filter(item => item.id !== parentId);
-
-  // Check if selected group member has relevant sub-group, if not create.
-  const groupArr = selectedGroup[group] ? [...selectedGroup[group]] : [];
-
-  const itemsTemp = handleNestedInput(groupArr, itemId, name, value);
-
-  // Updated full group with altered sub-group.
-  selectedGroup[group] = itemsTemp;
-
-  // groupTemp.push(selectedGroup);
-  groupTemp.splice(groupIndexValue, 0, selectedGroup);
-
-  return groupTemp;
-};
-
-const addToUpdating = (state, id) => {
-  if (state?.updating) {
-    const clone = [...state.updating];
-    if (!clone.includes(id)) {
-      clone.push(id);
-    }
-
-    return clone;
-  }
-
-  return [];
-};
-
-const removeFromUpdating = (state, id) => {
-  if (state?.updating) {
-    const clone = [...state.updating];
-
-    const resetUpdating = clone.filter(item => item !== id);
-
-    return resetUpdating;
-  }
-
-  return [];
-};
+import {
+  fileAdd,
+  fileAddNested,
+  fileRemove,
+  fileRemoveNested,
+  groupAddItem,
+  groupAddItemNested,
+  groupHandleInput,
+  groupHandleInputNested,
+  groupRemoveItem,
+  groupRemoveItemNested,
+  templateDelete,
+  templateSave,
+  updatingAddTo,
+  updatingRemoveFrom
+} from 'metabox/utils/dispatch-helpers';
 
 export const AdminContext = React.createContext();
 
@@ -238,12 +31,12 @@ export const adminReducer = (state, action) => {
     case 'delete':
       return {
         ...state,
-        templates: deleteFromState(state, payload)
+        templates: templateDelete(state, payload)
       };
     case 'save':
       return {
         ...state,
-        templates: saveInState(state, payload)
+        templates: templateSave(state, payload)
       };
     case 'file-add':
       return {
@@ -252,7 +45,7 @@ export const adminReducer = (state, action) => {
           ...state.formData,
           formValues: {
             ...state.formData.formValues,
-            files: addFile(payload.file, payload.name, state.formData.formValues.files)
+            files: fileAdd(payload.file, payload.name, state.formData.formValues.files)
           }
         }
       };
@@ -263,9 +56,35 @@ export const adminReducer = (state, action) => {
           ...state.formData,
           formValues: {
             ...state.formData.formValues,
-            [payload.parentGroup]: addNestedFile(
+            [payload.parentGroup]: fileAddNested(
               state.formData.formValues[payload.parentGroup],
               payload.file,
+              payload.name,
+              payload.parentId
+            )
+          }
+        }
+      };
+    case 'file-remove':
+      return {
+        ...state,
+        formData: {
+          ...state.formData,
+          formValues: {
+            ...state.formData.formValues,
+            files: fileRemove(state.formData.formValues.files, payload.name)
+          }
+        }
+      };
+    case 'file-remove-nested':
+      return {
+        ...state,
+        formData: {
+          ...state.formData,
+          formValues: {
+            ...state.formData.formValues,
+            [payload.parentGroup]: fileRemoveNested(
+              state.formData.formValues[payload.parentGroup],
               payload.name,
               payload.parentId
             )
@@ -290,7 +109,7 @@ export const adminReducer = (state, action) => {
           ...state.formData,
           formValues: {
             ...state.formData.formValues,
-            [payload.group]: addGroupItem(payload.fields, state.formData.formValues, payload.group)
+            [payload.group]: groupAddItem(payload.fields, state.formData.formValues, payload.group)
           }
         }
       };
@@ -301,7 +120,7 @@ export const adminReducer = (state, action) => {
           ...state.formData,
           formValues: {
             ...state.formData.formValues,
-            [payload.parentGroup]: addNestedGroupItem(
+            [payload.parentGroup]: groupAddItemNested(
               state.formData.formValues[payload.parentGroup],
               payload.fields,
               payload.group,
@@ -317,7 +136,7 @@ export const adminReducer = (state, action) => {
           ...state.formData,
           formValues: {
             ...state.formData.formValues,
-            [payload.group]: handleNestedInput(
+            [payload.group]: groupHandleInput(
               state.formData.formValues[payload.group],
               payload.itemId,
               payload.name,
@@ -333,7 +152,7 @@ export const adminReducer = (state, action) => {
           ...state.formData,
           formValues: {
             ...state.formData.formValues,
-            [payload.parentGroup]: handleDoubleNestedInput(
+            [payload.parentGroup]: groupHandleInputNested(
               state.formData.formValues[payload.parentGroup],
               payload.itemId,
               payload.group,
@@ -351,7 +170,7 @@ export const adminReducer = (state, action) => {
           ...state.formData,
           formValues: {
             ...state.formData.formValues,
-            [payload.group]: removeGroupItem(state.formData.formValues, payload.group, payload.id)
+            [payload.group]: groupRemoveItem(state.formData.formValues, payload.group, payload.id)
           }
         }
       };
@@ -362,7 +181,7 @@ export const adminReducer = (state, action) => {
           ...state.formData,
           formValues: {
             ...state.formData.formValues,
-            [payload.parentGroup]: removeNestedGroupInput(
+            [payload.parentGroup]: groupRemoveItemNested(
               state.formData.formValues[payload.parentGroup],
               payload.itemId,
               payload.group,
@@ -394,12 +213,12 @@ export const adminReducer = (state, action) => {
     case 'updating-add':
       return {
         ...state,
-        updating: addToUpdating(state, payload)
+        updating: updatingAddTo(state, payload)
       };
     case 'updating-remove':
       return {
         ...state,
-        updating: removeFromUpdating(state, payload)
+        updating: updatingRemoveFrom(state, payload)
       };
     default:
       throw new Error();
