@@ -29,6 +29,7 @@
     "eslint-plugin-prettier": "^3.1.2",
     "eslint-plugin-react": "^7.17.0",
     "eslint-plugin-react-hooks": "^2.3.0",
+    "imports-loader": "^0.8.0",
     "mini-css-extract-plugin": "^0.8.0",
     "node-sass": "^4.13.0",
     "postcss-nested": "^4.2.1",
@@ -44,9 +45,8 @@
     "prop-types": "^15.7.2",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
-    "uuid": "^3.3.3",
-    "react-gsap": "^1.2.0",
-    "react-scrollmagic": "^2.1.1",
-    "scrollmagic": "^2.0.7"
+    "scrollmagic": "^2.0.7",
+    "scrollmagic-plugin-gsap": "^1.0.4",
+    "uuid": "^3.3.3"
   }
 }

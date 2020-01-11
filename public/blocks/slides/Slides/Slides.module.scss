@@ -1,17 +1,9 @@
 @import 'styles/colors.scss';
 
-.pinContainer {
+.pin-container {
   height: 100vh;
   width: 100%;
   overflow: hidden;
-}
-
-.slide-container {
-  background-color: $black;
-  height: 100%;
-  overflow: hidden;
-  position: relative;
-  width: 100%;
 }
 
 .slide {
@@ -24,6 +16,14 @@
   justify-content: center;
   position: absolute;
   width: 100%;
+
+  &-container {
+    background-color: $black;
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+  }
 
   &-content {
     align-items: center;
@@ -178,24 +178,5 @@
     &-subtitle {
       font-size: 1.2rem;
     }
-  }
-}
-
-// Adjust mobile views of slides to bring subject of photo into focus
-@media screen and (max-width: 768px) {
-  #slide-one {
-    background-position-y: 5rem;
-  }
-
-  #slide-two {
-    background-position: 75% -5rem;
-  }
-
-  #slide-three {
-    background-position-y: 5rem;
-  }
-
-  #slide-six {
-    background-position-y: -5rem;
   }
 }

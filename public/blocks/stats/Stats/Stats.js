@@ -23,10 +23,11 @@ const Stats = ({ id }) => {
       stat.innerHTML = Math.ceil(counter.val);
     };
 
-    TweenLite.to(counter, 5, {
-      val: stat.getAttribute('data-stat'),
+    TweenLite.to(counter, {
+      duration: 5,
+      ease: Power2.easeOut,
       onUpdate: updateCount,
-      ease: Power2.easeOut
+      val: stat.getAttribute('data-stat')
     });
   };
 
