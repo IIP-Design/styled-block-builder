@@ -1,97 +1,52 @@
 import React, { useEffect, Fragment } from 'react';
 import propTypes from 'prop-types';
-import { TimelineMax, Power2 } from 'gsap';
+import { TweenLite, Power2 } from 'gsap';
 import { v4 as uuid } from 'uuid';
 
 import Gradient from 'blocks/_shared/components/Gradient/Gradient';
 import Normalizer from 'blocks/_shared/components/Normalizer/Normalizer';
-import { backgroundImage, backgroundStyle } from 'blocks/_shared/utils/background-style';
+import useVisibilityObserver from 'blocks/_shared/hooks/useVisibilityObserver';
+import { backgroundStyle, setBackgroundImage } from 'blocks/_shared/utils/background-style';
 
 import './Stats.module.scss';
 
 const Stats = ({ id }) => {
-  const { assets } = window.gpalabTemplateFront;
   const { meta } = window[`gpalabStats${id}`];
+
+  const [ref, entry] = useVisibilityObserver({ threshold: 0.75 });
+
+  const runStat = index => {
+    const counter = { val: 0 };
+    const stat = document.getElementById(`stat-${index + 1}`);
+
+    const updateCount = () => {
+      stat.innerHTML = Math.ceil(counter.val);
+    };
+
+    TweenLite.to(counter, 5, {
+      val: stat.getAttribute('data-stat'),
+      onUpdate: updateCount,
+      ease: Power2.easeOut
+    });
+  };
+
+  useEffect(() => {
+    if (entry.isIntersecting) {
+      const stats = [...document.querySelectorAll('.stat-number')];
+
+      stats.forEach((stat, index) => runStat(index, stat));
+    }
+  });
 
   if (meta) {
     const { backgroundType, blockBackground, files, fullWidth, stats, textColor, title } = meta;
 
-    const getBackgroundImage = fileList => {
-      const bgImage = fileList.filter(file => file.name === 'backgroundImage');
-
-      return bgImage[0].url;
-    };
-
     const bg =
-      backgroundType === 'image'
-        ? backgroundImage(getBackgroundImage(files))
-        : backgroundStyle(blockBackground, assets);
-
-    useEffect(() => {
-      const runStats = () => {
-        const tl = new TimelineMax(); // Set up new timeline for tweens
-
-        const statOne = document.getElementById('stat-1');
-        const statTwo = document.getElementById('stat-2');
-        const statThree = document.getElementById('stat-3');
-
-        // Initialize counters with 0 values
-        const counter = {
-          one: { val: 0 },
-          two: { val: 0 },
-          three: { val: 0 }
-        };
-
-        // Change the value displayed by the stats block
-        const countUp = (el, count) => {
-          el.innerHTML = Math.ceil(count.val);
-        };
-
-        if (statOne && statTwo && statThree) {
-          tl.to(counter.one, 5, {
-            val: statOne.getAttribute('data-stat'),
-            onUpdate: () => countUp(statOne, counter.one),
-            ease: Power2.easeOut
-          })
-            .to(
-              counter.two,
-              5,
-              {
-                val: statTwo.getAttribute('data-stat'),
-                onUpdate: () => countUp(statTwo, counter.two),
-                ease: Power2.easeOut
-              },
-              0 // Start without delay
-            )
-            .to(
-              counter.three,
-              5,
-              {
-                val: statThree.getAttribute('data-stat'),
-                onUpdate: () => countUp(statThree, counter.three),
-                ease: Power2.easeOut
-              },
-              0 // Start without Delay
-            );
-        }
-      };
-
-      const inView = () => {
-        if (
-          document.getElementById('stats-section').getBoundingClientRect().bottom <=
-          window.innerHeight
-        ) {
-          runStats();
-          // Remove event listener to prevent constant trigger when scrolling
-          document.removeEventListener('scroll', inView);
-        }
-      };
-      document.addEventListener('scroll', inView);
-    });
+      backgroundType === 'image' ? setBackgroundImage(files) : backgroundStyle(blockBackground);
 
     return (
       <Normalizer fullWidth={fullWidth}>
-        <div style={bg} styleName="box-bg">
+        <div ref={ref} style={bg} styleName="box-bg">
           <Gradient>
             <Fragment>
               <div id="stats-section" />
@@ -106,7 +61,11 @@ const Stats = ({ id }) => {
                     stats.map((stat, index) => (
                       <div key={uuid()} style={{ borderColor: textColor }} styleName="item">
                         <div style={{ color: textColor }} styleName="item-percent">
-                          <span data-stat={stat.number} id={`stat-${index + 1}`}>
+                          <span
+                            className="stat-number"
+                            data-stat={stat.number}
+                            id={`stat-${index + 1}`}
+                          >
                             0
                           </span>
                           %
