@@ -1,4 +1,4 @@
-import React, { useEffect, Fragment } from 'react';
+import React, { useEffect } from 'react';
 import propTypes from 'prop-types';
 import { TweenLite, Power2 } from 'gsap';
 import { v4 as uuid } from 'uuid';
@@ -49,36 +49,33 @@ const Stats = ({ id }) => {
       <Normalizer fullWidth={fullWidth}>
         <div ref={ref} style={bg} styleName="box-bg">
           <Gradient>
-            <Fragment>
-              <div id="stats-section" />
-              <div className="stats-container" styleName="container">
-                {title && (
-                  <h2 style={{ color: textColor }} styleName="title">
-                    {title}
-                  </h2>
-                )}
-                <div styleName="array">
-                  {stats &&
-                    stats.map((stat, index) => (
-                      <div key={uuid()} style={{ borderColor: textColor }} styleName="item">
-                        <div style={{ color: textColor }} styleName="item-percent">
-                          <span
-                            className="stat-number"
-                            data-stat={stat.number}
-                            id={`stat-${index + 1}`}
-                          >
-                            0
-                          </span>
-                          %
-                        </div>
-                        <p style={{ color: textColor }} styleName="item-info">
-                          {stat.title}
-                        </p>
+            <div className="stats-container" styleName="container">
+              {title && (
+                <h2 style={{ color: textColor }} styleName="title">
+                  {title}
+                </h2>
+              )}
+              <div id={`stats-${id}`} styleName="array">
+                {stats &&
+                  stats.map((stat, index) => (
+                    <div key={uuid()} style={{ borderColor: textColor }} styleName="item">
+                      <div style={{ color: textColor }} styleName="item-percent">
+                        <span
+                          className="stat-number"
+                          data-stat={stat.number}
+                          id={`stat-${index + 1}`}
+                        >
+                          0
+                        </span>
+                        %
                       </div>
-                    ))}
-                </div>
+                      <p style={{ color: textColor }} styleName="item-info">
+                        {stat.title}
+                      </p>
+                    </div>
+                  ))}
               </div>
-            </Fragment>
+            </div>
           </Gradient>
         </div>
       </Normalizer>

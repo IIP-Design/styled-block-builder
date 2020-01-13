@@ -1,6 +1,10 @@
 import { useEffect, useRef, useState } from 'react';
 
-const useVisibilityObserver = ({ root = null, rootMargin = '0px', threshold = 0.5 }) => {
+const useVisibilityObserver = ({
+  root = null,
+  rootMargin = '0px 0px 0px 0px',
+  threshold = 0.5
+}) => {
   const [entry, setEntry] = useState({});
   const [node, setNode] = useState(null);
 
@@ -24,7 +28,7 @@ const useVisibilityObserver = ({ root = null, rootMargin = '0px', threshold = 0.
     }
 
     return () => currentObserver.disconnect();
-  }, [node]);
+  }, [node, root, rootMargin, threshold]);
 
   return [setNode, entry];
 };
