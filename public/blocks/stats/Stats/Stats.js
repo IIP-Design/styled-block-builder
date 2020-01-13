@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import propTypes from 'prop-types';
-import { TweenLite, Power2 } from 'gsap';
+import gsap from 'gsap';
 import { v4 as uuid } from 'uuid';
 
 import Gradient from 'blocks/_shared/components/Gradient/Gradient';
@@ -23,9 +23,9 @@ const Stats = ({ id }) => {
       stat.innerHTML = Math.ceil(counter.val);
     };
 
-    TweenLite.to(counter, {
+    gsap.to(counter, {
       duration: 5,
-      ease: Power2.easeOut,
+      ease: 'power2',
       onUpdate: updateCount,
       val: stat.getAttribute('data-stat')
     });
