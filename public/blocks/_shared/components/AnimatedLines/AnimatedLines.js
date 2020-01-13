@@ -1,22 +1,19 @@
 import React, { useEffect } from 'react';
 import propTypes from 'prop-types';
-import { TimelineMax, Power2 } from 'gsap';
+import gsap from 'gsap';
 
 import './AnimatedLines.module.scss';
 
 const AnimatedLines = ({ lines }) => {
   useEffect(() => {
-    const tl = new TimelineMax({ repeat: -1 });
+    gsap.registerPlugin('CSSRulePlugin');
+
+    const tl = gsap.timeline({ repeat: -1 });
 
     const lineArr = [...document.getElementsByClassName('hero-line')];
 
     lineArr.forEach(element => {
-      tl.to(element, 2.5, { opacity: 1 }).to(
-        element,
-        2.5,
-        { opacity: 0, ease: Power2.easeIn },
-        '+=1'
-      );
+      tl.to(element, 2.5, { opacity: 1 }).to(element, 2.5, { opacity: 0, ease: 'power2' }, '+=1');
     });
   }, []);
 

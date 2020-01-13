@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import propTypes from 'prop-types';
 import * as ScrollMagic from 'scrollmagic';
-import { Linear, TimelineLite, TweenLite } from 'gsap';
+import gsap, { TweenLite, TimelineLite } from 'gsap';
 import { ScrollMagicPluginGsap } from 'scrollmagic-plugin-gsap';
 
 import Normalizer from 'blocks/_shared/components/Normalizer/Normalizer';
@@ -10,32 +10,33 @@ import Normalizer from 'blocks/_shared/components/Normalizer/Normalizer';
 
 import './Slides.module.scss';
 
-ScrollMagicPluginGsap(ScrollMagic, TweenLite, TimelineLite);
-
 const Slides = ({ id }) => {
   const { meta } = window[`gpalabSlides${id}`];
 
   useEffect(() => {
+    gsap.registerPlugin('CSSRulePlugin');
+
+    ScrollMagicPluginGsap(ScrollMagic, TweenLite, TimelineLite);
+
     const controller = new ScrollMagic.Controller();
 
     const slides = [...document.getElementsByClassName(`slide-${id}`)];
 
     const first = slides.slice(0, 1)[0];
     const remaining = slides.slice(1);
+    TweenLite.defaultOverwrite = false;
 
     const tl = new TimelineLite();
     tl.add(first);
 
     remaining.forEach(slide => {
-      tl.add(
-        TweenLite.fromTo(slide, 2, { xPercent: 100 }, { xPercent: 0, ease: Linear.easeNone }, '+=1')
-      );
+      tl.add(TweenLite.fromTo(slide, 2, { xPercent: 100 }, { xPercent: 0, ease: 'linear' }, '+=1'));
     });
 
     new ScrollMagic.Scene({
       triggerElement: `#pin-container-${id}`,
       triggerHook: 'onLeave',
-      duration: 500
+      duration: 1000
     })
       .setTween(tl)
       .setPin(`#pin-container-${id}`)
