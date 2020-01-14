@@ -22,7 +22,7 @@ class Sanitize_Slides_Meta {
    * Checks for and sanitizes the expected fields.
    *
    * @param array $data     Unsanitized values sent over in the AJAX request.
-   * @param array $uploads  Sanitized values provided from as a resutl of file upload.
+   * @param array $uploads  Sanitized values provided from as a result of file upload.
    * @return array          Array of sanitized values
    */
   public function sanitize_inputs( $data, $uploads ) {

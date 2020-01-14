@@ -22,9 +22,10 @@ class Sanitize_Hero_Meta {
    * Checks for and sanitizes the expected fields.
    *
    * @param array $data     Unsanitized values sent over in the AJAX request.
+   * @param array $uploads  Sanitized values provided from as a result of file upload.
    * @return array          Array of sanitized values
    */
-  public function sanitize_inputs( $data ) {
+  public function sanitize_inputs( $data, $uploads ) {
 
     $unsanitary = json_decode( stripslashes( $data ), true );
     $sanitized  = array();
@@ -80,6 +81,10 @@ class Sanitize_Hero_Meta {
 
     if ( ! empty( $unsanitary['type'] ) ) {
       $sanitized['type'] = sanitize_text_field( $unsanitary['type'] );
+    }
+
+    if ( ! empty( $uploads ) ) {
+      $sanitized['files'] = $uploads;
     }
 
     return $sanitized;

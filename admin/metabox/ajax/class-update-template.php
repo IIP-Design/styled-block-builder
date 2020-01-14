@@ -39,7 +39,7 @@ class Update_Template {
     include_once STYLE_TEMPLATES_DIR . 'admin/metabox/ajax/class-uploader.php';
     $uploader = new Uploader();
 
-    // The following rules are handled by the valitation and sanitization functions and hence can be safely ignored.
+    // The following rules are handled by the below valitation and sanitization functions and hence can be safely ignored.
     // phpcs:disable WordPress.Security.ValidatedSanitizedInput.InputNotValidated
     // phpcs:disable WordPress.Security.NonceVerification.Missing
     // phpcs:disable WordPress.Security.ValidatedSanitizedInput.MissingUnslash
@@ -56,8 +56,6 @@ class Update_Template {
     $passed_id = sanitize_text_field( $_POST['id'] );
     $parent_id = sanitize_text_field( $_POST['parent'] );
 
-    $meta = $_POST['meta'];
-
     // Handle file uploads.
     $files;
     if ( isset( $_FILES ) ) {
@@ -65,6 +63,7 @@ class Update_Template {
     }
 
     $uploads = $sanitizer->sanitize_files( $files );
+    $meta    = $_POST['meta'];
 
     // Use the appropriate sanitizer to sanitize the inputs.
     $sanitize       = $sanitizer->load_sanitizer( $form_type );
