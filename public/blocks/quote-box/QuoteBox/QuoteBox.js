@@ -46,9 +46,9 @@ const QuoteBox = ({ id }) => {
               </h3>
             )}
             {desc && (
-              <div style={{ color: textColor }} styleName="text">
+              <p style={{ color: textColor }} styleName="text">
                 {desc}
-              </div>
+              </p>
             )}
             {quote && (
               <div style={backgroundStyle(quoteBackground)} styleName="quote">

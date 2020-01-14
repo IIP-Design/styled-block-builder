@@ -29,7 +29,7 @@ const Slides = ({ id }) => {
     tl.add(first);
 
     remaining.forEach(slide => {
-      tl.add(gsap.fromTo(slide, 2, { xPercent: 100 }, { xPercent: 0, ease: 'linear' }, '+=1'));
+      tl.add(gsap.fromTo(slide, { xPercent: 100 }, { duration: 2, xPercent: 0, ease: 'linear' }));
     });
 
     new ScrollMagic.Scene({

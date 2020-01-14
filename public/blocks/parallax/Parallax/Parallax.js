@@ -33,7 +33,7 @@ const Parallax = ({ id }) => {
               <div styleName="content">
                 {title && <h2 styleName="title">{title}</h2>}
                 {subtitle && <h3 styleName="subtitle">{subtitle}</h3>}
-                {desc && <div styleName="text">{desc}</div>}
+                {desc && <p styleName="text">{desc}</p>}
                 {hasButton && (
                   <Button
                     arrow={buttonArrow}
