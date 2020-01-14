@@ -6,7 +6,7 @@ import { ScrollMagicPluginGsap } from 'scrollmagic-plugin-gsap';
 
 import Normalizer from 'blocks/_shared/components/Normalizer/Normalizer';
 // import Gradient from 'blocks/_shared/components/Gradient/Gradient';
-// import { backgroundImage } from 'blocks/_shared/utils/background-style';
+import { getBackgroundImageUrl } from 'blocks/_shared/utils/background-style';
 
 import './Slides.module.scss';
 
@@ -24,13 +24,12 @@ const Slides = ({ id }) => {
 
     const first = slides.slice(0, 1)[0];
     const remaining = slides.slice(1);
-    TweenLite.defaultOverwrite = false;
 
     const tl = new TimelineLite();
     tl.add(first);
 
     remaining.forEach(slide => {
-      tl.add(TweenLite.fromTo(slide, 2, { xPercent: 100 }, { xPercent: 0, ease: 'linear' }, '+=1'));
+      tl.add(gsap.fromTo(slide, 2, { xPercent: 100 }, { xPercent: 0, ease: 'linear' }, '+=1'));
     });
 
     new ScrollMagic.Scene({
@@ -56,7 +55,7 @@ const Slides = ({ id }) => {
                 key={slide.id}
                 className={`slide-${id}`}
                 id={`slide-${slide.id}`}
-                style={{ backgroundImage: `url(${slide.backgroundImage})` }}
+                style={{ backgroundImage: `url(${getBackgroundImageUrl(slide.files)})` }}
                 styleName="slide"
               >
                 <div styleName="slide-content">
