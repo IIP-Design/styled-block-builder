@@ -13,7 +13,12 @@ const AnimatedLines = ({ lines }) => {
     const lineArr = [...document.getElementsByClassName('hero-line')];
 
     lineArr.forEach(element => {
-      tl.to(element, 2.5, { opacity: 1 }).to(element, 2.5, { opacity: 0, ease: 'power2' }, '+=1');
+      tl.to(element, { duration: 2.5, opacity: 1 }).to(element, {
+        delay: 1,
+        duration: 2.5,
+        ease: 'power2',
+        opacity: 0
+      });
     });
   }, []);
 
