@@ -78,14 +78,14 @@ export const templateSave = (state, template) => {
  * Adds a file to a provided file list.
  *
  * @param {Object} file File object.
- * @param {string} name Name of the given file.
+ * @param {string} name Identifier for the given file.
  * @param {Object[]} fileList Array of file objects.
  * @returns {Object[]} New array of file objects.
  */
 export const fileAdd = (file, name, fileList) => {
   const files = fileList || [];
 
-  files.push({ file, name });
+  files.push({ file, name, filename: file.name });
 
   return files;
 };

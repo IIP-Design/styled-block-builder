@@ -56,10 +56,17 @@ class Uploader {
     }
 
     if ( 'slides' === $type ) {
-      $background = $this->background_image( $files );
+      $background = $this->background_images( $files );
 
       if ( ! empty( $background ) ) {
-        array_push( $for_upload, $background );
+        foreach ( $background as $bg ) {
+          $file['file'] = $bg;
+          $file['name'] = $bg['backgroundImage'];
+
+          array_push( $for_upload, $file );
+        }
+
+        unset( $bg );
       };
     }
 
@@ -94,6 +101,34 @@ class Uploader {
   }
 
   /**
+   * Uploads multiple background image files for nested forms to the WordPress media library.
+   *
+   * @param array $files          File objects submitted by the AJAX request.
+   * @return array $for_upload    File data array.
+   */
+  private function background_images( $files ) {
+    if ( ! empty( $files['backgroundImage'] ) ) {
+      $number = count( $files['backgroundImage']['name'] );
+
+      $background_images = array();
+
+      for ( $i = 0; $i < $number; $i++ ) {
+        $background_image = array();
+
+        $background_image['name']     = $files['backgroundImage']['name'][ $i ];
+        $background_image['error']    = $files['backgroundImage']['error'][ $i ];
+        $background_image['size']     = $files['backgroundImage']['size'][ $i ];
+        $background_image['tmp_name'] = $files['backgroundImage']['tmp_name'][ $i ];
+        $background_image['type']     = $files['backgroundImage']['type'][ $i ];
+
+        array_push( $background_images, $background_image );
+      }
+
+      return $background_images;
+    }
+  }
+
+  /**
    * Uploads the file to the WordPress media library.
    *
    * @param array $files    File objects submitted by the AJAX request.
@@ -123,7 +158,8 @@ class Uploader {
 
         array_push( $response, $file_data );
       } else {
-        echo esc_html( $new_file['error'] );
+        $data['message'] = $new_file['error'];
+        wp_send_json_error( $data );
       }
     }
 

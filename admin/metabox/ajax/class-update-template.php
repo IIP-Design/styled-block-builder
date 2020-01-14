@@ -56,11 +56,7 @@ class Update_Template {
     $passed_id = sanitize_text_field( $_POST['id'] );
     $parent_id = sanitize_text_field( $_POST['parent'] );
 
-    // Use the appropriate sanitizer to sanitize the inputs.
-    $sanitize = $sanitizer->load_sanitizer( $form_type );
-    $meta     = $sanitize->sanitize_inputs( $_POST['meta'] );
-
-    // phpcs:enable
+    $meta = $_POST['meta'];
 
     // Handle file uploads.
     $files;
@@ -68,13 +64,19 @@ class Update_Template {
       $files = $uploader->initiate_upload( $_FILES, $form_type );
     }
 
-    $meta['files'] = $sanitizer->sanitize_files( $files );
+    $uploads = $sanitizer->sanitize_files( $files );
+
+    // Use the appropriate sanitizer to sanitize the inputs.
+    $sanitize       = $sanitizer->load_sanitizer( $form_type );
+    $sanitized_meta = $sanitize->sanitize_inputs( $meta, $uploads );
+
+    // phpcs:enable
 
     // Istantiate and populate the post data array.
     $data               = array();
     $data['id']         = $passed_id;
-    $data['post_meta']  = $meta;
-    $data['post_title'] = $meta['title'];
+    $data['post_meta']  = $sanitized_meta;
+    $data['post_title'] = $sanitized_meta['title'];
     $data['post_type']  = $form_type;
 
     // Run function to pass data to post.
