@@ -30,12 +30,14 @@ export const updatePost = async (data, action, onComplete, onError) => {
     data.meta[data.type].forEach(item => {
       if (item.files) {
         item.files.forEach(file => {
-          const fileObj = {
-            file: file.file,
-            name: file.name,
-            parent: item.id
-          };
-          nestedFiles.push(fileObj);
+          if (file.file) {
+            const fileObj = {
+              file: file.file,
+              name: file.name,
+              parent: item.id
+            };
+            nestedFiles.push(fileObj);
+          }
         });
       }
     });

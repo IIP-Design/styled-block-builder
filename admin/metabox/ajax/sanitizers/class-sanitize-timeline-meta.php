@@ -27,6 +27,9 @@ class Sanitize_Timeline_Meta {
    */
   public function sanitize_inputs( $data, $uploads ) {
 
+    include_once STYLE_TEMPLATES_DIR . 'admin/metabox/ajax/sanitizers/class-sanitize-nested-files.php';
+    $nested_files = new Sanitize_Nested_Files();
+
     $unsanitary = json_decode( stripslashes( $data ), true );
     $sanitized  = array();
 
@@ -41,34 +44,10 @@ class Sanitize_Timeline_Meta {
         $sanitized_event = array();
 
         $sanitized_event['id']       = sanitize_text_field( $event['id'] );
-        $sanitized_event['image']    = sanitize_text_field( $event['image'] );
         $sanitized_event['subtitle'] = sanitize_text_field( $event['subtitle'] );
         $sanitized_event['text']     = sanitize_text_field( $event['text'] );
         $sanitized_event['year']     = sanitize_text_field( $event['year'] );
-
-        if ( ! empty( $event['files'] ) && ! empty( $uploads ) ) {
-          $sanitized_files = array();
-
-          foreach ( $event['files'] as $file ) {
-            $sanitized_file = array();
-
-            foreach ( $uploads as $upload ) {
-              if ( $upload['filename'] === $file['filename'] ) {
-                $sanitized_file['filename'] = $upload['filename'];
-                $sanitized_file['name']     = sanitize_text_field( $file['name'] );
-                $sanitized_file['url']      = $upload['url'];
-              }
-            }
-
-            unset( $upload );
-
-            array_push( $sanitized_files, $sanitized_file );
-          }
-
-          unset( $file );
-
-          $sanitized_event['files'] = $sanitized_files;
-        }
+        $sanitized_event['files']    = $nested_files->sanitize_nested_files( $event['files'], $uploads );
 
         array_push( $sanitized_timeline, $sanitized_event );
       }
