@@ -17,11 +17,11 @@ const Parallax = ({ id }) => {
       buttonLink,
       buttonText,
       buttonStyle,
+      desc,
       files,
       fullWidth,
       hasButton,
       subtitle,
-      text,
       title
     } = meta;
 
@@ -33,7 +33,7 @@ const Parallax = ({ id }) => {
               <div styleName="content">
                 {title && <h2 styleName="title">{title}</h2>}
                 {subtitle && <h3 styleName="subtitle">{subtitle}</h3>}
-                {text && <div styleName="text">{text}</div>}
+                {desc && <div styleName="text">{desc}</div>}
                 {hasButton && (
                   <Button
                     arrow={buttonArrow}

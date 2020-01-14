@@ -58,8 +58,8 @@ class Sanitize_Parallax_Meta {
       $sanitized['subtitle'] = sanitize_text_field( $unsanitary['subtitle'] );
     }
 
-    if ( ! empty( $unsanitary['text'] ) ) {
-      $sanitized['text'] = sanitize_textarea_field( $unsanitary['text'] );
+    if ( ! empty( $unsanitary['desc'] ) ) {
+      $sanitized['desc'] = sanitize_textarea_field( $unsanitary['desc'] );
     }
 
     if ( ! empty( $unsanitary['title'] ) ) {

@@ -38,7 +38,7 @@ const ParallaxForm = () => {
         Add description (Optional):
         <textarea
           id="parallax-text"
-          name="text"
+          name="desc"
           rows="6"
           value={formValues.desc || ''}
           onChange={e => handleChange(e, dispatch)}
