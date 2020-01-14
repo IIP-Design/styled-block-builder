@@ -15,15 +15,16 @@ export const updatePost = async (data, action, onComplete, onError) => {
     default:
   }
 
-  let files;
+  const files = [];
   const nestedFiles = [];
   const clone = { ...data };
 
   if (data?.meta?.files) {
-    files = [...data.meta.files];
-    delete clone.meta.files;
-  } else {
-    files = [];
+    data.meta.files.forEach(file => {
+      if (file.file) {
+        files.push(file);
+      }
+    });
   }
 
   if (data.type === 'slides' || data.type === 'timeline') {
@@ -31,12 +32,7 @@ export const updatePost = async (data, action, onComplete, onError) => {
       if (item.files) {
         item.files.forEach(file => {
           if (file.file) {
-            const fileObj = {
-              file: file.file,
-              name: file.name,
-              parent: item.id
-            };
-            nestedFiles.push(fileObj);
+            nestedFiles.push(file);
           }
         });
       }

@@ -1,6 +1,6 @@
 <?php
 /**
- * Registers the Sanitize_Nested_Files class.
+ * Registers the Sanitize_Files class.
  *
  * @package Style_Templates\Sanitizer
  * @since 0.0.1
@@ -16,7 +16,7 @@ namespace Style_Templates;
  * @package Style_Templates\Sanitizer
  * @since 0.0.1
  */
-class Sanitize_Nested_Files {
+class Sanitize_Files {
 
   /**
    * Checks for and sanitizes the expected fields.
@@ -25,7 +25,8 @@ class Sanitize_Nested_Files {
    * @param array $uploads  Sanitized values provided from as a result of file upload.
    * @return array          Array of sanitized values
    */
-  public function sanitize_nested_files( $files, $uploads ) {
+  public function sanitize_files( $files, $uploads ) {
+
     if ( ! empty( $files ) ) {
       $sanitized_files = array();
 

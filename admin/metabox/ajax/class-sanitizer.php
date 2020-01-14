@@ -108,8 +108,9 @@ class Sanitizer {
    * Sanitize the file name sent over in upload request.
    *
    * @param array $unsanitary     Unsanitized file objects.
+   * @return array                Array of sanitized filedata.
    */
-  public function sanitize_files( $unsanitary ) {
+  public function prep_uploads( $unsanitary ) {
     $sanitized_files = array();
 
     if ( ! empty( $unsanitary ) ) {
@@ -119,7 +120,7 @@ class Sanitizer {
 
         $sanitized_file['filename'] = sanitize_text_field( $file['filename'] );
         $sanitized_file['name']     = sanitize_text_field( $file['name'] );
-        $sanitized_file['url']      = $file['url']; // URL comes from wp_handle_upload function and doesn't need to be sanitized.
+        $sanitized_file['url']      = sanitize_text_field( $file['url'] );
 
         array_push( $sanitized_files, $sanitized_file );
       }

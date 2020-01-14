@@ -27,6 +27,9 @@ class Sanitize_Hero_Meta {
    */
   public function sanitize_inputs( $data, $uploads ) {
 
+    include_once STYLE_TEMPLATES_DIR . 'admin/metabox/ajax/sanitizers/class-sanitize-files.php';
+    $sanitize_files = new Sanitize_Files();
+
     $unsanitary = json_decode( stripslashes( $data ), true );
     $sanitized  = array();
 
@@ -83,8 +86,8 @@ class Sanitize_Hero_Meta {
       $sanitized['type'] = sanitize_text_field( $unsanitary['type'] );
     }
 
-    if ( ! empty( $uploads ) ) {
-      $sanitized['files'] = $uploads;
+    if ( ! empty( $unsanitary['files'] ) ) {
+      $sanitized['files'] = $sanitize_files->sanitize_files( $unsanitary['files'], $uploads );
     }
 
     return $sanitized;

@@ -62,7 +62,7 @@ class Update_Template {
       $files = $uploader->initiate_upload( $_FILES, $form_type );
     }
 
-    $uploads = $sanitizer->sanitize_files( $files );
+    $uploads = $sanitizer->prep_uploads( $files );
     $meta    = $_POST['meta'];
 
     // Use the appropriate sanitizer to sanitize the inputs.

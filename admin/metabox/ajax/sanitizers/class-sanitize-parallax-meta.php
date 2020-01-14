@@ -23,9 +23,12 @@ class Sanitize_Parallax_Meta {
    *
    * @param array $data     Unsanitized values sent over in the AJAX request.
    * @param array $uploads  Sanitized values provided from as a result of file upload.
-   * @return array          Array of sanitized values
+   * @return array          Array of sanitized values.
    */
   public function sanitize_inputs( $data, $uploads ) {
+
+    include_once STYLE_TEMPLATES_DIR . 'admin/metabox/ajax/sanitizers/class-sanitize-files.php';
+    $sanitize_files = new Sanitize_Files();
 
     $unsanitary = json_decode( stripslashes( $data ), true );
     $sanitized  = array();
@@ -66,8 +69,8 @@ class Sanitize_Parallax_Meta {
       $sanitized['title'] = sanitize_text_field( $unsanitary['title'] );
     }
 
-    if ( ! empty( $uploads ) ) {
-      $sanitized['files'] = $uploads;
+    if ( ! empty( $unsanitary['files'] ) ) {
+      $sanitized['files'] = $sanitize_files->sanitize_files( $unsanitary['files'], $uploads );
     }
 
     return $sanitized;

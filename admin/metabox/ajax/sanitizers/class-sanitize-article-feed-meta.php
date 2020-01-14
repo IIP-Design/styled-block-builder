@@ -22,7 +22,7 @@ class Sanitize_Article_Feed_Meta {
    * Checks for and sanitizes the expected fields.
    *
    * @param array $data     Unsanitized values sent over in the AJAX request.
-   * @return array          Array of sanitized values
+   * @return array          Array of sanitized values.
    */
   public function sanitize_inputs( $data ) {
 
