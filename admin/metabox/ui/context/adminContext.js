@@ -36,6 +36,11 @@ export const adminReducer = (state, action) => {
     case 'save':
       return {
         ...state,
+        formData: {
+          ...state.formData,
+          formId: payload.id,
+          formValues: payload.post_meta
+        },
         templates: templateSave(state, payload)
       };
     case 'file-add':
