@@ -78,6 +78,21 @@ class Uploader {
       };
     }
 
+    if ( 'timeline' === $type ) {
+      $background = $this->background_images( $files );
+
+      if ( ! empty( $background ) ) {
+        foreach ( $background as $bg ) {
+          $file['file'] = $bg;
+          $file['name'] = $bg['backgroundImage'];
+
+          array_push( $for_upload, $file );
+        }
+
+        unset( $bg );
+      };
+    }
+
     $response = $this->handle_upload( $for_upload );
 
     return $response;

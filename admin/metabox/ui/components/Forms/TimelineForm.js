@@ -11,7 +11,7 @@ const TimelineForm = () => {
 
   const tabFields = [
     { label: 'Add Event Title:', name: 'subtitle', tabTitle: true, type: 'text' },
-    { label: 'Add URL for Background Image:', name: 'image', type: 'text' },
+    { label: 'Add event background image:', name: 'backgroundImage', type: 'file' },
     { label: 'Add Event Year:', name: 'year', type: 'text' },
     { label: 'Add Event Text (Short description of event):', name: 'text', type: 'text' }
   ];
@@ -28,7 +28,7 @@ const TimelineForm = () => {
           onChange={e => handleChange(e, dispatch)}
         />
       </label>
-      <TabbedForm fields={tabFields} group="events" label="Event" maxTabs={5} />
+      <TabbedForm fields={tabFields} group="timeline" label="Event" maxTabs={5} />
       <FullWidthToggle checked={formValues.fullWidth} />
     </Fragment>
   );
