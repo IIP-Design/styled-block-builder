@@ -1,125 +1,64 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import propTypes from 'prop-types';
-// import { TimelineMax } from 'gsap';
 
 import Normalizer from 'blocks/_shared/components/Normalizer/Normalizer';
+import { setBackgroundImage } from 'blocks/_shared/utils/background-style';
 
 import './Timeline.module.scss';
 
 const Timeline = ({ id }) => {
-  // const { title } = window[`quotebox${id}`];
   const { meta } = window[`gpalabTimeline${id}`];
 
-  if (meta) {
-    const { title, fullWidth, events } = meta;
+  const [selected, setSelected] = useState({});
 
-    const isMobile = window.innerWidth <= 768;
+  useEffect(() => {
+    if (meta?.timeline && meta.timeline.length > 0) {
+      setSelected(meta.timeline[0]);
+    }
+  }, []);
 
-    const [selected, setSelected] = useState(events[0] || null);
+  const isMobile = window.innerWidth <= 768;
 
-    // Get the top of the timeline section
-    // const timelineSection = document.getElementById( 'timeline-section' );
-    // const distanceFromTop = timelineSection.getBoundingClientRect().top;
+  const updateSelected = (e, timeline) => {
+    const year = e?.target?.dataset?.year ? e.target.dataset.year : '';
 
+    if (year !== selected.year) {
+      const newEvent = timeline.filter(event => event.year === year)[0];
+      setSelected(newEvent);
+    }
+  };
+
+  const getColor = (year, el) => {
     // Set color values
     const activeDotColor = '#c1a783';
     const activeTextColor = '#333333';
     const inactiveColor = '#666666';
-    // const activeOpacity = '0.5';
 
-    // Define how each timeline behaves
-    // const runTimeline = (arr1, arr2, arr3) => {
-    //   const activeBg = { backgroundColor: activeDotColor };
-    //   const inactiveBg = { backgroundColor: activeTextColor };
+    const active = el === 'dot' ? activeDotColor : activeTextColor;
 
-    //   // Initialize timelines
-    //   const tlDots = new TimelineMax({ repeat: -1 });
-    //   const tlHeaders = new TimelineMax({ repeat: -1 });
-    //   const tlPhoto = new TimelineMax({ repeat: -1 });
+    const color = year === selected.year ? active : inactiveColor;
 
-    //   arr1.forEach(el => {
-    //     tlDots.fromTo(el, 3.9, inactiveBg, activeBg).to(el, 0.1, inactiveBg);
-    //   });
+    return color;
+  };
 
-    //   arr2.forEach(el => {
-    //     tlHeaders
-    //       .fromTo(el, 2, { display: 'none' }, { display: 'flex' })
-    //       .to(el, 2, { display: 'none' });
-    //   });
+  const getGridStyle = num => {
+    if (isMobile) {
+      return { gridTemplateRows: `repeat(${num}, 1fr)` };
+    }
 
-    //   arr3.forEach(el => {
-    //     if (el?.dataset?.photo) {
-    //       const activePhoto = {
-    //         backgroundImage: `url('${el.dataset.photo}')`,
-    //         opacity: activeOpacity,
-    //         visibility: 'visible'
-    //       };
-    //       const inactivePhoto = { opacity: 0, visibility: 'hidden' };
+    return { gridTemplateColumns: `repeat(${num}, 1fr)` };
+  };
 
-    //       tlPhoto.fromTo(el, 3.9, inactivePhoto, activePhoto).to(el, 0.1, inactivePhoto);
-    //     }
-    //   });
-    // };
-
-    // const playWhenAtTop = e => {
-    //   const off = getScrollOffsets().y;
-
-    //   if (
-    //     cards &&
-    //     dots &&
-    //     images &&
-    //     cards.length > 0 &&
-    //     dots.length > 0 &&
-    //     images.length > 0 &&
-    //     timelineSection &&
-    //     off >= distanceFromTop
-    //   ) {
-    //     runTimeline( dots, headers, images );
-    //     document.removeEventListener( 'scroll', playWhenAtTop );
-    //     document.removeEventListener( 'touchmove', playWhenAtTop );
-    //   }
-    // };
-
-    // useEffect(() => {
-    // Add event listeners for automated animation if user is on mobile
-    // if ( isMobile ) {
-    //   document.addEventListener( 'scroll', playWhenAtTop );
-    //   document.addEventListener( 'touchmove', playWhenAtTop );
-    // }
-
-    const updateSelected = e => {
-      const year = e?.target?.dataset?.year ? e.target.dataset.year : '';
-
-      if (year !== selected.year) {
-        const newEvent = events.filter(event => event.year === year)[0];
-        setSelected(newEvent);
-      }
-    };
-
-    const getTextStyle = year => {
-      const color = year === selected.year ? activeTextColor : inactiveColor;
-
-      return color;
-    };
-
-    const getDotStyle = year => {
-      const color = year === selected.year ? activeDotColor : inactiveColor;
-
-      return color;
-    };
-
-    const getGridStyle = items => {
-      if (isMobile) {
-        return { gridTemplateRows: `repeat(${events.length}, 1fr)` };
-      }
-
-      return { gridTemplateColumns: `repeat(${events.length}, 1fr)` };
-    };
+  if (meta?.timeline) {
+    const { title, fullWidth, timeline } = meta;
 
     return (
       <Normalizer fullWidth={fullWidth}>
         <div id="timeline-section" styleName="bg">
-          <div style={{ backgroundImage: `url('${selected.image || ''}')` }} styleName="overlay" />
+          <div
+            style={selected?.files ? setBackgroundImage(selected.files) : {}}
+            styleName="overlay"
+          />
 
           <h2 styleName="title">{title}</h2>
 
@@ -128,36 +67,36 @@ const Timeline = ({ id }) => {
           </h3>
 
           <div styleName="container">
-            <div style={getGridStyle(events.length)} styleName="line">
-              {events.map(event => (
+            <div style={getGridStyle(timeline.length)} styleName="line">
+              {timeline.map(event => (
                 <span
                   key={event.year}
                   data-year={event.year}
-                  onMouseEnter={e => updateSelected(e)}
-                  style={{ backgroundColor: getDotStyle(event.year) }}
+                  style={{ backgroundColor: getColor(event.year, 'dot') }}
                   styleName="dot"
+                  onMouseEnter={e => updateSelected(e, timeline)}
                 />
               ))}
             </div>
 
-            <div style={getGridStyle(events.length)} styleName="cards">
-              {events.map(event => (
+            <div style={getGridStyle(timeline.length)} styleName="cards">
+              {timeline.map(event => (
                 <div
-                  data-year={event.year}
                   key={event.year}
-                  onMouseEnter={e => updateSelected(e)}
+                  data-year={event.year}
                   styleName="card"
+                  onMouseEnter={e => updateSelected(e, timeline)}
                 >
                   <div
                     data-year={event.year}
-                    style={{ color: getTextStyle(event.year) }}
+                    style={{ color: getColor(event.year) }}
                     styleName="heading"
                   >
                     {event.year}
                   </div>
                   <p
                     data-year={event.year}
-                    style={{ color: getTextStyle(event.year) }}
+                    style={{ color: getColor(event.year) }}
                     styleName="text"
                   >
                     {event.text}
