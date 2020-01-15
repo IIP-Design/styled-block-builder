@@ -1,7 +1,13 @@
 @import 'styles/colors.scss';
 
 .gpalab-gradient {
-  background: linear-gradient(to top,
-      rgba($color: $blackStandard, $alpha: 0.4),
-      rgba($color: $blackStandard, $alpha: 0.5) 100%);
+  background: linear-gradient(
+    to top,
+    rgba($color: $blackStandard, $alpha: 0.4),
+    rgba($color: $blackStandard, $alpha: 0.5) 100%
+  );
+
+  > div {
+    min-height: 600px;
+  }
 }

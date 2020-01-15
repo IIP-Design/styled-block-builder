@@ -3,6 +3,10 @@
   margin: 0;
   padding: 0;
 
+  > div {
+    min-height: 600px;
+  }
+
   &.full-width {
     margin-left: calc(50% - 50vw);
     margin-right: calc(50% - 50vw);

@@ -3,9 +3,7 @@ import propTypes from 'prop-types';
 
 import './Gradient.scss';
 
-const Gradient = ( { children } ) => {
-  return <div className="gpalab-gradient">{ children }</div>;
-};
+const Gradient = ({ children }) => <div className="gpalab-gradient">{children}</div>;
 
 Gradient.propTypes = {
   children: propTypes.element
