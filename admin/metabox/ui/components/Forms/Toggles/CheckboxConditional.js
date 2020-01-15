@@ -6,9 +6,22 @@ import { handleToggle } from 'metabox/utils/event-handlers';
 
 import './Toggles.module.scss';
 
-const CheckboxConditional = ({ checked, children, label, name }) => {
+const CheckboxConditional = ({ callback, checked, children, label, name }) => {
   const { dispatch, state } = useContext(AdminContext);
   const values = state?.formData?.formValues ? state.formData.formValues : {};
+
+  /**
+   * Function to be run on change, either the default handleToggle function or a custom callback function if provided.
+   *
+   * @param {Object} e An event object.
+   */
+  const handleChange = e => {
+    if (callback) {
+      callback(e);
+    }
+
+    handleToggle(e, dispatch, values);
+  };
 
   return (
     <div styleName="form-break">
@@ -20,7 +33,7 @@ const CheckboxConditional = ({ checked, children, label, name }) => {
           name={name}
           styleName="toggle-checkbox"
           type="checkbox"
-          onChange={e => handleToggle(e, dispatch, values)}
+          onChange={e => handleChange(e)}
         />
       </label>
       {checked && children}
@@ -28,6 +41,7 @@ const CheckboxConditional = ({ checked, children, label, name }) => {
   );
 };
 CheckboxConditional.propTypes = {
+  callback: propTypes.func,
   checked: propTypes.bool,
   children: propTypes.node,
   label: propTypes.string,

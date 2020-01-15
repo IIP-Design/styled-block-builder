@@ -19,6 +19,9 @@ module.exports = {
       }
     }
   ],
+  rules: {
+    'react/boolean-prop-naming': 'off'
+  },
   settings: {
     'import/resolver': {
       'babel-module': {

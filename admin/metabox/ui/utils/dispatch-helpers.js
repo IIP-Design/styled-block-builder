@@ -6,7 +6,7 @@ import { v4 as uuid } from 'uuid';
  * @param {Object[]} data An array of objects to be searched.
  * @param {string} id The id value of the object that the function is searching for.
  * @param {number=} start The default index value.
- * @return {Object} With three properties: selected item, copy of without selected item, and index of selected object in original array.
+ * @returns {Object} With three properties: selected item, copy of without selected item, and index of selected object in original array.
  */
 const getSelectedFromGroup = (data, id, start) => {
   let indexValue = start;
@@ -273,6 +273,7 @@ export const groupHandleInputNested = (data, itemId, group, name, parentId, valu
  * @param {Object} data Data object for the selected group.
  * @param {string} group Name of the selected group.
  * @param {string} id The id value of the object that the function is searching for.
+ * @returns {Object[]} An array of the remaining form objects.
  */
 export const groupRemoveItem = (data, group, id) => {
   const groupArr = data[group] ? [...data[group]] : [];
@@ -289,6 +290,7 @@ export const groupRemoveItem = (data, group, id) => {
  * @param {string} itemId The id value of the object that the function is searching for.
  * @param {string} group Name of the selected group.
  * @param {string} parentId The id value of the group where the target object resides.
+ * @returns {Object[]} An array of the remaining form objects.
  *
  * @see {getSelectedFromGroup}
  * @see {groupRemoveItem}
@@ -312,6 +314,7 @@ export const groupRemoveItemNested = (data, itemId, group, parentId) => {
  *
  * @param {Object} state The AdminContext object.
  * @param {number} id Selected post id.
+ * @returns {number[]} An array of post ids representing the posts in process of being updated.
  */
 export const updatingAddTo = (state, id) => {
   if (state?.updating) {
@@ -332,6 +335,7 @@ export const updatingAddTo = (state, id) => {
  *
  * @param {Object} state The AdminContext object.
  * @param {number} id Selected post id.
+ * @returns {number[]} An array of post ids representing the posts in process of being updated.
  */
 export const updatingRemoveFrom = (state, id) => {
   if (state?.updating) {

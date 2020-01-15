@@ -22,7 +22,9 @@ const TabbedForm = ({ fields, group, label, maxTabs }) => {
     }
   }, []);
 
-  // Adds a new tab.
+  /**
+   * Adds a new tab.
+   */
   const handleAdd = () => {
     dispatch({ type: 'group-add', payload: { fields, group } });
     /**
@@ -31,14 +33,23 @@ const TabbedForm = ({ fields, group, label, maxTabs }) => {
      */
   };
 
-  // Updates form field values.
+  /**
+   * Updates form field values.
+   *
+   * @param {Object} e An event object.
+   * @param {string} itemId The id of the item being updated.
+   */
   const handleChange = (e, itemId) => {
     const { name, value } = e.target;
 
     dispatch({ type: 'group-input', payload: { group, itemId, name, value } });
   };
 
-  // Removes the selected tab.
+  /**
+   * Removes the selected tab.
+   *
+   * @param {Object[]} forms Array of available form objects.
+   */
   const handleRemoval = forms => {
     const selected = forms.filter(item => item.id === selectedTab);
     const index = forms.indexOf(selected[0]);
@@ -68,7 +79,12 @@ const TabbedForm = ({ fields, group, label, maxTabs }) => {
     dispatch({ type: 'group-remove', payload: { group, id: selectedTab } });
   };
 
-  // Manage turning on/off of optional sections
+  /**
+   * Dispatches an event to turn on/off of optional sections.
+   *
+   * @param {string} name Name of the field.
+   * @param {string} itemId The id of the item being updated.
+   */
   const handleToggle = (name, itemId) => {
     const isChecked = formValues[name] || false;
 
