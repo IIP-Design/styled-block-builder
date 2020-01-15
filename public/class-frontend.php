@@ -17,6 +17,17 @@ namespace Style_Templates;
 class Frontend {
 
   /**
+   * Initializes the class with the plugin name and version.
+   *
+   * @param string $plugin     The plugin name.
+   * @param string $version    The plugin version number.
+   */
+  public function __construct( $plugin, $version ) {
+    $this->plugin  = $plugin;
+    $this->version = $version;
+  }
+
+  /**
    * Register the scripts for each block type.
    */
   public function register_template_scripts_styles() {
@@ -26,9 +37,9 @@ class Frontend {
     $scripts  = '1' === $dev_mode ? 'dev-template-frontend.js' : 'gpalab-template-frontend.js';
     $styles   = '1' === $dev_mode ? 'dev-template-frontend.css' : 'gpalab-template-frontend.css';
 
-    wp_register_script( 'gpalab-template-frontend-js', STYLE_TEMPLATES_DIST . $scripts, array(), null, true );
+    wp_register_script( 'gpalab-template-frontend-js', STYLE_TEMPLATES_DIST . $scripts, array(), $this->version, true );
 
-    wp_register_style( 'gpalab-template-frontend-css', STYLE_TEMPLATES_DIST . $styles, array(), null );
+    wp_register_style( 'gpalab-template-frontend-css', STYLE_TEMPLATES_DIST . $styles, array(), $this->version );
 
     wp_localize_script(
       'gpalab-template-frontend-js',

@@ -17,6 +17,17 @@ namespace Style_Templates;
 class Admin {
 
   /**
+   * Initializes the class with the plugin name and version.
+   *
+   * @param string $plugin     The plugin name.
+   * @param string $version    The plugin version number.
+   */
+  public function __construct( $plugin, $version ) {
+    $this->plugin  = $plugin;
+    $this->version = $version;
+  }
+
+  /**
    * Register the scripts and styles for the admin interface.
    */
   public function register_admin_scripts_styles() {
@@ -27,9 +38,9 @@ class Admin {
     $scripts = '1' === $dev_mode ? 'dev-template-admin.js' : 'gpalab-template-admin.js';
     $styles  = '1' === $dev_mode ? 'dev-template-admin.css' : 'gpalab-template-admin.css';
 
-    wp_register_script( 'gpalab-template-admin-js', STYLE_TEMPLATES_DIST . $scripts, array(), null, true );
+    wp_register_script( 'gpalab-template-admin-js', STYLE_TEMPLATES_DIST . $scripts, array(), $this->version, true );
 
-    wp_register_style( 'gpalab-template-admin-css', STYLE_TEMPLATES_DIST . $styles, array(), null );
+    wp_register_style( 'gpalab-template-admin-css', STYLE_TEMPLATES_DIST . $styles, array(), $this->version );
   }
 
   /**
