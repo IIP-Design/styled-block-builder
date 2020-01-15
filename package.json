@@ -7,7 +7,9 @@
     "analyze": "npm run build && webpack-bundle-analyzer dist/bundleStats.json dist",
     "dev": "webpack --watch --config config/webpack.config.js --mode development",
     "build": "webpack --config config/webpack.config.js --mode production",
-    "test:PHP": "./vendor/bin/phpcs"
+    "lint": "npm run lint:JS && npm run lint:PHP",
+    "lint:PHP": "./vendor/bin/phpcs",
+    "lint:JS": "eslint --ext .js ./"
   },
   "devDependencies": {
     "@babel/core": "^7.7.4",

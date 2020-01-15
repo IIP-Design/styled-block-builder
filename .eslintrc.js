@@ -28,6 +28,9 @@ module.exports = {
           styles: './styles'
         }
       }
+    },
+    'react': {
+      version: 'detect'
     }
   }
 };
