@@ -6,8 +6,9 @@
     rgba($color: $blackStandard, $alpha: 0.4),
     rgba($color: $blackStandard, $alpha: 0.5) 100%
   );
+  min-height: inherit;
 
-  > div {
-    min-height: 600px;
+  &.off {
+    background: transparent;
   }
 }
