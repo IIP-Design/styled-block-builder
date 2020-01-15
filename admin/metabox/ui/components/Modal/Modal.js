@@ -45,7 +45,7 @@ const ModalContent = () => {
       );
     };
 
-    // Generate shortcode for copying
+    // Generate shortcode for copying.
     const title = formData?.formValues?.title ? `title='${formData.formValues.title}'` : '';
     const shortcode = `[gpalab_template ${title} id='${formData.formId}' type='${formStr}']`;
 

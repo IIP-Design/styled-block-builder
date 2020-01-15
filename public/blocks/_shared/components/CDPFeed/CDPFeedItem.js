@@ -5,25 +5,25 @@ import { getFromCDP, parseFeedItemData } from 'blocks/_shared/utils/cdp';
 
 import './CDPFeed.module.scss';
 
-const CDPFeedItem = ( { id, source } ) => {
-  const [data, setData] = useState( null );
+const CDPFeedItem = ({ id, source }) => {
+  const [data, setData] = useState(null);
 
-  useEffect( () => {
+  useEffect(() => {
     const initalize = async () => {
-      const response = await getFromCDP( id, source ).then( result => parseFeedItemData( result ) );
+      const response = await getFromCDP(id, source).then(result => parseFeedItemData(result));
 
-      setData( response );
+      setData(response);
     };
 
     initalize();
-  }, [id] );
+  }, [id]);
 
-  if ( data ) {
+  if (data) {
     return (
-      <div styleName="feed-item" key={ id } style={ { backgroundImage: `url('${data.image}')` } }>
-        <a styleName="feed-item-link" href={ data.link }>
+      <div key={id} style={{ backgroundImage: `url('${data.image}')` }} styleName="feed-item">
+        <a href={data.link} styleName="feed-item-link">
           <div>
-            <p styleName="feed-item-title">{ data.title }</p>
+            <p styleName="feed-item-title">{data.title}</p>
           </div>
         </a>
       </div>

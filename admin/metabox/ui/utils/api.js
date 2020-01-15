@@ -11,5 +11,6 @@ export const getAssociated = async endpoint => {
     return result;
   } catch (error) {
     console.log(error);
+    return null;
   }
 };

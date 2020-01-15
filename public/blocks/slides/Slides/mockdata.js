@@ -27,7 +27,7 @@ const mockData = {
       id: 'two'
     },
     {
-      subtitle: `Iran's Missile Program`,
+      subtitle: "Iran's Missile Program",
       background: 'https://policystatic.state.gov/uploads/2019/11/AP_17033636414964.jpg',
       text:
         'You can actually grow lemon trees in your backyard. This is a great way to have fresh lemon juice at home.',

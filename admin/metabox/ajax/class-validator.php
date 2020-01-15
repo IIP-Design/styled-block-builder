@@ -74,7 +74,8 @@ class Validator {
     }
 
     if ( is_numeric( $id ) ) {
-      if ( 0 != $id && get_post_status( $id ) === false ) {
+      // While post ids are numbers, all values coming off AJAX are strings, hence the check for '0' not 0.
+      if ( '0' !== $id && get_post_status( $id ) === false ) {
         $send_response->send_custom_error( 'invalid_post_id' );
       }
     }

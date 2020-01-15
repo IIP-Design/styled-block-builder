@@ -48,7 +48,7 @@ const Stats = ({ id }) => {
     return (
       <Normalizer fullWidth={fullWidth}>
         <div ref={ref} style={bg} styleName="box-bg">
-          <Gradient>
+          <Gradient off={backgroundType !== 'image'}>
             <div className="stats-container" styleName="container">
               {title && (
                 <h2 style={{ color: textColor }} styleName="title">
