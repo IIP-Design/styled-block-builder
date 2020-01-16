@@ -48,7 +48,7 @@ const Slides = ({ id }) => {
     return (
       <Normalizer fullWidth>
         <div styleName="slide-container">
-          <h2 styleName="slide-title">{title}</h2>
+          {title && <h2 styleName="slide-title">{title}</h2>}
           <div id={`pin-container-${id}`} styleName="pin-container">
             {slides.map(slide => (
               <section
