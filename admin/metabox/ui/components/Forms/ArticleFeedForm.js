@@ -40,7 +40,7 @@ const ArticleFeedForm = () => {
         selected={formValues.textColor}
       />
       <label htmlFor="article-feed-title">
-        Add title (Optional):
+        Add Title (Optional):
         <input
           id="article-feed-title"
           name="title"
@@ -50,7 +50,7 @@ const ArticleFeedForm = () => {
         />
       </label>
       <label htmlFor="article-feed-subtitle">
-        Add sub-title (Optional):
+        Add Subtitle (Optional):
         <input
           id="article-feed-subtitle"
           name="subtitle"

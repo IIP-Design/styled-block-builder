@@ -47,7 +47,7 @@ const TextForm = () => {
         selected={formValues.blockBackground}
       />
       <label htmlFor="text-title">
-        Add title:
+        Add Title (Optional):
         <input
           id="text-title"
           name="title"
@@ -57,7 +57,7 @@ const TextForm = () => {
         />
       </label>
       <label htmlFor="text-subtitle">
-        Add sub-title:
+        Add Subtitle (Optional):
         <input
           id="text-subtitle"
           name="subtitle"
@@ -67,7 +67,7 @@ const TextForm = () => {
         />
       </label>
       <label htmlFor="text-desc">
-        Add description:
+        Add Description (Optional):
         <textarea
           id="text-desc"
           name="desc"
@@ -79,12 +79,16 @@ const TextForm = () => {
       <FullWidthToggle checked={formValues.fullWidth} />
       <CheckboxConditional
         checked={formValues.hasButton}
-        label="Add Button (Optional)"
+        label="Add Button (Optional):"
         name="hasButton"
       >
         <ButtonForm />
       </CheckboxConditional>
-      <CheckboxConditional checked={formValues.hasVideo} label="Add a Video?" name="hasVideo">
+      <CheckboxConditional
+        checked={formValues.hasVideo}
+        label="Add a Video (Optional):"
+        name="hasVideo"
+      >
         <label htmlFor="video-title">
           Add Video Title:
           <input
@@ -107,7 +111,11 @@ const TextForm = () => {
           />
         </label>
       </CheckboxConditional>
-      <CheckboxConditional checked={formValues.hasFeed} label="Add an Article Feed?" name="hasFeed">
+      <CheckboxConditional
+        checked={formValues.hasFeed}
+        label="Add an Article Feed (Optional):"
+        name="hasFeed"
+      >
         <ArticleById />
       </CheckboxConditional>
     </Fragment>

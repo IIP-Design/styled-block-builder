@@ -23,7 +23,7 @@ const HeroForm = () => {
     <Fragment>
       <FileUploader label="Add background image:" name="backgroundImage" />
       <label htmlFor="hero-title">
-        Add Title:
+        Add Title (Optional):
         <input
           id="hero-title"
           name="title"
@@ -33,7 +33,7 @@ const HeroForm = () => {
         />
       </label>
       <label htmlFor="hero-subtitle">
-        Add Subtitle:
+        Add Subtitle (Optional):
         <input
           id="hero-subtitle"
           name="subtitle"
@@ -65,7 +65,7 @@ const HeroForm = () => {
       )}
       <CheckboxConditional
         checked={formValues.hasButton}
-        label="Add Button (Optional)"
+        label="Add Button (Optional):"
         name="hasButton"
       >
         <ButtonForm />

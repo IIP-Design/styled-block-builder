@@ -19,7 +19,7 @@ const ResourcesForm = () => {
   return (
     <Fragment>
       <label htmlFor="resources-title">
-        Add title:
+        Add Title (Subtitle):
         <input
           id="resources-title"
           name="title"
@@ -29,7 +29,7 @@ const ResourcesForm = () => {
         />
       </label>
       <label htmlFor="resources-subtitle">
-        Add sub-title:
+        Add Subtitle (Optional):
         <input
           id="resources-subtitle"
           name="subtitle"

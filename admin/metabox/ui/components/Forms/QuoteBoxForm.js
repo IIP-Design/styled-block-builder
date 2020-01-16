@@ -74,7 +74,7 @@ const QuoteBoxForm = () => {
         selected={formValues.textColor}
       />
       <label htmlFor="quote-box-title">
-        Add title:
+        Add Title (Optional):
         <input
           id="quote-box-title"
           name="title"
@@ -84,7 +84,7 @@ const QuoteBoxForm = () => {
         />
       </label>
       <label htmlFor="quote-box-subtitle">
-        Add sub-title:
+        Add Subtitle (Optional):
         <input
           id="quote-box-subtitle"
           name="subtitle"
@@ -94,7 +94,7 @@ const QuoteBoxForm = () => {
         />
       </label>
       <label htmlFor="quote-box-desc">
-        Add description:
+        Add Description (Optional):
         <textarea
           id="quote-box-desc"
           name="desc"
@@ -109,7 +109,7 @@ const QuoteBoxForm = () => {
         selected={formValues.quoteBackground}
       />
       <label htmlFor="quote-box-quote">
-        Add quote:
+        Add Quote:
         <textarea
           id="quote-box-quote"
           name="quote"
@@ -119,7 +119,7 @@ const QuoteBoxForm = () => {
         />
       </label>
       <label htmlFor="quote-box-speaker">
-        Add speaker:
+        Add Speaker (Optional):
         <input
           id="quote-box-speaker"
           name="speaker"

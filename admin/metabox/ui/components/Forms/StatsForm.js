@@ -72,7 +72,7 @@ const StatsForm = () => {
           selected={formValues.textColor}
         />
         <label htmlFor="stats-title">
-          Add Stats block title:
+          Add Block Title (Optional):
           <input
             id="stats-title"
             name="title"

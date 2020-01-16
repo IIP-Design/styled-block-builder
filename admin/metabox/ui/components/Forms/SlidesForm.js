@@ -32,7 +32,7 @@ const SlidesForm = () => {
     return (
       <Fragment>
         <label htmlFor="slides-title">
-          Add title:
+          Add Title (Optional):
           <input
             id="slides-title"
             name="title"
