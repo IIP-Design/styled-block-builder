@@ -1,8 +1,7 @@
 @import 'styles/colors.scss';
 
 .read-more {
-  border: 2px solid $white;
-  color: $white;
+  border: 2px solid;
   font-weight: 700;
   background: none;
   margin: 1rem 0 2rem;
@@ -22,8 +21,17 @@
     padding-left: 0;
   }
 
+  &.white {
+    color: $white;
+    border-color: $white;
+
+    &:hover {
+      border: 2px solid rgba($color: $white, $alpha: 0.1);
+    }
+  }
+
   &.red {
-    color: $blueDark;
+    color: $red;
     border-color: $red;
 
     &:hover {
@@ -53,6 +61,11 @@
 
   &-red {
     color: $red;
+    font-size: 0.8rem;
+  }
+
+  &-blue {
+    color: $blueBlackPearl;
     font-size: 0.8rem;
   }
 }

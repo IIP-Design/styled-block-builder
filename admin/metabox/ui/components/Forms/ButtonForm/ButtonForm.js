@@ -59,9 +59,10 @@ const ButtonForm = () => {
             onBlur={e => handleChange(e)}
             onChange={e => handleChange(e)}
           >
-            <option value="minimal">Minimal</option>
+            <option value="white">White</option>
             <option value="red">Red</option>
             <option value="blue">Blue</option>
+            <option value="minimal">Minimal (Blue with no border)</option>
           </select>
         </label>
         <label htmlFor="arrow-color">
@@ -76,6 +77,7 @@ const ButtonForm = () => {
           >
             <option value="white">White</option>
             <option value="red">Red</option>
+            <option value="blue">Blue</option>
           </select>
         </label>
       </div>
