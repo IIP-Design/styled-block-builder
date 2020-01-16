@@ -17,12 +17,14 @@
    - Add button text (Text that will display on the button)
    - Add button link (URL for the button)
    - Select button style:
-     - Minimal (no border, blue text)
-     - Red (red outline, blue text)
-     - Blue (blue outline, blue text)
+     - White (white outline and text)
+     - Red (red outline and text)
+     - Blue (blue outline and text)
+     - Minimal (no outline and blue text)
    - Select button arrow color:
      - White
      - Red
+     - Blue
 6. **Click Save** to save your block configurations.
 
 To add the block to your page, follow the instructions for adding blocks to the page.
