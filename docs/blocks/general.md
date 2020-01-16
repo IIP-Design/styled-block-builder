@@ -1,8 +1,8 @@
-## Creating a New Style Templates Block
-
-Navigate to the Style Templates section within the editor to configure a new block template.
+## Style Templates Block Overview
 
 ### Creating a New Block
+
+Navigate to the Style Templates section within the editor to configure a new block template.
 
 1. Select the desired blcok from the **Add Template:** dropdown.
 
@@ -30,9 +30,38 @@ Navigate to the Style Templates section within the editor to configure a new blo
 1. Within the **Configure Your Text Block** window, access the created shortcode at the bottom.
 2. Copy the shortcode and close out the configuration window.
 3. Paste into the **Visual** tab of the text editor where you want the block to appear on the page.
-4. Update the page.
+4. Update or save the page as a draft.
 
 ### Removing a Block from the Page
 
 1. Delete the shortcode from the **Visual** tab of the text editor.
 2. Update the page.
+
+### Choosing Images for Blocks
+
+We recommend paying close attention the images used for each block. Preview the block on the page to make sure the image works well with the block.
+
+### Ordering Blocks on a Page
+
+Place the shortcodes within the visual content editor in the order that you want them to appear on the page. Blocks can be placed in any order on the page.
+
+Additionally, blocks can be separated by other content within the visual editor. For example, you could place a Hero block that is followed by text and then insert a Stats block:
+
+```
+[gpalab_template title='Testing Title' id='000000' type='hero']
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce in varius sem.
+
+Nullam at quam nisl. Mauris lacinia nisi tortor, id tempor arcu commodo sed.
+
+[gpalab_template title='Testing Stats' id='000000' type='stats']
+
+```
+
+#### Block Order Best Practices
+
+We recommend placing the blocks in the order that makes the most sense for your content and messaging. We also recommend using each block for it's intended purpose. If there is currently not a block that meets your need, we suggest placing that content between the blocks as shown above.
+
+While blocks can be placed in any order, we recommend that you preview the page and look to make sure the selected backgrounds of some blocks work stacked on top of each other:
+
+- Stats and Slides: Content scrolls across a fixed background that covers the entire screen. When placed next to each other, these blocks have more of an abrupt transition and would have a better impact if separated by another block.
