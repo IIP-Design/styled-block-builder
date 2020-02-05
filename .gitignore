@@ -2,7 +2,7 @@
 dist/bundleStats.html
 dist/bundleStats.json
 
-# Editor
+# Editor & System
 .vscode
 .DS_Store
 
@@ -17,5 +17,6 @@ vendor/
 dist/dev-*.js
 dist/dev-*.css
 
-# Error Logs
+# Error Logs & Caches
 npm-debug.log*
+.phpunit.result.cache
