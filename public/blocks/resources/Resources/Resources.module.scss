@@ -75,6 +75,7 @@
   &-content {
     display: grid;
     grid-template-areas:
+      'header'
       'content'
       'hr'
       'feed';

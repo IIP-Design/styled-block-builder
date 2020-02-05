@@ -83,6 +83,12 @@
   }
 }
 
+.video-only-title {
+  font-weight: 700;
+  margin: 1rem 0 2rem;
+  text-align: center;
+}
+
 @media screen and (max-width: 500px) {
   .content {
     &-columns {
