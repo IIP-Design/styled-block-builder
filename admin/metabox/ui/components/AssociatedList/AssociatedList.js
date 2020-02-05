@@ -22,7 +22,7 @@ const AssociatedList = () => {
 
   return (
     <Fragment>
-      <h4 styleName="header">Existing Templates for This Post:</h4>
+      <strong styleName="header">Existing Templates for This Post:</strong>
       <div styleName="list">
         {templates.map(item => (
           <div
