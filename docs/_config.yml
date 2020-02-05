@@ -1,4 +1,5 @@
 theme: jekyll-theme-minimal
 title: Style Templates Plugin
+repository: IIP-Design/Style-Templates
 description: WordPress plugin to add animated blocks to posts and pages.
 show_downloads: True
