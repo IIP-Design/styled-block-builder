@@ -4,7 +4,7 @@
 
 Navigate to the Style Templates section within the editor to configure a new block template.
 
-1. Select the desired blcok from the **Add Template:** dropdown.
+1. Select the desired block from the **Add Template:** dropdown.
 
    - The current list of blocks can be found below. Refer to each specific block for detailed user guides.
      - **Article Feed**: Displays up to three articles from available sources.
@@ -39,7 +39,7 @@ Navigate to the Style Templates section within the editor to configure a new blo
 
 ### Choosing Images for Blocks
 
-We recommend paying close attention the images used for each block. Preview the block on the page to make sure the image works well with the block.
+We recommend selecting images specificaly for use within each block. Most blocks work well with images that act as a background. Preview the block on the page to make sure the image works well with the block and make adjustments to the image or selection accordingly.
 
 ### Ordering Blocks on a Page
 
@@ -65,3 +65,5 @@ We recommend placing the blocks in the order that makes the most sense for your 
 While blocks can be placed in any order, we recommend that you preview the page and look to make sure the selected backgrounds of some blocks work stacked on top of each other:
 
 - Stats and Slides: Content scrolls across a fixed background that covers the entire screen. When placed next to each other, these blocks have more of an abrupt transition and would have a better impact if separated by another block.
+
+- Consecutive Blocks with Images: Test your block order to make sure that the backgrounds selected work well when viewed consecutively on the page.
