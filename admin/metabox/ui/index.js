@@ -1,6 +1,14 @@
 import React from 'react';
-import { render } from 'react-dom';
+import ReactDOM from 'react-dom';
 
 import Metabox from './components/Metabox/Metabox';
 
-render( <Metabox />, document.getElementById( 'gpalab-add-template-metabox' ) );
+// Run accessibility tests in development.
+if (process.env.NODE_ENV !== 'production') {
+  // eslint-disable-next-line global-require
+  const axe = require('react-axe');
+
+  axe(React, ReactDOM, 1000);
+}
+
+ReactDOM.render(<Metabox />, document.getElementById('gpalab-add-template-metabox'));
