@@ -19,3 +19,7 @@ dist/dev-*.css
 
 # Error Logs
 npm-debug.log*
+
+#Jekyll
+docs/_site
+docs/Gemfile.lock
