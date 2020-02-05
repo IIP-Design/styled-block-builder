@@ -7,15 +7,15 @@ Navigate to the Style Templates section within the editor to configure a new blo
 1. Select the desired block from the **Add Template:** dropdown.
 
    - The current list of blocks can be found below. Refer to each specific block for detailed user guides.
-     - **[Article Feed](/blocks/article-feed)**: Displays up to three articles from available sources.
-     - **[Hero](/blocks/article-feed)**: Use for highlighting the title and purpose of the page.
-     - **[Parallax](/blocks/parallax)**: Fixed background with text.
-     - **[Quote](/blocks/quote)**: Use for highlghting a specific quote.
-     - **[Resources](/blocks/resources)**: Use for adding materials or splitting up subsections into different resource tabs.
-     - **[Slides](/blocks/slides)**: Add up to 10 slides that display an image with text information.
-     - **[Stats](/blocks/stats)**: Highlight up to three stats with a count up animation.
-     - **[Text](/blocks/text)**: Use as the primary text information block. Contains multiple media options.
-     - **[Timeline](/blocks/timeline)**: Add up to 5 events to an interactive timeline with large images.
+     - **[Article Feed]({{ site.github.url }}/blocks/article-feed)**: Displays up to three articles from available sources.
+     - **[Hero]({{ site.github.url }}/blocks/hero)**: Use for highlighting the title and purpose of the page.
+     - **[Parallax]({{ site.github.url }}/blocks/parallax)**: Fixed background with text.
+     - **[Quote]({{ site.github.url }}/blocks/quote)**: Use for highlghting a specific quote.
+     - **[Resources]({{ site.github.url }}/blocks/resources)**: Use for adding materials or splitting up subsections into different resource tabs.
+     - **[Slides]({{ site.github.url }}/blocks/slides)**: Add up to 10 slides that display an image with text information.
+     - **[Stats]({{ site.github.url }}/blocks/stats)**: Highlight up to three stats with a count up animation.
+     - **[Text]({{ site.github.url }}/blocks/text)**: Use as the primary text information block. Contains multiple media options.
+     - **[Timeline]({{ site.github.url }}/blocks/timeline)**: Add up to 5 events to an interactive timeline with large images.
 
 2. Select **Configure Template** to bring up the block template editor window.
 3. Refer to the individual user guides for setting up each block.
