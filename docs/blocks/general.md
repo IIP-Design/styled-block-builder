@@ -4,21 +4,21 @@
 
 Navigate to the Style Templates section within the editor to configure a new block template.
 
-1. Select the desired blcok from the **Add Template:** dropdown.
+1. Select the desired block from the **Add Template:** dropdown.
 
    - The current list of blocks can be found below. Refer to each specific block for detailed user guides.
-     - **Article Feed**: Displays up to three articles from available sources.
-     - **Hero**: Use for highlighting the title and purpose of the page.
-     - **Parallax**: Fixed background with text.
-     - **Quote**: Use for highlghting a specific quote.
-     - **Resources**: Use for adding materials or splitting up subsections into different resource tabs.
-     - **Slides**: Add up to 10 slides that display an image with text information.
-     - **Stats**: Highlight up to three stats with a count up animation.
-     - **Text**: Use as the primary text information block. Contains multiple media options.
-     - **Timeline**: Add up to 5 events to an interactive timeline with large images.
+     - **[Article Feed](/Style-Templates/blocks/article-feed)**: Displays up to three articles from available sources.
+     - **[Hero](/Style-Templates/blocks/hero)**: Use for highlighting the title and purpose of the page.
+     - **[Parallax](/Style-Templates/blocks/parallax)**: Fixed background with text.
+     - **[Quote](/Style-Templates/blocks/quote)**: Use for highlghting a specific quote.
+     - **[Resources](/Style-Templates/blocks/resources)**: Use for adding materials or splitting up subsections into different resource tabs.
+     - **[Slides](/Style-Templates/blocks/slides)**: Add up to 10 slides that display an image with text information.
+     - **[Stats](/Style-Templates/blocks/stats)**: Highlight up to three stats with a count up animation.
+     - **[Text](/Style-Templates/blocks/text)**: Use as the primary text information block. Contains multiple media options.
+     - **[Timeline](/Style-Templates/blocks/timeline)**: Add up to 5 events to an interactive timeline with large images.
 
 2. Select **Configure Template** to bring up the block template editor window.
-3. Refer to the individual user guides for setting up each block.
+3. Refer to the individual user guides linked above for notes on setting up each block.
 
 ### Editing an Existing Block
 
@@ -39,7 +39,7 @@ Navigate to the Style Templates section within the editor to configure a new blo
 
 ### Choosing Images for Blocks
 
-We recommend paying close attention the images used for each block. Preview the block on the page to make sure the image works well with the block.
+We recommend selecting images specificaly for use within each block. Most blocks work well with images that act as a background. Preview the block on the page to make sure the image works well with the block and make adjustments to the image or selection accordingly.
 
 ### Ordering Blocks on a Page
 
@@ -65,3 +65,5 @@ We recommend placing the blocks in the order that makes the most sense for your 
 While blocks can be placed in any order, we recommend that you preview the page and look to make sure the selected backgrounds of some blocks work stacked on top of each other:
 
 - Stats and Slides: Content scrolls across a fixed background that covers the entire screen. When placed next to each other, these blocks have more of an abrupt transition and would have a better impact if separated by another block.
+
+- Consecutive Blocks with Images: Test your block order to make sure that the backgrounds selected work well when viewed consecutively on the page.

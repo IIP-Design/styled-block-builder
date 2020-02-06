@@ -12,3 +12,5 @@
 3. **Click Save** to save your block configurations.
 
 To add the block to your page, follow the instructions for adding blocks to the page.
+
+[⬅︎ Back to Blocks Overview](/Style-Templates/blocks/general)
