@@ -15,4 +15,10 @@ This plugin contains a `style-templates.php`, which registers plugin and begins 
             └── class-my-plugin-public.php
 ```
 
+## Blocks
+
+This plugin provides content editors with the ability to create dynamic content blocks within posts.
+
+Blocks are created within the post admin panel and are inserted onto the page using a shortcode.
+
 For a general overview of the blocks used within this plugin, [navigate here](/Style-Templates/blocks/general).
