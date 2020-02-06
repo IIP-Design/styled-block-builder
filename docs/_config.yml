@@ -1,5 +1,12 @@
-theme: jekyll-theme-minimal
+remote_theme: IIP-Design/lab-notes
 title: Style Templates Plugin
 repository: IIP-Design/Style-Templates
 description: WordPress plugin to add animated blocks to posts and pages.
-show_downloads: True
+favicon: /assets/img/favicon.ico
+logo: /assets/img/dos_seal.svg
+show_downloads: true
+author: Bureau of Global Public Affairs (GPA) Digital Lab Team
+author_homepage: https://github.com/IIP-Design
+show_nav: true
+
+highlighter: rouge
