@@ -1,4 +1,6 @@
-## Resources
+---
+title: Resources
+---
 
 1. Add Title
 2. Add Subtitle

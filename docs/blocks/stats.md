@@ -1,4 +1,6 @@
-## Stats
+---
+title: Stats
+---
 
 1. Select the type of background you would like to apply to the block:
    - Color

@@ -1,4 +1,6 @@
-## Parallax
+---
+title: Parallax
+---
 
 1. Add Background Image:
    - Select **Choose File** to uploade your background image.

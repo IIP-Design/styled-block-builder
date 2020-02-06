@@ -1,4 +1,6 @@
-## Text Block
+---
+title: Text
+---
 
 1. Set block text color from available options.
 2. Set block background color from available options.

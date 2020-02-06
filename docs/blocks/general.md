@@ -1,4 +1,6 @@
-## Style Templates Block Overview
+---
+title: Style Templates Block Overview
+---
 
 ### Creating a New Block
 

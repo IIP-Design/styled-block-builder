@@ -1,4 +1,6 @@
-## Timeline
+---
+title: Timeline
+---
 
 1. Add Block Title
 2. Select the **Add Event** button to add an event (Maximum 5 events)

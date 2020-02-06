@@ -1,4 +1,6 @@
-## Article Feed
+---
+title: Article Feed
+---
 
 1. Select the **block text color** from the options provided.
 2. Add title (Optional)
