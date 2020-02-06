@@ -7,7 +7,6 @@ repository: IIP-Design/Style-Templates
 description: WordPress plugin to add animated blocks to posts and pages.
 favicon: /Style-Templates/assets/img/favicon.ico
 logo: /Style-Templates/assets/img/dos_seal.svg
-repo_name: 'Style-Templates'
 show_downloads: true
 show_nav: true
 
