@@ -18,7 +18,7 @@ Navigate to the Style Templates section within the editor to configure a new blo
      - **[Timeline](/Style-Templates/blocks/timeline)**: Add up to 5 events to an interactive timeline with large images.
 
 2. Select **Configure Template** to bring up the block template editor window.
-3. Refer to the individual user guides for setting up each block.
+3. Refer to the individual user guides linked above for notes on setting up each block.
 
 ### Editing an Existing Block
 
