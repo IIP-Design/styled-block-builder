@@ -1,4 +1,6 @@
-## Data Management
+---
+title: Data Management
+---
 
 ### Cleanup
 

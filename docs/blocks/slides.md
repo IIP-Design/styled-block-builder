@@ -1,4 +1,6 @@
-## Slides
+---
+title: Slides
+---
 
 1. Add Title (Primary title for the entire slide block. This only appears on the top of the first slide.)
 2. Set the slide subheading background color from the provided options.

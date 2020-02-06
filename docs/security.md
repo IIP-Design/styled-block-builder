@@ -1,4 +1,6 @@
-## Security
+---
+title: Security
+---
 
 This plugin follows the security guidelines and best practices laid out in the official [WordPress Plugin Developer Handbook](https://developer.wordpress.org/plugins/security/).
 
