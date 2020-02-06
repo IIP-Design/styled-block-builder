@@ -8,14 +8,14 @@ Navigate to the Style Templates section within the editor to configure a new blo
 
    - The current list of blocks can be found below. Refer to each specific block for detailed user guides.
      - **[Article Feed](/Style-Templates/blocks/article-feed)**: Displays up to three articles from available sources.
-     - **Hero**: Use for highlighting the title and purpose of the page.
-     - **Parallax**: Fixed background with text.
-     - **Quote**: Use for highlghting a specific quote.
-     - **Resources**: Use for adding materials or splitting up subsections into different resource tabs.
-     - **Slides**: Add up to 10 slides that display an image with text information.
-     - **Stats**: Highlight up to three stats with a count up animation.
-     - **Text**: Use as the primary text information block. Contains multiple media options.
-     - **Timeline**: Add up to 5 events to an interactive timeline with large images.
+     - **[Hero](/Style-Templates/blocks/hero)**: Use for highlighting the title and purpose of the page.
+     - **[Parallax](/Style-Templates/blocks/parallax)**: Fixed background with text.
+     - **[Quote](/Style-Templates/blocks/quote)**: Use for highlghting a specific quote.
+     - **[Resources](/Style-Templates/blocks/resources)**: Use for adding materials or splitting up subsections into different resource tabs.
+     - **[Slides](/Style-Templates/blocks/slides)**: Add up to 10 slides that display an image with text information.
+     - **[Stats](/Style-Templates/blocks/stats)**: Highlight up to three stats with a count up animation.
+     - **[Text](/Style-Templates/blocks/text)**: Use as the primary text information block. Contains multiple media options.
+     - **[Timeline](/Style-Templates/blocks/timeline)**: Add up to 5 events to an interactive timeline with large images.
 
 2. Select **Configure Template** to bring up the block template editor window.
 3. Refer to the individual user guides for setting up each block.
