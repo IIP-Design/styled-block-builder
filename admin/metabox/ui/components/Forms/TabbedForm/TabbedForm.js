@@ -86,7 +86,9 @@ const TabbedForm = ({ fields, group, label, maxTabs }) => {
    * @param {string} itemId The id of the item being updated.
    */
   const handleToggle = (name, itemId) => {
-    const isChecked = formValues[name] || false;
+    const selectItem = formValues[group].filter(item => item.id === itemId)[0];
+
+    const isChecked = selectItem[name] || false;
 
     dispatch({ type: 'group-input', payload: { group, itemId, name, value: !isChecked } });
   };
