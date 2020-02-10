@@ -2,6 +2,11 @@ import React, { Fragment, useContext } from 'react';
 import propTypes from 'prop-types';
 
 import { AdminContext } from 'metabox/context/adminContext';
+import {
+  handleAddNested,
+  handleChangeNested,
+  handleRemoveNested
+} from 'metabox/utils/event-handlers';
 
 import './ArticleById.module.scss';
 
@@ -9,48 +14,7 @@ const ArticleById = ({ parentGroup, parentId }) => {
   const { dispatch, state } = useContext(AdminContext);
   const formValues = state?.formData?.formValues ? state.formData.formValues : {};
 
-  const handleAdd = () => {
-    const fields = [{ name: 'postId' }, { name: 'source' }];
-
-    if (parentGroup) {
-      dispatch({
-        type: 'group-add-nested',
-        payload: { fields, group: 'articles', parentGroup, parentId }
-      });
-    } else {
-      dispatch({ type: 'group-add', payload: { fields, group: 'articles' } });
-    }
-  };
-
-  const handleChange = e => {
-    const { itemid } = e.target.dataset;
-    const { name, value } = e.target;
-
-    if (parentGroup) {
-      dispatch({
-        type: 'group-input-nested',
-        payload: { itemId: itemid, group: 'articles', name, parentGroup, parentId, value }
-      });
-    } else {
-      dispatch({
-        type: 'group-input',
-        payload: { itemId: itemid, group: 'articles', name, value }
-      });
-    }
-  };
-
-  const handleRemove = e => {
-    const { itemid } = e.target.dataset;
-
-    if (parentGroup) {
-      dispatch({
-        type: 'group-remove-nested',
-        payload: { itemId: itemid, group: 'articles', parentGroup, parentId }
-      });
-    } else {
-      dispatch({ type: 'group-remove', payload: { group: 'articles', id: itemid } });
-    }
-  };
+  const fields = [{ name: 'postId' }, { name: 'source' }];
 
   if (formValues) {
     let articles;
@@ -75,7 +39,7 @@ const ArticleById = ({ parentGroup, parentId }) => {
                 name="postId"
                 type="text"
                 value={article.postId || ''}
-                onChange={e => handleChange(e)}
+                onChange={e => handleChangeNested(e, dispatch, 'articles', parentGroup, parentId)}
               />
             </label>
             <label htmlFor={`article-source-${article.id}`} styleName="feed-label">
@@ -85,8 +49,8 @@ const ArticleById = ({ parentGroup, parentId }) => {
                 id={`article-source-${article.id}`}
                 name="source"
                 value={article.source}
-                onBlur={e => handleChange(e)}
-                onChange={e => handleChange(e)}
+                onBlur={e => handleChangeNested(e, dispatch, 'articles', parentGroup, parentId)}
+                onChange={e => handleChangeNested(e, dispatch, 'articles', parentGroup, parentId)}
               >
                 <option value="">- Select Source -</option>
                 <option value="share">Share America</option>
@@ -99,7 +63,7 @@ const ArticleById = ({ parentGroup, parentId }) => {
               data-itemid={article.id}
               styleName="feed-button-remove"
               type="button"
-              onClick={e => handleRemove(e)}
+              onClick={e => handleRemoveNested(e, dispatch, 'articles', parentGroup, parentId)}
             >
               Remove Article
             </button>
@@ -110,7 +74,7 @@ const ArticleById = ({ parentGroup, parentId }) => {
           disabled={articles && articles.length === 3}
           styleName="feed-button"
           type="button"
-          onClick={() => handleAdd()}
+          onClick={() => handleAddNested(dispatch, fields, 'articles', parentGroup, parentId)}
         >
           Add Article
         </button>
