@@ -1,0 +1,33 @@
+@import 'styles/colors.scss';
+
+.button {
+  &-add {
+    align-self: center;
+    margin: 1rem 0 0.5rem;
+    width: 75%;
+  }
+
+  &-remove {
+    align-self: flex-end;
+    margin: 0.5rem 0;
+  }
+}
+
+.container {
+  border: $wordpressBorder;
+  display: flex;
+  flex-direction: column;
+  margin: 0.5rem 0;
+  padding: 0.5rem;
+}
+
+.label {
+  display: grid;
+  grid-gap: 1rem;
+  grid-template-columns: 1fr 1fr;
+  margin: 0.3rem 0;
+}
+
+.title {
+  margin: 0.5rem 0;
+}

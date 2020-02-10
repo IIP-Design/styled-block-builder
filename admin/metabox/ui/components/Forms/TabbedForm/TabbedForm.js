@@ -4,6 +4,7 @@ import propTypes from 'prop-types';
 import ArticleById from 'metabox/components/Forms/FeedTypes/ArticleById';
 import CheckboxConditional from 'metabox/components/Forms/Toggles/CheckboxConditional';
 import FileUploader from 'metabox/components/FileUploader/FileUploader';
+import VideoForm from 'metabox/components/Forms/VideoForm/VideoForm';
 import { AdminContext } from 'metabox/context/adminContext';
 import { getTabTitleField, responsiveTitle } from 'metabox/utils/tab-titles';
 
@@ -190,6 +191,16 @@ const TabbedForm = ({ fields, group, label, maxTabs }) => {
                               >
                                 <ArticleById parentGroup={group} parentId={form.id} />
                               </CheckboxConditional>
+                            );
+                          }
+
+                          if (field.type === 'video') {
+                            return (
+                              <VideoForm
+                                key={`${field.name}-${form.id}`}
+                                parentGroup={group}
+                                parentId={form.id}
+                              />
                             );
                           }
 

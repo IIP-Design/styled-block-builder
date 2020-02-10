@@ -12,14 +12,14 @@ const ResourcesForm = () => {
   const tabFields = [
     { label: 'Add section title:', name: 'title', tabTitle: true, type: 'text' },
     { label: 'Add section text:', name: 'text', type: 'textarea' },
-    { label: 'Add video url:', name: 'video', type: 'text' },
+    { label: 'Add a video?', name: 'videos', type: 'video' },
     { label: 'Add an Article Feed?', name: 'hasFeed', type: 'article-feed' }
   ];
 
   return (
     <Fragment>
       <label htmlFor="resources-title">
-        Add Title (Subtitle):
+        Add Title:
         <input
           id="resources-title"
           name="title"
