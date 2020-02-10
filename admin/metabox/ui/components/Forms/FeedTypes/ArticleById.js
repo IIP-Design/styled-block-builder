@@ -1,4 +1,4 @@
-import React, { Fragment, useContext } from 'react';
+import React, { useContext } from 'react';
 import propTypes from 'prop-types';
 
 import { AdminContext } from 'metabox/context/adminContext';
@@ -27,8 +27,8 @@ const ArticleById = ({ parentGroup, parentId }) => {
     }
 
     return (
-      <Fragment>
-        <h4>Add Articles by Post ID:</h4>
+      <div styleName="container">
+        <h4 styleName="title">Add Articles by Post ID:</h4>
         {articles.map(article => (
           <div key={article.id} styleName="feed-info">
             <label htmlFor={`article-id-${article.id}`} styleName="feed-label">
@@ -78,7 +78,7 @@ const ArticleById = ({ parentGroup, parentId }) => {
         >
           Add Article
         </button>
-      </Fragment>
+      </div>
     );
   }
 
