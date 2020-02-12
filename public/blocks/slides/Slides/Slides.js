@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import propTypes, { func } from 'prop-types';
+import propTypes from 'prop-types';
 import * as ScrollMagic from 'scrollmagic';
 import gsap, { TweenLite, TimelineLite } from 'gsap';
 import { ScrollMagicPluginGsap } from 'scrollmagic-plugin-gsap';
@@ -57,29 +57,25 @@ const Slides = ({ id }) => {
   };
 
   window.onscroll = () => {
-    scrollPosition();
-  };
-
-  function scrollPosition() {
     const currentPos = document.documentElement.scrollTop || document.body.scrollTop;
 
     const scrolled =
       ((currentPos - sceneVals.sceneStartPos) / (sceneVals.sceneHeight - window.innerHeight)) * 100;
-    console.log(scrolled);
 
     if (currentPos > sceneVals.sceneStartPos && currentPos < sceneVals.sceneEndPos) {
-      document.getElementById('scrollBar').style.width = scrolled + '%';
+      document.getElementById('scrollBar').style.width = `${scrolled}%`;
     } else {
-      null;
+      return false;
     }
-  }
+    return false;
+  };
 
   if (meta) {
     const { title, slides, subTitleColor } = meta;
 
     return (
       <Normalizer fullWidth>
-        <div styleName="slide-container" id="scene-container">
+        <div id="scene-container" styleName="slide-container">
           {title && <h2 styleName="slide-title">{title}</h2>}
           <div id={`pin-container-${id}`} styleName="pin-container">
             {slides.map(slide => (
@@ -98,22 +94,12 @@ const Slides = ({ id }) => {
                 </div>
               </section>
             ))}
-            {/* <div styleName="slide-dot-container">
-              {slides.map(slide => (
-                <div
-                  key={`dot-${slide.id}`}
-                  data-number={slide.id}
-                  id={`slide-dot-${slide.id}`}
-                  styleName="slide-dot"
-                />
-              ))}
-            </div> */}
             <div styleName="progress-container">
               <div
+                id="scrollBar"
                 style={{ backgroundColor: subTitleColor }}
                 styleName="progress-bar"
-                id="scrollBar"
-              ></div>
+              />
             </div>
           </div>
         </div>
