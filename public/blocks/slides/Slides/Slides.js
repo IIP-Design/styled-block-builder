@@ -35,19 +35,47 @@ const Slides = ({ id }) => {
     new ScrollMagic.Scene({
       triggerElement: `#pin-container-${id}`,
       triggerHook: 'onLeave',
-      duration: 1000
+      duration: 2000
     })
       .setTween(tl)
       .setPin(`#pin-container-${id}`)
       .addTo(controller);
   }, []);
 
+  const sceneVals = {};
+
+  window.onload = () => {
+    sceneVals.sceneStartPos =
+      document.getElementById('scene-container').getBoundingClientRect().top +
+      document.documentElement.scrollTop;
+
+    sceneVals.sceneEndPos =
+      document.getElementById('scene-container').getBoundingClientRect().bottom +
+      document.documentElement.scrollTop;
+
+    sceneVals.sceneHeight = document.getElementById('scene-container').offsetHeight;
+  };
+
+  window.onscroll = () => {
+    const currentPos = document.documentElement.scrollTop || document.body.scrollTop;
+
+    const scrolled =
+      ((currentPos - sceneVals.sceneStartPos) / (sceneVals.sceneHeight - window.innerHeight)) * 100;
+
+    if (currentPos > sceneVals.sceneStartPos && currentPos < sceneVals.sceneEndPos) {
+      document.getElementById('scrollBar').style.width = `${scrolled}%`;
+    } else {
+      return false;
+    }
+    return false;
+  };
+
   if (meta) {
     const { title, slides, subTitleColor } = meta;
 
     return (
       <Normalizer fullWidth>
-        <div styleName="slide-container">
+        <div id="scene-container" styleName="slide-container">
           {title && <h2 styleName="slide-title">{title}</h2>}
           <div id={`pin-container-${id}`} styleName="pin-container">
             {slides.map(slide => (
@@ -66,15 +94,12 @@ const Slides = ({ id }) => {
                 </div>
               </section>
             ))}
-            <div styleName="slide-dot-container">
-              {slides.map(slide => (
-                <div
-                  key={`dot-${slide.id}`}
-                  data-number={slide.id}
-                  id={`slide-dot-${slide.id}`}
-                  styleName="slide-dot"
-                />
-              ))}
+            <div styleName="progress-container">
+              <div
+                id="scrollBar"
+                style={{ backgroundColor: subTitleColor }}
+                styleName="progress-bar"
+              />
             </div>
           </div>
         </div>
