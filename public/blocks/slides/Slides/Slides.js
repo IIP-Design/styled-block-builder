@@ -35,7 +35,7 @@ const Slides = ({ id }) => {
     new ScrollMagic.Scene({
       triggerElement: `#pin-container-${id}`,
       triggerHook: 'onLeave',
-      duration: 5000
+      duration: 2000
     })
       .setTween(tl)
       .setPin(`#pin-container-${id}`)
