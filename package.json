@@ -9,7 +9,9 @@
     "build": "webpack --config config/webpack.config.js --mode production",
     "lint": "npm run lint:JS && npm run lint:PHP",
     "lint:PHP": "./vendor/bin/phpcs",
-    "lint:JS": "eslint --ext .js ./"
+    "lint:JS": "eslint --ext .js ./",
+    "postversion": "git push && git push --tags",
+    "version": "npm run build && git add dist/"
   },
   "husky": {
     "hooks": {
