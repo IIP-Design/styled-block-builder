@@ -31,7 +31,7 @@ class Metabox {
       },
       array( 'page', 'post' ),
       'side',
-      'high'
+      'low'
     );
   }
 
