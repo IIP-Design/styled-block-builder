@@ -23,16 +23,21 @@ class Metabox {
    * Add custom metabox to the sidebar of the WordPress admin area.
    */
   public function add_blocks_metabox() {
-    add_meta_box(
-      'gpalab_blocks_meta',
-      __( 'Styled Blocks', 'gpalab-blocks' ),
-      function() {
-        return $this->render_blocks_metabox();
-      },
-      array( 'page', 'post' ),
-      'side',
-      'low'
-    );
+    $current_user = wp_get_current_user();
+
+    // Ensure that current user has correct priviledges.
+    if ( array_key_exists( 'activate_plugins', $current_user->allcaps ) ) {
+      add_meta_box(
+        'gpalab_blocks_meta',
+        __( 'Styled Blocks', 'gpalab-blocks' ),
+        function() {
+          return $this->render_blocks_metabox();
+        },
+        array( 'page', 'post' ),
+        'side',
+        'low'
+      );
+    };
   }
 
   /**
