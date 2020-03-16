@@ -7,7 +7,7 @@ import { handleColor } from 'metabox/utils/event-handlers';
 import './ColorPicker.module.scss';
 
 const ColorPicker = ({ colors, label, selected }) => {
-  const assetUrl = window?.gpalabTemplateAdmin?.assets;
+  const assetUrl = window?.gpalabBlockAdmin?.assets;
   const { dispatch } = useContext(AdminContext);
 
   return (

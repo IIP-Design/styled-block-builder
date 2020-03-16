@@ -1,24 +1,24 @@
 <?php
 /**
- * Registers the Style_Templates class.
+ * Registers the Style_Blocks class.
  *
- * @package Style_Templates
+ * @package Style_Blocks
  * @since 0.0.1
  */
 
  /**
   * Register all hooks to be run by the plugin.
   *
-  * @package Style_Templates
+  * @package Style_Blocks
   */
-class Style_Templates {
+class Style_Blocks {
 
   /**
    * The loader that's responsible for maintaining and registering all hooks that power the plugin.
    *
    * @since 0.0.1
    * @access protected
-   * @var Style_Templates_Loader $loader    Maintains and registers all hooks for the plugin.
+   * @var Style_Blocks_Loader $loader    Maintains and registers all hooks for the plugin.
    */
   protected $loader;
 
@@ -50,7 +50,7 @@ class Style_Templates {
    * @since 0.0.1
    */
   public function __construct() {
-    $this->plugin_name = 'style-templates';
+    $this->plugin_name = 'styled-block-builder';
     $this->version     = '0.0.1';
     $this->load_dependencies();
     $this->define_admin_hooks();
@@ -62,9 +62,9 @@ class Style_Templates {
    *
    * Includes the following files that make up the plugin:
    *
-   * - Style_Templates\Loader. Orchestrates the hooks of the plugin.
-   * - Style_Templates\Admin. Defines all hooks for the admin area.
-   * - Style_Templates\Frontend. Defines all hooks for the public side of the site.
+   * - Style_Blocks\Loader. Orchestrates the hooks of the plugin.
+   * - Style_Blocks\Admin. Defines all hooks for the admin area.
+   * - Style_Blocks\Frontend. Defines all hooks for the public side of the site.
    *
    * Create an instance of the loader which will be used to register the hooks with WordPress.
    *
@@ -80,54 +80,54 @@ class Style_Templates {
 
     require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/api/class-api.php';
     require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/metabox/class-metabox.php';
-    require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/metabox/ajax/class-update-template.php';
+    require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/metabox/ajax/class-update-block.php';
     require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/settings/class-settings.php';
     require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/shortcode/class-shortcode.php';
 
     // The class responsible for defining all actions that occur in the public-facing side of the site.
     require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-frontend.php';
 
-    $this->loader = new Style_Templates\Loader();
+    $this->loader = new Style_Blocks\Loader();
   }
 
   /** Register all of the hooks related to the admin area functionality of the plugin. */
   private function define_admin_hooks() {
     // Instantiate all admin classes.
-    $plugin_admin     = new Style_Templates\Admin( $this->get_plugin_name(), $this->get_version() );
-    $plugin_ajax      = new Style_Templates\Update_Template( $this->get_plugin_name(), $this->get_version() );
-    $plugin_api       = new Style_Templates\API( $this->get_plugin_name(), $this->get_version() );
-    $plugin_metabox   = new Style_Templates\Metabox( $this->get_plugin_name(), $this->get_version() );
-    $plugin_settings  = new Style_Templates\Settings( $this->get_plugin_name(), $this->get_version() );
-    $plugin_shortcode = new Style_Templates\Shortcode( $this->get_plugin_name(), $this->get_version() );
+    $plugin_admin     = new Style_Blocks\Admin( $this->get_plugin_name(), $this->get_version() );
+    $plugin_ajax      = new Style_Blocks\Update_Block( $this->get_plugin_name(), $this->get_version() );
+    $plugin_api       = new Style_Blocks\API( $this->get_plugin_name(), $this->get_version() );
+    $plugin_metabox   = new Style_Blocks\Metabox( $this->get_plugin_name(), $this->get_version() );
+    $plugin_settings  = new Style_Blocks\Settings( $this->get_plugin_name(), $this->get_version() );
+    $plugin_shortcode = new Style_Blocks\Shortcode( $this->get_plugin_name(), $this->get_version() );
 
     // Admin hooks.
     $this->loader->add_action( 'init', $plugin_admin, 'register_admin_scripts_styles' );
     $this->loader->add_action( 'admin_notices', $plugin_admin, 'localize_admin_script_globals' );
 
     // WP API hooks.
-    $this->loader->add_action( 'rest_api_init', $plugin_api, 'register_associated_templates_meta' );
+    $this->loader->add_action( 'rest_api_init', $plugin_api, 'register_associated_blocks_meta' );
 
     // Ajax hooks.
-    $this->loader->add_action( 'wp_ajax_gpalab_update_template', $plugin_ajax, 'handle_template_update' );
-    $this->loader->add_action( 'wp_ajax_gpalab_delete_template', $plugin_ajax, 'handle_template_deletion' );
+    $this->loader->add_action( 'wp_ajax_gpalab_update_block', $plugin_ajax, 'handle_block_update' );
+    $this->loader->add_action( 'wp_ajax_gpalab_delete_block', $plugin_ajax, 'handle_block_deletion' );
 
     // Custom metabox hooks.
-    $this->loader->add_action( 'add_meta_boxes', $plugin_metabox, 'add_templates_metabox' );
+    $this->loader->add_action( 'add_meta_boxes', $plugin_metabox, 'add_blocks_metabox' );
 
     // Settings page hooks.
-    $this->loader->add_action( 'admin_menu', $plugin_settings, 'add_templates_settings_page' );
-    $this->loader->add_action( 'admin_init', $plugin_settings, 'populate_template_settings' );
+    $this->loader->add_action( 'admin_menu', $plugin_settings, 'add_blocks_settings_page' );
+    $this->loader->add_action( 'admin_init', $plugin_settings, 'populate_blocks_settings' );
 
     // Shortcode hooks.
-    $this->loader->add_action( 'init', $plugin_shortcode, 'add_templates_shortcode' );
+    $this->loader->add_action( 'init', $plugin_shortcode, 'add_blocks_shortcode' );
   }
 
   /** Register all of the hooks related to the public-facing functionality. */
   private function define_public_hooks() {
-    $plugin_frontend = new Style_Templates\Frontend( $this->get_plugin_name(), $this->get_version() );
+    $plugin_frontend = new Style_Blocks\Frontend( $this->get_plugin_name(), $this->get_version() );
 
     // Frontend hooks.
-    $this->loader->add_action( 'init', $plugin_frontend, 'register_template_scripts_styles' );
+    $this->loader->add_action( 'init', $plugin_frontend, 'register_blocks_scripts_styles' );
   }
 
   /**
@@ -143,7 +143,7 @@ class Style_Templates {
    * The reference to the class that orchestrates the hooks with the plugin.
    *
    * @since  0.0.1
-   * @return Style_Templates_Loader    Orchestrates the hooks of the plugin.
+   * @return Style_Blocks_Loader    Orchestrates the hooks of the plugin.
    */
   public function get_loader() {
     return $this->loader;

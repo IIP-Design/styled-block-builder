@@ -9,7 +9,7 @@ import VideoLayout from './Layouts/VideoLayout';
 import './Resources.module.scss';
 
 const Resources = ({ id }) => {
-  const { assets } = window.gpalabTemplateFront;
+  const { assets } = window.gpalabBlockFront;
   const { meta } = window[`gpalabResources${id}`];
 
   const [selected, setSelected] = useState(null);

@@ -2,18 +2,18 @@
 /**
  * Registers the Sanitize_Files class.
  *
- * @package Style_Templates\Sanitizer
+ * @package Style_Blocks\Sanitizer
  * @since 0.0.1
  */
 
-namespace Style_Templates;
+namespace Style_Blocks;
 
 /**
  * Iterate over uploaded files and compare.
  *
  * Checks for and sanitizes the fields expected by the timeline form.
  *
- * @package Style_Templates\Sanitizer
+ * @package Style_Blocks\Sanitizer
  * @since 0.0.1
  */
 class Sanitize_Files {

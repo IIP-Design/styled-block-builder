@@ -1,5 +1,5 @@
 export const getAssociated = async endpoint => {
-  const params = '?_fields=gpalab_associated_templates';
+  const params = '?_fields=gpalab_associated_blocks';
 
   try {
     const response = await fetch(`${endpoint}${params}`, {

@@ -25,15 +25,15 @@ const getSelectedFromGroup = (data, id, start) => {
 };
 
 /**
- * Removes a template from the templates array in context by id.
+ * Removes a block from the blocks array in context by id.
  *
  * @param {Object} state The AdminContext object.
  * @param {number} id Selected post id.
- * @returns {Object[]} An array to template objects.
+ * @returns {Object[]} An array to block objects.
  */
-export const templateDelete = (state, id) => {
-  if (state?.templates) {
-    const { filtered } = getSelectedFromGroup(state.templates, id);
+export const blockDelete = (state, id) => {
+  if (state?.blocks) {
+    const { filtered } = getSelectedFromGroup(state.blocks, id);
 
     return filtered;
   }
@@ -42,31 +42,31 @@ export const templateDelete = (state, id) => {
 };
 
 /**
- * Add new/edits existing template to/in context array.
+ * Add new/edits existing block to/in context array.
  *
  * @param {Object} state The AdminContext object.
- * @param {Object} template Template values.
- * @returns {Object[]} An updated array of templates.
+ * @param {Object} block Block values.
+ * @returns {Object[]} An updated array of blocks.
  *
  * @see {getSelectedFromGroup}
  */
-export const templateSave = (state, template) => {
-  if (state?.templates) {
-    const { templates } = state;
+export const blockSave = (state, block) => {
+  if (state?.blocks) {
+    const { blocks } = state;
 
     // ID comes over as a string so must be converted into a number
-    const intID = Number(template.id);
+    const intID = Number(block.id);
 
-    const { filtered, indexValue } = getSelectedFromGroup(templates, intID, templates.length);
+    const { filtered, indexValue } = getSelectedFromGroup(blocks, intID, blocks.length);
 
-    const newTemplate = {
+    const newBlock = {
       id: intID,
-      meta: template.post_meta,
-      title: template.post_title,
-      type: `gpalab-${template.post_type}`
+      meta: block.post_meta,
+      title: block.post_title,
+      type: `gpalab-${block.post_type}`
     };
 
-    filtered.splice(indexValue, 0, newTemplate);
+    filtered.splice(indexValue, 0, newBlock);
 
     return filtered;
   }

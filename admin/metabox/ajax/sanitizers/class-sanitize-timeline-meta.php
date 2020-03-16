@@ -2,18 +2,18 @@
 /**
  * Registers the Sanitize_Timeline_Meta class.
  *
- * @package Style_Templates\Sanitizer
+ * @package Style_Blocks\Sanitizer
  * @since 0.0.1
  */
 
-namespace Style_Templates;
+namespace Style_Blocks;
 
 /**
  * Sanitizes the values sent over in the AJAX request.
  *
  * Checks for and sanitizes the fields expected by the timeline form.
  *
- * @package Style_Templates\Sanitizer
+ * @package Style_Blocks\Sanitizer
  * @since 0.0.1
  */
 class Sanitize_Timeline_Meta {
@@ -27,7 +27,7 @@ class Sanitize_Timeline_Meta {
    */
   public function sanitize_inputs( $data, $uploads ) {
 
-    include_once STYLE_TEMPLATES_DIR . 'admin/metabox/ajax/sanitizers/class-sanitize-files.php';
+    include_once STYLE_BLOCKS_DIR . 'admin/metabox/ajax/sanitizers/class-sanitize-files.php';
     $sanitize_files = new Sanitize_Files();
 
     $unsanitary = json_decode( stripslashes( $data ), true );

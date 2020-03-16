@@ -16,7 +16,7 @@ const MetaBox = () => {
       formValues: {}
     },
     showModal: false,
-    templates: [],
+    blocks: [],
     updating: []
   };
 
@@ -28,9 +28,7 @@ const MetaBox = () => {
   };
 
   useEffect(() => {
-    const list = window?.gpalabTemplateAdmin?.associated
-      ? window.gpalabTemplateAdmin.associated
-      : [];
+    const list = window?.gpalabBlockAdmin?.associated ? window.gpalabBlockAdmin.associated : [];
 
     dispatch({ type: 'init', payload: list });
   }, []);
@@ -38,16 +36,16 @@ const MetaBox = () => {
   return (
     <div styleName="dropdown-container">
       <AdminContext.Provider value={store}>
-        <label htmlFor="gpalab-templates-dropdown">
-          <strong>Add Template:</strong>
+        <label htmlFor="gpalab-blocks-dropdown">
+          <strong>Add Block:</strong>
           <select
-            id="gpalab-templates-dropdown"
+            id="gpalab-blocks-dropdown"
             styleName="dropdown"
             value={formType}
             onBlur={e => setFormType(e.target.value)}
             onChange={e => setFormType(e.target.value)}
           >
-            <option value="">- Select Template Type -</option>
+            <option value="">- Select Block Type -</option>
             <option value="article-feed">Article Feed</option>
             <option value="hero">Hero Block</option>
             <option value="parallax">Parallax Block</option>
@@ -70,9 +68,9 @@ const MetaBox = () => {
             })
           }
         >
-          Configure Template
+          Configure Block
         </button>
-        {state?.templates && state.templates.length > 0 && <AssociatedList />}
+        {state?.blocks && state.blocks.length > 0 && <AssociatedList />}
         <Modal />
       </AdminContext.Provider>
     </div>

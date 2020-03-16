@@ -1,6 +1,6 @@
 // Accept background value and check if it should be a repeated background image or a color value
 export const backgroundStyle = value => {
-  const { assets } = window.gpalabTemplateFront;
+  const { assets } = window.gpalabBlockFront;
 
   let type;
 

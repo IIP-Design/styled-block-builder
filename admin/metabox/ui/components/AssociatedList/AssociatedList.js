@@ -7,7 +7,7 @@ import './AssociatedList.module.scss';
 
 const AssociatedList = () => {
   const { dispatch, state } = useContext(AdminContext);
-  const { templates, updating } = state;
+  const { blocks, updating } = state;
 
   const deleteItem = async id => {
     dispatch({ type: 'updating-add', payload: id });
@@ -22,9 +22,9 @@ const AssociatedList = () => {
 
   return (
     <Fragment>
-      <strong styleName="header">Existing Templates for This Post:</strong>
+      <strong styleName="header">Existing Blocks for This Post:</strong>
       <div styleName="list">
-        {templates.map(item => (
+        {blocks.map(item => (
           <div
             key={item.id}
             data-id={item.id}
@@ -32,7 +32,7 @@ const AssociatedList = () => {
           >
             {item.title || item.id}
             <button
-              aria-label="edit template"
+              aria-label="edit block"
               disabled={isUpdating(item.id)}
               styleName="button"
               type="button"
@@ -50,7 +50,7 @@ const AssociatedList = () => {
               <span className="dashicons dashicons-edit" />
             </button>
             <button
-              aria-label="delete template"
+              aria-label="delete block"
               disabled={isUpdating(item.id)}
               styleName={isUpdating(item.id) ? 'button disabled' : 'button'}
               type="button"

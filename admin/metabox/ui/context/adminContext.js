@@ -11,8 +11,8 @@ import {
   groupHandleInputNested,
   groupRemoveItem,
   groupRemoveItemNested,
-  templateDelete,
-  templateSave,
+  blockDelete,
+  blockSave,
   updatingAddTo,
   updatingRemoveFrom
 } from 'metabox/utils/dispatch-helpers';
@@ -26,12 +26,12 @@ export const adminReducer = (state, action) => {
     case 'init':
       return {
         ...state,
-        templates: payload
+        blocks: payload
       };
     case 'delete':
       return {
         ...state,
-        templates: templateDelete(state, payload)
+        blocks: blockDelete(state, payload)
       };
     case 'save':
       return {
@@ -41,7 +41,7 @@ export const adminReducer = (state, action) => {
           formId: payload.id,
           formValues: payload.post_meta
         },
-        templates: templateSave(state, payload)
+        blocks: blockSave(state, payload)
       };
     case 'file-add':
       return {

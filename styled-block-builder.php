@@ -1,15 +1,15 @@
 <?php
 /**
- * Plugin Name: Style Templates
- * Plugin URI: https://github.com/IIP-Design/style-templates
+ * Plugin Name: Styled Block Builder
+ * Plugin URI: https://github.com/IIP-Design/styled-block-builder
  * Description: Customizable animated blocks for WordPress sites
  * Version: v0.0.1
  * Author: Marek Rewers, U.S. Department of State, Global Public Affairs <designdevops@america.gov>
- * Text Domain: gpalab-templates
+ * Text Domain: gpalab-blocks
  * License: GNU General Public License v2.0
  * License URI: https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html
  *
- * @package Style_Templates
+ * @package Style_Blocks
  * @author Marek Rewers, U.S. Department of State, Global Public Affairs
  */
 
@@ -19,30 +19,30 @@ if ( ! defined( 'WPINC' ) ) {
 }
 
 // Define constants.
-define( 'STYLE_TEMPLATES_DIR', plugin_dir_path( dirname( __FILE__ ) ) . 'style-templates/' );
-define( 'STYLE_TEMPLATES_DIST', plugin_dir_url( dirname( __FILE__ ) ) . 'style-templates/dist/' );
-define( 'STYLE_TEMPLATES_URL', plugin_dir_url( dirname( __FILE__ ) ) . 'style-templates/' );
+define( 'STYLE_BLOCKS_DIR', plugin_dir_path( dirname( __FILE__ ) ) . 'styled-block-builder/' );
+define( 'STYLE_BLOCKS_DIST', plugin_dir_url( dirname( __FILE__ ) ) . 'styled-block-builder/dist/' );
+define( 'STYLE_BLOCKS_URL', plugin_dir_url( dirname( __FILE__ ) ) . 'styled-block-builder/' );
 
 /**
  * Run functions needed at startup when plugin is installed.
  */
-function gpalab_style_templates_activate() {
+function gpalab_style_blocks_activate() {
   require_once plugin_dir_path( __FILE__ ) . 'includes/class-activator.php';
-  Style_Templates\Activator::activate();
+  Style_Blocks\Activator::activate();
 }
-register_activation_hook( __FILE__, 'gpalab_style_templates_activate' );
+register_activation_hook( __FILE__, 'gpalab_style_blocks_activate' );
 
 /**
  * Clean up site when the plugin is deactivated.
  */
-function gpalab_style_templates_deactivate() {
+function gpalab_style_blocks_deactivate() {
   require_once plugin_dir_path( __FILE__ ) . 'includes/class-deactivator.php';
-  Style_Templates\Deactivator::deactivate();
+  Style_Blocks\Deactivator::deactivate();
 }
-register_deactivation_hook( __FILE__, 'gpalab_style_templates_deactivate' );
+register_deactivation_hook( __FILE__, 'gpalab_style_blocks_deactivate' );
 
-// Imports Style_Templates class.
-require plugin_dir_path( __FILE__ ) . 'includes/class-style-templates.php';
+// Imports Style_Blocks class.
+require plugin_dir_path( __FILE__ ) . 'includes/class-style-blocks.php';
 
 /**
  * Begin execution of the plugin.
@@ -51,9 +51,9 @@ require plugin_dir_path( __FILE__ ) . 'includes/class-style-templates.php';
  * then kicking off the plugin from this point in the file does
  * not affect the page life cycle.
  */
-function run_style_templates() {
-  $plugin = new Style_Templates();
+function run_style_blocks() {
+  $plugin = new Style_Blocks();
   $plugin->run();
 }
 
-run_style_templates();
+run_style_blocks();

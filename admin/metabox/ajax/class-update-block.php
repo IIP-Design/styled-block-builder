@@ -1,42 +1,42 @@
 <?php
 /**
- * Registers the Update_Template class.
+ * Registers the Update_Block class.
  *
- * @package Style_Templates\Update_Template
+ * @package Style_Blocks\Update_Block
  * @since 0.0.1
  */
 
-namespace Style_Templates;
+namespace Style_Blocks;
 
 /**
- * Handles template form submissions.
+ * Handles block form submissions.
  *
- * Accepts AJAX request from the style templates metabox, validates and sanitize form inputs,
+ * Accepts AJAX request from the styled blocks metabox, validates and sanitize form inputs,
  * and executes the appropriate action (be it post creation, deletion, or update).
  *
- * @package Style_Templates\Update_Template
+ * @package Style_Blocks\Update_Block
  * @since 0.0.1
  */
-class Update_Template {
+class Update_Block {
 
   /**
-   * Create/update a template post.
+   * Create/update a block post.
    */
-  public function handle_template_update() {
+  public function handle_block_update() {
     // Load in possible HTTP responses.
-    include_once STYLE_TEMPLATES_DIR . 'admin/metabox/ajax/class-responses.php';
+    include_once STYLE_BLOCKS_DIR . 'admin/metabox/ajax/class-responses.php';
     $send_response = new Responses();
 
     // Load in sanitizer.
-    include_once STYLE_TEMPLATES_DIR . 'admin/metabox/ajax/class-sanitizer.php';
+    include_once STYLE_BLOCKS_DIR . 'admin/metabox/ajax/class-sanitizer.php';
     $sanitizer = new Sanitizer();
 
     // Load in validator.
-    include_once STYLE_TEMPLATES_DIR . 'admin/metabox/ajax/class-validator.php';
+    include_once STYLE_BLOCKS_DIR . 'admin/metabox/ajax/class-validator.php';
     $validator = new Validator();
 
     // Load in uploader.
-    include_once STYLE_TEMPLATES_DIR . 'admin/metabox/ajax/class-uploader.php';
+    include_once STYLE_BLOCKS_DIR . 'admin/metabox/ajax/class-uploader.php';
     $uploader = new Uploader();
 
     // The following rules are handled by the below valitation and sanitization functions and hence can be safely ignored.
@@ -79,15 +79,15 @@ class Update_Template {
     $data['post_type']  = $form_type;
 
     // Run function to pass data to post.
-    $post_id = $this->insert_template_data( $data );
+    $post_id = $this->insert_block_data( $data );
 
     // Update post data object with post id.
     if ( '0' === $passed_id ) {
       $data['id'] = $post_id;
     }
 
-    // Add the template id to its parent's post metadata.
-    include_once STYLE_TEMPLATES_DIR . 'admin/metabox/ajax/class-update-parent-post.php';
+    // Add the block id to its parent's post metadata.
+    include_once STYLE_BLOCKS_DIR . 'admin/metabox/ajax/class-update-parent-post.php';
     $update_parent = new Update_Parent_Post();
 
     $update_parent->set_parent_post_meta( $parent_id, $post_id );
@@ -98,15 +98,15 @@ class Update_Template {
   }
 
   /**
-   * Delete a template post.
+   * Delete a block post.
    */
-  public function handle_template_deletion() {
+  public function handle_block_deletion() {
     // Load in possible HTTP responses.
-    include_once STYLE_TEMPLATES_DIR . 'admin/metabox/ajax/class-responses.php';
+    include_once STYLE_BLOCKS_DIR . 'admin/metabox/ajax/class-responses.php';
     $send_response = new Responses();
 
     // Load in validator and validate inputs.
-    include_once STYLE_TEMPLATES_DIR . 'admin/metabox/ajax/class-validator.php';
+    include_once STYLE_BLOCKS_DIR . 'admin/metabox/ajax/class-validator.php';
     $validator = new Validator();
 
     // The following rules are handled by the valitation and sanitization functions and hence can be safely ignored.
@@ -126,8 +126,8 @@ class Update_Template {
 
     // phpcs:enable
 
-    // Remove the template id from it's parent's post metadata.
-    include_once STYLE_TEMPLATES_DIR . 'admin/metabox/ajax/class-update-parent-post.php';
+    // Remove the block id from it's parent's post metadata.
+    include_once STYLE_BLOCKS_DIR . 'admin/metabox/ajax/class-update-parent-post.php';
     $update_parent = new Update_Parent_Post();
 
     $update_parent->remove_from_parent_post_meta( $parent_id, $post_id );
@@ -143,7 +143,7 @@ class Update_Template {
    *
    * @param array $data     Post data to be inserted upon post creation/updating.
    */
-  private function insert_template_data( $data ) {
+  private function insert_block_data( $data ) {
     $user_id = get_current_user_id();
 
     $post_data = array(
@@ -157,7 +157,7 @@ class Update_Template {
       'post_type'             => 'gpalab-' . $data['post_type'],
       'comment_status'        => 'closed',
       'post_parent'           => 0,
-      'meta_input'            => array( '_gpalab_template_meta' => $data['post_meta'] ),
+      'meta_input'            => array( '_gpalab_block_meta' => $data['post_meta'] ),
     );
 
     /**

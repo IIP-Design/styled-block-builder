@@ -1,12 +1,12 @@
 remote_theme: IIP-Design/lab-notes
 
-title: Style Templates Plugin
+title: Styled Block Builder Plugin
 author: Bureau of Global Public Affairs (GPA) Digital Lab Team
 author_homepage: https://github.com/IIP-Design
-repository: IIP-Design/Style-Templates
+repository: IIP-Design/styled-block-builder
 description: WordPress plugin to add animated blocks to posts and pages.
-favicon: /Style-Templates/assets/img/favicon.ico
-logo: /Style-Templates/assets/img/dos_seal.svg
+favicon: /styled-block-builder/assets/img/favicon.ico
+logo: /styled-block-builder/assets/img/dos_seal.svg
 show_downloads: true
 show_nav: true
 

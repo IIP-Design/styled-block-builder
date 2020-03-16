@@ -2,16 +2,16 @@
 /**
  * Registers the Frontend class.
  *
- * @package Style_Templates\Frontend
+ * @package Style_Blocks\Frontend
  * @since 0.0.1
  */
 
-namespace Style_Templates;
+namespace Style_Blocks;
 
 /**
- * Add style templates frontend scripts and styles.
+ * Add styled blocks frontend scripts and styles.
  *
- * @package Style_Templates\Admin
+ * @package Style_Blocks\Frontend
  * @since 0.0.1
  */
 class Frontend {
@@ -30,22 +30,22 @@ class Frontend {
   /**
    * Register the scripts for each block type.
    */
-  public function register_template_scripts_styles() {
+  public function register_blocks_scripts_styles() {
 
     /** Check whether in dev mode and if so load dev builds. */
-    $dev_mode = get_option( 'gpalab-style-template-dev-mode' );
-    $scripts  = '1' === $dev_mode ? 'dev-template-frontend.js' : 'gpalab-template-frontend.js';
-    $styles   = '1' === $dev_mode ? 'dev-template-frontend.css' : 'gpalab-template-frontend.css';
+    $dev_mode = get_option( 'gpalab-blocks-dev-mode' );
+    $scripts  = '1' === $dev_mode ? 'dev-block-frontend.js' : 'gpalab-block-frontend.js';
+    $styles   = '1' === $dev_mode ? 'dev-block-frontend.css' : 'gpalab-block-frontend.css';
 
-    wp_register_script( 'gpalab-template-frontend-js', STYLE_TEMPLATES_DIST . $scripts, array(), $this->version, true );
+    wp_register_script( 'gpalab-blocks-frontend-js', STYLE_BLOCKS_DIST . $scripts, array(), $this->version, true );
 
-    wp_register_style( 'gpalab-template-frontend-css', STYLE_TEMPLATES_DIST . $styles, array(), $this->version );
+    wp_register_style( 'gpalab-blocks-frontend-css', STYLE_BLOCKS_DIST . $styles, array(), $this->version );
 
     wp_localize_script(
-      'gpalab-template-frontend-js',
-      'gpalabTemplateFront',
+      'gpalab-blocks-frontend-js',
+      'gpalabBlockFront',
       array(
-        'assets' => STYLE_TEMPLATES_URL . 'assets/',
+        'assets' => STYLE_BLOCKS_URL . 'assets/',
       )
     );
   }

@@ -1,8 +1,12 @@
 {
-  "name": "gcx-templates-admin",
+  "name": "gpalab-styled-block-builder",
   "version": "v0.0.1",
   "private": true,
   "license": "GPL-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/IIP-Design/styled-block-builder"
+  },
   "scripts": {
     "analyze": "npm run build && webpack-bundle-analyzer dist/bundleStats.json dist",
     "dev": "webpack --watch --config config/webpack.config.js --mode development",
@@ -48,7 +52,7 @@
     "react-axe": "^3.3.0",
     "sass-loader": "^8.0.0",
     "webpack": "^4.41.2",
-    "webpack-bundle-analyzer": "^3.6.0",
+    "webpack-bundle-analyzer": "^3.6.1",
     "webpack-cli": "^3.3.10"
   },
   "dependencies": {

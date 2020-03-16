@@ -2,11 +2,11 @@
 /**
  * Registers the Loader class.
  *
- * @package Style_Templates\Loader
+ * @package Style_Blocks\Loader
  * @since 0.0.1
  */
 
-namespace Style_Templates;
+namespace Style_Blocks;
 
 /**
  * Register all actions and filters for the plugin.
@@ -15,7 +15,7 @@ namespace Style_Templates;
  * the plugin, and register them with the WordPress API. Call the
  * run function to execute the list of actions and filters.
  *
- * @package Style_Templates/Loader
+ * @package Style_Blocks/Loader
  * @since 0.0.1
  */
 class Loader {

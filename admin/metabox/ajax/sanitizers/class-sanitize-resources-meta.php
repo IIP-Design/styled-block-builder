@@ -2,18 +2,18 @@
 /**
  * Registers the Sanitize_Resources_Meta class.
  *
- * @package Style_Templates\Sanitizer
+ * @package Style_Blocks\Sanitizer
  * @since 0.0.1
  */
 
-namespace Style_Templates;
+namespace Style_Blocks;
 
 /**
  * Sanitizes the values sent over in the AJAX request.
  *
  * Checks for and sanitizes the fields expected by the resources form.
  *
- * @package Style_Templates\Sanitizer
+ * @package Style_Blocks\Sanitizer
  * @since 0.0.1
  */
 class Sanitize_Resources_Meta {

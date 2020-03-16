@@ -11,4 +11,4 @@ if (process.env.NODE_ENV !== 'production') {
   axe(React, ReactDOM, 1000);
 }
 
-ReactDOM.render(<Metabox />, document.getElementById('gpalab-add-template-metabox'));
+ReactDOM.render(<Metabox />, document.getElementById('gpalab-blocks-metabox'));

@@ -2,18 +2,18 @@
 /**
  * Registers the Responses class.
  *
- * @package Style_Templates\Responses
+ * @package Style_Blocks\Responses
  * @since 0.0.1
  */
 
-namespace Style_Templates;
+namespace Style_Blocks;
 
 /**
  * HTTP error and success responses.
  *
  * Sends out the appropriate success or error message.
  *
- * @package Style_Templates\Responses
+ * @package Style_Blocks\Responses
  * @since 0.0.1
  */
 class Responses {
@@ -27,55 +27,55 @@ class Responses {
     $status = null;
 
     // Status codes.
-    $bad_request  = __( '400: Bad Request', 'gpalab-templates' );
-    $unauthorized = __( '401: Unauthorized', 'gpalab-templates' );
-    $forbidden    = __( '403: Forbidden', 'gpalab-templates' );
+    $bad_request  = __( '400: Bad Request', 'gpalab-blocks' );
+    $unauthorized = __( '401: Unauthorized', 'gpalab-blocks' );
+    $forbidden    = __( '403: Forbidden', 'gpalab-blocks' );
 
     if ( 'insufficient_permissions' === $type ) {
-      $data['message'] = __( 'Authorization failed - user does not have sufficient permissions', 'gpalab-templates' );
+      $data['message'] = __( 'Authorization failed - user does not have sufficient permissions', 'gpalab-blocks' );
       $data['status']  = $forbidden;
       $status          = 403;
     }
 
     if ( 'invalid_parent_id' === $type ) {
-      $data['message'] = __( 'The post associated with this template does not exist', 'gpalab-templates' );
+      $data['message'] = __( 'The post associated with this block does not exist', 'gpalab-blocks' );
       $data['status']  = $bad_request;
       $status          = 400;
     }
 
     if ( 'invalid_nonce' === $type ) {
       $data['header']  = 'WWW-Authenticate: Bearer';
-      $data['message'] = __( 'Authorization failed - invalid nonce provided', 'gpalab-templates' );
+      $data['message'] = __( 'Authorization failed - invalid nonce provided', 'gpalab-blocks' );
       $data['status']  = $unauthorized;
       $status          = 401;
     }
 
     if ( 'invalid_post_id' === $type ) {
-      $data['message'] = __( 'Invalid post id provided', 'gpalab-templates' );
+      $data['message'] = __( 'Invalid post id provided', 'gpalab-blocks' );
       $data['status']  = $bad_request;
       $status          = 400;
     }
 
     if ( 'invalid_form_type' === $type ) {
-      $data['message'] = __( 'Invalid form type provided', 'gpalab-templates' );
+      $data['message'] = __( 'Invalid form type provided', 'gpalab-blocks' );
       $data['status']  = $bad_request;
       $status          = 400;
     }
 
     if ( 'no_form' === $type ) {
-      $data['message'] = __( 'Required field "form type" not provided', 'gpalab-templates' );
+      $data['message'] = __( 'Required field "form type" not provided', 'gpalab-blocks' );
       $data['status']  = $bad_request;
       $status          = 400;
     }
 
     if ( 'no_parent_id' === $type ) {
-      $data['message'] = __( 'Required field "parent id" not provided', 'gpalab-templates' );
+      $data['message'] = __( 'Required field "parent id" not provided', 'gpalab-blocks' );
       $data['status']  = $bad_request;
       $status          = 400;
     }
 
     if ( 'no_post_id' === $type ) {
-      $data['message'] = __( 'Required field "post id" not provided', 'gpalab-templates' );
+      $data['message'] = __( 'Required field "post id" not provided', 'gpalab-blocks' );
       $data['status']  = $bad_request;
       $status          = 400;
     }
@@ -95,13 +95,13 @@ class Responses {
     $status = null;
 
     // Messages.
-    $added   = __( 'Added a template with the ID: ', 'gpalab-templates' );
-    $deleted = __( 'Deleted the template with the ID: ', 'gpalab-templates' );
-    $updated = __( 'Updated the template with the ID: ', 'gpalab-templates' );
+    $added   = __( 'Added a block with the ID: ', 'gpalab-blocks' );
+    $deleted = __( 'Deleted the block with the ID: ', 'gpalab-blocks' );
+    $updated = __( 'Updated the block with the ID: ', 'gpalab-blocks' );
 
     // Status codes.
-    $okay    = __( '200: Okay', 'gpalab-templates' );
-    $created = __( '201: Created', 'gpalab-templates' );
+    $okay    = __( '200: Okay', 'gpalab-blocks' );
+    $created = __( '201: Created', 'gpalab-blocks' );
 
     if ( 'added_post' === $type ) {
       $data['message'] = $added . $post_data['id'];

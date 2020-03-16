@@ -2,11 +2,11 @@
 /**
  * Registers the Validator class.
  *
- * @package Style_Templates\Validator
+ * @package Style_Blocks\Validator
  * @since 0.0.1
  */
 
-namespace Style_Templates;
+namespace Style_Blocks;
 
 /**
  * Validates the values sent over in the AJAX request.
@@ -14,7 +14,7 @@ namespace Style_Templates;
  * A series of functions that check if a given value is set and if so,
  * that the value is valid.
  *
- * @package Style_Templates\Validator
+ * @package Style_Blocks\Validator
  * @since 0.0.1
  */
 class Validator {
@@ -26,7 +26,7 @@ class Validator {
    */
   public function validate_form_type( $type ) {
     // Load in possible HTTP responses.
-    include_once STYLE_TEMPLATES_DIR . 'admin/metabox/ajax/class-responses.php';
+    include_once STYLE_BLOCKS_DIR . 'admin/metabox/ajax/class-responses.php';
     $send_response = new Responses();
 
     // Nonce verification occurs in separate function prior to this one running.
@@ -62,7 +62,7 @@ class Validator {
    */
   public function validate_post_id( $id ) {
     // Load in possible HTTP responses.
-    include_once STYLE_TEMPLATES_DIR . 'admin/metabox/ajax/class-responses.php';
+    include_once STYLE_BLOCKS_DIR . 'admin/metabox/ajax/class-responses.php';
     $send_response = new Responses();
 
     if ( ! isset( $id ) ) {
@@ -88,7 +88,7 @@ class Validator {
    */
   public function validate_parent_id( $id ) {
     // Load in possible HTTP responses.
-    include_once STYLE_TEMPLATES_DIR . 'admin/metabox/ajax/class-responses.php';
+    include_once STYLE_BLOCKS_DIR . 'admin/metabox/ajax/class-responses.php';
     $send_response = new Responses();
 
     if ( ! isset( $id ) ) {
@@ -105,24 +105,24 @@ class Validator {
   }
 
   /**
-   * Check for a valid nonce coming from the AJAX request (nonce set in Style_Templates/Admin)
+   * Check for a valid nonce coming from the AJAX request (nonce set in Style_Blocks/Admin)
    *
    * @param int $nonce     The nonce provided with the AJAX request.
    */
   public function validate_nonce( $nonce ) {
     // Load in possible HTTP responses.
-    include_once STYLE_TEMPLATES_DIR . 'admin/metabox/ajax/class-responses.php';
+    include_once STYLE_BLOCKS_DIR . 'admin/metabox/ajax/class-responses.php';
     $send_response = new Responses();
 
     if ( ! isset( $nonce ) ) {
       $send_response->send_custom_error( 'invalid_nonce' );
     }
 
-    if ( wp_verify_nonce( $nonce, 'gpalab-template-nonce' ) === false ) {
+    if ( wp_verify_nonce( $nonce, 'gpalab-block-nonce' ) === false ) {
       $send_response->send_custom_error( 'invalid_nonce' );
     }
 
-    if ( check_ajax_referer( 'gpalab-template-nonce', 'security', false ) === false ) {
+    if ( check_ajax_referer( 'gpalab-block-nonce', 'security', false ) === false ) {
       $send_response->send_custom_error( 'invalid_nonce' );
     }
 

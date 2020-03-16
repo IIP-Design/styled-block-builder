@@ -9,14 +9,14 @@ import { updatePost } from 'metabox/utils/update-post';
 
 import './Modal.module.scss';
 
-const modalRoot = document.getElementById('gpalab-add-template-modal');
+const modalRoot = document.getElementById('gpalab-blocks-modal');
 
 const ModalContent = () => {
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState(false);
   const [errorData, setErrorData] = useState(null);
 
-  // Get array of associated templates
+  // Get array of associated blocks
   const { dispatch, state } = useContext(AdminContext);
 
   if (state && state.showModal && state.showModal === true) {
@@ -47,7 +47,7 @@ const ModalContent = () => {
 
     // Generate shortcode for copying.
     const title = formData?.formValues?.title ? `title='${formData.formValues.title}'` : '';
-    const shortcode = `[gpalab_template ${title} id='${formData.formId}' type='${formStr}']`;
+    const shortcode = `[gpalab_block ${title} id='${formData.formId}' type='${formStr}']`;
 
     return (
       <div styleName="modal">

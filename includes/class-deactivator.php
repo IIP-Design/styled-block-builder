@@ -2,16 +2,16 @@
 /**
  * Registers the Deactivator class.
  *
- * @package Style_Templates/Deactivator
+ * @package Style_Blocks/Deactivator
  * @since 0.0.1
  */
 
-namespace Style_Templates;
+namespace Style_Blocks;
 
 /**
  * Register all hooks to be run when the plugin is deactivated.
  *
- * @package Style_Templates/Deactivator
+ * @package Style_Blocks/Deactivator
  * @since 0.0.1
  */
 class Deactivator {
@@ -20,6 +20,6 @@ class Deactivator {
    * Delete the plugin's options from the options table in the database.
    */
   public function deactivate() {
-    delete_option( 'gpalab-style-template-dev-mode' );
+    delete_option( 'gpalab-blocks-dev-mode' );
   }
 }

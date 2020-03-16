@@ -10,8 +10,8 @@ module.exports = (_, argv) => {
 
   return {
     entry: {
-      'template-frontend': `${paths.blocksFrontend}/blocks`,
-      'template-admin': paths.metaboxUI
+      'block-frontend': `${paths.blocksFrontend}/blocks`,
+      'block-admin': paths.metaboxUI
     },
     module: {
       rules: [

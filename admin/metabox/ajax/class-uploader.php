@@ -2,19 +2,19 @@
 /**
  * Registers the Uploader class.
  *
- * @package Style_Templates\Uploader
+ * @package Style_Blocks\Uploader
  * @since 0.0.1
  */
 
-namespace Style_Templates;
+namespace Style_Blocks;
 
 /**
- * Handles files submitted along with the style template form.
+ * Handles files submitted along with the styled block form.
  *
- * Accepts files sent by the AJAX request from the style templates metabox,
+ * Accepts files sent by the AJAX request from the styled blocks metabox,
  * confirms that these files are expected and if so, adds them to the WordPress media library.
  *
- * @package Style_Templates\Update_Template
+ * @package Style_Blocks\Update_Block
  * @since 0.0.1
  */
 class Uploader {
@@ -159,7 +159,7 @@ class Uploader {
 
     foreach ( $files as $file ) {
       // Ensure that file is coming from a valid AJAX request.
-      $overrides = array( 'action' => 'gpalab_update_template' );
+      $overrides = array( 'action' => 'gpalab_update_block' );
 
       // Upload file.
       $new_file = wp_handle_upload( $file['file'], $overrides );

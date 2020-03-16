@@ -20,12 +20,12 @@ For example they should be chosen over we use the functions provided by WordPres
 
 This set of functions grants users access to the underlaying operating system shell. There is no valid need to use them in this plugin and they are avoided entirely.
 
-```
+```php
 exec
 passthru
 system
 shell_exec
-\`\` (backticks)
+`` (backticks)
 popen
 proc_open
 pcntl_exec
@@ -37,7 +37,7 @@ Similarly, there is little need for filesystem functions and they are avoided:
 
 <summary> See Full List of File System Functions to be Avoided</summary>
 
-```
+```php
 fopen
 tmpfile
 bzopen
@@ -131,7 +131,7 @@ get_meta_tags
 
 The `eval` function is dangerous as it allows for the arbitrary execution of code and is therefore never used. Similarly, the following operations which are effectively equivalent to `eval` are never used:
 
-```
+```php
 assert()
 preg_replace with a /e modifier
 create_function()

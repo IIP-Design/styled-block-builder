@@ -2,15 +2,15 @@ import { getFormData } from './helpers';
 
 export const updatePost = async (data, action, onComplete, onError) => {
   // Get values provided to the client by the server
-  const fromPHP = window.gpalabTemplateAdmin ? window.gpalabTemplateAdmin : {};
+  const fromPHP = window.gpalabBlockAdmin ? window.gpalabBlockAdmin : {};
 
   let actionHandle;
   switch (action) {
     case 'save':
-      actionHandle = 'gpalab_update_template';
+      actionHandle = 'gpalab_update_block';
       break;
     case 'delete':
-      actionHandle = 'gpalab_delete_template';
+      actionHandle = 'gpalab_delete_block';
       break;
     default:
   }
@@ -51,7 +51,7 @@ export const updatePost = async (data, action, onComplete, onError) => {
   }
   formData.append('action', actionHandle);
   formData.append('parent', fromPHP.parentPost);
-  formData.append('security', fromPHP.templateNonce);
+  formData.append('security', fromPHP.blockNonce);
 
   // AJAX call
   try {

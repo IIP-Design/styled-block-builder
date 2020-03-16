@@ -2,27 +2,27 @@
 /**
  * Registers the Shortcode class.
  *
- * @package Style_Templates\Shortcode
+ * @package Style_Blocks\Shortcode
  * @since 0.0.1
  */
 
-namespace Style_Templates;
+namespace Style_Blocks;
 
 /**
- * Add style templates shortcode.
+ * Add styled blocks shortcode.
  *
  * The Shortcode class adds a custom shortcode and registers the corresponding scripts and styles.
  *
- * @package Style_Templates\Shortcode
+ * @package Style_Blocks\Shortcode
  * @since 0.0.1
  */
 class Shortcode {
 
   /**
-   * Adds a custom shortcode for the style templates.
+   * Adds a custom shortcode for the styled block.
    */
-  public function add_templates_shortcode() {
-    add_shortcode( 'gpalab_template', array( $this, 'template_shortcode' ) );
+  public function add_blocks_shortcode() {
+    add_shortcode( 'gpalab_block', array( $this, 'block_shortcode' ) );
   }
 
   /**
@@ -31,7 +31,7 @@ class Shortcode {
    * @param array $args     The arguments passed into the shortcode.
    * @return string         Output shortcode.
    */
-  public function template_shortcode( $args ) {
+  public function block_shortcode( $args ) {
     // Map the provided shortcode attributes.
     $attr = shortcode_atts(
       array(
@@ -45,15 +45,15 @@ class Shortcode {
     $type = $attr['type'];
 
     // Enqueue the relevant scripts & styles when shortcode present.
-    wp_enqueue_script( 'gpalab-template-frontend-js' );
-    wp_enqueue_style( 'gpalab-template-frontend-css' );
+    wp_enqueue_script( 'gpalab-blocks-frontend-js' );
+    wp_enqueue_style( 'gpalab-blocks-frontend-css' );
 
     // Localize the enqueued script with shortcode data.
     wp_localize_script(
-      'gpalab-template-frontend-js',
+      'gpalab-blocks-frontend-js',
       'gpalab' . str_replace( '-', '', ucwords( $type, '-' ) ) . $id,
       array(
-        'meta' => get_post_meta( $id, '_gpalab_template_meta', true ),
+        'meta' => get_post_meta( $id, '_gpalab_block_meta', true ),
       )
     );
 
