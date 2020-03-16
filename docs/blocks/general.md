@@ -49,7 +49,7 @@ Place the shortcodes within the visual content editor in the order that you want
 
 Additionally, blocks can be separated by other content within the visual editor. For example, you could place a Hero block that is followed by text and then insert a Stats block:
 
-```
+```plaintext
 [gpalab_block title='Testing Title' id='000000' type='hero']
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce in varius sem.
