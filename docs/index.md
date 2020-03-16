@@ -1,69 +1,57 @@
 ---
-title: Styled Block Builder Documentation
+title: Styled Block Builder Technical Documentation
 ---
 
-This plugin contains a `styled-block-builder.php`, which registers plugin and begins its execution. Additionally, there is an admin class (`admin/class-admin.php`) where all admin hooks are registered and the frontend class (`public/class-frontend.php`) where all public hooks are registered. The includes directory contains the main plugin class (`include/class-style-blocks.php`), which defines the core functionality of the plugin and the loader file (`include/class-loader.php`), which feeds the admin and public hooks in from their respective classes into the main class file.
+This plugin contains a `styled-block-builder.php` file, which registers the plugin and begins its execution. There is an admin directory (`admin`) where all functions relating to the admin portion of the plugin are registered and a public directory (`public`) where all functions relating to the plugin's frontend are registered. The `includes` directory contains the main plugin class (`include/class-style-blocks.php`) - which defines the core functionality of the plugin, the loader class (`include/class-loader.php`) - which feeds the admin and public hooks in from their respective classes into the main class file, and activator/deactivator hooks - which define the plugin's behavior upon installation/deactivation.
 
-## Plugin Structure
+### Development
+
+To install the plugin locally for development, clone this repository into the plugins directory of your WordPress site using the command `git clone git@github.com:IIP-Design/styled-block-builder.git`. Then in the WordPress admin panel go to the installed plugins and activate the Styled Block Builder plugin.
+
+To prevent the need for repeated re-compilation of the JavaScript and CSS, we have added a dev mode to the plugin. This mode loads development version of the scripts and styles, which can be regenerated on the fly as changes are saved. To activate dev mode, go to the `Styled Blocks` page under the `Settings` tab in your WordPress admin panel (note that you must have admin priviledges on your WordPress instance to see this option). Therein, toggle Dev Mode to `enabled`. With this done, you can enter into the plugin directory in your terminal (`cd styled-block-builder`) and run `npm run dev` to start a development server. This will watch for any changes to JavaScript and CSS files and recompile on save.
+
+Please note that ESLint and PHP Codesniffer will run on every commit to ensure that the plugin's code is conforming to the correct standards. If any code fails this linting, you will not be able to complete your commit. As such it is highly recommended that you integrate ESLint and PHP Codesniffer into your preferred text editor or frequently run the linting script `npm run lint`.
+
+To compile the JavaScript and CSS for production run the command `npm run build`, which will update the production files in the `dist` directory.
+
+### Plugin Structure
+
+Below is a listng of key plugin files and directories:
 
 ```bash
-├── admin
-│   ├── api
-│   │   └── class-api.php
-|   |
-│   ├── class-admin.php
-│   |
-│   ├── metabox
-│   │   ├── ajax
-│   │   │   ├── class-responses.php
-│   │   │   ├── class-sanitizer.php
-│   │   │   ├── class-update-block.php
-│   │   │   ├── class-update-parent-post.php
-│   │   │   ├── class-uploader.php
-│   │   │   ├── class-validator.php
-│   │   │   └── sanitizers
-|   |   |
-│   │   ├── class-metabox.php
-│   │   └── ui
-│   │       ├── components
-│   │       ├── context
-│   │       ├── index.js
-│   │       └── utils
-│   ├── settings
-│   │   └── class-settings.php
-│   └── shortcode
-│       └── class-shortcode.php
-├── assets
-├── config
-├── dist
-├── docs
-|
-├── includes
-│   ├── class-activator.php
-│   ├── class-deactivator.php
-│   ├── class-loader.php
-│   ├── class-style-blocks.php
-│   └── index.php
-|
-├── public
-│   ├── blocks
-│   │   ├── _shared
-│   │   ├── article-feed
-│   │   ├── blocks.js
-│   │   ├── hero
-│   │   ├── parallax
-│   │   ├── quote-box
-│   │   ├── resources
-│   │   ├── slides
-│   │   ├── stats
-│   │   ├── text
-│   │   └── timeline
-|   |
-│   └── class-frontend.php
-|
-├── styled-block-builder.php
-|
-└── styles
+root
+├── styled-block-builder.php # Entry point for the plugin.
+│
+├── admin # All files pertaining to the administrative portion of the plugin.
+│   │
+│   ├── class-admin.php # Registers and localizes admin scripts and styles.
+│   ├── metabox # All files pertaining to the plugin's custom metabox.
+│   │   ├── class-metabox.php # Registers and adds the custom metabox to the page/post admin interface.
+│   │   ├── ajax # Handles all AJAX operations including validation and sanitization of inputs.
+│   │   └── ui # Small React application that renders out the blocks input forms.
+│   ├── api # Adds block data to the API endpoint of the associated post.
+│   ├── settings # Adds a Styled Blocks page to the Settings tab in the administrative panel.
+│   └── shortcode # Registers and defines the [gpalab-block] shortcode.
+│
+├── includes # Registering and implements all classes.
+│   │
+│   ├── class-activator.php # Plugin activation hooks.
+│   ├── class-deactivator.php # Plugin deactivation hooks.
+│   ├── class-loader.php # Loader file, which imports and instantiates all needed classes.
+│   └── class-style-blocks.php # Registers the Style_Blocks class and instantiates all required hooks.
+│
+├── public # All files pertaining to the frontend portion of the plugin.
+│   │
+│   ├── class-frontend.php # Registers and localizes frontend scripts and styles.
+│   └── blocks # React component library containing a directory for every block type.
+│       ├── _shared # Elements shared across multiple block components.
+│       └── blocks.js # Entry point for frontend JavaScript bundle, imports all block-specific scripts and styles.
+│
+├── assets # Static assets used throughout the plugin.
+├── config # Plugin configuration files.
+├── dist # Compiled JavaScript and CSS bundles.
+├── docs # Plugin documentation.
+└── styles # Global CSS files.
 ```
 
 ## Blocks
@@ -72,4 +60,4 @@ This plugin provides content editors with the ability to create dynamic content 
 
 Blocks are created within the post admin panel and are inserted onto the page using a shortcode.
 
-For a general overview of the blocks used within this plugin, [navigate here](/Style-Templates/blocks/general).
+For a general overview of the blocks used within this plugin, [navigate here](/styled-block-builder/blocks/general).

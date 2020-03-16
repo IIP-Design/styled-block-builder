@@ -23,4 +23,4 @@ title: Resources
 
 To add the block to your page, follow the instructions for adding blocks to the page.
 
-[⬅︎ Back to Blocks Overview](/Style-Templates/blocks/general)
+[⬅︎ Back to Blocks Overview](/styled-block-builder/blocks/general)

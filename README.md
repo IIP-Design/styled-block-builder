@@ -1,16 +1,15 @@
-# Style Block Builder
+# Styled Block Builder
 
-This plugin contains a `style-templates.php`, which registers plugin and begins its execution. Additionally, there is an admin class (`admin/class-style-templates-admin.php`) where all admin hooks are registered and the frontend class (`public/class-style-templates-public.php`) where all public hooks are registered. The includes directory contains the main plugin class (`include/class-style-templates.php`), which defines the core functionality of the plugin and the loader file (`include/class-style-templates-loader.php`), which feeds the admin and public hooks in from their respective classes into the main class file.
+The Styled Block Builder is a WordPress plugin that allows users to create pre-styled blocks that can be added to posts using a shortcode. The currently available block options are:
 
-## Plugin Structure
+- Article Feed: Displays up to three articles from available sources.
+- Hero: Use for highlighting the title and purpose of the page.
+- Parallax: Fixed background with text.
+- Quote: Use for highlighting a specific quote.
+- Resources: Use for adding materials or splitting up subsections into different resource tabs.
+- Slides: Add up to 10 slides that display an image with text information.
+- Stats: Highlight up to three stats with a count up animation.
+- Text: Use as the primary text information block. Contains multiple media options.
+- Timeline: Add up to 5 events to an interactive timeline with large images.
 
-```bash
-├── my-plugin.php
-        ├── admin
-        │   └── class-my-plugin-admin.php
-        ├── includes
-        │   ├── class-my-plugin.php
-        │   └── class-my-plugin-loader.php
-        └── public
-            └── class-my-plugin-public.php
-```
+Full documentation can be found in the plugin's [docs site](https://iip-design.github.io/styled-block-builder).
