@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 Unreleased changes indicate forthcoming updates.
 
+- Switch from using in-repo Prettier config to shared GPA/LAb configuration.
+
 ## [v1.0.0](https://github.com/IIP-Design/styled-block-builder/releases/tag/v1.0.0) - 2020.03.16 (Initial Release)
 
 ### Added:

@@ -22,12 +22,14 @@
       "pre-commit": "npm run lint"
     }
   },
+  "prettier": "@gpa-lab/prettier-config",
   "devDependencies": {
     "@babel/core": "^7.7.4",
     "@babel/plugin-proposal-optional-chaining": "^7.7.4",
     "@babel/preset-env": "^7.7.4",
     "@babel/preset-react": "^7.7.4",
     "@gpa-lab/eslint-config": "^0.1.1",
+    "@gpa-lab/prettier-config": "^1.0.0",
     "babel-eslint": "^10.0.3",
     "babel-loader": "^8.0.6",
     "babel-plugin-module-resolver": "^4.0.0",
