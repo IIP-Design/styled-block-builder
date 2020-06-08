@@ -49,10 +49,10 @@ export const setText = background => {
   let text;
 
   if (background === '#ffffff' || background === 'wavy-bg.jpg') {
-    text = '#002d74';
+    text = '#0a314d';
   }
 
-  if (background === '#002d74' || background === 'wavy-navy.jpg') {
+  if (background === '#0a314d' || background === 'wavy-navy.jpg') {
     text = '#ffffff';
   }
 
