@@ -64,7 +64,6 @@ const Stats = ( { id } ) => {
                           className="stat-number"
                           data-stat={ stat.number }
                           id={ `stat-${index + 1}` }
-                          style={ { paddingRight: '0.4rem' } }
                         >
                           0
                         </span>
