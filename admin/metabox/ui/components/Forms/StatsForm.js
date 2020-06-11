@@ -46,6 +46,7 @@ const StatsForm = () => {
   const tabFields = [
     { label: 'Add stat title:', name: 'title', tabTitle: true, type: 'text' },
     { label: 'Add stat value:', name: 'number', type: 'text' },
+    { label: 'Add stat type:', name: 'type', type: 'text' },
   ];
 
   if ( formValues ) {

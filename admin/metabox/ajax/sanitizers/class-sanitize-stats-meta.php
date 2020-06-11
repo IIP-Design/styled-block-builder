@@ -58,6 +58,7 @@ class Sanitize_Stats_Meta {
         $sanitized_stat['id']     = sanitize_text_field( $stat['id'] );
         $sanitized_stat['number'] = sanitize_text_field( $stat['number'] );
         $sanitized_stat['title']  = sanitize_text_field( $stat['title'] );
+        $sanitized_stat['type']  = sanitize_text_field( $stat['type'] );
 
         array_push( $sanitized_stats, $sanitized_stat );
       }
