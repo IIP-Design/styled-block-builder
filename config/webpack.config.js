@@ -1,12 +1,12 @@
 const MiniCssExtractPlugin = require( 'mini-css-extract-plugin' );
 
 const babel = require( './babel' );
+const css = require( './css-modules' );
 const paths = require( './paths' );
 const plugins = require( './plugins' );
 
 module.exports = ( _, argv ) => {
-  const cssModuleNames
-    = argv.mode === 'development' ? '[name]-[local]' : 'gpalab-[local]-[hash:base64:5]';
+  const cssModuleNames = css.getCssModuleNames( argv.mode );
 
   return {
     entry: {
