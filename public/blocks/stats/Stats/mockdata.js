@@ -8,7 +8,7 @@ const mockData = {
   statThreeText: 'unemployment among youth 15-24',
   statThreeNumber: '28',
   title: 'The People of Iran',
-  background: 'https://policystatic.state.gov/uploads/2019/11/stats_people_bg_iran.jpg'
+  background: 'https://policystatic.state.gov/uploads/2019/11/stats_people_bg_iran.jpg',
 };
 
 export default mockData;

@@ -10,94 +10,96 @@ import { getBackgroundImageUrl } from 'blocks/_shared/utils/background-style';
 
 import './Slides.module.scss';
 
-const Slides = ({ id }) => {
+const Slides = ( { id } ) => {
   const { meta } = window[`gpalabSlides${id}`];
 
-  useEffect(() => {
-    gsap.registerPlugin('CSSRulePlugin');
+  useEffect( () => {
+    gsap.registerPlugin( 'CSSRulePlugin' );
 
-    ScrollMagicPluginGsap(ScrollMagic, TweenLite, TimelineLite);
+    ScrollMagicPluginGsap( ScrollMagic, TweenLite, TimelineLite );
 
     const controller = new ScrollMagic.Controller();
 
-    const slides = [...document.getElementsByClassName(`slide-${id}`)];
+    const slides = [...document.getElementsByClassName( `slide-${id}` )];
 
-    const first = slides.slice(0, 1)[0];
-    const remaining = slides.slice(1);
+    const first = slides.slice( 0, 1 )[0];
+    const remaining = slides.slice( 1 );
 
     const tl = new TimelineLite();
-    tl.add(first);
 
-    remaining.forEach(slide => {
-      tl.add(gsap.fromTo(slide, { xPercent: 100 }, { duration: 2, xPercent: 0, ease: 'linear' }));
-    });
+    tl.add( first );
 
-    new ScrollMagic.Scene({
+    remaining.forEach( slide => {
+      tl.add( gsap.fromTo( slide, { xPercent: 100 }, { duration: 2, xPercent: 0, ease: 'linear' } ) );
+    } );
+
+    new ScrollMagic.Scene( {
       triggerElement: `#pin-container-${id}`,
       triggerHook: 'onLeave',
-      duration: 2000
-    })
-      .setTween(tl)
-      .setPin(`#pin-container-${id}`)
-      .addTo(controller);
-  }, []);
+      duration: 2000,
+    } )
+      .setTween( tl )
+      .setPin( `#pin-container-${id}` )
+      .addTo( controller );
+  }, [id] );
 
   const sceneVals = {};
 
   window.onload = () => {
-    sceneVals.sceneStartPos =
-      document.getElementById('scene-container').getBoundingClientRect().top +
-      document.documentElement.scrollTop;
+    sceneVals.sceneStartPos
+      = document.getElementById( 'scene-container' ).getBoundingClientRect().top
+      + document.documentElement.scrollTop;
 
-    sceneVals.sceneEndPos =
-      document.getElementById('scene-container').getBoundingClientRect().bottom +
-      document.documentElement.scrollTop;
+    sceneVals.sceneEndPos
+      = document.getElementById( 'scene-container' ).getBoundingClientRect().bottom
+      + document.documentElement.scrollTop;
 
-    sceneVals.sceneHeight = document.getElementById('scene-container').offsetHeight;
+    sceneVals.sceneHeight = document.getElementById( 'scene-container' ).offsetHeight;
   };
 
   window.onscroll = () => {
     const currentPos = document.documentElement.scrollTop || document.body.scrollTop;
 
-    const scrolled =
-      ((currentPos - sceneVals.sceneStartPos) / (sceneVals.sceneHeight - window.innerHeight)) * 100;
+    // eslint-disable-next-line no-mixed-operators
+    const scrolled = ( currentPos - sceneVals.sceneStartPos ) / ( sceneVals.sceneHeight - window.innerHeight ) * 100;
 
-    if (currentPos > sceneVals.sceneStartPos && currentPos < sceneVals.sceneEndPos) {
-      document.getElementById('scrollBar').style.width = `${scrolled}%`;
+    if ( currentPos > sceneVals.sceneStartPos && currentPos < sceneVals.sceneEndPos ) {
+      document.getElementById( 'scrollBar' ).style.width = `${scrolled}%`;
     } else {
       return false;
     }
+
     return false;
   };
 
-  if (meta) {
+  if ( meta ) {
     const { title, slides, subTitleColor } = meta;
 
     return (
       <Normalizer fullWidth>
         <div id="scene-container" styleName="slide-container">
-          {title && <h2 styleName="slide-title">{title}</h2>}
-          <div id={`pin-container-${id}`} styleName="pin-container">
-            {slides.map(slide => (
+          { title && <h2 styleName="slide-title">{ title }</h2> }
+          <div id={ `pin-container-${id}` } styleName="pin-container">
+            { slides.map( slide => (
               <section
-                key={slide.id}
-                className={`slide-${id}`}
-                id={`slide-${slide.id}`}
-                style={{ backgroundImage: `url(${getBackgroundImageUrl(slide.files)})` }}
+                key={ slide.id }
+                className={ `slide-${id}` }
+                id={ `slide-${slide.id}` }
+                style={ { backgroundImage: `url(${getBackgroundImageUrl( slide.files )})` } }
                 styleName="slide"
               >
                 <div styleName="slide-content">
-                  <h4 style={{ backgroundColor: subTitleColor }} styleName="slide-subtitle">
-                    {slide.subtitle}
+                  <h4 style={ { backgroundColor: subTitleColor } } styleName="slide-subtitle">
+                    { slide.subtitle }
                   </h4>
-                  <div styleName="slide-text">{slide.text}</div>
+                  <div styleName="slide-text">{ slide.text }</div>
                 </div>
               </section>
-            ))}
+            ) ) }
             <div styleName="progress-container">
               <div
                 id="scrollBar"
-                style={{ backgroundColor: subTitleColor }}
+                style={ { backgroundColor: subTitleColor } }
                 styleName="progress-bar"
               />
             </div>
@@ -106,11 +108,12 @@ const Slides = ({ id }) => {
       </Normalizer>
     );
   }
+
   return null;
 };
 
 Slides.propTypes = {
-  id: propTypes.string
+  id: propTypes.string,
 };
 
 export default Slides;

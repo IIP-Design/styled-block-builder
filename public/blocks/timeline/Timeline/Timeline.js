@@ -6,29 +6,30 @@ import { setBackgroundImage } from 'blocks/_shared/utils/background-style';
 
 import './Timeline.module.scss';
 
-const Timeline = ({ id }) => {
+const Timeline = ( { id } ) => {
   const { meta } = window[`gpalabTimeline${id}`];
 
-  const [selected, setSelected] = useState({});
+  const [selected, setSelected] = useState( {} );
 
-  useEffect(() => {
-    if (meta?.timeline && meta.timeline.length > 0) {
-      setSelected(meta.timeline[0]);
+  useEffect( () => {
+    if ( meta?.timeline && meta.timeline.length > 0 ) {
+      setSelected( meta.timeline[0] );
     }
-  }, []);
+  }, [] );
 
   const isMobile = window.innerWidth <= 768;
 
-  const updateSelected = (e, timeline) => {
+  const updateSelected = ( e, timeline ) => {
     const year = e?.target?.dataset?.year ? e.target.dataset.year : '';
 
-    if (year !== selected.year) {
-      const newEvent = timeline.filter(event => event.year === year)[0];
-      setSelected(newEvent);
+    if ( year !== selected.year ) {
+      const newEvent = timeline.filter( event => event.year === year )[0];
+
+      setSelected( newEvent );
     }
   };
 
-  const getColor = (year, el) => {
+  const getColor = ( year, el ) => {
     // Set color values
     const activeDotColor = '#c1a783';
     const activeTextColor = '#333333';
@@ -42,67 +43,67 @@ const Timeline = ({ id }) => {
   };
 
   const getGridStyle = num => {
-    if (isMobile) {
+    if ( isMobile ) {
       return { gridTemplateRows: `repeat(${num}, 1fr)` };
     }
 
     return { gridTemplateColumns: `repeat(${num}, 1fr)` };
   };
 
-  if (meta?.timeline) {
+  if ( meta?.timeline ) {
     const { title, fullWidth, timeline } = meta;
 
     return (
-      <Normalizer fullWidth={fullWidth}>
+      <Normalizer fullWidth={ fullWidth }>
         <div id="timeline-section" styleName="bg">
           <div
-            style={selected?.files ? setBackgroundImage(selected.files) : {}}
+            style={ selected?.files ? setBackgroundImage( selected.files ) : {} }
             styleName="overlay"
           />
 
-          <h2 styleName="title">{title}</h2>
+          <h2 styleName="title">{ title }</h2>
 
-          <h3 styleName={isMobile ? 'slide-title-mobile' : 'slide-title'}>
-            {selected.subtitle || ''}
+          <h3 styleName={ isMobile ? 'slide-title-mobile' : 'slide-title' }>
+            { selected.subtitle || '' }
           </h3>
 
           <div styleName="container">
-            <div style={getGridStyle(timeline.length)} styleName="line">
-              {timeline.map(event => (
+            <div style={ getGridStyle( timeline.length ) } styleName="line">
+              { timeline.map( event => (
                 <span
-                  key={event.year}
-                  data-year={event.year}
-                  style={{ backgroundColor: getColor(event.year, 'dot') }}
+                  key={ event.year }
+                  data-year={ event.year }
+                  style={ { backgroundColor: getColor( event.year, 'dot' ) } }
                   styleName="dot"
-                  onMouseEnter={e => updateSelected(e, timeline)}
+                  onMouseEnter={ e => updateSelected( e, timeline ) }
                 />
-              ))}
+              ) ) }
             </div>
 
-            <div style={getGridStyle(timeline.length)} styleName="cards">
-              {timeline.map(event => (
+            <div style={ getGridStyle( timeline.length ) } styleName="cards">
+              { timeline.map( event => (
                 <div
-                  key={event.year}
-                  data-year={event.year}
+                  key={ event.year }
+                  data-year={ event.year }
                   styleName="card"
-                  onMouseEnter={e => updateSelected(e, timeline)}
+                  onMouseEnter={ e => updateSelected( e, timeline ) }
                 >
                   <div
-                    data-year={event.year}
-                    style={{ color: getColor(event.year) }}
+                    data-year={ event.year }
+                    style={ { color: getColor( event.year ) } }
                     styleName="heading"
                   >
-                    {event.year}
+                    { event.year }
                   </div>
                   <p
-                    data-year={event.year}
-                    style={{ color: getColor(event.year) }}
+                    data-year={ event.year }
+                    style={ { color: getColor( event.year ) } }
                     styleName="text"
                   >
-                    {event.text}
+                    { event.text }
                   </p>
                 </div>
-              ))}
+              ) ) }
             </div>
           </div>
         </div>
@@ -114,7 +115,7 @@ const Timeline = ({ id }) => {
 };
 
 Timeline.propTypes = {
-  id: propTypes.string
+  id: propTypes.string,
 };
 
 export default Timeline;

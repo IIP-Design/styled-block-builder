@@ -4,17 +4,17 @@ import ReactDOM from 'react-dom';
 import ArticleFeed from './ArticleFeed/ArticleFeed';
 
 // Run accessibility tests in development.
-if (process.env.NODE_ENV !== 'production') {
+if ( process.env.NODE_ENV !== 'production' ) {
   // eslint-disable-next-line global-require
-  const axe = require('react-axe');
+  const axe = require( 'react-axe' );
 
-  axe(React, ReactDOM, 1000);
+  axe( React, ReactDOM, 1000 );
 }
 
-const divs = [...document.querySelectorAll('div[data-type="gpalab-article-feed"]')];
+const divs = [...document.querySelectorAll( 'div[data-type="gpalab-article-feed"]' )];
 
-if (divs) {
-  divs.forEach(div => {
-    ReactDOM.render(<ArticleFeed id={div.dataset.id} />, div);
-  });
+if ( divs ) {
+  divs.forEach( div => {
+    ReactDOM.render( <ArticleFeed id={ div.dataset.id } />, div );
+  } );
 }

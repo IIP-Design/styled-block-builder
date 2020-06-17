@@ -6,7 +6,7 @@ export const getScrollOffsets = () => {
   let x;
   let y;
 
-  if (typeof w.pageYOffset === 'number') {
+  if ( typeof w.pageYOffset === 'number' ) {
     x = w.pageXOffset;
     y = w.pageYOffset;
   } else {

@@ -1,34 +1,36 @@
 import { useEffect, useRef, useState } from 'react';
 
-const useVisibilityObserver = ({
+const useVisibilityObserver = ( {
   root = null,
   rootMargin = '0px 0px 0px 0px',
-  threshold = 0.5
-}) => {
-  const [entry, setEntry] = useState({});
-  const [node, setNode] = useState(null);
+  threshold = 0.5,
+} ) => {
+  const [entry, setEntry] = useState( {} );
+  const [node, setNode] = useState( null );
 
-  const observer = useRef(null);
+  const observer = useRef( null );
 
-  useEffect(() => {
-    if (observer.current) {
+  useEffect( () => {
+    if ( observer.current ) {
       observer.current.disconnect();
     }
 
-    observer.current = new window.IntersectionObserver(([e]) => setEntry(e), {
+    observer.current = new window.IntersectionObserver( ( [e] ) => setEntry( e ), {
       root,
       rootMargin,
-      threshold
-    });
+      threshold,
+    } );
 
     const { current: currentObserver } = observer;
 
-    if (node) {
-      currentObserver.observe(node);
+    if ( node ) {
+      currentObserver.observe( node );
     }
 
     return () => currentObserver.disconnect();
-  }, [node, root, rootMargin, threshold]);
+  }, [
+    node, root, rootMargin, threshold,
+  ] );
 
   return [setNode, entry];
 };

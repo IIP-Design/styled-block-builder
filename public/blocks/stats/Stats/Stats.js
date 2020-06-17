@@ -10,70 +10,70 @@ import { backgroundStyle, setBackgroundImage } from 'blocks/_shared/utils/backgr
 
 import './Stats.module.scss';
 
-const Stats = ({ id }) => {
+const Stats = ( { id } ) => {
   const { meta } = window[`gpalabStats${id}`];
 
-  const [ref, entry] = useVisibilityObserver({ threshold: 0.75 });
+  const [ref, entry] = useVisibilityObserver( { threshold: 0.75 } );
 
   const runStat = index => {
     const counter = { val: 0 };
-    const stat = document.getElementById(`stat-${index + 1}`);
+    const stat = document.getElementById( `stat-${index + 1}` );
 
     const updateCount = () => {
-      stat.innerHTML = Math.ceil(counter.val);
+      stat.innerHTML = Math.ceil( counter.val );
     };
 
-    gsap.to(counter, {
+    gsap.to( counter, {
       duration: 5,
       ease: 'power2',
       onUpdate: updateCount,
-      val: stat.getAttribute('data-stat')
-    });
+      val: stat.getAttribute( 'data-stat' ),
+    } );
   };
 
-  useEffect(() => {
-    if (entry.isIntersecting) {
-      const stats = [...document.querySelectorAll('.stat-number')];
+  useEffect( () => {
+    if ( entry.isIntersecting ) {
+      const stats = [...document.querySelectorAll( '.stat-number' )];
 
-      stats.forEach((stat, index) => runStat(index, stat));
+      stats.forEach( ( stat, index ) => runStat( index, stat ) );
     }
-  });
+  } );
 
-  if (meta) {
+  if ( meta ) {
     const { backgroundType, blockBackground, files, fullWidth, stats, textColor, title } = meta;
 
-    const bg =
-      backgroundType === 'image' ? setBackgroundImage(files) : backgroundStyle(blockBackground);
+    const bg
+      = backgroundType === 'image' ? setBackgroundImage( files ) : backgroundStyle( blockBackground );
 
     return (
-      <Normalizer fullWidth={fullWidth}>
-        <div ref={ref} style={bg} styleName="box-bg">
-          <Gradient off={backgroundType !== 'image'}>
+      <Normalizer fullWidth={ fullWidth }>
+        <div ref={ ref } style={ bg } styleName="box-bg">
+          <Gradient off={ backgroundType !== 'image' }>
             <div className="stats-container" styleName="container">
-              {title && (
-                <h2 style={{ color: textColor }} styleName="title">
-                  {title}
+              { title && (
+                <h2 style={ { color: textColor } } styleName="title">
+                  { title }
                 </h2>
-              )}
-              <div id={`stats-${id}`} styleName="array">
-                {stats &&
-                  stats.map((stat, index) => (
-                    <div key={uuid()} style={{ borderColor: textColor }} styleName="item">
-                      <div style={{ color: textColor }} styleName="item-percent">
+              ) }
+              <div id={ `stats-${id}` } styleName="array">
+                { stats
+                  && stats.map( ( stat, index ) => (
+                    <div key={ uuid() } style={ { borderColor: textColor } } styleName="item">
+                      <div style={ { color: textColor } } styleName="item-percent">
                         <span
                           className="stat-number"
-                          data-stat={stat.number}
-                          id={`stat-${index + 1}`}
+                          data-stat={ stat.number }
+                          id={ `stat-${index + 1}` }
                         >
                           0
                         </span>
                         %
                       </div>
-                      <p style={{ color: textColor }} styleName="item-info">
-                        {stat.title}
+                      <p style={ { color: textColor } } styleName="item-info">
+                        { stat.title }
                       </p>
                     </div>
-                  ))}
+                  ) ) }
               </div>
             </div>
           </Gradient>
@@ -86,7 +86,7 @@ const Stats = ({ id }) => {
 };
 
 Stats.propTypes = {
-  id: propTypes.string
+  id: propTypes.string,
 };
 
 export default Stats;

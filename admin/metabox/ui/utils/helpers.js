@@ -8,14 +8,16 @@
 export const getFormData = obj => {
   const formData = new FormData();
 
-  function checkIfString(item) {
-    if (typeof item === 'string') {
+  function checkIfString( item ) {
+    if ( typeof item === 'string' ) {
       return item;
     }
-    return JSON.stringify(item);
+
+    return JSON.stringify( item );
   }
 
-  Object.keys(obj).forEach(key => formData.append(key, checkIfString(obj[key])));
+  Object.keys( obj ).forEach( key => formData.append( key, checkIfString( obj[key] ) ) );
+
   return formData;
 };
 
@@ -26,8 +28,8 @@ export const getFormData = obj => {
  * @param {string} identifier Name of the file to search for.
  * @returns {Object|null} If file object exists it will be returned, otherwise, null.
  */
-const getSelectedFile = (files, identifier) => {
-  const selectedFile = files.filter(file => file.name === identifier)[0];
+const getSelectedFile = ( files, identifier ) => {
+  const selectedFile = files.filter( file => file.name === identifier )[0];
 
   return selectedFile || null;
 };
@@ -43,15 +45,15 @@ const getSelectedFile = (files, identifier) => {
  *
  * @see {getSelectedFile}
  */
-export const checkForFile = (identifier, values, parentGroup, parentId) => {
-  if (!parentGroup && values?.files) {
-    return getSelectedFile(values.files, identifier);
+export const checkForFile = ( identifier, values, parentGroup, parentId ) => {
+  if ( !parentGroup && values?.files ) {
+    return getSelectedFile( values.files, identifier );
   }
 
-  if (parentGroup && parentId && values?.[parentGroup]) {
-    const selectedItem = values[parentGroup].filter(item => item.id === parentId)[0];
+  if ( parentGroup && parentId && values?.[parentGroup] ) {
+    const selectedItem = values[parentGroup].filter( item => item.id === parentId )[0];
     const selectedFile = selectedItem?.files
-      ? getSelectedFile(selectedItem.files, identifier)
+      ? getSelectedFile( selectedItem.files, identifier )
       : null;
 
     return selectedFile;

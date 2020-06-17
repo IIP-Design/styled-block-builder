@@ -1,26 +1,8 @@
 module.exports = {
   extends: ['@gpa-lab/eslint-config', '@gpa-lab/eslint-config/react'],
-  rules: {},
-  env: {
-    jest: true
-  },
   parser: 'babel-eslint',
-  parserOptions: {
-    ecmaFeatures: {
-      jsx: true
-    }
-  },
-  overrides: [
-    {
-      files: '*.test.js',
-      rules: {
-        'no-unused-expressions': 'off',
-        'import/no-unresolved': 'off'
-      }
-    }
-  ],
   rules: {
-    'react/boolean-prop-naming': 'off'
+    'react/jsx-child-element-spacing': 'off',
   },
   settings: {
     'import/resolver': {
@@ -28,12 +10,9 @@ module.exports = {
         alias: {
           blocks: './public/blocks',
           metabox: './admin/metabox/ui',
-          styles: './styles'
-        }
-      }
+          styles: './styles',
+        },
+      },
     },
-    'react': {
-      version: 'detect'
-    }
-  }
+  },
 };

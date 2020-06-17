@@ -10,41 +10,41 @@ import { defaultBackgrounds, defaultText } from 'metabox/utils/color-picker-pale
 import { handleChange } from 'metabox/utils/event-handlers';
 
 const TextForm = () => {
-  const { dispatch, state } = useContext(AdminContext);
+  const { dispatch, state } = useContext( AdminContext );
   const formValues = state?.formData?.formValues ? state.formData.formValues : {};
 
   // Initialize color pickers with default values if no color already selected.
-  useEffect(() => {
-    if (!state?.formData?.formValues?.textColor) {
-      dispatch({ type: 'form-update', payload: { name: 'textColor', value: '#333333' } });
+  useEffect( () => {
+    if ( !state?.formData?.formValues?.textColor ) {
+      dispatch( { type: 'form-update', payload: { name: 'textColor', value: '#333333' } } );
     }
 
-    if (!state?.formData?.formValues?.blockBackground) {
-      dispatch({ type: 'form-update', payload: { name: 'blockBackground', value: '#ffffff' } });
+    if ( !state?.formData?.formValues?.blockBackground ) {
+      dispatch( { type: 'form-update', payload: { name: 'blockBackground', value: '#ffffff' } } );
     }
-  }, []);
+  }, [] );
 
   const blockBgOptions = {
     group: 'blockBackground',
-    options: defaultBackgrounds
+    options: defaultBackgrounds,
   };
 
   const textOptions = {
     group: 'textColor',
-    options: defaultText
+    options: defaultText,
   };
 
   return (
     <Fragment>
       <ColorPicker
-        colors={textOptions}
+        colors={ textOptions }
         label="Set block text color:"
-        selected={formValues.textColor}
+        selected={ formValues.textColor }
       />
       <ColorPicker
-        colors={blockBgOptions}
+        colors={ blockBgOptions }
         label="Set block background color:"
-        selected={formValues.blockBackground}
+        selected={ formValues.blockBackground }
       />
       <label htmlFor="text-title">
         Add Title (Optional):
@@ -52,8 +52,8 @@ const TextForm = () => {
           id="text-title"
           name="title"
           type="text"
-          value={formValues.title || ''}
-          onChange={e => handleChange(e, dispatch)}
+          value={ formValues.title || '' }
+          onChange={ e => handleChange( e, dispatch ) }
         />
       </label>
       <label htmlFor="text-subtitle">
@@ -62,8 +62,8 @@ const TextForm = () => {
           id="text-subtitle"
           name="subtitle"
           type="text"
-          value={formValues.subtitle || ''}
-          onChange={e => handleChange(e, dispatch)}
+          value={ formValues.subtitle || '' }
+          onChange={ e => handleChange( e, dispatch ) }
         />
       </label>
       <label htmlFor="text-desc">
@@ -72,20 +72,20 @@ const TextForm = () => {
           id="text-desc"
           name="desc"
           rows="6"
-          value={formValues.desc || ''}
-          onChange={e => handleChange(e, dispatch)}
+          value={ formValues.desc || '' }
+          onChange={ e => handleChange( e, dispatch ) }
         />
       </label>
-      <FullWidthToggle checked={formValues.fullWidth} />
+      <FullWidthToggle checked={ formValues.fullWidth } />
       <CheckboxConditional
-        checked={formValues.hasButton}
+        checked={ formValues.hasButton }
         label="Add Button (Optional):"
         name="hasButton"
       >
         <ButtonForm />
       </CheckboxConditional>
       <CheckboxConditional
-        checked={formValues.hasVideo}
+        checked={ formValues.hasVideo }
         label="Add a Video (Optional):"
         name="hasVideo"
       >
@@ -95,8 +95,8 @@ const TextForm = () => {
             id="video-title"
             name="videoTitle"
             type="text"
-            value={formValues.videoTitle || ''}
-            onChange={e => handleChange(e, dispatch)}
+            value={ formValues.videoTitle || '' }
+            onChange={ e => handleChange( e, dispatch ) }
           />
         </label>
         <label htmlFor="video-url">
@@ -106,13 +106,13 @@ const TextForm = () => {
             id="video-url"
             name="videoURL"
             type="text"
-            value={formValues.videoURL || ''}
-            onChange={e => handleChange(e, dispatch)}
+            value={ formValues.videoURL || '' }
+            onChange={ e => handleChange( e, dispatch ) }
           />
         </label>
       </CheckboxConditional>
       <CheckboxConditional
-        checked={formValues.hasFeed}
+        checked={ formValues.hasFeed }
         label="Add an Article Feed (Optional):"
         name="hasFeed"
       >

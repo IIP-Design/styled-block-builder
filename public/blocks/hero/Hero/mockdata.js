@@ -10,7 +10,7 @@ const mockData = {
   link:
     'https://www.politico.eu/article/europe-must-put-security-first-with-5g-mike-pompeo-eu-us-china/',
   style: 'white',
-  arrow: 'red'
+  arrow: 'red',
 };
 
 export default mockData;

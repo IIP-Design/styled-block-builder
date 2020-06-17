@@ -10,11 +10,11 @@ const setBabelConfig = cssModuleNames => ( {
         filetypes: {
           '.scss': {
             plugins: ['postcss-nested'],
-            syntax: 'postcss-scss'
-          }
+            syntax: 'postcss-scss',
+          },
         },
-        generateScopedName: cssModuleNames
-      }
+        generateScopedName: cssModuleNames,
+      },
     ],
     [
       'babel-plugin-module-resolver',
@@ -22,15 +22,17 @@ const setBabelConfig = cssModuleNames => ( {
         alias: {
           blocks: './public/blocks',
           metabox: './admin/metabox/ui',
-          styles: './styles'
+          styles: './styles',
         },
-        extensions: ['.js', '.jsx', '.css', '.scss'],
-        root: [paths.pluginRoot]
-      }
-    ]
-  ]
+        extensions: [
+          '.js', '.jsx', '.css', '.scss',
+        ],
+        root: [paths.pluginRoot],
+      },
+    ],
+  ],
 } );
 
 module.exports = {
-  setBabelConfig
+  setBabelConfig,
 };

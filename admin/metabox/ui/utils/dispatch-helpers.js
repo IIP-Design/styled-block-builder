@@ -8,18 +8,18 @@ import { v4 as uuid } from 'uuid';
  * @param {number=} start The default index value.
  * @returns {Object} With three properties: selected item, copy of without selected item, and index of selected object in original array.
  */
-const getSelectedFromGroup = (data, id, start) => {
+const getSelectedFromGroup = ( data, id, start ) => {
   let indexValue = start;
 
-  const selected = data.filter((item, index) => {
-    if (item.id === id) {
+  const selected = data.filter( ( item, index ) => {
+    if ( item.id === id ) {
       indexValue = index;
     }
 
     return item.id === id;
-  })[0];
+  } )[0];
 
-  const filtered = data.filter(item => item.id !== id);
+  const filtered = data.filter( item => item.id !== id );
 
   return { filtered, indexValue, selected };
 };
@@ -31,9 +31,9 @@ const getSelectedFromGroup = (data, id, start) => {
  * @param {number} id Selected post id.
  * @returns {Object[]} An array to block objects.
  */
-export const blockDelete = (state, id) => {
-  if (state?.blocks) {
-    const { filtered } = getSelectedFromGroup(state.blocks, id);
+export const blockDelete = ( state, id ) => {
+  if ( state?.blocks ) {
+    const { filtered } = getSelectedFromGroup( state.blocks, id );
 
     return filtered;
   }
@@ -50,23 +50,23 @@ export const blockDelete = (state, id) => {
  *
  * @see {getSelectedFromGroup}
  */
-export const blockSave = (state, block) => {
-  if (state?.blocks) {
+export const blockSave = ( state, block ) => {
+  if ( state?.blocks ) {
     const { blocks } = state;
 
     // ID comes over as a string so must be converted into a number
-    const intID = Number(block.id);
+    const intID = Number( block.id );
 
-    const { filtered, indexValue } = getSelectedFromGroup(blocks, intID, blocks.length);
+    const { filtered, indexValue } = getSelectedFromGroup( blocks, intID, blocks.length );
 
     const newBlock = {
       id: intID,
       meta: block.post_meta,
       title: block.post_title,
-      type: `gpalab-${block.post_type}`
+      type: `gpalab-${block.post_type}`,
     };
 
-    filtered.splice(indexValue, 0, newBlock);
+    filtered.splice( indexValue, 0, newBlock );
 
     return filtered;
   }
@@ -82,10 +82,10 @@ export const blockSave = (state, block) => {
  * @param {Object[]} fileList Array of file objects.
  * @returns {Object[]} New array of file objects.
  */
-export const fileAdd = (file, name, fileList) => {
+export const fileAdd = ( file, name, fileList ) => {
   const files = fileList || [];
 
-  files.push({ file, name, filename: file.name });
+  files.push( { file, name, filename: file.name } );
 
   return files;
 };
@@ -102,18 +102,18 @@ export const fileAdd = (file, name, fileList) => {
  * @see {getSelectedFromGroup}
  * @see {fileAdd}
  */
-export const fileAddNested = (data, file, name, parentId) => {
+export const fileAddNested = ( data, file, name, parentId ) => {
   // Pull selected item out of array, preserve the remaining temporary array
-  const { filtered, selected } = getSelectedFromGroup(data, parentId);
+  const { filtered, selected } = getSelectedFromGroup( data, parentId );
 
   // Update the nested group.
-  const groupArr = fileAdd(file, name, selected.files);
+  const groupArr = fileAdd( file, name, selected.files );
 
   // Update selected files list.
   selected.files = groupArr;
 
   // Push updated item back into group
-  filtered.push(selected);
+  filtered.push( selected );
 
   return filtered;
 };
@@ -125,8 +125,8 @@ export const fileAddNested = (data, file, name, parentId) => {
  * @param {string} name Name of the given file.
  * @returns {Object[]} Array of file objects, without the selected one.
  */
-export const fileRemove = (fileList, name) => {
-  const filtered = fileList.filter(file => file.name !== name);
+export const fileRemove = ( fileList, name ) => {
+  const filtered = fileList.filter( file => file.name !== name );
 
   return filtered;
 };
@@ -142,18 +142,18 @@ export const fileRemove = (fileList, name) => {
  * @see {getSelectedFromGroup}
  * @see {fileRemove}
  */
-export const fileRemoveNested = (data, name, parentId) => {
+export const fileRemoveNested = ( data, name, parentId ) => {
   // Pull selected item out of array, preserve the remaining temporary array
-  const { filtered, selected } = getSelectedFromGroup(data, parentId);
+  const { filtered, selected } = getSelectedFromGroup( data, parentId );
 
   // Update the nested group.
-  const groupArr = fileRemove(selected.files, name);
+  const groupArr = fileRemove( selected.files, name );
 
   // Update selected files list.
   selected.files = groupArr;
 
   // Push updated item back into group
-  filtered.push(selected);
+  filtered.push( selected );
 
   return filtered;
 };
@@ -166,22 +166,23 @@ export const fileRemoveNested = (data, name, parentId) => {
  * @param {string} group Name of the selected group.
  * @returns {Object[]} Updated array with new item added.
  */
-export const groupAddItem = (fields, data, group) => {
+export const groupAddItem = ( fields, data, group ) => {
   // Get list of field names required.
-  const fieldNames = fields.map(field => field.name);
+  const fieldNames = fields.map( field => field.name );
 
   // Check if selected group member has relevant sub-group, if not create.
   const groupArr = data[group] ? [...data[group]] : [];
 
   // Create an object to store values for new resource.
   const obj = {};
+
   obj.id = uuid();
-  fieldNames.forEach(name => {
+  fieldNames.forEach( name => {
     obj[name] = '';
-  });
+  } );
 
   // Add new object to sub-group.
-  groupArr.push(obj);
+  groupArr.push( obj );
 
   return groupArr;
 };
@@ -198,18 +199,18 @@ export const groupAddItem = (fields, data, group) => {
  * @see {getSelectedFromGroup}
  * @see {groupAddItem}
  */
-export const groupAddItemNested = (data, fields, group, parentId) => {
+export const groupAddItemNested = ( data, fields, group, parentId ) => {
   // Pull selected item out of array, preserve the remaining temporary array
-  const { filtered, selected } = getSelectedFromGroup(data, parentId);
+  const { filtered, selected } = getSelectedFromGroup( data, parentId );
 
   // Update the nested group.
-  const groupArr = groupAddItem(fields, selected, group);
+  const groupArr = groupAddItem( fields, selected, group );
 
   // Update selected group member.
   selected[group] = groupArr;
 
   // Push updated item back into group
-  filtered.push(selected);
+  filtered.push( selected );
 
   return filtered;
 };
@@ -225,14 +226,14 @@ export const groupAddItemNested = (data, fields, group, parentId) => {
  *
  * @see {getSelectedFromGroup}
  */
-export const groupHandleInput = (data, itemId, name, value) => {
-  const { filtered, indexValue, selected } = getSelectedFromGroup(data, itemId, 0);
+export const groupHandleInput = ( data, itemId, name, value ) => {
+  const { filtered, indexValue, selected } = getSelectedFromGroup( data, itemId, 0 );
 
   // Update selected sub-group item.
   selected[name] = value;
 
   // Add updated sub-group item back to sub-group.
-  filtered.splice(indexValue, 0, selected);
+  filtered.splice( indexValue, 0, selected );
 
   return filtered;
 };
@@ -251,18 +252,18 @@ export const groupHandleInput = (data, itemId, name, value) => {
  * @see {getSelectedFromGroup}
  * @see {groupHandleInput}
  */
-export const groupHandleInputNested = (data, itemId, group, name, parentId, value) => {
-  const { filtered, indexValue, selected } = getSelectedFromGroup(data, parentId, 0);
+export const groupHandleInputNested = ( data, itemId, group, name, parentId, value ) => {
+  const { filtered, indexValue, selected } = getSelectedFromGroup( data, parentId, 0 );
 
   // Check if selected group member has relevant sub-group, if not create.
   const groupArr = selected[group] ? [...selected[group]] : [];
 
-  const itemsTemp = groupHandleInput(groupArr, itemId, name, value);
+  const itemsTemp = groupHandleInput( groupArr, itemId, name, value );
 
   // Updated full group with altered sub-group.
   selected[group] = itemsTemp;
 
-  filtered.splice(indexValue, 0, selected);
+  filtered.splice( indexValue, 0, selected );
 
   return filtered;
 };
@@ -275,10 +276,10 @@ export const groupHandleInputNested = (data, itemId, group, name, parentId, valu
  * @param {string} id The id value of the object that the function is searching for.
  * @returns {Object[]} An array of the remaining form objects.
  */
-export const groupRemoveItem = (data, group, id) => {
+export const groupRemoveItem = ( data, group, id ) => {
   const groupArr = data[group] ? [...data[group]] : [];
 
-  const { filtered } = getSelectedFromGroup(groupArr, id);
+  const { filtered } = getSelectedFromGroup( groupArr, id );
 
   return filtered;
 };
@@ -295,16 +296,16 @@ export const groupRemoveItem = (data, group, id) => {
  * @see {getSelectedFromGroup}
  * @see {groupRemoveItem}
  */
-export const groupRemoveItemNested = (data, itemId, group, parentId) => {
-  const { filtered, indexValue, selected } = getSelectedFromGroup(data, parentId, 0);
+export const groupRemoveItemNested = ( data, itemId, group, parentId ) => {
+  const { filtered, indexValue, selected } = getSelectedFromGroup( data, parentId, 0 );
 
   // Check if selected group member has relevant sub-group, if not create.
-  const groupArr = groupRemoveItem(selected, group, itemId);
+  const groupArr = groupRemoveItem( selected, group, itemId );
 
   selected[group] = groupArr;
 
   // Updated full group with altered sub-group.
-  filtered.splice(indexValue, 0, selected);
+  filtered.splice( indexValue, 0, selected );
 
   return filtered;
 };
@@ -316,12 +317,12 @@ export const groupRemoveItemNested = (data, itemId, group, parentId) => {
  * @param {number} id Selected post id.
  * @returns {number[]} An array of post ids representing the posts in process of being updated.
  */
-export const updatingAddTo = (state, id) => {
-  if (state?.updating) {
+export const updatingAddTo = ( state, id ) => {
+  if ( state?.updating ) {
     const clone = [...state.updating];
 
-    if (!clone.includes(id)) {
-      clone.push(id);
+    if ( !clone.includes( id ) ) {
+      clone.push( id );
     }
 
     return clone;
@@ -337,9 +338,9 @@ export const updatingAddTo = (state, id) => {
  * @param {number} id Selected post id.
  * @returns {number[]} An array of post ids representing the posts in process of being updated.
  */
-export const updatingRemoveFrom = (state, id) => {
-  if (state?.updating) {
-    const reset = state.updating.filter(item => item !== id);
+export const updatingRemoveFrom = ( state, id ) => {
+  if ( state?.updating ) {
+    const reset = state.updating.filter( item => item !== id );
 
     return reset;
   }

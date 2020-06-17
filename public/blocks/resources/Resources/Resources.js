@@ -8,85 +8,88 @@ import VideoLayout from './Layouts/VideoLayout';
 
 import './Resources.module.scss';
 
-const Resources = ({ id }) => {
+const Resources = ( { id } ) => {
   const { assets } = window.gpalabBlockFront;
   const { meta } = window[`gpalabResources${id}`];
 
-  const [selected, setSelected] = useState(null);
+  const [selected, setSelected] = useState( null );
 
-  useEffect(() => {
+  useEffect( () => {
     const first = meta?.resources ? meta.resources[0] : null;
-    setSelected(first.id);
-  }, []);
+
+    setSelected( first.id );
+  }, [] );
 
   const isMobile = window.innerWidth <= 500;
 
-  if (meta) {
+  if ( meta ) {
     const { fullWidth, resources, subtitle, title } = meta;
 
     return (
-      <Normalizer fullWidth={fullWidth}>
+      <Normalizer fullWidth={ fullWidth }>
         <div
-          style={{
-            backgroundImage: `url('${assets}wavy-bg.jpg')`
-          }}
+          style={ {
+            backgroundImage: `url('${assets}wavy-bg.jpg')`,
+          } }
           styleName="background"
         >
-          {title && <h2 styleName="title">{title}</h2>}
+          { title && <h2 styleName="title">{ title }</h2> }
 
-          {subtitle && <h4 styleName="subtitle">{subtitle}</h4>}
+          { subtitle && <h4 styleName="subtitle">{ subtitle }</h4> }
 
           <div styleName="container">
             <div styleName="nav">
-              {resources &&
-                resources.map(resource => {
+              { resources
+                && resources.map( resource => {
                   const styles = resource.id === selected ? 'nav-button' : 'nav-button inactive';
+
                   return (
                     <button
-                      key={resource.id}
-                      id={resource.id}
-                      styleName={styles}
+                      key={ resource.id }
+                      id={ resource.id }
+                      styleName={ styles }
                       type="button"
-                      onClick={() => setSelected(resource.id)}
+                      onClick={ () => setSelected( resource.id ) }
                     >
-                      {resource.title}
+                      { resource.title }
                     </button>
                   );
-                })}
+                } ) }
             </div>
 
-            {resources &&
-              resources.map(resource => {
+            { resources
+              && resources.map( resource => {
                 const type = resource.video ? 'video' : 'base';
                 let layout = null;
-                if (type === 'base') {
-                  layout = <BaseLayout data={resource} />;
+
+                if ( type === 'base' ) {
+                  layout = <BaseLayout data={ resource } />;
                 }
 
-                if (type === 'video') {
-                  layout = <VideoLayout data={resource} />;
+                if ( type === 'video' ) {
+                  layout = <VideoLayout data={ resource } />;
                 }
 
-                if (resource.id === selected || isMobile) {
+                if ( resource.id === selected || isMobile ) {
                   return (
-                    <div key={resource.id} id={resource.id}>
-                      <div id={resource.id} styleName="section-content">
-                        {layout}
-                        {resource.articles && (
+                    <div key={ resource.id } id={ resource.id }>
+                      <div id={ resource.id } styleName="section-content">
+                        { layout }
+                        { resource.articles && (
                           <Fragment>
                             <hr styleName="section-hr" />
                             <div styleName="feed-container">
-                              <CDPFeed id={resource.id} items={resource.articles} />
+                              <CDPFeed id={ resource.id } items={ resource.articles } />
                             </div>
                           </Fragment>
-                        )}
+                        ) }
                       </div>
                     </div>
                   );
                 }
 
                 return null;
-              })}
+              } ) }
           </div>
         </div>
       </Normalizer>
@@ -97,7 +100,7 @@ const Resources = ({ id }) => {
 };
 
 Resources.propTypes = {
-  id: propTypes.string
+  id: propTypes.string,
 };
 
 export default Resources;

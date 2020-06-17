@@ -15,6 +15,7 @@ export const responsiveTitle = ( index, length, title ) => {
 
 export const getTabTitleField = list => {
   let title;
+
   list.forEach( item => {
     if ( item.tabTitle ) {
       title = item.name;

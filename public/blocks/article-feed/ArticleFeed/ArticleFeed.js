@@ -7,27 +7,27 @@ import { backgroundStyle } from 'blocks/_shared/utils/background-style';
 
 import './ArticleFeed.module.scss';
 
-const ArticleFeed = ({ id }) => {
+const ArticleFeed = ( { id } ) => {
   const { meta } = window[`gpalabArticleFeed${id}`];
 
-  if (meta) {
+  if ( meta ) {
     const { blockBackground, fullWidth, subtitle, textColor, title, articles } = meta;
 
     return (
-      <Normalizer fullWidth={fullWidth}>
-        <div style={backgroundStyle(blockBackground)} styleName="bg">
+      <Normalizer fullWidth={ fullWidth }>
+        <div style={ backgroundStyle( blockBackground ) } styleName="bg">
           <div styleName="content">
-            {title && (
-              <h2 style={{ color: textColor }} styleName="title">
-                {title}
+            { title && (
+              <h2 style={ { color: textColor } } styleName="title">
+                { title }
               </h2>
-            )}
-            {subtitle && (
-              <h3 style={{ color: textColor }} styleName="subtitle">
-                {subtitle}
+            ) }
+            { subtitle && (
+              <h3 style={ { color: textColor } } styleName="subtitle">
+                { subtitle }
               </h3>
-            )}
-            <CDPFeed id={id} items={articles} />
+            ) }
+            <CDPFeed id={ id } items={ articles } />
           </div>
         </div>
       </Normalizer>
@@ -38,7 +38,7 @@ const ArticleFeed = ({ id }) => {
 };
 
 ArticleFeed.propTypes = {
-  id: propTypes.string
+  id: propTypes.string,
 };
 
 export default ArticleFeed;

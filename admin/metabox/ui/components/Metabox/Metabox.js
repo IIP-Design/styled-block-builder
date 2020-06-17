@@ -7,43 +7,43 @@ import { AdminContext, adminReducer } from 'metabox/context/adminContext';
 import './Metabox.module.scss';
 
 const MetaBox = () => {
-  const [formType, setFormType] = useState('');
+  const [formType, setFormType] = useState( '' );
 
   const initialState = {
     formData: {
       formId: 0,
       formType: '',
-      formValues: {}
+      formValues: {},
     },
     showModal: false,
     blocks: [],
-    updating: []
+    updating: [],
   };
 
-  const [state, dispatch] = useReducer(adminReducer, initialState);
+  const [state, dispatch] = useReducer( adminReducer, initialState );
 
   const store = {
     dispatch,
-    state
+    state,
   };
 
-  useEffect(() => {
+  useEffect( () => {
     const list = window?.gpalabBlockAdmin?.associated ? window.gpalabBlockAdmin.associated : [];
 
-    dispatch({ type: 'init', payload: list });
-  }, []);
+    dispatch( { type: 'init', payload: list } );
+  }, [] );
 
   return (
     <div styleName="dropdown-container">
-      <AdminContext.Provider value={store}>
+      <AdminContext.Provider value={ store }>
         <label htmlFor="gpalab-blocks-dropdown">
           <strong>Add Block:</strong>
           <select
             id="gpalab-blocks-dropdown"
             styleName="dropdown"
-            value={formType}
-            onBlur={e => setFormType(e.target.value)}
-            onChange={e => setFormType(e.target.value)}
+            value={ formType }
+            onBlur={ e => setFormType( e.target.value ) }
+            onChange={ e => setFormType( e.target.value ) }
           >
             <option value="">- Select Block Type -</option>
             <option value="article-feed">Article Feed</option>
@@ -59,18 +59,16 @@ const MetaBox = () => {
         </label>
         <button
           className="button-secondary"
-          disabled={formType === ''}
+          disabled={ formType === '' }
           type="button"
-          onClick={() =>
-            dispatch({
-              type: 'modal-show',
-              payload: { formId: 0, formType, formValues: {} }
-            })
-          }
+          onClick={ () => dispatch( {
+            type: 'modal-show',
+            payload: { formId: 0, formType, formValues: {} },
+          } ) }
         >
           Configure Block
         </button>
-        {state?.blocks && state.blocks.length > 0 && <AssociatedList />}
+        { state?.blocks && state.blocks.length > 0 && <AssociatedList /> }
         <Modal />
       </AdminContext.Provider>
     </div>

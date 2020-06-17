@@ -6,8 +6,8 @@ import { handleToggle } from 'metabox/utils/event-handlers';
 
 import './Toggles.module.scss';
 
-const FullWidthToggle = ({ checked }) => {
-  const { dispatch, state } = useContext(AdminContext);
+const FullWidthToggle = ( { checked } ) => {
+  const { dispatch, state } = useContext( AdminContext );
   const values = state?.formData?.formValues ? state.formData.formValues : {};
 
   return (
@@ -15,12 +15,12 @@ const FullWidthToggle = ({ checked }) => {
       <label htmlFor="full-width-toggle" styleName="toggle-label">
         Make this block full-page width?
         <input
-          checked={checked}
+          checked={ checked }
           id="full-width-toggle"
           name="fullWidth"
           styleName="toggle-checkbox"
           type="checkbox"
-          onChange={e => handleToggle(e, dispatch, values)}
+          onChange={ e => handleToggle( e, dispatch, values ) }
         />
       </label>
     </div>
@@ -28,11 +28,11 @@ const FullWidthToggle = ({ checked }) => {
 };
 
 FullWidthToggle.propTypes = {
-  checked: propTypes.bool
+  checked: propTypes.bool,
 };
 
 FullWidthToggle.defaultProps = {
-  checked: false
+  checked: false,
 };
 
 export default FullWidthToggle;

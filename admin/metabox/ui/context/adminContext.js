@@ -14,24 +14,24 @@ import {
   blockDelete,
   blockSave,
   updatingAddTo,
-  updatingRemoveFrom
+  updatingRemoveFrom,
 } from 'metabox/utils/dispatch-helpers';
 
 export const AdminContext = React.createContext();
 
-export const adminReducer = (state, action) => {
+export const adminReducer = ( state, action ) => {
   const { payload } = action;
 
-  switch (action.type) {
+  switch ( action.type ) {
     case 'init':
       return {
         ...state,
-        blocks: payload
+        blocks: payload,
       };
     case 'delete':
       return {
         ...state,
-        blocks: blockDelete(state, payload)
+        blocks: blockDelete( state, payload ),
       };
     case 'save':
       return {
@@ -39,9 +39,9 @@ export const adminReducer = (state, action) => {
         formData: {
           ...state.formData,
           formId: payload.id,
-          formValues: payload.post_meta
+          formValues: payload.post_meta,
         },
-        blocks: blockSave(state, payload)
+        blocks: blockSave( state, payload ),
       };
     case 'file-add':
       return {
@@ -50,9 +50,9 @@ export const adminReducer = (state, action) => {
           ...state.formData,
           formValues: {
             ...state.formData.formValues,
-            files: fileAdd(payload.file, payload.name, state.formData.formValues.files)
-          }
-        }
+            files: fileAdd( payload.file, payload.name, state.formData.formValues.files ),
+          },
+        },
       };
     case 'file-add-nested':
       return {
@@ -65,10 +65,10 @@ export const adminReducer = (state, action) => {
               state.formData.formValues[payload.parentGroup],
               payload.file,
               payload.name,
-              payload.parentId
-            )
-          }
-        }
+              payload.parentId,
+            ),
+          },
+        },
       };
     case 'file-remove':
       return {
@@ -77,9 +77,9 @@ export const adminReducer = (state, action) => {
           ...state.formData,
           formValues: {
             ...state.formData.formValues,
-            files: fileRemove(state.formData.formValues.files, payload.name)
-          }
-        }
+            files: fileRemove( state.formData.formValues.files, payload.name ),
+          },
+        },
       };
     case 'file-remove-nested':
       return {
@@ -91,10 +91,10 @@ export const adminReducer = (state, action) => {
             [payload.parentGroup]: fileRemoveNested(
               state.formData.formValues[payload.parentGroup],
               payload.name,
-              payload.parentId
-            )
-          }
-        }
+              payload.parentId,
+            ),
+          },
+        },
       };
     case 'form-update':
       return {
@@ -103,9 +103,9 @@ export const adminReducer = (state, action) => {
           ...state.formData,
           formValues: {
             ...state.formData.formValues,
-            [payload.name]: payload.value
-          }
-        }
+            [payload.name]: payload.value,
+          },
+        },
       };
     case 'group-add':
       return {
@@ -114,9 +114,9 @@ export const adminReducer = (state, action) => {
           ...state.formData,
           formValues: {
             ...state.formData.formValues,
-            [payload.group]: groupAddItem(payload.fields, state.formData.formValues, payload.group)
-          }
-        }
+            [payload.group]: groupAddItem( payload.fields, state.formData.formValues, payload.group ),
+          },
+        },
       };
     case 'group-add-nested':
       return {
@@ -129,10 +129,10 @@ export const adminReducer = (state, action) => {
               state.formData.formValues[payload.parentGroup],
               payload.fields,
               payload.group,
-              payload.parentId
-            )
-          }
-        }
+              payload.parentId,
+            ),
+          },
+        },
       };
     case 'group-input':
       return {
@@ -145,10 +145,10 @@ export const adminReducer = (state, action) => {
               state.formData.formValues[payload.group],
               payload.itemId,
               payload.name,
-              payload.value
-            )
-          }
-        }
+              payload.value,
+            ),
+          },
+        },
       };
     case 'group-input-nested':
       return {
@@ -163,10 +163,10 @@ export const adminReducer = (state, action) => {
               payload.group,
               payload.name,
               payload.parentId,
-              payload.value
-            )
-          }
-        }
+              payload.value,
+            ),
+          },
+        },
       };
     case 'group-remove':
       return {
@@ -175,9 +175,9 @@ export const adminReducer = (state, action) => {
           ...state.formData,
           formValues: {
             ...state.formData.formValues,
-            [payload.group]: groupRemoveItem(state.formData.formValues, payload.group, payload.id)
-          }
-        }
+            [payload.group]: groupRemoveItem( state.formData.formValues, payload.group, payload.id ),
+          },
+        },
       };
     case 'group-remove-nested':
       return {
@@ -190,10 +190,10 @@ export const adminReducer = (state, action) => {
               state.formData.formValues[payload.parentGroup],
               payload.itemId,
               payload.group,
-              payload.parentId
-            )
-          }
-        }
+              payload.parentId,
+            ),
+          },
+        },
       };
     case 'modal-hide':
       return {
@@ -201,9 +201,9 @@ export const adminReducer = (state, action) => {
         formData: {
           formId: 0,
           formType: '',
-          formValues: {}
+          formValues: {},
         },
-        showModal: false
+        showModal: false,
       };
     case 'modal-show':
       return {
@@ -211,19 +211,19 @@ export const adminReducer = (state, action) => {
         formData: {
           formId: payload.formId,
           formType: payload.formType,
-          formValues: payload.formValues
+          formValues: payload.formValues,
         },
-        showModal: true
+        showModal: true,
       };
     case 'updating-add':
       return {
         ...state,
-        updating: updatingAddTo(state, payload)
+        updating: updatingAddTo( state, payload ),
       };
     case 'updating-remove':
       return {
         ...state,
-        updating: updatingRemoveFrom(state, payload)
+        updating: updatingRemoveFrom( state, payload ),
       };
     default:
       throw new Error();

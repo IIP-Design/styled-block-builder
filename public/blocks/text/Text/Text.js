@@ -9,10 +9,10 @@ import { backgroundStyle } from 'blocks/_shared/utils/background-style';
 
 import './Text.module.scss';
 
-const Text = ({ id }) => {
+const Text = ( { id } ) => {
   const { meta } = window[`gpalabText${id}`];
 
-  if (meta) {
+  if ( meta ) {
     const {
       articles,
       blockBackground,
@@ -27,36 +27,35 @@ const Text = ({ id }) => {
       textColor,
       title,
       videoTitle,
-      videoURL
+      videoURL,
     } = meta;
 
     return (
-      <Normalizer fullWidth={fullWidth}>
-        <div style={backgroundStyle(blockBackground)} styleName="bg">
+      <Normalizer fullWidth={ fullWidth }>
+        <div style={ backgroundStyle( blockBackground ) } styleName="bg">
           <div styleName="container">
-            {title && (
-              <h2 style={{ color: textColor }} styleName="title">
-                {title}
+            { title && (
+              <h2 style={ { color: textColor } } styleName="title">
+                { title }
               </h2>
-            )}
-            {subtitle && (
-              <h3 style={{ color: textColor }} styleName="subtitle">
-                {subtitle}
+            ) }
+            { subtitle && (
+              <h3 style={ { color: textColor } } styleName="subtitle">
+                { subtitle }
               </h3>
-            )}
+            ) }
             <div styleName="content">
-              {desc && (
-                <div style={{ color: textColor }} styleName="description">
-                  {desc}
+              { desc && (
+                <div style={ { color: textColor } } styleName="description">
+                  { desc }
                 </div>
-              )}
+              ) }
             </div>
-            {hasButton && (
-              <Button arrow={buttonArrow} link={buttonLink} style={buttonStyle} text={buttonText} />
-            )}
+            { hasButton
+              && <Button arrow={ buttonArrow } link={ buttonLink } style={ buttonStyle } text={ buttonText } /> }
           </div>
-          {videoURL && <VideoEmbed title={videoTitle} url={videoURL} />}
-          {articles && <CDPFeed id={id} items={articles} />}
+          { videoURL && <VideoEmbed title={ videoTitle } url={ videoURL } /> }
+          { articles && <CDPFeed id={ id } items={ articles } /> }
         </div>
       </Normalizer>
     );
@@ -66,7 +65,7 @@ const Text = ({ id }) => {
 };
 
 Text.propTypes = {
-  id: propTypes.string
+  id: propTypes.string,
 };
 
 export default Text;

@@ -10,10 +10,10 @@
  * @param {Object} e An event object.
  * @param {dispatch} dispatch The AdminContext dispatch function.
  */
-export const handleChange = (e, dispatch) => {
+export const handleChange = ( e, dispatch ) => {
   const { name, value } = e.target;
 
-  dispatch({ type: 'form-update', payload: { name, value } });
+  dispatch( { type: 'form-update', payload: { name, value } } );
 };
 
 /**
@@ -22,11 +22,11 @@ export const handleChange = (e, dispatch) => {
  * @param {Object} e An event object.
  * @param {dispatch} dispatch The AdminContext dispatch function.
  */
-export const handleColor = (e, dispatch) => {
+export const handleColor = ( e, dispatch ) => {
   const { group } = e.target.dataset;
   const { value } = e.target;
 
-  dispatch({ type: 'form-update', payload: { name: group, value } });
+  dispatch( { type: 'form-update', payload: { name: group, value } } );
 };
 
 /**
@@ -36,11 +36,11 @@ export const handleColor = (e, dispatch) => {
  * @param {dispatch} dispatch The AdminContext dispatch function.
  * @param {Object} values Object of form values.
  */
-export const handleToggle = (e, dispatch, values) => {
+export const handleToggle = ( e, dispatch, values ) => {
   const { name } = e.target;
   const isChecked = values[name] || false;
 
-  dispatch({ type: 'form-update', payload: { name, value: !isChecked } });
+  dispatch( { type: 'form-update', payload: { name, value: !isChecked } } );
 };
 
 /**
@@ -52,20 +52,20 @@ export const handleToggle = (e, dispatch, values) => {
  * @param {string} parentGroup Group to which the parent of the selected item belongs.
  * @param {string} parentId The id value of the group where the target object resides.
  */
-export const handleChangeNested = (e, dispatch, group, parentGroup, parentId) => {
+export const handleChangeNested = ( e, dispatch, group, parentGroup, parentId ) => {
   const { itemid } = e.target.dataset;
   const { name, value } = e.target;
 
-  if (parentGroup) {
-    dispatch({
+  if ( parentGroup ) {
+    dispatch( {
       type: 'group-input-nested',
-      payload: { itemId: itemid, group, name, parentGroup, parentId, value }
-    });
+      payload: { itemId: itemid, group, name, parentGroup, parentId, value },
+    } );
   } else {
-    dispatch({
+    dispatch( {
       type: 'group-input',
-      payload: { itemId: itemid, group, name, value }
-    });
+      payload: { itemId: itemid, group, name, value },
+    } );
   }
 };
 
@@ -78,14 +78,14 @@ export const handleChangeNested = (e, dispatch, group, parentGroup, parentId) =>
  * @param {string} parentGroup Group to which the parent of the selected item belongs.
  * @param {string} parentId The id value of the group where the target object resides.
  */
-export const handleAddNested = (dispatch, fields, group, parentGroup, parentId) => {
-  if (parentGroup) {
-    dispatch({
+export const handleAddNested = ( dispatch, fields, group, parentGroup, parentId ) => {
+  if ( parentGroup ) {
+    dispatch( {
       type: 'group-add-nested',
-      payload: { fields, group, parentGroup, parentId }
-    });
+      payload: { fields, group, parentGroup, parentId },
+    } );
   } else {
-    dispatch({ type: 'group-add', payload: { fields, group } });
+    dispatch( { type: 'group-add', payload: { fields, group } } );
   }
 };
 
@@ -98,15 +98,15 @@ export const handleAddNested = (dispatch, fields, group, parentGroup, parentId) 
  * @param {string} parentGroup Group to which the parent of the selected item belongs.
  * @param {string} parentId The id value of the group where the target object resides.
  */
-export const handleRemoveNested = (e, dispatch, group, parentGroup, parentId) => {
+export const handleRemoveNested = ( e, dispatch, group, parentGroup, parentId ) => {
   const { itemid } = e.target.dataset;
 
-  if (parentGroup) {
-    dispatch({
+  if ( parentGroup ) {
+    dispatch( {
       type: 'group-remove-nested',
-      payload: { itemId: itemid, group, parentGroup, parentId }
-    });
+      payload: { itemId: itemid, group, parentGroup, parentId },
+    } );
   } else {
-    dispatch({ type: 'group-remove', payload: { group, id: itemid } });
+    dispatch( { type: 'group-remove', payload: { group, id: itemid } } );
   }
 };

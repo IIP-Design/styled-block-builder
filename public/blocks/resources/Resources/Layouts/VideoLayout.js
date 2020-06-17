@@ -5,32 +5,32 @@ import VideoEmbed from 'blocks/_shared/components/VideoEmbed/VideoEmbed';
 
 import './Layouts.module.scss';
 
-const VideoLayout = ({ data }) => (
+const VideoLayout = ( { data } ) => (
   <Fragment>
-    {data.text && (
+    { data.text && (
       <section styleName="content-columns">
-        <VideoEmbed title={data.title} url={data.video} />
+        <VideoEmbed title={ data.title } url={ data.video } />
         <div styleName="star-line">
           <span className="dashicons dashicons-star-filled" />
           <span className="dashicons dashicons-star-filled" />
           <span className="dashicons dashicons-star-filled" />
         </div>
-        <h5 styleName="content-title">{data.title}</h5>
-        <div styleName="content-text">{data.text}</div>
+        <h5 styleName="content-title">{ data.title }</h5>
+        <div styleName="content-text">{ data.text }</div>
       </section>
-    )}
+    ) }
 
-    {!data.text && (
+    { !data.text && (
       <section styleName="content no-columns">
-        <h3 styleName="video-only-title">{data.title}</h3>
-        <VideoEmbed title={data.title} url={data.video} />
+        <h3 styleName="video-only-title">{ data.title }</h3>
+        <VideoEmbed title={ data.title } url={ data.video } />
       </section>
-    )}
+    ) }
   </Fragment>
 );
 
 VideoLayout.propTypes = {
-  data: propTypes.object
+  data: propTypes.object,
 };
 
 export default VideoLayout;

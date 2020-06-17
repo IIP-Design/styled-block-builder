@@ -8,10 +8,10 @@ import { setBackgroundImage } from 'blocks/_shared/utils/background-style';
 
 import './Parallax.module.scss';
 
-const Parallax = ({ id }) => {
+const Parallax = ( { id } ) => {
   const { meta } = window[`gpalabParallax${id}`];
 
-  if (meta) {
+  if ( meta ) {
     const {
       buttonArrow,
       buttonLink,
@@ -22,26 +22,26 @@ const Parallax = ({ id }) => {
       fullWidth,
       hasButton,
       subtitle,
-      title
+      title,
     } = meta;
 
     return (
-      <Normalizer fullWidth={fullWidth}>
-        <div style={setBackgroundImage(files)} styleName="box-bg">
+      <Normalizer fullWidth={ fullWidth }>
+        <div style={ setBackgroundImage( files ) } styleName="box-bg">
           <Gradient>
             <div styleName="fixed">
               <div styleName="content">
-                {title && <h2 styleName="title">{title}</h2>}
-                {subtitle && <h3 styleName="subtitle">{subtitle}</h3>}
-                {desc && <p styleName="text">{desc}</p>}
-                {hasButton && (
+                { title && <h2 styleName="title">{ title }</h2> }
+                { subtitle && <h3 styleName="subtitle">{ subtitle }</h3> }
+                { desc && <p styleName="text">{ desc }</p> }
+                { hasButton && (
                   <Button
-                    arrow={buttonArrow}
-                    link={buttonLink}
-                    style={buttonStyle}
-                    text={buttonText}
+                    arrow={ buttonArrow }
+                    link={ buttonLink }
+                    style={ buttonStyle }
+                    text={ buttonText }
                   />
-                )}
+                ) }
               </div>
             </div>
           </Gradient>
@@ -54,7 +54,7 @@ const Parallax = ({ id }) => {
 };
 
 Parallax.propTypes = {
-  id: propTypes.string
+  id: propTypes.string,
 };
 
 export default Parallax;

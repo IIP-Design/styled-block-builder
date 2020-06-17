@@ -8,7 +8,7 @@ import { AdminContext } from 'metabox/context/adminContext';
 import { handleChange } from 'metabox/utils/event-handlers';
 
 const ParallaxForm = () => {
-  const { dispatch, state } = useContext(AdminContext);
+  const { dispatch, state } = useContext( AdminContext );
   const formValues = state?.formData?.formValues ? state.formData.formValues : {};
 
   return (
@@ -20,8 +20,8 @@ const ParallaxForm = () => {
           id="parallax-title"
           name="title"
           type="text"
-          value={formValues.title || ''}
-          onChange={e => handleChange(e, dispatch)}
+          value={ formValues.title || '' }
+          onChange={ e => handleChange( e, dispatch ) }
         />
       </label>
       <label htmlFor="parallax-subtitle">
@@ -30,8 +30,8 @@ const ParallaxForm = () => {
           id="parallax-subtitle"
           name="subtitle"
           type="text"
-          value={formValues.subtitle || ''}
-          onChange={e => handleChange(e, dispatch)}
+          value={ formValues.subtitle || '' }
+          onChange={ e => handleChange( e, dispatch ) }
         />
       </label>
       <label htmlFor="parallax-text">
@@ -40,18 +40,18 @@ const ParallaxForm = () => {
           id="parallax-text"
           name="desc"
           rows="6"
-          value={formValues.desc || ''}
-          onChange={e => handleChange(e, dispatch)}
+          value={ formValues.desc || '' }
+          onChange={ e => handleChange( e, dispatch ) }
         />
       </label>
       <CheckboxConditional
-        checked={formValues.hasButton}
+        checked={ formValues.hasButton }
         label="Add Button (Optional):"
         name="hasButton"
       >
         <ButtonForm />
       </CheckboxConditional>
-      <FullWidthToggle checked={formValues.fullWidth} />
+      <FullWidthToggle checked={ formValues.fullWidth } />
     </Fragment>
   );
 };

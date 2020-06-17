@@ -9,39 +9,39 @@ import { updatePost } from 'metabox/utils/update-post';
 
 import './Modal.module.scss';
 
-const modalRoot = document.getElementById('gpalab-blocks-modal');
+const modalRoot = document.getElementById( 'gpalab-blocks-modal' );
 
 const ModalContent = () => {
-  const [saving, setSaving] = useState(false);
-  const [error, setError] = useState(false);
-  const [errorData, setErrorData] = useState(null);
+  const [saving, setSaving] = useState( false );
+  const [error, setError] = useState( false );
+  const [errorData, setErrorData] = useState( null );
 
   // Get array of associated blocks
-  const { dispatch, state } = useContext(AdminContext);
+  const { dispatch, state } = useContext( AdminContext );
 
-  if (state && state.showModal && state.showModal === true) {
+  if ( state && state.showModal && state.showModal === true ) {
     const formData = state?.formData ? state.formData : { formId: 0, formType: '' };
 
-    const formStr = formData.formType.replace('gpalab-', '');
+    const formStr = formData.formType.replace( 'gpalab-', '' );
 
     const submitForm = async () => {
       const onComplete = res => {
-        dispatch({ type: 'save', payload: res });
-        setSaving(false);
+        dispatch( { type: 'save', payload: res } );
+        setSaving( false );
       };
 
       const onError = err => {
-        setSaving(false);
-        setError(true);
-        setErrorData(err);
+        setSaving( false );
+        setError( true );
+        setErrorData( err );
       };
 
-      setSaving(true);
+      setSaving( true );
       await updatePost(
         { id: formData.formId, meta: formData.formValues, type: formStr },
         'save',
         onComplete,
-        onError
+        onError,
       );
     };
 
@@ -57,47 +57,45 @@ const ModalContent = () => {
             aria-label="close modal"
             styleName="close-icon"
             type="button"
-            onClick={() => dispatch({ type: 'modal-hide' })}
+            onClick={ () => dispatch( { type: 'modal-hide' } ) }
           >
             <span className="dashicons dashicons-no" />
           </button>
-          {saving && <Spinner />}
-          {error && <ErrorMessage closeFunc={() => setError(false)} err={errorData} />}
-          {formStr && (
+          { saving && <Spinner /> }
+          { error && <ErrorMessage closeFunc={ () => setError( false ) } err={ errorData } /> }
+          { formStr && (
             <form styleName="modal-form">
-              <h3 styleName="modal-form-title">{selectTitle(formStr)}</h3>
+              <h3 styleName="modal-form-title">{ selectTitle( formStr ) }</h3>
               <div
-                styleName={
-                  error || saving ? 'modal-form-background obscured' : 'modal-form-background'
-                }
+                styleName={ error || saving ? 'modal-form-background obscured' : 'modal-form-background' }
               >
-                {selectForm(formStr)}
+                { selectForm( formStr ) }
               </div>
               <div styleName="modal-controls">
                 <label htmlFor="copy-shortcode">
-                  {formData.formId !== 0 && (
+                  { formData.formId !== 0 && (
                     <input
                       id="copy-shortcode"
                       readOnly
                       styleName="shortcode-input"
                       type="text"
-                      value={shortcode}
+                      value={ shortcode }
                     />
-                  )}
+                  ) }
                 </label>
                 <button
                   className="button-secondary"
                   type="button"
-                  onClick={() => dispatch({ type: 'modal-hide' })}
+                  onClick={ () => dispatch( { type: 'modal-hide' } ) }
                 >
                   Cancel
                 </button>
-                <button className="button-primary" type="button" onClick={submitForm}>
+                <button className="button-primary" type="button" onClick={ submitForm }>
                   Save
                 </button>
               </div>
             </form>
-          )}
+          ) }
         </div>
       </div>
     );
@@ -106,6 +104,6 @@ const ModalContent = () => {
   return null;
 };
 
-const Modal = () => createPortal(<ModalContent />, modalRoot);
+const Modal = () => createPortal( <ModalContent />, modalRoot );
 
 export default Modal;

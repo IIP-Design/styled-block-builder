@@ -8,7 +8,7 @@ const mockData = {
   style: 'red',
   arrow: 'red',
   subtitle: 'Not just faster smart phones.',
-  title: 'The Promise of 5G'
+  title: 'The Promise of 5G',
 };
 
 export default mockData;

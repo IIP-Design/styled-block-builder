@@ -9,12 +9,12 @@ import { AdminContext } from 'metabox/context/adminContext';
 import { handleChange } from 'metabox/utils/event-handlers';
 
 const HeroForm = () => {
-  const { dispatch, state } = useContext(AdminContext);
+  const { dispatch, state } = useContext( AdminContext );
   const formValues = state?.formData?.formValues ? state.formData.formValues : {};
 
   const options = [
     { label: 'Text', name: 'type', value: 'text' },
-    { label: 'Animated lines', name: 'type', value: 'lines' }
+    { label: 'Animated lines', name: 'type', value: 'lines' },
   ];
 
   const tabFields = [{ label: 'Add Animated line:', name: 'text', tabTitle: true, type: 'text' }];
@@ -28,8 +28,8 @@ const HeroForm = () => {
           id="hero-title"
           name="title"
           type="text"
-          value={formValues.title || ''}
-          onChange={e => handleChange(e, dispatch)}
+          value={ formValues.title || '' }
+          onChange={ e => handleChange( e, dispatch ) }
         />
       </label>
       <label htmlFor="hero-subtitle">
@@ -38,16 +38,16 @@ const HeroForm = () => {
           id="hero-subtitle"
           name="subtitle"
           type="text"
-          value={formValues.subtitle || ''}
-          onChange={e => handleChange(e, dispatch)}
+          value={ formValues.subtitle || '' }
+          onChange={ e => handleChange( e, dispatch ) }
         />
       </label>
       <RadioConditional
-        checked={formValues.type}
+        checked={ formValues.type }
         label="What type of block would you like?"
-        options={options}
+        options={ options }
       />
-      {formValues.type === 'text' && (
+      { formValues.type === 'text' && (
         <label htmlFor="hero-description">
           Add main content area text:
           <textarea
@@ -55,16 +55,15 @@ const HeroForm = () => {
             name="description"
             rows="6"
             type="text"
-            value={formValues.description || ''}
-            onChange={e => handleChange(e, dispatch)}
+            value={ formValues.description || '' }
+            onChange={ e => handleChange( e, dispatch ) }
           />
         </label>
-      )}
-      {formValues.type === 'lines' && (
-        <TabbedForm fields={tabFields} group="lines" label="Line" maxTabs={10} />
-      )}
+      ) }
+      { formValues.type === 'lines'
+        && <TabbedForm fields={ tabFields } group="lines" label="Line" maxTabs={ 10 } /> }
       <CheckboxConditional
-        checked={formValues.hasButton}
+        checked={ formValues.hasButton }
         label="Add Button (Optional):"
         name="hasButton"
       >

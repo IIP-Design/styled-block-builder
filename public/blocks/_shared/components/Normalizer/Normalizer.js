@@ -9,7 +9,7 @@ const Normalizer = ( { children, fullWidth } ) => {
 
 Normalizer.propTypes = {
   children: propTypes.element,
-  fullWidth: propTypes.bool
+  fullWidth: propTypes.bool,
 };
 
 export default Normalizer;

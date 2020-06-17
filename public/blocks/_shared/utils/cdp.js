@@ -1,22 +1,23 @@
 // API call to the CDP to get all post data
-export const getFromCDP = async (id, source) => {
+export const getFromCDP = async ( id, source ) => {
   const formData = new FormData();
 
-  formData.append('query', `(site: ${source} AND post_id: ${id})`);
+  formData.append( 'query', `(site: ${source} AND post_id: ${id})` );
 
   try {
-    const response = await fetch('https://api.america.gov/v1/search', {
+    const response = await fetch( 'https://api.america.gov/v1/search', {
       method: 'POST',
-      body: formData
-    });
+      body: formData,
+    } );
     const result = await response.json();
 
     // eslint-disable-next-line no-underscore-dangle
     const data = result?.hits?.hits?.[0]?._source ? result.hits.hits[0]._source : {};
 
     return data;
-  } catch (error) {
-    console.log('Error:', error);
+  } catch ( error ) {
+    console.log( 'Error:', error );
+
     return null;
   }
 };
@@ -35,11 +36,13 @@ export const parseFeedItemData = async data => {
 export const getFeedData = feed => {
   const dataArray = [];
 
-  feed.forEach(async item => {
-    const itemData = await parseFeedItemData(item.id, item.source);
-    dataArray.push(itemData);
-  });
+  feed.forEach( async item => {
+    const itemData = await parseFeedItemData( item.id, item.source );
 
-  console.log(dataArray);
+    dataArray.push( itemData );
+  } );
+
+  console.log( dataArray );
+
   return dataArray;
 };

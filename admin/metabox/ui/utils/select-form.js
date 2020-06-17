@@ -11,7 +11,7 @@ import TextForm from 'metabox/components/Forms/TextForm';
 import TimelineForm from 'metabox/components/Forms/TimelineForm';
 
 export const selectForm = formStr => {
-  switch (formStr) {
+  switch ( formStr ) {
     case 'article-feed':
       return <ArticleFeedForm />;
     case 'hero':
@@ -36,7 +36,7 @@ export const selectForm = formStr => {
 };
 
 export const selectTitle = formStr => {
-  switch (formStr) {
+  switch ( formStr ) {
     case 'article-feed':
       return 'Configure Your Article Feed:';
     case 'hero':

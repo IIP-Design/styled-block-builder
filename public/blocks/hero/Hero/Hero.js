@@ -9,10 +9,10 @@ import { setBackgroundImage } from 'blocks/_shared/utils/background-style';
 
 import './Hero.module.scss';
 
-const Hero = ({ id }) => {
+const Hero = ( { id } ) => {
   const { meta } = window[`gpalabHero${id}`];
 
-  if (meta) {
+  if ( meta ) {
     const {
       buttonArrow,
       buttonLink,
@@ -24,30 +24,30 @@ const Hero = ({ id }) => {
       lines,
       subtitle,
       title,
-      type
+      type,
     } = meta;
 
     return (
       <Normalizer fullWidth>
-        <div style={setBackgroundImage(files)} styleName="content-background">
+        <div style={ setBackgroundImage( files ) } styleName="content-background">
           <Gradient>
             <div styleName="header">
-              {title && <h1 styleName="header-title">{title}</h1>}
-              {subtitle && <h3 styleName="header-subtitle">{subtitle}</h3>}
+              { title && <h1 styleName="header-title">{ title }</h1> }
+              { subtitle && <h3 styleName="header-subtitle">{ subtitle }</h3> }
               <div styleName="header-text">
                 <div styleName="header-text-column">
                   <div>
-                    {type === 'text' && <p styleName="header-text-large">{description}</p>}
-                    {type === 'lines' && <AnimatedLines lines={lines} />}
+                    { type === 'text' && <p styleName="header-text-large">{ description }</p> }
+                    { type === 'lines' && <AnimatedLines lines={ lines } /> }
                   </div>
-                  {hasButton && (
+                  { hasButton && (
                     <Button
-                      arrow={buttonArrow}
-                      link={buttonLink}
-                      style={buttonStyle}
-                      text={buttonText}
+                      arrow={ buttonArrow }
+                      link={ buttonLink }
+                      style={ buttonStyle }
+                      text={ buttonText }
                     />
-                  )}
+                  ) }
                 </div>
               </div>
             </div>
@@ -56,11 +56,12 @@ const Hero = ({ id }) => {
       </Normalizer>
     );
   }
+
   return null;
 };
 
 Hero.propTypes = {
-  id: propTypes.string
+  id: propTypes.string,
 };
 
 export default Hero;

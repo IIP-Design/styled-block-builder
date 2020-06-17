@@ -7,7 +7,7 @@ const mockData = {
     'We welcome collaboration with partners and allies to ensure our shared security in a 5G future. Were a country to elect to allow an untrusted company to build out its 5G network, the United States would have to reassess how it interconnects and shares information with that country.',
   speaker: 'Secretary of State Michael R. Pompeo',
   subtitle: 'United States supports a secure 5G future for everyone.',
-  title: 'Partnership'
+  title: 'Partnership',
 };
 
 export default mockData;

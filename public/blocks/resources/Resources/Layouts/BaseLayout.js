@@ -11,7 +11,7 @@ const BaseLayout = ( { data } ) => (
 );
 
 BaseLayout.propTypes = {
-  data: propTypes.object
+  data: propTypes.object,
 };
 
 export default BaseLayout;
