@@ -11,10 +11,15 @@
   text-align: center;
   font-size: 12px;
   text-transform: uppercase;
+  transition: all 0.2s ease;
 
   &:hover {
     cursor: pointer;
     border: 2px solid rgba($color: $white, $alpha: 0.1);
+
+    > span {
+      transform: translateX(4px);
+    }
   }
 
   &.minimal {
@@ -58,7 +63,7 @@
 
 .arrow {
   display: inline-block;
-  height: 12px; 
+  height: 12px;
   position: relative;
   font-size: 1rem;
   margin-left: 10px;
