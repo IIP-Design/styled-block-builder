@@ -55,12 +55,16 @@ class Sanitize_Text_Meta {
       $sanitized['buttonArrow'] = sanitize_text_field( $unsanitary['buttonArrow'] );
     }
 
-    if ( ! empty( $unsanitary['buttonLink'] ) ) {
-      $sanitized['buttonLink'] = sanitize_text_field( $unsanitary['buttonLink'] );
+    if ( ! empty( $unsanitary['buttonBorder'] ) ) {
+      $sanitized['buttonBorder'] = sanitize_text_field( $unsanitary['buttonBorder'] );
     }
 
-    if ( ! empty( $unsanitary['buttonStyle'] ) ) {
-      $sanitized['buttonStyle'] = sanitize_text_field( $unsanitary['buttonStyle'] );
+    if ( ! empty( $unsanitary['buttonColor'] ) ) {
+      $sanitized['buttonColor'] = sanitize_text_field( $unsanitary['buttonColor'] );
+    }
+
+    if ( ! empty( $unsanitary['buttonLink'] ) ) {
+      $sanitized['buttonLink'] = sanitize_text_field( $unsanitary['buttonLink'] );
     }
 
     if ( ! empty( $unsanitary['buttonText'] ) ) {

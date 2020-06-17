@@ -15,8 +15,9 @@ const Hero = ( { id } ) => {
   if ( meta ) {
     const {
       buttonArrow,
+      buttonBorder,
+      buttonColor,
       buttonLink,
-      buttonStyle,
       buttonText,
       description,
       files,
@@ -43,8 +44,9 @@ const Hero = ( { id } ) => {
                   { hasButton && (
                     <Button
                       arrow={ buttonArrow }
+                      border={ buttonBorder }
+                      color={ buttonColor }
                       link={ buttonLink }
-                      style={ buttonStyle }
                       text={ buttonText }
                     />
                   ) }

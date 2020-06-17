@@ -17,7 +17,7 @@ const ButtonForm = () => {
     if ( !state?.formData?.formValues?.buttonArrow ) {
       dispatch( { type: 'form-update', payload: { name: 'buttonArrow', value: 'white' } } );
     }
-  }, [] );
+  }, [dispatch, state] );
 
   const handleChange = e => {
     const { name, value } = e.target;
@@ -38,6 +38,7 @@ const ButtonForm = () => {
             onChange={ e => handleChange( e ) }
           />
         </label>
+
         <label htmlFor="button-link">
           Add button link:
           <input
@@ -49,24 +50,40 @@ const ButtonForm = () => {
           />
         </label>
 
-        <label htmlFor="button-style">
-          Select button style:
+        <label htmlFor="button-color">
+          Select text color:
           <select
-            id="button-style"
-            name="buttonStyle"
+            id="button-color"
+            name="buttonColor"
             type="select"
-            value={ formValues.buttonStyle }
+            value={ formValues.buttonColor }
             onBlur={ e => handleChange( e ) }
             onChange={ e => handleChange( e ) }
           >
             <option value="white">White</option>
             <option value="red">Red</option>
             <option value="blue">Blue</option>
-            <option value="minimal">Minimal (Blue with no border)</option>
           </select>
         </label>
+
+        <label htmlFor="button-border">
+          Select border style:
+          <select
+            id="button-border"
+            name="buttonBorder"
+            type="select"
+            value={ formValues.buttonBorder }
+            onBlur={ e => handleChange( e ) }
+            onChange={ e => handleChange( e ) }
+          >
+            <option value="plain">Plain</option>
+            <option value="rounded">Rounded</option>
+            <option value="none">None</option>
+          </select>
+        </label>
+
         <label htmlFor="arrow-color">
-          Select button arrow color:
+          Select arrow color:
           <select
             id="arrow-color"
             name="buttonArrow"
@@ -76,8 +93,10 @@ const ButtonForm = () => {
             onChange={ e => handleChange( e ) }
           >
             <option value="white">White</option>
-            <option value="red">Red</option>
             <option value="blue">Blue</option>
+            <option value="gold">Gold</option>
+            <option value="red">Red</option>
+            <option value="none">None</option>
           </select>
         </label>
       </div>
