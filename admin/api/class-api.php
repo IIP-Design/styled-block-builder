@@ -12,7 +12,7 @@ namespace Style_Blocks;
  * Creates custom API endpoint.
  *
  * Adds a 'gpalab_associated_blocks' node to the WordPress posts API,
- * which displays the data for style blocks assoicated with the post.
+ * which displays the data for style blocks associated with the post.
  *
  * @package Style_Blocks\API
  * @since 0.0.1
@@ -39,7 +39,7 @@ class API {
   /**
    * Register an API endpoint for 'gpalab_styles_blocks' data for each post
    *
-   * @param array $object     Post data onject.
+   * @param array $object     Post data object.
    */
   public function get_block_data_for_api( $object ) {
     // Get the id of the given post.

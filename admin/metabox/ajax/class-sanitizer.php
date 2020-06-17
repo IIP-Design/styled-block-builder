@@ -108,7 +108,7 @@ class Sanitizer {
    * Sanitize the file name sent over in upload request.
    *
    * @param array $unsanitary     Unsanitized file objects.
-   * @return array                Array of sanitized filedata.
+   * @return array                Array of sanitized file data.
    */
   public function prep_uploads( $unsanitary ) {
     $sanitized_files = array();

@@ -39,7 +39,7 @@ class Update_Block {
     include_once STYLE_BLOCKS_DIR . 'admin/metabox/ajax/class-uploader.php';
     $uploader = new Uploader();
 
-    // The following rules are handled by the below valitation and sanitization functions and hence can be safely ignored.
+    // The following rules are handled by the below validation and sanitization functions and hence can be safely ignored.
     // phpcs:disable WordPress.Security.ValidatedSanitizedInput.InputNotValidated
     // phpcs:disable WordPress.Security.NonceVerification.Missing
     // phpcs:disable WordPress.Security.ValidatedSanitizedInput.MissingUnslash
@@ -51,7 +51,7 @@ class Update_Block {
     $validator->validate_form_type( $_POST['type'] );
     $validator->validate_parent_id( $_POST['parent'] );
 
-    // Sanitize submited values.
+    // Sanitize submitted values.
     $form_type = sanitize_text_field( $_POST['type'] );
     $passed_id = sanitize_text_field( $_POST['id'] );
     $parent_id = sanitize_text_field( $_POST['parent'] );
@@ -71,7 +71,7 @@ class Update_Block {
 
     // phpcs:enable
 
-    // Istantiate and populate the post data array.
+    // Instantiate and populate the post data array.
     $data               = array();
     $data['id']         = $passed_id;
     $data['post_meta']  = $sanitized_meta;
@@ -109,7 +109,7 @@ class Update_Block {
     include_once STYLE_BLOCKS_DIR . 'admin/metabox/ajax/class-validator.php';
     $validator = new Validator();
 
-    // The following rules are handled by the valitation and sanitization functions and hence can be safely ignored.
+    // The following rules are handled by the validation and sanitization functions and hence can be safely ignored.
     // phpcs:disable WordPress.Security.ValidatedSanitizedInput.InputNotValidated
     // phpcs:disable WordPress.Security.NonceVerification.Missing
     // phpcs:disable WordPress.Security.ValidatedSanitizedInput.MissingUnslash
@@ -120,7 +120,7 @@ class Update_Block {
     $validator->validate_post_id( $_POST['id'] );
     $validator->validate_parent_id( $_POST['parent'] );
 
-    // Sanitize submited values.
+    // Sanitize submitted values.
     $post_id   = sanitize_text_field( $_POST['id'] );
     $parent_id = sanitize_text_field( $_POST['parent'] );
 

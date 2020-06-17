@@ -25,7 +25,7 @@ class Metabox {
   public function add_blocks_metabox() {
     $current_user = wp_get_current_user();
 
-    // Ensure that current user has correct priviledges.
+    // Ensure that current user has correct privileges.
     if ( array_key_exists( 'activate_plugins', $current_user->allcaps ) ) {
       add_meta_box(
         'gpalab_blocks_meta',

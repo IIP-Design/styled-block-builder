@@ -29,7 +29,7 @@ class Update_Parent_Post {
     // Get the list of style blocks associated with the parent post.
     $associated = get_post_meta( $parent_id, 'gpalab_associated_blocks', true );
 
-    // Initialize empy array if no associated blocks exist.
+    // Initialize empty array if no associated blocks exist.
     if ( empty( $associated ) ) {
       $associated = array();
     }
@@ -64,7 +64,7 @@ class Update_Parent_Post {
     if ( in_array( $id_as_int, $associated, true ) ) {
       $remove = array( $id_as_int );
 
-      // array_values needed to reindex the array after removing item.
+      // array_values needed to re-index the array after removing item.
       $removed = array_values( array_diff( $associated, $remove ) );
 
       update_post_meta( $parent_id, 'gpalab_associated_blocks', $removed );
