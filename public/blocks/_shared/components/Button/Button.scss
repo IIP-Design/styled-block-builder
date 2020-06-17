@@ -1,13 +1,16 @@
 @import 'styles/colors.scss';
 
 .read-more {
-  border: 2px solid;
+  border: 2px solid $white;
   font-weight: 700;
   background: none;
   margin: 1rem 0 2rem;
-  padding: 0.5rem 1rem;
+  padding: 14px 20px;
   letter-spacing: 1.5px;
   transition: 0.5s;
+  text-align: center;
+  font-size: 12px;
+  text-transform: uppercase;
 
   &:hover {
     cursor: pointer;
@@ -54,18 +57,22 @@
 }
 
 .arrow {
+  display: inline-block;
+  height: 12px; 
+  position: relative;
+  font-size: 1rem;
+  margin-left: 10px;
+  width: 23px;
+
   &-white {
     color: $white;
-    font-size: 0.8rem;
   }
 
   &-red {
     color: $red;
-    font-size: 0.8rem;
   }
 
   &-blue {
     color: $blueBlackPearl;
-    font-size: 0.8rem;
   }
 }

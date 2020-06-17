@@ -8,7 +8,7 @@ const Button = ( { arrow, link, text, style } ) => (
     <a href={ link }>
       <button className={ `read-more ${style}` } type="button">
         { text }
-        <span className={ `arrow-${arrow}` }>⟶</span>
+        <span className={ `arrow arrow-${arrow}` }>⟶</span>
       </button>
     </a>
   </div>
