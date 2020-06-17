@@ -7,9 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased](https://github.com/IIP-Design/styled-block-builder/compare/v1.0.0...HEAD)
 
-Unreleased changes indicate forthcoming updates.
+_This sections lists changes committed since most recent release_
 
-- Switch from using in-repo Prettier config to shared GPA/LAb configuration.
+### Changed
+
+- Add Jest for JavaScript unit testing
+- Remove Prettier
 
 ## [v1.0.0](https://github.com/IIP-Design/styled-block-builder/releases/tag/v1.0.0) - 2020.03.16 (Initial Release)
 
