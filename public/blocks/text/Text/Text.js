@@ -17,8 +17,9 @@ const Text = ( { id } ) => {
       articles,
       blockBackground,
       buttonArrow,
+      buttonBorder,
+      buttonColor,
       buttonLink,
-      buttonStyle,
       buttonText,
       desc,
       fullWidth,
@@ -51,8 +52,15 @@ const Text = ( { id } ) => {
                 </div>
               ) }
             </div>
-            { hasButton
-              && <Button arrow={ buttonArrow } link={ buttonLink } style={ buttonStyle } text={ buttonText } /> }
+            { hasButton && (
+              <Button
+                arrow={ buttonArrow }
+                border={ buttonBorder }
+                color={ buttonColor }
+                link={ buttonLink }
+                text={ buttonText }
+              />
+            ) }
           </div>
           { videoURL && <VideoEmbed title={ videoTitle } url={ videoURL } /> }
           { articles && <CDPFeed id={ id } items={ articles } /> }
