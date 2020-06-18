@@ -10,14 +10,18 @@ const ButtonForm = () => {
 
   // Initialize button style options with default values if none are already selected.
   useEffect( () => {
-    if ( !state?.formData?.formValues?.buttonStyle ) {
-      dispatch( { type: 'form-update', payload: { name: 'buttonStyle', value: 'minimal' } } );
+    if ( !state?.formData?.formValues?.buttonColor ) {
+      dispatch( { type: 'form-update', payload: { name: 'buttonStyle', value: 'white' } } );
+    }
+
+    if ( !state?.formData?.formValues?.buttonBorder ) {
+      dispatch( { type: 'form-update', payload: { name: 'buttonStyle', value: 'plain' } } );
     }
 
     if ( !state?.formData?.formValues?.buttonArrow ) {
       dispatch( { type: 'form-update', payload: { name: 'buttonArrow', value: 'white' } } );
     }
-  }, [dispatch, state] );
+  }, [dispatch] );
 
   const handleChange = e => {
     const { name, value } = e.target;
