@@ -26,7 +26,7 @@ const StatsForm = () => {
     if ( !state?.formData?.formValues?.blockBackground ) {
       dispatch( { type: 'form-update', payload: { name: 'blockBackground', value: '#ffffff' } } );
     }
-  }, [] );
+  }, [dispatch] );
 
   const blockBgOptions = {
     group: 'blockBackground',
@@ -44,9 +44,10 @@ const StatsForm = () => {
   };
 
   const tabFields = [
-    { label: 'Add stat title:', name: 'title', tabTitle: true, type: 'text' },
+    { label: 'Add stat description:', name: 'desc', tabTitle: true, type: 'text' },
+    { label: 'Add stat prefix:', name: 'prefix', type: 'text' },
+    { label: 'Add stat unit:', name: 'unit', type: 'text' },
     { label: 'Add stat value:', name: 'number', type: 'text' },
-    { label: 'Add stat type:', name: 'type', type: 'text' },
   ];
 
   if ( formValues ) {
@@ -64,8 +65,7 @@ const StatsForm = () => {
             selected={ formValues.blockBackground }
           />
         ) }
-        { formValues.backgroundType === 'image'
-          && <FileUploader label="Add background image:" name="backgroundImage" /> }
+        { formValues.backgroundType === 'image' && <FileUploader label="Add background image:" name="backgroundImage" /> }
         <ColorPicker
           colors={ textOptions }
           label="Set block text color:"

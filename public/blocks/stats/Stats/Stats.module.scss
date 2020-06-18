@@ -39,7 +39,11 @@
   align-items: center;
   min-width: 30%;
 
-  &-percent {
+  &-unit {
+    padding-left: 0.4rem;
+  }
+
+  &-value {
     font-size: 2rem;
     font-weight: 800;
     color: $white;

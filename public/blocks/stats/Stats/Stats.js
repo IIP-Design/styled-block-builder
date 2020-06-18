@@ -59,7 +59,8 @@ const Stats = ( { id } ) => {
                 { stats
                   && stats.map( ( stat, index ) => (
                     <div key={ uuid() } style={ { borderColor: textColor } } styleName="item">
-                      <div style={ { color: textColor } } styleName="item-percent">
+                      <div style={ { color: textColor } } styleName="item-value">
+                        { stat.prefix }
                         <span
                           className="stat-number"
                           data-stat={ stat.number }
@@ -67,10 +68,10 @@ const Stats = ( { id } ) => {
                         >
                           0
                         </span>
-                        { stat.type }
+                        { stat.unit && <span styleName="item-unit">{ stat.unit }</span> }
                       </div>
                       <p style={ { color: textColor } } styleName="item-info">
-                        { stat.title }
+                        { stat.desc }
                       </p>
                     </div>
                   ) ) }
