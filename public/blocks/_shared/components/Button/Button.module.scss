@@ -1,32 +1,22 @@
 @import 'styles/colors.scss';
 
-.read-more {
-  border: 2px solid $white;
-  font-weight: 700;
+.button {
   background: none;
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 1.5px;
   margin: 1rem 0 2rem;
   padding: 14px 20px;
-  letter-spacing: 1.5px;
-  transition: 0.5s;
   text-align: center;
-  font-size: 12px;
   text-transform: uppercase;
   transition: all 0.2s ease;
 
   &:hover {
     cursor: pointer;
-    border: 2px solid rgba($color: $white, $alpha: 0.1);
 
     > span {
       transform: translateX(4px);
     }
-  }
-
-  &.minimal {
-    border: none;
-    background: none;
-    color: $blueDark;
-    padding-left: 0;
   }
 
   &.white {
@@ -56,6 +46,23 @@
     }
   }
 
+  &.plain {
+    border: 2px solid;
+  }
+
+  &.rounded {
+    border: 2px solid;
+    border-radius: 22px;
+  }
+
+  &.none {
+    border: none;
+
+    &:hover {
+      border: none;
+    }
+  }
+
   @media screen and (max-width: 768px) {
     margin: 1rem 0 1rem;
   }
@@ -63,21 +70,31 @@
 
 .arrow {
   display: inline-block;
-  height: 12px;
-  position: relative;
   font-size: 1rem;
+  height: 12px;
   margin-left: 10px;
+  position: relative;
+  top: 1px;
   width: 23px;
 
-  &-white {
-    color: $white;
+  &-blue {
+    color: $blueBlackPearl;
+  }
+
+  &-gold {
+    color: $gold;
   }
 
   &-red {
     color: $red;
   }
 
-  &-blue {
-    color: $blueBlackPearl;
+  &-white {
+    color: $white;
   }
+}
+
+.svg {
+  fill: currentColor;
+  stroke: currentColor;
 }
