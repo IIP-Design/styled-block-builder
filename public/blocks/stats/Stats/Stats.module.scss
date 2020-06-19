@@ -11,9 +11,12 @@
   padding: 5rem 0 0;
 }
 
+.stat-number {
+  padding-right: 0.4rem;
+}
+
 .title {
   color: $white;
-  padding-top: 2.75rem;
   text-align: center;
 }
 
@@ -31,15 +34,24 @@
   border: 5px solid $white;
   padding: 2rem;
   margin: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 30%;
 
-  &-percent {
-    font-size: 4rem;
+  &-unit {
+    padding-left: 0.4rem;
+  }
+
+  &-value {
+    font-size: 3rem;
     font-weight: 800;
     color: $white;
     text-decoration: none;
     text-align: center;
     margin-top: 26px;
-    padding-bottom: 2rem;
+    padding-bottom: 1rem;
+    width: 300px;
   }
 
   &-info {
@@ -47,12 +59,29 @@
     color: $white;
     text-decoration: none;
     text-align: center;
-    width: 200px;
+    width: 300px;
     margin-bottom: 0;
   }
 }
 
 @media screen and (max-width: 768px) {
+  .item {
+    padding: 0.5rem;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-width: 66%;
+
+    &-info {
+      width: 60vw;
+      padding-bottom: 1.5rem;
+    }
+
+    &-percent {
+      font-size: 2rem;
+    }
+  }
   .array {
     flex-direction: column;
     padding: 2rem 0;
@@ -75,21 +104,16 @@
 
 @media screen and (max-width: 500px) {
   .item {
-    padding: 0.5rem;
-    height: calc(160px + 1rem);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+    min-width: 70%;
 
     &-info {
-      width: 150px;
+      width: 80vw;
     }
 
     &-percent {
-      font-size: 2rem;
+      font-size: 1.7rem;
     }
   }
-
   &-array {
     padding: 20px 0px 20px 0px;
   }
