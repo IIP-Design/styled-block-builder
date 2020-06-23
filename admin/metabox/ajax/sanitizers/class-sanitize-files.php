@@ -36,7 +36,7 @@ class Sanitize_Files {
         if ( ! empty( $file['name'] ) ) {
           $sanitized_file['filename'] = sanitize_text_field( $file['filename'] );
           $sanitized_file['name']     = sanitize_text_field( $file['name'] );
-          $sanitized_file['url']      = sanitize_text_field( $file['url'] );
+          $sanitized_file['url']      = esc_url_raw( $file['file']['url'] );
         }
 
         // Check for updates to file in upload files.

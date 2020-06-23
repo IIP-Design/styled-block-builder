@@ -47,6 +47,7 @@ class Metabox {
   private function render_blocks_metabox() {
     wp_enqueue_script( 'gpalab-blocks-admin-js' );
     wp_enqueue_style( 'gpalab-blocks-admin-css' );
+    wp_enqueue_media();
 
     $html .= '<div id="gpalab-blocks-metabox"></div>';
     $html .= '<div id="gpalab-blocks-modal"></div>';
