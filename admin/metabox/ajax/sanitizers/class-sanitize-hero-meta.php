@@ -90,6 +90,10 @@ class Sanitize_Hero_Meta {
       $sanitized['type'] = sanitize_text_field( $unsanitary['type'] );
     }
 
+    if ( ! empty( $unsanitary['align'] ) ) {
+      $sanitized['align'] = sanitize_text_field( $unsanitary['align'] );
+    }
+
     if ( ! empty( $unsanitary['files'] ) ) {
       $sanitized['files'] = $sanitize_files->sanitize_files( $unsanitary['files'], $uploads );
     }

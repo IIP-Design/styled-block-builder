@@ -21,33 +21,37 @@
 }
 
 .header {
-  align-items: center;
-  display: flex;
-  flex-direction: column;
+  margin: 0 auto;
+  transform: translateY(50%);
+  max-width: 1260px;
+  display: grid;
+  grid-column-gap: 2.63%;
+  grid-template-columns: repeat(12, 1fr);
 
   &-title {
-    color: $white;
+    color: #ffffff;
     font-style: normal;
+    font-family: 'EB Garamond', Times, Serif;
     letter-spacing: -0.75px;
     margin: 4rem 0 0;
-    text-align: center;
+    display: grid;
+    grid-column: 2 / span 11;
   }
 
   &-subtitle {
-    color: $white;
+    color: #ffffff;
     letter-spacing: -0.75px;
     margin: 1rem 0 0;
-    text-align: center;
+    display: grid;
+    grid-column: 2 / span 11;
   }
 
   &-text {
-    color: $white;
+    color: #ffffff;
     display: grid;
+    grid-column: 2 / span 11;
     font-style: italic;
-    grid-template-columns: 65% 35%;
     margin: 2rem 0 4rem;
-    max-width: 1191px;
-    width: 90%;
 
     &-column {
       display: grid;
