@@ -22,16 +22,14 @@
 
 .header {
   margin: 0 auto;
-  transform: translateY(50%);
   max-width: 1260px;
   display: grid;
   grid-column-gap: 2.63%;
   grid-template-columns: repeat(12, 1fr);
 
   &-title {
-    color: #ffffff;
+    color: $white;
     font-style: normal;
-    font-family: 'EB Garamond', Times, Serif;
     letter-spacing: -0.75px;
     margin: 4rem 0 0;
     display: grid;
@@ -39,7 +37,7 @@
   }
 
   &-subtitle {
-    color: #ffffff;
+    color: $white;
     letter-spacing: -0.75px;
     margin: 1rem 0 0;
     display: grid;
@@ -47,11 +45,11 @@
   }
 
   &-text {
-    color: #ffffff;
+    color: $white;
     display: grid;
     grid-column: 2 / span 11;
     font-style: italic;
-    margin: 2rem 0 4rem;
+    margin: 2rem 0;
 
     &-column {
       display: grid;
@@ -60,7 +58,6 @@
       grid-row-gap: 2rem;
 
       > p {
-        font-family: 'EB Garamond', Times, serif;
         font-size: 1.3rem;
         margin: 1rem 0;
       }
