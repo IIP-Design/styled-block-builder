@@ -9,6 +9,7 @@ const setBabelConfig = cssModuleNames => {
       '@babel/preset-react',
     ],
     plugins: [
+      '@babel/plugin-transform-runtime',
       '@babel/plugin-proposal-optional-chaining',
       [
         'babel-plugin-react-css-modules',

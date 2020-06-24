@@ -24,3 +24,15 @@
   display: flex;
   flex-direction: column;
 }
+
+.js-uploader {
+  margin: 1rem 0;
+}
+
+.native-uploader {
+  margin: 1rem 0;
+
+  > button {
+    margin-right: 1rem;
+  }
+}
