@@ -55,7 +55,7 @@ const TextForm = () => {
         selected={ formValues.blockBackground }
       />
       <label htmlFor="text-title">
-        Add Title (Optional):
+        Add Title:
         <input
           id="text-title"
           name="title"
@@ -65,7 +65,7 @@ const TextForm = () => {
         />
       </label>
       <label htmlFor="text-subtitle">
-        Add Subtitle (Optional):
+        Add Subtitle:
         <input
           id="text-subtitle"
           name="subtitle"
@@ -75,7 +75,7 @@ const TextForm = () => {
         />
       </label>
       <label htmlFor="text-desc">
-        Add Description (Optional):
+        Add Description:
         <ReactQuill
           id="text-desc"
           modules={ modules }
@@ -88,14 +88,14 @@ const TextForm = () => {
       <FullWidthToggle checked={ formValues.fullWidth } />
       <CheckboxConditional
         checked={ formValues.hasButton }
-        label="Add Button (Optional):"
+        label="Add Button?"
         name="hasButton"
       >
         <ButtonForm />
       </CheckboxConditional>
       <CheckboxConditional
         checked={ formValues.hasVideo }
-        label="Add a Video (Optional):"
+        label="Add a Video?"
         name="hasVideo"
       >
         <label htmlFor="video-title">
@@ -122,7 +122,7 @@ const TextForm = () => {
       </CheckboxConditional>
       <CheckboxConditional
         checked={ formValues.hasFeed }
-        label="Add an Article Feed (Optional):"
+        label="Add an Article Feed?"
         name="hasFeed"
       >
         <ArticleById />
