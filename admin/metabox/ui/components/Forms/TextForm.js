@@ -1,4 +1,5 @@
 import React, { Fragment, useContext, useEffect } from 'react';
+import ReactQuill from 'react-quill';
 
 import ArticleById from 'metabox/components/Forms/FeedTypes/ArticleById';
 import ButtonForm from 'metabox/components/Forms/ButtonForm/ButtonForm';
@@ -8,6 +9,8 @@ import FullWidthToggle from 'metabox/components/Forms/Toggles/FullWidthToggle';
 import { AdminContext } from 'metabox/context/adminContext';
 import { defaultBackgrounds, defaultText } from 'metabox/utils/color-picker-palettes';
 import { handleChange } from 'metabox/utils/event-handlers';
+
+import 'react-quill/dist/quill.snow.css';
 
 const TextForm = () => {
   const { dispatch, state } = useContext( AdminContext );
@@ -23,6 +26,10 @@ const TextForm = () => {
       dispatch( { type: 'form-update', payload: { name: 'blockBackground', value: '#ffffff' } } );
     }
   }, [] );
+
+  const handleQuill = value => {
+    dispatch( { type: 'form-update', payload: { name: 'desc', value } } );
+  };
 
   const blockBgOptions = {
     group: 'blockBackground',
@@ -68,12 +75,12 @@ const TextForm = () => {
       </label>
       <label htmlFor="text-desc">
         Add Description (Optional):
-        <textarea
+        <ReactQuill
           id="text-desc"
           name="desc"
-          rows="6"
+          theme="snow"
           value={ formValues.desc || '' }
-          onChange={ e => handleChange( e, dispatch ) }
+          onChange={ handleQuill }
         />
       </label>
       <FullWidthToggle checked={ formValues.fullWidth } />

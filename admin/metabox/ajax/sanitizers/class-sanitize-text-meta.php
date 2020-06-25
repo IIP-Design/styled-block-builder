@@ -72,7 +72,7 @@ class Sanitize_Text_Meta {
     }
 
     if ( ! empty( $unsanitary['desc'] ) ) {
-      $sanitized['desc'] = sanitize_textarea_field( $unsanitary['desc'] );
+      $sanitized['desc'] = wp_kses_post( $unsanitary['desc'] );
     }
 
     if ( ! empty( $unsanitary['fullWidth'] ) ) {
