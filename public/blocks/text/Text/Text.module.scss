@@ -40,8 +40,12 @@
 
 .description {
   color: $black;
-  text-align: center;
   flex-shrink: 1;
+  margin: 0 2rem;
+
+  > ul {
+    margin-left: 2rem;
+  }
 }
 
 @media screen and (max-width: 768px) {
@@ -52,7 +56,6 @@
 
   .text {
     text-align: center;
-
   }
 
   .container {

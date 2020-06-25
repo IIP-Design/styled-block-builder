@@ -46,11 +46,11 @@ const Text = ( { id } ) => {
               </h3>
             ) }
             <div styleName="content">
-              { desc && (
-                <div style={ { color: textColor } } styleName="description">
-                  { desc }
-                </div>
-              ) }
+              {
+                desc
+                // eslint-disable-next-line react/no-danger
+                && <div dangerouslySetInnerHTML={ { __html: desc } } style={ { color: textColor } } styleName="description" />
+              }
             </div>
             { hasButton && (
               <Button
