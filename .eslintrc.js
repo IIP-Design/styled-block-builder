@@ -3,6 +3,14 @@ module.exports = {
   parser: 'babel-eslint',
   rules: {
     'react/jsx-child-element-spacing': 'off',
+    'jsx-a11y/label-has-associated-control': [
+      'error',
+      {
+        assert: 'both',
+        controlComponents: ['ReactQuill'],
+        depth: 3
+      }
+    ],
   },
   settings: {
     'import/resolver': {
