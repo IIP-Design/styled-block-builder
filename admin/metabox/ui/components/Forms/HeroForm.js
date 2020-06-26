@@ -8,7 +8,7 @@ import RadioConditional from 'metabox/components/Forms/Toggles/RadioConditional'
 import TabbedForm from 'metabox/components/Forms/TabbedForm/TabbedForm';
 import { AdminContext } from 'metabox/context/adminContext';
 import { handleChange } from 'metabox/utils/event-handlers';
-import { modules } from 'metabox/utils/quill';
+import { getModules } from 'metabox/utils/quill';
 
 const HeroForm = () => {
   const { dispatch, state } = useContext( AdminContext );
@@ -68,7 +68,7 @@ const HeroForm = () => {
           Add main content area text:
           <ReactQuill
             id="hero-description"
-            modules={ modules }
+            modules={ getModules( ['align', 'lists'] ) }
             theme="snow"
             value={ formValues.description || '' }
             onChange={ handleQuill }

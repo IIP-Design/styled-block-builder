@@ -7,7 +7,7 @@ import FileUploader from 'metabox/components/FileUploader/FileUploader';
 import FullWidthToggle from 'metabox/components/Forms/Toggles/FullWidthToggle';
 import { AdminContext } from 'metabox/context/adminContext';
 import { handleChange } from 'metabox/utils/event-handlers';
-import { modules } from 'metabox/utils/quill';
+import { getModules } from 'metabox/utils/quill';
 
 const ParallaxForm = () => {
   const { dispatch, state } = useContext( AdminContext );
@@ -44,7 +44,7 @@ const ParallaxForm = () => {
         Add Description:
         <ReactQuill
           id="parallax-text"
-          modules={ modules }
+          modules={ getModules( ['align', 'lists'] ) }
           theme="snow"
           value={ formValues.desc || '' }
           onChange={ handleQuill }

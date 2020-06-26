@@ -8,7 +8,7 @@ import ColorPicker from 'metabox/components/ColorPicker/ColorPicker';
 import FullWidthToggle from 'metabox/components/Forms/Toggles/FullWidthToggle';
 import { AdminContext } from 'metabox/context/adminContext';
 import { defaultBackgrounds, defaultText } from 'metabox/utils/color-picker-palettes';
-import { modules } from 'metabox/utils/quill';
+import { getModules } from 'metabox/utils/quill';
 import { handleChange } from 'metabox/utils/event-handlers';
 
 const TextForm = () => {
@@ -76,7 +76,7 @@ const TextForm = () => {
         Add Description:
         <ReactQuill
           id="text-desc"
-          modules={ modules }
+          modules={ getModules( ['align', 'lists'] ) }
           theme="snow"
           value={ formValues.desc || '' }
           onChange={ handleQuill }
