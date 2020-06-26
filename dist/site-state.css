@@ -26,16 +26,40 @@ h2.gpa-lab-site-specific {
 
 h3.gpa-lab-site-specific {
   font-family: "EB Garamond", Times, Serif;
-  
+  font-size: 28px;
+  letter-spacing: -.5px;
+  line-height: 1.16667;
+
+  @media screen and (min-width: 62em) {
+    font-size: 36px;
+    line-height: 1.11538;
+  }
 }
 
 h4.gpa-lab-site-specific {
   font-family: "EB Garamond", Times, Serif;
-  
+  font-size: 16px;
+  line-height: 1.16667;
+  letter-spacing: 4.5px;
+  text-transform: uppercase;
+
+
+  @media screen and (min-width: 62em) {
+    font-size: 18px;
+    line-height: 1.11538;
+  }
 }
 
 h5.gpa-lab-site-specific {
   font-family: "EB Garamond", Times, Serif;
-  
+  font-size: 24px;
+	line-height: 30px;
+  text-transform: uppercase;
+
+
+  @media screen and (min-width: 62em) {
+    font-size: 22px;
+    line-height: 1.11538;
+  }
 }
 
