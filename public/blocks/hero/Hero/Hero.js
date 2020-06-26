@@ -34,7 +34,7 @@ const Hero = ( { id } ) => {
         <div style={ setBackgroundImage( files ) } styleName="content-background">
           <Gradient>
             <div style={ { textAlign: align } } styleName="header">
-              { title && <h1 styleName="header-title" className="gpalab-site-specific">{ title }</h1> }
+              { title && <h2 styleName="header-title" className="gpalab-site-specific">{ title }</h2> }
               { subtitle && <h3 styleName="header-subtitle" className="gpalab-site-specific">{ subtitle }</h3> }
               <div styleName="header-text">
                 <div styleName="header-text-column">
