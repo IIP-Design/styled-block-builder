@@ -1,0 +1,41 @@
+h1.gpa-lab-site-specific {
+  font-family: "EB Garamond", Times, Serif;
+  font-size: 36px;
+  line-height: 1.16667;
+  letter-spacing: -.75px;
+
+  @media screen and (min-width: 62em) {
+    font-size: 52px;
+    line-height: 1.11538;
+  }
+
+}
+
+h2.gpa-lab-site-specific {
+  font-family: "EB Garamond", Times, Serif;
+  font-size: 36px;
+  line-height: 1.16667;
+  letter-spacing: -.75px;
+  
+  @media screen and (min-width: 62em) {
+    font-size: 52px;
+    line-height: 1.11538;
+  }
+  
+}
+
+h3.gpa-lab-site-specific {
+  font-family: "EB Garamond", Times, Serif;
+  
+}
+
+h4.gpa-lab-site-specific {
+  font-family: "EB Garamond", Times, Serif;
+  
+}
+
+h5.gpa-lab-site-specific {
+  font-family: "EB Garamond", Times, Serif;
+  
+}
+

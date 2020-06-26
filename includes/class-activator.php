@@ -21,5 +21,6 @@ class Activator {
    */
   public function activate() {
     add_option( 'gpalab-blocks-dev-mode', 0 );
+    add_option( 'gpalab-styling-dev-mode', 0 );
   }
 }
