@@ -29,7 +29,7 @@ const ResourcesForm = () => {
         />
       </label>
       <label htmlFor="resources-subtitle">
-        Add Subtitle (Optional):
+        Add Subtitle:
         <input
           id="resources-subtitle"
           name="subtitle"

@@ -15,7 +15,7 @@ const ParallaxForm = () => {
     <Fragment>
       <FileUploader label="Add background image:" name="backgroundImage" />
       <label htmlFor="parallax-title">
-        Add Title (Optional):
+        Add Title:
         <input
           id="parallax-title"
           name="title"
@@ -25,7 +25,7 @@ const ParallaxForm = () => {
         />
       </label>
       <label htmlFor="parallax-subtitle">
-        Add Subtitle (Optional):
+        Add Subtitle:
         <input
           id="parallax-subtitle"
           name="subtitle"
@@ -35,7 +35,7 @@ const ParallaxForm = () => {
         />
       </label>
       <label htmlFor="parallax-text">
-        Add Description (Optional):
+        Add Description:
         <textarea
           id="parallax-text"
           name="desc"
@@ -46,7 +46,7 @@ const ParallaxForm = () => {
       </label>
       <CheckboxConditional
         checked={ formValues.hasButton }
-        label="Add Button (Optional):"
+        label="Add Button:"
         name="hasButton"
       >
         <ButtonForm />
