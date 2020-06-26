@@ -1,4 +1,5 @@
 import React, { Fragment, useContext } from 'react';
+import ReactQuill from 'react-quill';
 
 import ButtonForm from 'metabox/components/Forms/ButtonForm/ButtonForm';
 import CheckboxConditional from 'metabox/components/Forms/Toggles/CheckboxConditional';
@@ -6,10 +7,15 @@ import FileUploader from 'metabox/components/FileUploader/FileUploader';
 import FullWidthToggle from 'metabox/components/Forms/Toggles/FullWidthToggle';
 import { AdminContext } from 'metabox/context/adminContext';
 import { handleChange } from 'metabox/utils/event-handlers';
+import { modules } from 'metabox/utils/quill';
 
 const ParallaxForm = () => {
   const { dispatch, state } = useContext( AdminContext );
   const formValues = state?.formData?.formValues ? state.formData.formValues : {};
+
+  const handleQuill = value => {
+    dispatch( { type: 'form-update', payload: { name: 'desc', value } } );
+  };
 
   return (
     <Fragment>
@@ -36,12 +42,12 @@ const ParallaxForm = () => {
       </label>
       <label htmlFor="parallax-text">
         Add Description:
-        <textarea
+        <ReactQuill
           id="parallax-text"
-          name="desc"
-          rows="6"
+          modules={ modules }
+          theme="snow"
           value={ formValues.desc || '' }
-          onChange={ e => handleChange( e, dispatch ) }
+          onChange={ handleQuill }
         />
       </label>
       <CheckboxConditional

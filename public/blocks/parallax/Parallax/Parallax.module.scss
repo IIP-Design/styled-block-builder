@@ -48,8 +48,8 @@
 
 .text {
   color: $white;
-  text-align: center;
   flex-shrink: 1;
+  margin: 2rem 0;
 }
 
 @media screen and (max-width: 768px) {
