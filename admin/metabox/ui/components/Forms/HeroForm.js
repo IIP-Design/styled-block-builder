@@ -1,4 +1,5 @@
 import React, { Fragment, useContext } from 'react';
+import ReactQuill from 'react-quill';
 
 import ButtonForm from 'metabox/components/Forms/ButtonForm/ButtonForm';
 import CheckboxConditional from 'metabox/components/Forms/Toggles/CheckboxConditional';
@@ -7,10 +8,15 @@ import RadioConditional from 'metabox/components/Forms/Toggles/RadioConditional'
 import TabbedForm from 'metabox/components/Forms/TabbedForm/TabbedForm';
 import { AdminContext } from 'metabox/context/adminContext';
 import { handleChange } from 'metabox/utils/event-handlers';
+import { modules } from 'metabox/utils/quill';
 
 const HeroForm = () => {
   const { dispatch, state } = useContext( AdminContext );
   const formValues = state?.formData?.formValues ? state.formData.formValues : {};
+
+  const handleQuill = value => {
+    dispatch( { type: 'form-update', payload: { name: 'description', value } } );
+  };
 
   const optionsAlign = [
     { label: 'Left', name: 'align', value: 'left' },
@@ -28,7 +34,7 @@ const HeroForm = () => {
     <Fragment>
       <FileUploader label="Add background image:" name="backgroundImage" />
       <label htmlFor="hero-title">
-        Add Title (Optional):
+        Add Title:
         <input
           id="hero-title"
           name="title"
@@ -38,7 +44,7 @@ const HeroForm = () => {
         />
       </label>
       <label htmlFor="hero-subtitle">
-        Add Subtitle (Optional):
+        Add Subtitle:
         <input
           id="hero-subtitle"
           name="subtitle"
@@ -60,13 +66,12 @@ const HeroForm = () => {
       { formValues.type === 'text' && (
         <label htmlFor="hero-description">
           Add main content area text:
-          <textarea
+          <ReactQuill
             id="hero-description"
-            name="description"
-            rows="6"
-            type="text"
+            modules={ modules }
+            theme="snow"
             value={ formValues.description || '' }
-            onChange={ e => handleChange( e, dispatch ) }
+            onChange={ handleQuill }
           />
         </label>
       ) }
@@ -74,7 +79,7 @@ const HeroForm = () => {
         && <TabbedForm fields={ tabFields } group="lines" label="Line" maxTabs={ 10 } /> }
       <CheckboxConditional
         checked={ formValues.hasButton }
-        label="Add Button (Optional):"
+        label="Add Button:"
         name="hasButton"
       >
         <ButtonForm />
