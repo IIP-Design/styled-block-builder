@@ -42,7 +42,7 @@ class Sanitize_Quotebox_Meta {
     }
 
     if ( ! empty( $unsanitary['desc'] ) ) {
-      $sanitized['desc'] = sanitize_textarea_field( $unsanitary['desc'] );
+      $sanitized['desc'] = wp_kses_post( $unsanitary['desc'] );
     }
 
     if ( ! empty( $unsanitary['fullWidth'] ) ) {
@@ -50,15 +50,11 @@ class Sanitize_Quotebox_Meta {
     }
 
     if ( ! empty( $unsanitary['quote'] ) ) {
-      $sanitized['quote'] = sanitize_textarea_field( $unsanitary['quote'] );
+      $sanitized['quote'] = wp_kses_post( $unsanitary['quote'] );
     }
 
     if ( ! empty( $unsanitary['quoteBackground'] ) ) {
       $sanitized['quoteBackground'] = sanitize_text_field( $unsanitary['quoteBackground'] );
-    }
-
-    if ( ! empty( $unsanitary['speaker'] ) ) {
-      $sanitized['speaker'] = sanitize_text_field( $unsanitary['speaker'] );
     }
 
     if ( ! empty( $unsanitary['subtitle'] ) ) {

@@ -1,4 +1,5 @@
 import React, { Fragment, useContext, useEffect } from 'react';
+import ReactQuill from 'react-quill';
 
 import ColorPicker from 'metabox/components/ColorPicker/ColorPicker';
 import FileUploader from 'metabox/components/FileUploader/FileUploader';
@@ -7,6 +8,7 @@ import RadioConditional from 'metabox/components/Forms/Toggles/RadioConditional'
 import { AdminContext } from 'metabox/context/adminContext';
 import { defaultBackgrounds, defaultText } from 'metabox/utils/color-picker-palettes';
 import { handleChange } from 'metabox/utils/event-handlers';
+import { getModules } from 'metabox/utils/quill';
 
 const QuoteBoxForm = () => {
   const { dispatch, state } = useContext( AdminContext );
@@ -30,6 +32,14 @@ const QuoteBoxForm = () => {
       dispatch( { type: 'form-update', payload: { name: 'quoteBackground', value: '#ffffff' } } );
     }
   }, [] );
+
+  const handleDesc = value => {
+    dispatch( { type: 'form-update', payload: { name: 'desc', value } } );
+  };
+
+  const handleQuote = value => {
+    dispatch( { type: 'form-update', payload: { name: 'quote', value } } );
+  };
 
   const blockBgOptions = {
     group: 'blockBackground',
@@ -94,12 +104,12 @@ const QuoteBoxForm = () => {
       </label>
       <label htmlFor="quote-box-desc">
         Add Description:
-        <textarea
+        <ReactQuill
           id="quote-box-desc"
-          name="desc"
-          rows="6"
+          modules={ getModules( ['align', 'lists'] ) }
+          theme="snow"
           value={ formValues.desc || '' }
-          onChange={ e => handleChange( e, dispatch ) }
+          onChange={ handleDesc }
         />
       </label>
       <ColorPicker
@@ -109,22 +119,12 @@ const QuoteBoxForm = () => {
       />
       <label htmlFor="quote-box-quote">
         Add Quote:
-        <textarea
+        <ReactQuill
           id="quote-box-quote"
-          name="quote"
-          rows="6"
+          modules={ getModules() }
+          theme="snow"
           value={ formValues.quote || '' }
-          onChange={ e => handleChange( e, dispatch ) }
-        />
-      </label>
-      <label htmlFor="quote-box-speaker">
-        Add Speaker:
-        <input
-          id="quote-box-speaker"
-          name="speaker"
-          type="text"
-          value={ formValues.speaker || '' }
-          onChange={ e => handleChange( e, dispatch ) }
+          onChange={ handleQuote }
         />
       </label>
       <FullWidthToggle checked={ formValues.fullWidth } />

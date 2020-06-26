@@ -23,7 +23,6 @@ const QuoteBox = ( { id } ) => {
       fullWidth,
       quote,
       quoteBackground,
-      speaker,
       subtitle,
       textColor,
       title,
@@ -48,19 +47,10 @@ const QuoteBox = ( { id } ) => {
                     { subtitle }
                   </h3>
                 ) }
-                { desc && (
-                  <p style={ { color: textColor } } styleName="text">
-                    { desc }
-                  </p>
-                ) }
+                { desc && <div dangerouslySetInnerHTML={ { __html: desc } } style={ { color: textColor } } styleName="text" /> }
                 { quote && (
                   <div style={ backgroundStyle( quoteBackground ) } styleName="quote">
-                    <p style={ { color: setText( quoteBackground ) } } styleName="quote-text">
-                      { quote }
-                      <br />
-                      <br />
-                      { speaker && `– ${speaker}` }
-                    </p>
+                    <div dangerouslySetInnerHTML={ { __html: quote } } style={ { color: setText( quoteBackground ) } } styleName="quote-text" />
                   </div>
                 ) }
               </div>

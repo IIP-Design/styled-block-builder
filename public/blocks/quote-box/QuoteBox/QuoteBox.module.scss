@@ -48,10 +48,13 @@
 
   &-text {
     color: $blueDark;
-    font-style: italic;
     margin: 0 !important;
     padding: 3rem;
     text-align: center;
+
+    > p {
+      margin-bottom: 0.5rem;
+    }
   }
 }
 
