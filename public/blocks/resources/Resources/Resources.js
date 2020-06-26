@@ -33,9 +33,9 @@ const Resources = ( { id } ) => {
           } }
           styleName="background"
         >
-          { title && <h2 styleName="title">{ title }</h2> }
+          { title && <h2 className="gpa-lab-site-specific" styleName="title">{ title }</h2> }
 
-          { subtitle && <h4 styleName="subtitle">{ subtitle }</h4> }
+          { subtitle && <h4 className="gpa-lab-site-specific" styleName="subtitle">{ subtitle }</h4> }
 
           <div styleName="container">
             <div styleName="nav">

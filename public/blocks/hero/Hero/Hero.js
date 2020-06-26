@@ -33,8 +33,8 @@ const Hero = ( { id } ) => {
         <div style={ setBackgroundImage( files ) } styleName="content-background">
           <Gradient>
             <div styleName="header">
-              { title && <h1 styleName="header-title">{ title }</h1> }
-              { subtitle && <h3 styleName="header-subtitle">{ subtitle }</h3> }
+              { title && <h1 styleName="header-title" className="gpa-lab-site-specific">{ title }</h1> }
+              { subtitle && <h3 styleName="header-subtitle" className="gpa-lab-site-specific">{ subtitle }</h3> }
               <div styleName="header-text">
                 <div styleName="header-text-column">
                   <div>

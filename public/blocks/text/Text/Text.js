@@ -36,12 +36,12 @@ const Text = ( { id } ) => {
         <div style={ backgroundStyle( blockBackground ) } styleName="bg">
           <div styleName="container">
             { title && (
-              <h2 style={ { color: textColor } } styleName="title">
+              <h2 className="gpa-lab-site-specific" style={ { color: textColor } } styleName="title">
                 { title }
               </h2>
             ) }
             { subtitle && (
-              <h3 style={ { color: textColor } } styleName="subtitle">
+              <h3 className="gpa-lab-site-specific" style={ { color: textColor } } styleName="subtitle">
                 { subtitle }
               </h3>
             ) }
