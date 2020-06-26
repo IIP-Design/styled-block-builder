@@ -11,8 +11,6 @@ import { defaultBackgrounds, defaultText } from 'metabox/utils/color-picker-pale
 import { modules } from 'metabox/utils/quill';
 import { handleChange } from 'metabox/utils/event-handlers';
 
-import 'react-quill/dist/quill.snow.css';
-
 const TextForm = () => {
   const { dispatch, state } = useContext( AdminContext );
   const formValues = state?.formData?.formValues ? state.formData.formValues : {};
@@ -79,7 +77,6 @@ const TextForm = () => {
         <ReactQuill
           id="text-desc"
           modules={ modules }
-          name="desc"
           theme="snow"
           value={ formValues.desc || '' }
           onChange={ handleQuill }

@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom';
 
 import Metabox from './components/Metabox/Metabox';
 
+import 'react-quill/dist/quill.snow.css';
+
 // Run accessibility tests in development.
 if ( process.env.NODE_ENV !== 'production' ) {
   // eslint-disable-next-line global-require
