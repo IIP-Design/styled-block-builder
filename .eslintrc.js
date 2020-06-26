@@ -2,6 +2,7 @@ module.exports = {
   extends: ['@gpa-lab/eslint-config', '@gpa-lab/eslint-config/react'],
   parser: 'babel-eslint',
   rules: {
+    'react/no-danger':'warn',
     'react/jsx-child-element-spacing': 'off',
     'jsx-a11y/label-has-associated-control': [
       'error',

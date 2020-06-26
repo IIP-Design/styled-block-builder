@@ -38,12 +38,8 @@ const Hero = ( { id } ) => {
               { subtitle && <h3 styleName="subtitle" className="gpalab-site-specific">{ subtitle }</h3> }
               <div styleName="text">
                 <div styleName="text-column">
-                  <div>
-                    { type === 'text'
-                    // eslint-disable-next-line react/no-danger
-                    && <div dangerouslySetInnerHTML={ { __html: description } } styleName="text-large" /> }
-                    { type === 'lines' && <AnimatedLines lines={ lines } /> }
-                  </div>
+                  { type === 'text' && <div dangerouslySetInnerHTML={ { __html: description } } styleName="text-large" /> }
+                  { type === 'lines' && <AnimatedLines lines={ lines } /> }
                   { hasButton && (
                     <Button
                       arrow={ buttonArrow }

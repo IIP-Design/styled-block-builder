@@ -34,9 +34,7 @@ const Parallax = ( { id } ) => {
               <div styleName="content">
                 { title && <h2 className="gpalab-site-specific" styleName="title">{ title }</h2> }
                 { subtitle && <h3 className="gpalab-site-specific" styleName="subtitle">{ subtitle }</h3> }
-                { desc
-                    // eslint-disable-next-line react/no-danger
-                    && <div dangerouslySetInnerHTML={ { __html: desc } } styleName="text" /> }
+                { desc && <div dangerouslySetInnerHTML={ { __html: desc } } styleName="text" /> }
                 { hasButton && (
                   <Button
                     arrow={ buttonArrow }
