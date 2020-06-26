@@ -38,7 +38,7 @@ class Settings {
    */
   private function create_admin_page() {
     // Set class property.
-    $this->options = get_option( 'gpalab-blocks-dev-mode', 'gpalab-styling-dev-mode' );
+    $this->options = get_option( 'gpalab-blocks-dev-mode' );
     ?>
     <div class="wrap">
       <h1> <?php __( 'GPA/LAB Styled Blocks', 'gpalab-blocks' ); ?></h1>
@@ -104,7 +104,6 @@ class Settings {
       'gpalab-blocks',
       'gpalab-styling'
     );
-   
   }
 
   /**
@@ -145,6 +144,9 @@ class Settings {
     <?php
   }
 
+  /**
+   * Provide option to toggle State.gov styles for plugin headings.
+   */
   private function styling_toggle() {
     $option = get_option( 'gpalab-styling-dev-mode' );
 
