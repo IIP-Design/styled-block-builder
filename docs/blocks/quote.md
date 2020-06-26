@@ -7,7 +7,7 @@ title: Quote
      - Set **block background color** from the options provided: `white, blue, textured white, textured navy`.
    - Image
      - Add Background Image:
-       - Select **Choose File** to uploade your background image.
+       - Select **Choose File** to upload your background image.
 2. Select the **block text color** from the options provided.
 3. Add Title (Optional)
 4. Add Subtitle (Optional)

@@ -3,7 +3,7 @@ title: Hero
 ---
 
 1. Add Background Image:
-   - Select **Choose File** to uploade your background image.
+   - Select **Choose File** to upload your background image.
 2. Add Title
 3. Add Subtitle
 4. Select the type of text you would like for your Hero Block.

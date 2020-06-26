@@ -3,7 +3,7 @@ title: Parallax
 ---
 
 1. Add Background Image:
-   - Select **Choose File** to uploade your background image.
+   - Select **Choose File** to upload your background image.
 2. Add Title (Optional)
 3. Add Subtitle (Optional)
 4. Add Description (Optional):
