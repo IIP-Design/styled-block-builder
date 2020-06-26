@@ -3,7 +3,9 @@ export const modules = {
     [
       'bold', 'italic', 'underline',
     ],
-    [{ list: 'ordered' }, { list: 'bullet' }],
+    [
+      { list: 'ordered' }, { list: 'bullet' }, { align: [] },
+    ],
     ['link'],
     ['clean'],
   ],

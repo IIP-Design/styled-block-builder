@@ -1,5 +1,6 @@
 // Normalizer CSS should be included first to ensure a proper cascade
 import './_shared/components/Normalizer/Normalizer.scss';
+import 'styles/quill.scss';
 
 /* eslint-disable import/no-unassigned-import */
 // Blocks
