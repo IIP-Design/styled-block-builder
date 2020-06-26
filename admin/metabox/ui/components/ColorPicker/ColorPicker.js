@@ -3,6 +3,7 @@ import propTypes from 'prop-types';
 
 import { AdminContext } from 'metabox/context/adminContext';
 import { handleColor } from 'metabox/utils/event-handlers';
+import { getColorTitle } from 'metabox/utils/color-picker-palettes';
 
 import './ColorPicker.module.scss';
 
@@ -34,6 +35,7 @@ const ColorPicker = ( { colors, label, selected } ) => {
                   name={ color.name }
                   style={ style }
                   styleName={ color.value === selected ? 'button selected' : 'button hidden' }
+                  title={ getColorTitle( color.name ) }
                   type="button"
                   value={ color.value }
                   onClick={ e => handleColor( e, dispatch ) }

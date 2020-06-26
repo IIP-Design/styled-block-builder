@@ -24,3 +24,15 @@ export const defaultText = [
   { name: 'white', type: 'color', value: '#ffffff' },
   { name: 'blue', type: 'color', value: '#0a314d' },
 ];
+
+export const getColorTitle = color => {
+  if ( color === 'blueWavy' ) {
+    return 'blue waves';
+  }
+
+  if ( color === 'whiteWavy' ) {
+    return 'white waves';
+  }
+
+  return color;
+};
