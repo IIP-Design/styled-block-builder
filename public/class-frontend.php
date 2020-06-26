@@ -37,15 +37,13 @@ class Frontend {
     $scripts  = '1' === $dev_mode ? 'dev-block-frontend.js' : 'gpalab-block-frontend.js';
     $styles   = '1' === $dev_mode ? 'dev-block-frontend.css' : 'gpalab-block-frontend.css';
 
-    $style_mode = get_option( 'gpalab-style-dev-mode' );
-    $set_styles = '1' === $style_mode ? 'site-state.css' : 'gpalab-block-frontend.css';
-
     wp_register_script( 'gpalab-blocks-frontend-js', STYLE_BLOCKS_DIST . $scripts, array(), $this->version, true );
 
     wp_register_style( 'gpalab-blocks-frontend-css', STYLE_BLOCKS_DIST . $styles, array(), $this->version );
 
-    wp_register_style( 'site-state-css', STYLE_BLOCKS_DIST . $set_styles, array(), $this->version );
-
+    if ( '1' === get_option( 'gpalab-styling-dev-mode' ) ) {
+      wp_register_style( 'site-state-css', STYLE_BLOCKS_DIST . 'site-state.css', array(), $this->version );
+    }
 
     wp_localize_script(
       'gpalab-blocks-frontend-js',
