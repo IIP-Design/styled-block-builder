@@ -20,32 +20,41 @@
   );
 }
 
-.header {
+.hero {
   margin: 0 auto;
   max-width: 1260px;
   display: grid;
   grid-column-gap: 2.63%;
   grid-template-columns: repeat(12, 1fr);
+}
 
-  &-title {
-    color: $white;
-    font-style: normal;
-    letter-spacing: -0.75px;
-    margin: 4rem 0 0;
-    display: grid;
-    grid-column: 2 / span 11;
-  }
+.title {
+  color: $white;
+  font-style: normal;
+  letter-spacing: -0.75px;
+  margin: 4rem 0 0;
+  display: grid;
+  grid-column: 2 / span 11;
+}
 
-  &-subtitle {
-    color: $white;
-    letter-spacing: -0.75px;
-    margin: 1rem 0 0;
-    display: grid;
-    grid-column: 2 / span 11;
-  }
+.subtitle {
+  color: $white;
+  letter-spacing: -0.75px;
+  margin: 1rem 0 0;
+  display: grid;
+  grid-column: 2 / span 11;
+}
 
-  &-text {
-    color: $white;
+.text {
+  color: $white;
+  display: grid;
+  font-style: italic;
+  grid-template-columns: 65% 35%;
+  margin: 2rem 0 4rem;
+  max-width: 1191px;
+  width: 90%;
+
+  &-column {
     display: grid;
     grid-column: 2 / span 11;
     font-style: italic;
@@ -63,52 +72,54 @@
       }
     }
 
-    &-large {
-      font-style: normal;
-      font-weight: 500;
+    > p {
+      font-family: 'EB Garamond', Times, serif;
+      font-size: 1.3rem;
+      margin: 1rem 0;
     }
+  }
+
+  &-large {
+    font-style: normal;
+    font-weight: 500;
   }
 }
 
 @media screen and (max-width: 800px) {
-  .header-text {
+  .text {
     grid-template-columns: 1fr;
   }
 }
 
 @media screen and (max-width: 768px) {
-  .header {
-    &-title {
-      margin: 1.5rem 1.5rem 0;
-      padding-top: 3rem;
-    }
+  .title {
+    margin: 1.5rem 1.5rem 0;
+    padding-top: 3rem;
+  }
 
-    &-subtitle {
-      margin: 1rem;
-    }
+  .subtitle {
+    margin: 1rem;
+  }
 
-    &-text {
-      margin: 1rem 1.5rem 2rem;
-    }
+  .text {
+    margin: 1rem 1.5rem 2rem;
   }
 }
 
 @media screen and (max-width: 500px) {
-  .header {
-    &-title {
-      text-align: center;
-    }
-
-    &-subtitle {
-      text-align: center;
-    }
-
-    &-text {
-      margin: 1rem 1rem 2rem;
-    }
+  .title {
+    text-align: center;
   }
 
-  &-content {
+  .subtitle {
+    text-align: center;
+  }
+
+  .text {
+    margin: 1rem 1rem 2rem;
+  }
+
+  .content {
     &-background {
       background-position: center bottom;
       background-size: cover;

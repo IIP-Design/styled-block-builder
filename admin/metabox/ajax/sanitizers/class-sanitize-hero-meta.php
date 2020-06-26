@@ -58,7 +58,7 @@ class Sanitize_Hero_Meta {
     }
 
     if ( ! empty( $unsanitary['description'] ) ) {
-      $sanitized['description'] = sanitize_textarea_field( $unsanitary['description'] );
+      $sanitized['description'] = wp_kses_post( $unsanitary['description'] );
     }
 
     if ( ! empty( $unsanitary['hasButton'] ) ) {

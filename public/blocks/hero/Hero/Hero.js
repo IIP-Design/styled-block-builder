@@ -33,14 +33,15 @@ const Hero = ( { id } ) => {
       <Normalizer fullWidth>
         <div style={ setBackgroundImage( files ) } styleName="content-background">
           <Gradient>
-            <div style={ { textAlign: align } } styleName="header">
-              { title && <h2 styleName="header-title" className="gpalab-site-specific">{ title }</h2> }
-              { subtitle && <h3 styleName="header-subtitle" className="gpalab-site-specific">{ subtitle }</h3> }
-              <div styleName="header-text">
-                <div styleName="header-text-column">
+            <div style={ { textAlign: align } } styleName="hero">
+              { title && <h2 styleName="title" className="gpalab-site-specific">{ title }</h2> }
+              { subtitle && <h3 styleName="subtitle" className="gpalab-site-specific">{ subtitle }</h3> }
+              <div styleName="text">
+                <div styleName="text-column">
                   <div>
                     { type === 'text'
-                      && <p styleName="header-text-large">{ description }</p> }
+                    // eslint-disable-next-line react/no-danger
+                    && <div dangerouslySetInnerHTML={ { __html: description } } styleName="text-large" /> }
                     { type === 'lines' && <AnimatedLines lines={ lines } /> }
                   </div>
                   { hasButton && (
