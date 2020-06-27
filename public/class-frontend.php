@@ -33,16 +33,17 @@ class Frontend {
   public function register_blocks_scripts_styles() {
 
     /** Check whether in dev mode and if so load dev builds. */
-    $dev_mode = get_option( 'gpalab-blocks-dev-mode' );
-    $scripts  = '1' === $dev_mode ? 'dev-block-frontend.js' : 'gpalab-block-frontend.js';
-    $styles   = '1' === $dev_mode ? 'dev-block-frontend.css' : 'gpalab-block-frontend.css';
+    $dev_mode     = get_option( 'gpalab-blocks-dev-mode' );
+    $scripts      = '1' === $dev_mode ? 'dev-block-frontend.js' : 'gpalab-block-frontend.js';
+    $base_styles  = '1' === $dev_mode ? 'dev-block-frontend.css' : 'gpalab-block-frontend.css';
+    $state_styles = '1' === $dev_mode ? 'dev-site-state.css' : 'gpalab-site-state.css';
 
     wp_register_script( 'gpalab-blocks-frontend-js', STYLE_BLOCKS_DIST . $scripts, array(), $this->version, true );
 
-    wp_register_style( 'gpalab-blocks-frontend-css', STYLE_BLOCKS_DIST . $styles, array(), $this->version );
+    wp_register_style( 'gpalab-blocks-frontend-css', STYLE_BLOCKS_DIST . $base_styles, array(), $this->version );
 
     if ( '1' === get_option( 'gpalab-styling-dev-mode' ) ) {
-      wp_register_style( 'site-state-css', STYLE_BLOCKS_DIST . 'site-state.css', array(), $this->version );
+      wp_register_style( 'site-state-css', STYLE_BLOCKS_DIST . $state_styles, array(), $this->version );
     }
 
     wp_localize_script(
