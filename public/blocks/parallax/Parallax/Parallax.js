@@ -32,8 +32,8 @@ const Parallax = ( { id } ) => {
           <Gradient>
             <div styleName="fixed">
               <div styleName="content">
-                { title && <h2 styleName="title">{ title }</h2> }
-                { subtitle && <h3 styleName="subtitle">{ subtitle }</h3> }
+                { title && <h2 className="gpalab-site-specific" styleName="title">{ title }</h2> }
+                { subtitle && <h3 className="gpalab-site-specific" styleName="subtitle">{ subtitle }</h3> }
                 { desc && <p styleName="text">{ desc }</p> }
                 { hasButton && (
                   <Button

@@ -58,7 +58,8 @@
     "sass-loader": "^8.0.0",
     "webpack": "^4.43.0",
     "webpack-bundle-analyzer": "^3.6.1",
-    "webpack-cli": "^3.3.11"
+    "webpack-cli": "^3.3.11",
+    "webpack-fix-style-only-entries": "^0.5.1"
   },
   "dependencies": {
     "gsap": "^3.0.2",

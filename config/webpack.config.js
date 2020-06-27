@@ -12,6 +12,7 @@ module.exports = ( _, argv ) => {
     entry: {
       'block-frontend': `${paths.blocksFrontend}/blocks`,
       'block-admin': paths.metaboxUI,
+      'site-state': [`${paths.siteSpecificStyles}/state.scss`],
     },
     module: {
       rules: [
