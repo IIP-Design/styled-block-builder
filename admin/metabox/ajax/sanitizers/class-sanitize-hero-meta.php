@@ -33,6 +33,10 @@ class Sanitize_Hero_Meta {
     $unsanitary = json_decode( stripslashes( $data ), true );
     $sanitized  = array();
 
+    if ( ! empty( $unsanitary['align'] ) ) {
+      $sanitized['align'] = sanitize_text_field( $unsanitary['align'] );
+    }
+
     if ( ! empty( $unsanitary['buttonArrow'] ) ) {
       $sanitized['buttonArrow'] = sanitize_text_field( $unsanitary['buttonArrow'] );
     }
@@ -88,10 +92,6 @@ class Sanitize_Hero_Meta {
 
     if ( ! empty( $unsanitary['type'] ) ) {
       $sanitized['type'] = sanitize_text_field( $unsanitary['type'] );
-    }
-
-    if ( ! empty( $unsanitary['align'] ) ) {
-      $sanitized['align'] = sanitize_text_field( $unsanitary['align'] );
     }
 
     if ( ! empty( $unsanitary['files'] ) ) {
