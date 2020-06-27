@@ -61,9 +61,9 @@ const Timeline = ( { id } ) => {
             styleName="overlay"
           />
 
-          <h2 className="gpa-lab-site-specific" styleName="title">{ title }</h2>
+          <h2 className="gpalab-site-specific" styleName="title">{ title }</h2>
 
-          <h3 className="gpa-lab-site-specific" styleName={ isMobile ? 'slide-title-mobile' : 'slide-title' }>
+          <h3 className="gpalab-site-specific" styleName={ isMobile ? 'slide-title-mobile' : 'slide-title' }>
             { selected.subtitle || '' }
           </h3>
 

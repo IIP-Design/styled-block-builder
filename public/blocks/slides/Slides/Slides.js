@@ -78,7 +78,7 @@ const Slides = ( { id } ) => {
     return (
       <Normalizer fullWidth>
         <div id="scene-container" styleName="slide-container">
-          { title && <h2 className="gpa-lab-site-specific" styleName="slide-title">{ title }</h2> }
+          { title && <h2 className="gpalab-site-specific" styleName="slide-title">{ title }</h2> }
           <div id={ `pin-container-${id}` } styleName="pin-container">
             { slides.map( slide => (
               <section
@@ -89,7 +89,7 @@ const Slides = ( { id } ) => {
                 styleName="slide"
               >
                 <div styleName="slide-content">
-                  <h4 className="gpa-lab-site-specific" style={ { backgroundColor: subTitleColor } } styleName="slide-subtitle">
+                  <h4 className="gpalab-site-specific" style={ { backgroundColor: subTitleColor } } styleName="slide-subtitle">
                     { slide.subtitle }
                   </h4>
                   <div styleName="slide-text">{ slide.text }</div>

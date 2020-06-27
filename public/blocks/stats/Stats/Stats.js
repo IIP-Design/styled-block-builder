@@ -51,7 +51,7 @@ const Stats = ( { id } ) => {
           <Gradient off={ backgroundType !== 'image' }>
             <div className="stats-container" styleName="container">
               { title && (
-                <h2 className="gpa-lab-site-specific" style={ { color: textColor } } styleName="title">
+                <h2 className="gpalab-site-specific" style={ { color: textColor } } styleName="title">
                   { title }
                 </h2>
               ) }
