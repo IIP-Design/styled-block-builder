@@ -48,7 +48,7 @@ class Shortcode {
     wp_enqueue_script( 'gpalab-blocks-frontend-js' );
     wp_enqueue_style( 'gpalab-blocks-frontend-css' );
 
-    if ( '1' === get_option( 'gpalab-styling-dev-mode' ) ) {
+    if ( '1' === get_option( 'gpalab-blocks-styling' ) ) {
       wp_enqueue_style( 'site-state-css' );
     }
 

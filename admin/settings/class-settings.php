@@ -64,7 +64,7 @@ class Settings {
 
     register_setting(
       'gpalab-blocks',
-      'gpalab-styling-dev-mode'
+      'gpalab-blocks-styling'
     );
 
     add_settings_section(
@@ -78,7 +78,7 @@ class Settings {
 
     add_settings_field(
       'gpalab-dev-mode',
-      __( 'Toggle Dev Mode', 'gpalab-blocks' ),
+      __( 'Toggle dev-mode:', 'gpalab-blocks' ),
       function() {
         return $this->dev_mode_toggle();
       },
@@ -88,16 +88,16 @@ class Settings {
 
     add_settings_section(
       'gpalab-styling',
-      __( 'Set styling to State.gov specific?', 'gpalab-blocks' ),
+      __( 'Set styling to match that of state.gov?', 'gpalab-blocks' ),
       function() {
-        esc_html_e( 'This will set Heading elements to State.gov specific styling.', 'gpalab-blocks' );
+        esc_html_e( 'This will apply the font styles used by state.gov to all block heading elements. If left disabled, blocks will inherit the base heading styles on the site.', 'gpalab-blocks' );
       },
       'gpalab-blocks'
     );
 
     add_settings_field(
       'gpalab-styling-mode',
-      __( 'Toggle State.gov Styling', 'gpalab-blocks' ),
+      __( 'Toggle state.gov styling:', 'gpalab-blocks' ),
       function() {
         return $this->styling_toggle();
       },
@@ -148,19 +148,19 @@ class Settings {
    * Provide option to toggle State.gov styles for plugin headings.
    */
   private function styling_toggle() {
-    $option = get_option( 'gpalab-styling-dev-mode' );
+    $option = get_option( 'gpalab-blocks-styling' );
 
     ?>
       <label for="styling-disabled">
         <?php esc_html_e( 'Disabled', 'gpalab-blocks' ); ?>
         <input
           id="gpalab-styling-disabled"
-          name="gpalab-styling-dev-mode"
+          name="gpalab-blocks-styling"
           style="margin-left: 10px"
           type="radio"
           value="0"
           <?php
-            $disabled = get_option( 'gpalab-styling-dev-mode' ) === '0' ? 'checked' : '';
+            $disabled = get_option( 'gpalab-blocks-styling' ) === '0' ? 'checked' : '';
             echo esc_html( $disabled );
           ?>
         />
@@ -169,12 +169,12 @@ class Settings {
         <?php esc_html_e( 'Enabled', 'gpalab-blocks' ); ?>
         <input
           id="gpalab-styling-enabled"
-          name="gpalab-styling-dev-mode"
+          name="gpalab-blocks-styling"
           style="margin-left: 10px"
           type="radio"
           value="1"
           <?php
-            $enabled = get_option( 'gpalab-styling-dev-mode' ) === '1' ? 'checked' : '';
+            $enabled = get_option( 'gpalab-blocks-styling' ) === '1' ? 'checked' : '';
             echo esc_html( $enabled );
           ?>
         />

@@ -21,6 +21,6 @@ class Deactivator {
    */
   public function deactivate() {
     delete_option( 'gpalab-blocks-dev-mode' );
-    delete_option( 'gpalab-styling-dev-mode' );
+    delete_option( 'gpalab-blocks-styling' );
   }
 }

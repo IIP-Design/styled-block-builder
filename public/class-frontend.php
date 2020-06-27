@@ -42,7 +42,7 @@ class Frontend {
 
     wp_register_style( 'gpalab-blocks-frontend-css', STYLE_BLOCKS_DIST . $base_styles, array(), $this->version );
 
-    if ( '1' === get_option( 'gpalab-styling-dev-mode' ) ) {
+    if ( '1' === get_option( 'gpalab-blocks-styling' ) ) {
       wp_register_style( 'site-state-css', STYLE_BLOCKS_DIST . $state_styles, array(), $this->version );
     }
 
