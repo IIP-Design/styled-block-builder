@@ -12,6 +12,11 @@ const HeroForm = () => {
   const { dispatch, state } = useContext( AdminContext );
   const formValues = state?.formData?.formValues ? state.formData.formValues : {};
 
+  const optionsAlign = [
+    { label: 'Left', name: 'align', value: 'left' },
+    { label: 'Center', name: 'align', value: 'center' },
+  ];
+
   const options = [
     { label: 'Text', name: 'type', value: 'text' },
     { label: 'Animated lines', name: 'type', value: 'lines' },
@@ -42,6 +47,11 @@ const HeroForm = () => {
           onChange={ e => handleChange( e, dispatch ) }
         />
       </label>
+      <RadioConditional
+        checked={ formValues.align }
+        label="Choose a text alignment"
+        options={ optionsAlign }
+      />
       <RadioConditional
         checked={ formValues.type }
         label="What type of block would you like?"
