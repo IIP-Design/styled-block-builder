@@ -1,9 +1,15 @@
+@import url('https://fonts.googleapis.com/css?family=EB+Garamond:400,600,700&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700&display=swap');
+
+$fontBase: 'Open Sans', Arial, sans-serif;
+$fontHeader: 'EB Garamond', Times, serif;
+
 h1.gpalab-site-specific {
-  font-family: 'EB Garamond', Times, Serif;
+  font-family: $fontHeader;
   font-size: 36px;
   font-weight: 400;
-  letter-spacing: -0.75px;
   line-height: 1.16667;
+  letter-spacing: -0.75px;
 
   @media screen and (min-width: 62em) {
     font-size: 52px;
@@ -12,7 +18,7 @@ h1.gpalab-site-specific {
 }
 
 h2.gpalab-site-specific {
-  font-family: 'EB Garamond', Times, Serif;
+  font-family: $fontHeader;
   font-size: 32px;
   font-weight: 400;
   letter-spacing: -0.5px;
@@ -21,11 +27,12 @@ h2.gpalab-site-specific {
   @media (min-width: 48em) {
     font-size: 42px;
     line-height: 48px;
+    line-height: 1.11538;
   }
 }
 
 h3.gpalab-site-specific {
-  font-family: 'EB Garamond', Times, Serif;
+  font-family: $fontHeader;
   font-size: 28px;
   font-weight: 400;
   letter-spacing: -0.5px;
@@ -38,20 +45,15 @@ h3.gpalab-site-specific {
 }
 
 h4.gpalab-site-specific {
-  font-family: 'EB Garamond', Times, Serif;
+  font-family: $fontHeader;
   font-size: 24px;
   font-weight: 500;
   line-height: 30px;
   letter-spacing: -0.5px;
-
-  @media screen and (min-width: 62em) {
-    font-size: 30px;
-    line-height: 1.11538;
-  }
 }
 
 h5.gpalab-site-specific {
-  font-family: 'Open Sans', Arial, Sans-Serif;
+  font-family: $fontBase;
   font-size: 18px;
   font-weight: 700;
   letter-spacing: 1px;
