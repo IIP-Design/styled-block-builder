@@ -55,6 +55,11 @@
     > p {
       margin-bottom: 0.5rem;
     }
+
+    > ul {
+      list-style: inherit;
+      margin-inline-start: 2rem;
+    }
   }
 }
 

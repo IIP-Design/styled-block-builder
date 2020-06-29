@@ -48,7 +48,8 @@
   }
 
   > ul {
-    margin-left: 2rem;
+    list-style: inherit;
+    margin-inline-start: 2rem;
   }
 }
 

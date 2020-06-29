@@ -59,6 +59,11 @@
     margin: 1rem 0;
   }
 
+  > ul {
+    list-style: inherit;
+    margin-inline-start: 2rem;
+  }
+
   &-large {
     font-style: normal;
     font-weight: 500;
