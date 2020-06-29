@@ -40,19 +40,17 @@ const Hero = ( { id } ) => {
               { title && <h2 styleName="title" className="gpalab-site-specific">{ title }</h2> }
               { subtitle && <h3 styleName="subtitle" className="gpalab-site-specific">{ subtitle }</h3> }
               <div styleName="text">
-                <div styleName="text-column">
-                  { type === 'text' && <div dangerouslySetInnerHTML={ { __html: description } } styleName="text-large" /> }
-                  { type === 'lines' && <AnimatedLines lines={ lines } /> }
-                  { hasButton && (
-                    <Button
-                      arrow={ buttonArrow }
-                      border={ buttonBorder }
-                      color={ buttonColor }
-                      link={ buttonLink }
-                      text={ buttonText }
-                    />
-                  ) }
-                </div>
+                { type === 'text' && <div dangerouslySetInnerHTML={ { __html: description } } styleName="text-large" /> }
+                { type === 'lines' && <AnimatedLines lines={ lines } /> }
+                { hasButton && (
+                  <Button
+                    arrow={ buttonArrow }
+                    border={ buttonBorder }
+                    color={ buttonColor }
+                    link={ buttonLink }
+                    text={ buttonText }
+                  />
+                ) }
               </div>
             </div>
           </Gradient>

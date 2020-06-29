@@ -48,35 +48,15 @@
 .text {
   color: $white;
   display: grid;
-  font-style: italic;
+  grid-column: 2 / span 11;
   grid-template-columns: 65% 35%;
   margin: 2rem 0 4rem;
   max-width: 1191px;
   width: 90%;
 
-  &-column {
-    display: grid;
-    grid-column: 2 / span 11;
-    font-style: italic;
-    margin: 2rem 0;
-
-    &-column {
-      display: grid;
-      grid-template-columns: 1fr;
-      grid-template-rows: 1fr 1fr;
-      grid-row-gap: 2rem;
-
-      > p {
-        font-size: 1.3rem;
-        margin: 1rem 0;
-      }
-    }
-
-    > p {
-      font-family: 'EB Garamond', Times, serif;
-      font-size: 1.3rem;
-      margin: 1rem 0;
-    }
+  > p {
+    font-size: 1.3rem;
+    margin: 1rem 0;
   }
 
   &-large {
