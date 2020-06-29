@@ -57,6 +57,8 @@ const Timeline = ( { id } ) => {
       <Normalizer fullWidth={ fullWidth }>
         <div id="timeline-section" styleName="bg">
           <div
+            aria-label={ selected.alt }
+            role="img"
             style={ selected?.files ? setBackgroundImage( selected.files ) : {} }
             styleName="overlay"
           />

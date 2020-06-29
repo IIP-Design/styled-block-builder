@@ -40,7 +40,7 @@ const Stats = ( { id } ) => {
   } );
 
   if ( meta ) {
-    const { backgroundType, blockBackground, files, fullWidth, stats, textColor, title } = meta;
+    const { alt, backgroundType, blockBackground, files, fullWidth, stats, textColor, title } = meta;
 
     const bg
       = backgroundType === 'image' ? setBackgroundImage( files ) : backgroundStyle( blockBackground );
@@ -48,6 +48,7 @@ const Stats = ( { id } ) => {
     return (
       <Normalizer fullWidth={ fullWidth }>
         <div ref={ ref } style={ bg } styleName="box-bg">
+          <span role="img" aria-label={ alt } />
           <Gradient off={ backgroundType !== 'image' }>
             <div className="stats-container" styleName="container">
               { title && (

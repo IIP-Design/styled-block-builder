@@ -15,6 +15,7 @@ const Hero = ( { id } ) => {
   if ( meta ) {
     const {
       align,
+      alt,
       buttonArrow,
       buttonBorder,
       buttonColor,
@@ -32,6 +33,7 @@ const Hero = ( { id } ) => {
     return (
       <Normalizer fullWidth>
         <div style={ setBackgroundImage( files ) } styleName="content-background">
+          <span role="img" aria-label={ alt } />
           <Gradient>
             <div style={ { textAlign: align } } styleName="hero">
               { title && <h2 styleName="title" className="gpalab-site-specific">{ title }</h2> }

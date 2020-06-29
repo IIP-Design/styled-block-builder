@@ -13,6 +13,7 @@ const Parallax = ( { id } ) => {
 
   if ( meta ) {
     const {
+      alt,
       buttonArrow,
       buttonBorder,
       buttonColor,
@@ -29,6 +30,7 @@ const Parallax = ( { id } ) => {
     return (
       <Normalizer fullWidth={ fullWidth }>
         <div style={ setBackgroundImage( files ) } styleName="box-bg">
+          <span role="img" aria-label={ alt } />
           <Gradient>
             <div styleName="fixed">
               <div styleName="content">

@@ -88,6 +88,7 @@ const Slides = ( { id } ) => {
                 style={ { backgroundImage: `url(${getBackgroundImageUrl( slide.files )})` } }
                 styleName="slide"
               >
+                <span role="img" aria-label={ slide.alt } />
                 <div styleName="slide-content">
                   <h4 className="gpalab-site-specific" style={ { backgroundColor: subTitleColor } } styleName="slide-subtitle">
                     { slide.subtitle }

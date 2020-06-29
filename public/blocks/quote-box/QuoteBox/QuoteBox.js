@@ -16,6 +16,7 @@ const QuoteBox = ( { id } ) => {
 
   if ( meta ) {
     const {
+      alt,
       backgroundType,
       blockBackground,
       desc,
@@ -34,6 +35,7 @@ const QuoteBox = ( { id } ) => {
     return (
       <Normalizer fullWidth={ fullWidth }>
         <div style={ bg } styleName="box-bg">
+          <span role="img" aria-label={ alt } />
           <Gradient off={ backgroundType !== 'image' }>
             <div styleName="container">
               <div styleName="content">
