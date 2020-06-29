@@ -6,7 +6,7 @@ import { ScrollMagicPluginGsap } from 'scrollmagic-plugin-gsap';
 
 import Normalizer from 'blocks/_shared/components/Normalizer/Normalizer';
 // import Gradient from 'blocks/_shared/components/Gradient/Gradient';
-import { getBackgroundImageUrl } from 'blocks/_shared/utils/background-style';
+import { getBackgroundAlt, getBackgroundImageUrl } from 'blocks/_shared/utils/background-style';
 
 import './Slides.module.scss';
 
@@ -80,23 +80,27 @@ const Slides = ( { id } ) => {
         <div id="scene-container" styleName="slide-container">
           { title && <h2 className="gpalab-site-specific" styleName="slide-title">{ title }</h2> }
           <div id={ `pin-container-${id}` } styleName="pin-container">
-            { slides.map( slide => (
-              <section
-                key={ slide.id }
-                className={ `slide-${id}` }
-                id={ `slide-${slide.id}` }
-                style={ { backgroundImage: `url(${getBackgroundImageUrl( slide.files )})` } }
-                styleName="slide"
-              >
-                <span role="img" aria-label={ slide.alt } />
-                <div styleName="slide-content">
-                  <h4 className="gpalab-site-specific" style={ { backgroundColor: subTitleColor } } styleName="slide-subtitle">
-                    { slide.subtitle }
-                  </h4>
-                  <div styleName="slide-text">{ slide.text }</div>
-                </div>
-              </section>
-            ) ) }
+            { slides.map( slide => {
+              const alt = getBackgroundAlt( slide.files );
+
+              return (
+                <section
+                  key={ slide.id }
+                  className={ `slide-${id}` }
+                  id={ `slide-${slide.id}` }
+                  style={ { backgroundImage: `url(${getBackgroundImageUrl( slide.files )})` } }
+                  styleName="slide"
+                >
+                  { alt && <span role="img" aria-label={ alt } /> }
+                  <div styleName="slide-content">
+                    <h4 className="gpalab-site-specific" style={ { backgroundColor: subTitleColor } } styleName="slide-subtitle">
+                      { slide.subtitle }
+                    </h4>
+                    <div styleName="slide-text">{ slide.text }</div>
+                  </div>
+                </section>
+              );
+            } ) }
             <div styleName="progress-container">
               <div
                 id="scrollBar"

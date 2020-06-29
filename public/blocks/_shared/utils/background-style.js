@@ -101,7 +101,7 @@ export const setBackgroundImage = fileList => backgroundImageStyle( getBackgroun
  * @param {string} background The background color value
  * @returns {string} The hex code color value expected given the provided background color.
  */
-export const setText = background => {
+export const setTextColor = background => {
   let textColor = '#333333'; // The base font color
 
   if ( background === '#ffffff' || background === 'wavy-bg.jpg' ) {

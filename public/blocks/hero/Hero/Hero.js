@@ -5,7 +5,7 @@ import AnimatedLines from 'blocks/_shared/components/AnimatedLines/AnimatedLines
 import Button from 'blocks/_shared/components/Button/Button';
 import Gradient from 'blocks/_shared/components/Gradient/Gradient';
 import Normalizer from 'blocks/_shared/components/Normalizer/Normalizer';
-import { setBackgroundImage } from 'blocks/_shared/utils/background-style';
+import { getBackgroundAlt, setBackgroundImage } from 'blocks/_shared/utils/background-style';
 
 import './Hero.module.scss';
 
@@ -15,7 +15,6 @@ const Hero = ( { id } ) => {
   if ( meta ) {
     const {
       align,
-      alt,
       buttonArrow,
       buttonBorder,
       buttonColor,
@@ -30,10 +29,12 @@ const Hero = ( { id } ) => {
       type,
     } = meta;
 
+    const alt = getBackgroundAlt( files );
+
     return (
       <Normalizer fullWidth>
         <div style={ setBackgroundImage( files ) } styleName="content-background">
-          <span role="img" aria-label={ alt } />
+          { alt && <span role="img" aria-label={ alt } /> }
           <Gradient>
             <div style={ { textAlign: align } } styleName="hero">
               { title && <h2 styleName="title" className="gpalab-site-specific">{ title }</h2> }

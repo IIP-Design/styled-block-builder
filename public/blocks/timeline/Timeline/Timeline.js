@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import propTypes from 'prop-types';
 
 import Normalizer from 'blocks/_shared/components/Normalizer/Normalizer';
-import { setBackgroundImage } from 'blocks/_shared/utils/background-style';
+import { getBackgroundAlt, setBackgroundImage } from 'blocks/_shared/utils/background-style';
 
 import './Timeline.module.scss';
 
@@ -57,7 +57,7 @@ const Timeline = ( { id } ) => {
       <Normalizer fullWidth={ fullWidth }>
         <div id="timeline-section" styleName="bg">
           <div
-            aria-label={ selected.alt }
+            aria-label={ getBackgroundAlt( selected.files ) }
             role="img"
             style={ selected?.files ? setBackgroundImage( selected.files ) : {} }
             styleName="overlay"

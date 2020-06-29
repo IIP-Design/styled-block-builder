@@ -14,7 +14,6 @@ const Text = ( { id } ) => {
 
   if ( meta ) {
     const {
-      alt,
       articles,
       blockBackground,
       buttonArrow,
@@ -35,7 +34,6 @@ const Text = ( { id } ) => {
     return (
       <Normalizer fullWidth={ fullWidth }>
         <div style={ backgroundStyle( blockBackground ) } styleName="bg">
-          <span role="img" aria-label={ alt } />
           <div styleName="container">
             { title && (
               <h2 className="gpalab-site-specific" style={ { color: textColor } } styleName="title">

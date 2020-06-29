@@ -5,8 +5,9 @@ import Gradient from 'blocks/_shared/components/Gradient/Gradient';
 import Normalizer from 'blocks/_shared/components/Normalizer/Normalizer';
 import {
   backgroundStyle,
+  getBackgroundAlt,
   setBackgroundImage,
-  setText,
+  setTextColor,
 } from 'blocks/_shared/utils/background-style';
 
 import './QuoteBox.module.scss';
@@ -16,7 +17,6 @@ const QuoteBox = ( { id } ) => {
 
   if ( meta ) {
     const {
-      alt,
       backgroundType,
       blockBackground,
       desc,
@@ -29,13 +29,13 @@ const QuoteBox = ( { id } ) => {
       title,
     } = meta;
 
-    const bg
-      = backgroundType === 'image' ? setBackgroundImage( files ) : backgroundStyle( blockBackground );
+    const alt = getBackgroundAlt( files );
+    const bg = backgroundType === 'image' ? setBackgroundImage( files ) : backgroundStyle( blockBackground );
 
     return (
       <Normalizer fullWidth={ fullWidth }>
         <div style={ bg } styleName="box-bg">
-          <span role="img" aria-label={ alt } />
+          { alt && <span role="img" aria-label={ alt } /> }
           <Gradient off={ backgroundType !== 'image' }>
             <div styleName="container">
               <div styleName="content">
@@ -52,7 +52,7 @@ const QuoteBox = ( { id } ) => {
                 { desc && <div dangerouslySetInnerHTML={ { __html: desc } } style={ { color: textColor } } styleName="text" /> }
                 { quote && (
                   <div style={ backgroundStyle( quoteBackground ) } styleName="quote">
-                    <div dangerouslySetInnerHTML={ { __html: quote } } style={ { color: setText( quoteBackground ) } } styleName="quote-text" />
+                    <div dangerouslySetInnerHTML={ { __html: quote } } style={ { color: setTextColor( quoteBackground ) } } styleName="quote-text" />
                   </div>
                 ) }
               </div>

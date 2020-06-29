@@ -6,7 +6,7 @@ import { v4 as uuid } from 'uuid';
 import Gradient from 'blocks/_shared/components/Gradient/Gradient';
 import Normalizer from 'blocks/_shared/components/Normalizer/Normalizer';
 import useVisibilityObserver from 'blocks/_shared/hooks/useVisibilityObserver';
-import { backgroundStyle, setBackgroundImage } from 'blocks/_shared/utils/background-style';
+import { backgroundStyle, getBackgroundAlt, setBackgroundImage } from 'blocks/_shared/utils/background-style';
 
 import './Stats.module.scss';
 
@@ -40,15 +40,23 @@ const Stats = ( { id } ) => {
   } );
 
   if ( meta ) {
-    const { alt, backgroundType, blockBackground, files, fullWidth, stats, textColor, title } = meta;
+    const {
+      backgroundType,
+      blockBackground,
+      files,
+      fullWidth,
+      stats,
+      textColor,
+      title,
+    } = meta;
 
-    const bg
-      = backgroundType === 'image' ? setBackgroundImage( files ) : backgroundStyle( blockBackground );
+    const alt = getBackgroundAlt( files );
+    const bg = backgroundType === 'image' ? setBackgroundImage( files ) : backgroundStyle( blockBackground );
 
     return (
       <Normalizer fullWidth={ fullWidth }>
         <div ref={ ref } style={ bg } styleName="box-bg">
-          <span role="img" aria-label={ alt } />
+          { alt && <span role="img" aria-label={ alt } /> }
           <Gradient off={ backgroundType !== 'image' }>
             <div className="stats-container" styleName="container">
               { title && (

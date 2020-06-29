@@ -4,7 +4,7 @@ import propTypes from 'prop-types';
 import Button from 'blocks/_shared/components/Button/Button';
 import Gradient from 'blocks/_shared/components/Gradient/Gradient';
 import Normalizer from 'blocks/_shared/components/Normalizer/Normalizer';
-import { setBackgroundImage } from 'blocks/_shared/utils/background-style';
+import { getBackgroundAlt, setBackgroundImage } from 'blocks/_shared/utils/background-style';
 
 import './Parallax.module.scss';
 
@@ -13,7 +13,6 @@ const Parallax = ( { id } ) => {
 
   if ( meta ) {
     const {
-      alt,
       buttonArrow,
       buttonBorder,
       buttonColor,
@@ -27,10 +26,12 @@ const Parallax = ( { id } ) => {
       title,
     } = meta;
 
+    const alt = getBackgroundAlt( files );
+
     return (
       <Normalizer fullWidth={ fullWidth }>
         <div style={ setBackgroundImage( files ) } styleName="box-bg">
-          <span role="img" aria-label={ alt } />
+          { alt && <span role="img" aria-label={ alt } /> }
           <Gradient>
             <div styleName="fixed">
               <div styleName="content">
