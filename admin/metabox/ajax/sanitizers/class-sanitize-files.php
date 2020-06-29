@@ -35,7 +35,9 @@ class Sanitize_Files {
 
         if ( ! empty( $file['name'] ) ) {
           $url = $file['file']['url'] ? $file['file']['url'] : $file['url'];
+          $alt = $file['file']['alt'] ? $file['file']['alt'] : $file['alt'];
 
+          $sanitized_file['alt']      = sanitize_text_field( $alt );
           $sanitized_file['filename'] = sanitize_text_field( $file['filename'] );
           $sanitized_file['name']     = sanitize_text_field( $file['name'] );
           $sanitized_file['url']      = esc_url_raw( $url );
@@ -45,6 +47,7 @@ class Sanitize_Files {
         if ( ! empty( $uploads ) ) {
           foreach ( $uploads as $upload ) {
             if ( $upload['filename'] === $file['filename'] ) {
+              $sanitized_file['alt']      = sanitize_text_field( $file['alt'] );
               $sanitized_file['filename'] = $upload['filename'];
               $sanitized_file['name']     = sanitize_text_field( $file['name'] );
               $sanitized_file['url']      = $upload['url'];

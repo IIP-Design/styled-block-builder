@@ -50,7 +50,12 @@ export const adminReducer = ( state, action ) => {
           ...state.formData,
           formValues: {
             ...state.formData.formValues,
-            files: fileAdd( payload.file, payload.name, state.formData.formValues.files ),
+            files: fileAdd(
+              payload.alt,
+              payload.file,
+              payload.name,
+              state.formData.formValues.files,
+            ),
           },
         },
       };
@@ -63,6 +68,7 @@ export const adminReducer = ( state, action ) => {
             ...state.formData.formValues,
             [payload.parentGroup]: fileAddNested(
               state.formData.formValues[payload.parentGroup],
+              payload.alt,
               payload.file,
               payload.name,
               payload.parentId,

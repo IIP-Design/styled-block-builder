@@ -77,15 +77,16 @@ export const blockSave = ( state, block ) => {
 /**
  * Adds a file to a provided file list.
  *
+ * @param {string} alt Alternative text for the given file.
  * @param {Object} file File object.
  * @param {string} name Identifier for the given file.
  * @param {Object[]} fileList Array of file objects.
  * @returns {Object[]} New array of file objects.
  */
-export const fileAdd = ( file, name, fileList ) => {
+export const fileAdd = ( alt, file, name, fileList ) => {
   const files = fileList || [];
 
-  files.push( { file, name, filename: file.name } );
+  files.push( { alt, file, name, filename: file.name } );
 
   return files;
 };
@@ -94,6 +95,7 @@ export const fileAdd = ( file, name, fileList ) => {
  * Adds a file to a provided file list nested within a group.
  *
  * @param {Object} data Data object for the selected group.
+ * @param {string} alt Alternative text for the given file.
  * @param {Object} file Uploaded file object.
  * @param {string} name Name of the given file.
  * @param {string} parentId The id value of the object that the function is searching for.
@@ -102,12 +104,12 @@ export const fileAdd = ( file, name, fileList ) => {
  * @see {getSelectedFromGroup}
  * @see {fileAdd}
  */
-export const fileAddNested = ( data, file, name, parentId ) => {
+export const fileAddNested = ( data, alt, file, name, parentId ) => {
   // Pull selected item out of array, preserve the remaining temporary array
   const { filtered, selected } = getSelectedFromGroup( data, parentId );
 
   // Update the nested group.
-  const groupArr = fileAdd( file, name, selected.files );
+  const groupArr = fileAdd( alt, file, name, selected.files );
 
   // Update selected files list.
   selected.files = groupArr;

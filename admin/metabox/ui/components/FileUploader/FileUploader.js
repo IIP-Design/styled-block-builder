@@ -40,6 +40,7 @@ const FileUploader = ( { label, name, parentGroup, parentId } ) => {
       .first();
 
     addFileDispatch( {
+      alt: attributes.alt,
       name: attributes.filename,
       type: attributes.type,
       url: attributes.url,
@@ -69,12 +70,12 @@ const FileUploader = ( { label, name, parentGroup, parentId } ) => {
     const current = checkForFile( name, formValues, parentGroup, parentId );
 
     return (
-      <label htmlFor="quote-box-image" styleName="label">
+      <label htmlFor="file-uploader" styleName="label">
         { label }
         { current && (
           <div styleName="existing-file">
             <p>
-              <strong>Current image: </strong>
+              <strong>Current file: </strong>
               { current.filename || 'Pending upload...' }
             </p>
             <button styleName="button" type="button" onClick={ () => handleFileRemoval() }>
