@@ -42,7 +42,9 @@ const Hero = ( { id } ) => {
               <div styleName="text">
                 { type === 'text' && <div dangerouslySetInnerHTML={ { __html: description } } styleName="text-large" /> }
                 { type === 'lines' && <AnimatedLines lines={ lines } /> }
-                { hasButton && (
+              </div>
+              { hasButton && (
+                <div styleName="button-container">
                   <Button
                     arrow={ buttonArrow }
                     border={ buttonBorder }
@@ -50,8 +52,8 @@ const Hero = ( { id } ) => {
                     link={ buttonLink }
                     text={ buttonText }
                   />
-                ) }
-              </div>
+                </div>
+              ) }
             </div>
           </Gradient>
         </div>
