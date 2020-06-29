@@ -4,7 +4,7 @@ import propTypes from 'prop-types';
 import './Button.module.scss';
 
 const Button = ( { arrow, border, color, link, text } ) => (
-  <a href={ link }>
+  <a href={ link } styleName="link">
     <button styleName={ `button ${color} ${border}` } type="button">
       { text }
       { arrow && arrow !== 'none' && (
