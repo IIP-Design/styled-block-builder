@@ -93,9 +93,9 @@ const Slides = ( { id } ) => {
                 >
                   { alt && <span role="img" aria-label={ alt } /> }
                   <div styleName="slide-content">
-                    <h4 className="gpalab-site-specific" style={ { backgroundColor: subTitleColor } } styleName="slide-subtitle">
+                    <h3 className="gpalab-site-specific" style={ { backgroundColor: subTitleColor } } styleName="slide-subtitle">
                       { slide.subtitle }
-                    </h4>
+                    </h3>
                     <div styleName="slide-text">{ slide.text }</div>
                   </div>
                 </section>
