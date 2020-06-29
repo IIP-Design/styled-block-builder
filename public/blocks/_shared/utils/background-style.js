@@ -1,20 +1,35 @@
-// Accept background value and check if it should be a repeated background image or a color value
-export const backgroundStyle = value => {
-  const { assets } = window.gpalabBlockFront;
-
+/**
+ * Checks whether the selected background style is an image or not
+ *
+ * @param {string} value Background style
+ * @returns {string|undefined} If an image returns 'image' otherwise undefined
+ */
+const getBackgroundType = value => {
   let type;
 
-  const extentions = [
+  const extensions = [
     '.jpg', '.jpeg', '.png', '.svg',
   ];
 
-  extentions.forEach( extention => {
-    if ( value.includes( extention ) ) {
+  extensions.forEach( extension => {
+    if ( value.includes( extension ) ) {
       type = 'image';
     }
   } );
 
-  if ( type === 'image' ) {
+  return type;
+};
+
+/**
+ * Accept background value and check if it should be a repeated background image or a color value
+ *
+ * @param {string} value Background style
+ * @returns {Object} Inline style object, either for a background image or a background color depending on the provided style
+ */
+export const backgroundStyle = value => {
+  const { assets } = window.gpalabBlockFront;
+
+  if ( getBackgroundType( value ) === 'image' ) {
     return {
       backgroundImage: `url('${assets}${value}')`,
       backgroundRepeat: 'repeat',
@@ -24,41 +39,78 @@ export const backgroundStyle = value => {
   return { backgroundColor: value };
 };
 
-// Return the inline styles for a background cover image
-export const backgroundImageStyle = url => ( {
+/**
+ * Return the inline styles for a background cover image
+ *
+ * @param {string} url Background image URL
+ * @returns {Object} Inline styles for a background image
+ */
+const backgroundImageStyle = url => ( {
   backgroundImage: `url('${url}')`,
   backgroundPosition: 'center',
   backgroundRepeat: 'no-repeat',
   backgroundSize: 'cover',
 } );
 
-// Get the URL for a file with the name 'backgroundImage' from an array of image objects
-export const getBackgroundImageUrl = fileList => {
+/**
+ * Get a specified property for a file with the name 'backgroundImage' from an array of file objects
+ *
+ * @param {Object[]} fileList Group of file objects.
+ * @param {string} prop Name of the sought after property.
+ * @returns {string} The specified property's value.
+ */
+const getBackgroundProp = ( fileList, prop ) => {
   if ( !fileList ) {
     return '';
   }
 
   const bgImage = fileList.filter( file => file.name === 'backgroundImage' );
 
-  const url = bgImage?.[0]?.url ? bgImage[0].url : '';
+  const property = bgImage?.[0]?.[prop] ? bgImage[0][prop] : '';
 
-  return url;
+  return property;
 };
 
-// Return background image inline styles for the file 'backgroundImage' from a list of file objects
+/**
+ * Get the alt text for a file with the name 'backgroundImage' from an array of file objects
+ *
+ * @param {Object[]} fileList Group of file objects.
+ * @returns {string} The alt text value, if present, or an empty string.
+ */
+export const getBackgroundAlt = fileList => getBackgroundProp( fileList, 'alt' );
+
+/**
+ * Get the URL for a file with the name 'backgroundImage' from an array of file objects
+ *
+ * @param {Object[]} fileList Group of file objects.
+ * @returns {string} The URL value, if present, or an empty string.
+ */
+export const getBackgroundImageUrl = fileList => getBackgroundProp( fileList, 'url' );
+
+/**
+ * Return background image inline styles for the file 'backgroundImage' from a list of file objects
+ *
+ * @param {Object[]} fileList Group of file objects.
+ * @returns {Object} Inline styles for a background URL
+ */
 export const setBackgroundImage = fileList => backgroundImageStyle( getBackgroundImageUrl( fileList ) );
 
-// Sets text color opposite (i.e. dark/light) of input color
+/**
+ * Sets text color opposite (i.e. dark/light) of input color
+ *
+ * @param {string} background The background color value
+ * @returns {string} The hex code color value expected given the provided background color.
+ */
 export const setText = background => {
-  let text;
+  let textColor = '#333333'; // The base font color
 
   if ( background === '#ffffff' || background === 'wavy-bg.jpg' ) {
-    text = '#0a314d';
+    textColor = '#0a314d';
   }
 
   if ( background === '#0a314d' || background === 'wavy-navy.jpg' ) {
-    text = '#ffffff';
+    textColor = '#ffffff';
   }
 
-  return text;
+  return textColor;
 };
