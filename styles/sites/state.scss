@@ -1,6 +1,8 @@
 @import url('https://fonts.googleapis.com/css?family=EB+Garamond:400,600,700&display=swap');
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700&display=swap');
 
+@import 'styles/colors.scss';
+
 $fontBase: 'Open Sans', Arial, sans-serif;
 $fontHeader: 'EB Garamond', Times, serif;
 
@@ -63,5 +65,25 @@ h5.gpalab-site-specific {
   @media screen and (min-width: 62em) {
     font-size: 22px;
     line-height: 1.11538;
+  }
+}
+
+a {
+  border-bottom: 1px solid;
+}
+
+.gpalab-normalizer p > a {
+  color: inherit;
+  cursor: pointer;
+  font-weight: 700;
+  text-decoration: none;
+  transition: color 0.2s ease-out, border-color 0.2s ease-out;
+
+  &:hover,
+  &:active,
+  &:focus {
+    border-bottom-color: transparent;
+    color: $blueSilver;
+    text-decoration: none;
   }
 }
