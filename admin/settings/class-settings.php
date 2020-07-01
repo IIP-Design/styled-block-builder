@@ -86,7 +86,10 @@ class Settings {
       'gpalab-styling-mode',
       __( 'Toggle state.gov styling:', 'gpalab-blocks' ),
       function() {
-        return $this->styling_toggle();
+        include_once STYLE_BLOCKS_DIR . 'admin/settings/templates/class-settings-inputs.php';
+        $inputs = new Settings_Inputs();
+
+        return $inputs->radio_toggle( 'styling' );
       },
       'gpalab-blocks',
       'gpalab-styling'
@@ -108,86 +111,13 @@ class Settings {
       'gpalab-dev-mode',
       __( 'Toggle dev-mode:', 'gpalab-blocks' ),
       function() {
-        return $this->dev_mode_toggle();
+        include_once STYLE_BLOCKS_DIR . 'admin/settings/templates/class-settings-inputs.php';
+        $inputs = new Settings_Inputs();
+
+        return $inputs->radio_toggle( 'dev-mode' );
       },
       'gpalab-blocks',
       'gpalab-blocks'
     );
-  }
-
-  /**
-   * Provide option to toggle development mode for the plugin.
-   */
-  private function dev_mode_toggle() {
-    $option = get_option( 'gpalab-blocks-dev-mode' );
-
-    ?>
-      <label for="gpalab-dev-mode-disabled">
-        <?php esc_html_e( 'Disabled', 'gpalab-blocks' ); ?>
-        <input
-          id="gpalab-dev-mode-disabled"
-          name="gpalab-blocks-dev-mode"
-          style="margin-left: 10px"
-          type="radio"
-          value="0"
-          <?php
-            $disabled = get_option( 'gpalab-blocks-dev-mode' ) === '0' ? 'checked' : '';
-            echo esc_html( $disabled );
-          ?>
-        />
-      </label>
-      <label for="gpalab-dev-mode-enabled">
-        <?php esc_html_e( 'Enabled', 'gpalab-blocks' ); ?>
-        <input
-          id="gpalab-dev-mode-enabled"
-          name="gpalab-blocks-dev-mode"
-          style="margin-left: 10px"
-          type="radio"
-          value="1"
-          <?php
-            $enabled = get_option( 'gpalab-blocks-dev-mode' ) === '1' ? 'checked' : '';
-            echo esc_html( $enabled );
-          ?>
-        />
-      </label>
-    <?php
-  }
-
-  /**
-   * Provide option to toggle State.gov styles for plugin headings.
-   */
-  private function styling_toggle() {
-    $option = get_option( 'gpalab-blocks-styling' );
-
-    ?>
-      <label for="styling-disabled">
-        <?php esc_html_e( 'Disabled', 'gpalab-blocks' ); ?>
-        <input
-          id="gpalab-styling-disabled"
-          name="gpalab-blocks-styling"
-          style="margin-left: 10px"
-          type="radio"
-          value="0"
-          <?php
-            $disabled = get_option( 'gpalab-blocks-styling' ) === '0' ? 'checked' : '';
-            echo esc_html( $disabled );
-          ?>
-        />
-      </label>
-      <label for="gpalab-styling-enabled">
-        <?php esc_html_e( 'Enabled', 'gpalab-blocks' ); ?>
-        <input
-          id="gpalab-styling-enabled"
-          name="gpalab-blocks-styling"
-          style="margin-left: 10px"
-          type="radio"
-          value="1"
-          <?php
-            $enabled = get_option( 'gpalab-blocks-styling' ) === '1' ? 'checked' : '';
-            echo esc_html( $enabled );
-          ?>
-        />
-      </label>
-    <?php
   }
 }
