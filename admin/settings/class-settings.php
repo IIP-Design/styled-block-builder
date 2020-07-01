@@ -57,35 +57,22 @@ class Settings {
    * Register the plugin settings and add to the settings page.
    */
   public function populate_blocks_settings() {
-    register_setting(
-      'gpalab-blocks',
-      'gpalab-blocks-dev-mode'
-    );
-
+    /**
+     * Register settings
+     */
     register_setting(
       'gpalab-blocks',
       'gpalab-blocks-styling'
     );
 
-    add_settings_section(
+    register_setting(
       'gpalab-blocks',
-      __( 'Set Plugin to Dev Mode?', 'gpalab-blocks' ),
-      function() {
-        esc_html_e( 'This is not recommended. It will enqueue development builds of the plugin\'s scripts and styles and should only be used while actively developing the plugin.', 'gpalab-blocks' );
-      },
-      'gpalab-blocks'
+      'gpalab-blocks-dev-mode'
     );
 
-    add_settings_field(
-      'gpalab-dev-mode',
-      __( 'Toggle dev-mode:', 'gpalab-blocks' ),
-      function() {
-        return $this->dev_mode_toggle();
-      },
-      'gpalab-blocks',
-      'gpalab-blocks'
-    );
-
+    /**
+     * Add custom styling section
+     */
     add_settings_section(
       'gpalab-styling',
       __( 'Set styling to match that of state.gov?', 'gpalab-blocks' ),
@@ -103,6 +90,28 @@ class Settings {
       },
       'gpalab-blocks',
       'gpalab-styling'
+    );
+
+    /**
+     * Add dev-mode section
+     */
+    add_settings_section(
+      'gpalab-blocks',
+      __( 'Set Plugin to Dev Mode?', 'gpalab-blocks' ),
+      function() {
+        esc_html_e( 'This is not recommended. It will enqueue development builds of the plugin\'s scripts and styles and should only be used while actively developing the plugin.', 'gpalab-blocks' );
+      },
+      'gpalab-blocks'
+    );
+
+    add_settings_field(
+      'gpalab-dev-mode',
+      __( 'Toggle dev-mode:', 'gpalab-blocks' ),
+      function() {
+        return $this->dev_mode_toggle();
+      },
+      'gpalab-blocks',
+      'gpalab-blocks'
     );
   }
 
