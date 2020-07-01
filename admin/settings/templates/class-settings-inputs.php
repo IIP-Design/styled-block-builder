@@ -59,4 +59,56 @@ class Settings_Inputs {
       </label>
     <?php
   }
+
+  /**
+   * Return an multiple select input to populate an option with an array of values
+   * Expects the option to follow the naming convention 'gpalab-blocks-property'
+   *
+   * @param string      $property   The name of the given option without the gpalab-blocks-' prefix.
+   * @param array       $options    An array of possible values for the select options.
+   * @param string|null $transform  The type of transformation that should be run to generate the option names.
+   */
+  public function multi_select( $property, $options, $transform = null ) {
+    $option = 'gpalab-blocks-' . $property;
+
+    ?>
+      <select
+        id="<?php echo esc_html( $option ); ?>"
+        name="<?php echo esc_html( $option ); ?>[]"
+        multiple
+        style="font-size: 13px;width: 11rem;"
+      >
+        <?php
+        foreach ( $options as $opt ) {
+          $value    = get_option( $option );
+          $selected = ! empty( $value ) && in_array( $opt, $value, true ) ? ' selected="selected"' : '';
+          $opt_text = $this->transform_options( $opt, $transform );
+
+          echo '<option style="padding: 0.3rem" value="' . esc_html( $opt ) . '" ' . esc_attr( $selected ) . '>' . esc_html( $opt_text ) . '</option>';
+        }
+        ?>
+      </select>
+    <?php
+  }
+
+  /**
+   * Converts an option value into the corresponding, predefined text.
+   * Otherwise it returns the provided option value.
+   *
+   * @param string      $option     The value of the given option.
+   * @param string|null $transform  The type of transformation that should be run to generate the option names.
+   */
+  private function transform_options( $option, $transform ) {
+    if ( 'feed' === $transform ) {
+      if ( 'share' === $option ) {
+        return 'ShareAmerica';
+      } elseif ( 'this' === $option ) {
+        return 'Posts from this site';
+      } else {
+        return strtoupper( $option );
+      }
+    } else {
+      return $option;
+    }
+  }
 }

@@ -22,5 +22,8 @@ class Activator {
   public function activate() {
     add_option( 'gpalab-blocks-dev-mode', 0 );
     add_option( 'gpalab-blocks-styling', 0 );
+
+    $default = array( 'share', 'yali', 'ylai', 'this' );
+    add_option( 'gpalab-blocks-feed-sources', $default );
   }
 }

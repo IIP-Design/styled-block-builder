@@ -70,6 +70,11 @@ class Settings {
       'gpalab-blocks-dev-mode'
     );
 
+    register_setting(
+      'gpalab-blocks',
+      'gpalab-blocks-feed-sources'
+    );
+
     /**
      * Add custom styling section
      */
@@ -77,13 +82,13 @@ class Settings {
       'gpalab-styling',
       __( 'Set styling to match that of state.gov?', 'gpalab-blocks' ),
       function() {
-        esc_html_e( 'This will apply the font styles used by state.gov to all block heading elements. If left disabled, blocks will inherit the base heading styles on the site.', 'gpalab-blocks' );
+        esc_html_e( 'This setting will apply the font styles used by state.gov to all block heading elements. If left disabled, blocks will inherit the base heading styles on the site.', 'gpalab-blocks' );
       },
       'gpalab-blocks'
     );
 
     add_settings_field(
-      'gpalab-styling-mode',
+      'gpalab-styling',
       __( 'Toggle state.gov styling:', 'gpalab-blocks' ),
       function() {
         include_once STYLE_BLOCKS_DIR . 'admin/settings/templates/class-settings-inputs.php';
@@ -96,13 +101,40 @@ class Settings {
     );
 
     /**
+     * Add article feed source section
+     */
+    add_settings_section(
+      'gpalab-feed-sources',
+      __( 'Select sources to enable in the article feed block:', 'gpalab-blocks' ),
+      function() {
+        esc_html_e( 'This setting determines which sources will be made available to the article feed block.', 'gpalab-blocks' );
+      },
+      'gpalab-blocks'
+    );
+
+    add_settings_field(
+      'gpalab-feed-sources',
+      __( 'Choose sources:', 'gpalab-blocks' ),
+      function() {
+        include_once STYLE_BLOCKS_DIR . 'admin/settings/templates/class-settings-inputs.php';
+        $inputs = new Settings_Inputs();
+
+        $options = array( 'this', 'share', 'yali', 'ylai' );
+
+        return $inputs->multi_select( 'feed-sources', $options, 'feed' );
+      },
+      'gpalab-blocks',
+      'gpalab-feed-sources'
+    );
+
+    /**
      * Add dev-mode section
      */
     add_settings_section(
-      'gpalab-blocks',
+      'gpalab-dev-mode',
       __( 'Set Plugin to Dev Mode?', 'gpalab-blocks' ),
       function() {
-        esc_html_e( 'This is not recommended. It will enqueue development builds of the plugin\'s scripts and styles and should only be used while actively developing the plugin.', 'gpalab-blocks' );
+        esc_html_e( 'WARNING: This setting is not recommended. It will enqueue development builds of the plugin\'s scripts and styles and should only be used while actively developing the plugin.', 'gpalab-blocks' );
       },
       'gpalab-blocks'
     );
@@ -117,7 +149,7 @@ class Settings {
         return $inputs->radio_toggle( 'dev-mode' );
       },
       'gpalab-blocks',
-      'gpalab-blocks'
+      'gpalab-dev-mode'
     );
   }
 }
