@@ -37,11 +37,9 @@ class Settings {
    * Define the contents of the settings page.
    */
   private function create_admin_page() {
-    // Set class property.
-    $this->options = get_option( 'gpalab-blocks-dev-mode' );
     ?>
     <div class="wrap">
-      <h1> <?php __( 'GPA/LAB Styled Blocks', 'gpalab-blocks' ); ?></h1>
+      <h1><?php esc_html_e( 'GPA/LAB Styled Blocks', 'gpalab-blocks' ); ?></h1>
       <form method="post" action="options.php">
       <?php
         settings_fields( 'gpalab-blocks' );
@@ -105,7 +103,7 @@ class Settings {
      */
     add_settings_section(
       'gpalab-feed-sources',
-      __( 'Select sources to enable in the article feed block:', 'gpalab-blocks' ),
+      __( 'Select sources enabled in the article feed block:', 'gpalab-blocks' ),
       function() {
         esc_html_e( 'This setting determines which sources will be made available to the article feed block.', 'gpalab-blocks' );
       },
@@ -114,7 +112,7 @@ class Settings {
 
     add_settings_field(
       'gpalab-feed-sources',
-      __( 'Choose sources:', 'gpalab-blocks' ),
+      __( 'Choose source(s):', 'gpalab-blocks' ),
       function() {
         include_once STYLE_BLOCKS_DIR . 'admin/settings/templates/class-settings-inputs.php';
         $inputs = new Settings_Inputs();
@@ -132,7 +130,7 @@ class Settings {
      */
     add_settings_section(
       'gpalab-dev-mode',
-      __( 'Set Plugin to Dev Mode?', 'gpalab-blocks' ),
+      __( 'Set the plugin to dev-mode?', 'gpalab-blocks' ),
       function() {
         esc_html_e( 'WARNING: This setting is not recommended. It will enqueue development builds of the plugin\'s scripts and styles and should only be used while actively developing the plugin.', 'gpalab-blocks' );
       },
