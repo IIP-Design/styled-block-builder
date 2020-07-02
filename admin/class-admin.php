@@ -75,6 +75,7 @@ class Admin {
         'assets'      => STYLE_BLOCKS_URL . 'assets/',
         'apiEndpoint' => $endpoint,
         'associated'  => $assoc_data,
+        'feedOptions' => get_option( 'gpalab-blocks-feed-sources' ),
         'parentPost'  => $current_post,
         'blockNonce'  => wp_create_nonce( 'gpalab-block-nonce' ),
       )

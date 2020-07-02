@@ -8,6 +8,7 @@ import './Metabox.module.scss';
 
 const MetaBox = () => {
   const [formType, setFormType] = useState( '' );
+  const { feedOptions } = window?.gpalabBlockAdmin;
 
   const initialState = {
     formData: {
@@ -33,6 +34,8 @@ const MetaBox = () => {
     dispatch( { type: 'init', payload: list } );
   }, [] );
 
+  const showArticleFeed = Array.isArray( feedOptions ) && feedOptions.length > 0;
+
   return (
     <div styleName="dropdown-container">
       <AdminContext.Provider value={ store }>
@@ -46,7 +49,7 @@ const MetaBox = () => {
             onChange={ e => setFormType( e.target.value ) }
           >
             <option value="">- Select Block Type -</option>
-            <option value="article-feed">Article Feed</option>
+            { showArticleFeed && <option value="article-feed">Article Feed</option> }
             <option value="hero">Hero Block</option>
             <option value="parallax">Parallax Block</option>
             <option value="quote-box">Quote Box</option>
