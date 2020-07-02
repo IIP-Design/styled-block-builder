@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import propTypes from 'prop-types';
 
 import { AdminContext } from 'metabox/context/adminContext';
+import { getFeedOptions } from 'metabox/utils/feed-options';
 import {
   handleAddNested,
   handleChangeNested,
@@ -13,6 +14,8 @@ import './ArticleById.module.scss';
 const ArticleById = ( { parentGroup, parentId } ) => {
   const { dispatch, state } = useContext( AdminContext );
   const formValues = state?.formData?.formValues ? state.formData.formValues : {};
+
+  const { feedOptions } = window?.gpalabBlockAdmin;
 
   const fields = [{ name: 'postId' }, { name: 'source' }];
 
@@ -55,9 +58,7 @@ const ArticleById = ( { parentGroup, parentId } ) => {
                 onChange={ e => handleChangeNested( e, dispatch, 'articles', parentGroup, parentId ) }
               >
                 <option value="">- Select Source -</option>
-                <option value="share">Share America</option>
-                <option value="yali">YALI</option>
-                <option value="ylai">YLAI</option>
+                { feedOptions && getFeedOptions( feedOptions ) }
               </select>
             </label>
             <button
