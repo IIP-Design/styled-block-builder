@@ -76,7 +76,7 @@ class Settings_Inputs {
         id="<?php echo esc_html( $option ); ?>"
         name="<?php echo esc_html( $option ); ?>[]"
         multiple
-        style="font-size: 13px;width: 11rem;"
+        style="font-size: 13px;min-width: 11rem;"
       >
         <?php
         foreach ( $options as $opt ) {
@@ -99,16 +99,44 @@ class Settings_Inputs {
    * @param string|null $transform  The type of transformation that should be run to generate the option names.
    */
   private function transform_options( $option, $transform ) {
+    $domain = $this->remove_http( get_site_url() );
+
     if ( 'feed' === $transform ) {
-      if ( 'share' === $option ) {
+      if ( 'state_' === substr( $option, 0, 6 ) ) {
+        $trimmed  = str_replace( 'State_', '', ucwords( $option, '_' ) );
+        $no_snake = str_replace( '_', ' ', $trimmed );
+
+        return $no_snake . ' posts from ' . $domain;
+      } elseif ( 'share' === $option ) {
         return 'ShareAmerica';
-      } elseif ( 'this' === $option ) {
-        return 'Posts from this site';
-      } else {
+      } elseif ( 'post' === $option ) {
+        return 'Posts from ' . $domain;
+      } elseif ( 'page' === $option ) {
+        return 'Pages from ' . $domain;
+      } elseif ( 'yali' === $option || 'ylai' === $option ) {
         return strtoupper( $option );
+      } else {
+        return $option;
       }
     } else {
       return $option;
     }
+  }
+
+  /**
+   * Helper function to strip the protocol (http or https) from the beginning of a url
+   *
+   * @param string $url A URL which may or may not contain a protocol prefix.
+   * @return string A URL without the protocol prefix.
+   */
+  private function remove_http( $url ) {
+    $protocol = array( 'http://', 'https://' );
+
+    foreach ( $protocol as $p ) {
+      if ( strpos( $url, $p ) === 0 ) {
+        return str_replace( $p, '', $url );
+      }
+    }
+    return $url;
   }
 }

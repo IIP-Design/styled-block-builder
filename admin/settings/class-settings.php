@@ -117,9 +117,11 @@ class Settings {
         include_once STYLE_BLOCKS_DIR . 'admin/settings/templates/class-settings-inputs.php';
         $inputs = new Settings_Inputs();
 
-        $options = array( 'this', 'share', 'yali', 'ylai' );
+        $custom  = $this->get_custom_post_types();
+        $default = array( 'share', 'yali', 'ylai', 'post', 'page' );
+        $merged  = ! empty( $custom ) ? array_merge( $default, $custom ) : $default;
 
-        return $inputs->multi_select( 'feed-sources', $options, 'feed' );
+        return $inputs->multi_select( 'feed-sources', $merged, 'feed' );
       },
       'gpalab-blocks',
       'gpalab-feed-sources'
@@ -149,5 +151,22 @@ class Settings {
       'gpalab-blocks',
       'gpalab-dev-mode'
     );
+  }
+
+  /**
+   * Returns a list of custom post types registered to the site.
+   *
+   * @return array List of custom post type names
+   */
+  private function get_custom_post_types() {
+    $args = array(
+      'public'       => true,
+      'show_in_rest' => true,
+      '_builtin'     => false,
+    );
+
+    $post_types = get_post_types( $args, 'names', 'and' );
+
+    return $post_types;
   }
 }
