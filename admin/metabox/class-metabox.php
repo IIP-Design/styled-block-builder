@@ -23,10 +23,11 @@ class Metabox {
    * Add custom metabox to the sidebar of the WordPress admin area.
    */
   public function add_blocks_metabox() {
-    $current_user = wp_get_current_user();
+    $current_user   = wp_get_current_user();
+    $min_capability = get_option( 'gpalab-blocks-role' );
 
     // Ensure that current user has correct privileges.
-    if ( array_key_exists( 'activate_plugins', $current_user->allcaps ) ) {
+    if ( array_key_exists( $min_capability, $current_user->allcaps ) ) {
       add_meta_box(
         'gpalab_blocks_meta',
         __( 'Styled Blocks', 'gpalab-blocks' ),

@@ -60,7 +60,17 @@ class Settings {
      */
     register_setting(
       'gpalab-blocks',
+      'gpalab-blocks-role'
+    );
+
+    register_setting(
+      'gpalab-blocks',
       'gpalab-blocks-styling'
+    );
+
+    register_setting(
+      'gpalab-blocks',
+      'gpalab-blocks-feed-sources'
     );
 
     register_setting(
@@ -68,9 +78,35 @@ class Settings {
       'gpalab-blocks-dev-mode'
     );
 
-    register_setting(
+    /**
+     * Add article feed source section
+     */
+    add_settings_section(
+      'gpalab-role',
+      __( 'Select users who can add styled blocks:', 'gpalab-blocks' ),
+      function() {
+        esc_html_e( 'This setting determines which users will be able to see the styled blocks custom metabox when editing a page or post.', 'gpalab-blocks' );
+      },
+      'gpalab-blocks'
+    );
+
+    add_settings_field(
+      'gpalab-role',
+      __( 'Choose role:', 'gpalab-blocks' ),
+      function() {
+        include_once STYLE_BLOCKS_DIR . 'admin/settings/templates/class-settings-inputs.php';
+        $inputs = new Settings_Inputs();
+
+        $default = array( 'manage_options', 'edit_private_pages', 'publish_posts', 'edit_posts' );
+
+        if ( is_multisite() ) {
+          array_unshift( $default, 'manage_sites' );
+        };
+
+        return $inputs->select( 'role', $default, 'role' );
+      },
       'gpalab-blocks',
-      'gpalab-blocks-feed-sources'
+      'gpalab-role'
     );
 
     /**
@@ -121,7 +157,7 @@ class Settings {
         $default = array( 'share', 'yali', 'ylai', 'post', 'page' );
         $merged  = ! empty( $custom ) ? array_merge( $default, $custom ) : $default;
 
-        return $inputs->multi_select( 'feed-sources', $merged, 'feed' );
+        return $inputs->select( 'feed-sources', $merged, 'feed', true );
       },
       'gpalab-blocks',
       'gpalab-feed-sources'
