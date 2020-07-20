@@ -16,7 +16,7 @@ const VideoLayout = ( { data } ) => (
           <span className="dashicons dashicons-star-filled" />
         </div>
         <h5 styleName="content-title">{ data.title }</h5>
-        <div styleName="content-text">{ data.text }</div>
+        { data.text && <div dangerouslySetInnerHTML={ { __html: data.text } } styleName="content-text" /> }
       </section>
     ) }
 

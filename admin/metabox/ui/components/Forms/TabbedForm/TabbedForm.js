@@ -1,12 +1,15 @@
 import React, { Fragment, useContext, useEffect, useState } from 'react';
 import propTypes from 'prop-types';
+import ReactQuill from 'react-quill';
 
 import ArticleById from 'metabox/components/Forms/FeedTypes/ArticleById';
 import CheckboxConditional from 'metabox/components/Forms/Toggles/CheckboxConditional';
 import FileUploader from 'metabox/components/FileUploader/FileUploader';
 import VideoForm from 'metabox/components/Forms/VideoForm/VideoForm';
+
 import { AdminContext } from 'metabox/context/adminContext';
 import { getTabTitleField, responsiveTitle } from 'metabox/utils/tab-titles';
+import { getModules } from 'metabox/utils/quill';
 
 import './TabbedForm.module.scss';
 
@@ -142,6 +145,28 @@ const TabbedForm = ( { fields, group, label, maxTabs } ) => {
                                 parentGroup={ group }
                                 parentId={ form.id }
                               />
+                            );
+                          }
+
+                          if ( field.type === 'quill' ) {
+                            const handleQuill = value => {
+                              dispatch( { type: 'group-input', payload: { group, itemId: form.id, name: field.name, value } } );
+                            };
+
+                            return (
+                              <label
+                                key={ `${field.name}-${form.id}` }
+                                htmlFor={ `section-${field.name}-${form.id}` }
+                              >
+                                { field.label || '' }
+                                <ReactQuill
+                                  id={ `section-${field.name}-${form.id}` }
+                                  modules={ getModules( ['align', 'lists'] ) }
+                                  theme="snow"
+                                  value={ selected[0][field.name] }
+                                  onChange={ handleQuill }
+                                />
+                              </label>
                             );
                           }
 

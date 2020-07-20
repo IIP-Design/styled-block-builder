@@ -37,6 +37,11 @@
         margin-bottom: 0;
       }
     }
+
+    > ul {
+      list-style: inherit;
+      margin-inline-start: 2rem;
+    }
   }
 
   &-title {

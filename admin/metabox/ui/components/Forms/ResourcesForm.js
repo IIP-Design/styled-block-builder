@@ -11,7 +11,7 @@ const ResourcesForm = () => {
 
   const tabFields = [
     { label: 'Add section title:', name: 'title', tabTitle: true, type: 'text' },
-    { label: 'Add section text:', name: 'text', type: 'textarea' },
+    { label: 'Add section text:', name: 'text', type: 'quill' },
     { label: 'Add a video?', name: 'videos', type: 'video' },
     { label: 'Add an Article Feed?', name: 'hasFeed', type: 'article-feed' },
   ];

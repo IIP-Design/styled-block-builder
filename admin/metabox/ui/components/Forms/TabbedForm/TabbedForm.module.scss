@@ -3,7 +3,7 @@
 .tabs {
   border-bottom: $wordpressBorder;
   display: flex;
-  margin: 0.5rem 0 0.3rem;
+  margin: 0.5rem 0 0;
 }
 
 .tab {
@@ -39,8 +39,11 @@
     display: none;
 
     &.selected-item {
+      border: $wordpressBorder;
+      border-top: none;
       display: flex;
       flex-direction: column;
+      padding: 0.5rem;
     }
 
     > label {
