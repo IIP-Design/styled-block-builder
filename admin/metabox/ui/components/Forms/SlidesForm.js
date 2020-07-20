@@ -25,7 +25,7 @@ const SlidesForm = () => {
   const tabFields = [
     { label: 'Add slide subtitle:', name: 'subtitle', tabTitle: true, type: 'text' },
     { label: 'Add slide background image:', name: 'backgroundImage', type: 'file' },
-    { label: 'Add slide text:', name: 'text', type: 'textarea' },
+    { label: 'Add slide text:', name: 'text', type: 'quill' },
   ];
 
   if ( formValues ) {

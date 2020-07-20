@@ -96,7 +96,7 @@ const Slides = ( { id } ) => {
                     <h3 className="gpalab-site-specific" style={ { backgroundColor: subTitleColor } } styleName="slide-subtitle">
                       { slide.subtitle }
                     </h3>
-                    <div styleName="slide-text">{ slide.text }</div>
+                    { slide.text && <div dangerouslySetInnerHTML={ { __html: slide.text } } styleName="slide-text" /> }
                   </div>
                 </section>
               );

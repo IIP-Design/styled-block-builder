@@ -49,7 +49,7 @@ class Sanitize_Slides_Meta {
 
         $sanitized_slide['id']       = sanitize_text_field( $slide['id'] );
         $sanitized_slide['subtitle'] = sanitize_text_field( $slide['subtitle'] );
-        $sanitized_slide['text']     = sanitize_textarea_field( $slide['text'] );
+        $sanitized_slide['text']     = wp_kses_post( $slide['text'] );
         $sanitized_slide['files']    = $sanitize_files->sanitize_files( $slide['files'], $uploads );
 
         array_push( $sanitized_slides, $sanitized_slide );
