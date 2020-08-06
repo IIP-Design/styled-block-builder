@@ -72,6 +72,10 @@ a {
   border-bottom: 1px solid;
 }
 
+.gpalab-site-specific > p {
+  color: $black;
+}
+
 .gpalab-normalizer p > a {
   color: inherit;
   cursor: pointer;
