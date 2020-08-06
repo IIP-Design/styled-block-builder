@@ -7,6 +7,7 @@ import {
   backgroundStyle,
   getBackgroundAlt,
   setBackgroundImage,
+  setLightClass,
   setTextColor,
 } from 'blocks/_shared/utils/background-style';
 
@@ -32,6 +33,8 @@ const QuoteBox = ( { id } ) => {
     const alt = getBackgroundAlt( files );
     const bg = backgroundType === 'image' ? setBackgroundImage( files ) : backgroundStyle( blockBackground );
 
+    const quoteColor = setTextColor( quoteBackground );
+
     return (
       <Normalizer fullWidth={ fullWidth }>
         <div style={ bg } styleName="box-bg">
@@ -49,10 +52,10 @@ const QuoteBox = ( { id } ) => {
                     { subtitle }
                   </h3>
                 ) }
-                { desc && <div dangerouslySetInnerHTML={ { __html: desc } } style={ { color: textColor } } styleName="text" /> }
+                { desc && <div className={ setLightClass( textColor ) } dangerouslySetInnerHTML={ { __html: desc } } style={ { color: textColor } } styleName="text" /> }
                 { quote && (
                   <div style={ backgroundStyle( quoteBackground ) } styleName="quote">
-                    <div dangerouslySetInnerHTML={ { __html: quote } } style={ { color: setTextColor( quoteBackground ) } } styleName="quote-text" />
+                    <div className={ setLightClass( quoteColor ) } dangerouslySetInnerHTML={ { __html: quote } } style={ { color: quoteColor } } styleName="quote-text" />
                   </div>
                 ) }
               </div>

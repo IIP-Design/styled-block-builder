@@ -114,3 +114,5 @@ export const setTextColor = background => {
 
   return textColor;
 };
+
+export const setLightClass = color => (color === '#ffffff' ? 'light' : '');

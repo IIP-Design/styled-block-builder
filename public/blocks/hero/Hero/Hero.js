@@ -40,7 +40,7 @@ const Hero = ( { id } ) => {
               { title && <h2 styleName="title" className="gpalab-site-specific">{ title }</h2> }
               { subtitle && <h3 styleName="subtitle" className="gpalab-site-specific">{ subtitle }</h3> }
               <div styleName="text">
-                { type === 'text' && <div dangerouslySetInnerHTML={ { __html: description } } styleName="text-large" /> }
+                { type === 'text' && <div className="light" dangerouslySetInnerHTML={ { __html: description } } styleName="text-large" /> }
                 { type === 'lines' && <AnimatedLines lines={ lines } /> }
               </div>
               { hasButton && (

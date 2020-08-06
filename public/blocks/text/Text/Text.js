@@ -5,7 +5,7 @@ import Button from 'blocks/_shared/components/Button/Button';
 import CDPFeed from 'blocks/_shared/components/CDPFeed/CDPFeed';
 import Normalizer from 'blocks/_shared/components/Normalizer/Normalizer';
 import VideoEmbed from 'blocks/_shared/components/VideoEmbed/VideoEmbed';
-import { backgroundStyle } from 'blocks/_shared/utils/background-style';
+import { backgroundStyle, setLightClass } from 'blocks/_shared/utils/background-style';
 
 import './Text.module.scss';
 
@@ -46,7 +46,7 @@ const Text = ( { id } ) => {
               </h3>
             ) }
             <div styleName="content">
-              { desc && <div dangerouslySetInnerHTML={ { __html: desc } } style={ { color: textColor } } styleName="description" /> }
+              { desc && <div className={ setLightClass( textColor ) } dangerouslySetInnerHTML={ { __html: desc } } style={ { color: textColor } } styleName="description" /> }
             </div>
             { hasButton && (
               <Button

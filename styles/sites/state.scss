@@ -76,8 +76,14 @@ a {
   color: $black;
 }
 
-.gpalab-normalizer p > a {
+.gpalab-normalizer .light p > a,
+.gpalab-normalizer .light li > a {
   color: inherit;
+}
+
+.gpalab-normalizer p > a,
+.gpalab-normalizer li > a {
+  color: $blueDark;
   cursor: pointer;
   font-weight: 700;
   text-decoration: none;
