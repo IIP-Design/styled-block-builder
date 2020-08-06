@@ -141,7 +141,7 @@ class Settings {
       'gpalab-feed-sources',
       __( 'Select sources enabled in the article feed block:', 'gpalab-blocks' ),
       function() {
-        esc_html_e( 'This setting determines which sources will be made available to the article feed block.', 'gpalab-blocks' );
+        esc_html_e( 'This setting determines which sources will be made available to the article feed block. Note that if no source is selected, the article feed widget will be disabled.', 'gpalab-blocks' );
       },
       'gpalab-blocks'
     );
@@ -153,11 +153,15 @@ class Settings {
         include_once STYLE_BLOCKS_DIR . 'admin/settings/templates/class-settings-inputs.php';
         $inputs = new Settings_Inputs();
 
+        /*
+         * TODO: add support for posts, pages, and custom post types.
+         * Below is the initial scaffolding to put this in place.
+         */
         $custom  = $this->get_custom_post_types();
-        $default = array( 'share', 'yali', 'ylai', 'post', 'page' );
+        $default = array( 'share', 'yali', 'ylai' );
         $merged  = ! empty( $custom ) ? array_merge( $default, $custom ) : $default;
 
-        return $inputs->select( 'feed-sources', $merged, 'feed', true );
+        return $inputs->select( 'feed-sources', $default, 'feed', true );
       },
       'gpalab-blocks',
       'gpalab-feed-sources'
