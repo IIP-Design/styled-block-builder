@@ -27,8 +27,7 @@ const Text = ( { id } ) => {
       subtitle,
       textColor,
       title,
-      videoTitle,
-      videoURL,
+      videos,
     } = meta;
 
     return (
@@ -58,7 +57,14 @@ const Text = ( { id } ) => {
               />
             ) }
           </div>
-          { videoURL && <VideoEmbed title={ videoTitle } url={ videoURL } /> }
+          { videos && videos.map( video => (
+            <VideoEmbed
+              key={ video.id }
+              desc={ video.description }
+              title={ video.title || video.id }
+              url={ video.url }
+            />
+          ) ) }
           { articles && <CDPFeed id={ id } items={ articles } /> }
         </div>
       </Normalizer>

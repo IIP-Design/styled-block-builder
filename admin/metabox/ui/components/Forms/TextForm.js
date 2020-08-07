@@ -6,6 +6,8 @@ import ButtonForm from 'metabox/components/Forms/ButtonForm/ButtonForm';
 import CheckboxConditional from 'metabox/components/Forms/Toggles/CheckboxConditional';
 import ColorPicker from 'metabox/components/ColorPicker/ColorPicker';
 import FullWidthToggle from 'metabox/components/Forms/Toggles/FullWidthToggle';
+import VideoForm from 'metabox/components/Forms/VideoForm/VideoForm';
+
 import { AdminContext } from 'metabox/context/adminContext';
 import { defaultBackgrounds, defaultText } from 'metabox/utils/color-picker-palettes';
 import { getModules } from 'metabox/utils/quill';
@@ -90,33 +92,7 @@ const TextForm = () => {
       >
         <ButtonForm />
       </CheckboxConditional>
-      <CheckboxConditional
-        checked={ formValues.hasVideo }
-        label="Add a Video?"
-        name="hasVideo"
-      >
-        <label htmlFor="video-title">
-          Add Video Title:
-          <input
-            id="video-title"
-            name="videoTitle"
-            type="text"
-            value={ formValues.videoTitle || '' }
-            onChange={ e => handleChange( e, dispatch ) }
-          />
-        </label>
-        <label htmlFor="video-url">
-          Add Video URL (for YouTube use the embed link format
-          https://www.youtube.com/embed/VIDEOID):
-          <input
-            id="video-url"
-            name="videoURL"
-            type="text"
-            value={ formValues.videoURL || '' }
-            onChange={ e => handleChange( e, dispatch ) }
-          />
-        </label>
-      </CheckboxConditional>
+      <VideoForm />
       <CheckboxConditional
         checked={ formValues.hasFeed }
         label="Add an Article Feed?"

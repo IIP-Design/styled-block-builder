@@ -25,6 +25,8 @@ class Sanitize_Text_Meta {
    * @return array          Array of sanitized values.
    */
   public function sanitize_inputs( $data ) {
+    include_once STYLE_BLOCKS_DIR . 'admin/metabox/ajax/sanitizers/class-sanitize-video.php';
+    $sanitize_video = new Sanitize_Video();
 
     $unsanitary = json_decode( stripslashes( $data ), true );
     $sanitized  = array();
@@ -103,12 +105,18 @@ class Sanitize_Text_Meta {
       $sanitized['title'] = sanitize_text_field( $unsanitary['title'] );
     }
 
-    if ( ! empty( $unsanitary['videoTitle'] ) ) {
-      $sanitized['videoTitle'] = sanitize_text_field( $unsanitary['videoTitle'] );
-    }
+    if ( ! empty( $unsanitary['videos'] ) ) {
+      $sanitized_videos = array();
 
-    if ( ! empty( $unsanitary['videoURL'] ) ) {
-      $sanitized['videoURL'] = sanitize_text_field( $unsanitary['videoURL'] );
+      foreach ( $unsanitary['videos'] as $video ) {
+        $sanitized_video = $sanitize_video->sanitize_video( $video );
+
+        array_push( $sanitized_videos, $sanitized_video );
+      }
+
+      unset( $video );
+
+      $sanitized['videos'] = $sanitized_videos;
     }
 
     return $sanitized;

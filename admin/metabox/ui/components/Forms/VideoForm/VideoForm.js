@@ -17,7 +17,7 @@ const VideoForm = ( { parentGroup, parentId } ) => {
   const formValues = state?.formData?.formValues ? state.formData.formValues : {};
 
   const fields = [
-    { name: 'date' }, { name: 'title' }, { name: 'url' },
+    { name: 'description' }, { name: 'title' }, { name: 'url' },
   ];
 
   if ( formValues ) {
