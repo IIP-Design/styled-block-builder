@@ -1,7 +1,9 @@
 import React, { Fragment, useContext } from 'react';
 import propTypes from 'prop-types';
+import ReactQuill from 'react-quill';
 
 import { AdminContext } from 'metabox/context/adminContext';
+import { getModules } from 'metabox/utils/quill';
 import {
   handleAddNested,
   handleChangeNested,
@@ -32,55 +34,62 @@ const VideoForm = ( { parentGroup, parentId } ) => {
 
     return (
       <Fragment>
-        { videos.map( video => (
-          <div key={ video.id } styleName="container">
-            <h4 styleName="title">Video Data:</h4>
-            <label htmlFor={ `video-url-${video.id}` } styleName="label">
-              Add video URL:
-              <input
+        { videos.map( video => {
+          const handleQuill = value => {
+            if ( !parentGroup ) {
+              dispatch( { type: 'group-input', payload: { group: 'videos', itemId: video.id, name: 'description', value } } );
+            } else {
+              dispatch( { type: 'group-input-nested', payload: { group: 'videos', itemId: video.id, name: 'description', parentGroup, parentId, value } } );
+            }
+          };
+
+          return (
+            <div key={ video.id } styleName="container">
+              <h4 styleName="title">Video Data:</h4>
+              <label htmlFor={ `video-url-${video.id}` } styleName="label">
+                Add video URL:
+                <input
+                  data-itemid={ video.id }
+                  id={ `video-url-${video.id}` }
+                  name="url"
+                  type="text"
+                  value={ video.url || '' }
+                  onChange={ e => handleChangeNested( e, dispatch, 'videos', parentGroup, parentId ) }
+                />
+              </label>
+              <label htmlFor={ `video-title-${video.id}` } styleName="label">
+                Add title:
+                <input
+                  data-itemid={ video.id }
+                  id={ `video-title-${video.id}` }
+                  name="title"
+                  type="text"
+                  value={ video.title || '' }
+                  onChange={ e => handleChangeNested( e, dispatch, 'videos', parentGroup, parentId ) }
+                />
+              </label>
+              <label htmlFor={ `video-desc-${video.id}` } styleName="label-stacked">
+                Additional text:
+                <ReactQuill
+                  id={ `video-desc-${video.id}` }
+                  modules={ getModules( ['align', 'lists'] ) }
+                  theme="snow"
+                  value={ video.description || '' }
+                  onChange={ handleQuill }
+                />
+              </label>
+              <button
+                className="button-secondary"
                 data-itemid={ video.id }
-                id={ `video-url-${video.id}` }
-                name="url"
-                type="text"
-                value={ video.url || '' }
-                onChange={ e => handleChangeNested( e, dispatch, 'videos', parentGroup, parentId ) }
-              />
-            </label>
-            <label htmlFor={ `video-title-${video.id}` } styleName="label">
-              Add title:
-              <input
-                data-itemid={ video.id }
-                id={ `video-title-${video.id}` }
-                name="title"
-                type="text"
-                value={ video.title || '' }
-                onChange={ e => handleChangeNested( e, dispatch, 'videos', parentGroup, parentId ) }
-              />
-            </label>
-            <label htmlFor={ `video-date-${video.id}` } styleName="label">
-              Add date of video:
-              <input
-                data-itemid={ video.id }
-                id={ `video-date-${video.id}` }
-                name="date"
-                type="text"
-                value={ video.date || '' }
-                onChange={ e => handleChangeNested( e, dispatch, 'videos', parentGroup, parentId ) }
-              />
-            </label>
-            <button
-              className="button-secondary"
-              data-itemid={ video.id }
-              styleName="button-remove"
-              type="button"
-              onClick={ e => handleRemoveNested( e, dispatch, 'videos', parentGroup, parentId ) }
-            >
-              Remove Video
-            </button>
-          </div>
-        ) ) }
-        { /* speakers */ }
-        { /* link */ }
+                styleName="button-remove"
+                type="button"
+                onClick={ e => handleRemoveNested( e, dispatch, 'videos', parentGroup, parentId ) }
+              >
+                Remove Video
+              </button>
+            </div>
+          );
+        } ) }
         <button
           className="button-secondary"
           style={ videos && videos.length > 0 ? { display: 'none' } : { display: 'block' } }

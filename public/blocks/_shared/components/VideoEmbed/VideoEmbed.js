@@ -3,7 +3,7 @@ import propTypes from 'prop-types';
 
 import './VideoEmbed.module.scss';
 
-const Video = ( { title, url } ) => (
+const Video = ( { desc, title, url } ) => (
   <div className="gpalab-video-embed" styleName="video">
     <div styleName="video-responsive">
       <iframe
@@ -14,10 +14,12 @@ const Video = ( { title, url } ) => (
         title={ title }
       />
     </div>
+    { desc && <div className="gpalab-site-specific" dangerouslySetInnerHTML={ { __html: desc } } styleName="description" /> }
   </div>
 );
 
 Video.propTypes = {
+  desc: propTypes.string,
   title: propTypes.string,
   url: propTypes.string,
 };

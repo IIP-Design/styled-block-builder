@@ -5,7 +5,7 @@ import './Layouts.module.scss';
 
 const BaseLayout = ( { data } ) => (
   <div styleName="content no-columns">
-    <h4 className="gpalab-site-specific" styleName="content-title">{ data.title }</h4>
+    <h3 className="gpalab-site-specific" styleName="content-title">{ data.title }</h3>
     { data.text && <div className="gpalab-site-specific" dangerouslySetInnerHTML={ { __html: data.text } } styleName="content-text" /> }
   </div>
 );

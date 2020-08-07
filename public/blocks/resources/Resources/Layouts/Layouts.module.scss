@@ -11,10 +11,11 @@
     display: grid;
     grid-area: content;
     grid-column-gap: 1.5rem;
-    grid-template-columns: 1fr 20px 1fr;
     grid-template-areas:
       'column1 stars title'
       'column1 stars column2';
+    grid-template-columns: 1fr 20px 1fr;
+    grid-template-rows: auto 1fr;
     margin: 0 1rem;
     max-width: 100%;
 
@@ -110,5 +111,13 @@
     &-title {
       display: none;
     }
+
+    &.no-columns {
+      margin: 0;
+    }
+  }
+
+  .video-only-title {
+    display: none;
   }
 }

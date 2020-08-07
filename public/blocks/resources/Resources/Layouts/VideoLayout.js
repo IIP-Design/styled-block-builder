@@ -9,9 +9,14 @@ const VideoLayout = ( { data } ) => (
   <Fragment>
     { data.text && (
       <section styleName="content-columns">
-        { data.videos && data.videos.map(
-          video => <VideoEmbed key={ video.id } title={ video.title || video.id } url={ video.url } />,
-        ) }
+        { data.videos && data.videos.map( video => (
+          <VideoEmbed
+            key={ video.id }
+            desc={ video.description }
+            title={ video.title || video.id }
+            url={ video.url }
+          />
+        ) ) }
         <div styleName="star-line">
           <span className="dashicons dashicons-star-filled" />
           <span className="dashicons dashicons-star-filled" />
@@ -24,8 +29,15 @@ const VideoLayout = ( { data } ) => (
 
     { !data.text && (
       <section styleName="content no-columns">
-        <h3 styleName="video-only-title">{ data.title }</h3>
-        <VideoEmbed title={ data.title } url={ data.video } />
+        <h3 className="gpalab-site-specific" styleName="video-only-title">{ data.title }</h3>
+        { data.videos && data.videos.map( video => (
+          <VideoEmbed
+            key={ video.id }
+            desc={ video.description }
+            title={ video.title || video.id }
+            url={ video.url }
+          />
+        ) ) }
       </section>
     ) }
   </Fragment>

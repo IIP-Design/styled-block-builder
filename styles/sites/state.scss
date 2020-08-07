@@ -68,10 +68,6 @@ h5.gpalab-site-specific {
   }
 }
 
-a {
-  border-bottom: 1px solid;
-}
-
 .gpalab-site-specific > p {
   color: $black;
 }
@@ -83,6 +79,7 @@ a {
 
 .gpalab-normalizer p > a,
 .gpalab-normalizer li > a {
+  border-bottom: 1px solid;
   color: $blueDark;
   cursor: pointer;
   font-weight: 700;

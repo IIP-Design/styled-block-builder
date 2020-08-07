@@ -25,6 +25,8 @@ class Sanitize_Resources_Meta {
    * @return array          Array of sanitized values.
    */
   public function sanitize_inputs( $data ) {
+    include_once STYLE_BLOCKS_DIR . 'admin/metabox/ajax/sanitizers/class-sanitize-video.php';
+    $sanitize_video = new Sanitize_Video();
 
     $unsanitary = json_decode( stripslashes( $data ), true );
     $sanitized  = array();
@@ -67,12 +69,7 @@ class Sanitize_Resources_Meta {
           $sanitized_videos = array();
 
           foreach ( $resource['videos'] as $video ) {
-            $sanitize_video = array();
-
-            $sanitized_video['id']    = sanitize_text_field( $video['id'] );
-            $sanitized_video['date']  = sanitize_text_field( $video['date'] );
-            $sanitized_video['title'] = sanitize_text_field( $video['title'] );
-            $sanitized_video['url']   = sanitize_text_field( $video['url'] );
+            $sanitized_video = $sanitize_video->sanitize_video( $video );
 
             array_push( $sanitized_videos, $sanitized_video );
           }
