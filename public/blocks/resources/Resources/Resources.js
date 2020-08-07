@@ -2,6 +2,7 @@ import React, { Fragment, useEffect, useState } from 'react';
 import propTypes from 'prop-types';
 
 import CDPFeed from 'blocks/_shared/components/CDPFeed/CDPFeed';
+import Chevron from 'blocks/_shared/components/Chevron/Chevron';
 import Normalizer from 'blocks/_shared/components/Normalizer/Normalizer';
 import BaseLayout from './Layouts/BaseLayout';
 import VideoLayout from './Layouts/VideoLayout';
@@ -72,8 +73,12 @@ const Resources = ( { id } ) => {
 
                 if ( resource.id === selected || isMobile ) {
                   return (
-                    <div key={ resource.id } id={ resource.id }>
-                      <div id={ resource.id } styleName="section-content">
+                    <div key={ resource.id } id={ resource.id } styleName="section-container">
+                      <button id={ resource.id } styleName="section-mobile-toggle" type="button" onClick={ () => setSelected( resource.id ) }>
+                        <h5 styleName="section-mobile-title">{ resource.title }</h5>
+                        <Chevron reverse={ resource.id === selected } />
+                      </button>
+                      <div id={ resource.id } styleName={ `section-content ${resource.id === selected ? 'mobile-show' : ''}` }>
                         { layout }
                         { resource.articles && (
                           <Fragment>
