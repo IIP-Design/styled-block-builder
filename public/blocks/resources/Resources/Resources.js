@@ -23,6 +23,12 @@ const Resources = ( { id } ) => {
 
   const isMobile = window.innerWidth <= 500;
 
+  const toggleSelection = toggled => {
+    const setTo = toggled === selected ? null : toggled;
+
+    setSelected( setTo );
+  };
+
   if ( meta ) {
     const { fullWidth, resources, subtitle, title } = meta;
 
@@ -60,7 +66,7 @@ const Resources = ( { id } ) => {
 
             { resources
               && resources.map( resource => {
-                const type = resource.video ? 'video' : 'base';
+                const type = resource.videos && resource.videos.length ? 'video' : 'base';
                 let layout = null;
 
                 if ( type === 'base' ) {
@@ -74,8 +80,8 @@ const Resources = ( { id } ) => {
                 if ( resource.id === selected || isMobile ) {
                   return (
                     <div key={ resource.id } id={ resource.id } styleName="section-container">
-                      <button id={ resource.id } styleName="section-mobile-toggle" type="button" onClick={ () => setSelected( resource.id ) }>
-                        <h5 styleName="section-mobile-title">{ resource.title }</h5>
+                      <button id={ resource.id } styleName="section-mobile-toggle" type="button" onClick={ () => toggleSelection( resource.id ) }>
+                        <strong className="gpalab-site-specific" styleName="section-mobile-title">{ resource.title }</strong>
                         <Chevron reverse={ resource.id === selected } />
                       </button>
                       <div id={ resource.id } styleName={ `section-content ${resource.id === selected ? 'mobile-show' : ''}` }>

@@ -39,18 +39,17 @@
 
   &-button {
     background-color: $white;
+    border: none;
+    border-bottom: 2px solid $gold;
     color: $black;
     font-size: 1rem;
     font-weight: 600;
     height: 100px;
     width: 300px;
     padding: 1rem;
-    text-decoration: none;
     text-align: center;
-    border-bottom: 2px solid $gold;
-    border-top: none;
-    border-right: none;
-    border-left: none;
+    text-decoration: none;
+    text-transform: uppercase;
 
     &:focus {
       outline: none;
@@ -74,7 +73,7 @@
 
 .section {
   &-container {
-    margin-top: 1rem;
+    margin: 1rem 0;
   }
 
   &-content {
@@ -93,7 +92,7 @@
   &-hr {
     border-top: 1px solid $greyLight;
     grid-area: hr;
-    margin-top: 3rem;
+    margin: 3rem auto 0;
     width: calc(100% - 2rem);
   }
 
@@ -151,7 +150,7 @@
   .section {
     &-container {
       border-top: 1px solid $gold;
-      margin-top: 0;
+      margin: 0;
     }
 
     &-content {

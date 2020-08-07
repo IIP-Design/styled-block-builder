@@ -27,9 +27,11 @@ _This sections lists changes committed since most recent release_
 - Make buttons more configurable with additional style options
 - Add Jest for JavaScript unit testing
 - Remove automated formatting with Prettier in favor of ESLint config rules
+- Do not fill block root div with the block type (to prevent flash of text before the block loads)
 
 ### Fixed:
 
+- Video option in resources block not saving values
 - Correctly escape and render the settings page title
 - Updated JavaScript dependencies
 

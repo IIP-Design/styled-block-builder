@@ -9,13 +9,15 @@ const VideoLayout = ( { data } ) => (
   <Fragment>
     { data.text && (
       <section styleName="content-columns">
-        <VideoEmbed title={ data.title } url={ data.video } />
+        { data.videos && data.videos.map(
+          video => <VideoEmbed key={ video.id } title={ video.title || video.id } url={ video.url } />,
+        ) }
         <div styleName="star-line">
           <span className="dashicons dashicons-star-filled" />
           <span className="dashicons dashicons-star-filled" />
           <span className="dashicons dashicons-star-filled" />
         </div>
-        <h5 styleName="content-title">{ data.title }</h5>
+        <h4 className="gpalab-site-specific" styleName="content-title">{ data.title }</h4>
         { data.text && <div className="gpalab-site-specific" dangerouslySetInnerHTML={ { __html: data.text } } styleName="content-text" /> }
       </section>
     ) }

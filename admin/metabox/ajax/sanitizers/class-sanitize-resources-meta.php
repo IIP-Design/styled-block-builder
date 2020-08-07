@@ -43,7 +43,6 @@ class Sanitize_Resources_Meta {
         $sanitized_resource['id']      = sanitize_text_field( $resource['id'] );
         $sanitized_resource['text']    = wp_kses_post( $resource['text'] );
         $sanitized_resource['title']   = sanitize_text_field( $resource['title'] );
-        $sanitized_resource['video']   = sanitize_text_field( $resource['video'] );
 
         if ( ! empty( $resource['articles'] ) ) {
           $sanitized_articles = array();
@@ -62,6 +61,25 @@ class Sanitize_Resources_Meta {
           unset( $article );
 
           $sanitized_resource['articles'] = $sanitized_articles;
+        }
+
+        if ( ! empty( $resource['videos'] ) ) {
+          $sanitized_videos = array();
+
+          foreach ( $resource['videos'] as $video ) {
+            $sanitize_video = array();
+
+            $sanitized_video['id']    = sanitize_text_field( $video['id'] );
+            $sanitized_video['date']  = sanitize_text_field( $video['date'] );
+            $sanitized_video['title'] = sanitize_text_field( $video['title'] );
+            $sanitized_video['url']   = sanitize_text_field( $video['url'] );
+
+            array_push( $sanitized_videos, $sanitized_video );
+          }
+
+          unset( $video );
+
+          $sanitized_resource['videos'] = $sanitized_videos;
         }
 
         array_push( $sanitized_resources, $sanitized_resource );

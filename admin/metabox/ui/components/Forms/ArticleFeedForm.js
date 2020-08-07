@@ -35,6 +35,11 @@ const ArticleFeedForm = () => {
   return (
     <Fragment>
       <ColorPicker
+        colors={ blockBgOptions }
+        label="Set block background color:"
+        selected={ formValues.blockBackground }
+      />
+      <ColorPicker
         colors={ textOptions }
         label="Set block text color:"
         selected={ formValues.textColor }
@@ -59,11 +64,6 @@ const ArticleFeedForm = () => {
           onChange={ e => handleChange( e, dispatch ) }
         />
       </label>
-      <ColorPicker
-        colors={ blockBgOptions }
-        label="Set block background color:"
-        selected={ formValues.blockBackground }
-      />
       <ArticleById />
       <FullWidthToggle checked={ formValues.fullWidth } />
     </Fragment>

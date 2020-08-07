@@ -14,7 +14,9 @@ const VideoForm = ( { parentGroup, parentId } ) => {
   const { dispatch, state } = useContext( AdminContext );
   const formValues = state?.formData?.formValues ? state.formData.formValues : {};
 
-  const fields = [{ name: 'date' }, { name: 'url' }];
+  const fields = [
+    { name: 'date' }, { name: 'title' }, { name: 'url' },
+  ];
 
   if ( formValues ) {
     let videos;
@@ -41,6 +43,17 @@ const VideoForm = ( { parentGroup, parentId } ) => {
                 name="url"
                 type="text"
                 value={ video.url || '' }
+                onChange={ e => handleChangeNested( e, dispatch, 'videos', parentGroup, parentId ) }
+              />
+            </label>
+            <label htmlFor={ `video-title-${video.id}` } styleName="label">
+              Add title:
+              <input
+                data-itemid={ video.id }
+                id={ `video-title-${video.id}` }
+                name="title"
+                type="text"
+                value={ video.title || '' }
                 onChange={ e => handleChangeNested( e, dispatch, 'videos', parentGroup, parentId ) }
               />
             </label>

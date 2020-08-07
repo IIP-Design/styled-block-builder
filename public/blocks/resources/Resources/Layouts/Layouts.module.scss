@@ -3,7 +3,7 @@
 .content {
   &.no-columns {
     grid-area: content;
-    margin: 0 1rem;
+    margin: 0 2rem;
   }
 
   &-columns {
@@ -17,6 +17,11 @@
       'column1 stars column2';
     margin: 0 1rem;
     max-width: 100%;
+
+    > h4 {
+      align-self: center;
+      margin: 0;
+    }
 
     > :global(.gpalab-video-embed) {
       align-self: center;
