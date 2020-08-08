@@ -1,9 +1,9 @@
 <?php
 /**
- * Registers the Sanitize_Files class.
+ * Registers the Sanitize_Video class.
  *
  * @package Style_Blocks\Sanitizer
- * @since 0.0.1
+ * @since 2.0.0
  */
 
 namespace Style_Blocks;
@@ -19,7 +19,7 @@ namespace Style_Blocks;
 class Sanitize_Video {
 
   /**
-   * Checks for and sanitizes the expected fields.
+   * Checks for and sanitizes the expected video fields.
    *
    * @param array $video    Unsanitized video values sent over in the AJAX request.
    * @return array          Array of sanitized values

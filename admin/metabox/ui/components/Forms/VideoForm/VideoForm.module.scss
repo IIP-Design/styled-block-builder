@@ -2,9 +2,8 @@
 
 .button {
   &-add {
-    align-self: center;
     margin: 1rem 0 0.5rem;
-    width: 75%;
+    width: 50%;
   }
 
   &-remove {
@@ -14,6 +13,10 @@
 }
 
 .container {
+  margin: 1rem 0 0.5rem;
+}
+
+.form {
   border: $wordpressBorder;
   display: flex;
   flex-direction: column;

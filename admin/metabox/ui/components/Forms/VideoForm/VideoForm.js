@@ -1,4 +1,4 @@
-import React, { Fragment, useContext } from 'react';
+import React, { useContext } from 'react';
 import propTypes from 'prop-types';
 import ReactQuill from 'react-quill';
 
@@ -33,7 +33,7 @@ const VideoForm = ( { parentGroup, parentId } ) => {
     }
 
     return (
-      <Fragment>
+      <div styleName="container">
         { videos.map( video => {
           const handleQuill = value => {
             if ( !parentGroup ) {
@@ -44,8 +44,8 @@ const VideoForm = ( { parentGroup, parentId } ) => {
           };
 
           return (
-            <div key={ video.id } styleName="container">
-              <h4 styleName="title">Video Data:</h4>
+            <div key={ video.id } styleName="form">
+              <strong styleName="title">Video Data:</strong>
               <label htmlFor={ `video-url-${video.id}` } styleName="label">
                 Add video URL:
                 <input
@@ -99,7 +99,7 @@ const VideoForm = ( { parentGroup, parentId } ) => {
         >
           Add Video
         </button>
-      </Fragment>
+      </div>
     );
   }
 
