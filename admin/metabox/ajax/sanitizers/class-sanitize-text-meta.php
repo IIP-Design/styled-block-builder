@@ -25,6 +25,10 @@ class Sanitize_Text_Meta {
    * @return array          Array of sanitized values.
    */
   public function sanitize_inputs( $data ) {
+
+    include_once STYLE_BLOCKS_DIR . 'admin/metabox/ajax/sanitizers/class-sanitize-button.php';
+    $sanitize_button = new Sanitize_Button();
+
     include_once STYLE_BLOCKS_DIR . 'admin/metabox/ajax/sanitizers/class-sanitize-video.php';
     $sanitize_video = new Sanitize_Video();
 
@@ -53,24 +57,18 @@ class Sanitize_Text_Meta {
       $sanitized['blockBackground'] = sanitize_text_field( $unsanitary['blockBackground'] );
     }
 
-    if ( ! empty( $unsanitary['buttonArrow'] ) ) {
-      $sanitized['buttonArrow'] = sanitize_text_field( $unsanitary['buttonArrow'] );
-    }
+    if ( ! empty( $unsanitary['buttons'] ) ) {
+      $sanitized_buttons = array();
 
-    if ( ! empty( $unsanitary['buttonBorder'] ) ) {
-      $sanitized['buttonBorder'] = sanitize_text_field( $unsanitary['buttonBorder'] );
-    }
+      foreach ( $unsanitary['buttons'] as $button ) {
+        $sanitized_button = $sanitize_button->sanitize_button( $button );
 
-    if ( ! empty( $unsanitary['buttonColor'] ) ) {
-      $sanitized['buttonColor'] = sanitize_text_field( $unsanitary['buttonColor'] );
-    }
+        array_push( $sanitized_buttons, $sanitized_button );
+      }
 
-    if ( ! empty( $unsanitary['buttonLink'] ) ) {
-      $sanitized['buttonLink'] = sanitize_text_field( $unsanitary['buttonLink'] );
-    }
+      unset( $button );
 
-    if ( ! empty( $unsanitary['buttonText'] ) ) {
-      $sanitized['buttonText'] = sanitize_text_field( $unsanitary['buttonText'] );
+      $sanitized['buttons'] = $sanitized_buttons;
     }
 
     if ( ! empty( $unsanitary['desc'] ) ) {
@@ -81,16 +79,8 @@ class Sanitize_Text_Meta {
       $sanitized['fullWidth'] = rest_sanitize_boolean( $unsanitary['fullWidth'] );
     }
 
-    if ( ! empty( $unsanitary['hasButton'] ) ) {
-      $sanitized['hasButton'] = rest_sanitize_boolean( $unsanitary['hasButton'] );
-    }
-
     if ( ! empty( $unsanitary['hasFeed'] ) ) {
       $sanitized['hasFeed'] = rest_sanitize_boolean( $unsanitary['hasFeed'] );
-    }
-
-    if ( ! empty( $unsanitary['hasVideo'] ) ) {
-      $sanitized['hasVideo'] = rest_sanitize_boolean( $unsanitary['hasVideo'] );
     }
 
     if ( ! empty( $unsanitary['subtitle'] ) ) {

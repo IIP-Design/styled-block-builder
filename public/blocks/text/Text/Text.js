@@ -16,14 +16,9 @@ const Text = ( { id } ) => {
     const {
       articles,
       blockBackground,
-      buttonArrow,
-      buttonBorder,
-      buttonColor,
-      buttonLink,
-      buttonText,
+      buttons,
       desc,
       fullWidth,
-      hasButton,
       subtitle,
       textColor,
       title,
@@ -45,17 +40,25 @@ const Text = ( { id } ) => {
               </h3>
             ) }
             <div styleName="content">
-              { desc && <div className={ setLightClass( textColor ) } dangerouslySetInnerHTML={ { __html: desc } } style={ { color: textColor } } styleName="description" /> }
+              { desc && (
+                <div
+                  className={ setLightClass( textColor ) }
+                  dangerouslySetInnerHTML={ { __html: desc } }
+                  style={ { color: textColor } }
+                  styleName="description"
+                />
+              ) }
             </div>
-            { hasButton && (
+            { buttons && buttons.map( button => (
               <Button
-                arrow={ buttonArrow }
-                border={ buttonBorder }
-                color={ buttonColor }
-                link={ buttonLink }
-                text={ buttonText }
+                key={ button.id }
+                arrow={ button.buttonArrow }
+                border={ button.buttonBorder }
+                color={ button.buttonColor }
+                link={ button.buttonLink }
+                text={ button.buttonText }
               />
-            ) }
+            ) ) }
           </div>
           { videos && videos.map( video => (
             <VideoEmbed
