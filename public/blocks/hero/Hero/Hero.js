@@ -15,14 +15,9 @@ const Hero = ( { id } ) => {
   if ( meta ) {
     const {
       align,
-      buttonArrow,
-      buttonBorder,
-      buttonColor,
-      buttonLink,
-      buttonText,
+      buttons,
       description,
       files,
-      hasButton,
       lines,
       subtitle,
       title,
@@ -40,20 +35,25 @@ const Hero = ( { id } ) => {
               { title && <h2 styleName="title" className="gpalab-site-specific">{ title }</h2> }
               { subtitle && <h3 styleName="subtitle" className="gpalab-site-specific">{ subtitle }</h3> }
               <div styleName="text">
-                { type === 'text' && <div className="light" dangerouslySetInnerHTML={ { __html: description } } styleName="text-large" /> }
+                { type === 'text' && (
+                  <div
+                    className="light"
+                    dangerouslySetInnerHTML={ { __html: description } }
+                    styleName="text-large"
+                  />
+                ) }
                 { type === 'lines' && <AnimatedLines lines={ lines } /> }
               </div>
-              { hasButton && (
-                <div styleName="button-container">
-                  <Button
-                    arrow={ buttonArrow }
-                    border={ buttonBorder }
-                    color={ buttonColor }
-                    link={ buttonLink }
-                    text={ buttonText }
-                  />
-                </div>
-              ) }
+              { buttons && buttons.map( button => (
+                <Button
+                  key={ button.id }
+                  arrow={ button.buttonArrow }
+                  border={ button.buttonBorder }
+                  color={ button.buttonColor }
+                  link={ button.buttonLink }
+                  text={ button.buttonText }
+                />
+              ) ) }
             </div>
           </Gradient>
         </div>

@@ -27,6 +27,9 @@ class Sanitize_Hero_Meta {
    */
   public function sanitize_inputs( $data, $uploads ) {
 
+    include_once STYLE_BLOCKS_DIR . 'admin/metabox/ajax/sanitizers/class-sanitize-button.php';
+    $sanitize_button = new Sanitize_Button();
+
     include_once STYLE_BLOCKS_DIR . 'admin/metabox/ajax/sanitizers/class-sanitize-files.php';
     $sanitize_files = new Sanitize_Files();
 
@@ -37,32 +40,22 @@ class Sanitize_Hero_Meta {
       $sanitized['align'] = sanitize_text_field( $unsanitary['align'] );
     }
 
-    if ( ! empty( $unsanitary['buttonArrow'] ) ) {
-      $sanitized['buttonArrow'] = sanitize_text_field( $unsanitary['buttonArrow'] );
-    }
+    if ( ! empty( $unsanitary['buttons'] ) ) {
+      $sanitized_buttons = array();
 
-    if ( ! empty( $unsanitary['buttonBorder'] ) ) {
-      $sanitized['buttonBorder'] = sanitize_text_field( $unsanitary['buttonBorder'] );
-    }
+      foreach ( $unsanitary['buttons'] as $button ) {
+        $sanitized_button = $sanitize_button->sanitize_button( $button );
 
-    if ( ! empty( $unsanitary['buttonColor'] ) ) {
-      $sanitized['buttonColor'] = sanitize_text_field( $unsanitary['buttonColor'] );
-    }
+        array_push( $sanitized_buttons, $sanitized_button );
+      }
 
-    if ( ! empty( $unsanitary['buttonLink'] ) ) {
-      $sanitized['buttonLink'] = sanitize_text_field( $unsanitary['buttonLink'] );
-    }
+      unset( $button );
 
-    if ( ! empty( $unsanitary['buttonText'] ) ) {
-      $sanitized['buttonText'] = sanitize_text_field( $unsanitary['buttonText'] );
+      $sanitized['buttons'] = $sanitized_buttons;
     }
 
     if ( ! empty( $unsanitary['description'] ) ) {
       $sanitized['description'] = wp_kses_post( $unsanitary['description'] );
-    }
-
-    if ( ! empty( $unsanitary['hasButton'] ) ) {
-      $sanitized['hasButton'] = rest_sanitize_boolean( $unsanitary['hasButton'] );
     }
 
     if ( ! empty( $unsanitary['lines'] ) ) {

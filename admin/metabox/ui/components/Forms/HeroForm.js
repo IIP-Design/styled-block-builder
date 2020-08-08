@@ -2,7 +2,6 @@ import React, { Fragment, useContext } from 'react';
 import ReactQuill from 'react-quill';
 
 import ButtonForm from 'metabox/components/Forms/ButtonForm/ButtonForm';
-import CheckboxConditional from 'metabox/components/Forms/Toggles/CheckboxConditional';
 import FileUploader from 'metabox/components/FileUploader/FileUploader';
 import RadioConditional from 'metabox/components/Forms/Toggles/RadioConditional';
 import TabbedForm from 'metabox/components/Forms/TabbedForm/TabbedForm';
@@ -77,13 +76,7 @@ const HeroForm = () => {
       ) }
       { formValues.type === 'lines'
         && <TabbedForm fields={ tabFields } group="lines" label="Line" maxTabs={ 10 } /> }
-      <CheckboxConditional
-        checked={ formValues.hasButton }
-        label="Add Button:"
-        name="hasButton"
-      >
-        <ButtonForm />
-      </CheckboxConditional>
+      <ButtonForm />
     </Fragment>
   );
 };
