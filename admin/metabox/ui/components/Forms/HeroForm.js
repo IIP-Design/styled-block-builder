@@ -19,7 +19,8 @@ const HeroForm = () => {
 
   const optionsAlign = [
     { label: 'Left', name: 'align', value: 'left' },
-    { label: 'Center', name: 'align', value: 'center' },
+    { label: 'Center Title', name: 'align', value: 'title' },
+    { label: 'Center All', name: 'align', value: 'center' },
   ];
 
   const options = [
@@ -54,7 +55,7 @@ const HeroForm = () => {
       </label>
       <RadioConditional
         checked={ formValues.align }
-        label="Choose a text alignment"
+        label="Choose a block alignment:"
         options={ optionsAlign }
       />
       <RadioConditional
@@ -67,7 +68,7 @@ const HeroForm = () => {
           Add main content area text:
           <ReactQuill
             id="hero-description"
-            modules={ getModules( ['align', 'lists'] ) }
+            modules={ getModules( ['lists'] ) }
             theme="snow"
             value={ formValues.description || '' }
             onChange={ handleQuill }

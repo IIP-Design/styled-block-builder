@@ -26,34 +26,49 @@ const Hero = ( { id } ) => {
 
     const alt = getBackgroundAlt( files );
 
+    const titleAlignment = align === 'center' || align === 'title' ? 'center' : 'left';
+    const contentAlignment = align === 'center' ? 'content-center' : 'content-left';
+
     return (
       <Normalizer fullWidth>
         <div style={ setBackgroundImage( files ) } styleName="content-background">
           { alt && <span role="img" aria-label={ alt } /> }
           <Gradient>
-            <div style={ { textAlign: align } } styleName="hero">
-              { title && <h2 styleName="title" className="gpalab-site-specific">{ title }</h2> }
-              { subtitle && <h3 styleName="subtitle" className="gpalab-site-specific">{ subtitle }</h3> }
-              <div styleName="text">
-                { type === 'text' && (
-                  <div
-                    className="light"
-                    dangerouslySetInnerHTML={ { __html: description } }
-                    styleName="text-large"
-                  />
-                ) }
-                { type === 'lines' && <AnimatedLines lines={ lines } /> }
+            <div styleName="hero">
+              { title && (
+                <h2 className="gpalab-site-specific" style={ { textAlign: titleAlignment } } styleName="title">
+                  { title }
+                </h2>
+              ) }
+              { subtitle && (
+                <h3 className="gpalab-site-specific" style={ { textAlign: titleAlignment } } styleName="subtitle">
+                  { subtitle }
+                </h3>
+              ) }
+              <div styleName={ `content ${contentAlignment}` }>
+                <div styleName="text">
+                  { type === 'text' && (
+                    <div
+                      className="light"
+                      dangerouslySetInnerHTML={ { __html: description } }
+                      styleName="text-large"
+                    />
+                  ) }
+                  { type === 'lines' && <AnimatedLines lines={ lines } /> }
+                </div>
+                <div styleName="button-container">
+                  { buttons && buttons.map( button => (
+                    <Button
+                      key={ button.id }
+                      arrow={ button.buttonArrow }
+                      border={ button.buttonBorder }
+                      color={ button.buttonColor }
+                      link={ button.buttonLink }
+                      text={ button.buttonText }
+                    />
+                  ) ) }
+                </div>
               </div>
-              { buttons && buttons.map( button => (
-                <Button
-                  key={ button.id }
-                  arrow={ button.buttonArrow }
-                  border={ button.buttonBorder }
-                  color={ button.buttonColor }
-                  link={ button.buttonLink }
-                  text={ button.buttonText }
-                />
-              ) ) }
             </div>
           </Gradient>
         </div>

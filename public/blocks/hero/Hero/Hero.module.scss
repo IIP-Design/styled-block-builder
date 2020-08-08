@@ -1,16 +1,37 @@
 @import 'styles/colors.scss';
 
 .button-container {
-  grid-column: 2 / span 5;
+  grid-area: button;
+  margin: 0 1rem;
 }
 
-.content-background {
-  align-items: center;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  position: relative;
-  width: 100%;
+.content {
+  display: grid;
+  margin: 2rem 0 4rem;
+  max-width: 1191px;
+
+  &-background {
+    align-items: center;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    width: 100%;
+  }
+
+  &-center {
+    text-align: center;
+    margin: 0 auto;
+    width: 80%;
+  }
+
+  &-left {
+    text-align: left;
+    grid-template-areas:
+      'text blank'
+      'button blank';
+    grid-template-columns: 65% 35%;
+  }
 }
 
 .overlay {
@@ -25,11 +46,10 @@
 }
 
 .hero {
+  display: flex;
+  flex-direction: column;
   margin: 0 auto;
   max-width: 1260px;
-  display: grid;
-  grid-column-gap: 2.63%;
-  grid-template-columns: repeat(12, 1fr);
 }
 
 .title {
@@ -51,21 +71,16 @@
 
 .text {
   color: $white;
-  display: grid;
-  grid-column: 2 / span 11;
-  grid-template-columns: 65% 35%;
-  margin: 2rem 0 4rem;
-  max-width: 1191px;
-  width: 90%;
+  grid-area: text;
 
-  > p {
-    font-size: 1.3rem;
-    line-height: 1.3;
+  p {
+    font-size: 1.2rem;
+    line-height: 1.75;
     margin: 1rem 0;
   }
 
-  > ol,
-  > ul {
+  ol,
+  ul {
     list-style: inherit;
     margin-inline-start: 2rem;
   }
@@ -83,6 +98,20 @@
 }
 
 @media screen and (max-width: 768px) {
+  .content {
+    &-center {
+      width: 90%;
+    }
+
+    &-left {
+      grid-template-areas:
+        'text'
+        'button';
+      grid-template-columns: 1fr;
+      text-align: center;
+    }
+  }
+
   .title {
     margin: 1.5rem 1.5rem 0;
     padding-top: 3rem;
@@ -108,6 +137,10 @@
 
   .text {
     margin: 1rem 1rem 2rem;
+
+    p {
+      font-size: 1.2rem;
+    }
   }
 
   .content {
