@@ -8,11 +8,13 @@
   margin: 1rem 0 2rem;
   padding: 14px 20px;
   text-align: center;
+  text-decoration: none !important;
   text-transform: uppercase;
   transition: all 0.2s ease;
 
   &:hover {
     cursor: pointer;
+    text-decoration: none;
 
     > span {
       transform: translateX(4px);
@@ -97,9 +99,4 @@
 .svg {
   fill: currentColor;
   stroke: currentColor;
-}
-
-.link {
-  border-bottom: none;
-  text-decoration: none;
 }
