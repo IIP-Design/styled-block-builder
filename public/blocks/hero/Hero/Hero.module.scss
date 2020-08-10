@@ -11,8 +11,13 @@
   max-width: 1191px;
 
   &-center {
+    grid-template-areas:
+      'text'
+      'button';
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 80px;
     text-align: center;
-    margin: 0 auto;
+    margin: 2rem auto 4rem;
     width: 80%;
   }
 
@@ -22,6 +27,7 @@
       'text blank'
       'button blank';
     grid-template-columns: 65% 35%;
+    grid-template-rows: 1fr 80px;
   }
 }
 
@@ -63,6 +69,7 @@
 .text {
   color: $white;
   grid-area: text;
+  min-height: 80px;
 
   p {
     font-size: 1.2rem;
@@ -103,29 +110,23 @@
     }
   }
 
-  .title {
-    margin: 1.5rem 1.5rem 0;
-    padding-top: 3rem;
-  }
-
   .subtitle {
     margin: 1rem;
+    text-align: center !important;
   }
 
   .text {
     margin: 1rem 1.5rem 2rem;
   }
+
+  .title {
+    margin: 1.5rem 1.5rem 0;
+    padding-top: 3rem;
+    text-align: center !important;
+  }
 }
 
 @media screen and (max-width: 500px) {
-  .title {
-    text-align: center;
-  }
-
-  .subtitle {
-    text-align: center;
-  }
-
   .text {
     margin: 1rem 1rem 2rem;
 
@@ -138,6 +139,10 @@
     &-background {
       background-position: center bottom;
       background-size: cover;
+    }
+
+    &-center {
+      margin: 1rem auto 2rem;
     }
   }
 }

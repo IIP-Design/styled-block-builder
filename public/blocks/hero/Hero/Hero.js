@@ -53,7 +53,12 @@ const Hero = ( { id } ) => {
                     styleName="text-large"
                   />
                 ) }
-                { type === 'lines' && <AnimatedLines lines={ lines } /> }
+                { type === 'lines' && (
+                  <AnimatedLines
+                    lines={ lines }
+                    style={ align === 'center' ? { left: 0, right: 0, margin: '0 auto' } : {} }
+                  />
+                ) }
               </div>
               <div styleName="button-container">
                 { buttons && buttons.map( button => (

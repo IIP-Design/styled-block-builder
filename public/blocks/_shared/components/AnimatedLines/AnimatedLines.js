@@ -4,7 +4,7 @@ import gsap from 'gsap';
 
 import './AnimatedLines.module.scss';
 
-const AnimatedLines = ( { lines } ) => {
+const AnimatedLines = ( { lines, style } ) => {
   useEffect( () => {
     gsap.registerPlugin( 'CSSRulePlugin' );
 
@@ -24,7 +24,7 @@ const AnimatedLines = ( { lines } ) => {
 
   if ( lines ) {
     return lines.map( line => (
-      <div key={ line.text } className="hero-line" styleName="line">
+      <div key={ line.text } className="hero-line" style={ style || {} } styleName="line">
         { line.text }
       </div>
     ) );
@@ -35,6 +35,7 @@ const AnimatedLines = ( { lines } ) => {
 
 AnimatedLines.propTypes = {
   lines: propTypes.array,
+  style: propTypes.object,
 };
 
 export default AnimatedLines;
