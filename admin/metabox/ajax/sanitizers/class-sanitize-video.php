@@ -27,8 +27,10 @@ class Sanitize_Video {
   public function sanitize_video( $video ) {
     $sanitized_video = array();
 
+    $sanitized_video['brightcove']  = sanitize_text_field( $video['brightcove'] );
     $sanitized_video['id']          = sanitize_text_field( $video['id'] );
     $sanitized_video['description'] = wp_kses_post( $video['description'] );
+    $sanitized_video['source']      = sanitize_text_field( $video['source'] );
     $sanitized_video['title']       = sanitize_text_field( $video['title'] );
     $sanitized_video['url']         = sanitize_text_field( $video['url'] );
 

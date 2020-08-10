@@ -2,6 +2,8 @@ import React, { useContext } from 'react';
 import propTypes from 'prop-types';
 import ReactQuill from 'react-quill';
 
+import RadioConditional from 'metabox/components/Forms/Toggles/RadioConditional';
+
 import { AdminContext } from 'metabox/context/adminContext';
 import { getModules } from 'metabox/utils/quill';
 import {
@@ -18,6 +20,11 @@ const VideoForm = ( { parentGroup, parentId } ) => {
 
   const fields = [
     { name: 'description' }, { name: 'title' }, { name: 'url' },
+  ];
+
+  const videoSource = [
+    { label: 'Brightcove', name: 'source', value: 'brightcove' },
+    { label: 'YouTube', name: 'source', value: 'youtube' },
   ];
 
   if ( formValues ) {
@@ -46,17 +53,40 @@ const VideoForm = ( { parentGroup, parentId } ) => {
           return (
             <div key={ video.id } styleName="form">
               <strong styleName="title">Video Data:</strong>
-              <label htmlFor={ `video-url-${video.id}` } styleName="label">
-                Add video URL:
-                <input
-                  data-itemid={ video.id }
-                  id={ `video-url-${video.id}` }
-                  name="url"
-                  type="text"
-                  value={ video.url || '' }
-                  onChange={ e => handleChangeNested( e, dispatch, 'videos', parentGroup, parentId ) }
-                />
-              </label>
+              <RadioConditional
+                checked={ video.source }
+                group={ { id: video.id, name: 'videos' } }
+                label="What is the video source?"
+                options={ videoSource }
+                parentGroup={ parentGroup }
+                parentId={ parentId }
+              />
+              { video.source === 'youtube' && (
+                <label htmlFor={ `video-url-${video.id}` } styleName="label">
+                  Add video URL:
+                  <input
+                    data-itemid={ video.id }
+                    id={ `video-url-${video.id}` }
+                    name="url"
+                    type="text"
+                    value={ video.url || '' }
+                    onChange={ e => handleChangeNested( e, dispatch, 'videos', parentGroup, parentId ) }
+                  />
+                </label>
+              ) }
+              { video.source === 'brightcove' && (
+                <label htmlFor={ `video-brightcove-${video.id}` } styleName="label">
+                  Add Brightcove ID:
+                  <input
+                    data-itemid={ video.id }
+                    id={ `video-brightcove-${video.id}` }
+                    name="brightcove"
+                    type="text"
+                    value={ video.brightcove || '' }
+                    onChange={ e => handleChangeNested( e, dispatch, 'videos', parentGroup, parentId ) }
+                  />
+                </label>
+              ) }
               <label htmlFor={ `video-title-${video.id}` } styleName="label">
                 Add title:
                 <input
