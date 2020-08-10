@@ -33,10 +33,10 @@ const ArticleById = ( { parentGroup, parentId } ) => {
 
     return (
       <div styleName="container">
-        <h4 styleName="title">Add Articles by Post ID:</h4>
         { articles.map( article => (
-          <div key={ article.id } styleName="feed-info">
-            <label htmlFor={ `article-id-${article.id}` } styleName="feed-label">
+          <div key={ article.id } styleName="form">
+            <strong styleName="title">Add Article Data:</strong>
+            <label htmlFor={ `article-id-${article.id}` }>
               Enter article id
               <input
                 data-itemid={ article.id }
@@ -47,7 +47,7 @@ const ArticleById = ( { parentGroup, parentId } ) => {
                 onChange={ e => handleChangeNested( e, dispatch, 'articles', parentGroup, parentId ) }
               />
             </label>
-            <label htmlFor={ `article-source-${article.id}` } styleName="feed-label">
+            <label htmlFor={ `article-source-${article.id}` }>
               Select article source
               <select
                 data-itemid={ article.id }
@@ -64,7 +64,7 @@ const ArticleById = ( { parentGroup, parentId } ) => {
             <button
               className="button-secondary"
               data-itemid={ article.id }
-              styleName="feed-button-remove"
+              styleName="button-remove"
               type="button"
               onClick={ e => handleRemoveNested( e, dispatch, 'articles', parentGroup, parentId ) }
             >
@@ -74,12 +74,12 @@ const ArticleById = ( { parentGroup, parentId } ) => {
         ) ) }
         <button
           className="button-secondary"
-          disabled={ articles && articles.length === 6 }
-          styleName="feed-button"
+          style={ articles && articles.length > 5 ? { display: 'none' } : { display: 'block' } }
+          styleName="button-add"
           type="button"
           onClick={ () => handleAddNested( dispatch, fields, 'articles', parentGroup, parentId ) }
         >
-          Add Article
+          { articles.length === 0 ? 'Add An Article' : 'Add Another Article' }
         </button>
       </div>
     );

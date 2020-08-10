@@ -1,12 +1,35 @@
 @import 'styles/colors.scss';
 
+.button {
+  &-add {
+    margin: 1rem 0 0.5rem;
+    width: 50%;
+  }
+
+  &-remove {
+    align-self: flex-end;
+    margin: 0.5rem 0;
+  }
+}
+
 .container {
+  margin: 1rem 0 0.5rem;
+}
+
+.form {
   border: $wordpressBorder;
   display: flex;
   flex-direction: column;
-  margin: 0.5rem 0;
+  margin-bottom: 0.5rem;
   padding: 0.5rem;
   width: 96%;
+
+  > label {
+    display: grid;
+    grid-gap: 1rem;
+    grid-template-columns: 1fr 1fr;
+    margin: 0.3rem 0;
+  }
 }
 
 .feed {
@@ -22,24 +45,6 @@
   &-buttons {
     display: flex;
     margin: 0.5rem 0;
-  }
-
-  &-info {
-    display: flex;
-    flex-direction: column;
-    margin: 0.75rem 0;
-    padding-bottom: 0.75rem;
-
-    &:not(:last-of-type) {
-      border-bottom: $wordpressBorder;
-    }
-  }
-
-  &-label {
-    display: grid;
-    grid-gap: 1rem;
-    grid-template-columns: 1fr 1fr;
-    margin: 0.3rem 0;
   }
 }
 

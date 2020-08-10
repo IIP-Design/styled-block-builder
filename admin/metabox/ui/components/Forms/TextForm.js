@@ -3,7 +3,6 @@ import ReactQuill from 'react-quill';
 
 import ArticleById from 'metabox/components/Forms/FeedTypes/ArticleById';
 import ButtonForm from 'metabox/components/Forms/ButtonForm/ButtonForm';
-import CheckboxConditional from 'metabox/components/Forms/Toggles/CheckboxConditional';
 import ColorPicker from 'metabox/components/ColorPicker/ColorPicker';
 import FileUploader from 'metabox/components/FileUploader/FileUploader';
 import FullWidthToggle from 'metabox/components/Forms/Toggles/FullWidthToggle';
@@ -107,13 +106,7 @@ const TextForm = () => {
       <FullWidthToggle checked={ formValues.fullWidth } />
       <ButtonForm number={ 2 } />
       <VideoForm />
-      <CheckboxConditional
-        checked={ formValues.hasFeed }
-        label="Add an Article Feed?"
-        name="hasFeed"
-      >
-        <ArticleById />
-      </CheckboxConditional>
+      <ArticleById />
     </Fragment>
   );
 };

@@ -90,10 +90,6 @@ class Sanitize_Text_Meta {
       $sanitized['fullWidth'] = rest_sanitize_boolean( $unsanitary['fullWidth'] );
     }
 
-    if ( ! empty( $unsanitary['hasFeed'] ) ) {
-      $sanitized['hasFeed'] = rest_sanitize_boolean( $unsanitary['hasFeed'] );
-    }
-
     if ( ! empty( $unsanitary['subtitle'] ) ) {
       $sanitized['subtitle'] = sanitize_text_field( $unsanitary['subtitle'] );
     }
