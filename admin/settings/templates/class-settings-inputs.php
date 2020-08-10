@@ -111,6 +111,29 @@ class Settings_Inputs {
   }
 
   /**
+   * Return an text input to populate an option with a provided string
+   * Expects the option to follow the naming convention 'gpalab-blocks-property'
+   *
+   * @param string $property The name of the given option without the gpalab-blocks-' prefix.
+   */
+  public function text_input( $property ) {
+    $option = 'gpalab-blocks-' . $property;
+    $value  = get_option( $option ) ? get_option( $option ) : ''
+
+    ?>
+      <label for="<?php echo esc_html( $option ); ?>">
+        <input
+          id="<?php echo esc_html( $option ); ?>"
+          name="<?php echo esc_html( $option ); ?>"
+          style="margin-left: 10px; width: 30%"
+          type="text"
+          value="<?php echo esc_html( $value ); ?>"
+        />
+      </label>
+    <?php
+  }
+
+  /**
    * Converts an option value into the corresponding, predefined text.
    * Otherwise it returns the provided option value.
    *
