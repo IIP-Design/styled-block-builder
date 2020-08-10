@@ -52,10 +52,22 @@ const QuoteBox = ( { id } ) => {
                     { subtitle }
                   </h3>
                 ) }
-                { desc && <div className={ setLightClass( textColor ) } dangerouslySetInnerHTML={ { __html: desc } } style={ { color: textColor } } styleName="text" /> }
+                { desc && (
+                  <div
+                    className={ setLightClass( textColor ) }
+                    dangerouslySetInnerHTML={ { __html: desc } }
+                    style={ { color: textColor } }
+                    styleName="text"
+                  />
+                ) }
                 { quote && (
                   <div style={ backgroundStyle( quoteBackground ) } styleName="quote">
-                    <div className={ setLightClass( quoteColor ) } dangerouslySetInnerHTML={ { __html: quote } } style={ { color: quoteColor } } styleName="quote-text" />
+                    <div
+                      className={ setLightClass( quoteColor ) }
+                      dangerouslySetInnerHTML={ { __html: quote } }
+                      style={ { color: quoteColor } }
+                      styleName="quote-text"
+                    />
                   </div>
                 ) }
               </div>

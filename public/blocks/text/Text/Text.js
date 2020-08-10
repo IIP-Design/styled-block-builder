@@ -5,7 +5,8 @@ import Button from 'blocks/_shared/components/Button/Button';
 import CDPFeed from 'blocks/_shared/components/CDPFeed/CDPFeed';
 import Normalizer from 'blocks/_shared/components/Normalizer/Normalizer';
 import VideoEmbed from 'blocks/_shared/components/VideoEmbed/VideoEmbed';
-import { backgroundStyle, setLightClass } from 'blocks/_shared/utils/background-style';
+
+import { backgroundStyle, getBackgroundAlt, setBackgroundImage, setLightClass } from 'blocks/_shared/utils/background-style';
 
 import './Text.module.scss';
 
@@ -15,9 +16,11 @@ const Text = ( { id } ) => {
   if ( meta ) {
     const {
       articles,
+      backgroundType,
       blockBackground,
       buttons,
       desc,
+      files,
       fullWidth,
       subtitle,
       textColor,
@@ -25,9 +28,13 @@ const Text = ( { id } ) => {
       videos,
     } = meta;
 
+    const alt = getBackgroundAlt( files );
+    const bg = backgroundType === 'image' ? setBackgroundImage( files ) : backgroundStyle( blockBackground );
+
     return (
       <Normalizer fullWidth={ fullWidth }>
-        <div style={ backgroundStyle( blockBackground ) } styleName="bg">
+        <div style={ bg } styleName="bg">
+          { alt && <span role="img" aria-label={ alt } /> }
           <div styleName="container">
             { title && (
               <h2 className="gpalab-site-specific" style={ { color: textColor } } styleName="title">

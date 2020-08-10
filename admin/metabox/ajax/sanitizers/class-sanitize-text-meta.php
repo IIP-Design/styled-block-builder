@@ -29,6 +29,9 @@ class Sanitize_Text_Meta {
     include_once STYLE_BLOCKS_DIR . 'admin/metabox/ajax/sanitizers/class-sanitize-button.php';
     $sanitize_button = new Sanitize_Button();
 
+    include_once STYLE_BLOCKS_DIR . 'admin/metabox/ajax/sanitizers/class-sanitize-files.php';
+    $sanitize_files = new Sanitize_Files();
+
     include_once STYLE_BLOCKS_DIR . 'admin/metabox/ajax/sanitizers/class-sanitize-video.php';
     $sanitize_video = new Sanitize_Video();
 
@@ -53,6 +56,10 @@ class Sanitize_Text_Meta {
       $sanitized['articles'] = $sanitized_articles;
     }
 
+    if ( ! empty( $unsanitary['backgroundType'] ) ) {
+      $sanitized['backgroundType'] = sanitize_text_field( $unsanitary['backgroundType'] );
+    }
+
     if ( ! empty( $unsanitary['blockBackground'] ) ) {
       $sanitized['blockBackground'] = sanitize_text_field( $unsanitary['blockBackground'] );
     }
@@ -73,6 +80,10 @@ class Sanitize_Text_Meta {
 
     if ( ! empty( $unsanitary['desc'] ) ) {
       $sanitized['desc'] = wp_kses_post( $unsanitary['desc'] );
+    }
+
+    if ( ! empty( $unsanitary['files'] ) ) {
+      $sanitized['files'] = $sanitize_files->sanitize_files( $unsanitary['files'], $uploads );
     }
 
     if ( ! empty( $unsanitary['fullWidth'] ) ) {

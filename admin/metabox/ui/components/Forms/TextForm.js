@@ -5,7 +5,9 @@ import ArticleById from 'metabox/components/Forms/FeedTypes/ArticleById';
 import ButtonForm from 'metabox/components/Forms/ButtonForm/ButtonForm';
 import CheckboxConditional from 'metabox/components/Forms/Toggles/CheckboxConditional';
 import ColorPicker from 'metabox/components/ColorPicker/ColorPicker';
+import FileUploader from 'metabox/components/FileUploader/FileUploader';
 import FullWidthToggle from 'metabox/components/Forms/Toggles/FullWidthToggle';
+import RadioConditional from 'metabox/components/Forms/Toggles/RadioConditional';
 import VideoForm from 'metabox/components/Forms/VideoForm/VideoForm';
 
 import { AdminContext } from 'metabox/context/adminContext';
@@ -32,6 +34,11 @@ const TextForm = () => {
     dispatch( { type: 'form-update', payload: { name: 'desc', value } } );
   };
 
+  const blockBgType = [
+    { label: 'Color', name: 'backgroundType', value: 'color' },
+    { label: 'Image', name: 'backgroundType', value: 'image' },
+  ];
+
   const blockBgOptions = {
     group: 'blockBackground',
     options: defaultBackgrounds,
@@ -44,15 +51,28 @@ const TextForm = () => {
 
   return (
     <Fragment>
+      <RadioConditional
+        checked={ formValues.backgroundType }
+        label="What type of background would you like to apply to this block?"
+        options={ blockBgType }
+      />
+      { formValues.backgroundType === 'color' && (
+        <ColorPicker
+          colors={ blockBgOptions }
+          label="Set block background color:"
+          selected={ formValues.blockBackground }
+        />
+      ) }
+      { formValues.backgroundType === 'image' && (
+        <FileUploader
+          label="Add background image URL:"
+          name="backgroundImage"
+        />
+      ) }
       <ColorPicker
         colors={ textOptions }
         label="Set block text color:"
         selected={ formValues.textColor }
-      />
-      <ColorPicker
-        colors={ blockBgOptions }
-        label="Set block background color:"
-        selected={ formValues.blockBackground }
       />
       <label htmlFor="text-title">
         Add Title:

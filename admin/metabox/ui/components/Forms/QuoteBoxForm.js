@@ -5,6 +5,7 @@ import ColorPicker from 'metabox/components/ColorPicker/ColorPicker';
 import FileUploader from 'metabox/components/FileUploader/FileUploader';
 import FullWidthToggle from 'metabox/components/Forms/Toggles/FullWidthToggle';
 import RadioConditional from 'metabox/components/Forms/Toggles/RadioConditional';
+
 import { AdminContext } from 'metabox/context/adminContext';
 import { defaultBackgrounds, defaultText } from 'metabox/utils/color-picker-palettes';
 import { handleChange } from 'metabox/utils/event-handlers';
