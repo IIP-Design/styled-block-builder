@@ -11,27 +11,36 @@ _This sections lists changes committed since most recent release_
 
 ### Added:
 
-- Integration with the WordPress media library to as the source for
-- The ability to set the unit in the stats block
+- Integration with the WordPress media library to as the source for image uploads
+- The ability to set the unit in the Stats block
 - A section in settings page to configure which sources are available in the article feed
-- A section in settings page to configure which users can add styled blocks
-- An optional stylesheet to enforce state.gov heading styles
-- Rich text editor to allow for formatted text in the hero, parallax, quote box, and text blocks
+- A section in settings page to configure which users can add styled blocks (based on user's WordPress role)
+- An optional stylesheet to enforce state.gov heading and link styles
+- Rich text editor to allow for formatted text in the Hero, Parallax, Quote Box, Resources, Slides, and Text blocks
 - Alt text support for background images
-- Alignment options for hero block headings
+- A reusable background component to set the block background color/image and gradient
+- Additional alignment options for Hero block headings and content
 - Tooltip displaying color name in color picker component
+- Reusable sanitizers for article, button, and video sub-forms
 
 ### Changed:
 
+- Unify styling across article feed, button, and video input forms
 - Update color options to more closely align with state.gov styleguide
+- Update the Resources block an accordion on mobile (rather than simply stacking the content)
+- Vary link text color based on surrounding text rather than simply inheriting surrounding text color
 - Make buttons more configurable with additional style options
+- Enable background images for Text blocks
+- Increase CDP Feed item limit from three to six
+- Increase button limit in text block from one to two
 - Add Jest for JavaScript unit testing
 - Remove automated formatting with Prettier in favor of ESLint config rules
 - Do not fill block root div with the block type (to prevent flash of text before the block loads)
 
 ### Fixed:
 
-- Video option in resources block not saving values
+- Video option in Resources block not saving values
+- Added focus states to all links and buttons for better accessibility
 - Correctly escape and render the settings page title
 - Updated JavaScript dependencies
 
