@@ -6,7 +6,7 @@ import CDPFeedItem from './CDPFeedItem';
 import './CDPFeed.module.scss';
 
 const CDPFeed = ( { id, items } ) => {
-  let feedType = '';
+  let feedType = 'base';
 
   if ( items.length === 1 ) {
     feedType = 'single';
@@ -14,6 +14,10 @@ const CDPFeed = ( { id, items } ) => {
 
   if ( items.length === 3 ) {
     feedType = 'three';
+  }
+
+  if ( items.length > 4 ) {
+    feedType = 'multi';
   }
 
   const getSource = alias => {
@@ -31,7 +35,13 @@ const CDPFeed = ( { id, items } ) => {
 
   return (
     <div id={ `cdp-feed-${id}` } styleName={ `cdp-feed ${feedType}` }>
-      { items.map( item => <CDPFeedItem key={ item.postId } id={ item.postId } source={ getSource( item.source ) } /> ) }
+      { items.map( item => (
+        <CDPFeedItem
+          key={ item.postId }
+          id={ item.postId }
+          source={ getSource( item.source ) }
+        />
+      ) ) }
     </div>
   );
 };

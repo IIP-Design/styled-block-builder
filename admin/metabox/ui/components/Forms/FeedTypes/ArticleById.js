@@ -74,7 +74,7 @@ const ArticleById = ( { parentGroup, parentId } ) => {
         ) ) }
         <button
           className="button-secondary"
-          disabled={ articles && articles.length === 3 }
+          disabled={ articles && articles.length === 6 }
           styleName="feed-button"
           type="button"
           onClick={ () => handleAddNested( dispatch, fields, 'articles', parentGroup, parentId ) }
