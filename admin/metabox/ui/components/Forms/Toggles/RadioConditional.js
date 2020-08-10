@@ -2,12 +2,20 @@ import React, { useContext } from 'react';
 import propTypes from 'prop-types';
 
 import { AdminContext } from 'metabox/context/adminContext';
-import { handleChange } from 'metabox/utils/event-handlers';
+import { handleChange, handleChangeNested } from 'metabox/utils/event-handlers';
 
 import './Toggles.module.scss';
 
-const RadioConditional = ( { checked, label, options } ) => {
+const RadioConditional = ( { checked, group, label, options, parentGroup, parentId } ) => {
   const { dispatch } = useContext( AdminContext );
+
+  const onChange = e => {
+    if ( group ) {
+      handleChangeNested( e, dispatch, group.name, parentGroup, parentId );
+    } else {
+      handleChange( e, dispatch );
+    }
+  };
 
   return (
     <div styleName="form-break">
@@ -23,11 +31,12 @@ const RadioConditional = ( { checked, label, options } ) => {
               { option.label }
               <input
                 checked={ option.value === checked }
+                data-itemid={ group ? group.id : null }
                 id={ `radio-conditional-${option.value}` }
                 name={ option.name }
                 type="radio"
                 value={ option.value }
-                onChange={ e => handleChange( e, dispatch ) }
+                onChange={ e => onChange( e ) }
               />
             </label>
           ) ) }
@@ -38,8 +47,14 @@ const RadioConditional = ( { checked, label, options } ) => {
 
 RadioConditional.propTypes = {
   checked: propTypes.string,
+  group: propTypes.shape( {
+    id: propTypes.string,
+    name: propTypes.string,
+  } ),
   label: propTypes.string,
   options: propTypes.array,
+  parentGroup: propTypes.string,
+  parentId: propTypes.string,
 };
 
 export default RadioConditional;

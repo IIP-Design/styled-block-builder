@@ -22,6 +22,7 @@ _This sections lists changes committed since most recent release_
 - Additional alignment options for Hero block headings and content
 - Tooltip displaying color name in color picker component
 - Reusable sanitizers for article, button, and video sub-forms
+- Enable use of radio conditionals within nested groups
 
 ### Changed:
 
