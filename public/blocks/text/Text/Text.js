@@ -34,7 +34,6 @@ const Text = ( { id } ) => {
       display: 'flex',
       flexDirection: 'column',
       justifyContent: 'center',
-      padding: '2.75rem 0 5rem',
     };
 
     return (
@@ -77,16 +76,16 @@ const Text = ( { id } ) => {
                 text={ button.buttonText }
               />
             ) ) }
+            { videos && videos.map( video => (
+              <VideoEmbed
+                key={ video.id }
+                desc={ video.description }
+                title={ video.title || video.id }
+                url={ video.url }
+              />
+            ) ) }
+            { articles && <CDPFeed id={ id } items={ articles } /> }
           </div>
-          { videos && videos.map( video => (
-            <VideoEmbed
-              key={ video.id }
-              desc={ video.description }
-              title={ video.title || video.id }
-              url={ video.url }
-            />
-          ) ) }
-          { articles && <CDPFeed id={ id } items={ articles } /> }
         </Background>
       </Normalizer>
     );
