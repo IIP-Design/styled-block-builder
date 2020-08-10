@@ -10,7 +10,7 @@ import {
 
 import './ButtonForm.module.scss';
 
-const ButtonForm = ( { parentGroup, parentId } ) => {
+const ButtonForm = ( { parentGroup, parentId, number } ) => {
   const { dispatch, state } = useContext( AdminContext );
   const formValues = state?.formData?.formValues ? state.formData.formValues : {};
 
@@ -125,16 +125,17 @@ const ButtonForm = ( { parentGroup, parentId } ) => {
             >
               Remove Button
             </button>
+
           </div>
         ) ) }
         <button
           className="button-secondary"
-          style={ buttons && buttons.length > 0 ? { display: 'none' } : { display: 'block' } }
+          style={ buttons && buttons.length > number - 1 ? { display: 'none' } : { display: 'block' } }
           styleName="button-add"
           type="button"
           onClick={ () => handleAddNested( dispatch, fields, 'buttons', parentGroup, parentId ) }
         >
-          Add Button
+          { buttons.length === 0 ? 'Add Button' : 'Add Another Button' }
         </button>
       </div>
     );
@@ -144,11 +145,13 @@ const ButtonForm = ( { parentGroup, parentId } ) => {
 };
 
 ButtonForm.propTypes = {
+  number: propTypes.number,
   parentGroup: propTypes.string,
   parentId: propTypes.string,
 };
 
 ButtonForm.defaultProps = {
+  number: 1,
   parentGroup: null,
   parentId: null,
 };

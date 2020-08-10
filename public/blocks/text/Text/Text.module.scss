@@ -1,5 +1,14 @@
 @import 'styles/colors.scss';
 
+.button-container {
+  display: flex;
+
+  > a {
+    margin: 0 0.5rem;
+    width: 250px;
+  }
+}
+
 .container {
   align-items: center;
   display: flex;

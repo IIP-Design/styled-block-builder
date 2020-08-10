@@ -66,16 +66,20 @@ const Text = ( { id } ) => {
                 />
               ) }
             </div>
-            { buttons && buttons.map( button => (
-              <Button
-                key={ button.id }
-                arrow={ button.buttonArrow }
-                border={ button.buttonBorder }
-                color={ button.buttonColor }
-                link={ button.buttonLink }
-                text={ button.buttonText }
-              />
-            ) ) }
+            { buttons && (
+              <div styleName="button-container">
+                { buttons.map( button => (
+                  <Button
+                    key={ button.id }
+                    arrow={ button.buttonArrow }
+                    border={ button.buttonBorder }
+                    color={ button.buttonColor }
+                    link={ button.buttonLink }
+                    text={ button.buttonText }
+                  />
+                ) ) }
+              </div>
+            ) }
             { videos && videos.map( video => (
               <div key={ video.id } styleName="video-container">
                 <VideoEmbed

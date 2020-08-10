@@ -105,7 +105,7 @@ const TextForm = () => {
         />
       </label>
       <FullWidthToggle checked={ formValues.fullWidth } />
-      <ButtonForm />
+      <ButtonForm number={ 2 } />
       <VideoForm />
       <CheckboxConditional
         checked={ formValues.hasFeed }
