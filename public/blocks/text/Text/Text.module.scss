@@ -46,6 +46,12 @@
   text-align: center;
 }
 
+.video-container {
+  height: auto;
+  margin-top: 1rem;
+  width: 100%;
+}
+
 @media screen and (max-width: 768px) {
   .content {
     margin: 2rem 0 1rem;

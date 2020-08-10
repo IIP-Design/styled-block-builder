@@ -77,12 +77,13 @@ const Text = ( { id } ) => {
               />
             ) ) }
             { videos && videos.map( video => (
-              <VideoEmbed
-                key={ video.id }
-                desc={ video.description }
-                title={ video.title || video.id }
-                url={ video.url }
-              />
+              <div key={ video.id } styleName="video-container">
+                <VideoEmbed
+                  desc={ video.description }
+                  title={ video.title || video.id }
+                  url={ video.url }
+                />
+              </div>
             ) ) }
             { articles && <CDPFeed id={ id } items={ articles } /> }
           </div>
