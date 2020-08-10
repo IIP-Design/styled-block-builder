@@ -1,15 +1,10 @@
 import React from 'react';
 import propTypes from 'prop-types';
 
-import Gradient from 'blocks/_shared/components/Gradient/Gradient';
+import Background from 'blocks/_shared/components/Background/Background';
 import Normalizer from 'blocks/_shared/components/Normalizer/Normalizer';
-import {
-  backgroundStyle,
-  getBackgroundAlt,
-  setBackgroundImage,
-  setLightClass,
-  setTextColor,
-} from 'blocks/_shared/utils/background-style';
+
+import { backgroundStyle, setLightClass, setTextColor } from 'blocks/_shared/utils/background-style';
 
 import './QuoteBox.module.scss';
 
@@ -30,50 +25,49 @@ const QuoteBox = ( { id } ) => {
       title,
     } = meta;
 
-    const alt = getBackgroundAlt( files );
-    const bg = backgroundType === 'image' ? setBackgroundImage( files ) : backgroundStyle( blockBackground );
-
     const quoteColor = setTextColor( quoteBackground );
 
     return (
       <Normalizer fullWidth={ fullWidth }>
-        <div style={ bg } styleName="box-bg">
-          { alt && <span role="img" aria-label={ alt } /> }
-          <Gradient off={ backgroundType !== 'image' }>
-            <div styleName="container">
-              <div styleName="content">
-                { title && (
-                  <h2 className="gpalab-site-specific" style={ { color: textColor } } styleName="title">
-                    { title }
-                  </h2>
-                ) }
-                { subtitle && (
-                  <h3 className="gpalab-site-specific" style={ { color: textColor } } styleName="subtitle">
-                    { subtitle }
-                  </h3>
-                ) }
-                { desc && (
+        <Background
+          backgroundType={ backgroundType }
+          blockBackground={ blockBackground }
+          files={ files }
+          gradient={ backgroundType === 'image' }
+        >
+          <div styleName="container">
+            <div styleName="content">
+              { title && (
+                <h2 className="gpalab-site-specific" style={ { color: textColor } } styleName="title">
+                  { title }
+                </h2>
+              ) }
+              { subtitle && (
+                <h3 className="gpalab-site-specific" style={ { color: textColor } } styleName="subtitle">
+                  { subtitle }
+                </h3>
+              ) }
+              { desc && (
+                <div
+                  className={ setLightClass( textColor ) }
+                  dangerouslySetInnerHTML={ { __html: desc } }
+                  style={ { color: textColor } }
+                  styleName="text"
+                />
+              ) }
+              { quote && (
+                <div style={ backgroundStyle( quoteBackground ) } styleName="quote">
                   <div
-                    className={ setLightClass( textColor ) }
-                    dangerouslySetInnerHTML={ { __html: desc } }
-                    style={ { color: textColor } }
-                    styleName="text"
+                    className={ setLightClass( quoteColor ) }
+                    dangerouslySetInnerHTML={ { __html: quote } }
+                    style={ { color: quoteColor } }
+                    styleName="quote-text"
                   />
-                ) }
-                { quote && (
-                  <div style={ backgroundStyle( quoteBackground ) } styleName="quote">
-                    <div
-                      className={ setLightClass( quoteColor ) }
-                      dangerouslySetInnerHTML={ { __html: quote } }
-                      style={ { color: quoteColor } }
-                      styleName="quote-text"
-                    />
-                  </div>
-                ) }
-              </div>
+                </div>
+              ) }
             </div>
-          </Gradient>
-        </div>
+          </div>
+        </Background>
       </Normalizer>
     );
   }

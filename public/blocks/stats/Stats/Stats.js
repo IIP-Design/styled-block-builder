@@ -3,10 +3,9 @@ import propTypes from 'prop-types';
 import gsap from 'gsap';
 import { v4 as uuid } from 'uuid';
 
-import Gradient from 'blocks/_shared/components/Gradient/Gradient';
+import Background from 'blocks/_shared/components/Background/Background';
 import Normalizer from 'blocks/_shared/components/Normalizer/Normalizer';
 import useVisibilityObserver from 'blocks/_shared/hooks/useVisibilityObserver';
-import { backgroundStyle, getBackgroundAlt, setBackgroundImage } from 'blocks/_shared/utils/background-style';
 
 import './Stats.module.scss';
 
@@ -50,22 +49,23 @@ const Stats = ( { id } ) => {
       title,
     } = meta;
 
-    const alt = getBackgroundAlt( files );
-    const bg = backgroundType === 'image' ? setBackgroundImage( files ) : backgroundStyle( blockBackground );
-
     return (
       <Normalizer fullWidth={ fullWidth }>
-        <div ref={ ref } style={ bg } styleName="box-bg">
-          { alt && <span role="img" aria-label={ alt } /> }
-          <Gradient off={ backgroundType !== 'image' }>
-            <div className="stats-container" styleName="container">
-              { title && (
-                <h2 className="gpalab-site-specific" style={ { color: textColor } } styleName="title">
-                  { title }
-                </h2>
-              ) }
-              <div id={ `stats-${id}` } styleName="array">
-                { stats
+        <Background
+          backgroundType={ backgroundType }
+          blockBackground={ blockBackground }
+          files={ files }
+          gradient={ backgroundType === 'image' }
+          styles={ { backgroundAttachment: 'fixed' } }
+        >
+          <div ref={ ref } className="stats-container" styleName="container">
+            { title && (
+              <h2 className="gpalab-site-specific" style={ { color: textColor } } styleName="title">
+                { title }
+              </h2>
+            ) }
+            <div id={ `stats-${id}` } styleName="array">
+              { stats
                   && stats.map( ( stat, index ) => (
                     <div key={ uuid() } style={ { borderColor: textColor } } styleName="item">
                       <div style={ { color: textColor } } styleName="item-value">
@@ -84,10 +84,9 @@ const Stats = ( { id } ) => {
                       </p>
                     </div>
                   ) ) }
-              </div>
             </div>
-          </Gradient>
-        </div>
+          </div>
+        </Background>
       </Normalizer>
     );
   }

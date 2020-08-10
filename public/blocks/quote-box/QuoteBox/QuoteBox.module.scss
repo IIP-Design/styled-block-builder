@@ -1,10 +1,5 @@
 @import 'styles/colors.scss';
 
-.box-bg {
-  position: relative;
-  width: 100%;
-}
-
 .container {
   padding: 5rem 0 0;
   position: relative;
@@ -18,22 +13,6 @@
   justify-content: flex-start;
   position: relative;
   width: 100%;
-}
-
-.title {
-  text-align: center;
-}
-
-.subtitle {
-  margin-top: 1rem;
-  text-align: center;
-}
-
-.text {
-  margin: 2rem 0 1rem;
-  max-width: 1191px;
-  text-align: center;
-  width: 75%;
 }
 
 .quote {
@@ -62,6 +41,22 @@
       margin-inline-start: 2rem;
     }
   }
+}
+
+.subtitle {
+  margin-top: 1rem;
+  text-align: center;
+}
+
+.text {
+  margin: 2rem 0 1rem;
+  max-width: 1191px;
+  text-align: center;
+  width: 75%;
+}
+
+.title {
+  text-align: center;
 }
 
 @media screen and (max-width: 768px) {

@@ -1,15 +1,5 @@
 @import 'styles/colors.scss';
 
-.bg {
-  align-items: center;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 2.75rem 0 5rem;
-  position: relative;
-  width: 100%;
-}
-
 .container {
   align-items: center;
   display: flex;
@@ -17,17 +7,6 @@
   justify-content: flex-start;
   padding: 0;
   max-width: 1280px;
-}
-
-.title {
-  color: $black;
-  text-align: center;
-}
-
-.subtitle {
-  color: $black;
-  text-align: center;
-  margin-top: 1rem;
 }
 
 .content {
@@ -54,6 +33,17 @@
     list-style: inherit;
     margin-inline-start: 2rem;
   }
+}
+
+.subtitle {
+  color: $black;
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.title {
+  color: $black;
+  text-align: center;
 }
 
 @media screen and (max-width: 768px) {

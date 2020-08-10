@@ -1,12 +1,21 @@
 @import 'styles/colors.scss';
 
-.box-bg {
-  background-attachment: fixed;
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
+.container {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 2.75rem 0 5rem;
+}
+
+.content {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  margin: 2rem 0;
+  max-width: 1191px;
   position: relative;
-  width: 100%;
+  width: 90%;
 }
 
 .fixed {
@@ -18,33 +27,10 @@
   align-items: center;
 }
 
-.container {
-  align-items: center;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  padding: 2.75rem 0 5rem;
-}
-
-.title {
-  color: $white;
-  text-align: center;
-}
-
 .subtitle {
   color: $white;
   text-align: center;
   margin: 1rem;
-}
-
-.content {
-  align-items: center;
-  display: flex;
-  flex-direction: column;
-  margin: 2rem 0;
-  max-width: 1191px;
-  position: relative;
-  width: 90%;
 }
 
 .text {
@@ -61,6 +47,11 @@
     list-style: inherit;
     margin-inline-start: 2rem;
   }
+}
+
+.title {
+  color: $white;
+  text-align: center;
 }
 
 @media screen and (max-width: 768px) {

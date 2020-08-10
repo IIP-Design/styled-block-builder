@@ -1,12 +1,13 @@
 import React from 'react';
 import propTypes from 'prop-types';
 
+import Background from 'blocks/_shared/components/Background/Background';
 import Button from 'blocks/_shared/components/Button/Button';
 import CDPFeed from 'blocks/_shared/components/CDPFeed/CDPFeed';
 import Normalizer from 'blocks/_shared/components/Normalizer/Normalizer';
 import VideoEmbed from 'blocks/_shared/components/VideoEmbed/VideoEmbed';
 
-import { backgroundStyle, getBackgroundAlt, setBackgroundImage, setLightClass } from 'blocks/_shared/utils/background-style';
+import { setLightClass } from 'blocks/_shared/utils/background-style';
 
 import './Text.module.scss';
 
@@ -28,13 +29,23 @@ const Text = ( { id } ) => {
       videos,
     } = meta;
 
-    const alt = getBackgroundAlt( files );
-    const bg = backgroundType === 'image' ? setBackgroundImage( files ) : backgroundStyle( blockBackground );
+    const bgStyle = {
+      alignItems: 'center',
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'center',
+      padding: '2.75rem 0 5rem',
+    };
 
     return (
       <Normalizer fullWidth={ fullWidth }>
-        <div style={ bg } styleName="bg">
-          { alt && <span role="img" aria-label={ alt } /> }
+        <Background
+          backgroundType={ backgroundType }
+          blockBackground={ blockBackground }
+          files={ files }
+          gradient={ false }
+          styles={ bgStyle }
+        >
           <div styleName="container">
             { title && (
               <h2 className="gpalab-site-specific" style={ { color: textColor } } styleName="title">
@@ -76,7 +87,7 @@ const Text = ( { id } ) => {
             />
           ) ) }
           { articles && <CDPFeed id={ id } items={ articles } /> }
-        </div>
+        </Background>
       </Normalizer>
     );
   }

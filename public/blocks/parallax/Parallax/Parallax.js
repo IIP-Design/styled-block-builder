@@ -1,10 +1,9 @@
 import React from 'react';
 import propTypes from 'prop-types';
 
+import Background from 'blocks/_shared/components/Background/Background';
 import Button from 'blocks/_shared/components/Button/Button';
-import Gradient from 'blocks/_shared/components/Gradient/Gradient';
 import Normalizer from 'blocks/_shared/components/Normalizer/Normalizer';
-import { getBackgroundAlt, setBackgroundImage } from 'blocks/_shared/utils/background-style';
 
 import './Parallax.module.scss';
 
@@ -26,31 +25,31 @@ const Parallax = ( { id } ) => {
       title,
     } = meta;
 
-    const alt = getBackgroundAlt( files );
-
     return (
       <Normalizer fullWidth={ fullWidth }>
-        <div style={ setBackgroundImage( files ) } styleName="box-bg">
-          { alt && <span role="img" aria-label={ alt } /> }
-          <Gradient>
-            <div styleName="fixed">
-              <div styleName="content">
-                { title && <h2 className="gpalab-site-specific" styleName="title">{ title }</h2> }
-                { subtitle && <h3 className="gpalab-site-specific" styleName="subtitle">{ subtitle }</h3> }
-                { desc && <div className="light" dangerouslySetInnerHTML={ { __html: desc } } styleName="text" /> }
-                { hasButton && (
-                  <Button
-                    arrow={ buttonArrow }
-                    border={ buttonBorder }
-                    color={ buttonColor }
-                    link={ buttonLink }
-                    text={ buttonText }
-                  />
-                ) }
-              </div>
+        <Background
+          backgroundType="image"
+          files={ files }
+          gradient
+          styles={ { backgroundAttachment: 'fixed' } }
+        >
+          <div styleName="fixed">
+            <div styleName="content">
+              { title && <h2 className="gpalab-site-specific" styleName="title">{ title }</h2> }
+              { subtitle && <h3 className="gpalab-site-specific" styleName="subtitle">{ subtitle }</h3> }
+              { desc && <div className="light" dangerouslySetInnerHTML={ { __html: desc } } styleName="text" /> }
+              { hasButton && (
+                <Button
+                  arrow={ buttonArrow }
+                  border={ buttonBorder }
+                  color={ buttonColor }
+                  link={ buttonLink }
+                  text={ buttonText }
+                />
+              ) }
             </div>
-          </Gradient>
-        </div>
+          </div>
+        </Background>
       </Normalizer>
     );
   }
