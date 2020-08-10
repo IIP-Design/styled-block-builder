@@ -172,6 +172,12 @@ export const groupAddItem = ( fields, data, group ) => {
   // Get list of field names required.
   const fieldNames = fields.map( field => field.name );
 
+  const getFieldValue = fieldName => {
+    const field = fields.filter( f => f.name === fieldName );
+
+    return field[0].value;
+  };
+
   // Check if selected group member has relevant sub-group, if not create.
   const groupArr = data[group] ? [...data[group]] : [];
 
@@ -180,7 +186,7 @@ export const groupAddItem = ( fields, data, group ) => {
 
   obj.id = uuid();
   fieldNames.forEach( name => {
-    obj[name] = '';
+    obj[name] = getFieldValue( name ) || '';
   } );
 
   // Add new object to sub-group.
