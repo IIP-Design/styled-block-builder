@@ -46,14 +46,11 @@
     font-weight: 600;
     height: 100px;
     width: 300px;
+    overflow: hidden;
     padding: 1rem;
     text-align: center;
     text-decoration: none;
     text-transform: uppercase;
-
-    &:focus {
-      outline: none;
-    }
 
     &:hover {
       cursor: pointer;
@@ -67,6 +64,11 @@
       &:hover {
         color: $gold;
       }
+    }
+
+    &:focus {
+      outline: none;
+      border: 2px solid $gold;
     }
   }
 }

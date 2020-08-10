@@ -2,6 +2,7 @@ $black: #333333;
 $blackStandard: #000000;
 $blueBlackPearl: #062135;
 $blueBright: #002d74;
+$blueHighlight: #0000ee;
 $blueDark: #0a314d;
 $blueDarkest: #001027;
 $blueSilver: #68778f;
@@ -17,6 +18,8 @@ $white: #ffffff;
 
 $errorBackground: #f8dfe2;
 $errorColor: #6f3331;
+
+$focusBorder: 3px solid $blueHighlight;
 
 $wordpressBlack: #444444;
 $wordpressBackgroundGrey: #f1f1f1;
