@@ -26,6 +26,9 @@ class Sanitize_Text_Meta {
    */
   public function sanitize_inputs( $data ) {
 
+    include_once STYLE_BLOCKS_DIR . 'admin/metabox/ajax/sanitizers/class-sanitize-articles.php';
+    $sanitize_articles = new Sanitize_Articles();
+
     include_once STYLE_BLOCKS_DIR . 'admin/metabox/ajax/sanitizers/class-sanitize-button.php';
     $sanitize_button = new Sanitize_Button();
 
@@ -39,21 +42,7 @@ class Sanitize_Text_Meta {
     $sanitized  = array();
 
     if ( ! empty( $unsanitary['articles'] ) ) {
-      $sanitized_articles = array();
-
-      foreach ( $unsanitary['articles'] as $article ) {
-        $sanitized_article = array();
-
-        $sanitized_article['id']     = sanitize_text_field( $article['id'] );
-        $sanitized_article['postId'] = sanitize_text_field( $article['postId'] );
-        $sanitized_article['source'] = sanitize_text_field( $article['source'] );
-
-        array_push( $sanitized_articles, $sanitized_article );
-      }
-
-      unset( $article );
-
-      $sanitized['articles'] = $sanitized_articles;
+      $sanitized['articles'] = $sanitize_articles->sanitize_articles( $unsanitary['articles'] );
     }
 
     if ( ! empty( $unsanitary['backgroundType'] ) ) {

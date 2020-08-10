@@ -25,6 +25,7 @@ class Sanitize_Resources_Meta {
    * @return array          Array of sanitized values.
    */
   public function sanitize_inputs( $data ) {
+
     include_once STYLE_BLOCKS_DIR . 'admin/metabox/ajax/sanitizers/class-sanitize-video.php';
     $sanitize_video = new Sanitize_Video();
 
