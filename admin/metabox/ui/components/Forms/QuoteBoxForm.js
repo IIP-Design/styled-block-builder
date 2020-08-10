@@ -1,6 +1,7 @@
 import React, { Fragment, useContext, useEffect } from 'react';
 import ReactQuill from 'react-quill';
 
+import ArticleById from 'metabox/components/Forms/FeedTypes/ArticleById';
 import ColorPicker from 'metabox/components/ColorPicker/ColorPicker';
 import FileUploader from 'metabox/components/FileUploader/FileUploader';
 import FullWidthToggle from 'metabox/components/Forms/Toggles/FullWidthToggle';
@@ -128,6 +129,7 @@ const QuoteBoxForm = () => {
           onChange={ handleQuote }
         />
       </label>
+      <ArticleById />
       <FullWidthToggle checked={ formValues.fullWidth } />
     </Fragment>
   );

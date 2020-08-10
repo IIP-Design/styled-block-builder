@@ -27,11 +27,18 @@ class Sanitize_Quotebox_Meta {
    */
   public function sanitize_inputs( $data, $uploads ) {
 
+    include_once STYLE_BLOCKS_DIR . 'admin/metabox/ajax/sanitizers/class-sanitize-articles.php';
+    $sanitize_articles = new Sanitize_Articles();
+
     include_once STYLE_BLOCKS_DIR . 'admin/metabox/ajax/sanitizers/class-sanitize-files.php';
     $sanitize_files = new Sanitize_Files();
 
     $unsanitary = json_decode( stripslashes( $data ), true );
     $sanitized  = array();
+
+    if ( ! empty( $unsanitary['articles'] ) ) {
+      $sanitized['articles'] = $sanitize_articles->sanitize_articles( $unsanitary['articles'] );
+    }
 
     if ( ! empty( $unsanitary['backgroundType'] ) ) {
       $sanitized['backgroundType'] = sanitize_text_field( $unsanitary['backgroundType'] );

@@ -2,6 +2,7 @@ import React from 'react';
 import propTypes from 'prop-types';
 
 import Background from 'blocks/_shared/components/Background/Background';
+import CDPFeed from 'blocks/_shared/components/CDPFeed/CDPFeed';
 import Normalizer from 'blocks/_shared/components/Normalizer/Normalizer';
 
 import { backgroundStyle, setLightClass, setTextColor } from 'blocks/_shared/utils/background-style';
@@ -13,6 +14,7 @@ const QuoteBox = ( { id } ) => {
 
   if ( meta ) {
     const {
+      articles,
       backgroundType,
       blockBackground,
       desc,
@@ -65,6 +67,7 @@ const QuoteBox = ( { id } ) => {
                   />
                 </div>
               ) }
+              { articles && <CDPFeed id={ id } items={ articles } /> }
             </div>
           </div>
         </Background>
