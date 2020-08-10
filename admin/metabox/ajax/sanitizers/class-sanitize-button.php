@@ -32,6 +32,7 @@ class Sanitize_Button {
     $sanitized_button['buttonColor']  = sanitize_text_field( $button['buttonColor'] );
     $sanitized_button['buttonLink']   = sanitize_text_field( $button['buttonLink'] );
     $sanitized_button['buttonText']   = sanitize_text_field( $button['buttonText'] );
+    $sanitized_button['id']           = sanitize_text_field( $button['id'] );
 
     return $sanitized_button;
   }

@@ -15,7 +15,11 @@ const ButtonForm = ( { parentGroup, parentId } ) => {
   const formValues = state?.formData?.formValues ? state.formData.formValues : {};
 
   const fields = [
-    { name: 'buttonArrow' }, { name: 'buttonBorder' }, { name: 'buttonColor' }, { name: 'buttonLink' }, { name: 'buttonText' },
+    { name: 'buttonArrow', value: 'white' },
+    { name: 'buttonBorder', value: 'plain' },
+    { name: 'buttonColor', value: 'white' },
+    { name: 'buttonLink' },
+    { name: 'buttonText' },
   ];
 
   if ( formValues ) {
@@ -66,7 +70,7 @@ const ButtonForm = ( { parentGroup, parentId } ) => {
                 id="button-color"
                 name="buttonColor"
                 type="select"
-                value={ button.buttonColor || 'white' }
+                value={ button.buttonColor || '' }
                 onBlur={ e => handleChangeNested( e, dispatch, 'buttons', parentGroup, parentId ) }
                 onChange={ e => handleChangeNested( e, dispatch, 'buttons', parentGroup, parentId ) }
               >
@@ -83,7 +87,7 @@ const ButtonForm = ( { parentGroup, parentId } ) => {
                 id="button-border"
                 name="buttonBorder"
                 type="select"
-                value={ button.buttonBorder || 'plain' }
+                value={ button.buttonBorder || '' }
                 onBlur={ e => handleChangeNested( e, dispatch, 'buttons', parentGroup, parentId ) }
                 onChange={ e => handleChangeNested( e, dispatch, 'buttons', parentGroup, parentId ) }
               >
@@ -100,7 +104,7 @@ const ButtonForm = ( { parentGroup, parentId } ) => {
                 id="arrow-color"
                 name="buttonArrow"
                 type="select"
-                value={ button.buttonArrow || 'white' }
+                value={ button.buttonArrow || '' }
                 onBlur={ e => handleChangeNested( e, dispatch, 'buttons', parentGroup, parentId ) }
                 onChange={ e => handleChangeNested( e, dispatch, 'buttons', parentGroup, parentId ) }
               >
