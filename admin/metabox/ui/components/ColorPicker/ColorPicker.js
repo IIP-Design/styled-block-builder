@@ -17,10 +17,9 @@ const ColorPicker = ( { colors, label, selected } ) => {
       <div styleName="options-container">
         { colors?.options
           && colors.options.map( color => {
-            const style
-              = color.type === 'image'
-                ? { backgroundImage: `url('${assetUrl}${color.value}')` }
-                : { backgroundColor: color.value };
+            const style = color.type === 'image'
+              ? { backgroundImage: `url('${assetUrl}${color.value}')` }
+              : { backgroundColor: color.value };
 
             return (
               <div key={ color.value } styleName="option">
