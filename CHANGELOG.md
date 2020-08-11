@@ -43,6 +43,7 @@ _This sections lists changes committed since most recent release_
 ### Fixed:
 
 - Video option in Resources block not saving values
+- Stop Resources block tabs from reordering when adding nested content
 - Added focus states to all links and buttons for better accessibility
 - Correctly escape and render the settings page title
 - Updated JavaScript dependencies

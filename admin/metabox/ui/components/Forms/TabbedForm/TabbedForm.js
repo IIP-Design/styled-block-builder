@@ -31,10 +31,6 @@ const TabbedForm = ( { fields, group, label, maxTabs } ) => {
    */
   const handleAdd = () => {
     dispatch( { type: 'group-add', payload: { fields, group } } );
-    /**
-     * TODO: Bring new tab into focus upon creation. This is difficult to do since the reducer
-     * async without a callback and there is no way to tell when the state has been updated
-     */
   };
 
   /**

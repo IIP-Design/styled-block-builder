@@ -209,7 +209,7 @@ export const groupAddItem = ( fields, data, group ) => {
  */
 export const groupAddItemNested = ( data, fields, group, parentId ) => {
   // Pull selected item out of array, preserve the remaining temporary array
-  const { filtered, selected } = getSelectedFromGroup( data, parentId );
+  const { filtered, indexValue, selected } = getSelectedFromGroup( data, parentId );
 
   // Update the nested group.
   const groupArr = groupAddItem( fields, selected, group );
@@ -218,7 +218,7 @@ export const groupAddItemNested = ( data, fields, group, parentId ) => {
   selected[group] = groupArr;
 
   // Push updated item back into group
-  filtered.push( selected );
+  filtered.splice(indexValue, 0, selected);
 
   return filtered;
 };
