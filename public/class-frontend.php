@@ -46,11 +46,14 @@ class Frontend {
       wp_register_style( 'site-state-css', STYLE_BLOCKS_DIST . $state_styles, array(), $this->version );
     }
 
+    $brightcove = get_option( 'gpalab-blocks-brightcove' ) ? get_option( 'gpalab-blocks-brightcove' ) : get_option( '_brightcove_default_account' );
+
     wp_localize_script(
       'gpalab-blocks-frontend-js',
       'gpalabBlockFront',
       array(
-        'assets' => STYLE_BLOCKS_URL . 'assets/',
+        'assets'     => STYLE_BLOCKS_URL . 'assets/',
+        'brightcove' => $brightcove,
       )
     );
   }

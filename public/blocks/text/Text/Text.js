@@ -8,6 +8,7 @@ import Normalizer from 'blocks/_shared/components/Normalizer/Normalizer';
 import VideoEmbed from 'blocks/_shared/components/VideoEmbed/VideoEmbed';
 
 import { setLightClass } from 'blocks/_shared/utils/background-style';
+import { getVideoUrl } from 'blocks/_shared/utils/video';
 
 import './Text.module.scss';
 
@@ -85,7 +86,7 @@ const Text = ( { id } ) => {
                 <VideoEmbed
                   desc={ video.description }
                   title={ video.title || video.id }
-                  url={ video.url }
+                  url={ getVideoUrl( video ) }
                 />
               </div>
             ) ) }

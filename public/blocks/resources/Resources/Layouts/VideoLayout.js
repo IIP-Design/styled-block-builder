@@ -3,6 +3,8 @@ import propTypes from 'prop-types';
 
 import VideoEmbed from 'blocks/_shared/components/VideoEmbed/VideoEmbed';
 
+import { getVideoUrl } from 'blocks/_shared/utils/video';
+
 import './Layouts.module.scss';
 
 const VideoLayout = ( { data } ) => (
@@ -14,7 +16,7 @@ const VideoLayout = ( { data } ) => (
             key={ video.id }
             desc={ video.description }
             title={ video.title || video.id }
-            url={ video.url }
+            url={ getVideoUrl( video ) }
           />
         ) ) }
         <div styleName="star-line">
@@ -35,7 +37,7 @@ const VideoLayout = ( { data } ) => (
             key={ video.id }
             desc={ video.description }
             title={ video.title || video.id }
-            url={ video.url }
+            url={ getVideoUrl( video ) }
           />
         ) ) }
       </section>

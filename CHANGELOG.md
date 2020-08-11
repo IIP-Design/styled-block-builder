@@ -12,6 +12,7 @@ _This sections lists changes committed since most recent release_
 ### Added:
 
 - Integration with the WordPress media library to as the source for image uploads
+- Add Brightcove video embed support
 - The ability to set the unit in the Stats block
 - A section in settings page to configure which sources are available in the article feed
 - A section in settings page to configure which users can add styled blocks (based on user's WordPress role)
@@ -19,6 +20,7 @@ _This sections lists changes committed since most recent release_
 - Rich text editor to allow for formatted text in the Hero, Parallax, Quote Box, Resources, Slides, and Text blocks
 - Alt text support for background images
 - A reusable background component to set the block background color/image and gradient
+- The ability to rename resource tab labels
 - Additional alignment options for Hero block headings and content
 - Tooltip displaying color name in color picker component
 - Reusable sanitizers for article, button, and video sub-forms
