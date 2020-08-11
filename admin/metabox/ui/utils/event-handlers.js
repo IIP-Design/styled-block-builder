@@ -53,13 +53,15 @@ export const handleToggle = ( e, dispatch, values ) => {
  * @param {string} parentId The id value of the group where the target object resides.
  */
 export const handleChangeNested = ( e, dispatch, group, parentGroup, parentId ) => {
-  const { itemid } = e.target.dataset;
+  const { itemid, itemname } = e.target.dataset;
   const { name, value } = e.target;
+
+  const itemName = itemname || name;
 
   if ( parentGroup ) {
     dispatch( {
       type: 'group-input-nested',
-      payload: { itemId: itemid, group, name, parentGroup, parentId, value },
+      payload: { itemId: itemid, group, name: itemName, parentGroup, parentId, value },
     } );
   } else {
     dispatch( {

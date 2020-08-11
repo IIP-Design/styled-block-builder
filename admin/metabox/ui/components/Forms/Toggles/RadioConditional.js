@@ -21,24 +21,30 @@ const RadioConditional = ( { checked, group, label, options, parentGroup, parent
     <div styleName="form-break">
       { label && <h4 styleName="toggle-header">{ label }</h4> }
       <div styleName="radio-wrapper">
-        { options && options.map( option => (
-          <label
-            key={ option.value }
-            htmlFor={ `radio-conditional-${option.value}` }
-            styleName="radio-label"
-          >
-            { option.label }
-            <input
-              checked={ option.value === checked }
-              data-itemid={ group ? group.id : null }
-              id={ `radio-conditional-${option.value}` }
-              name={ option.name }
-              type="radio"
-              value={ option.value }
-              onChange={ e => onChange( e ) }
-            />
-          </label>
-        ) ) }
+        { options && options.map( option => {
+          const id = group ? `radio-conditional-${option.value}-${group.id}` : `radio-conditional-${option.value}`;
+          const name = group ? `${option.name}-${group.id}` : option.name;
+
+          return (
+            <label
+              key={ option.value }
+              htmlFor={ id }
+              styleName="radio-label"
+            >
+              { option.label }
+              <input
+                checked={ option.value === checked }
+                data-itemid={ group ? group.id : null }
+                data-itemname={ option.name }
+                id={ id }
+                name={ name }
+                type="radio"
+                value={ option.value }
+                onChange={ e => onChange( e ) }
+              />
+            </label>
+          );
+        } ) }
       </div>
     </div>
   );
