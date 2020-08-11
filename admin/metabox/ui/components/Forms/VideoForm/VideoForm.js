@@ -15,6 +15,8 @@ import {
 import './VideoForm.module.scss';
 
 const VideoForm = ( { parentGroup, parentId } ) => {
+  const brightcove = window?.gpalabBlockAdmin?.brightcove;
+
   const { dispatch, state } = useContext( AdminContext );
   const formValues = state?.formData?.formValues ? state.formData.formValues : {};
 
@@ -22,10 +24,10 @@ const VideoForm = ( { parentGroup, parentId } ) => {
     { name: 'description' }, { name: 'title' }, { name: 'url' },
   ];
 
-  const videoSource = [
-    { label: 'Brightcove', name: 'source', value: 'brightcove' },
-    { label: 'YouTube', name: 'source', value: 'youtube' },
-  ];
+  const bc = { label: 'Brightcove', name: 'source', value: 'brightcove' };
+  const yt = { label: 'YouTube', name: 'source', value: 'youtube' };
+
+  const videoSource = brightcove ? [bc, yt] : [yt];
 
   if ( formValues ) {
     let videos;

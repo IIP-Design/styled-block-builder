@@ -75,6 +75,11 @@ class Settings {
 
     register_setting(
       'gpalab-blocks',
+      'gpalab-blocks-brightcove'
+    );
+
+    register_setting(
+      'gpalab-blocks',
       'gpalab-blocks-dev-mode'
     );
 
@@ -165,6 +170,31 @@ class Settings {
       },
       'gpalab-blocks',
       'gpalab-feed-sources'
+    );
+
+    /**
+     * Add Brightcove account override
+     */
+    add_settings_section(
+      'gpalab-brightcove',
+      __( 'Set styling to match that of state.gov?', 'gpalab-blocks' ),
+      function() {
+        esc_html_e( 'This plugin looks for the default Brightcove account ID set by the Brightcove Video Connect plugin. If no default account ID is found, it will disable Brightcove video embeds in the styled blocks. Use this setting to set the Brightcove account ID if not using Brightcove Video Connect or to override the default Brightcove account.', 'gpalab-blocks' );
+      },
+      'gpalab-blocks'
+    );
+
+    add_settings_field(
+      'gpalab-styling',
+      __( 'Add Brightcove account id:', 'gpalab-blocks' ),
+      function() {
+        include_once STYLE_BLOCKS_DIR . 'admin/settings/templates/class-settings-inputs.php';
+        $inputs = new Settings_Inputs();
+
+        return $inputs->text_input( 'brightcove' );
+      },
+      'gpalab-blocks',
+      'gpalab-brightcove'
     );
 
     /**

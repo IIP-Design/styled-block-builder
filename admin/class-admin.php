@@ -67,6 +67,8 @@ class Admin {
       }
     }
 
+    $brightcove = get_option( 'gpalab-blocks-brightcove' ) ? get_option( 'gpalab-blocks-brightcove' ) : get_option( '_brightcove_default_account' );
+
     wp_localize_script(
       'gpalab-blocks-admin-js',
       'gpalabBlockAdmin',
@@ -75,6 +77,7 @@ class Admin {
         'assets'      => STYLE_BLOCKS_URL . 'assets/',
         'apiEndpoint' => $endpoint,
         'associated'  => $assoc_data,
+        'brightcove'  => $brightcove,
         'feedOptions' => get_option( 'gpalab-blocks-feed-sources' ),
         'parentPost'  => $current_post,
         'blockNonce'  => wp_create_nonce( 'gpalab-block-nonce' ),
