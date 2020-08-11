@@ -62,7 +62,7 @@ class Shortcode {
     );
 
     // Generate and return the shortcode.
-    $html = '<div data-id="' . $id . '" data-type="gpalab-' . $type . '"></div>';
+    $html = '<div data-id="' . $id . '" data-type="gpalab-' . $type . '" id="gpalab-' . $id . '"></div>';
 
     return $html;
   }
