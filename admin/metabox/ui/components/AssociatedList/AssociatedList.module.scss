@@ -28,6 +28,7 @@
 
     &:not(:last-of-type) {
       border-bottom: $wordpressBorder;
+      padding: 0.1rem 0;
     }
 
     &.disabled {
