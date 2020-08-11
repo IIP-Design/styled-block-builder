@@ -53,6 +53,11 @@ const QuoteBoxForm = () => {
     { label: 'Image', name: 'backgroundType', value: 'image' },
   ];
 
+  const blockBgGradient = [
+    { label: 'Dark Gradient', name: 'backgroundGradient', value: 'dark' },
+    { label: 'No Gradient', name: 'backgroundGradient', value: 'off' },
+  ];
+
   const textOptions = {
     group: 'textColor',
     options: defaultText,
@@ -77,8 +82,16 @@ const QuoteBoxForm = () => {
           selected={ formValues.blockBackground }
         />
       ) }
-      { formValues.backgroundType === 'image'
-        && <FileUploader label="Add background image URL:" name="backgroundImage" /> }
+      { formValues.backgroundType === 'image' && (
+        <Fragment>
+          <FileUploader label="Add background image URL:" name="backgroundImage" />
+          <RadioConditional
+            checked={ formValues.backgroundGradient || 'dark' }
+            label="Overlay the image with a gradient (to improve text legibility)?"
+            options={ blockBgGradient }
+          />
+        </Fragment>
+      ) }
       <ColorPicker
         colors={ textOptions }
         label="Set block text color:"

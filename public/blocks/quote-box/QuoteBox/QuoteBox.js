@@ -15,6 +15,7 @@ const QuoteBox = ( { id } ) => {
   if ( meta ) {
     const {
       articles,
+      backgroundGradient,
       backgroundType,
       blockBackground,
       desc,
@@ -35,7 +36,7 @@ const QuoteBox = ( { id } ) => {
           backgroundType={ backgroundType }
           blockBackground={ blockBackground }
           files={ files }
-          gradient={ backgroundType === 'image' }
+          gradient={ backgroundType === 'image' && backgroundGradient !== 'off' }
         >
           <div styleName="container">
             <div styleName="content">

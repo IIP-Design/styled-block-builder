@@ -18,6 +18,7 @@ const Text = ( { id } ) => {
   if ( meta ) {
     const {
       articles,
+      backgroundGradient,
       backgroundType,
       blockBackground,
       buttons,
@@ -30,21 +31,13 @@ const Text = ( { id } ) => {
       videos,
     } = meta;
 
-    const bgStyle = {
-      alignItems: 'center',
-      display: 'flex',
-      flexDirection: 'column',
-      justifyContent: 'center',
-    };
-
     return (
       <Normalizer fullWidth={ fullWidth }>
         <Background
           backgroundType={ backgroundType }
           blockBackground={ blockBackground }
           files={ files }
-          gradient={ false }
-          styles={ bgStyle }
+          gradient={ backgroundType === 'image' && backgroundGradient === 'dark' }
         >
           <div styleName="container">
             { title && (

@@ -33,6 +33,11 @@ const TextForm = () => {
     dispatch( { type: 'form-update', payload: { name: 'desc', value } } );
   };
 
+  const blockBgGradient = [
+    { label: 'Dark Gradient', name: 'backgroundGradient', value: 'dark' },
+    { label: 'No Gradient', name: 'backgroundGradient', value: 'off' },
+  ];
+
   const blockBgType = [
     { label: 'Color', name: 'backgroundType', value: 'color' },
     { label: 'Image', name: 'backgroundType', value: 'image' },
@@ -63,10 +68,17 @@ const TextForm = () => {
         />
       ) }
       { formValues.backgroundType === 'image' && (
-        <FileUploader
-          label="Add background image URL:"
-          name="backgroundImage"
-        />
+        <Fragment>
+          <FileUploader
+            label="Add background image URL:"
+            name="backgroundImage"
+          />
+          <RadioConditional
+            checked={ formValues.backgroundGradient || 'off' }
+            label="Overlay the image with a gradient (to improve text legibility)?"
+            options={ blockBgGradient }
+          />
+        </Fragment>
       ) }
       <ColorPicker
         colors={ textOptions }
