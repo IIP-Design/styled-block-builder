@@ -66,7 +66,7 @@ export const handleChangeNested = ( e, dispatch, group, parentGroup, parentId ) 
   } else {
     dispatch( {
       type: 'group-input',
-      payload: { itemId: itemid, group, name, value },
+      payload: { itemId: itemid, group, name: itemName, value },
     } );
   }
 };

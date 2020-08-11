@@ -35,7 +35,7 @@ const RadioConditional = ( { checked, group, label, options, parentGroup, parent
               <input
                 checked={ option.value === checked }
                 data-itemid={ group ? group.id : null }
-                data-itemname={ option.name }
+                data-itemname={ group ? option.name : null }
                 id={ id }
                 name={ name }
                 type="radio"
