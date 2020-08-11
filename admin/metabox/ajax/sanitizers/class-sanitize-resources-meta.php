@@ -44,6 +44,7 @@ class Sanitize_Resources_Meta {
 
         $sanitized_resource['hasFeed'] = rest_sanitize_boolean( $resource['hasFeed'] );
         $sanitized_resource['id']      = sanitize_text_field( $resource['id'] );
+        $sanitized_resource['tab']     = sanitize_text_field( $resource['tab'] );
         $sanitized_resource['text']    = wp_kses_post( $resource['text'] );
         $sanitized_resource['title']   = sanitize_text_field( $resource['title'] );
 

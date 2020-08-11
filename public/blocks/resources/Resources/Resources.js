@@ -58,14 +58,13 @@ const Resources = ( { id } ) => {
                       type="button"
                       onClick={ () => setSelected( resource.id ) }
                     >
-                      { resource.title }
+                      { resource.tab || resource.title }
                     </button>
                   );
                 } ) }
             </div>
 
-            { resources
-              && resources.map( resource => {
+            { resources && resources.map( resource => {
                 const type = resource.videos && resource.videos.length ? 'video' : 'base';
                 let layout = null;
 
@@ -81,7 +80,7 @@ const Resources = ( { id } ) => {
                   return (
                     <div key={ resource.id } id={ resource.id } styleName="section-container">
                       <button id={ resource.id } styleName="section-mobile-toggle" type="button" onClick={ () => toggleSelection( resource.id ) }>
-                        <strong className="gpalab-site-specific" styleName="section-mobile-title">{ resource.title }</strong>
+                        <strong className="gpalab-site-specific" styleName="section-mobile-title">{ resource.tab || resource.title }</strong>
                         <Chevron reverse={ resource.id === selected } />
                       </button>
                       <div id={ resource.id } styleName={ `section-content ${resource.id === selected ? 'mobile-show' : ''}` }>
