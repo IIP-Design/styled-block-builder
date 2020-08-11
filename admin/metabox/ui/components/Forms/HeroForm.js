@@ -28,7 +28,7 @@ const HeroForm = () => {
     { label: 'Animated lines', name: 'type', value: 'lines' },
   ];
 
-  const tabFields = [{ label: 'Add Animated line:', name: 'text', tabTitle: true, type: 'text' }];
+  const tabFields = [{ label: 'Add animated line:', name: 'text', tabTitle: true, type: 'text' }];
 
   return (
     <Fragment>

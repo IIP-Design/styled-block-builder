@@ -39,6 +39,7 @@ _This sections lists changes committed since most recent release_
 - Add Jest for JavaScript unit testing
 - Remove automated formatting with Prettier in favor of ESLint config rules
 - Do not fill block root div with the block type (to prevent flash of text before the block loads)
+- Show "Untitled [block type] block" rather than block id for untitled blocks in associated blocks list
 
 ### Fixed:
 

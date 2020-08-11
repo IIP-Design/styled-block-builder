@@ -5,6 +5,13 @@ import { updatePost } from 'metabox/utils/update-post';
 
 import './AssociatedList.module.scss';
 
+const formatBlockType = type => {
+  const trimmed = type.replace( 'gpalab-', '' );
+  const spaced = trimmed.replace( '-', '' );
+
+  return `Untitled ${spaced} block`;
+};
+
 const AssociatedList = () => {
   const { dispatch, state } = useContext( AdminContext );
   const { blocks, updating } = state;
@@ -30,7 +37,7 @@ const AssociatedList = () => {
             data-id={ item.id }
             styleName={ isUpdating( item.id ) ? 'list-item disabled' : 'list-item' }
           >
-            { item.title || item.id }
+            { item.title || formatBlockType( item.type ) }
             <button
               aria-label="edit block"
               disabled={ isUpdating( item.id ) }
