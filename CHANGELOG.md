@@ -44,6 +44,7 @@ _This sections lists changes committed since most recent release_
 
 - Video option in Resources block not saving values
 - Stop Resources block tabs from reordering when adding nested content
+- When adding a tab to a tabbed form, automatically open it
 - Added focus states to all links and buttons for better accessibility
 - Correctly escape and render the settings page title
 - Updated JavaScript dependencies

@@ -15,22 +15,26 @@ import './TabbedForm.module.scss';
 
 const TabbedForm = ( { fields, group, label, maxTabs } ) => {
   const [selectedTab, setSelectedTab] = useState( null );
+  const [groupLength, setGroupLength] = useState( 0 );
 
   const { dispatch, state } = useContext( AdminContext );
   const formValues = state?.formData?.formValues ? state.formData.formValues : {};
 
+  const formGroup = formValues[group];
+
   useEffect( () => {
-    // If group items already present, open first one
-    if ( formValues?.[group] && formValues[group].length > 0 ) {
-      setSelectedTab( formValues[group][0].id );
+    // Open most recently added tab when opening form or the number of tabs changes
+    if ( formGroup && formGroup.length !== groupLength && formGroup.length > 0 ) {
+      setSelectedTab( formGroup[formGroup.length - 1].id );
+      setGroupLength( formGroup.length );
     }
-  }, [] );
+  }, [formGroup] );
 
   /**
    * Adds a new tab.
    */
-  const handleAdd = () => {
-    dispatch( { type: 'group-add', payload: { fields, group } } );
+  const handleAdd = async () => {
+    await dispatch( { type: 'group-add', payload: { fields, group } } );
   };
 
   /**
