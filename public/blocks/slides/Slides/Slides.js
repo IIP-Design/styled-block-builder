@@ -5,7 +5,6 @@ import gsap, { TweenLite, TimelineLite } from 'gsap';
 import { ScrollMagicPluginGsap } from 'scrollmagic-plugin-gsap';
 
 import Normalizer from 'blocks/_shared/components/Normalizer/Normalizer';
-// import Gradient from 'blocks/_shared/components/Gradient/Gradient';
 import { getBackgroundAlt, getBackgroundImageUrl } from 'blocks/_shared/utils/background-style';
 
 import './Slides.module.scss';
@@ -47,14 +46,14 @@ const Slides = ( { id } ) => {
 
   window.onload = () => {
     sceneVals.sceneStartPos
-      = document.getElementById( 'scene-container' ).getBoundingClientRect().top
+      = document.getElementById( `scene-container-${id}` ).getBoundingClientRect().top
       + document.documentElement.scrollTop;
 
     sceneVals.sceneEndPos
-      = document.getElementById( 'scene-container' ).getBoundingClientRect().bottom
+      = document.getElementById( `scene-container-${id}` ).getBoundingClientRect().bottom
       + document.documentElement.scrollTop;
 
-    sceneVals.sceneHeight = document.getElementById( 'scene-container' ).offsetHeight;
+    sceneVals.sceneHeight = document.getElementById( `scene-container-${id}` ).offsetHeight;
   };
 
   window.onscroll = () => {
@@ -77,7 +76,7 @@ const Slides = ( { id } ) => {
 
     return (
       <Normalizer fullWidth>
-        <div id="scene-container" styleName="slide-container">
+        <div id={`scene-container-${id}`} styleName="slide-container">
           { title && <h2 className="gpalab-site-specific" styleName="slide-title">{ title }</h2> }
           <div id={ `pin-container-${id}` } styleName="pin-container">
             { slides.map( slide => {
