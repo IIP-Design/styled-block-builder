@@ -27,10 +27,10 @@ class Sanitize_Hero_Meta {
    */
   public function sanitize_inputs( $data, $uploads ) {
 
-    include_once STYLE_BLOCKS_DIR . 'admin/metabox/ajax/sanitizers/class-sanitize-button.php';
-    $sanitize_button = new Sanitize_Button();
+    include_once STYLE_BLOCKS_DIR . 'admin/metabox/ajax/sanitizers/subforms/class-sanitize-buttons.php';
+    $sanitize_buttons = new Sanitize_Buttons();
 
-    include_once STYLE_BLOCKS_DIR . 'admin/metabox/ajax/sanitizers/class-sanitize-files.php';
+    include_once STYLE_BLOCKS_DIR . 'admin/metabox/ajax/sanitizers/subforms/class-sanitize-files.php';
     $sanitize_files = new Sanitize_Files();
 
     $unsanitary = json_decode( stripslashes( $data ), true );
@@ -41,17 +41,7 @@ class Sanitize_Hero_Meta {
     }
 
     if ( ! empty( $unsanitary['buttons'] ) ) {
-      $sanitized_buttons = array();
-
-      foreach ( $unsanitary['buttons'] as $button ) {
-        $sanitized_button = $sanitize_button->sanitize_button( $button );
-
-        array_push( $sanitized_buttons, $sanitized_button );
-      }
-
-      unset( $button );
-
-      $sanitized['buttons'] = $sanitized_buttons;
+      $sanitized['buttons'] = $sanitize_buttons->sanitize_buttons( $unsanitary['buttons'] );
     }
 
     if ( ! empty( $unsanitary['description'] ) ) {

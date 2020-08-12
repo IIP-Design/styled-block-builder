@@ -35,12 +35,14 @@ _This sections lists changes committed since most recent release_
 - Vary link text color based on surrounding text rather than simply inheriting surrounding text color
 - Make buttons more configurable with additional style options
 - Enable background images for Text blocks
+- On the Stats block, use stat ids rather than indices to trigger animation, allowing multiple blocks on the same page
 - Increase CDP Feed item limit from three to six
 - Increase button limit in text block from one to two
 - Add Jest for JavaScript unit testing
 - Remove automated formatting with Prettier in favor of ESLint config rules
 - Do not fill block root div with the block type (to prevent flash of text before the block loads)
 - Show "Untitled [block type] block" rather than block id for untitled blocks in associated blocks list
+- Group and streamline sanitizers
 
 ### Fixed:
 

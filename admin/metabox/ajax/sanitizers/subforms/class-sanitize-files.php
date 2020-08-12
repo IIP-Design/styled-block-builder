@@ -9,9 +9,8 @@
 namespace Style_Blocks;
 
 /**
- * Iterate over uploaded files and compare.
- *
- * Checks for and sanitizes the fields expected by the timeline form.
+ * Iterates over uploads to compares against expected files.
+ * If the uploads and files match, it sanitizes the fields expected for file uploads.
  *
  * @package Style_Blocks\Sanitizer
  * @since 0.0.1
@@ -19,7 +18,7 @@ namespace Style_Blocks;
 class Sanitize_Files {
 
   /**
-   * Checks for and sanitizes the expected fields.
+   * Checks for and sanitizes expected file fields.
    *
    * @param array $files    Unsanitized file values sent over in the AJAX request.
    * @param array $uploads  Sanitized values provided from as a result of file upload.

@@ -9,7 +9,7 @@
 namespace Style_Blocks;
 
 /**
- * Iterate over uploaded files and compare.
+ * Sanitizes the values sent over in the AJAX request.
  *
  * Checks for and sanitizes the fields expected by the navigation form.
  *
@@ -27,7 +27,7 @@ class Sanitize_Navigation_Meta {
    */
   public function sanitize_inputs( $data, $uploads ) {
 
-    include_once STYLE_BLOCKS_DIR . 'admin/metabox/ajax/sanitizers/class-sanitize-files.php';
+    include_once STYLE_BLOCKS_DIR . 'admin/metabox/ajax/sanitizers/subforms/class-sanitize-files.php';
     $sanitize_files = new Sanitize_Files();
 
     $unsanitary = json_decode( stripslashes( $data ), true );

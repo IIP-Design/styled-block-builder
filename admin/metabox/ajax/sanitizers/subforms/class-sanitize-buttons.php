@@ -9,14 +9,14 @@
 namespace Style_Blocks;
 
 /**
- * Iterate over uploaded files and compare.
+ * Iterate over uploaded button data and sanitize each field.
  *
  * Checks for and sanitizes the fields expected by the video form.
  *
  * @package Style_Blocks\Sanitizer
  * @since 2.0.0
  */
-class Sanitize_Button {
+class Sanitize_Buttons {
 
   /**
    * Checks for and sanitizes the expected button fields.
@@ -37,4 +37,24 @@ class Sanitize_Button {
     return $sanitized_button;
   }
 
+  /**
+   * Checks for and sanitizes a group of buttons.
+   *
+   * @param array $buttons    Unsanitized button group sent over in the AJAX request.
+   * @return array            Array of sanitized values
+   */
+  public function sanitize_buttons( $buttons ) {
+
+    $sanitized_buttons = array();
+
+    foreach ( $buttons as $button ) {
+      $sanitized_button = $this->sanitize_button( $button );
+
+      array_push( $sanitized_buttons, $sanitized_button );
+    }
+
+    unset( $button );
+
+    return $sanitized_buttons;
+  }
 }

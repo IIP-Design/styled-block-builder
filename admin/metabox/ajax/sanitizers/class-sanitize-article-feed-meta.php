@@ -26,7 +26,7 @@ class Sanitize_Article_Feed_Meta {
    */
   public function sanitize_inputs( $data ) {
 
-    include_once STYLE_BLOCKS_DIR . 'admin/metabox/ajax/sanitizers/class-sanitize-articles.php';
+    include_once STYLE_BLOCKS_DIR . 'admin/metabox/ajax/sanitizers/subforms/class-sanitize-articles.php';
     $sanitize_articles = new Sanitize_Articles();
 
     $unsanitary = json_decode( stripslashes( $data ), true );

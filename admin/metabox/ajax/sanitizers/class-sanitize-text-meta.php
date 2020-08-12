@@ -26,17 +26,17 @@ class Sanitize_Text_Meta {
    */
   public function sanitize_inputs( $data ) {
 
-    include_once STYLE_BLOCKS_DIR . 'admin/metabox/ajax/sanitizers/class-sanitize-articles.php';
+    include_once STYLE_BLOCKS_DIR . 'admin/metabox/ajax/sanitizers/subforms/class-sanitize-articles.php';
     $sanitize_articles = new Sanitize_Articles();
 
-    include_once STYLE_BLOCKS_DIR . 'admin/metabox/ajax/sanitizers/class-sanitize-button.php';
-    $sanitize_button = new Sanitize_Button();
+    include_once STYLE_BLOCKS_DIR . 'admin/metabox/ajax/sanitizers/subforms/class-sanitize-buttons.php';
+    $sanitize_buttons = new Sanitize_Buttons();
 
-    include_once STYLE_BLOCKS_DIR . 'admin/metabox/ajax/sanitizers/class-sanitize-files.php';
+    include_once STYLE_BLOCKS_DIR . 'admin/metabox/ajax/sanitizers/subforms/class-sanitize-files.php';
     $sanitize_files = new Sanitize_Files();
 
-    include_once STYLE_BLOCKS_DIR . 'admin/metabox/ajax/sanitizers/class-sanitize-video.php';
-    $sanitize_video = new Sanitize_Video();
+    include_once STYLE_BLOCKS_DIR . 'admin/metabox/ajax/sanitizers/subforms/class-sanitize-videos.php';
+    $sanitize_videos = new Sanitize_Videos();
 
     $unsanitary = json_decode( stripslashes( $data ), true );
     $sanitized  = array();
@@ -58,17 +58,7 @@ class Sanitize_Text_Meta {
     }
 
     if ( ! empty( $unsanitary['buttons'] ) ) {
-      $sanitized_buttons = array();
-
-      foreach ( $unsanitary['buttons'] as $button ) {
-        $sanitized_button = $sanitize_button->sanitize_button( $button );
-
-        array_push( $sanitized_buttons, $sanitized_button );
-      }
-
-      unset( $button );
-
-      $sanitized['buttons'] = $sanitized_buttons;
+      $sanitized['buttons'] = $sanitize_buttons->sanitize_buttons( $unsanitary['buttons'] );
     }
 
     if ( ! empty( $unsanitary['desc'] ) ) {
@@ -96,17 +86,7 @@ class Sanitize_Text_Meta {
     }
 
     if ( ! empty( $unsanitary['videos'] ) ) {
-      $sanitized_videos = array();
-
-      foreach ( $unsanitary['videos'] as $video ) {
-        $sanitized_video = $sanitize_video->sanitize_video( $video );
-
-        array_push( $sanitized_videos, $sanitized_video );
-      }
-
-      unset( $video );
-
-      $sanitized['videos'] = $sanitized_videos;
+      $sanitized['videos'] = $sanitize_videos->sanitize_videos( $unsanitary['videos'] );
     }
 
     return $sanitized;
