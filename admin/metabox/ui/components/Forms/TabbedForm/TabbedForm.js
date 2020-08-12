@@ -236,16 +236,11 @@ const TabbedForm = ( { fields, group, label, maxTabs } ) => {
 
                           if ( field.type === 'article-feed' ) {
                             return (
-                              <CheckboxConditional
+                              <ArticleById
                                 key={ `${field.name}-${form.id}` }
-                                callback={ () => handleToggle( 'hasFeed', form.id ) }
-                                checked={ form.hasFeed || false }
-                                data-parent={ form.id }
-                                label={ field.label || '' }
-                                name={ form.id }
-                              >
-                                <ArticleById parentGroup={ group } parentId={ form.id } />
-                              </CheckboxConditional>
+                                parentGroup={ group }
+                                parentId={ form.id }
+                              />
                             );
                           }
 
