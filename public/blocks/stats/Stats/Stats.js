@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import propTypes from 'prop-types';
 import gsap from 'gsap';
-import { v4 as uuid } from 'uuid';
 
 import Background from 'blocks/_shared/components/Background/Background';
 import Normalizer from 'blocks/_shared/components/Normalizer/Normalizer';
@@ -14,9 +13,9 @@ const Stats = ( { id } ) => {
 
   const [ref, entry] = useVisibilityObserver( { threshold: 0.75 } );
 
-  const runStat = index => {
+  const runStat = statId => {
     const counter = { val: 0 };
-    const stat = document.getElementById( `stat-${index + 1}` );
+    const stat = document.getElementById( statId );
 
     const updateCount = () => {
       stat.innerHTML = Math.ceil( counter.val );
@@ -32,11 +31,12 @@ const Stats = ( { id } ) => {
 
   useEffect( () => {
     if ( entry.isIntersecting ) {
-      const stats = [...document.querySelectorAll( '.stat-number' )];
+      const block = document.getElementById( `gpalab-${id}` );
+      const stats = [...block.querySelectorAll( '.stat-number' )];
 
-      stats.forEach( ( stat, index ) => runStat( index, stat ) );
+      stats.forEach( stat => runStat( stat.id ) );
     }
-  } );
+  }, [entry, id] );
 
   if ( meta ) {
     const {
@@ -65,25 +65,24 @@ const Stats = ( { id } ) => {
               </h2>
             ) }
             <div id={ `stats-${id}` } styleName="array">
-              { stats
-                  && stats.map( ( stat, index ) => (
-                    <div key={ uuid() } style={ { borderColor: textColor } } styleName="item">
-                      <div style={ { color: textColor } } styleName="item-value">
-                        { stat.prefix }
-                        <span
-                          className="stat-number"
-                          data-stat={ stat.number }
-                          id={ `stat-${index + 1}` }
-                        >
-                          0
-                        </span>
-                        { stat.unit && <span styleName="item-unit">{ stat.unit }</span> }
-                      </div>
-                      <p style={ { color: textColor } } styleName="item-info">
-                        { stat.desc }
-                      </p>
-                    </div>
-                  ) ) }
+              { stats && stats.map( stat => (
+                <div key={ stat.id } style={ { borderColor: textColor } } styleName="item">
+                  <div style={ { color: textColor } } styleName="item-value">
+                    { stat.prefix }
+                    <span
+                      className="stat-number"
+                      data-stat={ stat.number }
+                      id={ `stat-${stat.id}` }
+                    >
+                      0
+                    </span>
+                    { stat.unit && <span styleName="item-unit">{ stat.unit }</span> }
+                  </div>
+                  <p style={ { color: textColor } } styleName="item-info">
+                    { stat.desc }
+                  </p>
+                </div>
+              ) ) }
             </div>
           </div>
         </Background>
