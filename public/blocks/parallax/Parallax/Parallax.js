@@ -12,15 +12,10 @@ const Parallax = ( { id } ) => {
 
   if ( meta ) {
     const {
-      buttonArrow,
-      buttonBorder,
-      buttonColor,
-      buttonLink,
-      buttonText,
+      buttons,
       desc,
       files,
       fullWidth,
-      hasButton,
       subtitle,
       title,
     } = meta;
@@ -38,15 +33,16 @@ const Parallax = ( { id } ) => {
               { title && <h2 className="gpalab-site-specific" styleName="title">{ title }</h2> }
               { subtitle && <h3 className="gpalab-site-specific" styleName="subtitle">{ subtitle }</h3> }
               { desc && <div className="light" dangerouslySetInnerHTML={ { __html: desc } } styleName="text" /> }
-              { hasButton && (
+              { buttons && buttons.map( button => (
                 <Button
-                  arrow={ buttonArrow }
-                  border={ buttonBorder }
-                  color={ buttonColor }
-                  link={ buttonLink }
-                  text={ buttonText }
+                  key={ button.id }
+                  arrow={ button.buttonArrow }
+                  border={ button.buttonBorder }
+                  color={ button.buttonColor }
+                  link={ button.buttonLink }
+                  text={ button.buttonText }
                 />
-              ) }
+              ) ) }
             </div>
           </div>
         </Background>

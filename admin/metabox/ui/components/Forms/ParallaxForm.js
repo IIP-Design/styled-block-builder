@@ -50,13 +50,7 @@ const ParallaxForm = () => {
           onChange={ handleQuill }
         />
       </label>
-      <CheckboxConditional
-        checked={ formValues.hasButton }
-        label="Add Button:"
-        name="hasButton"
-      >
-        <ButtonForm />
-      </CheckboxConditional>
+      <ButtonForm />
       <FullWidthToggle checked={ formValues.fullWidth } />
     </Fragment>
   );
