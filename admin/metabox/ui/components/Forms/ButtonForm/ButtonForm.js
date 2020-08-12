@@ -69,7 +69,6 @@ const ButtonForm = ( { parentGroup, parentId, number } ) => {
                 data-itemid={ button.id }
                 id="button-color"
                 name="buttonColor"
-                type="select"
                 value={ button.buttonColor || '' }
                 onBlur={ e => handleChangeNested( e, dispatch, 'buttons', parentGroup, parentId ) }
                 onChange={ e => handleChangeNested( e, dispatch, 'buttons', parentGroup, parentId ) }
@@ -86,7 +85,6 @@ const ButtonForm = ( { parentGroup, parentId, number } ) => {
                 data-itemid={ button.id }
                 id="button-border"
                 name="buttonBorder"
-                type="select"
                 value={ button.buttonBorder || '' }
                 onBlur={ e => handleChangeNested( e, dispatch, 'buttons', parentGroup, parentId ) }
                 onChange={ e => handleChangeNested( e, dispatch, 'buttons', parentGroup, parentId ) }
@@ -103,7 +101,6 @@ const ButtonForm = ( { parentGroup, parentId, number } ) => {
                 data-itemid={ button.id }
                 id="arrow-color"
                 name="buttonArrow"
-                type="select"
                 value={ button.buttonArrow || '' }
                 onBlur={ e => handleChangeNested( e, dispatch, 'buttons', parentGroup, parentId ) }
                 onChange={ e => handleChangeNested( e, dispatch, 'buttons', parentGroup, parentId ) }

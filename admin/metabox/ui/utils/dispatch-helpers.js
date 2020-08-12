@@ -106,7 +106,7 @@ export const fileAdd = ( alt, file, name, fileList ) => {
  */
 export const fileAddNested = ( data, alt, file, name, parentId ) => {
   // Pull selected item out of array, preserve the remaining temporary array
-  const { filtered, selected } = getSelectedFromGroup( data, parentId );
+  const { filtered, indexValue, selected } = getSelectedFromGroup( data, parentId );
 
   // Update the nested group.
   const groupArr = fileAdd( alt, file, name, selected.files );
@@ -115,7 +115,7 @@ export const fileAddNested = ( data, alt, file, name, parentId ) => {
   selected.files = groupArr;
 
   // Push updated item back into group
-  filtered.push( selected );
+  filtered.splice( indexValue, 0, selected )
 
   return filtered;
 };

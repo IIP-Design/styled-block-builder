@@ -13,6 +13,7 @@ _This sections lists changes committed since most recent release_
 
 - Integration with the WordPress media library to as the source for image uploads
 - Add Brightcove video embed support
+- A Navigation block that can be populated with anchor tags to other blocks on the page
 - The ability to set the unit in the Stats block
 - A section in settings page to configure which sources are available in the article feed
 - A section in settings page to configure which users can add styled blocks (based on user's WordPress role)

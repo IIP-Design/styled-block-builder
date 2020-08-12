@@ -2,6 +2,7 @@ import React from 'react';
 
 import ArticleFeedForm from 'metabox/components/Forms/ArticleFeedForm';
 import HeroForm from 'metabox/components/Forms/HeroForm';
+import NavigationForm from 'metabox/components/Forms/NavigationForm';
 import ParallaxForm from 'metabox/components/Forms/ParallaxForm';
 import QuoteBoxForm from 'metabox/components/Forms/QuoteBoxForm';
 import ResourcesForm from 'metabox/components/Forms/ResourcesForm';
@@ -16,6 +17,8 @@ export const selectForm = formStr => {
       return <ArticleFeedForm />;
     case 'hero':
       return <HeroForm />;
+    case 'navigation':
+      return <NavigationForm />;
     case 'parallax':
       return <ParallaxForm />;
     case 'quote-box':
@@ -41,6 +44,8 @@ export const selectTitle = formStr => {
       return 'Configure Your Article Feed:';
     case 'hero':
       return 'Configure Your Hero Block:';
+    case 'navigation':
+      return 'Configure Your Navigation Block:';
     case 'parallax':
       return 'Configure Your Parallax Block:';
     case 'quote-box':

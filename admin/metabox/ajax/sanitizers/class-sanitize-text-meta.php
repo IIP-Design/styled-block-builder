@@ -48,7 +48,7 @@ class Sanitize_Text_Meta {
     if ( ! empty( $unsanitary['backgroundGradient'] ) ) {
       $sanitized['backgroundGradient'] = sanitize_text_field( $unsanitary['backgroundGradient'] );
     }
-    
+
     if ( ! empty( $unsanitary['backgroundType'] ) ) {
       $sanitized['backgroundType'] = sanitize_text_field( $unsanitary['backgroundType'] );
     }

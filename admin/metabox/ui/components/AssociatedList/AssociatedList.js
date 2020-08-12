@@ -2,15 +2,9 @@ import React, { Fragment, useContext } from 'react';
 
 import { AdminContext } from 'metabox/context/adminContext';
 import { updatePost } from 'metabox/utils/update-post';
+import { formatBlockType } from 'metabox/utils/block-titles';
 
 import './AssociatedList.module.scss';
-
-const formatBlockType = type => {
-  const trimmed = type.replace( 'gpalab-', '' );
-  const spaced = trimmed.replace( '-', '' );
-
-  return `Untitled ${spaced} block`;
-};
 
 const AssociatedList = () => {
   const { dispatch, state } = useContext( AdminContext );

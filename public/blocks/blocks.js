@@ -6,6 +6,7 @@ import 'styles/quill.scss';
 // Blocks
 import './article-feed';
 import './hero';
+import './navigation';
 import './parallax';
 import './quote-box';
 import './resources';

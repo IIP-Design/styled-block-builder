@@ -41,10 +41,10 @@ class Sanitizer {
       $sanitize = new Sanitize_Hero_Meta();
 
       return $sanitize;
-    } elseif ( 'hero-animated' === $form_type ) {
+    } elseif ( 'navigation' === $form_type ) {
 
-      include_once STYLE_BLOCKS_DIR . 'admin/metabox/ajax/sanitizers/class-sanitize-hero-animated-meta.php';
-      $sanitize = new Sanitize_HeroAnimated_Meta();
+      include_once STYLE_BLOCKS_DIR . 'admin/metabox/ajax/sanitizers/class-sanitize-navigation-meta.php';
+      $sanitize = new Sanitize_Navigation_Meta();
 
       return $sanitize;
 

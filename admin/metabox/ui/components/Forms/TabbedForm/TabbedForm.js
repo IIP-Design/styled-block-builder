@@ -170,6 +170,32 @@ const TabbedForm = ( { fields, group, label, maxTabs } ) => {
                             );
                           }
 
+                          if ( field.type === 'select' ) {
+                            return (
+                              <label
+                                key={ `${field.name}-${form.id}` }
+                                htmlFor={ `section-${field.name}-${form.id}` }
+                              >
+                                { field.label || '' }
+                                <select
+                                  data-parent={ form.id }
+                                  id={ `section-${field.name}-${form.id}` }
+                                  name={ field.name }
+                                  value={ selected[0][field.name] }
+                                  onBlur={ e => handleChange( e, form.id ) }
+                                  onChange={ e => handleChange( e, form.id ) }
+                                >
+                                  <option value="">{ `Please select a ${field.name}` }</option>
+                                  { field.options && field.options.map( opt => (
+                                    <option key={ opt.value } value={ opt.value }>
+                                      { opt.name }
+                                    </option>
+                                  ) ) }
+                                </select>
+                              </label>
+                            );
+                          }
+
                           if ( field.type === 'text' ) {
                             return (
                               <label
