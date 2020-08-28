@@ -259,7 +259,7 @@ const TabbedForm = ( { fields, group, label, maxTabs } ) => {
                             return (
                               <ButtonForm
                                 key={ `${field.name}-${form.id}` }
-                                number={field.number || 1}
+                                number={ field.number || 1 }
                                 parentGroup={ group }
                                 parentId={ form.id }
                               />
