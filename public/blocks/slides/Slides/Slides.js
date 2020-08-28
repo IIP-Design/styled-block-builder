@@ -76,7 +76,7 @@ const Slides = ( { id } ) => {
 
     return (
       <Normalizer fullWidth>
-        <div id={`scene-container-${id}`} styleName="slide-container">
+        <div id={ `scene-container-${id}` } styleName="slide-container">
           { title && <h2 className="gpalab-site-specific" styleName="slide-title">{ title }</h2> }
           <div id={ `pin-container-${id}` } styleName="pin-container">
             { slides.map( slide => {

@@ -65,41 +65,41 @@ const Resources = ( { id } ) => {
             </div>
 
             { resources && resources.map( resource => {
-                const type = resource.videos && resource.videos.length ? 'video' : 'base';
-                let layout = null;
+              const type = resource.videos && resource.videos.length ? 'video' : 'base';
+              let layout = null;
 
-                if ( type === 'base' ) {
-                  layout = <BaseLayout data={ resource } />;
-                }
+              if ( type === 'base' ) {
+                layout = <BaseLayout data={ resource } />;
+              }
 
-                if ( type === 'video' ) {
-                  layout = <VideoLayout data={ resource } />;
-                }
+              if ( type === 'video' ) {
+                layout = <VideoLayout data={ resource } />;
+              }
 
-                if ( resource.id === selected || isMobile ) {
-                  return (
-                    <div key={ resource.id } id={ resource.id } styleName="section-container">
-                      <button id={ resource.id } styleName="section-mobile-toggle" type="button" onClick={ () => toggleSelection( resource.id ) }>
-                        <strong className="gpalab-site-specific" styleName="section-mobile-title">{ resource.tab || resource.title }</strong>
-                        <Chevron reverse={ resource.id === selected } />
-                      </button>
-                      <div id={ resource.id } styleName={ `section-content ${resource.id === selected ? 'mobile-show' : ''}` }>
-                        { layout }
-                        { resource.articles && (
-                          <Fragment>
-                            <hr styleName="section-hr" />
-                            <div styleName="feed-container">
-                              <CDPFeed id={ resource.id } items={ resource.articles } />
-                            </div>
-                          </Fragment>
-                        ) }
-                      </div>
+              if ( resource.id === selected || isMobile ) {
+                return (
+                  <div key={ resource.id } id={ resource.id } styleName="section-container">
+                    <button id={ resource.id } styleName="section-mobile-toggle" type="button" onClick={ () => toggleSelection( resource.id ) }>
+                      <strong className="gpalab-site-specific" styleName="section-mobile-title">{ resource.tab || resource.title }</strong>
+                      <Chevron reverse={ resource.id === selected } />
+                    </button>
+                    <div id={ resource.id } styleName={ `section-content ${resource.id === selected ? 'mobile-show' : ''}` }>
+                      { layout }
+                      { resource.articles && (
+                        <Fragment>
+                          <hr styleName="section-hr" />
+                          <div styleName="feed-container">
+                            <CDPFeed id={ resource.id } items={ resource.articles } />
+                          </div>
+                        </Fragment>
+                      ) }
                     </div>
-                  );
-                }
+                  </div>
+                );
+              }
 
-                return null;
-              } ) }
+              return null;
+            } ) }
           </div>
         </div>
       </Normalizer>

@@ -24,10 +24,10 @@ const Parallax = ( { id } ) => {
           <nav styleName="nav">
             <ul styleName="nav-list">
               { nav && nav.map( item => (
-                <li key={ item.link } style={{ width: `calc(${itemWidth}% - 1rem)` }} styleName="nav-item">
+                <li key={ item.link } style={ { width: `calc(${itemWidth}% - 1rem)` } } styleName="nav-item">
                   <a href={ `#gpalab-${item.link}` } styleName="link">
                     <span>{ item.text }</span>
-                    { item?.files?.[0]?.url && <img src={item.files[0].url} styleName="icon" />}
+                    { item?.files?.[0]?.url && <img alt="" src={ item.files[0].url } styleName="icon" /> }
                   </a>
                 </li>
               ) ) }

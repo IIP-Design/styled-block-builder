@@ -115,7 +115,7 @@ export const fileAddNested = ( data, alt, file, name, parentId ) => {
   selected.files = groupArr;
 
   // Push updated item back into group
-  filtered.splice( indexValue, 0, selected )
+  filtered.splice( indexValue, 0, selected );
 
   return filtered;
 };
@@ -218,7 +218,7 @@ export const groupAddItemNested = ( data, fields, group, parentId ) => {
   selected[group] = groupArr;
 
   // Push updated item back into group
-  filtered.splice(indexValue, 0, selected);
+  filtered.splice( indexValue, 0, selected );
 
   return filtered;
 };
