@@ -3,6 +3,7 @@ import propTypes from 'prop-types';
 import ReactQuill from 'react-quill';
 
 import ArticleById from 'metabox/components/Forms/FeedTypes/ArticleById';
+import ButtonForm from 'metabox/components/Forms/ButtonForm/ButtonForm';
 import CheckboxConditional from 'metabox/components/Forms/Toggles/CheckboxConditional';
 import FileUploader from 'metabox/components/FileUploader/FileUploader';
 import VideoForm from 'metabox/components/Forms/VideoForm/VideoForm';
@@ -248,6 +249,17 @@ const TabbedForm = ( { fields, group, label, maxTabs } ) => {
                             return (
                               <VideoForm
                                 key={ `${field.name}-${form.id}` }
+                                parentGroup={ group }
+                                parentId={ form.id }
+                              />
+                            );
+                          }
+
+                          if ( field.type === 'button' ) {
+                            return (
+                              <ButtonForm
+                                key={ `${field.name}-${form.id}` }
+                                number={field.number || 1}
                                 parentGroup={ group }
                                 parentId={ form.id }
                               />
