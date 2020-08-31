@@ -29,6 +29,9 @@ class Sanitize_Resources_Meta {
     include_once STYLE_BLOCKS_DIR . 'admin/metabox/ajax/sanitizers/subforms/class-sanitize-articles.php';
     $sanitize_articles = new Sanitize_Articles();
 
+    include_once STYLE_BLOCKS_DIR . 'admin/metabox/ajax/sanitizers/subforms/class-sanitize-buttons.php';
+    $sanitize_buttons = new Sanitize_Buttons();
+
     include_once STYLE_BLOCKS_DIR . 'admin/metabox/ajax/sanitizers/subforms/class-sanitize-videos.php';
     $sanitize_videos = new Sanitize_Videos();
 
@@ -52,6 +55,10 @@ class Sanitize_Resources_Meta {
 
         if ( ! empty( $resource['articles'] ) ) {
           $sanitized_resource['articles'] = $sanitize_articles->sanitize_articles( $resource['articles'] );
+        }
+
+        if ( ! empty( $resource['buttons'] ) ) {
+          $sanitized_resource['buttons'] = $sanitize_buttons->sanitize_buttons( $resource['buttons'] );
         }
 
         if ( ! empty( $resource['videos'] ) ) {

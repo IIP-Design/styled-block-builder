@@ -22,6 +22,7 @@ _This sections lists changes committed since most recent release_
 - Alt text support for background images
 - A reusable background component to set the block background color/image and gradient
 - The ability to rename resource tab labels
+- An add button option to the resources block
 - Additional alignment options for Hero block headings and content
 - Tooltip displaying color name in color picker component
 - Reusable sanitizers for article, button, and video sub-forms

@@ -15,7 +15,8 @@ const ResourcesForm = () => {
     { label: 'Change tab label (defaults to title):', name: 'tab', type: 'text' },
     { label: 'Add section text:', name: 'text', type: 'quill' },
     { label: 'Add a video?', name: 'videos', type: 'video' },
-    { label: 'Add an Article Feed?', name: 'hasFeed', type: 'article-feed' },
+    { label: 'Add an button?', name: 'buttons', number: 1, type: 'button' },
+    { label: 'Add an article feed?', name: 'hasFeed', type: 'article-feed' },
   ];
 
   return (

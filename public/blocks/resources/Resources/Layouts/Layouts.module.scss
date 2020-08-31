@@ -1,5 +1,15 @@
 @import 'styles/colors.scss';
 
+.button-container {
+  display: flex;
+  justify-content: center;
+
+  > a {
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+  }
+}
+
 .content {
   &.no-columns {
     grid-area: content;
