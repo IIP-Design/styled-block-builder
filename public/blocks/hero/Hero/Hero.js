@@ -19,11 +19,13 @@ const Hero = ( { id } ) => {
       files,
       lines,
       subtitle,
+      textColor,
       title,
       type,
     } = meta;
 
     const titleAlignment = align === 'center' || align === 'title' ? 'center' : 'left';
+    // const txtColor = color === 'lighter' || color === 'darker' ? '#ffffff' : '#333333';
     const contentAlignment = align === 'center' ? 'content-center' : 'content-left';
 
     return (
@@ -35,12 +37,12 @@ const Hero = ( { id } ) => {
         >
           <div styleName="hero">
             { title && (
-              <h2 className="gpalab-site-specific" style={ { textAlign: titleAlignment } } styleName="title">
+              <h2 className="gpalab-site-specific" style={ { textAlign: titleAlignment, color: textColor } } styleName="title">
                 { title }
               </h2>
             ) }
             { subtitle && (
-              <h3 className="gpalab-site-specific" style={ { textAlign: titleAlignment } } styleName="subtitle">
+              <h3 className="gpalab-site-specific" style={ { textAlign: titleAlignment, color: textColor } } styleName="subtitle">
                 { subtitle }
               </h3>
             ) }
@@ -50,6 +52,7 @@ const Hero = ( { id } ) => {
                   <div
                     className="light"
                     dangerouslySetInnerHTML={ { __html: description } }
+                    style={ { textAlign: titleAlignment, color: textColor } }
                     styleName="text-large"
                   />
                 ) }

@@ -62,6 +62,10 @@
   width: 100%;
 }
 
+.gpalab-text .gpalab-normalizer > div {
+  min-height: none;
+}
+
 @media screen and (max-width: 768px) {
   .content {
     margin: 2rem 0 1rem;

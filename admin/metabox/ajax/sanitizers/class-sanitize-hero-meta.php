@@ -44,6 +44,10 @@ class Sanitize_Hero_Meta {
       $sanitized['buttons'] = $sanitize_buttons->sanitize_buttons( $unsanitary['buttons'] );
     }
 
+    if ( ! empty( $unsanitary['textColor'] ) ) {
+      $sanitized['textColor'] = sanitize_text_field( $unsanitary['textColor'] );
+    }
+
     if ( ! empty( $unsanitary['description'] ) ) {
       $sanitized['description'] = wp_kses_post( $unsanitary['description'] );
     }

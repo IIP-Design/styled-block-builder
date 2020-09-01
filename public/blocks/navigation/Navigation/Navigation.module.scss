@@ -41,6 +41,22 @@
       text-decoration: none;
       transition: color 0.2s ease-out;
     }
+
+    > a {
+      display: flex;
+      flex-wrap: wrap;
+      flex: 1 0 100%;
+
+      > span {
+        align-self: center;
+        flex: 0 0 100%;
+      }
+
+      > img {
+        align-self: flex-end;
+      }
+    }
+
   }
 
   &-list {
@@ -49,6 +65,7 @@
     list-style: none;
     margin: 0;
   }
+
 }
 
 .title {

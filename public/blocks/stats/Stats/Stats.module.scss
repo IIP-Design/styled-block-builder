@@ -33,19 +33,24 @@
   align-items: center;
   min-width: 30%;
 
-  &-unit {
-    padding-left: 0.4rem;
-  }
-
+  
   &-value {
     font-size: 3rem;
     font-weight: 800;
+    line-height: 3.4rem;
     color: $white;
     text-decoration: none;
     text-align: center;
     margin-top: 26px;
     padding-bottom: 1rem;
     width: 300px;
+    
+    > span {
+      padding-left: 0.4rem;
+      display: inline-block;
+      line-height: 3.85rem;
+    }
+
   }
 
   &-info {
