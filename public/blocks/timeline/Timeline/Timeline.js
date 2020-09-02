@@ -65,7 +65,7 @@ const Timeline = ( { id } ) => {
 
           <h2 className="gpalab-site-specific" styleName="title">{ title }</h2>
 
-          <h3 className="gpalab-site-specific" styleName={ isMobile ? 'slide-title-mobile' : 'slide-title' }>
+          <h3 styleName={ isMobile ? 'slide-title-mobile' : 'slide-title' }>
             { selected.subtitle || '' }
           </h3>
 
