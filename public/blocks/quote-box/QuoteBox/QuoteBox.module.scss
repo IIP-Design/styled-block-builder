@@ -1,7 +1,8 @@
 @import 'styles/colors.scss';
+@import 'styles/mixins.scss';
 
 .container {
-  padding: 5rem 0 0;
+  padding: 5rem 0 2rem 0;
   position: relative;
   width: 100%;
 }
@@ -30,15 +31,10 @@
     margin: 0 !important;
     padding: 3rem;
     text-align: center;
+    @include list-spacing;
 
     > p {
       margin-bottom: 0.5rem;
-    }
-
-    > ol,
-    > ul {
-      list-style: inherit;
-      margin-inline-start: 2rem;
     }
   }
 }

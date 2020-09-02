@@ -1,15 +1,12 @@
+@import 'styles/mixins.scss';
+
 .description {
   margin-top: 1rem;
+  @include list-spacing;
 
   > p {
     margin-bottom: 0.5rem;
     line-height: 1.3;
-  }
-
-  > ol,
-  > ul {
-    list-style: inherit;
-    margin-inline-start: 2rem;
   }
 }
 

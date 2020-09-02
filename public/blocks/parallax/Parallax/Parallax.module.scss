@@ -1,4 +1,5 @@
 @import 'styles/colors.scss';
+@import 'styles/mixins.scss';
 
 .container {
   align-items: center;
@@ -37,15 +38,10 @@
   color: $white;
   flex-shrink: 1;
   margin: 2rem 0;
+  @include list-spacing;
 
   > p {
     margin-bottom: 0.5rem;
-  }
-
-  > ol,
-  > ul {
-    list-style: inherit;
-    margin-inline-start: 2rem;
   }
 }
 

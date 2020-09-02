@@ -2,11 +2,13 @@ import React, { Fragment, useContext } from 'react';
 import ReactQuill from 'react-quill';
 
 import ButtonForm from 'metabox/components/Forms/ButtonForm/ButtonForm';
+import ColorPicker from 'metabox/components/ColorPicker/ColorPicker';
 import FileUploader from 'metabox/components/FileUploader/FileUploader';
 import RadioConditional from 'metabox/components/Forms/Toggles/RadioConditional';
 import TabbedForm from 'metabox/components/Forms/TabbedForm/TabbedForm';
 
 import { AdminContext } from 'metabox/context/adminContext';
+import { defaultText } from 'metabox/utils/color-picker-palettes';
 import { handleChange } from 'metabox/utils/event-handlers';
 import { getModules } from 'metabox/utils/quill';
 
@@ -24,6 +26,11 @@ const HeroForm = () => {
     { label: 'Center All', name: 'align', value: 'center' },
   ];
 
+  const textOptions = {
+    group: 'textColor',
+    options: defaultText,
+  };
+
   const options = [
     { label: 'Text', name: 'type', value: 'text' },
     { label: 'Animated lines', name: 'type', value: 'lines' },
@@ -34,6 +41,11 @@ const HeroForm = () => {
   return (
     <Fragment>
       <FileUploader label="Add background image:" name="backgroundImage" />
+      <ColorPicker
+        colors={ textOptions }
+        label="Set block text color:"
+        selected={ formValues.textColor }
+      />
       <label htmlFor="hero-title">
         Add Title:
         <input

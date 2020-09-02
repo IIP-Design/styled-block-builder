@@ -76,7 +76,7 @@ const Stats = ( { id } ) => {
                     >
                       0
                     </span>
-                    { stat.unit && <span styleName="item-unit">{ stat.unit }</span> }
+                    { stat.unit && <span>{ stat.unit }</span> }
                   </div>
                   <p style={ { color: textColor } } styleName="item-info">
                     { stat.desc }

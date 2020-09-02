@@ -50,7 +50,6 @@
 }
 
 .title {
-  color: $white;
   font-style: normal;
   letter-spacing: -0.75px;
   margin: 4rem 2rem 0;
@@ -59,15 +58,13 @@
 }
 
 .subtitle {
-  color: $white;
   letter-spacing: -0.75px;
-  margin: 0 2rem;
+  margin: 1rem 2rem 0;
   display: grid;
   grid-column: 2 / span 11;
 }
 
 .text {
-  color: $white;
   grid-area: text;
   min-height: 80px;
 
