@@ -1,4 +1,5 @@
 @import 'styles/colors.scss';
+@import 'styles/mixins.scss';
 
 .button-container {
   display: flex;
@@ -31,17 +32,12 @@
   color: $black;
   flex-shrink: 1;
   margin: 0 4rem;
+  @include list-spacing;
 
   > p {
     margin-bottom: 0.5rem;
     letter-spacing: -0.25px;
     line-height: 1.75;
-  }
-
-  > ol,
-  > ul {
-    list-style: inherit;
-    margin-inline-start: 2rem;
   }
 }
 
@@ -60,10 +56,6 @@
   height: auto;
   margin-top: 1rem;
   width: 100%;
-}
-
-.gpalab-text .gpalab-normalizer > div {
-  min-height: none;
 }
 
 @media screen and (max-width: 768px) {

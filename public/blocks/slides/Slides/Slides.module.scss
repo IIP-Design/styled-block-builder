@@ -1,4 +1,5 @@
 @import 'styles/colors.scss';
+@import 'styles/mixins.scss';
 
 .pin-container {
   height: 100vh;
@@ -107,17 +108,12 @@
     max-width: 900px;
     padding: 2rem 0 4rem;
     position: relative;
+    @include list-spacing;
 
     > p {
       font-weight: 600;
       line-height: 1.3;
       margin: 1rem;
-    }
-
-    > ol,
-    > ul {
-      list-style: inherit;
-      margin-inline-start: 2rem;
     }
   }
 
