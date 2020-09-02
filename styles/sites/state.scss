@@ -14,44 +14,38 @@ h1.gpalab-site-specific {
   letter-spacing: -0.75px;
 
   @media screen and (min-width: 62em) {
-    font-size: 52px;
+    font-size: 32px;
     line-height: 1.11538;
   }
 }
 
 h2.gpalab-site-specific {
   font-family: $fontHeader;
-  font-size: 32px;
+  font-size: 36px;
   font-weight: 400;
   letter-spacing: -0.5px;
-  line-height: 40px;
+  line-height: 42px;
 
   @media (min-width: 48em) {
-    font-size: 42px;
-    line-height: 48px;
+    font-size: 32px;
     line-height: 1.11538;
   }
 }
 
 h3.gpalab-site-specific {
   font-family: $fontBase;
-  font-size: 36px;
-  font-weight: 500;
-  letter-spacing: -0.5px;
-  line-height: 42px;
-
-  @media (min-width: 48em) {
-    font-size: 36px;
-    line-height: 42px;
-  }
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  line-height: 26px;
 }
 
 h4.gpalab-site-specific {
   font-family: $fontHeader;
-  font-size: 24px;
+  font-size: 18px;
   font-weight: 500;
-  line-height: 30px;
-  letter-spacing: -0.5px;
+  line-height: 26px;
+  letter-spacing: 1px;
 }
 
 h5.gpalab-site-specific {
@@ -61,11 +55,6 @@ h5.gpalab-site-specific {
   letter-spacing: 1px;
   line-height: 26px;
   text-transform: uppercase;
-
-  @media screen and (min-width: 62em) {
-    font-size: 22px;
-    line-height: 1.11538;
-  }
 }
 
 .gpalab-site-specific > p {

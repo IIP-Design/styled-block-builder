@@ -1,7 +1,5 @@
 @import 'styles/colors.scss';
 
-$fontContent: 'Open Sans', Arial, sans-serif;
-
 .button-container {
   grid-area: button;
   margin: 2rem 0;
@@ -52,7 +50,6 @@ $fontContent: 'Open Sans', Arial, sans-serif;
 }
 
 .title {
-  color: $white;
   font-style: normal;
   letter-spacing: -0.75px;
   margin: 4rem 2rem 0;
@@ -61,23 +58,17 @@ $fontContent: 'Open Sans', Arial, sans-serif;
 }
 
 .subtitle {
-  color: $white;
-  font-family: $fontContent;
-  font-size: 18pt !important;
-  font-weight: 700 !important;
   letter-spacing: -0.75px;
-  margin: 0 2rem;
+  margin: 1rem 2rem 0;
   display: grid;
   grid-column: 2 / span 11;
 }
 
 .text {
-  color: $white;
   grid-area: text;
   min-height: 80px;
 
   p {
-    font-family: $fontContent;
     font-size: 1.2rem;
     line-height: 1.75;
     margin: 1rem 0;
