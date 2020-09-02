@@ -44,12 +44,12 @@ class Sanitize_Hero_Meta {
       $sanitized['buttons'] = $sanitize_buttons->sanitize_buttons( $unsanitary['buttons'] );
     }
 
-    if ( ! empty( $unsanitary['textColor'] ) ) {
-      $sanitized['textColor'] = sanitize_text_field( $unsanitary['textColor'] );
-    }
-
     if ( ! empty( $unsanitary['description'] ) ) {
       $sanitized['description'] = wp_kses_post( $unsanitary['description'] );
+    }
+
+    if ( ! empty( $unsanitary['files'] ) ) {
+      $sanitized['files'] = $sanitize_files->sanitize_files( $unsanitary['files'], $uploads );
     }
 
     if ( ! empty( $unsanitary['lines'] ) ) {
@@ -73,16 +73,16 @@ class Sanitize_Hero_Meta {
       $sanitized['subtitle'] = sanitize_text_field( $unsanitary['subtitle'] );
     }
 
+    if ( ! empty( $unsanitary['textColor'] ) ) {
+      $sanitized['textColor'] = sanitize_text_field( $unsanitary['textColor'] );
+    }
+
     if ( ! empty( $unsanitary['title'] ) ) {
       $sanitized['title'] = sanitize_text_field( $unsanitary['title'] );
     }
 
     if ( ! empty( $unsanitary['type'] ) ) {
       $sanitized['type'] = sanitize_text_field( $unsanitary['type'] );
-    }
-
-    if ( ! empty( $unsanitary['files'] ) ) {
-      $sanitized['files'] = $sanitize_files->sanitize_files( $unsanitary['files'], $uploads );
     }
 
     return $sanitized;
