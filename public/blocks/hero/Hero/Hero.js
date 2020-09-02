@@ -25,7 +25,6 @@ const Hero = ( { id } ) => {
     } = meta;
 
     const titleAlignment = align === 'center' || align === 'title' ? 'center' : 'left';
-    // const txtColor = color === 'lighter' || color === 'darker' ? '#ffffff' : '#333333';
     const contentAlignment = align === 'center' ? 'content-center' : 'content-left';
 
     return (
