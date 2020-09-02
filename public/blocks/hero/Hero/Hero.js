@@ -58,8 +58,9 @@ const Hero = ( { id } ) => {
                 ) }
                 { type === 'lines' && (
                   <AnimatedLines
+                    align={ align }
+                    color={ textColor }
                     lines={ lines }
-                    style={ align === 'center' ? { left: 0, right: 0, margin: '0 auto' } : {} }
                   />
                 ) }
               </div>

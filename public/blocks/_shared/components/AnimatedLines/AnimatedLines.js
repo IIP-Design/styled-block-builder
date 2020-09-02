@@ -4,7 +4,7 @@ import gsap from 'gsap';
 
 import './AnimatedLines.module.scss';
 
-const AnimatedLines = ( { lines, style } ) => {
+const AnimatedLines = ( { align, color, lines } ) => {
   useEffect( () => {
     gsap.registerPlugin( 'CSSRulePlugin' );
 
@@ -22,9 +22,12 @@ const AnimatedLines = ( { lines, style } ) => {
     } );
   }, [] );
 
+  const alignment = align === 'center' ? { left: 0, right: 0, margin: '0 auto' } : {};
+  const lineColor = color || '#ffffff';
+
   if ( lines ) {
     return lines.map( line => (
-      <div key={ line.text } className="hero-line" style={ style || {} } styleName="line">
+      <div key={ line.text } className="hero-line" style={ { ...alignment, color: lineColor } } styleName="line">
         { line.text }
       </div>
     ) );
