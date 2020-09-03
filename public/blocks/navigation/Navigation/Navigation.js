@@ -15,6 +15,7 @@ const Parallax = ( { id } ) => {
       title,
     } = meta;
 
+    const isMobile = window.innerWidth <= 600;
     const itemWidth = nav.length > 4 ? Math.round( 100 / nav.length ) : 25;
 
     return (
@@ -24,7 +25,7 @@ const Parallax = ( { id } ) => {
           <nav styleName="nav">
             <ul styleName="nav-list">
               { nav && nav.map( item => (
-                <li key={ item.link } style={ { width: `calc(${itemWidth}% - 1rem)` } } styleName="nav-item">
+                <li key={ item.link } style={ { width: isMobile ? '75%' : `calc(${itemWidth}% - 1rem)` } } styleName="nav-item">
                   <a href={ `#gpalab-${item.link}` } styleName="link">
                     <span>{ item.text }</span>
                     { item?.files?.[0]?.url && <img alt="" src={ item.files[0].url } styleName="icon" /> }

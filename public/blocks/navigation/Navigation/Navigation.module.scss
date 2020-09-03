@@ -9,6 +9,10 @@
     margin: 0.5rem auto 0;
     height: auto;
     width: 50%;
+
+    @media screen and (max-width: 600px) {
+      width: 35%;
+    }
   }
 }
 
@@ -56,7 +60,6 @@
         align-self: flex-end;
       }
     }
-
   }
 
   &-list {
@@ -64,8 +67,12 @@
     justify-content: center;
     list-style: none;
     margin: 0;
-  }
 
+    @media screen and (max-width: 600px) {
+      align-items: center;
+      flex-direction: column;
+    }
+  }
 }
 
 .title {
