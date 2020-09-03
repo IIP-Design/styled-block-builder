@@ -82,4 +82,10 @@ h5.gpalab-site-specific {
     color: $blueSilver;
     text-decoration: none;
   }
+
+  @media screen and (max-width: 600px) {
+    .gpalab-normalizer {
+      margin: 0 -20px;
+    }
+  }
 }
