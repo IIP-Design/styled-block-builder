@@ -3,8 +3,13 @@ import propTypes from 'prop-types';
 
 import './Button.module.scss';
 
-const Button = ( { arrow, border, color, link, text } ) => (
+const Button = ( { arrow, border, color, link, prefix, text } ) => (
   <a href={ link } styleName={ `button ${color} ${border}` }>
+    { prefix && prefix !== 'none' && (
+      <span style={ { display: 'block', lineHeight: '1.4rem' } }>
+        { prefix }
+      </span>
+    ) }
     { text }
     { arrow && arrow !== 'none' && (
       <span styleName={ `arrow arrow-${arrow}` }>
@@ -24,6 +29,7 @@ Button.propTypes = {
   border: propTypes.string,
   color: propTypes.string,
   link: propTypes.string,
+  prefix: propTypes.string,
   text: propTypes.string,
 };
 

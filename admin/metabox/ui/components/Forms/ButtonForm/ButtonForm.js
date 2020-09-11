@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import propTypes from 'prop-types';
 
 import { AdminContext } from 'metabox/context/adminContext';
+import CheckboxConditional from 'metabox/components/Forms/Toggles/CheckboxConditional';
 import {
   handleAddNested,
   handleChangeNested,
@@ -15,10 +16,12 @@ const ButtonForm = ( { parentGroup, parentId, number } ) => {
   const formValues = state?.formData?.formValues ? state.formData.formValues : {};
 
   const fields = [
+    { name: 'addPrefix' },
     { name: 'buttonArrow', value: 'white' },
     { name: 'buttonBorder', value: 'plain' },
     { name: 'buttonColor', value: 'white' },
     { name: 'buttonLink' },
+    { name: 'buttonPrefix' },
     { name: 'buttonText' },
   ];
 
@@ -39,6 +42,27 @@ const ButtonForm = ( { parentGroup, parentId, number } ) => {
         { buttons && buttons.map( button => (
           <div key={ button.id } styleName="form">
             <strong styleName="title">Button Data:</strong>
+
+            <CheckboxConditional
+              checked={ formValues.addPrefix }
+              label="Would you like to add a prefix?"
+              name="addPrefix"
+            >
+
+              <label htmlFor="button-prefix-text">
+                Add button text prefix:
+                <input
+                  data-itemid={ button.id }
+                  id="button-prefix"
+                  name="buttonPrefix"
+                  type="text"
+                  value={ button.buttonPrefix || '' }
+                  onChange={ e => handleChangeNested( e, dispatch, 'buttons', parentGroup, parentId ) }
+                />
+              </label>
+
+            </CheckboxConditional>
+
             <label htmlFor="button-text">
               Add button text:
               <input
