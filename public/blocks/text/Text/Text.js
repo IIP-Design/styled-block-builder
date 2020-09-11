@@ -69,6 +69,7 @@ const Text = ( { id } ) => {
                     border={ button.buttonBorder }
                     color={ button.buttonColor }
                     link={ button.buttonLink }
+                    prefix={ button.buttonPrefix }
                     text={ button.buttonText }
                   />
                 ) ) }
