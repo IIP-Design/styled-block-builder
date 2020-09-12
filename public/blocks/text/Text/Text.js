@@ -65,12 +65,7 @@ const Text = ( { id } ) => {
                 { buttons.map( button => (
                   <Button
                     key={ button.id }
-                    arrow={ button.buttonArrow }
-                    border={ button.buttonBorder }
-                    color={ button.buttonColor }
-                    link={ button.buttonLink }
-                    prefix={ button.buttonPrefix }
-                    text={ button.buttonText }
+                    config={ button }
                   />
                 ) ) }
               </div>
