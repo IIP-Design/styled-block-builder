@@ -59,6 +59,7 @@ const ButtonForm = ( { parentGroup, parentId, number } ) => {
                   id="button-prefix"
                   name="buttonPrefix"
                   type="text"
+                  styleName="conditional-field"
                   value={ button.buttonPrefix || '' }
                   onChange={ e => handleChangeNested( e, dispatch, 'buttons', parentGroup, parentId ) }
                 />
