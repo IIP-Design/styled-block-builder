@@ -1,6 +1,0 @@
-# Builds
-dist/
-
-# Dependencies
-node_modules/
-vendor/
