@@ -18,9 +18,9 @@ const CheckboxConditional = ( { callback, checked, children, label, name } ) => 
   const handleChange = e => {
     if ( callback ) {
       callback( e );
+    } else {
+      handleToggle( e, dispatch, values );
     }
-
-    handleToggle( e, dispatch, values );
   };
 
   return (
