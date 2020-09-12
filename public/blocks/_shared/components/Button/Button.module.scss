@@ -2,6 +2,8 @@
 
 .button {
   background: none;
+  display: flex;
+  flex-direction: column;
   font-weight: 700;
   font-size: 12px;
   letter-spacing: 1.5px;
@@ -11,12 +13,13 @@
   text-decoration: none !important;
   text-transform: uppercase;
   transition: all 0.2s ease;
+  width: max-content;
 
   &:hover {
     cursor: pointer;
     text-decoration: none;
 
-    > span {
+    .arrow {
       transform: translateX(4px);
     }
   }
