@@ -27,7 +27,7 @@ class Sanitize_Buttons {
   public function sanitize_button( $button ) {
     $sanitized_button = array();
 
-    $sanitized_button['addPrefix']    = sanitize_text_field( $button['addPrefix'] );
+    $sanitized_button['addPrefix']    = rest_sanitize_boolean( $button['addPrefix'] );
     $sanitized_button['buttonArrow']  = sanitize_text_field( $button['buttonArrow'] );
     $sanitized_button['buttonBorder'] = sanitize_text_field( $button['buttonBorder'] );
     $sanitized_button['buttonColor']  = sanitize_text_field( $button['buttonColor'] );
