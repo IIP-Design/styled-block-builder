@@ -7,6 +7,7 @@ import {
   handleAddNested,
   handleChangeNested,
   handleRemoveNested,
+  handleToggleNested,
 } from 'metabox/utils/event-handlers';
 
 import './ButtonForm.module.scss';
@@ -15,8 +16,9 @@ const ButtonForm = ( { parentGroup, parentId, number } ) => {
   const { dispatch, state } = useContext( AdminContext );
   const formValues = state?.formData?.formValues ? state.formData.formValues : {};
 
+  const togglePrefix = e => handleToggleNested( e, dispatch, 'buttons', parentGroup, parentId );
+
   const fields = [
-    { name: 'addPrefix' },
     { name: 'buttonArrow', value: 'white' },
     { name: 'buttonBorder', value: 'plain' },
     { name: 'buttonColor', value: 'white' },
@@ -44,11 +46,12 @@ const ButtonForm = ( { parentGroup, parentId, number } ) => {
             <strong styleName="title">Button Data:</strong>
 
             <CheckboxConditional
-              checked={ formValues.addPrefix }
+              callback={ togglePrefix }
+              checked={ button.addPrefix }
+              itemid={ button.id }
               label="Would you like to add a prefix?"
               name="addPrefix"
             >
-
               <label htmlFor="button-prefix-text">
                 Add button text prefix:
                 <input
@@ -60,7 +63,6 @@ const ButtonForm = ( { parentGroup, parentId, number } ) => {
                   onChange={ e => handleChangeNested( e, dispatch, 'buttons', parentGroup, parentId ) }
                 />
               </label>
-
             </CheckboxConditional>
 
             <label htmlFor="button-text">
