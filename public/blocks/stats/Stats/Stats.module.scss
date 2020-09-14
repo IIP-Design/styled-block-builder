@@ -5,10 +5,6 @@
   padding: 5rem 0 0;
 }
 
-.stat-number {
-  padding-right: 0.4rem;
-}
-
 .title {
   color: $white;
   text-align: center;
@@ -44,7 +40,7 @@
     padding-bottom: 1rem;
     width: 300px;
 
-    > span {
+    > span:nth-child(2) {
       padding-left: 0.4rem;
       display: inline-block;
       line-height: 1.3;
