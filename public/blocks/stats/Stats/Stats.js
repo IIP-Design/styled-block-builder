@@ -19,7 +19,9 @@ const Stats = ( { id } ) => {
    */
   const animationType = 'opacity';
 
-  const [ref, entry] = useVisibilityObserver( { threshold: 0.50 } );
+  const threshold = animationType === 'opacity' ? 0.5 : 0.75;
+
+  const [ref, entry] = useVisibilityObserver( { threshold } );
 
   useEffect( () => {
     if ( entry.isIntersecting ) {
