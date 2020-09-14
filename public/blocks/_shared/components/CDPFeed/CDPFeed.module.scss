@@ -78,8 +78,9 @@
 
   &-link {
     display: flex;
-    flex-direction: column;
+    flex-direction: column-reverse;
     text-decoration: none;
+    height: 100%;
 
     &:focus {
       border: $focusBorder;
