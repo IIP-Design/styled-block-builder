@@ -1,39 +1,34 @@
 import React, { useEffect } from 'react';
 import propTypes from 'prop-types';
-import gsap from 'gsap';
 
 import Background from 'blocks/_shared/components/Background/Background';
 import Normalizer from 'blocks/_shared/components/Normalizer/Normalizer';
 import useVisibilityObserver from 'blocks/_shared/hooks/useVisibilityObserver';
+
+import { runStat } from './animations';
 
 import './Stats.module.scss';
 
 const Stats = ( { id } ) => {
   const { meta } = window[`gpalabStats${id}`];
 
+  /**
+   * This hardcoded value is a place holder for a currently unused configuration.
+   * Changing it to 'number' will result in a different stat animation that will tick
+   * the stat value up from 0.
+   */
+  const animationType = 'opacity';
+
   const [ref, entry] = useVisibilityObserver( { threshold: 0.50 } );
-
-  const runStat = statId => {
-    const counter = { val: 0.25 };
-    const stat = document.getElementById( statId );
-
-    const updateOpacity = () => {
-      stat.style.opacity = counter.val.toFixed( 2 );
-    };
-
-    gsap.to( counter, {
-      duration: 5,
-      onUpdate: updateOpacity,
-      val: 1.0,
-    } );
-  };
 
   useEffect( () => {
     if ( entry.isIntersecting ) {
-      const block = document.getElementById( `gpalab-${id}` );
-      const stats = [...block.querySelectorAll( '.stat-number' )];
+      const targetClass = animationType === 'opacity' ? '.gpalab-stat' : '.gpalab-stat-number';
 
-      stats.forEach( stat => runStat( stat.id ) );
+      const block = document.getElementById( `gpalab-${id}` );
+      const stats = [...block.querySelectorAll( targetClass )];
+
+      stats.forEach( stat => runStat( stat.id, animationType ) );
     }
   }, [entry, id] );
 
@@ -66,14 +61,19 @@ const Stats = ( { id } ) => {
             <div id={ `stats-${id}` } styleName="array">
               { stats && stats.map( stat => (
                 <div key={ stat.id } style={ { borderColor: textColor } } styleName="item">
-                  <div style={ { color: textColor } } styleName="item-value">
+                  <div
+                    className="gpalab-stat"
+                    id={ `stat-${stat.id}` }
+                    style={ { color: textColor, opacity: animationType === 'opacity' ? '0.25' : '1' } }
+                    styleName="item-value"
+                  >
                     { stat.prefix }
                     <span
-                      className="stat-number"
+                      className="gpalab-stat-number"
                       data-stat={ stat.number }
-                      id={ `stat-${stat.id}` }
+                      id={ `stat-num-${stat.id}` }
                     >
-                      { stat.number }
+                      { animationType === 'opacity' ? stat.number : 0 }
                     </span>
                     { stat.unit && <span>{ stat.unit }</span> }
                   </div>
