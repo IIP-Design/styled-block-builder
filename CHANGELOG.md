@@ -18,6 +18,7 @@ _This sections lists changes committed since most recent release_
 - A section in settings page to configure which sources are available in the article feed
 - A section in settings page to configure which users can add styled blocks (based on user's WordPress role)
 - An optional stylesheet to enforce state.gov heading and link styles
+- Option to add a prefix to button text resulting in a two-line button
 - Rich text editor to allow for formatted text in the Hero, Parallax, Quote Box, Resources, Slides, and Text blocks
 - Alt text support for background images
 - A reusable background component to set the block background color/image and gradient
@@ -27,6 +28,7 @@ _This sections lists changes committed since most recent release_
 - Tooltip displaying color name in color picker component
 - Reusable sanitizers for article, button, and video sub-forms
 - Enable use of radio conditionals within nested groups
+- Support for the checkbox conditional component within nested forms
 
 ### Changed:
 
@@ -36,6 +38,7 @@ _This sections lists changes committed since most recent release_
 - Vary link text color based on surrounding text rather than simply inheriting surrounding text color
 - Make buttons more configurable with additional style options
 - Enable background images for Text blocks
+- Alter the Stats block animation, transitioning the stat line's opacity from 25% to 100% rather than counting up the stat number
 - On the Stats block, use stat ids rather than indices to trigger animation, allowing multiple blocks on the same page
 - Increase CDP Feed item limit from three to six
 - Increase button limit in text block from one to two
@@ -44,9 +47,12 @@ _This sections lists changes committed since most recent release_
 - Do not fill block root div with the block type (to prevent flash of text before the block loads)
 - Show "Untitled [block type] block" rather than block id for untitled blocks in associated blocks list
 - Group and streamline sanitizers
+- Several SCSS mixins to make common CSS styles a bit more reusable
 
 ### Fixed:
 
+- Stretch link elements in the CDP feed to cover full image height
+- Update mobile styling to prevent odd margins and shifted content
 - Video option in Resources block not saving values
 - Stop Resources block tabs from reordering when adding nested content
 - When adding a tab to a tabbed form, automatically open it
