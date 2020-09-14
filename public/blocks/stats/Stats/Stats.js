@@ -11,21 +11,20 @@ import './Stats.module.scss';
 const Stats = ( { id } ) => {
   const { meta } = window[`gpalabStats${id}`];
 
-  const [ref, entry] = useVisibilityObserver( { threshold: 0.75 } );
+  const [ref, entry] = useVisibilityObserver( { threshold: 0.50 } );
 
   const runStat = statId => {
-    const counter = { val: 0 };
+    const counter = { val: 0.25 };
     const stat = document.getElementById( statId );
 
-    const updateCount = () => {
-      stat.innerHTML = Math.ceil( counter.val );
+    const updateOpacity = () => {
+      stat.style.opacity = counter.val.toFixed( 2 );
     };
 
     gsap.to( counter, {
       duration: 5,
-      ease: 'power2',
-      onUpdate: updateCount,
-      val: stat.getAttribute( 'data-stat' ),
+      onUpdate: updateOpacity,
+      val: 1.0,
     } );
   };
 
@@ -74,7 +73,7 @@ const Stats = ( { id } ) => {
                       data-stat={ stat.number }
                       id={ `stat-${stat.id}` }
                     >
-                      0
+                      { stat.number }
                     </span>
                     { stat.unit && <span>{ stat.unit }</span> }
                   </div>
