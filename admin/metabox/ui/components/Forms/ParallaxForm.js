@@ -2,7 +2,6 @@ import React, { Fragment, useContext } from 'react';
 import ReactQuill from 'react-quill';
 
 import ButtonForm from 'metabox/components/Forms/ButtonForm/ButtonForm';
-import CheckboxConditional from 'metabox/components/Forms/Toggles/CheckboxConditional';
 import FileUploader from 'metabox/components/FileUploader/FileUploader';
 import FullWidthToggle from 'metabox/components/Forms/Toggles/FullWidthToggle';
 import { AdminContext } from 'metabox/context/adminContext';

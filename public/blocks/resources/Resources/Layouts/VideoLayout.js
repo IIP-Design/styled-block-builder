@@ -32,11 +32,7 @@ const VideoLayout = ( { data } ) => (
             { data.buttons.map( button => (
               <Button
                 key={ button.id }
-                arrow={ button.buttonArrow }
-                border={ button.buttonBorder }
-                color={ button.buttonColor }
-                link={ button.buttonLink }
-                text={ button.buttonText }
+                config={ button }
               />
             ) ) }
           </div>
@@ -60,11 +56,7 @@ const VideoLayout = ( { data } ) => (
             { data.buttons.map( button => (
               <Button
                 key={ button.id }
-                arrow={ button.buttonArrow }
-                border={ button.buttonBorder }
-                color={ button.buttonColor }
-                link={ button.buttonLink }
-                text={ button.buttonText }
+                config={ button }
               />
             ) ) }
           </div>

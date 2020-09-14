@@ -4,7 +4,6 @@ import ReactQuill from 'react-quill';
 
 import ArticleById from 'metabox/components/Forms/FeedTypes/ArticleById';
 import ButtonForm from 'metabox/components/Forms/ButtonForm/ButtonForm';
-import CheckboxConditional from 'metabox/components/Forms/Toggles/CheckboxConditional';
 import FileUploader from 'metabox/components/FileUploader/FileUploader';
 import VideoForm from 'metabox/components/Forms/VideoForm/VideoForm';
 
@@ -84,20 +83,6 @@ const TabbedForm = ( { fields, group, label, maxTabs } ) => {
     }
 
     dispatch( { type: 'group-remove', payload: { group, id: selectedTab } } );
-  };
-
-  /**
-   * Dispatches an event to turn on/off of optional sections.
-   *
-   * @param {string} name Name of the field.
-   * @param {string} itemId The id of the item being updated.
-   */
-  const handleToggle = ( name, itemId ) => {
-    const selectItem = formValues[group].filter( item => item.id === itemId )[0];
-
-    const isChecked = selectItem[name] || false;
-
-    dispatch( { type: 'group-input', payload: { group, itemId, name, value: !isChecked } } );
   };
 
   if ( formValues ) {

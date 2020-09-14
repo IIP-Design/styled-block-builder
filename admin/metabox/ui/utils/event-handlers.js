@@ -44,17 +44,18 @@ export const handleToggle = ( e, dispatch, values ) => {
 };
 
 /**
- * Handles form input changes for a nested form input.
+ * Checks if group is nested and dispatches the appropriate group input type.
  *
- * @param {Object} e An event object.
+ * @param {Object} dataset The target dataset pulled off of the event object.
  * @param {dispatch} dispatch The AdminContext dispatch function.
  * @param {string} group Name of the selected group.
+ * @param {string} name The name of the field being changed group.
  * @param {string} parentGroup Group to which the parent of the selected item belongs.
  * @param {string} parentId The id value of the group where the target object resides.
+ * @param {string|boolean} value The new value for the field.
  */
-export const handleChangeNested = ( e, dispatch, group, parentGroup, parentId ) => {
-  const { itemid, itemname } = e.target.dataset;
-  const { name, value } = e.target;
+const dispatchInput = ( dataset, dispatch, group, name, parentGroup, parentId, value ) => {
+  const { itemid, itemname } = dataset;
 
   const itemName = itemname || name;
 
@@ -69,6 +70,38 @@ export const handleChangeNested = ( e, dispatch, group, parentGroup, parentId ) 
       payload: { itemId: itemid, group, name: itemName, value },
     } );
   }
+};
+
+/**
+ * Handles form input changes for a nested form input.
+ *
+ * @param {Object} e An event object.
+ * @param {dispatch} dispatch The AdminContext dispatch function.
+ * @param {string} group Name of the selected group.
+ * @param {string} parentGroup Group to which the parent of the selected item belongs.
+ * @param {string} parentId The id value of the group where the target object resides.
+ */
+export const handleChangeNested = ( e, dispatch, group, parentGroup, parentId ) => {
+  const { dataset } = e.target;
+  const { name, value } = e.target;
+
+  dispatchInput( dataset, dispatch, group, name, parentGroup, parentId, value );
+};
+
+/**
+ * Handles form changes for a nested checkbox.
+ *
+ * @param {Object} e An event object.
+ * @param {dispatch} dispatch The AdminContext dispatch function.
+ * @param {string} group Name of the selected group.
+ * @param {string} parentGroup Group to which the parent of the selected item belongs.
+ * @param {string} parentId The id value of the group where the target object resides.
+ */
+export const handleToggleNested = ( e, dispatch, group, parentGroup, parentId ) => {
+  const { dataset } = e.target;
+  const { name, checked } = e.target;
+
+  dispatchInput( dataset, dispatch, group, name, parentGroup, parentId, checked );
 };
 
 /**

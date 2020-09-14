@@ -5,7 +5,7 @@ import Slides from './Slides/Slides';
 
 // Run accessibility tests in development.
 if ( process.env.NODE_ENV !== 'production' ) {
-  // eslint-disable-next-line global-require
+  // eslint-disable-next-line global-require, node/global-require
   const axe = require( 'react-axe' );
 
   axe( React, ReactDOM, 1000 );

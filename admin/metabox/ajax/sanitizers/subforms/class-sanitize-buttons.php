@@ -27,10 +27,12 @@ class Sanitize_Buttons {
   public function sanitize_button( $button ) {
     $sanitized_button = array();
 
+    $sanitized_button['addPrefix']    = rest_sanitize_boolean( $button['addPrefix'] );
     $sanitized_button['buttonArrow']  = sanitize_text_field( $button['buttonArrow'] );
     $sanitized_button['buttonBorder'] = sanitize_text_field( $button['buttonBorder'] );
     $sanitized_button['buttonColor']  = sanitize_text_field( $button['buttonColor'] );
     $sanitized_button['buttonLink']   = sanitize_text_field( $button['buttonLink'] );
+    $sanitized_button['buttonPrefix'] = sanitize_text_field( $button['buttonPrefix'] );
     $sanitized_button['buttonText']   = sanitize_text_field( $button['buttonText'] );
     $sanitized_button['id']           = sanitize_text_field( $button['id'] );
 

@@ -1,7 +1,7 @@
+@import 'styles/mixins.scss';
+
 .form-break {
-  display: flex;
-  flex-direction: column;
-  margin: 0.5rem 0;
+  @include stacked-form-label;
 }
 
 .radio-wrapper {

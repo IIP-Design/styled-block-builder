@@ -5,3 +5,9 @@
     margin-inline-start: 2rem;
   }
 }
+
+@mixin stacked-form-label {
+  display: flex;
+  flex-direction: column;
+  margin: 0.5rem 0;
+}
