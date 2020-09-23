@@ -24,7 +24,7 @@ class Metabox {
    */
   public function add_blocks_metabox() {
     $current_user   = wp_get_current_user();
-    $min_capability = get_option( 'gpalab-blocks-role' );
+    $min_capability = get_option( 'gpalab-blocks-role' ) ? get_option( 'gpalab-blocks-role' ) : 'manage_options';
 
     // Ensure that current user has correct privileges.
     if ( array_key_exists( $min_capability, $current_user->allcaps ) ) {

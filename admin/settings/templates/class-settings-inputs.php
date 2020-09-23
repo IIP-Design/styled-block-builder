@@ -88,7 +88,7 @@ class Settings_Inputs {
       >
         <?php
         foreach ( $options as $opt ) {
-          $value    = get_option( $option );
+          $value    = get_option( $option ) ? get_option( $option ) : $this->get_default( $property );
           $selected = '';
 
           if ( true === $multi ) {
@@ -131,6 +131,20 @@ class Settings_Inputs {
         />
       </label>
     <?php
+  }
+
+  /**
+   * Gets the default value for an input based on the input name.
+   *
+   * @param string $property     The name of the given input.
+   * @return string|null         The default value or null if there is none.
+   */
+  private function get_default( $property ) {
+    if ( 'role' === $property ) {
+      return 'manage_options';
+    } else {
+      return null;
+    }
   }
 
   /**
