@@ -11,3 +11,6 @@
   flex-direction: column;
   margin: 0.5rem 0;
 }
+@mixin border-standard {
+  border: 2px solid;
+}

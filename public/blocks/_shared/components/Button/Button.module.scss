@@ -1,4 +1,5 @@
 @import 'styles/colors.scss';
+@import 'styles/mixins.scss';
 
 .button {
   background: none;
@@ -29,7 +30,8 @@
     border-color: $white;
 
     &:hover {
-      border: 2px solid rgba($color: $white, $alpha: 0.1);
+      @include border-standard;
+      border-color: rgba($color: $white, $alpha: 0.1);
     }
   }
 
@@ -38,7 +40,8 @@
     border-color: $red;
 
     &:hover {
-      border: 2px solid rgba($color: $red, $alpha: 0.1);
+      @include border-standard;
+      border-color: rgba($color: $red, $alpha: 0.1);
     }
   }
 
@@ -47,16 +50,17 @@
     border-color: $blueBlackPearl;
 
     &:hover {
-      border: 2px solid rgba($color: $blueBlackPearl, $alpha: 0.1);
+      @include border-standard;
+      border-color: rgba($color: $blueBlackPearl, $alpha: 0.1);
     }
   }
 
   &.plain {
-    border: 2px solid;
+    @include border-standard;
   }
 
   &.rounded {
-    border: 2px solid;
+    @include border-standard;
     border-radius: 22px;
   }
 
