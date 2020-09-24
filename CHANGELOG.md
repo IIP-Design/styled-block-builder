@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 _This sections lists changes committed since most recent release_
 
+### Fixed:
+
+- Use event id rather than year to trigger timeline animation to allow for multiple events in the same year
+
 ## [v2.0.1](https://github.com/IIP-Design/styled-block-builder/compare/v2.0.0...v2.0.1) - 2020.09.23
 
 ### Fixed:

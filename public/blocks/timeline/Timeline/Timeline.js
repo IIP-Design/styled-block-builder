@@ -20,16 +20,16 @@ const Timeline = ( { id } ) => {
   const isMobile = window.innerWidth <= 768;
 
   const updateSelected = ( e, timeline ) => {
-    const year = e?.target?.dataset?.year ? e.target.dataset.year : '';
+    const itemId = e?.target?.dataset?.id ? e.target.dataset.id : '';
 
-    if ( year !== selected.year ) {
-      const newEvent = timeline.filter( event => event.year === year )[0];
+    if ( itemId !== selected.id ) {
+      const newEvent = timeline.filter( event => event.id === itemId )[0];
 
       setSelected( newEvent );
     }
   };
 
-  const getColor = ( year, el ) => {
+  const getColor = ( itemId, el ) => {
     // Set color values
     const activeDotColor = '#c1a783';
     const activeTextColor = '#333333';
@@ -37,7 +37,7 @@ const Timeline = ( { id } ) => {
 
     const active = el === 'dot' ? activeDotColor : activeTextColor;
 
-    const color = year === selected.year ? active : inactiveColor;
+    const color = itemId === selected.id ? active : inactiveColor;
 
     return color;
   };
@@ -73,9 +73,9 @@ const Timeline = ( { id } ) => {
             <div style={ getGridStyle( timeline.length ) } styleName="line">
               { timeline.map( event => (
                 <span
-                  key={ event.year }
-                  data-year={ event.year }
-                  style={ { backgroundColor: getColor( event.year, 'dot' ) } }
+                  key={ event.id }
+                  data-id={ event.id }
+                  style={ { backgroundColor: getColor( event.id, 'dot' ) } }
                   styleName="dot"
                   onMouseEnter={ e => updateSelected( e, timeline ) }
                 />
@@ -85,21 +85,21 @@ const Timeline = ( { id } ) => {
             <div style={ getGridStyle( timeline.length ) } styleName="cards">
               { timeline.map( event => (
                 <div
-                  key={ event.year }
-                  data-year={ event.year }
+                  key={ event.id }
+                  data-id={ event.id }
                   styleName="card"
                   onMouseEnter={ e => updateSelected( e, timeline ) }
                 >
                   <div
-                    data-year={ event.year }
-                    style={ { color: getColor( event.year ) } }
+                    data-id={ event.id }
+                    style={ { color: getColor( event.id ) } }
                     styleName="heading"
                   >
                     { event.year }
                   </div>
                   <p
-                    data-year={ event.year }
-                    style={ { color: getColor( event.year ) } }
+                    data-id={ event.id }
+                    style={ { color: getColor( event.id ) } }
                     styleName="text"
                   >
                     { event.text }
