@@ -16,6 +16,8 @@ _This sections lists changes committed since most recent release_
 ### Fixed:
 
 - Use event id rather than year to trigger timeline animation to allow for multiple events in the same year
+- Allow for the deletion of associated blocks, when the block does not exist in the database
+- Show error message when trying to edit a non-existent block from the associated list
 
 ## [v2.0.1](https://github.com/IIP-Design/styled-block-builder/compare/v2.0.0...v2.0.1) - 2020.09.23
 

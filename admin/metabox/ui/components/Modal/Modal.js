@@ -22,6 +22,26 @@ const ModalContent = () => {
   if ( state && state.showModal && state.showModal === true ) {
     const formData = state?.formData ? state.formData : { formId: 0, formType: '' };
 
+    if ( !formData.formType ) {
+      const error = { message: 'No form found with this id' };
+
+      return (
+        <div styleName="modal">
+          <div styleName="modal-background" />
+          <div styleName="modal-foreground">
+            <button
+              aria-label="close modal"
+              styleName="close-icon"
+              type="button"
+              onClick={ () => dispatch( { type: 'modal-hide' } ) }
+            >
+              <span className="dashicons dashicons-no" />
+            </button>
+            <ErrorMessage closeFunc={ () => dispatch( { type: 'modal-hide' } ) } err={ error } />
+          </div>
+        </div>
+      );
+    }
     const formStr = formData.formType.replace( 'gpalab-', '' );
 
     const submitForm = async () => {

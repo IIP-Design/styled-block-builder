@@ -117,8 +117,12 @@ class Update_Block {
 
     // Validate the values sent in the AJAX call.
     $validator->validate_nonce( $_POST['security'] );
-    $validator->validate_post_id( $_POST['id'] );
     $validator->validate_parent_id( $_POST['parent'] );
+
+    // Only send error response if id is missing, normal validator sends error if block does not exist.
+    if ( ! isset( $_POST['id'] ) || ! is_numeric( $_POST['id'] ) || '0' === $_POST['id'] ) {
+      $send_response->send_custom_error( 'invalid_post_id' );
+    }
 
     // Sanitize submitted values.
     $post_id   = sanitize_text_field( $_POST['id'] );
@@ -132,7 +136,10 @@ class Update_Block {
 
     $update_parent->remove_from_parent_post_meta( $parent_id, $post_id );
 
-    wp_delete_post( $post_id );
+    // If block exists, delete it from the database.
+    if ( get_post_status( $post_id ) !== false ) {
+      wp_delete_post( $post_id );
+    }
 
     // Return post ID as the AJAX response.
     $send_response->send_custom_success( 'deleted_post', $post_id );

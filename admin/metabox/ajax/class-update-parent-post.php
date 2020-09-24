@@ -22,7 +22,7 @@ class Update_Parent_Post {
   /**
    * Add a post id to the list of associated blocks.
    *
-   * @param string $parent_id       Post id of the parent post.
+   * @param string $parent_id    Post id of the parent post.
    * @param string $block_id     Post id of the block post.
    */
   public function set_parent_post_meta( $parent_id, $block_id ) {
@@ -44,9 +44,9 @@ class Update_Parent_Post {
   }
 
   /**
-   * Remove a post id to the list of associated blocks.
+   * Remove a post id from the list of associated blocks.
    *
-   * @param string $parent_id       Post id of the parent post.
+   * @param string $parent_id    Post id of the parent post.
    * @param string $block_id     Post id of the block post.
    */
   public function remove_from_parent_post_meta( $parent_id, $block_id ) {
