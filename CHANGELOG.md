@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 _This sections lists changes committed since most recent release_
 
+### Added:
+
+- Editor/Manager role to the permitted users list using the custom capability `state_options`
+
 ### Fixed:
 
 - Use event id rather than year to trigger timeline animation to allow for multiple events in the same year

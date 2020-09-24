@@ -102,7 +102,15 @@ class Settings {
         include_once STYLE_BLOCKS_DIR . 'admin/settings/templates/class-settings-inputs.php';
         $inputs = new Settings_Inputs();
 
-        $default = array( 'manage_options', 'edit_private_pages', 'publish_posts', 'edit_posts' );
+        /**
+         * The current default values include the 'state_options' capability which is used to identify the
+         * custom role Editor/Manager. It should be removed in favor of the below default value when integration
+         * with the User Role Editor plugin is added.
+         *
+         * $default = array( 'manage_options', 'edit_private_pages', 'publish_posts', 'edit_posts' );
+         */
+
+        $default = array( 'manage_options', 'state_options', 'edit_private_pages', 'publish_posts', 'edit_posts' );
 
         if ( is_multisite() ) {
           array_unshift( $default, 'manage_sites' );
