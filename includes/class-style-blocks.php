@@ -51,7 +51,7 @@ class Style_Blocks {
    */
   public function __construct() {
     $this->plugin_name = 'styled-block-builder';
-    $this->version     = '2.0.1';
+    $this->version     = '2.0.2';
     $this->load_dependencies();
     $this->define_admin_hooks();
     $this->define_public_hooks();
