@@ -1,0 +1,28 @@
+@import 'styles/mixins.scss';
+
+.link {
+  margin: 0.5rem 0;
+  text-decoration: none;
+  width: 100%;
+}
+
+.link-container {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  max-width: 700px;
+}
+
+.list-item {
+  @include border-standard;
+  border-color: black;
+  border-radius: 22px;
+  padding: 1.5rem;
+  text-align: center;
+  width: 100%;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
