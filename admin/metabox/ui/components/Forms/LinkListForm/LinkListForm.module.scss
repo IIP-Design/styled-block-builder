@@ -1,0 +1,20 @@
+@import 'styles/colors.scss';
+
+.container {
+  margin: 1rem 0 0.5rem;
+}
+
+.form {
+  border: $wordpressBorder;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 0.5rem;
+  padding: 0.5rem;
+  width: 96%;
+
+  > label {
+    display: flex;
+    flex-direction: column;
+    margin: 0.5rem 0;
+  }
+}
