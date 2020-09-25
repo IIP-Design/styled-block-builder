@@ -66,6 +66,22 @@ class Sanitize_Link_List_Meta {
       $sanitized['titleColor'] = sanitize_text_field( $unsanitary['titleColor'] );
     }
 
+    if ( ! empty( $unsanitary['facebook'] ) ) {
+      $sanitized['facebook'] = sanitize_text_field( $unsanitary['facebook'] );
+    }
+
+    if ( ! empty( $unsanitary['twitter'] ) ) {
+      $sanitized['twitter'] = sanitize_text_field( $unsanitary['twitter'] );
+    }
+
+    if ( ! empty( $unsanitary['instagram'] ) ) {
+      $sanitized['instagram'] = sanitize_text_field( $unsanitary['instagram'] );
+    }
+
+    if ( ! empty( $unsanitary['youtube'] ) ) {
+      $sanitized['youtube'] = sanitize_text_field( $unsanitary['youtube'] );
+    }
+
     $sanitized_background = $sanitize_background->sanitize_background( $unsanitary );
 
     $combined = array_merge( $sanitized, $sanitized_background );

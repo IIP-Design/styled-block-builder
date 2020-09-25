@@ -3,6 +3,7 @@ import propTypes from 'prop-types';
 
 import Background from 'blocks/_shared/components/Background/Background';
 import Normalizer from 'blocks/_shared/components/Normalizer/Normalizer';
+import SocialLinks from 'blocks/_shared/components/SocialLinks/SocialLinks';
 
 import { setColors } from './utils';
 
@@ -23,9 +24,20 @@ const LinkList = ( { id } ) => {
       links,
       title,
       titleColor,
+      facebook,
+      instagram,
+      youtube,
+      twitter,
     } = meta;
 
     const linkClass = setColors( backgroundType, blockBackground, linkColor, linkStyle );
+
+    const social = {
+      facebook,
+      instagram,
+      youtube,
+      twitter,
+    };
 
     return (
       <Normalizer fullWidth={ fullWidth }>
@@ -48,6 +60,7 @@ const LinkList = ( { id } ) => {
                 </div>
               </a>
             ) ) }
+            <SocialLinks fill={ titleColor } social={ social } />
           </div>
         </Background>
       </Normalizer>

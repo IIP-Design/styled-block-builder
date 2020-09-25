@@ -5,6 +5,7 @@ import BackgroundForm from '../BackgroundForm/BackgroundForm';
 import ColorPicker from 'metabox/components/ColorPicker/ColorPicker';
 import FullWidthToggle from 'metabox/components/Forms/Toggles/FullWidthToggle';
 import RadioConditional from 'metabox/components/Forms/Toggles/RadioConditional';
+import SocialLinkForm from 'metabox/components/Forms/SocialLinkForm/SocialLinkForm';
 
 import { AdminContext } from 'metabox/context/adminContext';
 import { defaultText } from 'metabox/utils/color-picker-palettes';
@@ -140,18 +141,22 @@ const LinkListForm = ( { parentGroup, parentId, number } ) => {
         >
           { links.length === 0 ? 'Add Link' : 'Add Another Link' }
         </button>
-        <BackgroundForm />
-        <ColorPicker
-          colors={ colorOptions }
-          label="Set link color:"
-          selected={ formValues.linkColor }
-        />
-        <RadioConditional
-          checked={ formValues.linkStyle }
-          label="Choose a link style:"
-          options={ styleOptions }
-        />
-        <FullWidthToggle checked={ formValues.fullWidth } />
+        <div styleName="form spacer">
+          <strong>Config Block Styles:</strong>
+          <BackgroundForm />
+          <ColorPicker
+            colors={ colorOptions }
+            label="Set link color:"
+            selected={ formValues.linkColor }
+          />
+          <RadioConditional
+            checked={ formValues.linkStyle }
+            label="Choose a link style:"
+            options={ styleOptions }
+          />
+          <FullWidthToggle checked={ formValues.fullWidth } />
+        </div>
+        <SocialLinkForm />
       </div>
     );
   }
