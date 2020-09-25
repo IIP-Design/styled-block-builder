@@ -1,6 +1,9 @@
 import React, { useContext } from 'react';
 import propTypes from 'prop-types';
 
+import BackgroundForm from '../BackgroundForm/BackgroundForm';
+import FullWidthToggle from 'metabox/components/Forms/Toggles/FullWidthToggle';
+
 import { AdminContext } from 'metabox/context/adminContext';
 import {
   handleAddNested,
@@ -17,7 +20,6 @@ const LinkListForm = ( { parentGroup, parentId, number } ) => {
   const fields = [
     { name: 'linkText' },
     { name: 'linkUrl' },
-    { name: 'buttonText' },
   ];
 
   if ( formValues ) {
@@ -34,6 +36,7 @@ const LinkListForm = ( { parentGroup, parentId, number } ) => {
 
     return (
       <div styleName="container">
+        <BackgroundForm />
         { links && links.map( ( link, idx ) => (
           <div key={ link.id } styleName="form">
             <strong>{ `Link ${idx + 1} Data:` }</strong>
@@ -81,6 +84,7 @@ const LinkListForm = ( { parentGroup, parentId, number } ) => {
         >
           { links.length === 0 ? 'Add Link' : 'Add Another Link' }
         </button>
+        <FullWidthToggle checked={ formValues.fullWidth } />
       </div>
     );
   }
