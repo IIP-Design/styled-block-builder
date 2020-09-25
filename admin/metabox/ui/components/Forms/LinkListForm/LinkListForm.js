@@ -1,12 +1,16 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import propTypes from 'prop-types';
 
 import BackgroundForm from '../BackgroundForm/BackgroundForm';
+import ColorPicker from 'metabox/components/ColorPicker/ColorPicker';
 import FullWidthToggle from 'metabox/components/Forms/Toggles/FullWidthToggle';
+import RadioConditional from 'metabox/components/Forms/Toggles/RadioConditional';
 
 import { AdminContext } from 'metabox/context/adminContext';
+import { defaultText } from 'metabox/utils/color-picker-palettes';
 import {
   handleAddNested,
+  handleChange,
   handleChangeNested,
   handleRemoveNested,
 } from 'metabox/utils/event-handlers';
@@ -17,9 +21,47 @@ const LinkListForm = ( { parentGroup, parentId, number } ) => {
   const { dispatch, state } = useContext( AdminContext );
   const formValues = state?.formData?.formValues ? state.formData.formValues : {};
 
+  // Initialize style options with default values if none are already selected.
+  useEffect( () => {
+    if ( !state?.formData?.formValues?.titleColor ) {
+      dispatch( { type: 'form-update', payload: { name: 'titleColor', value: '#333333' } } );
+    }
+
+    if ( !state?.formData?.formValues?.linkColor ) {
+      dispatch( { type: 'form-update', payload: { name: 'linkColor', value: '#0a314d' } } );
+    }
+
+    if ( !state?.formData?.formValues?.linkStyle ) {
+      dispatch( { type: 'form-update', payload: { name: 'linkStyle', value: 'outline' } } );
+    }
+
+    if ( !state?.formData?.formValues?.backgroundType ) {
+      dispatch( { type: 'form-update', payload: { name: 'backgroundType', value: 'color' } } );
+    }
+
+    if ( !state?.formData?.formValues?.blockBackground ) {
+      dispatch( { type: 'form-update', payload: { name: 'blockBackground', value: '#ffffff' } } );
+    }
+  }, [] );
+
   const fields = [
     { name: 'linkText' },
     { name: 'linkUrl' },
+  ];
+
+  const titleOptions = {
+    group: 'titleColor',
+    options: defaultText,
+  };
+
+  const colorOptions = {
+    group: 'linkColor',
+    options: defaultText,
+  };
+
+  const styleOptions = [
+    { label: 'Solid', name: 'linkStyle', value: 'solid' },
+    { label: 'Outline', name: 'linkStyle', value: 'outline' },
   ];
 
   if ( formValues ) {
@@ -36,7 +78,21 @@ const LinkListForm = ( { parentGroup, parentId, number } ) => {
 
     return (
       <div styleName="container">
-        <BackgroundForm />
+        <label htmlFor="handle">
+          Add Social Handle (Used as Block Title):
+          <input
+            id="handle"
+            name="title"
+            type="text"
+            value={ formValues.title || '' }
+            onChange={ e => handleChange( e, dispatch ) }
+          />
+        </label>
+        <ColorPicker
+          colors={ titleOptions }
+          label="Set title color:"
+          selected={ formValues.titleColor }
+        />
         { links && links.map( ( link, idx ) => (
           <div key={ link.id } styleName="form">
             <strong>{ `Link ${idx + 1} Data:` }</strong>
@@ -84,6 +140,17 @@ const LinkListForm = ( { parentGroup, parentId, number } ) => {
         >
           { links.length === 0 ? 'Add Link' : 'Add Another Link' }
         </button>
+        <BackgroundForm />
+        <ColorPicker
+          colors={ colorOptions }
+          label="Set link color:"
+          selected={ formValues.linkColor }
+        />
+        <RadioConditional
+          checked={ formValues.linkStyle }
+          label="Choose a link style:"
+          options={ styleOptions }
+        />
         <FullWidthToggle checked={ formValues.fullWidth } />
       </div>
     );

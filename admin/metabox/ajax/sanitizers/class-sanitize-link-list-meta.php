@@ -38,16 +38,32 @@ class Sanitize_Link_List_Meta {
     $unsanitary = json_decode( stripslashes( $data ), true );
     $sanitized  = array();
 
-    if ( ! empty( $unsanitary['links'] ) ) {
-      $sanitized['links'] = $sanitize_links->sanitize_links( $unsanitary['links'] );
-    }
-
     if ( ! empty( $unsanitary['files'] ) ) {
       $sanitized['files'] = $sanitize_files->sanitize_files( $unsanitary['files'], $uploads );
     }
 
     if ( ! empty( $unsanitary['fullWidth'] ) ) {
       $sanitized['fullWidth'] = rest_sanitize_boolean( $unsanitary['fullWidth'] );
+    }
+
+    if ( ! empty( $unsanitary['links'] ) ) {
+      $sanitized['links'] = $sanitize_links->sanitize_links( $unsanitary['links'] );
+    }
+
+    if ( ! empty( $unsanitary['linkColor'] ) ) {
+      $sanitized['linkColor'] = sanitize_text_field( $unsanitary['linkColor'] );
+    }
+
+    if ( ! empty( $unsanitary['linkStyle'] ) ) {
+      $sanitized['linkStyle'] = sanitize_text_field( $unsanitary['linkStyle'] );
+    }
+
+    if ( ! empty( $unsanitary['title'] ) ) {
+      $sanitized['title'] = sanitize_text_field( $unsanitary['title'] );
+    }
+
+    if ( ! empty( $unsanitary['titleColor'] ) ) {
+      $sanitized['titleColor'] = sanitize_text_field( $unsanitary['titleColor'] );
     }
 
     $sanitized_background = $sanitize_background->sanitize_background( $unsanitary );

@@ -1,3 +1,4 @@
+@import 'styles/colors.scss';
 @import 'styles/mixins.scss';
 
 .link {
@@ -18,11 +19,111 @@
   @include border-standard;
   border-color: black;
   border-radius: 22px;
+  font-weight: 600;
   padding: 1.5rem;
   text-align: center;
   width: 100%;
 
   &:hover {
     cursor: pointer;
+  }
+}
+
+.title {
+  text-align: center;
+}
+
+.solid {
+  &-black {
+    background-color: $black;
+    border-color: $black;
+    color: $white;
+
+    &:hover {
+      background-color: $white;
+      border-color: $white;
+      color: $black;
+    }
+  }
+
+  &-blue {
+    background-color: $blueDark;
+    border-color: $blueDark;
+    color: $white;
+
+    &:hover {
+      background-color: $white;
+      border-color: $white;
+      color: $blueDark;
+    }
+  }
+
+  &-white {
+    background-color: $white;
+    border-color: $white;
+    color: $blueDark;
+
+    &:hover {
+      background-color: $blueDark;
+      border-color: $blueDark;
+      color: $white;
+    }
+  }
+}
+
+.outline {
+  &-blue-empty {
+    background-color: transparent;
+    border-color: $blueDark;
+    color: $blueDark;
+
+    &:hover {
+      background-color: $blueDark;
+      color: $white;
+    }
+  }
+
+  &-white-empty {
+    background-color: transparent;
+    border-color: $white;
+    color: $white;
+
+    &:hover {
+      background-color: $white;
+      color: $blueDark;
+    }
+  }
+
+  &-black-empty {
+    background-color: transparent;
+    border-color: $black;
+    color: $black;
+
+    &:hover {
+      background-color: $black;
+      color: $white;
+    }
+  }
+
+  &-black-filled {
+    background-color: $white;
+    border-color: $black;
+    color: $black;
+
+    &:hover {
+      background-color: $black;
+      color: $white;
+    }
+  }
+
+  &-blue-filled {
+    background-color: $white;
+    border-color: $blueDark;
+    color: $blueDark;
+
+    &:hover {
+      background-color: $blueDark;
+      color: $white;
+    }
   }
 }
