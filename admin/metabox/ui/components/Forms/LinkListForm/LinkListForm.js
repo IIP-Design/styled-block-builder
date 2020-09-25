@@ -1,8 +1,9 @@
 import React, { useContext, useEffect } from 'react';
 import propTypes from 'prop-types';
 
-import BackgroundForm from '../BackgroundForm/BackgroundForm';
+import BackgroundForm from 'metabox/components/Forms/BackgroundForm/BackgroundForm';
 import ColorPicker from 'metabox/components/ColorPicker/ColorPicker';
+import DirectionalIcon from 'metabox/components/DirectionalIcon/DirectionalIcon';
 import FileUploader from 'metabox/components/FileUploader/FileUploader';
 import FullWidthToggle from 'metabox/components/Forms/Toggles/FullWidthToggle';
 import RadioConditional from 'metabox/components/Forms/Toggles/RadioConditional';
@@ -15,6 +16,7 @@ import {
   handleChange,
   handleChangeNested,
   handleRemoveNested,
+  handleReorder,
 } from 'metabox/utils/event-handlers';
 
 import './LinkListForm.module.scss';
@@ -96,7 +98,33 @@ const LinkListForm = ( { parentGroup, parentId, number } ) => {
         />
         { links && links.map( ( link, idx ) => (
           <div key={ link.id } styleName="form">
-            <strong>{ `Link ${idx + 1} Data:` }</strong>
+            <div styleName="form-header">
+              <strong>{ `Link ${idx + 1} Data:` }</strong>
+
+              <div>
+                { links.length > 1 && idx > 0 && (
+                  <button
+                    aria-label="move link up in order"
+                    onClick={ () => handleReorder( dispatch, 'up', 'links', link.id ) }
+                    styleName="form-button"
+                    type="button"
+                  >
+                    <DirectionalIcon direction="up" />
+                  </button>
+                ) }
+
+                { links.length > 1 && idx !== links.length - 1 && (
+                  <button
+                    aria-label="move link down in order"
+                    onClick={ () => handleReorder( dispatch, 'down', 'links', link.id ) }
+                    styleName="form-button"
+                    type="button"
+                  >
+                    <DirectionalIcon direction="down" />
+                  </button>
+                ) }
+              </div>
+            </div>
 
             <label htmlFor="link-text">
               Add link text:

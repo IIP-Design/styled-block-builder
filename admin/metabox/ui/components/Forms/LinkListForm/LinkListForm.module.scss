@@ -12,6 +12,20 @@
 .form {
   @include subform;
 
+  &-button {
+    background: none;
+    border: none;
+    margin: 0;
+    padding: 0;
+    width: 30px;
+  }
+
+  &-header {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+  }
+
   > label {
     @include stacked-form-label;
   }

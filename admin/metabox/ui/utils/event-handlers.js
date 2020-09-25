@@ -145,3 +145,15 @@ export const handleRemoveNested = ( e, dispatch, group, parentGroup, parentId ) 
     dispatch( { type: 'group-remove', payload: { group, id: itemid } } );
   }
 };
+
+/**
+ * Changes the location of an object within an array.
+ *
+ * @param {dispatch} dispatch The AdminContext dispatch function.
+ * @param {string} direction Direction in which to adjust the order (up => beginning, down => end).
+ * @param {string} group Name of the selected group.
+ * @param {string} id The id value of the item being moved.
+ */
+export const handleReorder = ( dispatch, direction, group, id ) => {
+  dispatch( { type: 'group-reorder', payload: { direction, group, id } } );
+};
