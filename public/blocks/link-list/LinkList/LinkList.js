@@ -5,7 +5,7 @@ import Background from 'blocks/_shared/components/Background/Background';
 import Normalizer from 'blocks/_shared/components/Normalizer/Normalizer';
 import SocialLinks from 'blocks/_shared/components/SocialLinks/SocialLinks';
 
-import { setColors } from './utils';
+import { setColors, getAvatar } from './utils';
 
 import './LinkList.module.scss';
 
@@ -31,6 +31,7 @@ const LinkList = ( { id } ) => {
     } = meta;
 
     const linkClass = setColors( backgroundType, blockBackground, linkColor, linkStyle );
+    const avatar = getAvatar( files );
 
     const social = {
       facebook,
@@ -48,6 +49,9 @@ const LinkList = ( { id } ) => {
           gradient={ backgroundType === 'image' && backgroundGradient === 'dark' }
         >
           <div styleName="link-container">
+            { avatar && (
+              <img alt={ avatar.alt } src={ avatar.url } styleName="avatar" />
+            ) }
             { title && (
               <h2 className="gpalab-site-specific" style={ { color: titleColor } } styleName="title">
                 { title }

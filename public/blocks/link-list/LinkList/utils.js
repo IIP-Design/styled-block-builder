@@ -34,3 +34,13 @@ export const setColors = ( bgType, bgColor, color, style ) => {
 
   return linkClass;
 };
+
+export const getAvatar = files => {
+  if ( !files || Array.isArray( files ) === false ) {
+    return null;
+  }
+
+  const avatar = files.filter( file => file.name === 'avatarImage' )[0];
+
+  return avatar;
+};

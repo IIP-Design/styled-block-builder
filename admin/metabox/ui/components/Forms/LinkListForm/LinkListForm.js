@@ -3,6 +3,7 @@ import propTypes from 'prop-types';
 
 import BackgroundForm from '../BackgroundForm/BackgroundForm';
 import ColorPicker from 'metabox/components/ColorPicker/ColorPicker';
+import FileUploader from 'metabox/components/FileUploader/FileUploader';
 import FullWidthToggle from 'metabox/components/Forms/Toggles/FullWidthToggle';
 import RadioConditional from 'metabox/components/Forms/Toggles/RadioConditional';
 import SocialLinkForm from 'metabox/components/Forms/SocialLinkForm/SocialLinkForm';
@@ -89,10 +90,9 @@ const LinkListForm = ( { parentGroup, parentId, number } ) => {
             onChange={ e => handleChange( e, dispatch ) }
           />
         </label>
-        <ColorPicker
-          colors={ titleOptions }
-          label="Set title color:"
-          selected={ formValues.titleColor }
+        <FileUploader
+          label="Add avatar:"
+          name="avatarImage"
         />
         { links && links.map( ( link, idx ) => (
           <div key={ link.id } styleName="form">
@@ -143,6 +143,11 @@ const LinkListForm = ( { parentGroup, parentId, number } ) => {
         </button>
         <div styleName="form spacer">
           <strong>Config Block Styles:</strong>
+          <ColorPicker
+            colors={ titleOptions }
+            label="Set title color:"
+            selected={ formValues.titleColor }
+          />
           <BackgroundForm />
           <ColorPicker
             colors={ colorOptions }

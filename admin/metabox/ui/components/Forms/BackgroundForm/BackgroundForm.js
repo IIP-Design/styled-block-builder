@@ -43,7 +43,7 @@ const BackgroundForm = () => {
       { formValues.backgroundType === 'image' && (
         <Fragment>
           <FileUploader
-            label="Add background image URL:"
+            label="Add background image:"
             name="backgroundImage"
           />
           <RadioConditional
