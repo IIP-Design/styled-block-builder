@@ -2,15 +2,14 @@ import React, { Fragment, useContext, useEffect } from 'react';
 import ReactQuill from 'react-quill';
 
 import ArticleById from 'metabox/components/Forms/FeedTypes/ArticleById';
+import BackgroundForm from 'metabox/components/Forms/BackgroundForm/BackgroundForm';
 import ButtonForm from 'metabox/components/Forms/ButtonForm/ButtonForm';
 import ColorPicker from 'metabox/components/ColorPicker/ColorPicker';
-import FileUploader from 'metabox/components/FileUploader/FileUploader';
 import FullWidthToggle from 'metabox/components/Forms/Toggles/FullWidthToggle';
-import RadioConditional from 'metabox/components/Forms/Toggles/RadioConditional';
 import VideoForm from 'metabox/components/Forms/VideoForm/VideoForm';
 
 import { AdminContext } from 'metabox/context/adminContext';
-import { defaultBackgrounds, defaultText } from 'metabox/utils/color-picker-palettes';
+import { defaultText } from 'metabox/utils/color-picker-palettes';
 import { getModules } from 'metabox/utils/quill';
 import { handleChange } from 'metabox/utils/event-handlers';
 
@@ -33,21 +32,6 @@ const TextForm = () => {
     dispatch( { type: 'form-update', payload: { name: 'desc', value } } );
   };
 
-  const blockBgGradient = [
-    { label: 'Dark Gradient', name: 'backgroundGradient', value: 'dark' },
-    { label: 'No Gradient', name: 'backgroundGradient', value: 'off' },
-  ];
-
-  const blockBgType = [
-    { label: 'Color', name: 'backgroundType', value: 'color' },
-    { label: 'Image', name: 'backgroundType', value: 'image' },
-  ];
-
-  const blockBgOptions = {
-    group: 'blockBackground',
-    options: defaultBackgrounds,
-  };
-
   const textOptions = {
     group: 'textColor',
     options: defaultText,
@@ -55,31 +39,7 @@ const TextForm = () => {
 
   return (
     <Fragment>
-      <RadioConditional
-        checked={ formValues.backgroundType }
-        label="What type of background would you like to apply to this block?"
-        options={ blockBgType }
-      />
-      { formValues.backgroundType === 'color' && (
-        <ColorPicker
-          colors={ blockBgOptions }
-          label="Set block background color:"
-          selected={ formValues.blockBackground }
-        />
-      ) }
-      { formValues.backgroundType === 'image' && (
-        <Fragment>
-          <FileUploader
-            label="Add background image URL:"
-            name="backgroundImage"
-          />
-          <RadioConditional
-            checked={ formValues.backgroundGradient || 'off' }
-            label="Overlay the image with a gradient (to improve text legibility)?"
-            options={ blockBgGradient }
-          />
-        </Fragment>
-      ) }
+      <BackgroundForm />
       <ColorPicker
         colors={ textOptions }
         label="Set block text color:"
