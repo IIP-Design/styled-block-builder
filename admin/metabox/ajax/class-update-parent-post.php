@@ -61,9 +61,9 @@ class Update_Parent_Post {
       $blocks = array();
     }
 
+    // Check if current block is listed, if not add it.
     $block_ids = $this->get_block_ids( $blocks );
 
-    // Check if current block is listed, if not add it.
     if ( in_array( $block_id, $block_ids, true ) ) {
       $position = $this->get_block_position( $block_ids, $block_id );
       $updated  = $this->replace_block_data( $blocks, $block_meta, $position );
@@ -82,24 +82,29 @@ class Update_Parent_Post {
    * @param string $block_id     Post id of the block post.
    */
   public function remove_from_parent_post_meta( $parent_id, $block_id ) {
-    // Get the list of style blocks associated with the parent post.
-    $associated = get_post_meta( $parent_id, 'gpalab_associated_blocks', true );
+    // Get the serialized array of styled block data associated with the parent post.
+    $blocks = get_post_meta( $parent_id, 'gpalab_blocks', true );
 
-    // If no array of associated blocks, there is nothing to remove.
-    if ( empty( $associated ) ) {
+    // If no array of blocks, there is nothing to remove.
+    if ( empty( $blocks ) ) {
       return;
     }
 
-    // Cast id value to an integer since post ids are ints, but the block_id values are stored as strings.
-    $id_as_int = (int) $block_id;
+    // Check if current block is listed, if so delete it.
+    $block_ids = $this->get_block_ids( $blocks );
 
-    if ( in_array( $id_as_int, $associated, true ) ) {
-      $remove = array( $id_as_int );
+    if ( in_array( $block_id, $block_ids, true ) ) {
+      $position = $this->get_block_position( $block_ids, $block_id );
 
-      // array_values needed to re-index the array after removing item.
-      $removed = array_values( array_diff( $associated, $remove ) );
+      // If no position returned, block not found in block data, so no need to remove.
+      if ( null === $position ) {
+        return;
+      }
 
-      update_post_meta( $parent_id, 'gpalab_associated_blocks', $removed );
+      // Remove one item, at index $position, from the $blocks array.
+      array_splice( $blocks, $position, 1 );
+
+      update_post_meta( $parent_id, 'gpalab_blocks', $blocks );
     }
   }
 
