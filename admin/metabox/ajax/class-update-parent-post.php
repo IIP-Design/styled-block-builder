@@ -47,7 +47,7 @@ class Update_Parent_Post {
    * Add/update a block's data to it's parent's post metadata.
    *
    * @param string $parent_id      Post id of the parent post.
-   * @param string $block_meta     New/updated block data to be saved.
+   * @param array  $block_meta     New/updated block data to be saved.
    */
   public function save_to_parent_post_meta( $parent_id, $block_meta ) {
     // Pull the block ID off of the provided block metadata.
@@ -61,24 +61,18 @@ class Update_Parent_Post {
       $blocks = array();
     }
 
+    $block_ids = $this->get_block_ids( $blocks );
+
     // Check if current block is listed, if not add it.
-    if ( in_array( $block_id, $blocks, true ) ) {
-      $this->replace_block_data( $blocks, $block_meta );
+    if ( in_array( $block_id, $block_ids, true ) ) {
+      $position = $this->get_block_position( $block_ids, $block_id );
+      $updated  = $this->replace_block_data( $blocks, $block_meta, $position );
+
+      update_post_meta( $parent_id, 'gpalab_blocks', $updated );
     } else {
       $blocks[] = $block_meta;
       update_post_meta( $parent_id, 'gpalab_blocks', $blocks );
     }
-  }
-
-  /**
-   * Find an existing block the list of block data, and update it.
-   *
-   * @param string $blocks        Serialized array of block data.
-   * @param string $block_meta    Updated block data to be saved.
-   */
-  private function replace_block_data( $blocks, $block_meta ) {
-    // Pull the block ID off of the provided block metadata.
-    $block_id = $block_meta['id'];
   }
 
   /**
@@ -107,5 +101,64 @@ class Update_Parent_Post {
 
       update_post_meta( $parent_id, 'gpalab_associated_blocks', $removed );
     }
+  }
+
+  /**
+   * Find an existing block in the list of block data and update it.
+   *
+   * @param array $blocks       Serialized array of block data.
+   * @param array $block_meta   Updated block data to be saved.
+   * @param int   $position     Updated block data to be saved.
+   * @return array
+   */
+  private function replace_block_data( $blocks, $block_meta, $position ) {
+    $updated = $blocks;
+
+    // Replace block data at given index with provided data.
+    $updated[ $position ] = $block_meta;
+
+    return $updated;
+  }
+
+  /**
+   * Get an array of block ids from a serialized array of block data.
+   *
+   * @param array $blocks   Serialized array of block data.
+   * @return array          An array of block ids derived from the provided block data.
+   */
+  private function get_block_ids( $blocks ) {
+    $block_ids = array();
+
+    foreach ( $blocks as $block ) {
+      $id = $block['id'];
+
+      array_push( $block_ids, $id );
+    }
+
+    unset( $block );
+
+    return $block_ids;
+  }
+
+  /**
+   * Get the position (index) of the provided id within the provided array.
+   *
+   * @param array  $block_ids   Array of block ids.
+   * @param string $id          Id value.
+   * @return int                The position of the provided id.
+   */
+  private function get_block_position( $block_ids, $id ) {
+    $pos;
+
+    foreach ( $block_ids as $key => $block_id ) {
+      if ( $id === $block_id ) {
+
+        $pos = $key;
+      }
+    }
+
+    unset( $block );
+
+    return $pos;
   }
 }

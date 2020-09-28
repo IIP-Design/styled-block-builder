@@ -91,6 +91,7 @@ class Update_Block {
     $update_parent = new Update_Parent_Post();
 
     $update_parent->set_parent_post_meta( $parent_id, $post_id );
+    $update_parent->save_to_parent_post_meta( $parent_id, $data );
 
     // Return post ID as the AJAX response.
     $action_type = '0' === $passed_id ? 'added_post' : 'updated_post';
