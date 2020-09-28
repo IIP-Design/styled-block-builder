@@ -44,6 +44,44 @@ class Update_Parent_Post {
   }
 
   /**
+   * Add/update a block's data to it's parent's post metadata.
+   *
+   * @param string $parent_id      Post id of the parent post.
+   * @param string $block_meta     New/updated block data to be saved.
+   */
+  public function save_to_parent_post_meta( $parent_id, $block_meta ) {
+    // Pull the block ID off of the provided block metadata.
+    $block_id = $block_meta['id'];
+
+    // Get the serialized array of styled block data associated with the parent post.
+    $blocks = get_post_meta( $parent_id, 'gpalab_blocks', true );
+
+    // Initialize empty array if no associated blocks exist.
+    if ( empty( $blocks ) ) {
+      $blocks = array();
+    }
+
+    // Check if current block is listed, if not add it.
+    if ( in_array( $block_id, $blocks, true ) ) {
+      $this->replace_block_data( $blocks, $block_meta );
+    } else {
+      $blocks[] = $block_meta;
+      update_post_meta( $parent_id, 'gpalab_blocks', $blocks );
+    }
+  }
+
+  /**
+   * Find an existing block the list of block data, and update it.
+   *
+   * @param string $blocks        Serialized array of block data.
+   * @param string $block_meta    Updated block data to be saved.
+   */
+  private function replace_block_data( $blocks, $block_meta ) {
+    // Pull the block ID off of the provided block metadata.
+    $block_id = $block_meta['id'];
+  }
+
+  /**
    * Remove a post id from the list of associated blocks.
    *
    * @param string $parent_id    Post id of the parent post.
