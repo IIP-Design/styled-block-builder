@@ -51,21 +51,7 @@ class Admin {
     $post_type    = get_post_type( $current_post );
     $endpoint     = get_site_url() . '/wp-json/wp/v2/' . $post_type . 's/' . $current_post;
 
-    $associated = get_post_meta( $current_post, 'gpalab_associated_blocks', true );
-
-    $assoc_data = array();
-
-    if ( ! empty( $associated ) ) {
-      foreach ( $associated as $id ) {
-        $assoc          = array();
-        $assoc['id']    = $id;
-        $assoc['meta']  = get_post_meta( $id, '_gpalab_block_meta', true );
-        $assoc['title'] = wp_specialchars_decode( get_the_title( $id ) );
-        $assoc['type']  = get_post_type( $id );
-
-        $assoc_data[] = $assoc;
-      }
-    }
+    $blocks = get_post_meta( $current_post, 'gpalab_blocks', true );
 
     $brightcove = get_option( 'gpalab-blocks-brightcove' ) ? get_option( 'gpalab-blocks-brightcove' ) : get_option( '_brightcove_default_account' );
 
@@ -76,7 +62,7 @@ class Admin {
         'ajaxUrl'     => admin_url( 'admin-ajax.php' ),
         'assets'      => STYLE_BLOCKS_URL . 'assets/',
         'apiEndpoint' => $endpoint,
-        'associated'  => $assoc_data,
+        'blocks'      => $blocks,
         'brightcove'  => $brightcove,
         'feedOptions' => get_option( 'gpalab-blocks-feed-sources' ),
         'parentPost'  => $current_post,

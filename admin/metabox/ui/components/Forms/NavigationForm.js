@@ -7,13 +7,13 @@ import { AdminContext } from 'metabox/context/adminContext';
 import { formatBlockType } from 'metabox/utils/block-titles';
 import { handleChange } from 'metabox/utils/event-handlers';
 
-const associated = window?.gpalabBlockAdmin?.associated;
+const associated = window?.gpalabBlockAdmin?.blocks;
 
 const linkOptions = list => {
-  const noNav = list.filter( item => item.type !== 'gpalab-navigation' );
+  const noNav = list.filter( item => item.post_type !== 'gpalab-navigation' );
 
   const options = noNav.map( item => {
-    const name = `${item.title || formatBlockType( item.type )} - ${item.id}`;
+    const name = `${item.post_title || formatBlockType( item.post_type )} - ${item.id}`;
 
     return { value: item.id, name };
   } );

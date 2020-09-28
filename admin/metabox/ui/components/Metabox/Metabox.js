@@ -29,7 +29,7 @@ const MetaBox = () => {
   };
 
   useEffect( () => {
-    const list = window?.gpalabBlockAdmin?.associated ? window.gpalabBlockAdmin.associated : [];
+    const list = window?.gpalabBlockAdmin?.blocks ? window.gpalabBlockAdmin.blocks : [];
 
     dispatch( { type: 'init', payload: list } );
   }, [] );

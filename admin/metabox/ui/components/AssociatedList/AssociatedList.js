@@ -31,7 +31,7 @@ const AssociatedList = () => {
             data-id={ item.id }
             styleName={ isUpdating( item.id ) ? 'list-item disabled' : 'list-item' }
           >
-            { item.title || formatBlockType( item.type ) }
+            { item.post_title || formatBlockType( item.post_type ) }
             <button
               aria-label="edit block"
               disabled={ isUpdating( item.id ) }
@@ -41,8 +41,8 @@ const AssociatedList = () => {
                 type: 'modal-show',
                 payload: {
                   formId: item.id,
-                  formType: item.type,
-                  formValues: item.meta,
+                  formType: item.post_type,
+                  formValues: item.post_meta,
                 },
               } ) }
             >
