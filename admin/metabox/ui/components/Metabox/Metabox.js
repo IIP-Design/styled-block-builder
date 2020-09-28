@@ -1,4 +1,5 @@
 import React, { useEffect, useReducer, useState } from 'react';
+import { v4 as uuid } from 'uuid';
 
 import AssociatedList from 'metabox/components/AssociatedList/AssociatedList';
 import Modal from 'metabox/components/Modal/Modal';
@@ -67,7 +68,7 @@ const MetaBox = () => {
           type="button"
           onClick={ () => dispatch( {
             type: 'modal-show',
-            payload: { formId: 0, formType, formValues: {} },
+            payload: { formId: uuid(), formType, formValues: {} },
           } ) }
         >
           Configure Block

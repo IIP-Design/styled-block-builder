@@ -1,5 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { createPortal } from 'react-dom';
+import { v4 as uuid } from 'uuid';
 
 import ErrorMessage from 'metabox/components/ErrorMessage/ErrorMessage';
 import Spinner from 'metabox/components/Spinner/Spinner';
@@ -20,7 +21,7 @@ const ModalContent = () => {
   const { dispatch, state } = useContext( AdminContext );
 
   if ( state && state.showModal && state.showModal === true ) {
-    const formData = state?.formData ? state.formData : { formId: 0, formType: '' };
+    const formData = state?.formData ? state.formData : { formId: uuid(), formType: '' };
 
     if ( !formData.formType ) {
       const error = { message: 'No form found with this id' };
