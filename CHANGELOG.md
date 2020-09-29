@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 _This sections lists changes committed since most recent release_
 
+### Changed:
+
+- Only load React-axe once for the frontend bundle and allow for toggling it on or off
+- Replace deprecated `react-axe` package with it's successor `@axe-core/react`
 ## [v2.0.2](https://github.com/IIP-Design/styled-block-builder/compare/v2.0.1...v2.0.2) - 2020.09.24
 
 ### Added:

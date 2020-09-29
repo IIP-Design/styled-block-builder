@@ -24,7 +24,7 @@ const ENABLE_AXE = false;
 
 if ( ENABLE_AXE && process.env.NODE_ENV !== 'production' ) {
   // eslint-disable-next-line global-require, node/global-require
-  const axe = require( 'react-axe' );
+  const axe = require( '@axe-core/react' );
 
   axe( React, ReactDOM, 1000 );
 }

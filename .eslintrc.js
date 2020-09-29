@@ -18,7 +18,7 @@ module.exports = {
     'node/no-missing-import': 'off',
     'node/no-unpublished-require': [
       'error', {
-        allowModules: ['@testing-library/react', 'react-axe'],
+        allowModules: ['@testing-library/react', '@axe-core/react'],
       },
     ],
   },
