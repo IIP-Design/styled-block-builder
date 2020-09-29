@@ -36,6 +36,20 @@ class Shortcode {
 
     $blocks = get_post_meta( $current_post, 'gpalab_blocks', true );
 
+    // Abort and print error to console if there is a shortcode but no blocks are found in postmeta.
+    if ( empty( $blocks ) ) {
+      $error_msg = __(
+        'Error: No blocks saved to this page. You may want to remove the gpalab-blocks shortcode(s).',
+        'gpalab-blocks'
+      );
+
+      echo (
+        '<script>console.error("' . esc_js( $error_msg ) . '")</script>'
+      );
+
+      return;
+    }
+
     // Map the provided shortcode attributes.
     $attr = shortcode_atts(
       array(

@@ -11,8 +11,14 @@ _This sections lists changes committed since most recent release_
 
 ### Changed:
 
+- [BREAKING] Restructure block data architecture by storing all blocks in parent's postmeta rather than as individual posts
 - Only load React-axe once for the frontend bundle and allow for toggling it on or off
 - Replace deprecated `react-axe` package with it's successor `@axe-core/react`
+
+### Fixed:
+
+- Only enqueue frontend scripts and styles if shortcode present AND blocks found in postmeta
+
 ## [v2.0.2](https://github.com/IIP-Design/styled-block-builder/compare/v2.0.1...v2.0.2) - 2020.09.24
 
 ### Added:
