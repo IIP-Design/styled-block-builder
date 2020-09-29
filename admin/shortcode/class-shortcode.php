@@ -43,9 +43,11 @@ class Shortcode {
         'gpalab-blocks'
       );
 
-      echo (
-        '<script>console.error("' . esc_js( $error_msg ) . '")</script>'
-      );
+      if ( ! is_admin() ) {
+         echo (
+          '<script>console.error("' . esc_js( $error_msg ) . '")</script>'
+        );
+      }
 
       return;
     }
