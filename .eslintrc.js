@@ -27,6 +27,7 @@ module.exports = {
       'babel-module': {
         alias: {
           blocks: './public/blocks',
+          config: './config',
           metabox: './admin/metabox/ui',
           styles: './styles',
         },

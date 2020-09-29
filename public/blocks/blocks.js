@@ -1,5 +1,4 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import { axeInit } from 'config/axe';
 
 // Normalizer CSS should be included first to ensure a proper cascade
 import './_shared/components/Normalizer/Normalizer.scss';
@@ -23,10 +22,4 @@ import './timeline';
 // Run accessibility tests in development.
 const ENABLE_AXE = false;
 
-if ( ENABLE_AXE && process.env.NODE_ENV !== 'production' ) {
-  // eslint-disable-next-line global-require, node/global-require
-  const axe = require( '@axe-core/react' );
-
-  axe( React, ReactDOM, 1000 );
-}
-/* eslint-enable import/no-unassigned-import */
+axeInit( ENABLE_AXE );

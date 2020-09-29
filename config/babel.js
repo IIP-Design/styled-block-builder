@@ -28,6 +28,7 @@ const setBabelConfig = cssModuleNames => {
         {
           alias: {
             blocks: './public/blocks',
+            config: './config',
             metabox: './admin/metabox/ui',
             styles: './styles',
           },
