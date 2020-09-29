@@ -7,6 +7,8 @@
 const getBackgroundType = value => {
   let type;
 
+  if ( !value ) return type;
+
   const extensions = [
     '.jpg', '.jpeg', '.png', '.svg',
   ];
@@ -115,4 +117,4 @@ export const setTextColor = background => {
   return textColor;
 };
 
-export const setLightClass = color => (color === '#ffffff' ? 'light' : '');
+export const setLightClass = color => ( color === '#ffffff' ? 'light' : '' );
