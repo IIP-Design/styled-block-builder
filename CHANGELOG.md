@@ -19,6 +19,10 @@ _This sections lists changes committed since most recent release_
 
 - Only enqueue frontend scripts and styles if shortcode present AND blocks found in postmeta
 
+### Security:
+
+- Update dependencies
+
 ## [v2.0.2](https://github.com/IIP-Design/styled-block-builder/compare/v2.0.1...v2.0.2) - 2020.09.24
 
 ### Added:
