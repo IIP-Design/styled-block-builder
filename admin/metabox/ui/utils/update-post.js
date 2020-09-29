@@ -65,6 +65,8 @@ export const updatePost = async ( data, action, onComplete, onError ) => {
     } );
     const result = await response.json();
 
+    // PHP may return a 200 is AJAX call is received but requested action fails
+    // for this reason we check the success message on the response
     if ( result.success === false && onError ) {
       onError( result.data );
     }

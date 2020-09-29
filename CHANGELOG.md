@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 _This sections lists changes committed since most recent release_
 
+### Added:
+
+- Migration tool to detect and convert/delete blocks stored under the legacy data architecture
+
 ### Changed:
 
 - [BREAKING] Restructure block data architecture by storing all blocks in parent's postmeta rather than as individual posts

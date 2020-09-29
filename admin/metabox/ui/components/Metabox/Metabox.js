@@ -2,14 +2,16 @@ import React, { useEffect, useReducer, useState } from 'react';
 import { v4 as uuid } from 'uuid';
 
 import AssociatedList from 'metabox/components/AssociatedList/AssociatedList';
+import MigrateLegacy from 'metabox/components/MigrateLegacy/MigrateLegacy';
 import Modal from 'metabox/components/Modal/Modal';
+
 import { AdminContext, adminReducer } from 'metabox/context/adminContext';
 
 import './Metabox.module.scss';
 
 const MetaBox = () => {
   const [formType, setFormType] = useState( '' );
-  const { feedOptions } = window?.gpalabBlockAdmin;
+  const { feedOptions, legacy, parentPost } = window?.gpalabBlockAdmin;
 
   const initialState = {
     formData: {
@@ -18,6 +20,7 @@ const MetaBox = () => {
       formValues: {},
     },
     showModal: false,
+    migrated: false,
     blocks: [],
     updating: [],
   };
@@ -40,6 +43,9 @@ const MetaBox = () => {
   return (
     <div styleName="dropdown-container">
       <AdminContext.Provider value={ store }>
+        { legacy && legacy === 'true' && (
+          <MigrateLegacy parent={ parentPost } />
+        ) }
         <label htmlFor="gpalab-blocks-dropdown">
           <strong>Add Block:</strong>
           <select

@@ -201,6 +201,16 @@ export const adminReducer = ( state, action ) => {
           },
         },
       };
+    case 'legacy-convert':
+      return {
+        ...state,
+        blocks: [...state.blocks, ...payload],
+      };
+    case 'migrated':
+      return {
+        ...state,
+        migrated: true,
+      };
     case 'modal-hide':
       return {
         ...state,

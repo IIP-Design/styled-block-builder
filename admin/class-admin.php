@@ -53,6 +53,9 @@ class Admin {
 
     $blocks = get_post_meta( $current_post, 'gpalab_blocks', true );
 
+    // Check for legacy method of storing block data.
+    $associated = get_post_meta( $current_post, 'gpalab_associated_blocks', true );
+
     $brightcove = get_option( 'gpalab-blocks-brightcove' ) ? get_option( 'gpalab-blocks-brightcove' ) : get_option( '_brightcove_default_account' );
 
     wp_localize_script(
@@ -65,6 +68,7 @@ class Admin {
         'blocks'      => $blocks,
         'brightcove'  => $brightcove,
         'feedOptions' => get_option( 'gpalab-blocks-feed-sources' ),
+        'legacy'      => wp_json_encode( ! empty( $associated ) ),
         'parentPost'  => $current_post,
         'blockNonce'  => wp_create_nonce( 'gpalab-block-nonce' ),
       )

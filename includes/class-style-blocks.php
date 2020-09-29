@@ -67,6 +67,7 @@ class Style_Blocks {
    * - Style_Blocks\Frontend. Defines all hooks for the public side of the site.
    * - Style_Blocks\Loader. Orchestrates the hooks of the plugin.
    * - Style_Blocks\Metabox. Defines all hooks for the custom metabox.
+   * - Style_Blocks\Migration. Defines all hooks for migrating blocks from legacy storage.
    * - Style_Blocks\Settings. Defines all hooks for the plugin's settings page.
    * - Style_Blocks\Shortcode. Defines all hooks for the custom shortcode.
    * - Style_Blocks\Update_Block. Defines all hooks for .
@@ -86,6 +87,7 @@ class Style_Blocks {
     require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/api/class-api.php';
     require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/metabox/class-metabox.php';
     require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/metabox/ajax/class-update-block.php';
+    require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/metabox/ajax/class-migrate-legacy.php';
     require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/settings/class-settings.php';
     require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/shortcode/class-shortcode.php';
 
@@ -102,6 +104,7 @@ class Style_Blocks {
     $plugin_ajax      = new Style_Blocks\Update_Block( $this->get_plugin_name(), $this->get_version() );
     $plugin_api       = new Style_Blocks\API( $this->get_plugin_name(), $this->get_version() );
     $plugin_metabox   = new Style_Blocks\Metabox( $this->get_plugin_name(), $this->get_version() );
+    $plugin_migrate   = new Style_Blocks\Migrate_Legacy( $this->get_plugin_name(), $this->get_version() );
     $plugin_settings  = new Style_Blocks\Settings( $this->get_plugin_name(), $this->get_version() );
     $plugin_shortcode = new Style_Blocks\Shortcode( $this->get_plugin_name(), $this->get_version() );
 
@@ -115,6 +118,10 @@ class Style_Blocks {
     // Ajax hooks.
     $this->loader->add_action( 'wp_ajax_gpalab_update_block', $plugin_ajax, 'handle_block_update' );
     $this->loader->add_action( 'wp_ajax_gpalab_delete_block', $plugin_ajax, 'handle_block_deletion' );
+
+    // Legacy block migration hooks.
+    $this->loader->add_action( 'wp_ajax_gpalab_convert_legacy', $plugin_migrate, 'handle_legacy_conversion' );
+    $this->loader->add_action( 'wp_ajax_gpalab_delete_legacy', $plugin_migrate, 'handle_legacy_deletion' );
 
     // Custom metabox hooks.
     $this->loader->add_action( 'add_meta_boxes', $plugin_metabox, 'add_blocks_metabox' );

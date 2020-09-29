@@ -1,0 +1,28 @@
+@import 'styles/colors.scss';
+
+.container {
+  background-color: $errorBackground;
+  border-radius: 5px;
+  border: $wordpressBorder;
+  box-shadow: $wordpressBoxShadow;
+  display: flex;
+  flex-direction: column;
+  margin: 0.5rem 0;
+  padding: 0.5rem;
+  position: relative;
+  width: calc(100% - 28px);
+
+  > .button {
+    margin: 0.5rem 0;
+  }
+}
+
+.wheel-container {
+  align-items: center;
+  display: flex;
+  height: 70%;
+  margin: -0.5rem;
+  position: absolute;
+  justify-content: center;
+  width: 100%;
+}

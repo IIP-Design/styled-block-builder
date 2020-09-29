@@ -107,9 +107,11 @@ class Responses {
     $status = null;
 
     // Messages.
-    $added   = __( 'Added a block with the ID: ', 'gpalab-blocks' );
-    $deleted = __( 'Deleted the block with the ID: ', 'gpalab-blocks' );
-    $updated = __( 'Updated the block with the ID: ', 'gpalab-blocks' );
+    $added          = __( 'Added a block with the ID: ', 'gpalab-blocks' );
+    $deleted        = __( 'Deleted the block with the ID: ', 'gpalab-blocks' );
+    $updated        = __( 'Updated the block with the ID: ', 'gpalab-blocks' );
+    $legacy_delete  = __( 'Deleted legacy blocks associate with the post: ', 'gpalab-blocks' );
+    $legacy_convert = __( 'Converted legacy blocks associate with the post: ', 'gpalab-blocks' );
 
     // Status codes.
     $okay    = __( '200: Okay', 'gpalab-blocks' );
@@ -120,6 +122,20 @@ class Responses {
       $data['status']  = $created;
       $data['data']    = $post_data;
       $status          = 201;
+    }
+
+    if ( 'converted_legacy' === $type ) {
+      $data['message'] = $legacy_convert . $post_data['id'];
+      $data['status']  = $okay;
+      $data['data']    = $post_data['blocks'];
+      $status          = 200;
+    }
+
+    if ( 'deleted_legacy' === $type ) {
+      $data['message'] = $legacy_delete . $post_data;
+      $data['status']  = $okay;
+      $data['data']    = $post_data;
+      $status          = 200;
     }
 
     if ( 'deleted_post' === $type ) {
