@@ -53,22 +53,21 @@ const Resources = ( { id } ) => {
 
           <div styleName="container">
             <div styleName="nav">
-              { resources
-                && resources.map( resource => {
-                  const styles = resource.id === selected ? 'nav-button' : 'nav-button inactive';
+              { resources && !isMobile && resources.map( resource => {
+                const styles = resource.id === selected ? 'nav-button' : 'nav-button inactive';
 
-                  return (
-                    <button
-                      key={ resource.id }
-                      id={ resource.id }
-                      styleName={ styles }
-                      type="button"
-                      onClick={ () => setSelected( resource.id ) }
-                    >
-                      { resource.tab || resource.title }
-                    </button>
-                  );
-                } ) }
+                return (
+                  <button
+                    key={ resource.id }
+                    id={ resource.id }
+                    styleName={ styles }
+                    type="button"
+                    onClick={ () => setSelected( resource.id ) }
+                  >
+                    { resource.tab || resource.title }
+                  </button>
+                );
+              } ) }
             </div>
 
             { resources && resources.map( resource => {
@@ -85,12 +84,14 @@ const Resources = ( { id } ) => {
 
               if ( resource.id === selected || isMobile ) {
                 return (
-                  <div key={ resource.id } id={ resource.id } styleName="section-container">
-                    <button id={ resource.id } styleName="section-mobile-toggle" type="button" onClick={ () => toggleSelection( resource.id ) }>
-                      <strong className="gpalab-site-specific" styleName="section-mobile-title">{ resource.tab || resource.title }</strong>
-                      <Chevron reverse={ resource.id === selected } />
-                    </button>
-                    <div id={ resource.id } styleName={ `section-content ${resource.id === selected ? 'mobile-show' : ''}` }>
+                  <div key={ resource.id } styleName="section-container">
+                    { isMobile && (
+                      <button id={ resource.id } styleName="section-mobile-toggle" type="button" onClick={ () => toggleSelection( resource.id ) }>
+                        <strong className="gpalab-site-specific" styleName="section-mobile-title">{ resource.tab || resource.title }</strong>
+                        <Chevron reverse={ resource.id === selected } />
+                      </button>
+                    ) }
+                    <div styleName={ `section-content ${resource.id === selected ? 'mobile-show' : ''}` }>
                       { layout }
                       { resource.articles && (
                         <Fragment>
