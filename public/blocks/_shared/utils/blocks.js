@@ -13,13 +13,17 @@ export const getBlocks = () => {
  * Get a specific block from the current post's block list.
  *
  * @param {string} id   Block id value.
- * @returns {Object}    Block metadata object or an empty object if block not found.
+ * @returns {Object|null}    Block metadata object or null if block not found.
  */
 export const getBlockById = id => {
   const blocks = getBlocks();
   const block = blocks.filter( b => b.id === id )[0] || {};
 
-  const meta = block?.meta || {};
+  const meta = block?.meta || null;
+
+  if ( meta === null ) {
+    console.error( `Block with id: ${id} not found` ); // eslint-disable-line no-console
+  }
 
   return meta;
 };
