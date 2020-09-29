@@ -39,7 +39,7 @@ export const adminReducer = ( state, action ) => {
         formData: {
           ...state.formData,
           formId: payload.id,
-          formValues: payload.post_meta,
+          formValues: payload.meta,
         },
         blocks: blockSave( state, payload ),
       };

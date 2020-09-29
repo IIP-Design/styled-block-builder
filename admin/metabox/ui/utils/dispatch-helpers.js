@@ -54,16 +54,13 @@ export const blockSave = ( state, block ) => {
   if ( state?.blocks ) {
     const { blocks } = state;
 
-    // ID comes over as a string so must be converted into a number
-    const intID = Number( block.id );
-
-    const { filtered, indexValue } = getSelectedFromGroup( blocks, intID, blocks.length );
+    const { filtered, indexValue } = getSelectedFromGroup( blocks, block.id, blocks.length );
 
     const newBlock = {
-      id: intID,
-      meta: block.post_meta,
-      title: block.post_title,
-      type: `gpalab-${block.post_type}`,
+      id: block.id,
+      meta: block.meta,
+      title: block.title,
+      type: `gpalab-${block.type}`,
     };
 
     filtered.splice( indexValue, 0, newBlock );

@@ -57,6 +57,25 @@ class Validator {
   }
 
   /**
+   * Check that block id is set and valid.
+   *
+   * @param int $id     The provided block id.
+   */
+  public function validate_block_id( $id ) {
+    // Load in possible HTTP responses.
+    include_once STYLE_BLOCKS_DIR . 'admin/metabox/ajax/class-responses.php';
+    $send_response = new Responses();
+
+    if ( ! isset( $id ) ) {
+      $send_response->send_custom_error( 'no_block_id' );
+    }
+
+    if ( ! is_string( $id ) ) {
+      $send_response->send_custom_error( 'invalid_block_id' );
+    }
+  }
+
+  /**
    * Check that post id is set and valid.
    *
    * @param int $id     The provided post id.

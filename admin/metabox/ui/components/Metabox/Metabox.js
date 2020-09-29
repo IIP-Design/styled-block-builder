@@ -30,7 +30,7 @@ const MetaBox = () => {
   };
 
   useEffect( () => {
-    const list = window?.gpalabBlockAdmin?.blocks ? window.gpalabBlockAdmin.blocks : [];
+    const list = window?.gpalabBlockAdmin?.blocks || [];
 
     dispatch( { type: 'init', payload: list } );
   }, [] );

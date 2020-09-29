@@ -21,7 +21,7 @@ const ModalContent = () => {
   const { dispatch, state } = useContext( AdminContext );
 
   if ( state && state.showModal && state.showModal === true ) {
-    const formData = state?.formData ? state.formData : { formId: uuid(), formType: '' };
+    const formData = state?.formData || { formId: uuid(), formType: '' };
 
     if ( !formData.formType ) {
       const error = { message: 'No form found with this id' };

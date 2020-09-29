@@ -2,7 +2,7 @@ import { getFormData } from './helpers';
 
 export const updatePost = async ( data, action, onComplete, onError ) => {
   // Get values provided to the client by the server
-  const fromPHP = window.gpalabBlockAdmin ? window.gpalabBlockAdmin : {};
+  const fromPHP = window?.gpalabBlockAdmin || {};
 
   let actionHandle;
 
@@ -29,7 +29,9 @@ export const updatePost = async ( data, action, onComplete, onError ) => {
   }
 
   if ( data.type === 'slides' || data.type === 'timeline' ) {
-    data.meta[data.type].forEach( item => {
+    const items = data?.meta?.[data.type] || [];
+
+    items.forEach( item => {
       if ( item.files ) {
         item.files.forEach( file => {
           if ( file.file ) {
@@ -55,7 +57,7 @@ export const updatePost = async ( data, action, onComplete, onError ) => {
   formData.append( 'parent', fromPHP.parentPost );
   formData.append( 'security', fromPHP.blockNonce );
 
-  // AJAX call
+  // AJAX call to submit block data for saving
   try {
     const response = await fetch( fromPHP.ajaxUrl, {
       method: 'POST',

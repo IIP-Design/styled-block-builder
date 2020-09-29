@@ -47,7 +47,7 @@ class Update_Block {
 
     // Validate the values sent in the AJAX call.
     $validator->validate_nonce( $_POST['security'] );
-    $validator->validate_post_id( $_POST['id'] );
+    $validator->validate_block_id( $_POST['id'] );
     $validator->validate_form_type( $_POST['type'] );
     $validator->validate_parent_id( $_POST['parent'] );
 
@@ -71,31 +71,22 @@ class Update_Block {
 
     // phpcs:enable
 
-    // Instantiate and populate the post data array.
-    $data               = array();
-    $data['id']         = $passed_id;
-    $data['post_meta']  = $sanitized_meta;
-    $data['post_title'] = $sanitized_meta['title'];
-    $data['post_type']  = $form_type;
-
-    // Run function to pass data to post.
-    $post_id = $this->insert_block_data( $data );
-
-    // Update post data object with post id.
-    if ( '0' === $passed_id ) {
-      $data['id'] = $post_id;
-    }
+    // Instantiate and populate the block data array.
+    $block_data          = array();
+    $block_data['id']    = $passed_id;
+    $block_data['meta']  = $sanitized_meta;
+    $block_data['title'] = $sanitized_meta['title'];
+    $block_data['type']  = $form_type;
 
     // Add the block id to its parent's post metadata.
     include_once STYLE_BLOCKS_DIR . 'admin/metabox/ajax/class-update-parent-post.php';
     $update_parent = new Update_Parent_Post();
 
-    $update_parent->set_parent_post_meta( $parent_id, $post_id );
-    $update_parent->save_to_parent_post_meta( $parent_id, $data );
+    $completed = $update_parent->save_to_parent_post_meta( $parent_id, $block_data );
 
     // Return post ID as the AJAX response.
-    $action_type = '0' === $passed_id ? 'added_post' : 'updated_post';
-    $send_response->send_custom_success( $action_type, $data );
+    $action_type = 'added' === $completed ? 'added_post' : 'updated_post';
+    $send_response->send_custom_success( $action_type, $block_data );
   }
 
   /**
@@ -119,11 +110,7 @@ class Update_Block {
     // Validate the values sent in the AJAX call.
     $validator->validate_nonce( $_POST['security'] );
     $validator->validate_parent_id( $_POST['parent'] );
-
-    // Only send error response if id is missing, normal validator sends error if block does not exist.
-    if ( ! isset( $_POST['id'] ) || ! is_numeric( $_POST['id'] ) || '0' === $_POST['id'] ) {
-      $send_response->send_custom_error( 'invalid_post_id' );
-    }
+    $validator->validate_block_id( $_POST['id'] );
 
     // Sanitize submitted values.
     $post_id   = sanitize_text_field( $_POST['id'] );
@@ -144,36 +131,5 @@ class Update_Block {
 
     // Return post ID as the AJAX response.
     $send_response->send_custom_success( 'deleted_post', $post_id );
-  }
-
-  /**
-   * Accept post data and use it to create/update post.
-   *
-   * @param array $data     Post data to be inserted upon post creation/updating.
-   */
-  private function insert_block_data( $data ) {
-    $user_id = get_current_user_id();
-
-    $post_data = array(
-      'ID'                    => $data['id'],
-      'post_author'           => $user_id,
-      'post_content'          => '',
-      'post_content_filtered' => '',
-      'post_title'            => $data['post_title'],
-      'post_excerpt'          => '',
-      'post_status'           => 'publish',
-      'post_type'             => 'gpalab-' . $data['post_type'],
-      'comment_status'        => 'closed',
-      'post_parent'           => 0,
-      'meta_input'            => array( '_gpalab_block_meta' => $data['post_meta'] ),
-    );
-
-    /**
-     * The wp_insert_post creates a new post if the ID passed in is empty or 0,
-     * otherwise, it updates the existing post with the provided post ID.
-     */
-    $post_id = wp_insert_post( $post_data, true );
-
-    return $post_id;
   }
 }

@@ -18,36 +18,14 @@ namespace Style_Blocks;
  * @since 0.0.1
  */
 class Update_Parent_Post {
-
-  /**
-   * Add a post id to the list of associated blocks.
-   *
-   * @param string $parent_id    Post id of the parent post.
-   * @param string $block_id     Post id of the block post.
-   */
-  public function set_parent_post_meta( $parent_id, $block_id ) {
-    // Get the list of style blocks associated with the parent post.
-    $associated = get_post_meta( $parent_id, 'gpalab_associated_blocks', true );
-
-    // Initialize empty array if no associated blocks exist.
-    if ( empty( $associated ) ) {
-      $associated = array();
-    }
-
-    // Check if current block is listed, if not add it.
-    if ( in_array( $block_id, $associated, true ) ) {
-      return;
-    } else {
-      $associated[] = $block_id;
-      update_post_meta( $parent_id, 'gpalab_associated_blocks', $associated );
-    }
-  }
-
   /**
    * Add/update a block's data to it's parent's post metadata.
    *
    * @param string $parent_id      Post id of the parent post.
    * @param array  $block_meta     New/updated block data to be saved.
+   * @return string                One of 'added' or 'updated' depending on the action taken.
+   *
+   * @since 3.0.0
    */
   public function save_to_parent_post_meta( $parent_id, $block_meta ) {
     // Pull the block ID off of the provided block metadata.
@@ -69,9 +47,13 @@ class Update_Parent_Post {
       $updated  = $this->replace_block_data( $blocks, $block_meta, $position );
 
       update_post_meta( $parent_id, 'gpalab_blocks', $updated );
+
+      return 'updated';
     } else {
       $blocks[] = $block_meta;
       update_post_meta( $parent_id, 'gpalab_blocks', $blocks );
+
+      return 'added';
     }
   }
 
@@ -115,6 +97,8 @@ class Update_Parent_Post {
    * @param array $block_meta   Updated block data to be saved.
    * @param int   $position     Updated block data to be saved.
    * @return array
+   *
+   * @since 3.0.0
    */
   private function replace_block_data( $blocks, $block_meta, $position ) {
     $updated = $blocks;
@@ -130,6 +114,8 @@ class Update_Parent_Post {
    *
    * @param array $blocks   Serialized array of block data.
    * @return array          An array of block ids derived from the provided block data.
+   *
+   * @since 3.0.0
    */
   private function get_block_ids( $blocks ) {
     $block_ids = array();
@@ -151,6 +137,8 @@ class Update_Parent_Post {
    * @param array  $block_ids   Array of block ids.
    * @param string $id          Id value.
    * @return int                The position of the provided id.
+   *
+   * @since 3.0.0
    */
   private function get_block_position( $block_ids, $id ) {
     $pos;

@@ -37,8 +37,8 @@ class Responses {
       $status          = 403;
     }
 
-    if ( 'invalid_parent_id' === $type ) {
-      $data['message'] = __( 'The post associated with this block does not exist', 'gpalab-blocks' );
+    if ( 'invalid_block_id' === $type ) {
+      $data['message'] = __( 'Invalid block id provided', 'gpalab-blocks' );
       $data['status']  = $bad_request;
       $status          = 400;
     }
@@ -50,6 +50,12 @@ class Responses {
       $status          = 401;
     }
 
+    if ( 'invalid_parent_id' === $type ) {
+      $data['message'] = __( 'The post associated with this block does not exist', 'gpalab-blocks' );
+      $data['status']  = $bad_request;
+      $status          = 400;
+    }
+
     if ( 'invalid_post_id' === $type ) {
       $data['message'] = __( 'Invalid post id provided', 'gpalab-blocks' );
       $data['status']  = $bad_request;
@@ -58,6 +64,12 @@ class Responses {
 
     if ( 'invalid_form_type' === $type ) {
       $data['message'] = __( 'Invalid form type provided', 'gpalab-blocks' );
+      $data['status']  = $bad_request;
+      $status          = 400;
+    }
+
+    if ( 'no_block_id' === $type ) {
+      $data['message'] = __( 'Required field "id" not provided', 'gpalab-blocks' );
       $data['status']  = $bad_request;
       $status          = 400;
     }
