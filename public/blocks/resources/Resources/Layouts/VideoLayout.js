@@ -26,7 +26,13 @@ const VideoLayout = ( { data } ) => (
           <span className="dashicons dashicons-star-filled" />
         </div>
         <h3 className="gpalab-site-specific" styleName="content-title">{ data.title }</h3>
-        { data.text && <div className="gpalab-site-specific" dangerouslySetInnerHTML={ { __html: data.text } } styleName="content-text" /> }
+        { data.text && (
+          <div
+            className="gpalab-site-specific"
+            dangerouslySetInnerHTML={ { __html: data.text } }
+            styleName="content-text"
+          />
+        ) }
         { data.buttons && (
           <div styleName="button-container">
             { data.buttons.map( button => (

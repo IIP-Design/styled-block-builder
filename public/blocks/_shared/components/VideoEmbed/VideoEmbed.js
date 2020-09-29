@@ -14,7 +14,13 @@ const Video = ( { desc, title, url } ) => (
         title={ title }
       />
     </div>
-    { desc && <div className="gpalab-site-specific" dangerouslySetInnerHTML={ { __html: desc } } styleName="description" /> }
+    { desc && (
+      <div
+        className="gpalab-site-specific"
+        dangerouslySetInnerHTML={ { __html: desc } }
+        styleName="description"
+      />
+    ) }
   </div>
 );
 

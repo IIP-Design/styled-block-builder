@@ -5,9 +5,10 @@ import TabbedForm from 'metabox/components/Forms/TabbedForm/TabbedForm';
 
 import { AdminContext } from 'metabox/context/adminContext';
 import { formatBlockType } from 'metabox/utils/block-titles';
+import { getBlocks } from 'blocks/_shared/utils/blocks';
 import { handleChange } from 'metabox/utils/event-handlers';
 
-const associated = window?.gpalabBlockAdmin?.blocks || [];
+const associated = getBlocks();
 
 const linkOptions = list => {
   const noNav = list.filter( item => item.type !== 'gpalab-navigation' );

@@ -5,12 +5,13 @@ import Background from 'blocks/_shared/components/Background/Background';
 import Normalizer from 'blocks/_shared/components/Normalizer/Normalizer';
 import useVisibilityObserver from 'blocks/_shared/hooks/useVisibilityObserver';
 
+import { getBlockById } from 'blocks/_shared/utils/blocks';
 import { runStat } from './animations';
 
 import './Stats.module.scss';
 
 const Stats = ( { id } ) => {
-  const { meta } = window[`gpalabStats${id}`];
+  const block = getBlockById( id );
 
   /**
    * This hardcoded value is a place holder for a currently unused configuration.
@@ -27,14 +28,14 @@ const Stats = ( { id } ) => {
     if ( entry.isIntersecting ) {
       const targetClass = animationType === 'opacity' ? '.gpalab-stat' : '.gpalab-stat-number';
 
-      const block = document.getElementById( `gpalab-${id}` );
-      const stats = [...block.querySelectorAll( targetClass )];
+      const rootEl = document.getElementById( `gpalab-${id}` );
+      const stats = [...rootEl.querySelectorAll( targetClass )];
 
       stats.forEach( stat => runStat( stat.id, animationType ) );
     }
   }, [entry, id] );
 
-  if ( meta ) {
+  if ( block ) {
     const {
       backgroundType,
       blockBackground,
@@ -43,7 +44,7 @@ const Stats = ( { id } ) => {
       stats,
       textColor,
       title,
-    } = meta;
+    } = block;
 
     return (
       <Normalizer fullWidth={ fullWidth }>

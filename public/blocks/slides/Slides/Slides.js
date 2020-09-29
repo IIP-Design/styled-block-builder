@@ -5,12 +5,14 @@ import gsap, { TweenLite, TimelineLite } from 'gsap';
 import { ScrollMagicPluginGsap } from 'scrollmagic-plugin-gsap';
 
 import Normalizer from 'blocks/_shared/components/Normalizer/Normalizer';
+
 import { getBackgroundAlt, getBackgroundImageUrl } from 'blocks/_shared/utils/background-style';
+import { getBlockById } from 'blocks/_shared/utils/blocks';
 
 import './Slides.module.scss';
 
 const Slides = ( { id } ) => {
-  const { meta } = window[`gpalabSlides${id}`];
+  const block = getBlockById( id );
 
   useEffect( () => {
     gsap.registerPlugin( 'CSSRulePlugin' );
@@ -71,8 +73,12 @@ const Slides = ( { id } ) => {
     return false;
   };
 
-  if ( meta ) {
-    const { title, slides, subTitleColor } = meta;
+  if ( block ) {
+    const {
+      title,
+      slides,
+      subTitleColor,
+    } = block;
 
     return (
       <Normalizer fullWidth>
@@ -95,7 +101,13 @@ const Slides = ( { id } ) => {
                     <h3 className="gpalab-site-specific" style={ { backgroundColor: subTitleColor } } styleName="slide-subtitle">
                       { slide.subtitle }
                     </h3>
-                    { slide.text && <div className="light" dangerouslySetInnerHTML={ { __html: slide.text } } styleName="slide-text" /> }
+                    { slide.text && (
+                      <div
+                        className="light"
+                        dangerouslySetInnerHTML={ { __html: slide.text } }
+                        styleName="slide-text"
+                      />
+                    ) }
                   </div>
                 </section>
               );

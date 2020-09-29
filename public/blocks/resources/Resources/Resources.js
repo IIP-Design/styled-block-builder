@@ -7,16 +7,18 @@ import Normalizer from 'blocks/_shared/components/Normalizer/Normalizer';
 import BaseLayout from './Layouts/BaseLayout';
 import VideoLayout from './Layouts/VideoLayout';
 
+import { getBlockById } from 'blocks/_shared/utils/blocks';
+
 import './Resources.module.scss';
 
 const Resources = ( { id } ) => {
   const { assets } = window.gpalabBlockFront;
-  const { meta } = window[`gpalabResources${id}`];
+  const block = getBlockById( id );
 
   const [selected, setSelected] = useState( null );
 
   useEffect( () => {
-    const first = meta?.resources ? meta.resources[0] : null;
+    const first = block?.resources ? block.resources[0] : null;
 
     setSelected( first.id );
   }, [] );
@@ -29,8 +31,13 @@ const Resources = ( { id } ) => {
     setSelected( setTo );
   };
 
-  if ( meta ) {
-    const { fullWidth, resources, subtitle, title } = meta;
+  if ( block ) {
+    const {
+      fullWidth,
+      resources,
+      subtitle,
+      title,
+    } = block;
 
     return (
       <Normalizer fullWidth={ fullWidth }>

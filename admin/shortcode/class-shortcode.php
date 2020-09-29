@@ -32,6 +32,10 @@ class Shortcode {
    * @return string         Output shortcode.
    */
   public function block_shortcode( $args ) {
+    $current_post = get_the_ID();
+
+    $blocks = get_post_meta( $current_post, 'gpalab_blocks', true );
+
     // Map the provided shortcode attributes.
     $attr = shortcode_atts(
       array(
@@ -55,9 +59,9 @@ class Shortcode {
     // Localize the enqueued script with shortcode data.
     wp_localize_script(
       'gpalab-blocks-frontend-js',
-      'gpalab' . str_replace( '-', '', ucwords( $type, '-' ) ) . $id,
+      'gpalabBlocks',
       array(
-        'meta' => get_post_meta( $id, '_gpalab_block_meta', true ),
+        'blocks' => get_post_meta( $current_post, 'gpalab_blocks', true ),
       )
     );
 

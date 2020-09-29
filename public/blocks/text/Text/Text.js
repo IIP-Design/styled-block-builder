@@ -7,15 +7,16 @@ import CDPFeed from 'blocks/_shared/components/CDPFeed/CDPFeed';
 import Normalizer from 'blocks/_shared/components/Normalizer/Normalizer';
 import VideoEmbed from 'blocks/_shared/components/VideoEmbed/VideoEmbed';
 
-import { setLightClass } from 'blocks/_shared/utils/background-style';
+import { getBlockById } from 'blocks/_shared/utils/blocks';
 import { getVideoUrl } from 'blocks/_shared/utils/video';
+import { setLightClass } from 'blocks/_shared/utils/background-style';
 
 import './Text.module.scss';
 
 const Text = ( { id } ) => {
-  const { meta } = window[`gpalabText${id}`];
+  const block = getBlockById( id );
 
-  if ( meta ) {
+  if ( block ) {
     const {
       articles,
       backgroundGradient,
@@ -29,7 +30,7 @@ const Text = ( { id } ) => {
       textColor,
       title,
       videos,
-    } = meta;
+    } = block;
 
     return (
       <Normalizer fullWidth={ fullWidth }>

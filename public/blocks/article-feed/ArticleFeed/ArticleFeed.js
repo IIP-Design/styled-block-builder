@@ -3,15 +3,24 @@ import propTypes from 'prop-types';
 
 import CDPFeed from 'blocks/_shared/components/CDPFeed/CDPFeed';
 import Normalizer from 'blocks/_shared/components/Normalizer/Normalizer';
+
 import { backgroundStyle } from 'blocks/_shared/utils/background-style';
+import { getBlockById } from 'blocks/_shared/utils/blocks';
 
 import './ArticleFeed.module.scss';
 
 const ArticleFeed = ( { id } ) => {
-  const { meta } = window[`gpalabArticleFeed${id}`];
+  const block = getBlockById( id );
 
-  if ( meta ) {
-    const { blockBackground, fullWidth, subtitle, textColor, title, articles } = meta;
+  if ( block ) {
+    const {
+      blockBackground,
+      fullWidth,
+      subtitle,
+      textColor,
+      title,
+      articles,
+    } = block;
 
     return (
       <Normalizer fullWidth={ fullWidth }>

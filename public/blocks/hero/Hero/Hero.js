@@ -6,12 +6,14 @@ import Background from 'blocks/_shared/components/Background/Background';
 import Button from 'blocks/_shared/components/Button/Button';
 import Normalizer from 'blocks/_shared/components/Normalizer/Normalizer';
 
+import { getBlockById } from 'blocks/_shared/utils/blocks';
+
 import './Hero.module.scss';
 
 const Hero = ( { id } ) => {
-  const { meta } = window[`gpalabHero${id}`];
+  const block = getBlockById( id );
 
-  if ( meta ) {
+  if ( block ) {
     const {
       align,
       buttons,
@@ -22,7 +24,7 @@ const Hero = ( { id } ) => {
       textColor,
       title,
       type,
-    } = meta;
+    } = block;
 
     const titleAlignment = align === 'center' || align === 'title' ? 'center' : 'left';
     const contentAlignment = align === 'center' ? 'content-center' : 'content-left';

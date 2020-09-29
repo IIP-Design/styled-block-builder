@@ -6,13 +6,14 @@ import CDPFeed from 'blocks/_shared/components/CDPFeed/CDPFeed';
 import Normalizer from 'blocks/_shared/components/Normalizer/Normalizer';
 
 import { backgroundStyle, setLightClass, setTextColor } from 'blocks/_shared/utils/background-style';
+import { getBlockById } from 'blocks/_shared/utils/blocks';
 
 import './QuoteBox.module.scss';
 
 const QuoteBox = ( { id } ) => {
-  const { meta } = window[`gpalabQuoteBox${id}`];
+  const block = getBlockById( id );
 
-  if ( meta ) {
+  if ( block ) {
     const {
       articles,
       backgroundGradient,
@@ -26,7 +27,7 @@ const QuoteBox = ( { id } ) => {
       subtitle,
       textColor,
       title,
-    } = meta;
+    } = block;
 
     const quoteColor = setTextColor( quoteBackground );
 

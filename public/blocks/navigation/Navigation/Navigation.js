@@ -3,17 +3,19 @@ import propTypes from 'prop-types';
 
 import Normalizer from 'blocks/_shared/components/Normalizer/Normalizer';
 
+import { getBlockById } from 'blocks/_shared/utils/blocks';
+
 import './Navigation.module.scss';
 
 const Parallax = ( { id } ) => {
-  const { meta } = window[`gpalabNavigation${id}`];
+  const block = getBlockById( id );
 
-  if ( meta ) {
+  if ( block ) {
     const {
       fullWidth,
       nav,
       title,
-    } = meta;
+    } = block;
 
     const isMobile = window.innerWidth <= 600;
     const itemWidth = nav.length > 4 ? Math.round( 100 / nav.length ) : 25;

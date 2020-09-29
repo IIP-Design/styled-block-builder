@@ -5,12 +5,14 @@ import Background from 'blocks/_shared/components/Background/Background';
 import Button from 'blocks/_shared/components/Button/Button';
 import Normalizer from 'blocks/_shared/components/Normalizer/Normalizer';
 
+import { getBlockById } from 'blocks/_shared/utils/blocks';
+
 import './Parallax.module.scss';
 
 const Parallax = ( { id } ) => {
-  const { meta } = window[`gpalabParallax${id}`];
+  const block = getBlockById( id );
 
-  if ( meta ) {
+  if ( block ) {
     const {
       buttons,
       desc,
@@ -18,7 +20,7 @@ const Parallax = ( { id } ) => {
       fullWidth,
       subtitle,
       title,
-    } = meta;
+    } = block;
 
     return (
       <Normalizer fullWidth={ fullWidth }>
@@ -32,7 +34,13 @@ const Parallax = ( { id } ) => {
             <div styleName="content">
               { title && <h2 className="gpalab-site-specific" styleName="title">{ title }</h2> }
               { subtitle && <h3 className="gpalab-site-specific" styleName="subtitle">{ subtitle }</h3> }
-              { desc && <div className="light" dangerouslySetInnerHTML={ { __html: desc } } styleName="text" /> }
+              { desc && (
+                <div
+                  className="light"
+                  dangerouslySetInnerHTML={ { __html: desc } }
+                  styleName="text"
+                />
+              ) }
               { buttons && buttons.map( button => (
                 <Button
                   key={ button.id }

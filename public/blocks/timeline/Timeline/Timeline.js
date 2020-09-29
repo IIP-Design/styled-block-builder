@@ -2,18 +2,20 @@ import React, { useEffect, useState } from 'react';
 import propTypes from 'prop-types';
 
 import Normalizer from 'blocks/_shared/components/Normalizer/Normalizer';
+
 import { getBackgroundAlt, setBackgroundImage } from 'blocks/_shared/utils/background-style';
+import { getBlockById } from 'blocks/_shared/utils/blocks';
 
 import './Timeline.module.scss';
 
 const Timeline = ( { id } ) => {
-  const { meta } = window[`gpalabTimeline${id}`];
+  const block = getBlockById( id );
 
   const [selected, setSelected] = useState( {} );
 
   useEffect( () => {
-    if ( meta?.timeline && meta.timeline.length > 0 ) {
-      setSelected( meta.timeline[0] );
+    if ( block?.timeline && block.timeline.length > 0 ) {
+      setSelected( block.timeline[0] );
     }
   }, [] );
 
@@ -50,8 +52,8 @@ const Timeline = ( { id } ) => {
     return { gridTemplateColumns: `repeat(${num}, 1fr)` };
   };
 
-  if ( meta?.timeline ) {
-    const { title, fullWidth, timeline } = meta;
+  if ( block?.timeline ) {
+    const { title, fullWidth, timeline } = block;
 
     return (
       <Normalizer fullWidth={ fullWidth }>
