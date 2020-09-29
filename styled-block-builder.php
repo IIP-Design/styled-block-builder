@@ -33,13 +33,13 @@ function gpalab_style_blocks_activate() {
 register_activation_hook( __FILE__, 'gpalab_style_blocks_activate' );
 
 /**
- * Clean up site when the plugin is deactivated.
+ * Clean up site when the plugin is uninstalled.
  */
-function gpalab_style_blocks_deactivate() {
-  require_once plugin_dir_path( __FILE__ ) . 'includes/class-deactivator.php';
-  Style_Blocks\Deactivator::deactivate();
+function gpalab_style_blocks_uninstall() {
+  require_once plugin_dir_path( __FILE__ ) . 'includes/class-uninstall.php';
+  Style_Blocks\Uninstall::uninstall();
 }
-register_deactivation_hook( __FILE__, 'gpalab_style_blocks_deactivate' );
+register_uninstall_hook( __FILE__, 'gpalab_style_blocks_uninstall' );
 
 // Imports Style_Blocks class.
 require plugin_dir_path( __FILE__ ) . 'includes/class-style-blocks.php';
