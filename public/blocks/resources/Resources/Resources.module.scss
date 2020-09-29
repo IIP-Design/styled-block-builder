@@ -1,4 +1,5 @@
 @import 'styles/colors.scss';
+@import 'styles/mixins.scss';
 
 .background {
   align-items: center;
@@ -66,8 +67,9 @@
     }
 
     &:focus {
+      @include border-standard;
+      border-color: $gold;
       outline: none;
-      border: 2px solid $gold;
     }
   }
 }

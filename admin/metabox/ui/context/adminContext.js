@@ -11,6 +11,7 @@ import {
   groupHandleInputNested,
   groupRemoveItem,
   groupRemoveItemNested,
+  groupReorderItem,
   blockDelete,
   blockSave,
   updatingAddTo,
@@ -210,6 +211,22 @@ export const adminReducer = ( state, action ) => {
       return {
         ...state,
         migrated: true,
+      };
+    case 'group-reorder':
+      return {
+        ...state,
+        formData: {
+          ...state.formData,
+          formValues: {
+            ...state.formData.formValues,
+            [payload.group]: groupReorderItem(
+              state.formData.formValues,
+              payload.group,
+              payload.id,
+              payload.direction,
+            ),
+          },
+        },
       };
     case 'modal-hide':
       return {

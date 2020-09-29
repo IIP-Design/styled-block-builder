@@ -316,6 +316,31 @@ export const groupRemoveItemNested = ( data, itemId, group, parentId ) => {
 };
 
 /**
+ * Moves an item in an array up (index - 1) or down (index + 1) in order within the array.
+ *
+ * @param {Object} data Data object for the selected group.
+ * @param {string} group Name of the selected group.
+ * @param {string} id The id value of the object being moved with the group.
+ * @param {string} direction The direction in which to move the item.
+ * @returns {Object[]} The reordered array of form objects.
+ *
+ * @see {getSelectedFromGroup}
+ */
+export const groupReorderItem = ( data, group, id, direction ) => {
+  const groupArr = data[group] ? [...data[group]] : [];
+
+  const { filtered, indexValue, selected } = getSelectedFromGroup( groupArr, id );
+
+  const adjusted = direction === 'up' ? indexValue - 1 : indexValue + 1;
+
+  const reordered = [...filtered];
+
+  reordered.splice( adjusted, 0, selected );
+
+  return reordered;
+};
+
+/**
  * Add specified post id from array of posts being updated.
  *
  * @param {Object} state The AdminContext object.

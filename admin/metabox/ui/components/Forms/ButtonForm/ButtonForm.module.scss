@@ -22,17 +22,10 @@
 }
 
 .form {
-  border: $wordpressBorder;
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 0.5rem;
-  padding: 0.5rem;
-  width: 96%;
+  @include subform;
 
   > label {
-    display: flex;
-    flex-direction: column;
-    margin: 0.5rem 0;
+    @include stacked-form-label;
   }
 }
 

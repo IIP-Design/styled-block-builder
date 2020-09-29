@@ -11,7 +11,7 @@ namespace Style_Blocks;
 /**
  * Iterate over uploaded article data and sanitize each field.
  *
- * Checks for and sanitizes the fields expected by the timeline form.
+ * Checks for and sanitizes the fields expected by the article form.
  *
  * @package Style_Blocks\Sanitizer
  * @since 2.0.0

@@ -41,6 +41,12 @@ class Sanitizer {
       $sanitize = new Sanitize_Hero_Meta();
 
       return $sanitize;
+    } elseif ( 'link-list' === $form_type ) {
+
+      include_once STYLE_BLOCKS_DIR . 'admin/metabox/ajax/sanitizers/class-sanitize-link-list-meta.php';
+      $sanitize = new Sanitize_Link_List_Meta();
+
+      return $sanitize;
     } elseif ( 'navigation' === $form_type ) {
 
       include_once STYLE_BLOCKS_DIR . 'admin/metabox/ajax/sanitizers/class-sanitize-navigation-meta.php';

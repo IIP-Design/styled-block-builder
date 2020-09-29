@@ -22,12 +22,16 @@ class Sanitize_Text_Meta {
    * Checks for and sanitizes the expected fields.
    *
    * @param array $data     Unsanitized values sent over in the AJAX request.
+   * @param array $uploads  Sanitized values provided from as a result of file upload.
    * @return array          Array of sanitized values.
    */
-  public function sanitize_inputs( $data ) {
+  public function sanitize_inputs( $data, $uploads ) {
 
     include_once STYLE_BLOCKS_DIR . 'admin/metabox/ajax/sanitizers/subforms/class-sanitize-articles.php';
     $sanitize_articles = new Sanitize_Articles();
+
+    include_once STYLE_BLOCKS_DIR . 'admin/metabox/ajax/sanitizers/subforms/class-sanitize-background.php';
+    $sanitize_background = new Sanitize_Background();
 
     include_once STYLE_BLOCKS_DIR . 'admin/metabox/ajax/sanitizers/subforms/class-sanitize-buttons.php';
     $sanitize_buttons = new Sanitize_Buttons();
@@ -43,18 +47,6 @@ class Sanitize_Text_Meta {
 
     if ( ! empty( $unsanitary['articles'] ) ) {
       $sanitized['articles'] = $sanitize_articles->sanitize_articles( $unsanitary['articles'] );
-    }
-
-    if ( ! empty( $unsanitary['backgroundGradient'] ) ) {
-      $sanitized['backgroundGradient'] = sanitize_text_field( $unsanitary['backgroundGradient'] );
-    }
-
-    if ( ! empty( $unsanitary['backgroundType'] ) ) {
-      $sanitized['backgroundType'] = sanitize_text_field( $unsanitary['backgroundType'] );
-    }
-
-    if ( ! empty( $unsanitary['blockBackground'] ) ) {
-      $sanitized['blockBackground'] = sanitize_text_field( $unsanitary['blockBackground'] );
     }
 
     if ( ! empty( $unsanitary['buttons'] ) ) {
@@ -89,6 +81,10 @@ class Sanitize_Text_Meta {
       $sanitized['videos'] = $sanitize_videos->sanitize_videos( $unsanitary['videos'] );
     }
 
-    return $sanitized;
+    $sanitized_background = $sanitize_background->sanitize_background( $unsanitary );
+
+    $combined = array_merge( $sanitized, $sanitized_background );
+
+    return $combined;
   }
 }

@@ -1,6 +1,6 @@
 .dropdown {
   margin: 1rem 0;
-  width: 100%;
+  width: calc(100% - 28px);
 
   &-container {
     align-items: flex-start;

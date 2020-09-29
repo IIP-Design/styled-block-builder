@@ -1,0 +1,14 @@
+@import 'styles/colors.scss';
+@import 'styles/mixins.scss';
+
+.form {
+  @include subform;
+
+  > label {
+    @include stacked-form-label;
+  }
+}
+
+.title {
+  margin: 0.5rem 0;
+}
