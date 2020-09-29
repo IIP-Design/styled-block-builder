@@ -9,7 +9,7 @@ import 'styles/quill.scss';
 // Blocks
 import './article-feed';
 import './hero';
-import './link-list';
+// import './link-list'; - Link List block available but disabled
 import './navigation';
 import './parallax';
 import './quote-box';

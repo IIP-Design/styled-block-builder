@@ -3,7 +3,7 @@
  * Registers the Sanitize_Link_List_Meta class.
  *
  * @package Style_Blocks\Sanitizer
- * @since 2.1.0
+ * @since 3.0.0
  */
 
 namespace Style_Blocks;
@@ -14,7 +14,7 @@ namespace Style_Blocks;
  * Checks for and sanitizes the fields expected by the Link List.
  *
  * @package Style_Blocks\Sanitizer
- * @since 2.1.0
+ * @since 3.0.0
  */
 class Sanitize_Link_List_Meta {
 

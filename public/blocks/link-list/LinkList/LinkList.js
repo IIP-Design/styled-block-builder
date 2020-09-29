@@ -5,14 +5,15 @@ import Background from 'blocks/_shared/components/Background/Background';
 import Normalizer from 'blocks/_shared/components/Normalizer/Normalizer';
 import SocialLinks from 'blocks/_shared/components/SocialLinks/SocialLinks';
 
+import { getBlockById } from 'blocks/_shared/utils/blocks';
 import { setColors, getAvatar } from './utils';
 
 import './LinkList.module.scss';
 
 const LinkList = ( { id } ) => {
-  const { meta } = window[`gpalabLinkList${id}`];
+  const block = getBlockById( id );
 
-  if ( meta ) {
+  if ( block ) {
     const {
       backgroundGradient,
       backgroundType,
@@ -28,7 +29,7 @@ const LinkList = ( { id } ) => {
       instagram,
       youtube,
       twitter,
-    } = meta;
+    } = block;
 
     const linkClass = setColors( backgroundType, blockBackground, linkColor, linkStyle );
     const avatar = getAvatar( files );

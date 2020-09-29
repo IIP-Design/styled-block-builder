@@ -58,7 +58,7 @@ const MetaBox = () => {
             <option value="">- Select Block Type -</option>
             { showArticleFeed && <option value="article-feed">Article Feed</option> }
             <option value="hero">Hero Block</option>
-            <option value="link-list">Link List Block</option>
+            { /* <option value="link-list">Link List Block</option> - Link List block available but disabled */ }
             <option value="navigation">Navigation Block</option>
             <option value="parallax">Parallax Block</option>
             <option value="quote-box">Quote Box</option>
