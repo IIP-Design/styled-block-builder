@@ -51,7 +51,7 @@ class Style_Blocks {
    */
   public function __construct() {
     $this->plugin_name = 'styled-block-builder';
-    $this->version     = '3.0.1';
+    $this->version     = '3.0.2';
     $this->load_dependencies();
     $this->define_admin_hooks();
     $this->define_public_hooks();
@@ -63,14 +63,15 @@ class Style_Blocks {
    * Includes the following files that make up the plugin:
    *
    * - Style_Blocks\Admin. Defines all hooks for the admin area.
-   * - Style_Blocks\API. Defines all hooks for the custom API endpoint.
    * - Style_Blocks\Frontend. Defines all hooks for the public side of the site.
    * - Style_Blocks\Loader. Orchestrates the hooks of the plugin.
    * - Style_Blocks\Metabox. Defines all hooks for the custom metabox.
    * - Style_Blocks\Migration. Defines all hooks for migrating blocks from legacy storage.
    * - Style_Blocks\Settings. Defines all hooks for the plugin's settings page.
+   * - Style_Blocks\Roles. Defines all hooks for the plugin's built-in user management.
    * - Style_Blocks\Shortcode. Defines all hooks for the custom shortcode.
-   * - Style_Blocks\Update_Block. Defines all hooks for .
+   * - Style_Blocks\Update_Block. Defines all hooks for used in saving block data.
+   * - Style_Blocks\URE. Defines all hooks for integration the User Role Editor plugin.
    *
    * Create an instance of the loader which will be used to register the hooks with WordPress.
    *

@@ -21,6 +21,8 @@ class Migrate_Legacy {
 
   /**
    * Convert all legacy blocks to new blocks for a given parent post.
+   *
+   * @since 3.0.0
    */
   public function handle_legacy_conversion() {
     // Load in possible HTTP responses.
@@ -50,16 +52,7 @@ class Migrate_Legacy {
 
         array_push( $legacy_blocks, $block_meta );
 
-        $content = get_post_field( 'post_content', $parent_id );
-
-        $updated_shortcode = str_replace( $block, $uuid, $content );
-
-        wp_update_post(
-          array(
-            'ID'           => $parent_id,
-            'post_content' => $updated_shortcode,
-          )
-        );
+        $this->update_shortcodes( $parent_id, $block, $block_meta );
       }
 
       unset( $block );
@@ -86,6 +79,8 @@ class Migrate_Legacy {
 
   /**
    * Delete all legacy block for a given parent post.
+   *
+   * @since 3.0.0
    */
   public function handle_legacy_deletion() {
     // Load in possible HTTP responses.
@@ -112,6 +107,8 @@ class Migrate_Legacy {
    *
    * @param array $post   An associative array of variables passed to the current script via the HTTP POST method.
    * @return int          The parent post id.
+   *
+   * @since 3.0.0
    */
   private function validate_and_return_parent( $post ) {
     // Load in validator.
@@ -140,10 +137,40 @@ class Migrate_Legacy {
   }
 
   /**
+   * Search a post's content for legacy shortcode, if found, replace with new version and update post content.
+   *
+   * @param string $parent_id   The post id for the parent post.
+   * @param string $old_id      The post id for the old block getting converted.
+   * @param string $block_meta  Meta data for the new block.
+   *
+   * @since 3.0.2
+   */
+  private function update_shortcodes( $parent_id, $old_id, $block_meta ) {
+    $content = get_post_field( 'post_content', $parent_id );
+
+    $new_id = $block_meta['id'];
+    $type   = $block_meta['type'];
+
+    $old_short = "id='" . $old_id . "' type='" . $type . "']";
+    $new_short = "id='" . $new_id . "' type='" . $type . "']";
+
+    $updated_content = str_replace( $old_short, $new_short, $content );
+
+    wp_update_post(
+      array(
+        'ID'           => $parent_id,
+        'post_content' => $updated_content,
+      )
+    );
+  }
+
+  /**
    * Find the list of associated legacy blocks for a given post.
    *
-   * @param string $parent_id   The post id for the parent id.
+   * @param string $parent_id   The post id for the parent post.
    * @return array              A list of post ids.
+   *
+   * @since 3.0.0
    */
   private function get_associated_blocks( $parent_id ) {
     $list = get_post_meta( $parent_id, 'gpalab_associated_blocks', true );
@@ -156,6 +183,8 @@ class Migrate_Legacy {
    *
    * @param array $associated     A list of post ids.
    * @param int   $parent_id      The post id of the parent post.
+   *
+   * @since 3.0.0
    */
   private function clean_up_legacy_data( $associated, $parent_id ) {
     // Iterate through legacy blocks deleting them.
@@ -174,7 +203,9 @@ class Migrate_Legacy {
   /**
    * Deletes the legacy `gpalab_associated_blocks` metavalue from a post's postmeta.
    *
-   * @param string $parent_id   The post id for the parent id.
+   * @param string $parent_id   The post id for the parent post.
+   *
+   * @since 3.0.0
    */
   private function delete_associated_meta( $parent_id ) {
     delete_post_meta( $parent_id, 'gpalab_associated_blocks' );
