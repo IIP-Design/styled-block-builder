@@ -7,6 +7,7 @@ import Spinner from 'metabox/components/Spinner/Spinner';
 
 import { AdminContext } from 'metabox/context/adminContext';
 import { selectForm, selectTitle } from 'metabox/utils/select-form';
+import { showShortcode } from './utils';
 import { updatePost } from 'metabox/utils/update-post';
 
 import './Modal.module.scss';
@@ -23,6 +24,7 @@ const ModalContent = () => {
 
   if ( state && state.showModal && state.showModal === true ) {
     const formData = state?.formData || { formId: uuid(), formType: '' };
+    const blocks = state?.blocks || [];
 
     if ( !formData.formType ) {
       const error = { message: 'No form found with this id' };
@@ -95,7 +97,7 @@ const ModalContent = () => {
               </div>
               <div styleName="modal-controls">
                 <label htmlFor="copy-shortcode">
-                  { formData.formId !== 0 && (
+                  { showShortcode( formData.formId, blocks ) && (
                     <input
                       id="copy-shortcode"
                       readOnly
