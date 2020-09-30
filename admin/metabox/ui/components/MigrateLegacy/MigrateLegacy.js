@@ -9,7 +9,7 @@ import { handleLegacy } from 'metabox/utils/legacy';
 
 import './MigrateLegacy.module.scss';
 
-const migrationMessage = 'This post contains blocks built using an older version of the Styled Block Builder plugin. These blocks will no longer work unless they are converted. Please convert or delete them (note that existing shortcodes will need to be replaced):';
+const migrationMessage = 'This post contains blocks built using an older version of the Styled Block Builder plugin. These blocks will no longer work unless they are converted. Please convert or delete them (note the page will refresh make sure you have saved any changes):';
 
 const MigrateLegacy = ( { parent } ) => {
   const [error, setError] = useState( false );
@@ -27,6 +27,9 @@ const MigrateLegacy = ( { parent } ) => {
 
       if ( action === 'convert' ) {
         dispatch( { type: 'legacy-convert', payload: res } );
+
+        // Page must reload for shortcode updates to take effect.
+        window.location.reload();
       }
 
       dispatch( { type: 'migrated' } );
@@ -40,12 +43,7 @@ const MigrateLegacy = ( { parent } ) => {
 
     setMigrating( true );
 
-    await handleLegacy(
-      parent,
-      type,
-      onComplete,
-      onError,
-    );
+    await handleLegacy( parent, type, onComplete, onError );
   };
 
   if ( !migrated ) {

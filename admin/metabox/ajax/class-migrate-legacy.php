@@ -40,13 +40,26 @@ class Migrate_Legacy {
       $legacy_blocks = array();
 
       foreach ( $associated as $block ) {
+        $uuid = wp_generate_uuid4();
+
         $block_meta          = array();
-        $block_meta['id']    = wp_generate_uuid4();
+        $block_meta['id']    = $uuid;
         $block_meta['meta']  = get_post_meta( $block, '_gpalab_block_meta', true );
         $block_meta['title'] = get_the_title( $block );
         $block_meta['type']  = str_replace( 'gpalab-', '', get_post_type( $block ) );
 
         array_push( $legacy_blocks, $block_meta );
+
+        $content = get_post_field( 'post_content', $parent_id );
+
+        $updated_shortcode = str_replace( $block, $uuid, $content );
+
+        wp_update_post(
+          array(
+            'ID'           => $parent_id,
+            'post_content' => $updated_shortcode,
+          )
+        );
       }
 
       unset( $block );
