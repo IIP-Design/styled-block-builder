@@ -20,9 +20,10 @@ _This sections lists changes committed since most recent release_
 
 - **[BREAKING]** Restructure block data architecture by storing all blocks in parent's postmeta rather than as individual posts
 - Replace deactivation hooks with uninstall hooks to avoid unexpected deletion of plugin data
+- Delete all block data (rather than just plugin options) upon uninstall
+- Log block id in error message if post contains a shortcode with an invalid block id
 - Only load React-axe once for the frontend bundle and allow for toggling it on or off
 - Replace deprecated `react-axe` package with it's successor `@axe-core/react`
-- Log block id in error message if post contains a shortcode with an invalid block id
 
 ### Fixed:
 
