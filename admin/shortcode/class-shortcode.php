@@ -43,7 +43,7 @@ class Shortcode {
         'gpalab-blocks'
       );
 
-      if ( ! is_admin() ) {
+      if ( ! is_admin() && ! defined( 'REST_REQUEST' ) ) {
          echo (
           '<script>console.error("' . esc_js( $error_msg ) . '")</script>'
         );
