@@ -52,6 +52,32 @@ class Settings {
   }
 
   /**
+   * Adds a link to the plugin's settings page on the Installed Plugins page.
+   *
+   * @param array $links   List of plugin action links.
+   * @param array          List of plugin action links with added settings link.
+   */
+  public function add_settings_link( $links ) {
+    // Build and escape the settings page URL.
+    $url = esc_url( add_query_arg(
+      'page',
+      'gpalab-blocks',
+      get_admin_url() . 'admin.php'
+    ) );
+
+    // Write the link HTML.
+    $settings_link = "<a href='$url'>" . __( 'Settings', 'gpalab-blocks' ) . '</a>';
+
+    // Add the Settings link to the beginning of the plugins list of action links.
+    array_unshift(
+      $links,
+      $settings_link
+    );
+
+    return $links;
+  }
+
+  /**
    * Register the plugin settings and add to the settings page.
    */
   public function populate_blocks_settings() {

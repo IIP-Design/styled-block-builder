@@ -13,6 +13,7 @@ _This sections lists changes committed since most recent release_
 
 - Migration tool to detect and convert/delete blocks stored under the legacy data architecture
 - Link List block type to display a list of user specified links (currently disabled)
+- Link to the plugin's settings page directly from the plugin listing on the Installed Plugins page
 
 ### Changed:
 

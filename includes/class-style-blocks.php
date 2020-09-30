@@ -127,6 +127,7 @@ class Style_Blocks {
     $this->loader->add_action( 'add_meta_boxes', $plugin_metabox, 'add_blocks_metabox' );
 
     // Settings page hooks.
+    $this->loader->add_filter( 'plugin_action_links_styled-block-builder/styled-block-builder.php', $plugin_settings, 'add_settings_link' );
     $this->loader->add_action( 'admin_menu', $plugin_settings, 'add_blocks_settings_page' );
     $this->loader->add_action( 'admin_init', $plugin_settings, 'populate_blocks_settings' );
 
