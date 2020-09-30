@@ -22,11 +22,6 @@ class Uninstall {
    * @since 3.0.0
    */
   public function uninstall() {
-    // Ensure we are actually uninstalling.
-    if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
-      exit();
-    }
-
     // Ensure user has the proper permissions.
     if ( ! current_user_can( 'delete_plugins' ) ) {
       return;
