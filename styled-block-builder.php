@@ -3,7 +3,7 @@
  * Plugin Name: Styled Block Builder
  * Plugin URI: https://github.com/IIP-Design/styled-block-builder
  * Description: Customizable content blocks for WordPress sites
- * Version: v2.0.2
+ * Version: v3.0.0
  * Author: Marek Rewers, U.S. Department of State, Global Public Affairs <designdevops@america.gov>
  * Text Domain: gpalab-blocks
  * License: GNU General Public License v2.0
