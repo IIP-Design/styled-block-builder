@@ -27,6 +27,7 @@ _This sections lists changes committed since most recent release_
 ### Fixed:
 
 - Only enqueue frontend scripts and styles if shortcode present AND blocks found in postmeta
+- Disable unused associated blocks API endpoint
 
 ### Security:
 

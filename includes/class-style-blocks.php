@@ -84,7 +84,6 @@ class Style_Blocks {
     // The class responsible for defining all actions that occur in the admin area.
     require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-admin.php';
 
-    require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/api/class-api.php';
     require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/metabox/class-metabox.php';
     require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/metabox/ajax/class-update-block.php';
     require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/metabox/ajax/class-migrate-legacy.php';
@@ -104,7 +103,6 @@ class Style_Blocks {
     // Instantiate all admin classes.
     $plugin_admin     = new Style_Blocks\Admin( $this->get_plugin_name(), $this->get_version() );
     $plugin_ajax      = new Style_Blocks\Update_Block( $this->get_plugin_name(), $this->get_version() );
-    $plugin_api       = new Style_Blocks\API( $this->get_plugin_name(), $this->get_version() );
     $plugin_metabox   = new Style_Blocks\Metabox( $this->get_plugin_name(), $this->get_version() );
     $plugin_migrate   = new Style_Blocks\Migrate_Legacy( $this->get_plugin_name(), $this->get_version() );
     $plugin_settings  = new Style_Blocks\Settings( $this->get_plugin_name(), $this->get_version() );
@@ -115,9 +113,6 @@ class Style_Blocks {
     // Admin hooks.
     $this->loader->add_action( 'init', $plugin_admin, 'register_admin_scripts_styles' );
     $this->loader->add_action( 'admin_notices', $plugin_admin, 'localize_admin_script_globals' );
-
-    // WP API hooks.
-    $this->loader->add_action( 'rest_api_init', $plugin_api, 'register_associated_blocks_meta' );
 
     // Ajax hooks.
     $this->loader->add_action( 'wp_ajax_gpalab_update_block', $plugin_ajax, 'handle_block_update' );

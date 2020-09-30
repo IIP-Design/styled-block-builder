@@ -9,7 +9,7 @@
 namespace Style_Blocks;
 
 /**
- * Creates custom API endpoint.
+ * Creates custom API endpoint. - Disabled as of v3.0.0.
  *
  * Adds a 'gpalab_associated_blocks' node to the WordPress posts API,
  * which displays the data for style blocks associated with the post.
