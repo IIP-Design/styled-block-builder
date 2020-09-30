@@ -22,15 +22,48 @@ class Uninstall {
    * @since 3.0.0
    */
   public function uninstall() {
+    // Ensure we are actually uninstalling.
+    if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
+      exit();
+    }
+
     // Ensure user has the proper permissions.
     if ( ! current_user_can( 'delete_plugins' ) ) {
       return;
     }
 
-    self::remove_options();
-    self::remove_capability();
-    self::delete_all_block_data();
-    self::delete_legacy_cpts();
+    if ( ! is_multisite() ) {
+
+      self::remove_options();
+      self::remove_capability();
+      self::delete_all_block_data();
+      self::delete_legacy_cpts();
+
+    } else {
+
+      // For a multisite you have to iterate through all the blogs to run uninstall hooks.
+      $sites_query_args = array(
+        'fields' => 'ids',
+      );
+
+      $blog_ids     = get_sites( $sites_query_args );
+      $current_blog = get_current_blog_id();
+
+      // Iterate through all blogs running deactivation hooks.
+      foreach ( $blog_ids as $id ) {
+        switch_to_blog( $id );
+
+        self::remove_options();
+        self::remove_capability();
+        self::delete_all_block_data();
+        self::delete_legacy_cpts();
+      }
+
+      unset( $id );
+
+      // Switch back to .
+      switch_to_blog( $current_blog );
+    }
   }
 
   /**

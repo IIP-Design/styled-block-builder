@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 _This sections lists changes committed since most recent release_
 
+### Added:
+
+- Support in uninstall hook for multi-site instances
+
 ## [v3.0.0](https://github.com/IIP-Design/styled-block-builder/compare/v2.0.2...v3.0.0) - 2020.09.30
 
 ### Added:
