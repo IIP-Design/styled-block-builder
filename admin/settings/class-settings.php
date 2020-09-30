@@ -55,15 +55,17 @@ class Settings {
    * Adds a link to the plugin's settings page on the Installed Plugins page.
    *
    * @param array $links   List of plugin action links.
-   * @param array          List of plugin action links with added settings link.
+   * @return array         List of plugin action links with added settings link.
    */
   public function add_settings_link( $links ) {
     // Build and escape the settings page URL.
-    $url = esc_url( add_query_arg(
-      'page',
-      'gpalab-blocks',
-      get_admin_url() . 'admin.php'
-    ) );
+    $url = esc_url(
+      add_query_arg(
+        'page',
+        'gpalab-blocks',
+        get_admin_url() . 'admin.php'
+      )
+    );
 
     // Write the link HTML.
     $settings_link = "<a href='$url'>" . __( 'Settings', 'gpalab-blocks' ) . '</a>';
@@ -81,6 +83,10 @@ class Settings {
    * Register the plugin settings and add to the settings page.
    */
   public function populate_blocks_settings() {
+    // URE class to check whether User Role Editor is installed and if so override native role settings.
+    include_once STYLE_BLOCKS_DIR . 'admin/settings/class-ure.php';
+    $ure_compat = new URE();
+
     /**
      * Register settings
      */
@@ -110,43 +116,37 @@ class Settings {
     );
 
     /**
-     * Add article feed source section
+     * Add permissions management section unless handled by URE
      */
-    add_settings_section(
-      'gpalab-role',
-      __( 'Select users who can add styled blocks:', 'gpalab-blocks' ),
-      function() {
-        esc_html_e( 'This setting determines which users will be able to see the styled blocks custom metabox when editing a page or post.', 'gpalab-blocks' );
-      },
-      'gpalab-blocks'
-    );
+    if ( ! $ure_compat->is_ure_active() ) {
+      add_settings_section(
+        'gpalab-role',
+        __( 'Select users who can add styled blocks:', 'gpalab-blocks' ),
+        function() {
+          esc_html_e( 'This setting determines which users will be able to see the styled blocks custom metabox when editing a page or post.', 'gpalab-blocks' );
+        },
+        'gpalab-blocks'
+      );
 
-    add_settings_field(
-      'gpalab-role',
-      __( 'Choose role:', 'gpalab-blocks' ),
-      function() {
-        include_once STYLE_BLOCKS_DIR . 'admin/settings/templates/class-settings-inputs.php';
-        $inputs = new Settings_Inputs();
+      add_settings_field(
+        'gpalab-role',
+        __( 'Choose role:', 'gpalab-blocks' ),
+        function() {
+          include_once STYLE_BLOCKS_DIR . 'admin/settings/templates/class-settings-inputs.php';
+          $inputs = new Settings_Inputs();
 
-        /**
-         * The current default values include the 'state_options' capability which is used to identify the
-         * custom role Editor/Manager. It should be removed in favor of the below default value when integration
-         * with the User Role Editor plugin is added.
-         *
-         * $default = array( 'manage_options', 'edit_private_pages', 'publish_posts', 'edit_posts' );
-         */
+          $default = array( 'manage_options', 'edit_private_pages', 'publish_posts', 'edit_posts' );
 
-        $default = array( 'manage_options', 'state_options', 'edit_private_pages', 'publish_posts', 'edit_posts' );
+          if ( is_multisite() ) {
+            array_unshift( $default, 'manage_sites' );
+          };
 
-        if ( is_multisite() ) {
-          array_unshift( $default, 'manage_sites' );
-        };
-
-        return $inputs->select( 'role', $default, 'role' );
-      },
-      'gpalab-blocks',
-      'gpalab-role'
-    );
+          return $inputs->select( 'role', $default, 'role' );
+        },
+        'gpalab-blocks',
+        'gpalab-role'
+      );
+    }
 
     /**
      * Add custom styling section

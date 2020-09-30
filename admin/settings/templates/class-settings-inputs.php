@@ -179,8 +179,6 @@ class Settings_Inputs {
         return 'Super Admin';
       } elseif ( 'manage_options' === $option ) {
         return 'Administrator';
-      } elseif ( 'state_options' === $option ) {
-        return 'Editor/Manager';
       } elseif ( 'edit_private_pages' === $option ) {
           return 'Editor';
       } elseif ( 'publish_posts' === $option ) {

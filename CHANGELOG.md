@@ -11,13 +11,14 @@ _This sections lists changes committed since most recent release_
 
 ### Added:
 
+- Integration with the [User Role Editor](https://www.role-editor.com/) plugin to allow for simplified permissions management when that plugin is also installed
 - Migration tool to detect and convert/delete blocks stored under the legacy data architecture
 - Link List block type to display a list of user specified links (currently disabled)
 - Link to the plugin's settings page directly from the plugin listing on the Installed Plugins page
 
 ### Changed:
 
-- [BREAKING] Restructure block data architecture by storing all blocks in parent's postmeta rather than as individual posts
+- **[BREAKING]** Restructure block data architecture by storing all blocks in parent's postmeta rather than as individual posts
 - Replace deactivation hooks with uninstall hooks to avoid unexpected deletion of plugin data
 - Only load React-axe once for the frontend bundle and allow for toggling it on or off
 - Replace deprecated `react-axe` package with it's successor `@axe-core/react`

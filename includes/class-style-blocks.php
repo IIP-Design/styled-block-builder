@@ -89,6 +89,8 @@ class Style_Blocks {
     require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/metabox/ajax/class-update-block.php';
     require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/metabox/ajax/class-migrate-legacy.php';
     require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/settings/class-settings.php';
+    require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/settings/class-roles.php';
+    require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/settings/class-ure.php';
     require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/shortcode/class-shortcode.php';
 
     // The class responsible for defining all actions that occur in the public-facing side of the site.
@@ -107,6 +109,8 @@ class Style_Blocks {
     $plugin_migrate   = new Style_Blocks\Migrate_Legacy( $this->get_plugin_name(), $this->get_version() );
     $plugin_settings  = new Style_Blocks\Settings( $this->get_plugin_name(), $this->get_version() );
     $plugin_shortcode = new Style_Blocks\Shortcode( $this->get_plugin_name(), $this->get_version() );
+    $plugin_roles     = new Style_Blocks\Roles( $this->get_plugin_name(), $this->get_version() );
+    $plugin_ure       = new Style_Blocks\URE( $this->get_plugin_name(), $this->get_version() );
 
     // Admin hooks.
     $this->loader->add_action( 'init', $plugin_admin, 'register_admin_scripts_styles' );
@@ -133,6 +137,13 @@ class Style_Blocks {
 
     // Shortcode hooks.
     $this->loader->add_action( 'init', $plugin_shortcode, 'add_blocks_shortcode' );
+
+    // Native permissions management hooks.
+    $this->loader->add_action( 'update_option_gpalab-blocks-role', $plugin_roles, 'update_role_caps', 10, 2 );
+
+    // User Role Editor compatibility hooks.
+    $this->loader->add_filter( 'ure_capabilities_groups_tree', $plugin_ure, 'add_custom_group', 10, 1 );
+    $this->loader->add_filter( 'ure_custom_capability_groups', $plugin_ure, 'get_plugin_caps', 10, 2 );
   }
 
   /** Register all of the hooks related to the public-facing functionality. */

@@ -21,13 +21,12 @@ class Metabox {
 
   /**
    * Add custom metabox to the sidebar of the WordPress admin area.
+   *
+   * @since 0.0.1
    */
   public function add_blocks_metabox() {
-    $current_user   = wp_get_current_user();
-    $min_capability = get_option( 'gpalab-blocks-role' ) ? get_option( 'gpalab-blocks-role' ) : 'manage_options';
-
     // Ensure that current user has correct privileges.
-    if ( array_key_exists( $min_capability, $current_user->allcaps ) ) {
+    if ( current_user_can( 'gpalab_blocks_add' ) ) {
       add_meta_box(
         'gpalab_blocks_meta',
         __( 'Styled Blocks', 'gpalab-blocks' ),
@@ -44,6 +43,8 @@ class Metabox {
   /**
    * Enqueue the scripts & styles which control the metabox, add divs required by JS to the DOM
    * Note: these scripts & styles are registered & localized in Style_Blocks/Admin
+   *
+   * @since 0.0.1
    */
   private function render_blocks_metabox() {
     wp_enqueue_script( 'gpalab-blocks-admin-js' );
