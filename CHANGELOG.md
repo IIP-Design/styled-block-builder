@@ -29,6 +29,7 @@ _This sections lists changes committed since most recent release_
 
 - Only enqueue frontend scripts and styles if shortcode present AND blocks found in postmeta
 - Disable unused associated blocks API endpoint
+- Correct heading for Brightcove account override section on settings page
 
 ### Security:
 

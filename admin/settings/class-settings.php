@@ -211,7 +211,7 @@ class Settings {
      */
     add_settings_section(
       'gpalab-brightcove',
-      __( 'Set styling to match that of state.gov?', 'gpalab-blocks' ),
+      __( 'Configure for use with Brightcove:', 'gpalab-blocks' ),
       function() {
         esc_html_e( 'This plugin looks for the default Brightcove account ID set by the Brightcove Video Connect plugin. If no default account ID is found, it will disable Brightcove video embeds in the styled blocks. Use this setting to set the Brightcove account ID if not using Brightcove Video Connect or to override the default Brightcove account.', 'gpalab-blocks' );
       },
