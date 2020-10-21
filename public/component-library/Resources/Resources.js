@@ -7,14 +7,10 @@ import Normalizer from 'library/_shared/components/Normalizer/Normalizer';
 import BaseLayout from './Layouts/BaseLayout';
 import VideoLayout from './Layouts/VideoLayout';
 
-import { getBlockById } from 'library/_shared/utils/blocks';
 
 import './Resources.module.scss';
 
-const Resources = ( { id } ) => {
-  const { assets } = window.gpalabBlockFront;
-  const block = getBlockById( id );
-
+const Resources = ( { assets, block } ) => {
   const [selected, setSelected] = useState( null );
 
   useEffect( () => {
@@ -118,7 +114,13 @@ const Resources = ( { id } ) => {
 };
 
 Resources.propTypes = {
-  id: propTypes.string,
+  assets: propTypes.string,
+  block: propTypes.shape( {
+    fullWidth: propTypes.bool,
+    resources: propTypes.array,
+    subtitle: propTypes.string,
+    title: propTypes.string,
+  } ),
 };
 
 export default Resources;

@@ -1,9 +1,9 @@
 import React from 'react';
 import propTypes from 'prop-types';
 
-import Gradient from 'blocks/_shared/components/Gradient/Gradient';
+import Gradient from 'library/_shared/components/Gradient/Gradient';
 
-import { backgroundStyle, getBackgroundAlt, setBackgroundImage } from 'blocks/_shared/utils/background-style';
+import { backgroundStyle, getBackgroundAlt, setBackgroundImage } from 'library/_shared/utils/background-style';
 
 import './Background.module.scss';
 

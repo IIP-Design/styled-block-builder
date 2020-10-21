@@ -1,7 +1,7 @@
 import React from 'react';
 import propTypes from 'prop-types';
 
-import Button from 'blocks/_shared/components/Button/Button';
+import Button from 'library/_shared/components/Button/Button';
 
 import './Layouts.module.scss';
 

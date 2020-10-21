@@ -5,21 +5,18 @@ import CDPFeed from 'library/_shared/components/CDPFeed/CDPFeed';
 import Normalizer from 'library/_shared/components/Normalizer/Normalizer';
 
 import { backgroundStyle } from 'library/_shared/utils/background-style';
-import { getBlockById } from 'library/_shared/utils/blocks';
 
 import './ArticleFeed.module.scss';
 
-const ArticleFeed = ( { id } ) => {
-  const block = getBlockById( id );
-
+const ArticleFeed = ( { block, id } ) => {
   if ( block ) {
     const {
+      articles,
       blockBackground,
       fullWidth,
       subtitle,
       textColor,
       title,
-      articles,
     } = block;
 
     return (
@@ -47,6 +44,14 @@ const ArticleFeed = ( { id } ) => {
 };
 
 ArticleFeed.propTypes = {
+  block: propTypes.shape( {
+    articles: propTypes.array,
+    blockBackground: propTypes.string,
+    fullWidth: propTypes.bool,
+    subtitle: propTypes.string,
+    textColor: propTypes.string,
+    title: propTypes.string,
+  } ),
   id: propTypes.string,
 };
 

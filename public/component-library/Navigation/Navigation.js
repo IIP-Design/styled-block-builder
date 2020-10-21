@@ -3,13 +3,9 @@ import propTypes from 'prop-types';
 
 import Normalizer from 'library/_shared/components/Normalizer/Normalizer';
 
-import { getBlockById } from 'library/_shared/utils/blocks';
-
 import './Navigation.module.scss';
 
-const Parallax = ( { id } ) => {
-  const block = getBlockById( id );
-
+const Parallax = ( { block } ) => {
   if ( block ) {
     const {
       fullWidth,
@@ -45,7 +41,11 @@ const Parallax = ( { id } ) => {
 };
 
 Parallax.propTypes = {
-  id: propTypes.string,
+  block: propTypes.shape( {
+    fullWidth: propTypes.bool,
+    nav: propTypes.array,
+    title: propTypes.string,
+  } ),
 };
 
 export default Parallax;

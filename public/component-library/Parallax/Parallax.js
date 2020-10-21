@@ -5,13 +5,9 @@ import Background from 'library/_shared/components/Background/Background';
 import Button from 'library/_shared/components/Button/Button';
 import Normalizer from 'library/_shared/components/Normalizer/Normalizer';
 
-import { getBlockById } from 'library/_shared/utils/blocks';
-
 import './Parallax.module.scss';
 
-const Parallax = ( { id } ) => {
-  const block = getBlockById( id );
-
+const Parallax = ( { block } ) => {
   if ( block ) {
     const {
       buttons,
@@ -58,7 +54,14 @@ const Parallax = ( { id } ) => {
 };
 
 Parallax.propTypes = {
-  id: propTypes.string,
+  block: propTypes.shape( {
+    buttons: propTypes.array,
+    desc: propTypes.string,
+    files: propTypes.array,
+    fullWidth: propTypes.bool,
+    subtitle: propTypes.string,
+    title: propTypes.string,
+  } ),
 };
 
 export default Parallax;

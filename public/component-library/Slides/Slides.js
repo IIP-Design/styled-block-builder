@@ -7,13 +7,10 @@ import { ScrollMagicPluginGsap } from 'scrollmagic-plugin-gsap';
 import Normalizer from 'library/_shared/components/Normalizer/Normalizer';
 
 import { getBackgroundAlt, getBackgroundImageUrl } from 'library/_shared/utils/background-style';
-import { getBlockById } from 'library/_shared/utils/blocks';
 
 import './Slides.module.scss';
 
-const Slides = ( { id } ) => {
-  const block = getBlockById( id );
-
+const Slides = ( { block, id } ) => {
   useEffect( () => {
     gsap.registerPlugin( 'CSSRulePlugin' );
 
@@ -75,9 +72,9 @@ const Slides = ( { id } ) => {
 
   if ( block ) {
     const {
-      title,
       slides,
       subTitleColor,
+      title,
     } = block;
 
     return (
@@ -129,6 +126,11 @@ const Slides = ( { id } ) => {
 };
 
 Slides.propTypes = {
+  block: propTypes.shape( {
+    slides: propTypes.array,
+    subTitleColor: propTypes.string,
+    title: propTypes.string,
+  } ),
   id: propTypes.string,
 };
 

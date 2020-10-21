@@ -5,14 +5,11 @@ import Background from 'library/_shared/components/Background/Background';
 import Normalizer from 'library/_shared/components/Normalizer/Normalizer';
 import SocialLinks from 'library/_shared/components/SocialLinks/SocialLinks';
 
-import { getBlockById } from 'library/_shared/utils/blocks';
 import { setColors, getAvatar } from './utils';
 
 import './LinkList.module.scss';
 
-const LinkList = ( { id } ) => {
-  const block = getBlockById( id );
-
+const LinkList = ( { block } ) => {
   if ( block ) {
     const {
       backgroundGradient,
@@ -74,7 +71,22 @@ const LinkList = ( { id } ) => {
 };
 
 LinkList.propTypes = {
-  id: propTypes.string,
+  block: propTypes.shape( {
+    backgroundGradient: propTypes.string,
+    backgroundType: propTypes.string,
+    blockBackground: propTypes.string,
+    files: propTypes.array,
+    fullWidth: propTypes.bool,
+    linkColor: propTypes.string,
+    linkStyle: propTypes.string,
+    links: propTypes.array,
+    title: propTypes.string,
+    titleColor: propTypes.string,
+    facebook: propTypes.string,
+    instagram: propTypes.string,
+    youtube: propTypes.string,
+    twitter: propTypes.string,
+  } ),
 };
 
 export default LinkList;

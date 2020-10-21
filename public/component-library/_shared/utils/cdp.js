@@ -16,13 +16,13 @@ export const getFromCDP = async ( id, source ) => {
 
     return data;
   } catch ( error ) {
-    console.log( 'Error:', error );
+    console.error( 'Error:', error );
 
     return null;
   }
 };
 
-// Parse fields required to constrtuct a field item
+// Parse fields required to construct a field item
 export const parseFeedItemData = async data => {
   const image = data?.thumbnail?.sizes?.small?.url ? data.thumbnail.sizes.small.url : '';
   const imageAlt = data?.thumbnail?.alt ? data.thumbnail.alt : '';
@@ -41,8 +41,6 @@ export const getFeedData = feed => {
 
     dataArray.push( itemData );
   } );
-
-  console.log( dataArray );
 
   return dataArray;
 };

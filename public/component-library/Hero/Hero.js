@@ -6,13 +6,9 @@ import Background from 'library/_shared/components/Background/Background';
 import Button from 'library/_shared/components/Button/Button';
 import Normalizer from 'library/_shared/components/Normalizer/Normalizer';
 
-import { getBlockById } from 'library/_shared/utils/blocks';
-
 import './Hero.module.scss';
 
-const Hero = ( { id } ) => {
-  const block = getBlockById( id );
-
+const Hero = ( { block } ) => {
   if ( block ) {
     const {
       align,
@@ -84,7 +80,17 @@ const Hero = ( { id } ) => {
 };
 
 Hero.propTypes = {
-  id: propTypes.string,
+  block: propTypes.shape( {
+    align: propTypes.string,
+    buttons: propTypes.array,
+    description: propTypes.string,
+    files: propTypes.array,
+    lines: propTypes.array,
+    subtitle: propTypes.string,
+    textColor: propTypes.string,
+    title: propTypes.string,
+    type: propTypes.string,
+  } ),
 };
 
 export default Hero;

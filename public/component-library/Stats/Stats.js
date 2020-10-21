@@ -5,14 +5,11 @@ import Background from 'library/_shared/components/Background/Background';
 import Normalizer from 'library/_shared/components/Normalizer/Normalizer';
 import useVisibilityObserver from 'library/_shared/hooks/useVisibilityObserver';
 
-import { getBlockById } from 'library/_shared/utils/blocks';
 import { runStat } from './animations';
 
 import './Stats.module.scss';
 
-const Stats = ( { id } ) => {
-  const block = getBlockById( id );
-
+const Stats = ( { id, block } ) => {
   /**
    * This hardcoded value is a place holder for a currently unused configuration.
    * Changing it to 'number' will result in a different stat animation that will tick
@@ -96,6 +93,15 @@ const Stats = ( { id } ) => {
 };
 
 Stats.propTypes = {
+  block: propTypes.shape( {
+    backgroundType: propTypes.string,
+    blockBackground: propTypes.string,
+    files: propTypes.array,
+    fullWidth: propTypes.bool,
+    stats: propTypes.array,
+    textColor: propTypes.string,
+    title: propTypes.string,
+  } ),
   id: propTypes.string,
 };
 

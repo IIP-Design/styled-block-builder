@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import propTypes from 'prop-types';
+
 import gsap from 'gsap';
 
 import './AnimatedLines.module.scss';

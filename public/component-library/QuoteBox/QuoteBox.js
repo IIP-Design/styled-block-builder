@@ -6,13 +6,10 @@ import CDPFeed from 'library/_shared/components/CDPFeed/CDPFeed';
 import Normalizer from 'library/_shared/components/Normalizer/Normalizer';
 
 import { backgroundStyle, setLightClass, setTextColor } from 'library/_shared/utils/background-style';
-import { getBlockById } from 'library/_shared/utils/blocks';
 
 import './QuoteBox.module.scss';
 
-const QuoteBox = ( { id } ) => {
-  const block = getBlockById( id );
-
+const QuoteBox = ( { block, id } ) => {
   if ( block ) {
     const {
       articles,
@@ -81,6 +78,20 @@ const QuoteBox = ( { id } ) => {
 };
 
 QuoteBox.propTypes = {
+  block: propTypes.shape( {
+    articles: propTypes.array,
+    backgroundGradient: propTypes.string,
+    backgroundType: propTypes.string,
+    blockBackground: propTypes.string,
+    desc: propTypes.string,
+    files: propTypes.array,
+    fullWidth: propTypes.bool,
+    quote: propTypes.string,
+    quoteBackground: propTypes.string,
+    subtitle: propTypes.string,
+    textColor: propTypes.string,
+    title: propTypes.string,
+  } ),
   id: propTypes.string,
 };
 

@@ -1,10 +1,10 @@
 import React, { Fragment } from 'react';
 import propTypes from 'prop-types';
 
-import Button from 'blocks/_shared/components/Button/Button';
-import VideoEmbed from 'blocks/_shared/components/VideoEmbed/VideoEmbed';
+import Button from 'library/_shared/components/Button/Button';
+import VideoEmbed from 'library/_shared/components/VideoEmbed/VideoEmbed';
 
-import { getVideoUrl } from 'blocks/_shared/utils/video';
+import { getVideoUrl } from 'library/_shared/utils/video';
 
 import './Layouts.module.scss';
 

@@ -4,13 +4,10 @@ import propTypes from 'prop-types';
 import Normalizer from 'library/_shared/components/Normalizer/Normalizer';
 
 import { getBackgroundAlt, setBackgroundImage } from 'library/_shared/utils/background-style';
-import { getBlockById } from 'library/_shared/utils/blocks';
 
 import './Timeline.module.scss';
 
-const Timeline = ( { id } ) => {
-  const block = getBlockById( id );
-
+const Timeline = ( { block } ) => {
   const [selected, setSelected] = useState( {} );
 
   useEffect( () => {
@@ -123,7 +120,11 @@ const Timeline = ( { id } ) => {
 };
 
 Timeline.propTypes = {
-  id: propTypes.string,
+  block: propTypes.shape( {
+    fullWidth: propTypes.boolean,
+    title: propTypes.string,
+    timeline: propTypes.object,
+  } ),
 };
 
 export default Timeline;

@@ -7,15 +7,12 @@ import CDPFeed from 'library/_shared/components/CDPFeed/CDPFeed';
 import Normalizer from 'library/_shared/components/Normalizer/Normalizer';
 import VideoEmbed from 'library/_shared/components/VideoEmbed/VideoEmbed';
 
-import { getBlockById } from 'library/_shared/utils/blocks';
 import { getVideoUrl } from 'library/_shared/utils/video';
 import { setLightClass } from 'library/_shared/utils/background-style';
 
 import './Text.module.scss';
 
-const Text = ( { id } ) => {
-  const block = getBlockById( id );
-
+const Text = ( { id, block } ) => {
   if ( block ) {
     const {
       articles,
@@ -91,6 +88,20 @@ const Text = ( { id } ) => {
 };
 
 Text.propTypes = {
+  block: propTypes.shape( {
+    articles: propTypes.array,
+    backgroundGradient: propTypes.string,
+    backgroundType: propTypes.string,
+    blockBackground: propTypes.string,
+    buttons: propTypes.array,
+    desc: propTypes.string,
+    files: propTypes.array,
+    fullWidth: propTypes.bool,
+    subtitle: propTypes.string,
+    textColor: propTypes.string,
+    title: propTypes.string,
+    videos: propTypes.array,
+  } ),
   id: propTypes.string,
 };
 
