@@ -13,6 +13,13 @@ import Stats from 'library/Stats/Stats';
 import Text from 'library/Text/Text';
 import Timeline from 'library/Timeline/Timeline';
 
+/**
+ * Get the block by id from a list of blocks.
+ *
+ * @param {string} id         Block id value.
+ * @param {Object[]} blocks   A list of block data objects.
+ * @returns {Object|null}     Block metadata object or null if block not found.
+ */
 const getBlockById = ( id, blocks ) => {
   const block = blocks.filter( b => b.id === id )[0] || {};
 
@@ -25,6 +32,12 @@ const getBlockById = ( id, blocks ) => {
   return meta;
 };
 
+/**
+ * Finds all divs in document to which a block should be attached, and then renders the appropriate blocks.
+ *
+ * @param {Object[]} blocks   A list of block data objects.
+ * @param {string} assetsUrl  The url at which site static assets are stored.
+ */
 const renderBlocks = ( blocks, assetsUrl ) => {
   const articleFeed = [...document.querySelectorAll( 'div[data-type="gpalab-article-feed"]' )];
   const hero = [...document.querySelectorAll( 'div[data-type="gpalab-hero"]' )];

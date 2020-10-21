@@ -5,7 +5,7 @@ import TabbedForm from 'metabox/components/Forms/TabbedForm/TabbedForm';
 
 import { AdminContext } from 'metabox/context/adminContext';
 import { formatBlockType } from 'metabox/utils/block-titles';
-import { getBlocks } from 'blocks/utils/blocks';
+import { getBlocks } from 'blocks';
 import { handleChange } from 'metabox/utils/event-handlers';
 
 const associated = getBlocks();

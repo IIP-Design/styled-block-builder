@@ -10,7 +10,7 @@ module.exports = ( _, argv ) => {
 
   return {
     entry: {
-      'block-frontend': `${paths.blocksFrontend}/_blocks`,
+      'block-frontend': paths.blocksFrontend,
       'block-admin': paths.metaboxUI,
       'site-state': [`${paths.siteSpecificStyles}/state.scss`],
     },
