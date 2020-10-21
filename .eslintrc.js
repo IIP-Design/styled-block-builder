@@ -1,7 +1,7 @@
 module.exports = {
   'extends': ['@gpa-lab/eslint-config', '@gpa-lab/eslint-config/react'],
   ignorePatterns: [
-    'dist/', 'node_modules/', 'vendor/',
+    'dist/', 'node_modules/', 'public/component-library/lib/', 'vendor/',
   ],
   parser: 'babel-eslint',
   rules: {

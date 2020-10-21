@@ -9,6 +9,7 @@ const resolvePlugin = relativePath => path.resolve( pluginDirectory, relativePat
 
 module.exports = {
   blocksFrontend: resolvePlugin( 'public/blocks' ),
+  componentLibrary: resolvePlugin( 'public/component-library' ),
   gutenbergBlocks: resolvePlugin( 'admin/gut-blocks' ),
   metaboxUI: resolvePlugin( 'admin/metabox/ui' ),
   pluginAdmin: resolvePlugin( 'admin' ),
