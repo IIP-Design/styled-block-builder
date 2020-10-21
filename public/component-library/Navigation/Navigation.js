@@ -3,6 +3,8 @@ import propTypes from 'prop-types';
 
 import Normalizer from 'library/_shared/components/Normalizer/Normalizer';
 
+import { checkIfMobile } from 'library/_shared/utils/breakpoints';
+
 import './Navigation.module.scss';
 
 const Parallax = ( { block } ) => {
@@ -13,7 +15,7 @@ const Parallax = ( { block } ) => {
       title,
     } = block;
 
-    const isMobile = window.innerWidth <= 600;
+    const isMobile = checkIfMobile( 600 );
     const itemWidth = nav.length > 4 ? Math.round( 100 / nav.length ) : 25;
 
     return (

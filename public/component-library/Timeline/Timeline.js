@@ -3,6 +3,7 @@ import propTypes from 'prop-types';
 
 import Normalizer from 'library/_shared/components/Normalizer/Normalizer';
 
+import { checkIfMobile } from 'library/_shared/utils/breakpoints';
 import { getBackgroundAlt, setBackgroundImage } from 'library/_shared/utils/background-style';
 
 import './Timeline.module.scss';
@@ -16,7 +17,7 @@ const Timeline = ( { block } ) => {
     }
   }, [] );
 
-  const isMobile = window.innerWidth <= 768;
+  const isMobile = checkIfMobile( 768 );
 
   const updateSelected = ( e, timeline ) => {
     const itemId = e?.target?.dataset?.id ? e.target.dataset.id : '';

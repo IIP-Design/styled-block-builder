@@ -7,6 +7,7 @@ import Normalizer from 'library/_shared/components/Normalizer/Normalizer';
 import BaseLayout from './Layouts/BaseLayout';
 import VideoLayout from './Layouts/VideoLayout';
 
+import { checkIfMobile } from 'library/_shared/utils/breakpoints';
 
 import './Resources.module.scss';
 
@@ -19,7 +20,7 @@ const Resources = ( { assets, block } ) => {
     setSelected( first.id );
   }, [] );
 
-  const isMobile = window.innerWidth <= 500;
+  const isMobile = checkIfMobile( 500 );
 
   const toggleSelection = toggled => {
     const setTo = toggled === selected ? null : toggled;
