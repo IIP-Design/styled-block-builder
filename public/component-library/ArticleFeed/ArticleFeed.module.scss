@@ -1,0 +1,46 @@
+@import 'styles/colors.scss';
+
+.bg {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  padding: 2.75rem 0;
+  position: relative;
+  width: 100%;
+}
+
+.content {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 2rem;
+}
+
+.title {
+  color: $black;
+  text-align: center;
+}
+
+.subtitle {
+  color: $black;
+  text-align: center;
+  margin-top: 1rem;
+}
+
+@media screen and (max-width: 768px) {
+  .content {
+    align-items: center;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .bg {
+    padding: 1rem 0;
+  }
+
+  .subtitle {
+    width: 90%;
+  }
+}

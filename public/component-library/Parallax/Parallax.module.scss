@@ -1,0 +1,72 @@
+@import 'styles/colors.scss';
+@import 'styles/mixins.scss';
+
+.container {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 2.75rem 0 5rem;
+}
+
+.content {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  margin: 2rem 0;
+  max-width: 1191px;
+  position: relative;
+  width: 90%;
+}
+
+.fixed {
+  min-height: 500px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.subtitle {
+  color: $white;
+  text-align: center;
+  margin: 1rem;
+}
+
+.text {
+  color: $white;
+  flex-shrink: 1;
+  margin: 2rem 0;
+  @include list-spacing;
+
+  > p {
+    margin-bottom: 0.5rem;
+  }
+}
+
+.title {
+  color: $white;
+  text-align: center;
+}
+
+@media screen and (max-width: 768px) {
+  .content {
+    margin: 2rem 0 1rem;
+    width: 90vw;
+  }
+
+  .text {
+    text-align: center;
+  }
+
+  .container {
+    align-items: center;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .content {
+    width: 80vw;
+  }
+}

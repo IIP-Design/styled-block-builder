@@ -1,0 +1,39 @@
+@import 'styles/colors.scss';
+
+.scroll-more {
+  bottom: 1rem;
+  color: $greyMediumLight;
+  font-size: 0.8rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: absolute;
+  left: 50%;
+  right: 50%;
+  margin: 0 -50%;
+
+  &-arrow {
+    color: $greyMediumLight;
+    animation: bounce ease-in-out 3s infinite;
+    -webkit-animation: bounce ease-in-out 3s infinite;
+    -moz-animation: bounce ease-in-out 3s infinite;
+    font-size: 3rem;
+    margin-top: -35px;
+
+    @keyframes bounce {
+      50% {
+        transform: translateY(+15px);
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .scroll-more {
+    @keyframes bounce {
+      50% {
+        transform: translateY(+8px);
+      }
+    }
+  }
+}

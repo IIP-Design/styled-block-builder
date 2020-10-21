@@ -1,0 +1,80 @@
+@import 'styles/colors.scss';
+
+.container {
+  margin: 2rem 0;
+}
+
+.link > {
+  .icon {
+    margin: 0.5rem auto 0;
+    height: auto;
+    width: 50%;
+
+    @media screen and (max-width: 600px) {
+      width: 35%;
+    }
+  }
+}
+
+.nav {
+  margin: 1rem;
+
+  &-item {
+    align-items: center;
+    border: 3px solid $greyMedium;
+    color: $blueDark;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0.5rem;
+    padding: 0.5rem;
+    text-align: center;
+
+    &:hover {
+      border-color: $blueDark;
+      cursor: pointer;
+      transition: color 0.2s ease-out, border-color 0.2s ease-out;
+
+      > a.link {
+        color: $blueSilver;
+      }
+    }
+
+    > a.link {
+      border: none;
+      text-decoration: none;
+      transition: color 0.2s ease-out;
+    }
+
+    > a {
+      display: flex;
+      flex-wrap: wrap;
+      flex: 1 0 100%;
+
+      > span {
+        align-self: center;
+        flex: 0 0 100%;
+      }
+
+      > img {
+        align-self: flex-end;
+      }
+    }
+  }
+
+  &-list {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    margin: 0;
+
+    @media screen and (max-width: 600px) {
+      align-items: center;
+      flex-direction: column;
+    }
+  }
+}
+
+.title {
+  text-align: center;
+}

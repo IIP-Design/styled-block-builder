@@ -1,0 +1,39 @@
+@import 'styles/mixins.scss';
+
+.description {
+  margin-top: 1rem;
+  @include list-spacing;
+
+  > p {
+    margin-bottom: 0.5rem;
+    line-height: 1.3;
+  }
+}
+
+.video {
+  margin: 0 auto;
+  max-width: 832px;
+  text-align: center;
+  width: 100%;
+
+  &-responsive {
+    position: relative;
+    padding-bottom: 56.25%;
+    /* 16:9 */
+    padding-top: 25px;
+    height: 0;
+
+    & iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100% !important;
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    max-width: 519px;
+    width: 100%;
+  }
+}

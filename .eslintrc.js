@@ -28,6 +28,7 @@ module.exports = {
         alias: {
           blocks: './public/blocks',
           config: './config',
+          library: './public/component-library',
           metabox: './admin/metabox/ui',
           styles: './styles',
         },
