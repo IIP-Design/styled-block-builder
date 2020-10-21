@@ -11,7 +11,7 @@ import { checkIfMobile } from 'library/_shared/utils/breakpoints';
 
 import './Resources.module.scss';
 
-const Resources = ( { assets, block } ) => {
+const Resources = ( { assetsUrl, block } ) => {
   const [selected, setSelected] = useState( null );
 
   useEffect( () => {
@@ -40,7 +40,7 @@ const Resources = ( { assets, block } ) => {
       <Normalizer fullWidth={ fullWidth }>
         <div
           style={ {
-            backgroundImage: `url('${assets}wavy-bg.jpg')`,
+            backgroundImage: `url('${assetsUrl}wavy-bg.jpg')`,
           } }
           styleName="background"
         >
@@ -115,7 +115,7 @@ const Resources = ( { assets, block } ) => {
 };
 
 Resources.propTypes = {
-  assets: propTypes.string,
+  assetsUrl: propTypes.string,
   block: propTypes.shape( {
     fullWidth: propTypes.bool,
     resources: propTypes.array,

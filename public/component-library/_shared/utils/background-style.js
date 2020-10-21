@@ -28,12 +28,10 @@ const getBackgroundType = value => {
  * @param {string} value Background style
  * @returns {Object} Inline style object, either for a background image or a background color depending on the provided style
  */
-export const backgroundStyle = value => {
-  const { assets } = window.gpalabBlockFront;
-
+export const backgroundStyle = ( value, assetsURL ) => {
   if ( getBackgroundType( value ) === 'image' ) {
     return {
-      backgroundImage: `url('${assets}${value}')`,
+      backgroundImage: assetsURL ? `url('${assetsURL}${value}')` : `url('${value}')`,
       backgroundRepeat: 'repeat',
     };
   }

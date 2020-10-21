@@ -9,8 +9,10 @@ const divs = [...document.querySelectorAll( 'div[data-type="gpalab-article-feed"
 
 if ( divs ) {
   divs.forEach( div => {
+    const { assetsUrl } = window.gpalabBlockFront;
+
     ReactDOM.render(
-      <ArticleFeed block={ getBlockById( div.dataset.id ) } id={ div.dataset.id } />,
+      <ArticleFeed assetsUrl={ assetsUrl } block={ getBlockById( div.dataset.id ) } id={ div.dataset.id } />,
       div,
     );
   } );

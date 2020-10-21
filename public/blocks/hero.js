@@ -9,8 +9,10 @@ const divs = [...document.querySelectorAll( 'div[data-type="gpalab-hero"]' )];
 
 if ( divs ) {
   divs.forEach( div => {
+    const { assetsUrl } = window.gpalabBlockFront;
+
     ReactDOM.render(
-      <Hero block={ getBlockById( div.dataset.id ) } />,
+      <Hero assetsUrl={ assetsUrl } block={ getBlockById( div.dataset.id ) } />,
       div,
     );
   } );

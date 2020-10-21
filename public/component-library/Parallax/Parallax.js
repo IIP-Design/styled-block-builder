@@ -7,7 +7,7 @@ import Normalizer from 'library/_shared/components/Normalizer/Normalizer';
 
 import './Parallax.module.scss';
 
-const Parallax = ( { block } ) => {
+const Parallax = ( { assetsUrl, block } ) => {
   if ( block ) {
     const {
       buttons,
@@ -21,6 +21,7 @@ const Parallax = ( { block } ) => {
     return (
       <Normalizer fullWidth={ fullWidth }>
         <Background
+          assetsUrl={ assetsUrl }
           backgroundType="image"
           files={ files }
           gradient
@@ -54,6 +55,7 @@ const Parallax = ( { block } ) => {
 };
 
 Parallax.propTypes = {
+  assetsUrl: propTypes.string,
   block: propTypes.shape( {
     buttons: propTypes.array,
     desc: propTypes.string,

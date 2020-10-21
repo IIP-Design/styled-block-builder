@@ -9,7 +9,7 @@ import { runStat } from './animations';
 
 import './Stats.module.scss';
 
-const Stats = ( { id, block } ) => {
+const Stats = ( { assetsUrl, id, block } ) => {
   /**
    * This hardcoded value is a place holder for a currently unused configuration.
    * Changing it to 'number' will result in a different stat animation that will tick
@@ -46,6 +46,7 @@ const Stats = ( { id, block } ) => {
     return (
       <Normalizer fullWidth={ fullWidth }>
         <Background
+          assetsUrl={ assetsUrl }
           backgroundType={ backgroundType }
           blockBackground={ blockBackground }
           files={ files }
@@ -93,6 +94,7 @@ const Stats = ( { id, block } ) => {
 };
 
 Stats.propTypes = {
+  assetsUrl: propTypes.string,
   block: propTypes.shape( {
     backgroundType: propTypes.string,
     blockBackground: propTypes.string,

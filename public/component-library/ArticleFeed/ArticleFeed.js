@@ -8,7 +8,7 @@ import { backgroundStyle } from 'library/_shared/utils/background-style';
 
 import './ArticleFeed.module.scss';
 
-const ArticleFeed = ( { block, id } ) => {
+const ArticleFeed = ( { assetsUrl, block, id } ) => {
   if ( block ) {
     const {
       articles,
@@ -21,7 +21,7 @@ const ArticleFeed = ( { block, id } ) => {
 
     return (
       <Normalizer fullWidth={ fullWidth }>
-        <div style={ backgroundStyle( blockBackground ) } styleName="bg">
+        <div style={ backgroundStyle( blockBackground, assetsUrl ) } styleName="bg">
           <div styleName="content">
             { title && (
               <h2 className="gpalab-site-specific" style={ { color: textColor } } styleName="title">
@@ -44,6 +44,7 @@ const ArticleFeed = ( { block, id } ) => {
 };
 
 ArticleFeed.propTypes = {
+  assetsUrl: propTypes.string,
   block: propTypes.shape( {
     articles: propTypes.array,
     blockBackground: propTypes.string,

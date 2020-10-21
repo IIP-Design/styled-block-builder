@@ -9,8 +9,10 @@ const divs = [...document.querySelectorAll( 'div[data-type="gpalab-stats"]' )];
 
 if ( divs ) {
   divs.forEach( div => {
+    const { assetsUrl } = window.gpalabBlockFront;
+
     ReactDOM.render(
-      <Stats block={ getBlockById( div.dataset.id ) } id={ div.dataset.id } />,
+      <Stats assetsUrl={ assetsUrl } block={ getBlockById( div.dataset.id ) } id={ div.dataset.id } />,
       div,
     );
   } );

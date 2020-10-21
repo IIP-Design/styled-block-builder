@@ -7,9 +7,9 @@ import { backgroundStyle, getBackgroundAlt, setBackgroundImage } from 'library/_
 
 import './Background.module.scss';
 
-const Background = ( { backgroundType, blockBackground, files, gradient, styles, children } ) => {
+const Background = ( { assetsUrl, backgroundType, blockBackground, files, gradient, styles, children } ) => {
   const alt = getBackgroundAlt( files );
-  const bg = backgroundType === 'image' ? setBackgroundImage( files ) : backgroundStyle( blockBackground );
+  const bg = backgroundType === 'image' ? setBackgroundImage( files ) : backgroundStyle( blockBackground, assetsUrl );
 
   let style;
 
@@ -30,6 +30,7 @@ const Background = ( { backgroundType, blockBackground, files, gradient, styles,
 };
 
 Background.propTypes = {
+  assetsUrl: propTypes.string,
   backgroundType: propTypes.string,
   blockBackground: propTypes.string,
   children: propTypes.element,
