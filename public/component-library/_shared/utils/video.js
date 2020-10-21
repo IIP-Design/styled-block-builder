@@ -1,4 +1,8 @@
-const brightcove = window?.gpalabBlockFront?.brightcove;
+const brightcove = () => {
+  if ( typeof window === 'undefined' ) return '';
+
+  return window?.gpalabBlockFront?.brightcove;
+};
 
 /**
  * Fetch id from url. A YouTube link can either use the
@@ -29,7 +33,7 @@ const getYouTubeId = url => {
 export const getVideoUrl = video => {
   switch ( video.source ) {
     case 'brightcove':
-      return `https://players.brightcove.net/${brightcove}/default_default/index.html?videoId=${video.brightcove}`;
+      return `https://players.brightcove.net/${brightcove()}/default_default/index.html?videoId=${video.brightcove}`;
     case 'youtube':
       return `https://www.youtube.com/embed/${getYouTubeId( video.url )}`;
     default:

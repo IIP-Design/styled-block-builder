@@ -1,4 +1,6 @@
 export const getScrollOffsets = () => {
+  if ( typeof document === 'undefined' || typeof window === 'undefined' ) return;
+
   const doc = document;
   const w = window;
 
