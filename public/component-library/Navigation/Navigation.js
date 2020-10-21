@@ -7,7 +7,7 @@ import { checkIfMobile } from 'library/_shared/utils/breakpoints';
 
 import './Navigation.module.scss';
 
-const Parallax = ( { block } ) => {
+const Navigation = ( { block } ) => {
   if ( block ) {
     const {
       fullWidth,
@@ -42,7 +42,7 @@ const Parallax = ( { block } ) => {
   return null;
 };
 
-Parallax.propTypes = {
+Navigation.propTypes = {
   block: propTypes.shape( {
     fullWidth: propTypes.bool,
     nav: propTypes.array,
@@ -50,4 +50,4 @@ Parallax.propTypes = {
   } ),
 };
 
-export default Parallax;
+export default Navigation;
