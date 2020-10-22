@@ -1,8 +1,7 @@
 import React, { useEffect } from 'react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import propTypes from 'prop-types';
-import * as ScrollMagic from 'scrollmagic';
-import gsap, { TweenLite, TimelineLite } from 'gsap';
-import { ScrollMagicPluginGsap } from 'scrollmagic-plugin-gsap';
 
 import Normalizer from '../_shared/components/Normalizer/Normalizer';
 
@@ -12,63 +11,36 @@ import './Slides.module.scss';
 
 const Slides = ( { block, id } ) => {
   useEffect( () => {
-    gsap.registerPlugin( 'CSSRulePlugin' );
+    gsap.registerPlugin( ScrollTrigger );
 
-    ScrollMagicPluginGsap( ScrollMagic, TweenLite, TimelineLite );
-
-    const controller = new ScrollMagic.Controller();
-
+    const container = document.querySelector( `#scene-container-${id}` );
     const slides = [...document.getElementsByClassName( `slide-${id}` )];
+    const scrollBar = document.querySelector( `#scrollBar-${id}` );
 
-    const first = slides.slice( 0, 1 )[0];
-    const remaining = slides.slice( 1 );
-
-    const tl = new TimelineLite();
-
-    tl.add( first );
-
-    remaining.forEach( slide => {
-      tl.add( gsap.fromTo( slide, { xPercent: 100 }, { duration: 2, xPercent: 0, ease: 'linear' } ) );
+    gsap.to( slides, {
+      xPercent: -100 * ( slides.length - 1 ),
+      ease: 'none',
+      scrollTrigger: {
+        trigger: `#scene-container-${id}`,
+        pin: true,
+        scrub: 1,
+        snap: 1 / ( slides.length - 1 ),
+        end: () => `+=${`${container.offsetWidth} + 100vh`}`,
+      },
     } );
 
-    new ScrollMagic.Scene( {
-      triggerElement: `#pin-container-${id}`,
-      triggerHook: 'onLeave',
-      duration: 2000,
-    } )
-      .setTween( tl )
-      .setPin( `#pin-container-${id}` )
-      .addTo( controller );
+    gsap.to( scrollBar, {
+      width: container.offsetWidth,
+      ease: 'none',
+      scrollTrigger: {
+        trigger: `#scene-container-${id}`,
+        pin: true,
+        scrub: 1,
+        snap: 1 / ( slides.length - 1 ),
+        end: () => `+=${`${container.offsetWidth} + 100vh`}`,
+      },
+    } );
   }, [id] );
-
-  const sceneVals = {};
-
-  window.onload = () => {
-    sceneVals.sceneStartPos
-        = document.getElementById( `scene-container-${id}` ).getBoundingClientRect().top
-        + document.documentElement.scrollTop;
-
-    sceneVals.sceneEndPos
-        = document.getElementById( `scene-container-${id}` ).getBoundingClientRect().bottom
-        + document.documentElement.scrollTop;
-
-    sceneVals.sceneHeight = document.getElementById( `scene-container-${id}` ).offsetHeight;
-  };
-
-  window.onscroll = () => {
-    const currentPos = document.documentElement.scrollTop || document.body.scrollTop;
-
-    // eslint-disable-next-line no-mixed-operators
-    const scrolled = ( currentPos - sceneVals.sceneStartPos ) / ( sceneVals.sceneHeight - window.innerHeight ) * 100;
-
-    if ( currentPos > sceneVals.sceneStartPos && currentPos < sceneVals.sceneEndPos ) {
-      document.getElementById( 'scrollBar' ).style.width = `${scrolled}%`;
-    } else {
-      return false;
-    }
-
-    return false;
-  };
 
   if ( block ) {
     const {
@@ -81,7 +53,7 @@ const Slides = ( { block, id } ) => {
       <Normalizer fullWidth>
         <div id={ `scene-container-${id}` } styleName="slide-container">
           { title && <h2 className="gpalab-site-specific" styleName="slide-title">{ title }</h2> }
-          <div id={ `pin-container-${id}` } styleName="pin-container">
+          <div id={ `pin-container-${id}` } styleName="pin-container" style={ { width: slides.length < 2 ? '100%' : `${100 * slides.length}%` } }>
             { slides.map( slide => {
               const alt = getBackgroundAlt( slide.files );
 
@@ -111,7 +83,7 @@ const Slides = ( { block, id } ) => {
             } ) }
             <div styleName="progress-container">
               <div
-                id="scrollBar"
+                id={ `scrollBar-${id}` }
                 style={ { backgroundColor: subTitleColor } }
                 styleName="progress-bar"
               />
