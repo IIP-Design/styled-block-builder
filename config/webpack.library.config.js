@@ -1,9 +1,7 @@
-const EsmWebpackPlugin = require( '@purtuga/esm-webpack-plugin' );
-const MiniCssExtractPlugin = require( 'mini-css-extract-plugin' );
-
-const babel = require( './babel' );
 const css = require( './css-modules' );
 const paths = require( './paths' );
+const plugins = require( './plugins' );
+const rules = require( './rules' );
 
 module.exports = ( _, argv ) => {
   const cssModuleNames = css.getCssModuleNames( argv.mode );
@@ -13,41 +11,7 @@ module.exports = ( _, argv ) => {
       'component-library': paths.componentLibrary,
     },
     module: {
-      rules: [
-        {
-          test: /\.(js|jsx)$/,
-          exclude: /node_modules/,
-          use: {
-            loader: 'babel-loader',
-            options: babel.setBabelConfig( cssModuleNames ),
-          },
-        },
-        {
-          include: /\.module\.(sa|sc|c)ss$/,
-          test: /\.(sa|sc|c)ss$/,
-          use: [
-            MiniCssExtractPlugin.loader,
-            {
-              loader: 'css-loader',
-              options: {
-                importLoaders: 1,
-                modules: {
-                  localIdentName: cssModuleNames,
-                  mode: 'local',
-                },
-              },
-            },
-            'sass-loader',
-          ],
-        },
-        {
-          exclude: /\.module\.(sa|sc|c)ss$/,
-          test: /\.(sa|sc|c)ss$/,
-          use: [
-            MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader',
-          ],
-        },
-      ],
+      rules: rules.setRules( cssModuleNames ),
     },
     output: {
       filename: 'lab-blocks.js',
@@ -55,16 +19,7 @@ module.exports = ( _, argv ) => {
       libraryTarget: 'var',
       path: `${paths.componentLibrary}/lib`,
     },
-    plugins: [
-      new EsmWebpackPlugin(),
-      new MiniCssExtractPlugin( {
-        filename: 'lab-blocks.css',
-      } ),
-    ],
-    resolve: {
-      extensions: [
-        '*', '.js', '.jsx',
-      ],
-    },
+    plugins: plugins.loadPlugins( argv.mode, 'library' ),
+    resolve: rules.resolve,
   };
 };

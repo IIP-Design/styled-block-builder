@@ -1,5 +1,11 @@
 const paths = require( './paths' );
 
+/**
+ * Sets the project Babel configuration.
+ *
+ * @param {string} cssModuleNames   The desired scoped CSS class name format.
+ * @returns {Object}                A Babel configuration object.
+ */
 const setBabelConfig = cssModuleNames => {
   const isTest = String( process.env.NODE_ENV ) === 'test';
 

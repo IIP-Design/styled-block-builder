@@ -1,3 +1,6 @@
 # Depdendencies
 node_modules/
 package-lock.json
+
+# Stats
+lib/bundleStats.*
