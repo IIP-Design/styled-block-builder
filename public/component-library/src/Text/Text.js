@@ -1,14 +1,14 @@
 import React from 'react';
 import propTypes from 'prop-types';
 
-import Background from 'library/src/_shared/components/Background/Background';
-import Button from 'library/src/_shared/components/Button/Button';
-import CDPFeed from 'library/src/_shared/components/CDPFeed/CDPFeed';
-import Normalizer from 'library/src/_shared/components/Normalizer/Normalizer';
-import VideoEmbed from 'library/src/_shared/components/VideoEmbed/VideoEmbed';
+import Background from '../_shared/components/Background/Background';
+import Button from '../_shared/components/Button/Button';
+import CDPFeed from '../_shared/components/CDPFeed/CDPFeed';
+import Normalizer from '../_shared/components/Normalizer/Normalizer';
+import VideoEmbed from '../_shared/components/VideoEmbed/VideoEmbed';
 
-import { getVideoUrl } from 'library/src/_shared/utils/video';
-import { setLightClass } from 'library/src/_shared/utils/background-style';
+import { getVideoUrl } from '../_shared/utils/video';
+import { setLightClass } from '../_shared/utils/background-style';
 
 import './Text.module.scss';
 

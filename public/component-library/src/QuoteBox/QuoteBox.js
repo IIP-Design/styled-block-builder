@@ -1,11 +1,11 @@
 import React from 'react';
 import propTypes from 'prop-types';
 
-import Background from 'library/src/_shared/components/Background/Background';
-import CDPFeed from 'library/src/_shared/components/CDPFeed/CDPFeed';
-import Normalizer from 'library/src/_shared/components/Normalizer/Normalizer';
+import Background from '../_shared/components/Background/Background';
+import CDPFeed from '../_shared/components/CDPFeed/CDPFeed';
+import Normalizer from '../_shared/components/Normalizer/Normalizer';
 
-import { backgroundStyle, setLightClass, setTextColor } from 'library/src/_shared/utils/background-style';
+import { backgroundStyle, setLightClass, setTextColor } from '../_shared/utils/background-style';
 
 import './QuoteBox.module.scss';
 

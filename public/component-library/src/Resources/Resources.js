@@ -1,13 +1,13 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import propTypes from 'prop-types';
 
-import CDPFeed from 'library/src/_shared/components/CDPFeed/CDPFeed';
-import Chevron from 'library/src/_shared/components/Chevron/Chevron';
-import Normalizer from 'library/src/_shared/components/Normalizer/Normalizer';
+import CDPFeed from '../_shared/components/CDPFeed/CDPFeed';
+import Chevron from '../_shared/components/Chevron/Chevron';
+import Normalizer from '../_shared/components/Normalizer/Normalizer';
 import BaseLayout from './Layouts/BaseLayout';
 import VideoLayout from './Layouts/VideoLayout';
 
-import { checkIfMobile } from 'library/src/_shared/utils/breakpoints';
+import { checkIfMobile } from '../_shared/utils/breakpoints';
 
 import './Resources.module.scss';
 

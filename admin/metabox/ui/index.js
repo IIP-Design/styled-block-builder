@@ -6,7 +6,7 @@ import Metabox from './components/Metabox/Metabox';
 import { axeInit } from 'config/axe';
 
 import 'react-quill/dist/quill.snow.css';
-import 'styles/quill.scss';
+import 'library/styles/quill.scss';
 
 // Run accessibility tests in development.
 const ENABLE_AXE = false;

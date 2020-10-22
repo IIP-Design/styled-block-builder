@@ -1,10 +1,10 @@
 import React from 'react';
 import propTypes from 'prop-types';
 
-import CDPFeed from 'library/src/_shared/components/CDPFeed/CDPFeed';
-import Normalizer from 'library/src/_shared/components/Normalizer/Normalizer';
+import CDPFeed from '../_shared/components/CDPFeed/CDPFeed';
+import Normalizer from '../_shared/components/Normalizer/Normalizer';
 
-import { backgroundStyle } from 'library/src/_shared/utils/background-style';
+import { backgroundStyle } from '../_shared/utils/background-style';
 
 import './ArticleFeed.module.scss';
 

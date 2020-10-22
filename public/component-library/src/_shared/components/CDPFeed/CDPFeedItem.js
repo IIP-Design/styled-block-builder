@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import propTypes from 'prop-types';
 
-import { getFromCDP, parseFeedItemData } from 'library/src/_shared/utils/cdp';
+import { getFromCDP, parseFeedItemData } from '../../utils/cdp';
 
 import './CDPFeed.module.scss';
 

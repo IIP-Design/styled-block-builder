@@ -1,9 +1,9 @@
 import React from 'react';
 import propTypes from 'prop-types';
 
-import Background from 'library/src/_shared/components/Background/Background';
-import Button from 'library/src/_shared/components/Button/Button';
-import Normalizer from 'library/src/_shared/components/Normalizer/Normalizer';
+import Background from '../_shared/components/Background/Background';
+import Button from '../_shared/components/Button/Button';
+import Normalizer from '../_shared/components/Normalizer/Normalizer';
 
 import './Parallax.module.scss';
 

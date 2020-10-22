@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
 import propTypes from 'prop-types';
 
-import Background from 'library/src/_shared/components/Background/Background';
-import Normalizer from 'library/src/_shared/components/Normalizer/Normalizer';
-import useVisibilityObserver from 'library/src/_shared/hooks/useVisibilityObserver';
+import Background from '../_shared/components/Background/Background';
+import Normalizer from '../_shared/components/Normalizer/Normalizer';
+import useVisibilityObserver from '../_shared/hooks/useVisibilityObserver';
 
 import { runStat } from './animations';
 

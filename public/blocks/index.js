@@ -2,7 +2,7 @@ import { axeInit } from 'config/axe';
 
 // Normalizer CSS should be included first to ensure a proper cascade
 import 'library/src/_shared/components/Normalizer/Normalizer.scss';
-import 'styles/quill.scss';
+import 'library/styles/quill.scss';
 
 import renderBlocks from 'library/src/utils/block-renderer';
 

@@ -1,9 +1,9 @@
 import React from 'react';
 import propTypes from 'prop-types';
 
-import Background from 'library/src/_shared/components/Background/Background';
-import Normalizer from 'library/src/_shared/components/Normalizer/Normalizer';
-import SocialLinks from 'library/src/_shared/components/SocialLinks/SocialLinks';
+import Background from '../_shared/components/Background/Background';
+import Normalizer from '../_shared/components/Normalizer/Normalizer';
+import SocialLinks from '../_shared/components/SocialLinks/SocialLinks';
 
 import { setColors, getAvatar } from './utils';
 

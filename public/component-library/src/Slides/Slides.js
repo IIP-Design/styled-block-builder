@@ -4,9 +4,9 @@ import * as ScrollMagic from 'scrollmagic';
 import gsap, { TweenLite, TimelineLite } from 'gsap';
 import { ScrollMagicPluginGsap } from 'scrollmagic-plugin-gsap';
 
-import Normalizer from 'library/src/_shared/components/Normalizer/Normalizer';
+import Normalizer from '../_shared/components/Normalizer/Normalizer';
 
-import { getBackgroundAlt, getBackgroundImageUrl } from 'library/src/_shared/utils/background-style';
+import { getBackgroundAlt, getBackgroundImageUrl } from '../_shared/utils/background-style';
 
 import './Slides.module.scss';
 

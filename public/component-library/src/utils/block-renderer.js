@@ -1,17 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import ArticleFeed from 'library/src/ArticleFeed/ArticleFeed';
-import Hero from 'library/src/Hero/Hero';
-import LinkList from 'library/src/LinkList/LinkList';
-import Navigation from 'library/src/Navigation/Navigation';
-import Parallax from 'library/src/Parallax/Parallax';
-import QuoteBox from 'library/src/QuoteBox/QuoteBox';
-import Resources from 'library/src/Resources/Resources';
-import Slides from 'library/src/Slides/Slides';
-import Stats from 'library/src/Stats/Stats';
-import Text from 'library/src/Text/Text';
-import Timeline from 'library/src/Timeline/Timeline';
+import ArticleFeed from '../ArticleFeed/ArticleFeed';
+import Hero from '../Hero/Hero';
+import LinkList from '../LinkList/LinkList';
+import Navigation from '../Navigation/Navigation';
+import Parallax from '../Parallax/Parallax';
+import QuoteBox from '../QuoteBox/QuoteBox';
+import Resources from '../Resources/Resources';
+import Slides from '../Slides/Slides';
+import Stats from '../Stats/Stats';
+import Text from '../Text/Text';
+import Timeline from '../Timeline/Timeline';
 
 /**
  * Get the block by id from a list of blocks.

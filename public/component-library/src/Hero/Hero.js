@@ -1,10 +1,10 @@
 import React from 'react';
 import propTypes from 'prop-types';
 
-import AnimatedLines from 'library/src/_shared/components/AnimatedLines/AnimatedLines';
-import Background from 'library/src/_shared/components/Background/Background';
-import Button from 'library/src/_shared/components/Button/Button';
-import Normalizer from 'library/src/_shared/components/Normalizer/Normalizer';
+import AnimatedLines from '../_shared/components/AnimatedLines/AnimatedLines';
+import Background from '../_shared/components/Background/Background';
+import Button from '../_shared/components/Button/Button';
+import Normalizer from '../_shared/components/Normalizer/Normalizer';
 
 import './Hero.module.scss';
 

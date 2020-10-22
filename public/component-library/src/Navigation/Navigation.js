@@ -1,9 +1,9 @@
 import React from 'react';
 import propTypes from 'prop-types';
 
-import Normalizer from 'library/src/_shared/components/Normalizer/Normalizer';
+import Normalizer from '../_shared/components/Normalizer/Normalizer';
 
-import { checkIfMobile } from 'library/src/_shared/utils/breakpoints';
+import { checkIfMobile } from '../_shared/utils/breakpoints';
 
 import './Navigation.module.scss';
 
