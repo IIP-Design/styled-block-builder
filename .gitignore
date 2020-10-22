@@ -1,6 +1,7 @@
 # Bundle Analysis
 dist/bundleStats.html
 dist/bundleStats.json
+dist/gpalab-vendors~react-axe.js
 
 # Editor & System
 .vscode

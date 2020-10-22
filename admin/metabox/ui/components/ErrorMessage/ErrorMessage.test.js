@@ -1,5 +1,5 @@
 import React from 'react';
-import { fireEvent, render } from '@testing-library/react'; // eslint-disable-line node/no-unpublished-import
+import { fireEvent, render } from '@testing-library/react';
 
 import ErrorMessage from './ErrorMessage';
 

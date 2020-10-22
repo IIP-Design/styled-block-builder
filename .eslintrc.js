@@ -16,9 +16,11 @@ module.exports = {
       },
     ],
     'node/no-missing-import': 'off',
-    'node/no-unpublished-require': [
+    'node/no-unpublished-import': [
       'error', {
-        allowModules: ['@testing-library/react', '@axe-core/react'],
+        allowModules: [
+          '@axe-core/react', '@testing-library/react', 'prop-types',
+        ],
       },
     ],
   },
