@@ -377,3 +377,24 @@ export const updatingRemoveFrom = ( state, id ) => {
 
   return [];
 };
+
+/**
+ * Toggles the primary status of the selected block.
+ *
+ * @param {Object[]} blocks An array block data objects.
+ * @param {string} id       Selected block id.
+ * @returns {Object[]}      An array block data objects.
+ */
+export const togglePrimary = ( blocks, id ) => {
+  const toggledBlocks = blocks.map( block => {
+    if ( block.id === id ) {
+      block.primary = !block.primary;
+    } else {
+      block.primary = false;
+    }
+
+    return block;
+  } );
+
+  return toggledBlocks;
+};

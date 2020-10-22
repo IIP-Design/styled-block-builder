@@ -19,6 +19,10 @@ const AssociatedList = () => {
     dispatch( { type: 'delete', payload: id } );
   };
 
+  const togglePrimary = id => {
+    dispatch( { type: 'toggle-primary', payload: id } );
+  };
+
   const isUpdating = id => updating && updating.includes( id );
 
   return (
@@ -32,6 +36,15 @@ const AssociatedList = () => {
             styleName={ isUpdating( item.id ) ? 'list-item disabled' : 'list-item' }
           >
             { item.title || formatBlockType( item.type ) }
+            <button
+              aria-label="set as primary block"
+              disabled={ isUpdating( item.id ) }
+              styleName={ isUpdating( item.id ) ? 'button disabled' : 'button' }
+              type="button"
+              onClick={ () => togglePrimary( item.id ) }
+            >
+              1st
+            </button>
             <button
               aria-label="edit block"
               disabled={ isUpdating( item.id ) }

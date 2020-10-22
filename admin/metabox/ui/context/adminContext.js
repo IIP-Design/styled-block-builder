@@ -1,6 +1,8 @@
 import React from 'react';
 
 import {
+  blockDelete,
+  blockSave,
   fileAdd,
   fileAddNested,
   fileRemove,
@@ -12,8 +14,7 @@ import {
   groupRemoveItem,
   groupRemoveItemNested,
   groupReorderItem,
-  blockDelete,
-  blockSave,
+  togglePrimary,
   updatingAddTo,
   updatingRemoveFrom,
 } from 'metabox/utils/dispatch-helpers';
@@ -247,6 +248,11 @@ export const adminReducer = ( state, action ) => {
           formValues: payload.formValues,
         },
         showModal: true,
+      };
+    case 'toggle-primary':
+      return {
+        ...state,
+        blocks: togglePrimary( state.blocks, payload ),
       };
     case 'updating-add':
       return {
