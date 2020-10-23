@@ -4,6 +4,7 @@ module.exports = {
     'dist/', 'node_modules/', 'public/component-library/lib/', 'vendor/',
   ],
   parser: 'babel-eslint',
+  root: true,
   rules: {
     'react/no-danger': 'warn',
     'react/jsx-child-element-spacing': 'off',
