@@ -52,7 +52,6 @@ class Frontend {
       'gpalab-blocks-frontend-js',
       'gpalabBlockFront',
       array(
-        'assets'     => STYLE_BLOCKS_URL . 'assets/',
         'brightcove' => $brightcove,
       )
     );

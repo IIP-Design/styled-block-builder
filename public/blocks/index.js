@@ -7,11 +7,6 @@ import 'library/styles/quill.scss';
 import renderBlocks from 'library/src/utils/block-renderer';
 
 /**
- * Pull the URL to the static assets off of the window object.
- */
-const assetsUrl = window?.gpalabBlockFront?.assetsUrl || '';
-
-/**
  * Pull the blocks associated with the current post off of the window object.
  *
  * @returns {Object[]}   Array of block data objects or an empty array if no blocks.
@@ -22,7 +17,7 @@ export const getBlocks = () => {
   return blocks;
 };
 
-renderBlocks( getBlocks(), assetsUrl );
+renderBlocks( getBlocks() );
 
 // Run accessibility tests in development.
 const ENABLE_AXE = false;

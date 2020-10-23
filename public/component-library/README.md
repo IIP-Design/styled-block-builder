@@ -30,7 +30,7 @@ const MyPage = () => {
 
   return (
     ...
-    <Hero assetsUrl="https://my-website.com/assets/" blocks={ block.meta } />
+    <Hero blocks={ block.meta } />
     ...
   )
 }

@@ -12,7 +12,7 @@ import { setLightClass } from '../_shared/utils/background-style';
 
 import './Text.module.scss';
 
-const Text = ( { assetsUrl, id, block } ) => {
+const Text = ( { id, block } ) => {
   if ( block ) {
     const {
       articles,
@@ -32,7 +32,6 @@ const Text = ( { assetsUrl, id, block } ) => {
     return (
       <Normalizer fullWidth={ fullWidth }>
         <Background
-          assetsUrl={ assetsUrl }
           backgroundType={ backgroundType }
           blockBackground={ blockBackground }
           files={ files }
@@ -89,7 +88,6 @@ const Text = ( { assetsUrl, id, block } ) => {
 };
 
 Text.propTypes = {
-  assetsUrl: propTypes.string,
   block: propTypes.shape( {
     articles: propTypes.array,
     backgroundGradient: propTypes.string,

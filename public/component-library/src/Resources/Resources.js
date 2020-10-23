@@ -8,10 +8,11 @@ import BaseLayout from './Layouts/BaseLayout';
 import VideoLayout from './Layouts/VideoLayout';
 
 import { checkIfMobile } from '../_shared/utils/breakpoints';
+import { wavyWhite } from '../_shared/utils/patterns';
 
 import './Resources.module.scss';
 
-const Resources = ( { assetsUrl, block } ) => {
+const Resources = ( { block } ) => {
   const [selected, setSelected] = useState( null );
 
   useEffect( () => {
@@ -40,7 +41,7 @@ const Resources = ( { assetsUrl, block } ) => {
       <Normalizer fullWidth={ fullWidth }>
         <div
           style={ {
-            backgroundImage: `url('${assetsUrl}wavy-bg.jpg')`,
+            backgroundImage: `url(${wavyWhite})`,
           } }
           styleName="background"
         >
@@ -115,7 +116,6 @@ const Resources = ( { assetsUrl, block } ) => {
 };
 
 Resources.propTypes = {
-  assetsUrl: propTypes.string,
   block: propTypes.shape( {
     fullWidth: propTypes.bool,
     resources: propTypes.array,

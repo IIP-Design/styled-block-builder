@@ -9,7 +9,7 @@ import { backgroundStyle, setLightClass, setTextColor } from '../_shared/utils/b
 
 import './QuoteBox.module.scss';
 
-const QuoteBox = ( { assetsUrl, block, id } ) => {
+const QuoteBox = ( { block, id } ) => {
   if ( block ) {
     const {
       articles,
@@ -31,7 +31,6 @@ const QuoteBox = ( { assetsUrl, block, id } ) => {
     return (
       <Normalizer fullWidth={ fullWidth }>
         <Background
-          assetsUrl={ assetsUrl }
           backgroundType={ backgroundType }
           blockBackground={ blockBackground }
           files={ files }
@@ -58,7 +57,7 @@ const QuoteBox = ( { assetsUrl, block, id } ) => {
                 />
               ) }
               { quote && (
-                <div style={ backgroundStyle( quoteBackground, assetsUrl ) } styleName="quote">
+                <div style={ backgroundStyle( quoteBackground ) } styleName="quote">
                   <div
                     className={ setLightClass( quoteColor ) }
                     dangerouslySetInnerHTML={ { __html: quote } }
@@ -79,7 +78,6 @@ const QuoteBox = ( { assetsUrl, block, id } ) => {
 };
 
 QuoteBox.propTypes = {
-  assetsUrl: propTypes.string,
   block: propTypes.shape( {
     articles: propTypes.array,
     backgroundGradient: propTypes.string,

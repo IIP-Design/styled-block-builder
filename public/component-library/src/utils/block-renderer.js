@@ -35,10 +35,9 @@ const getBlockById = ( id, blocks ) => {
 /**
  * Finds all divs in document to which a block should be attached, and then renders the appropriate blocks.
  *
- * @param {Object[]} blocks   A list of block data objects.
- * @param {string} assetsUrl  The url at which site static assets are stored.
+ * @param {Object[]} blocks  A list of block data objects.
  */
-const renderBlocks = ( blocks, assetsUrl ) => {
+const renderBlocks = blocks => {
   const articleFeed = [...document.querySelectorAll( 'div[data-type="gpalab-article-feed"]' )];
   const hero = [...document.querySelectorAll( 'div[data-type="gpalab-hero"]' )];
   const linkList = [...document.querySelectorAll( 'div[data-type="gpalab-link-list"]' )];
@@ -54,7 +53,7 @@ const renderBlocks = ( blocks, assetsUrl ) => {
   if ( articleFeed ) {
     articleFeed.forEach( div => {
       ReactDOM.render(
-        <ArticleFeed assetsUrl={ assetsUrl } block={ getBlockById( div.dataset.id, blocks ) } id={ div.dataset.id } />,
+        <ArticleFeed block={ getBlockById( div.dataset.id, blocks ) } id={ div.dataset.id } />,
         div,
       );
     } );
@@ -63,7 +62,7 @@ const renderBlocks = ( blocks, assetsUrl ) => {
   if ( hero ) {
     hero.forEach( div => {
       ReactDOM.render(
-        <Hero assetsUrl={ assetsUrl } block={ getBlockById( div.dataset.id, blocks ) } />,
+        <Hero block={ getBlockById( div.dataset.id, blocks ) } />,
         div,
       );
     } );
@@ -72,7 +71,7 @@ const renderBlocks = ( blocks, assetsUrl ) => {
   if ( linkList ) {
     linkList.forEach( div => {
       ReactDOM.render(
-        <LinkList assetsUrl={ assetsUrl } block={ getBlockById( div.dataset.id, blocks ) } />,
+        <LinkList block={ getBlockById( div.dataset.id, blocks ) } />,
         div,
       );
     } );
@@ -90,7 +89,7 @@ const renderBlocks = ( blocks, assetsUrl ) => {
   if ( parallax ) {
     parallax.forEach( div => {
       ReactDOM.render(
-        <Parallax assetsUrl={ assetsUrl } block={ getBlockById( div.dataset.id, blocks ) } />,
+        <Parallax block={ getBlockById( div.dataset.id, blocks ) } />,
         div,
       );
     } );
@@ -99,7 +98,7 @@ const renderBlocks = ( blocks, assetsUrl ) => {
   if ( quoteBox ) {
     quoteBox.forEach( div => {
       ReactDOM.render(
-        <QuoteBox assetsUrl={ assetsUrl } block={ getBlockById( div.dataset.id, blocks ) } id={ div.dataset.id } />,
+        <QuoteBox block={ getBlockById( div.dataset.id, blocks ) } id={ div.dataset.id } />,
         div,
       );
     } );
@@ -108,7 +107,7 @@ const renderBlocks = ( blocks, assetsUrl ) => {
   if ( resources ) {
     resources.forEach( div => {
       ReactDOM.render(
-        <Resources assetsUrl={ assetsUrl } block={ getBlockById( div.dataset.id, blocks ) } />,
+        <Resources block={ getBlockById( div.dataset.id, blocks ) } />,
         div,
       );
     } );
@@ -126,7 +125,7 @@ const renderBlocks = ( blocks, assetsUrl ) => {
   if ( stats ) {
     stats.forEach( div => {
       ReactDOM.render(
-        <Stats assetsUrl={ assetsUrl } block={ getBlockById( div.dataset.id, blocks ) } id={ div.dataset.id } />,
+        <Stats block={ getBlockById( div.dataset.id, blocks ) } id={ div.dataset.id } />,
         div,
       );
     } );
@@ -135,7 +134,7 @@ const renderBlocks = ( blocks, assetsUrl ) => {
   if ( text ) {
     text.forEach( div => {
       ReactDOM.render(
-        <Text assetsUrl={ assetsUrl } block={ getBlockById( div.dataset.id, blocks ) } id={ div.dataset.id } />,
+        <Text block={ getBlockById( div.dataset.id, blocks ) } id={ div.dataset.id } />,
         div,
       );
     } );

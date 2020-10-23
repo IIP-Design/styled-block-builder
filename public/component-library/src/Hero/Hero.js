@@ -8,7 +8,7 @@ import Normalizer from '../_shared/components/Normalizer/Normalizer';
 
 import './Hero.module.scss';
 
-const Hero = ( { assetsUrl, block } ) => {
+const Hero = ( { block } ) => {
   if ( block ) {
     const {
       align,
@@ -28,7 +28,6 @@ const Hero = ( { assetsUrl, block } ) => {
     return (
       <Normalizer fullWidth>
         <Background
-          assetsUrl={ assetsUrl }
           backgroundType="image"
           files={ files }
           gradient
@@ -81,7 +80,6 @@ const Hero = ( { assetsUrl, block } ) => {
 };
 
 Hero.propTypes = {
-  assetsUrl: propTypes.string,
   block: propTypes.shape( {
     align: propTypes.string,
     buttons: propTypes.array,

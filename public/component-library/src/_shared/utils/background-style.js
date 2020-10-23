@@ -1,5 +1,8 @@
+import { wavyNavy, wavyWhite } from './patterns';
+
 /**
  * Checks whether the selected background style is an image or not
+ * Formerly used as a helper in backgroundStyle().
  *
  * @param {string} value Background style
  * @returns {string|undefined} If an image returns 'image' otherwise undefined
@@ -28,10 +31,17 @@ const getBackgroundType = value => {
  * @param {string} value Background style
  * @returns {Object} Inline style object, either for a background image or a background color depending on the provided style
  */
-export const backgroundStyle = ( value, assetsURL ) => {
-  if ( getBackgroundType( value ) === 'image' ) {
+export const backgroundStyle = value => {
+  if ( value === 'wavy-bg.jpg' ) {
     return {
-      backgroundImage: assetsURL ? `url('${assetsURL}${value}')` : `url('${value}')`,
+      backgroundImage: `url(${wavyWhite})`,
+      backgroundRepeat: 'repeat',
+    };
+  }
+
+  if ( value === 'wavy-navy.jpg' ) {
+    return {
+      backgroundImage: `url(${wavyNavy})`,
       backgroundRepeat: 'repeat',
     };
   }

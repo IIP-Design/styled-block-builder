@@ -7,9 +7,12 @@ import { backgroundStyle, getBackgroundAlt, setBackgroundImage } from '../../uti
 
 import './Background.module.scss';
 
-const Background = ( { assetsUrl, backgroundType, blockBackground, files, gradient, styles, children } ) => {
+const Background = ( { backgroundType, blockBackground, files, gradient, styles, children } ) => {
   const alt = getBackgroundAlt( files );
-  const bg = backgroundType === 'image' ? setBackgroundImage( files ) : backgroundStyle( blockBackground, assetsUrl );
+
+  const bg = backgroundType === 'image'
+    ? setBackgroundImage( files )
+    : backgroundStyle( blockBackground );
 
   let style;
 
@@ -30,7 +33,6 @@ const Background = ( { assetsUrl, backgroundType, blockBackground, files, gradie
 };
 
 Background.propTypes = {
-  assetsUrl: propTypes.string,
   backgroundType: propTypes.string,
   blockBackground: propTypes.string,
   children: propTypes.element,

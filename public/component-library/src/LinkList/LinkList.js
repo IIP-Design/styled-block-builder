@@ -9,7 +9,7 @@ import { setColors, getAvatar } from './utils';
 
 import './LinkList.module.scss';
 
-const LinkList = ( { assetsUrl, block } ) => {
+const LinkList = ( { block } ) => {
   if ( block ) {
     const {
       backgroundGradient,
@@ -41,7 +41,6 @@ const LinkList = ( { assetsUrl, block } ) => {
     return (
       <Normalizer fullWidth={ fullWidth }>
         <Background
-          assetsUrl={ assetsUrl }
           backgroundType={ backgroundType }
           blockBackground={ blockBackground }
           files={ files }
@@ -72,7 +71,6 @@ const LinkList = ( { assetsUrl, block } ) => {
 };
 
 LinkList.propTypes = {
-  assetsUrl: propTypes.string,
   block: propTypes.shape( {
     backgroundGradient: propTypes.string,
     backgroundType: propTypes.string,
