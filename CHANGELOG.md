@@ -9,6 +9,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 _This sections lists changes committed since most recent release_
 
+### Changed:
+
+- Broke out the frontend blocks as it's own component library to allow for reuse elsewhere
+- Remove ScrollMagic as a dependency and use GreenSock (a more modern, better maintained library) for all animations
+- Use data urls rather than relative links for background image assets to simplify the data management
+- Dynamically import ReactAxe only when used to ensure that it does not end up in the production bundle
+- Make Webpack build process more modular to allow for reuse of settings across multiple configs
+
 ## [v3.0.2](https://github.com/IIP-Design/styled-block-builder/compare/v3.0.1...v3.0.2) - 2020.09.30
 
 ### Fixed:
