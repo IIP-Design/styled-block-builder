@@ -52,9 +52,10 @@ class Update_Block {
     $validator->validate_parent_id( $_POST['parent'] );
 
     // Sanitize submitted values.
-    $form_type = sanitize_text_field( $_POST['type'] );
-    $passed_id = sanitize_text_field( $_POST['id'] );
-    $parent_id = sanitize_text_field( $_POST['parent'] );
+    $form_type  = sanitize_text_field( $_POST['type'] );
+    $passed_id  = sanitize_text_field( $_POST['id'] );
+    $parent_id  = sanitize_text_field( $_POST['parent'] );
+    $is_primary = rest_sanitize_boolean( $_POST['primary'] );
 
     // Handle file uploads.
     $files;
@@ -72,11 +73,12 @@ class Update_Block {
     // phpcs:enable
 
     // Instantiate and populate the block data array.
-    $block_data          = array();
-    $block_data['id']    = $passed_id;
-    $block_data['meta']  = $sanitized_meta;
-    $block_data['title'] = $sanitized_meta['title'];
-    $block_data['type']  = $form_type;
+    $block_data            = array();
+    $block_data['id']      = $passed_id;
+    $block_data['meta']    = $sanitized_meta;
+    $block_data['primary'] = $is_primary;
+    $block_data['title']   = $sanitized_meta['title'];
+    $block_data['type']    = $form_type;
 
     // Add the block id to its parent's post metadata.
     include_once STYLE_BLOCKS_DIR . 'admin/metabox/ajax/class-update-parent-post.php';

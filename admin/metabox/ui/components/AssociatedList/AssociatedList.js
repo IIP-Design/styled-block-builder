@@ -19,8 +19,26 @@ const AssociatedList = () => {
     dispatch( { type: 'delete', payload: id } );
   };
 
-  const togglePrimary = id => {
-    dispatch( { type: 'toggle-primary', payload: id } );
+  const togglePrimary = async item => {
+    dispatch( { type: 'updating-add', payload: item.id } );
+    dispatch( { type: 'toggle-primary', payload: item.id } );
+
+    blocks.forEach( async block => {
+      if ( block.id === item.id ) {
+        const data = { ...item, primary: !item.primary };
+
+        await updatePost( data, 'save' );
+      }
+
+      if ( block.id !== item.id && block.primary ) {
+        const data = { ...block, primary: false };
+
+        await updatePost( data, 'save' );
+      }
+    } );
+
+
+    dispatch( { type: 'updating-remove', payload: item.id } );
   };
 
   const isUpdating = id => updating && updating.includes( id );
@@ -41,7 +59,7 @@ const AssociatedList = () => {
               disabled={ isUpdating( item.id ) }
               styleName={ isUpdating( item.id ) ? 'button disabled' : 'button' }
               type="button"
-              onClick={ () => togglePrimary( item.id ) }
+              onClick={ () => togglePrimary( item ) }
             >
               <span className="dashicons dashicons-heading" styleName={ item.primary ? 'dh-primary' : 'dh-normal' } />
             </button>
