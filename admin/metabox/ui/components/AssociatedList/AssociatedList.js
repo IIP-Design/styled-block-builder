@@ -43,7 +43,7 @@ const AssociatedList = () => {
               type="button"
               onClick={ () => togglePrimary( item.id ) }
             >
-              1st
+              <span className="dashicons dashicons-heading" styleName={ item.primary ? 'dh-primary' : 'dh-normal' } />
             </button>
             <button
               aria-label="edit block"
