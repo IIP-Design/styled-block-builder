@@ -59,6 +59,7 @@ export const blockSave = ( state, block ) => {
     const newBlock = {
       id: block.id,
       meta: block.meta,
+      primary: block.primary || false,
       title: block.title,
       type: `gpalab-${block.type}`,
     };

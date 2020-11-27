@@ -41,6 +41,7 @@ export const adminReducer = ( state, action ) => {
         formData: {
           ...state.formData,
           formId: payload.id,
+          formPrimary: payload.primary,
           formValues: payload.meta,
         },
         blocks: blockSave( state, payload ),
@@ -234,6 +235,7 @@ export const adminReducer = ( state, action ) => {
         ...state,
         formData: {
           formId: 0,
+          formPrimary: false,
           formType: '',
           formValues: {},
         },
@@ -244,6 +246,7 @@ export const adminReducer = ( state, action ) => {
         ...state,
         formData: {
           formId: payload.formId,
+          formPrimary: payload.formPrimary,
           formType: payload.formType,
           formValues: payload.formValues,
         },

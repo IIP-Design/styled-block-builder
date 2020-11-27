@@ -16,6 +16,7 @@ const MetaBox = () => {
   const initialState = {
     formData: {
       formId: 0,
+      formPrimary: false,
       formType: '',
       formValues: {},
     },
@@ -75,7 +76,7 @@ const MetaBox = () => {
           type="button"
           onClick={ () => dispatch( {
             type: 'modal-show',
-            payload: { formId: uuid(), formType, formValues: {} },
+            payload: { formId: uuid(), formPrimary: false, formType, formValues: {} },
           } ) }
         >
           Configure Block

@@ -62,7 +62,7 @@ const ModalContent = () => {
 
       setSaving( true );
       await updatePost(
-        { id: formData.formId, meta: formData.formValues, type: formStr },
+        { id: formData.formId, meta: formData.formValues, primary: formData.formPrimary, type: formStr },
         'save',
         onComplete,
         onError,

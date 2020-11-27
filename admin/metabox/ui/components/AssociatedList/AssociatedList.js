@@ -72,6 +72,7 @@ const AssociatedList = () => {
                 type: 'modal-show',
                 payload: {
                   formId: item.id,
+                  formPrimary: item.primary,
                   formType: item.type,
                   formValues: item.meta,
                 },
