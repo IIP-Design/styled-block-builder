@@ -3,13 +3,14 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import propTypes from 'prop-types';
 
+import BlockHeading from '../_shared/components/BlockHeading/BlockHeading';
 import Normalizer from '../_shared/components/Normalizer/Normalizer';
 
 import { getBackgroundAlt, getBackgroundImageUrl } from '../_shared/utils/background-style';
 
 import './Slides.module.scss';
 
-const Slides = ( { block, id } ) => {
+const Slides = ( { block, id, primary } ) => {
   useEffect( () => {
     gsap.registerPlugin( ScrollTrigger );
 
@@ -52,7 +53,15 @@ const Slides = ( { block, id } ) => {
     return (
       <Normalizer fullWidth>
         <div id={ `scene-container-${id}` } styleName="slide-container">
-          { title && <h2 className="gpalab-site-specific" styleName="slide-title">{ title }</h2> }
+
+          { title && (
+            <BlockHeading
+              primary={ primary }
+              text={ title }
+              styleName="slide-title"
+            />
+          ) }
+
           <div id={ `pin-container-${id}` } styleName="pin-container" style={ { width: slides.length < 2 ? '100%' : `${100 * slides.length}%` } }>
             { slides.map( slide => {
               const alt = getBackgroundAlt( slide.files );
@@ -104,6 +113,7 @@ Slides.propTypes = {
     title: propTypes.string,
   } ),
   id: propTypes.string,
+  primary: propTypes.bool,
 };
 
 export default Slides;

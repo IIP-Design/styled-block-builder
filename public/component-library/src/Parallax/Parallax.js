@@ -2,12 +2,13 @@ import React from 'react';
 import propTypes from 'prop-types';
 
 import Background from '../_shared/components/Background/Background';
+import BlockHeading from '../_shared/components/BlockHeading/BlockHeading';
 import Button from '../_shared/components/Button/Button';
 import Normalizer from '../_shared/components/Normalizer/Normalizer';
 
 import './Parallax.module.scss';
 
-const Parallax = ( { block } ) => {
+const Parallax = ( { block, primary } ) => {
   if ( block ) {
     const {
       buttons,
@@ -28,7 +29,13 @@ const Parallax = ( { block } ) => {
         >
           <div styleName="fixed">
             <div styleName="content">
-              { title && <h2 className="gpalab-site-specific" styleName="title">{ title }</h2> }
+              { title && (
+                <BlockHeading
+                  primary={ primary }
+                  text={ title }
+                  styleName="title"
+                />
+              ) }
               { subtitle && <h3 className="gpalab-site-specific" styleName="subtitle">{ subtitle }</h3> }
               { desc && (
                 <div
@@ -62,6 +69,7 @@ Parallax.propTypes = {
     subtitle: propTypes.string,
     title: propTypes.string,
   } ),
+  primary: propTypes.bool,
 };
 
 export default Parallax;

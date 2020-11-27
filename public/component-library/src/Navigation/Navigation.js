@@ -1,13 +1,14 @@
 import React from 'react';
 import propTypes from 'prop-types';
 
+import BlockHeading from '../_shared/components/BlockHeading/BlockHeading';
 import Normalizer from '../_shared/components/Normalizer/Normalizer';
 
 import { checkIfMobile } from '../_shared/utils/breakpoints';
 
 import './Navigation.module.scss';
 
-const Navigation = ( { block } ) => {
+const Navigation = ( { block, primary } ) => {
   if ( block ) {
     const {
       fullWidth,
@@ -21,7 +22,15 @@ const Navigation = ( { block } ) => {
     return (
       <Normalizer fullWidth={ fullWidth }>
         <section styleName="container">
-          { title && <h2 className="gpalab-site-specific" styleName="title">{ title }</h2> }
+
+          { title && (
+            <BlockHeading
+              primary={ primary }
+              text={ title }
+              styleName="title"
+            />
+          ) }
+
           <nav styleName="nav">
             <ul styleName="nav-list">
               { nav && nav.map( item => (
@@ -48,6 +57,7 @@ Navigation.propTypes = {
     nav: propTypes.array,
     title: propTypes.string,
   } ),
+  primary: propTypes.bool,
 };
 
 export default Navigation;

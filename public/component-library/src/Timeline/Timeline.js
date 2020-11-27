@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import propTypes from 'prop-types';
 
+import BlockHeading from '../_shared/components/BlockHeading/BlockHeading';
 import Normalizer from '../_shared/components/Normalizer/Normalizer';
 
 import { checkIfMobile } from '../_shared/utils/breakpoints';
@@ -8,7 +9,7 @@ import { getBackgroundAlt, setBackgroundImage } from '../_shared/utils/backgroun
 
 import './Timeline.module.scss';
 
-const Timeline = ( { block } ) => {
+const Timeline = ( { block, primary } ) => {
   const [selected, setSelected] = useState( {} );
 
   useEffect( () => {
@@ -67,7 +68,13 @@ const Timeline = ( { block } ) => {
             styleName="overlay"
           />
 
-          <h2 className="gpalab-site-specific" styleName="title">{ title }</h2>
+          { title && (
+            <BlockHeading
+              primary={ primary }
+              text={ title }
+              styleName="title"
+            />
+          ) }
 
           <h3 styleName={ isMobile ? 'slide-title-mobile' : 'slide-title' }>
             { selected.subtitle || '' }
@@ -126,6 +133,7 @@ Timeline.propTypes = {
     title: propTypes.string,
     timeline: propTypes.object,
   } ),
+  primary: propTypes.bool,
 };
 
 export default Timeline;

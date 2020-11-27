@@ -1,6 +1,7 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import propTypes from 'prop-types';
 
+import BlockHeading from '../_shared/components/BlockHeading/BlockHeading';
 import CDPFeed from '../_shared/components/CDPFeed/CDPFeed';
 import Chevron from '../_shared/components/Chevron/Chevron';
 import Normalizer from '../_shared/components/Normalizer/Normalizer';
@@ -12,7 +13,7 @@ import { wavyWhite } from '../_shared/utils/patterns';
 
 import './Resources.module.scss';
 
-const Resources = ( { block } ) => {
+const Resources = ( { block, primary } ) => {
   const [selected, setSelected] = useState( null );
 
   useEffect( () => {
@@ -45,7 +46,13 @@ const Resources = ( { block } ) => {
           } }
           styleName="background"
         >
-          { title && <h2 className="gpalab-site-specific" styleName="title">{ title }</h2> }
+          { title && (
+            <BlockHeading
+              primary={ primary }
+              text={ title }
+              styleName="title"
+            />
+          ) }
 
           { subtitle && <h3 className="gpalab-site-specific" styleName="subtitle">{ subtitle }</h3> }
 
@@ -122,6 +129,7 @@ Resources.propTypes = {
     subtitle: propTypes.string,
     title: propTypes.string,
   } ),
+  primary: propTypes.bool,
 };
 
 export default Resources;

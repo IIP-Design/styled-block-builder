@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import propTypes from 'prop-types';
 
 import Background from '../_shared/components/Background/Background';
+import BlockHeading from '../_shared/components/BlockHeading/BlockHeading';
 import Normalizer from '../_shared/components/Normalizer/Normalizer';
 import useVisibilityObserver from '../_shared/hooks/useVisibilityObserver';
 
@@ -9,7 +10,7 @@ import { runStat } from './animations';
 
 import './Stats.module.scss';
 
-const Stats = ( { id, block } ) => {
+const Stats = ( { block, id, primary } ) => {
   /**
    * This hardcoded value is a place holder for a currently unused configuration.
    * Changing it to 'number' will result in a different stat animation that will tick
@@ -54,9 +55,12 @@ const Stats = ( { id, block } ) => {
         >
           <div ref={ ref } className="stats-container" styleName="container">
             { title && (
-              <h2 className="gpalab-site-specific" style={ { color: textColor } } styleName="title">
-                { title }
-              </h2>
+              <BlockHeading
+                primary={ primary }
+                text={ title }
+                style={ { color: textColor } }
+                styleName="title"
+              />
             ) }
             <div id={ `stats-${id}` } styleName="array">
               { stats && stats.map( stat => (
@@ -103,6 +107,7 @@ Stats.propTypes = {
     title: propTypes.string,
   } ),
   id: propTypes.string,
+  primary: propTypes.bool,
 };
 
 export default Stats;

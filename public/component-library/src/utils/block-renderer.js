@@ -18,10 +18,19 @@ import Timeline from '../Timeline/Timeline';
  *
  * @param {string} id         Block id value.
  * @param {Object[]} blocks   A list of block data objects.
+ * @returns {Object}          Block data object or empty object if block not found.
+ */
+const getCurrentBlock = ( id, blocks ) => blocks.filter( b => b.id === id )[0] || {};
+
+/**
+ * Extract the meta data for a given block by id from a list of blocks.
+ *
+ * @param {string} id         Block id value.
+ * @param {Object[]} blocks   A list of block data objects.
  * @returns {Object|null}     Block metadata object or null if block not found.
  */
 const getBlockById = ( id, blocks ) => {
-  const block = blocks.filter( b => b.id === id )[0] || {};
+  const block = getCurrentBlock( id, blocks );
 
   const meta = block?.meta || null;
 
@@ -30,6 +39,19 @@ const getBlockById = ( id, blocks ) => {
   }
 
   return meta;
+};
+
+/**
+ * Check whether a given block is identified as the primary block by id from a list of blocks.
+ *
+ * @param {string} id         Block id value.
+ * @param {Object[]} blocks   A list of block data objects.
+ * @returns {boolean}         Whether or not a block is the primary block.
+ */
+const isPrimary = ( id, blocks ) => {
+  const block = getCurrentBlock( id, blocks );
+
+  return block.primary;
 };
 
 /**
@@ -53,7 +75,11 @@ const renderBlocks = blocks => {
   if ( articleFeed ) {
     articleFeed.forEach( div => {
       ReactDOM.render(
-        <ArticleFeed block={ getBlockById( div.dataset.id, blocks ) } id={ div.dataset.id } />,
+        <ArticleFeed
+          block={ getBlockById( div.dataset.id, blocks ) }
+          id={ div.dataset.id }
+          primary={ isPrimary( div.dataset.id, blocks ) }
+        />,
         div,
       );
     } );
@@ -62,7 +88,10 @@ const renderBlocks = blocks => {
   if ( hero ) {
     hero.forEach( div => {
       ReactDOM.render(
-        <Hero block={ getBlockById( div.dataset.id, blocks ) } />,
+        <Hero
+          block={ getBlockById( div.dataset.id, blocks ) }
+          primary={ isPrimary( div.dataset.id, blocks ) }
+        />,
         div,
       );
     } );
@@ -71,7 +100,10 @@ const renderBlocks = blocks => {
   if ( linkList ) {
     linkList.forEach( div => {
       ReactDOM.render(
-        <LinkList block={ getBlockById( div.dataset.id, blocks ) } />,
+        <LinkList
+          block={ getBlockById( div.dataset.id, blocks ) }
+          primary={ isPrimary( div.dataset.id, blocks ) }
+        />,
         div,
       );
     } );
@@ -80,7 +112,10 @@ const renderBlocks = blocks => {
   if ( navigation ) {
     navigation.forEach( div => {
       ReactDOM.render(
-        <Navigation block={ getBlockById( div.dataset.id, blocks ) } />,
+        <Navigation
+          block={ getBlockById( div.dataset.id, blocks ) }
+          primary={ isPrimary( div.dataset.id, blocks ) }
+        />,
         div,
       );
     } );
@@ -89,7 +124,10 @@ const renderBlocks = blocks => {
   if ( parallax ) {
     parallax.forEach( div => {
       ReactDOM.render(
-        <Parallax block={ getBlockById( div.dataset.id, blocks ) } />,
+        <Parallax
+          block={ getBlockById( div.dataset.id, blocks ) }
+          primary={ isPrimary( div.dataset.id, blocks ) }
+        />,
         div,
       );
     } );
@@ -98,7 +136,11 @@ const renderBlocks = blocks => {
   if ( quoteBox ) {
     quoteBox.forEach( div => {
       ReactDOM.render(
-        <QuoteBox block={ getBlockById( div.dataset.id, blocks ) } id={ div.dataset.id } />,
+        <QuoteBox
+          block={ getBlockById( div.dataset.id, blocks ) }
+          id={ div.dataset.id }
+          primary={ isPrimary( div.dataset.id, blocks ) }
+        />,
         div,
       );
     } );
@@ -107,7 +149,10 @@ const renderBlocks = blocks => {
   if ( resources ) {
     resources.forEach( div => {
       ReactDOM.render(
-        <Resources block={ getBlockById( div.dataset.id, blocks ) } />,
+        <Resources
+          block={ getBlockById( div.dataset.id, blocks ) }
+          primary={ isPrimary( div.dataset.id, blocks ) }
+        />,
         div,
       );
     } );
@@ -116,7 +161,11 @@ const renderBlocks = blocks => {
   if ( slides ) {
     slides.forEach( div => {
       ReactDOM.render(
-        <Slides block={ getBlockById( div.dataset.id, blocks ) } id={ div.dataset.id } />,
+        <Slides
+          block={ getBlockById( div.dataset.id, blocks ) }
+          id={ div.dataset.id }
+          primary={ isPrimary( div.dataset.id, blocks ) }
+        />,
         div,
       );
     } );
@@ -125,7 +174,11 @@ const renderBlocks = blocks => {
   if ( stats ) {
     stats.forEach( div => {
       ReactDOM.render(
-        <Stats block={ getBlockById( div.dataset.id, blocks ) } id={ div.dataset.id } />,
+        <Stats
+          block={ getBlockById( div.dataset.id, blocks ) }
+          id={ div.dataset.id }
+          primary={ isPrimary( div.dataset.id, blocks ) }
+        />,
         div,
       );
     } );
@@ -134,7 +187,11 @@ const renderBlocks = blocks => {
   if ( text ) {
     text.forEach( div => {
       ReactDOM.render(
-        <Text block={ getBlockById( div.dataset.id, blocks ) } id={ div.dataset.id } />,
+        <Text
+          block={ getBlockById( div.dataset.id, blocks ) }
+          id={ div.dataset.id }
+          primary={ isPrimary( div.dataset.id, blocks ) }
+        />,
         div,
       );
     } );
@@ -143,7 +200,10 @@ const renderBlocks = blocks => {
   if ( timeline ) {
     timeline.forEach( div => {
       ReactDOM.render(
-        <Timeline block={ getBlockById( div.dataset.id, blocks ) } />,
+        <Timeline
+          block={ getBlockById( div.dataset.id, blocks ) }
+          primary={ isPrimary( div.dataset.id, blocks ) }
+        />,
         div,
       );
     } );

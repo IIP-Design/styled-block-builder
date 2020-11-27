@@ -3,12 +3,13 @@ import propTypes from 'prop-types';
 
 import AnimatedLines from '../_shared/components/AnimatedLines/AnimatedLines';
 import Background from '../_shared/components/Background/Background';
+import BlockHeading from '../_shared/components/BlockHeading/BlockHeading';
 import Button from '../_shared/components/Button/Button';
 import Normalizer from '../_shared/components/Normalizer/Normalizer';
 
 import './Hero.module.scss';
 
-const Hero = ( { block } ) => {
+const Hero = ( { block, primary } ) => {
   if ( block ) {
     const {
       align,
@@ -34,9 +35,12 @@ const Hero = ( { block } ) => {
         >
           <div styleName="hero">
             { title && (
-              <h2 className="gpalab-site-specific" style={ { textAlign: titleAlignment, color: textColor } } styleName="title">
-                { title }
-              </h2>
+              <BlockHeading
+                primary={ primary }
+                text={ title }
+                style={ { textAlign: titleAlignment, color: textColor } }
+                styleName="title"
+              />
             ) }
             { subtitle && (
               <h3 className="gpalab-site-specific" style={ { textAlign: titleAlignment, color: textColor } } styleName="subtitle">
@@ -91,6 +95,7 @@ Hero.propTypes = {
     title: propTypes.string,
     type: propTypes.string,
   } ),
+  primary: propTypes.bool,
 };
 
 export default Hero;

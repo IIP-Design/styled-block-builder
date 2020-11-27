@@ -2,6 +2,7 @@ import React from 'react';
 import propTypes from 'prop-types';
 
 import Background from '../_shared/components/Background/Background';
+import BlockHeading from '../_shared/components/BlockHeading/BlockHeading';
 import Button from '../_shared/components/Button/Button';
 import CDPFeed from '../_shared/components/CDPFeed/CDPFeed';
 import Normalizer from '../_shared/components/Normalizer/Normalizer';
@@ -12,7 +13,7 @@ import { setLightClass } from '../_shared/utils/background-style';
 
 import './Text.module.scss';
 
-const Text = ( { id, block } ) => {
+const Text = ( { block, id, primary } ) => {
   if ( block ) {
     const {
       articles,
@@ -39,9 +40,12 @@ const Text = ( { id, block } ) => {
         >
           <div styleName="container">
             { title && (
-              <h2 className="gpalab-site-specific" style={ { color: textColor } } styleName="title">
-                { title }
-              </h2>
+              <BlockHeading
+                primary={ primary }
+                text={ title }
+                style={ { color: textColor } }
+                styleName="title"
+              />
             ) }
             { subtitle && (
               <h3 className="gpalab-site-specific" style={ { color: textColor } } styleName="subtitle">
@@ -103,6 +107,7 @@ Text.propTypes = {
     videos: propTypes.array,
   } ),
   id: propTypes.string,
+  primary: propTypes.bool,
 };
 
 export default Text;

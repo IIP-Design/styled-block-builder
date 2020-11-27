@@ -1,6 +1,7 @@
 import React from 'react';
 import propTypes from 'prop-types';
 
+import BlockHeading from '../_shared/components/BlockHeading/BlockHeading';
 import CDPFeed from '../_shared/components/CDPFeed/CDPFeed';
 import Normalizer from '../_shared/components/Normalizer/Normalizer';
 
@@ -8,7 +9,7 @@ import { backgroundStyle } from '../_shared/utils/background-style';
 
 import './ArticleFeed.module.scss';
 
-const ArticleFeed = ( { block, id } ) => {
+const ArticleFeed = ( { block, id, primary } ) => {
   if ( block ) {
     const {
       articles,
@@ -24,9 +25,12 @@ const ArticleFeed = ( { block, id } ) => {
         <div style={ backgroundStyle( blockBackground ) } styleName="bg">
           <div styleName="content">
             { title && (
-              <h2 className="gpalab-site-specific" style={ { color: textColor } } styleName="title">
-                { title }
-              </h2>
+              <BlockHeading
+                primary={ primary }
+                text={ title }
+                style={ { color: textColor } }
+                styleName="title"
+              />
             ) }
             { subtitle && (
               <h3 className="gpalab-site-specific" style={ { color: textColor } } styleName="subtitle">
@@ -53,6 +57,7 @@ ArticleFeed.propTypes = {
     title: propTypes.string,
   } ),
   id: propTypes.string,
+  primary: propTypes.bool,
 };
 
 export default ArticleFeed;

@@ -2,6 +2,7 @@ import React from 'react';
 import propTypes from 'prop-types';
 
 import Background from '../_shared/components/Background/Background';
+import BlockHeading from '../_shared/components/BlockHeading/BlockHeading';
 import Normalizer from '../_shared/components/Normalizer/Normalizer';
 import SocialLinks from '../_shared/components/SocialLinks/SocialLinks';
 
@@ -9,7 +10,7 @@ import { setColors, getAvatar } from './utils';
 
 import './LinkList.module.scss';
 
-const LinkList = ( { block } ) => {
+const LinkList = ( { block, primary } ) => {
   if ( block ) {
     const {
       backgroundGradient,
@@ -51,9 +52,12 @@ const LinkList = ( { block } ) => {
               <img alt={ avatar.alt } src={ avatar.url } styleName="avatar" />
             ) }
             { title && (
-              <h2 className="gpalab-site-specific" style={ { color: titleColor } } styleName="title">
-                { title }
-              </h2>
+              <BlockHeading
+                primary={ primary }
+                text={ title }
+                style={ { color: titleColor } }
+                styleName="title"
+              />
             ) }
             { links && links.map( link => (
               <a key={ link.id } href={ link.linkUrl } styleName="link">
@@ -87,6 +91,7 @@ LinkList.propTypes = {
     youtube: propTypes.string,
     twitter: propTypes.string,
   } ),
+  primary: propTypes.bool,
 };
 
 export default LinkList;

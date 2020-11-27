@@ -2,6 +2,7 @@ import React from 'react';
 import propTypes from 'prop-types';
 
 import Background from '../_shared/components/Background/Background';
+import BlockHeading from '../_shared/components/BlockHeading/BlockHeading';
 import CDPFeed from '../_shared/components/CDPFeed/CDPFeed';
 import Normalizer from '../_shared/components/Normalizer/Normalizer';
 
@@ -9,7 +10,7 @@ import { backgroundStyle, setLightClass, setTextColor } from '../_shared/utils/b
 
 import './QuoteBox.module.scss';
 
-const QuoteBox = ( { block, id } ) => {
+const QuoteBox = ( { block, id, primary } ) => {
   if ( block ) {
     const {
       articles,
@@ -39,9 +40,12 @@ const QuoteBox = ( { block, id } ) => {
           <div styleName="container">
             <div styleName="content">
               { title && (
-                <h2 className="gpalab-site-specific" style={ { color: textColor } } styleName="title">
-                  { title }
-                </h2>
+                <BlockHeading
+                  primary={ primary }
+                  text={ title }
+                  style={ { color: textColor } }
+                  styleName="title"
+                />
               ) }
               { subtitle && (
                 <h3 className="gpalab-site-specific" style={ { color: textColor } } styleName="subtitle">
@@ -93,6 +97,7 @@ QuoteBox.propTypes = {
     title: propTypes.string,
   } ),
   id: propTypes.string,
+  primary: propTypes.bool,
 };
 
 export default QuoteBox;
