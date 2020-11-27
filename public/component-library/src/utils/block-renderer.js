@@ -13,6 +13,8 @@ import Stats from '../Stats/Stats';
 import Text from '../Text/Text';
 import Timeline from '../Timeline/Timeline';
 
+import '../../styles/root-div.scss';
+
 /**
  * Get the block by id from a list of blocks.
  *
