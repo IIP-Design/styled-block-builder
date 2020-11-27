@@ -79,5 +79,6 @@ const MyPage = () => {
 - Quote Box
 - Resources Section
 - Slide Block
+- Stats Block
 - Text Block
 - Timeline Block

@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 _This sections lists changes committed since most recent release_
 
+### Added:
+
+- The ability to designate a given block as the primary block (which converts the block's title into an h1 element)
+
 ### Changed:
 
 - Broke out the frontend blocks as it's own component library to allow for reuse elsewhere
@@ -16,6 +20,7 @@ _This sections lists changes committed since most recent release_
 - Use data urls rather than relative links for background image assets to simplify the data management
 - Dynamically import ReactAxe only when used to ensure that it does not end up in the production bundle
 - Make Webpack build process more modular to allow for reuse of settings across multiple configs
+- Ensure that block root divs don't have unnecessary top and bottom margins
 
 ## [v3.0.2](https://github.com/IIP-Design/styled-block-builder/compare/v3.0.1...v3.0.2) - 2020.09.30
 

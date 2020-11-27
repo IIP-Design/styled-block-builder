@@ -4,6 +4,7 @@ The Styled Block Builder is a WordPress plugin that allows users to create pre-s
 
 - Article Feed: Displays up to three articles from available sources.
 - Hero: Use for highlighting the title and purpose of the page.
+- Navigation Block: Can be used to create a navigation menu with anchor links to the blocks on a page.
 - Parallax: Fixed background with text.
 - Quote: Use for highlighting a specific quote.
 - Resources: Use for adding materials or splitting up subsections into different resource tabs.
