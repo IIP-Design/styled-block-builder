@@ -38,4 +38,14 @@ When the page is loaded, the blocks data object is pulled off of the `window` an
 
 ### Cleanup
 
-The plugin includes an uninstall hook that removes all the plugin-related option values saved in the `wp_options` table.
+The plugin includes an uninstall hook that removes all the plugin-related data when the plugin is deleted from the site. Specifically, the uninstall hook will:
+
+1. Delete all of the plugin settings saved as option values in the `wp_options` table:
+   - `gpalab-blocks-brightcove` - A Brightcove account id to used for embedding Brightcove videos in blocks.
+   - `gpalab-blocks-dev-mode` - Whether or not to use the development build of the plugin JavaScript bundles.
+   - `gpalab-blocks-feed-sources` - Which source sites the article feed component can pull content from.
+   - `gpalab-blocks-role` - The WordPress role required to add styled blocks to posts.
+   - `gpalab-blocks-styling` - Whether or not to use the state.gov style overrides.
+1. Remove the custom capability added to manage access to the plugin:
+   - `gpalab_blocks_add` - This custom capability allows users to add styled blocks to a post.
+1. Find all posts with associated block metadata (i.e. the metakeys `gpalab_blocks` or `gpalab_associated_blocks`) and delete that metadata.

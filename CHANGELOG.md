@@ -12,6 +12,7 @@ _This sections lists changes committed since most recent release_
 ### Added:
 
 - The ability to designate a given block as the primary block (which converts the block's title into an h1 element)
+- Documentation on the plugin's data management
 
 ### Changed:
 
