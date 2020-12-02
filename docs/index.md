@@ -8,7 +8,7 @@ This plugin contains a `styled-block-builder.php` file, which registers the plug
 
 To install the plugin locally for development, clone this repository into the plugins directory of your WordPress site using the command `git clone git@github.com:IIP-Design/styled-block-builder.git`. Then in the WordPress admin panel go to the installed plugins and activate the Styled Block Builder plugin.
 
-To prevent the need for repeated re-compilation of the JavaScript and CSS, we have added a dev mode to the plugin. This mode loads development version of the scripts and styles, which can be regenerated on the fly as changes are saved. To activate dev mode, go to the `Styled Blocks` page under the `Settings` tab in your WordPress admin panel (note that you must have admin priviledges on your WordPress instance to see this option). Therein, toggle Dev Mode to `enabled`. With this done, you can enter into the plugin directory in your terminal (`cd styled-block-builder`) and run `npm run dev` to start a development server. This will watch for any changes to JavaScript and CSS files and recompile on save.
+To prevent the need for repeated re-compilation of the JavaScript and CSS, we have added a dev mode to the plugin. This mode loads development version of the scripts and styles, which can be regenerated on the fly as changes are saved. To activate dev mode, go to the `Styled Blocks` page under the `Settings` tab in your WordPress admin panel (note that you must have admin privileges on your WordPress instance to see this option). Therein, toggle Dev Mode to `enabled`. With this done, you can enter into the plugin directory in your terminal (`cd styled-block-builder`) and run `npm run dev` to start a development server. This will watch for any changes to JavaScript and CSS files and recompile on save.
 
 Please note that ESLint and PHP Codesniffer will run on every commit to ensure that the plugin's code is conforming to the correct standards. If any code fails this linting, you will not be able to complete your commit. As such it is highly recommended that you integrate ESLint and PHP Codesniffer into your preferred text editor or frequently run the linting script `npm run lint`.
 
@@ -16,7 +16,7 @@ To compile the JavaScript and CSS for production run the command `npm run build`
 
 ### Plugin Structure
 
-Below is a listng of key plugin files and directories:
+Below is a listing of key plugin files and directories:
 
 ```bash
 root
@@ -35,17 +35,18 @@ root
 │
 ├── includes # Registering and implements all classes.
 │   │
-│   ├── class-activator.php # Plugin activation hooks.
-│   ├── class-deactivator.php # Plugin deactivation hooks.
-│   ├── class-loader.php # Loader file, which imports and instantiates all needed classes.
-│   └── class-style-blocks.php # Registers the Style_Blocks class and instantiates all required hooks.
+│   ├── class-activator.php # Hooks run when the plugin is activated.
+│   ├── class-uninstall.php # Hooks run when the plugin is deleted.
+│   ├── class-loader.php # Loader file, which runs all needed action and filter hooks.
+│   └── class-style-blocks.php # Registers the Style_Blocks class and imports/instantiates all the plugin's classes.
 │
 ├── public # All files pertaining to the frontend portion of the plugin.
 │   │
 │   ├── class-frontend.php # Registers and localizes frontend scripts and styles.
-│   └── blocks # React component library containing a directory for every block type.
-│       ├── _shared # Elements shared across multiple block components.
-│       └── blocks.js # Entry point for frontend JavaScript bundle, imports all block-specific scripts and styles.
+│   ├── blocks # Entry point for the frontend JS, uses the component-library to render out blocks on a page.
+│   └── component-library # React component library containing a directory for every block type.
+│       ├── lib # Transpiled code for distribution as a package
+│       └── src # Block components.
 │
 ├── assets # Static assets used throughout the plugin.
 ├── config # Plugin configuration files.
