@@ -4,11 +4,17 @@
   "description": "A React component library used to return pre-defined content blocks",
   "license": "MIT",
   "main": "lib/lab-blocks.js",
-  "author": "U.S. Department of State, Bureau of Global Public Affairs Digital Lab <gpa-lab@america.gov>",
+  "author": "U.S. Department of State, Bureau of Global Public Affairs Digital Lab <gpa-lab@fan.gov>",
   "contributors": [
-    { "name": "Marek Rewers" },
-    { "name": "Steven Hascher" },
-    { "name": "Brenton Price" }
+    {
+      "name": "Marek Rewers"
+    },
+    {
+      "name": "Steven Hascher"
+    },
+    {
+      "name": "Brenton Price"
+    }
   ],
   "repository": {
     "type": "git",

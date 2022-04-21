@@ -4,7 +4,7 @@
   "description": "Customizable animated blocks for WordPress sites",
   "authors": [
     {
-      "name": "Marek Rewers, U.S. Department of State, Global Public Affairs <designdevops@america.gov>"
+      "name": "Marek Rewers, U.S. Department of State, Global Public Affairs <gpa-lab@fan.gov>"
     }
   ],
   "require-dev": {

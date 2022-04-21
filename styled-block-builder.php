@@ -4,7 +4,7 @@
  * Plugin URI: https://github.com/IIP-Design/styled-block-builder
  * Description: Customizable content blocks for WordPress sites
  * Version: v3.0.2
- * Author: Marek Rewers, U.S. Department of State, Global Public Affairs <designdevops@america.gov>
+ * Author: Marek Rewers, U.S. Department of State, Global Public Affairs <gpa-lab@fan.gov>
  * Text Domain: gpalab-blocks
  * License: GNU General Public License v2.0
  * License URI: https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html
