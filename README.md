@@ -1,3 +1,7 @@
+# :warning: THIS REPO HAS BEEN ARCHIVED :warning:
+
+This repository contains a custom plugin for WordPress sites formerly under the america.gov domain. Theses sites were transitioned to another team for maintenance in October 2020. As such, this repository has been archived and is no longer being maintained. The code is preserved here as a reference.
+
 # Styled Block Builder
 
 The Styled Block Builder is a WordPress plugin that allows users to create pre-styled blocks that can be added to posts using a shortcode. The currently available block options are:
